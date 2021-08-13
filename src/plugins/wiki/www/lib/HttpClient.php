@@ -1,11 +1,17 @@
 <?php
+/**
+ * Copyright © 2003 Simon Willison, Incutio Limited
+ * Copyright © 2004,2006-2007 Reini Urban
+ *
+ * This file is part of PhpWiki.
+ *
+ * SPDX-License-Identifier: Artistic-1.0+
+ *
+ */
 
 /**
 Version 0.9, 6th April 2003 - Simon Willison ( http://simon.incutio.com/ )
 Manual: http://scripts.incutio.com/httpclient/
-
-Copyright © 2003 Incutio Limited
-License: http://www.opensource.org/licenses/artistic-license.php
 
 File upload and xmlrpc support by Reini Urban for PhpWiki, 2006-12-28 18:12:47
 Todo: proxy support
@@ -49,7 +55,7 @@ class HttpClient
     public $redirect_count = 0;
     public $cookie_host = '';
 
-    function HttpClient($host = 'localhost', $port = 80)
+    function __construct($host = 'localhost', $port = 80)
     {
         $this->host = $host;
         $this->port = $port;
@@ -209,7 +215,7 @@ class HttpClient
         // If data is compressed, uncompress it
         if (isset($this->headers['content-encoding']) && $this->headers['content-encoding'] == 'gzip') {
             $this->debug('Content is gzip encoded, unzipping it');
-            $this->content = substr($this->content, 10); // See http://www.php.net/manual/en/function.gzencode.php
+            $this->content = substr($this->content, 10); // See https://www.php.net/manual/en/function.gzencode.php
             $this->content = gzinflate($this->content);
         }
         // If $persist_cookies, deal with any cookies
@@ -439,11 +445,3 @@ class HttpClient
         }
     }
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

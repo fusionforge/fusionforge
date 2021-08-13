@@ -1,7 +1,6 @@
 <?php
-
-/*
- * Copyright 2005 Wincor Nixdorf International GmbH
+/**
+ * Copyright © 2005 Wincor Nixdorf International GmbH
  *
  * This file is part of PhpWiki.
  *
@@ -18,6 +17,9 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
  */
 
 /**
@@ -26,7 +28,7 @@
  *          copied and pasted into a wiki page.
  *          Credit to an unknown programmer, who has provided the first
  *          version 0.01 on http://www.gpgstudy.com/striphtml.phps
- * Usage:   <<HtmlConverter >>
+ * Usage:   <<HtmlConverter>>
  * Author:  HendrikScheider <hendrik.scheider@wincor-nixdorf.com>
  */
 
@@ -59,7 +61,7 @@ class WikiPlugin_HtmlConverter extends WikiPlugin
             'name' => 'MAX_FILE_SIZE',
             'value' => MAX_UPLOAD_SIZE)));
         $contents->pushContent(HTML::input(array('name' => 'userfile',
-            'type' => 'file')));
+            'type' => 'file', 'required' => 'required')));
         $contents->pushContent(HTML::raw(" "));
         $contents->pushContent(HTML::input(array('value' => _("Convert"),
             'type' => 'submit')));
@@ -73,10 +75,10 @@ class WikiPlugin_HtmlConverter extends WikiPlugin
             $userfile_tmpname = $userfile->getTmpName();
 
             if (!preg_match("/(\.html|\.htm)$/i", $userfile_name)) {
-                $message->pushContent(_("Only files with extension HTML are allowed"), HTML::br(), HTML::br());
+                $message->pushContent(HTML::p(array('class' => 'error'),
+                     _("Only files with extension HTML are allowed")));
             } else {
-                $message->pushContent(_("Processed $userfile_name"), HTML::br(), HTML::br());
-                $message->pushContent(_("Copy the output below and paste it into your Wiki page."), HTML::br());
+                $message->pushContent(HTML::p(_("Processed $userfile_name")));
                 $message->pushContent($this->process($userfile_tmpname));
             }
         } else {
@@ -92,10 +94,10 @@ class WikiPlugin_HtmlConverter extends WikiPlugin
     private function processA(&$file)
     {
 
-        $file = eregi_replace(
-            "<a([[:space:]]+)href([[:space:]]*)=([[:space:]]*)\"([-/.a-zA-Z0-9_~#@%$?&=:\200-\377\(\)[:space:]]+)\"([^>]*)>", "{{\\4}}", $file);
+        $file = preg_replace(
+            "#<a([[:space:]]+)href([[:space:]]*)=([[:space:]]*)\"([-/.a-zA-Z0-9_~\#@%$?&=:\200-\377\(\)[:space:]]+)\"([^>]*)>#i", "{{\\4}}", $file);
 
-        $file = eregi_replace("{{([-/a-zA-Z0-9._~#@%$?&=:\200-\377\(\)[:space:]]+)}}([^<]+)</a>", "[ \\2 | \\1 ]", $file);
+        $file = preg_replace("#{{([-/a-zA-Z0-9._~\#@%$?&=:\200-\377\(\)[:space:]]+)}}([^<]+)</a>#i", "[ \\2 | \\1 ]", $file);
     }
 
     private function processIMG(&$file)
@@ -130,6 +132,11 @@ class WikiPlugin_HtmlConverter extends WikiPlugin
     {
         $result = HTML();
         $file = file_get_contents($file_name);
+        if (!is_utf8($file)) {
+            $result->pushContent(HTML::p(array('class' => 'error'),
+                     _("Error: file must be encoded in UTF-8")));
+            return $result;
+        }
         $file = html_entity_decode($file);
 
         $this->processA($file);
@@ -138,29 +145,29 @@ class WikiPlugin_HtmlConverter extends WikiPlugin
 
         $file = str_replace("\r\n", "\n", $file);
 
-        $file = eregi_replace("<h1[[:space:]]?[^>]*>", "\n\n!!!!", $file);
+        $file = preg_replace("#<h1[[:space:]]?[^>]*>#i", "\n\n!!!!", $file);
 
-        $file = eregi_replace("<h2[[:space:]]?[^>]*>", "\n\n!!!", $file);
+        $file = preg_replace("#<h2[[:space:]]?[^>]*>#i", "\n\n!!!", $file);
 
-        $file = eregi_replace("<h3[[:space:]]?[^>]*>", "\n\n!!", $file);
+        $file = preg_replace("#<h3[[:space:]]?[^>]*>#i", "\n\n!!", $file);
 
-        $file = eregi_replace("<h4[[:space:]]?[^>]*>", "\n\n!", $file);
+        $file = preg_replace("#<h4[[:space:]]?[^>]*>#i", "\n\n!", $file);
 
-        $file = eregi_replace("<h5[[:space:]]?[^>]*>", "\n\n__", $file);
+        $file = preg_replace("#<h5[[:space:]]?[^>]*>#i", "\n\n__", $file);
 
-        $file = eregi_replace("</h1>", "\n\n", $file);
+        $file = preg_replace("#</h1>#i", "\n\n", $file);
 
-        $file = eregi_replace("</h2>", "\n\n", $file);
+        $file = preg_replace("#</h2>#i", "\n\n", $file);
 
-        $file = eregi_replace("</h3>", "\n\n", $file);
+        $file = preg_replace("#</h3>#i", "\n\n", $file);
 
-        $file = eregi_replace("</h4>", "\n\n", $file);
+        $file = preg_replace("#</h4>#i", "\n\n", $file);
 
-        $file = eregi_replace("</h5>", "__\n\n", $file);
+        $file = preg_replace("#</h5>#i", "__\n\n", $file);
 
-        $file = eregi_replace("<hr[[:space:]]?[^>]*>", "\n----\n", $file);
+        $file = preg_replace("#<hr[[:space:]]?[^>]*>#i", "\n----\n", $file);
 
-        $file = eregi_replace("<li[[:space:]]?[^>]*>", "* ", $file);
+        $file = preg_replace("#<li[[:space:]]?[^>]*>#i", "* ", $file);
 
         // strip all tags, except for <pre>, which is supported by wiki
         // and <p>'s which will be converted after compression.
@@ -179,6 +186,8 @@ class WikiPlugin_HtmlConverter extends WikiPlugin
 
         // strip attributes from <pre>-Tags and add a new-line before
         $file = preg_replace("_<pre(\s[^>]*|)>_iU", "\n<pre>", $file);
+
+        $result->pushContent(HTML::p(_("Copy the output below and paste it into your Wiki page.")));
 
         $outputArea = HTML::textarea(array('rows' => '30', 'cols' => '80'));
 

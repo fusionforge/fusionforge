@@ -1,8 +1,7 @@
 <?php
-
-/*
- * Copyright 1999, 2000, 2001, 2002 $ThePhpWikiProgrammingTeam
- * Copyright 2008-2011 Marc-Etienne Vargenau, Alcatel-Lucent
+/**
+ * Copyright © 1999, 2000, 2001, 2002 $ThePhpWikiProgrammingTeam
+ * Copyright © 2008-2011 Marc-Etienne Vargenau, Alcatel-Lucent
  *
  * This file is part of PhpWiki.
  *
@@ -19,6 +18,9 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
  */
 
 /**
@@ -62,21 +64,13 @@ class WikiPlugin_IncludePage
         if (!$page or !$page->name)
             return false;
 
-        global $backlinks;
-        if (empty($backlinks)) {
-            global $request;
-            $this->run($request->_dbi, $argstr, $request, $basepage);
-        }
-
-        $backlinks[] = array('linkto' => $page->name);
-        return $backlinks;
+        return array(array('linkto' => $page->name));
     }
 
     // Avoid warning in:
     // <<IncludePages pages=<!plugin-list BackLinks page=CategoryWikiPlugin !> >>
     function handle_plugin_args_cruft($argstr, $args)
     {
-        return;
     }
 
     /**
@@ -90,6 +84,22 @@ class WikiPlugin_IncludePage
     {
         $args = $this->getArgs($argstr, $request);
         extract($args);
+
+        if (($quiet == '0') || ($quiet == 'false')) {
+            $quiet = false;
+        } elseif (($quiet == '1') || ($quiet == 'true')) {
+            $quiet = true;
+        } else {
+            return $this->error(sprintf(_("Argument '%s' must be a boolean"), "quiet"));
+        }
+
+        if (($sectionhead == '0') || ($sectionhead == 'false')) {
+            $sectionhead = false;
+        } elseif (($sectionhead == '1') || ($sectionhead == 'true')) {
+            $sectionhead = true;
+        } else {
+            return $this->error(sprintf(_("Argument '%s' must be a boolean"), "sectionhead"));
+        }
 
         if ($page) {
             // Expand relative page names.
@@ -201,7 +211,7 @@ class WikiPlugin_IncludePage
             }
         }
         if ($sections) {
-            $c = extractSections($sections, $c, $pagename, $quiet, 1);
+            $c = extractSections($sections, $c);
         }
         if ($lines) {
             $c = array_slice($c, 0, $lines);
@@ -221,11 +231,3 @@ class WikiPlugin_IncludePage
         return $ct;
     }
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

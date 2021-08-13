@@ -17,7 +17,7 @@
 //
 // $Id: Error.php 174777 2004-12-15 09:09:33Z dufuz $
 
-require_once 'PEAR.php';
+require_once 'lib/pear/PEAR.php';
 
 /**
 * Cache Error class
@@ -42,9 +42,9 @@ class Cache_Error extends PEAR_Error
   * @param  string  file where the error occured
   * @param  string  linenumber where the error occured
   */
-  function Cache_Error($msg, $file = __FILE__, $line = __LINE__) {
+  function __construct($msg, $file = __FILE__, $line = __LINE__) {
     
-    $this->PEAR_Error(sprintf("%s [%s on line %d].", $msg, $file, $line));
+    parent::__construct(sprintf("%s [%s on line %d].", $msg, $file, $line));
     
   } // end func Cache_Error
   

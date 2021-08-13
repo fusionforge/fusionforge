@@ -1,12 +1,14 @@
-Date: Mon, 29 Jun 2015 12:04:27 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Tue, 16 Apr 2019 15:27:59 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=SeiteSpeichern;
   flags=PAGE_LOCKED;
   charset=UTF-8
 Content-Transfer-Encoding: binary
 
-Betrachte eine Wiki Seite im MIME Format oder lade sie als Backup herunter als einzelne Seite. _Ein komplettes Backup aller Seiten kann in der PhpWikiVerwaltung erzeugt werden._
+Betrachte eine Wiki Seite im MIME Format oder lade sie als Backup herunter als einzelne
+Seite. //Ein komplettes Backup aller Seiten kann in der [[PhpWikiVerwaltung]]
+erzeugt werden.//
 
 <<PageDump>>
 ----
@@ -16,5 +18,9 @@ Exakter Seitenname, der gespeichert werden soll:
 TitelSuche:
 <?plugin-form TitleSearch?>
 
+== Siehe auch ==
+* [[phpwiki:?action=viewsource|QuellTextAnsicht]]
+* [[PluginManager]]
+
 ----
-Siehe auch: [QuellTextAnsicht|phpwiki:?action=viewsource].
+[[KategorieAktionSeite]]

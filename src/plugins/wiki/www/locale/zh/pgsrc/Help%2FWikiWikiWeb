@@ -1,28 +1,28 @@
-Date: Mon, 29 Jun 2015 12:04:26 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Thu, 24 Dec 2020 18:13:17 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FWikiWikiWeb;
-  flags="";
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
   charset=UTF-8
 Content-Transfer-Encoding: binary
 
-WikiWikiWeb 是一個可以協同作業的站台. 最知名且最廣泛被使用的 Wiki 是
-位於 http://c2.com/cgi-bin/wiki?WikiWikiWeb 的 Portland Pattern Repository.
+~WikiWikiWeb 是一個可以協同作業的站台. 最知名且最廣泛被使用的 Wiki 是
+位於 [[http://c2.com/cgi-bin/wiki?WikiWikiWeb]] 的 Portland Pattern Repository.
 
 You and I will find these statements there particularly relevant:
 
-''使 EditText 表單變得簡單並且使 FindPage 能快速搜尋.''
+//使 [[Help:EditText|EditText]] 表單變得簡單並且使 [[FindPage]] 能快速搜尋.//
 
-''In addition to being quick, this site also aspires to Zen ideals
-generally labeled WabiSabi. Zen finds beauty in the imperfect and
-ephemeral. When it comes down to it, that's all you need.''
+//In addition to being quick, this site also aspires to Zen ideals
+generally labeled [[Help:WabiSabi|WabiSabi]]. Zen finds beauty in the imperfect and
+ephemeral. When it comes down to it, that's all you need.//
 
-''The Universe tends toward chaos. The Universe tends toward Wiki.''
+//The Universe tends toward chaos. The Universe tends toward Wiki.//
 
-你可以在 RecentVisitors 說聲 hello, 或是閱讀 HowToUseWiki 和 AddingPages.
+你可以在 [[RecentVisitors]] 說聲 hello, 或是閱讀 [[Help:HowToUseWiki|HowToUseWiki]] 和 [[Help:AddingPages|AddingPages]].
 目前這個 Wiki 並沒有討論任何主題, 所以就用力的去玩並享受他吧!!
 
--- [[Steve Wainstead]]
+-- [[Help:Steve Wainstead|Steve Wainstead]]
 
 <noinclude>
 ----

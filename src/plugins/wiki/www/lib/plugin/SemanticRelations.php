@@ -1,7 +1,6 @@
 <?php
-
-/*
- * Copyright 2005 Reini Urban
+/**
+ * Copyright © 2005 Reini Urban
  *
  * This file is part of PhpWiki.
  *
@@ -18,6 +17,9 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
  */
 
 /**
@@ -28,6 +30,7 @@
  * @author: Reini Urban
  * @see WikiPlugin_SemanticSearch
  */
+
 class WikiPlugin_SemanticRelations
     extends WikiPlugin
 {
@@ -60,6 +63,23 @@ class WikiPlugin_SemanticRelations
         global $WikiTheme;
         $args = $this->getArgs($argstr, $request);
         extract($args);
+
+        if (($noheader == '0') || ($noheader == 'false')) {
+            $noheader = false;
+        } elseif (($noheader == '1') || ($noheader == 'true')) {
+            $noheader = true;
+        } else {
+            return $this->error(sprintf(_("Argument '%s' must be a boolean"), "noheader"));
+        }
+
+        if (($nohelp == '0') || ($nohelp == 'false')) {
+            $nohelp = false;
+        } elseif (($nohelp == '1') || ($nohelp == 'true')) {
+            $nohelp = true;
+        } else {
+            return $this->error(sprintf(_("Argument '%s' must be a boolean"), "nohelp"));
+        }
+
         if (empty($page))
             $page = $request->getArg('pagename');
         $relhtml = HTML();
@@ -144,11 +164,3 @@ class WikiPlugin_SemanticRelations
             HTML::em(_("Find out how to add relations and attributes to pages.")));
     }
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

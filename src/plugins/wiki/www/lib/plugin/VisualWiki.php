@@ -1,7 +1,6 @@
 <?php
-
 /*
- * Copyright (C) 2002 Johannes Große
+ * Copyright © 2002 Johannes Große
  *
  * This file is part of PhpWiki.
  *
@@ -18,6 +17,9 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
  */
 
 /**
@@ -91,19 +93,19 @@ class WikiPlugin_VisualWiki
     function getDefaultArguments()
     {
         if (VISUALWIKI_ALLOWOPTIONS)
-            return $this->defaultarguments();
+            return $this->defaultArguments();
         else
             return array();
     }
 
     /**
      * Substitutes each forbidden parameter value by the default value
-     * defined in <code>defaultarguments</code>.
+     * defined in <code>defaultArguments</code>.
      */
     function checkArguments(&$arg)
     {
         extract($arg);
-        $def = $this->defaultarguments();
+        $def = $this->defaultArguments();
         if (($width < 3) || ($width > 15))
             $arg['width'] = $def['width'];
         if (($height < 3) || ($height > 20))
@@ -147,7 +149,7 @@ class WikiPlugin_VisualWiki
     protected function getMap($dbi, $argarray, $request)
     {
         if (!VISUALWIKI_ALLOWOPTIONS)
-            $argarray = $this->defaultarguments();
+            $argarray = $this->defaultArguments();
         $this->checkArguments($argarray);
         $request->setArg('debug', $argarray['debug']);
         //extract($argarray);
@@ -171,7 +173,7 @@ class WikiPlugin_VisualWiki
      */
     function helpImage()
     {
-        $def = $this->defaultarguments();
+        $def = $this->defaultArguments();
         $other_imgtypes = $GLOBALS['PLUGIN_CACHED_IMGTYPES'];
         unset ($other_imgtypes[$def['imgtype']]);
         $helparr = array(
@@ -317,7 +319,7 @@ class WikiPlugin_VisualWiki
 
             // false = get links from actual page
             // true  = get links to actual page ("backlinks")
-            $backlinks = $page->getLinks(true);
+            $backlinks = $page->getLinks();
             unset($bconnection);
             $bconnection = array();
             while ($blink = $backlinks->next()) {
@@ -379,10 +381,10 @@ class WikiPlugin_VisualWiki
 
         // remove dead links and collect links
         reset($pages);
-        while (list($name, $page) = each($pages)) {
+        foreach ($pages as $name => $page) {
             if (is_array($page['backlinks'])) {
                 reset($page['backlinks']);
-                while (list($index, $link) = each($page['backlinks'])) {
+                foreach ($page['backlinks'] as $index => $link) {
                     if (!isset($pages[$link]) || $link == $name) {
                         unset($pages[$name]['backlinks'][$index]);
                     } else {
@@ -405,9 +407,8 @@ class WikiPlugin_VisualWiki
      * Creates the text file description of the graph needed to invoke
      * <code>dot</code>.
      *
-     * @param string $filename
+     * @param string $tempfile
      * @param array $argarray
-     * @internal param string $filename name of the dot file to be created
      * @internal param float $width width of the output graph in inches
      * @internal param float $height height of the graph in inches
      * @internal param string $colorby color sceme beeing used ('age', 'revtime',
@@ -417,10 +418,10 @@ class WikiPlugin_VisualWiki
      *                          'number': label by unique number
      * @return bool error status; true=ok; false=error
      */
-    function createDotFile($filename, $argarray)
+    function createDotFile($tempfile = '', $argarray = array())
     {
         extract($argarray);
-        if (!$fp = fopen($filename, 'w'))
+        if (!$fp = fopen($tempfile, 'w'))
             return false;
 
         $fillstring = ($fillnodes == 'on') ? 'style=filled,' : '';
@@ -535,7 +536,7 @@ class WikiPlugin_VisualWiki
     private function embedImg($url, &$dbi, $argarray, &$request)
     {
         if (!VISUALWIKI_ALLOWOPTIONS)
-            $argarray = $this->defaultarguments();
+            $argarray = $this->defaultArguments();
         $this->checkArguments($argarray);
         //extract($argarray);
         if ($argarray['help'])
@@ -548,7 +549,7 @@ class WikiPlugin_VisualWiki
         $upload_dir = getUploadDataPath();
         $tmpfile = tempnam($file_dir, "VisualWiki") . "." . $argarray['imgtype'];
         WikiPluginCached::writeImage($argarray['imgtype'], $imagehandle, $tmpfile);
-        ImageDestroy($imagehandle);
+        imagedestroy($imagehandle);
         return WikiPluginCached::embedMap(1, $upload_dir . basename($tmpfile), $content['html'],
             $dbi, $argarray, $request);
     }
@@ -621,11 +622,3 @@ function interpolate($a, $b, $pos)
 {
     return $a + ($b - $a) * $pos;
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

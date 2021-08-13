@@ -18,7 +18,7 @@
 // $Id: dbx.php 268860 2008-11-12 14:56:26Z clockwerx $
 
 
-require_once 'Cache/Container.php';
+require_once 'lib/pear/Cache/Container.php';
 
 /**
 * ext/dbx Cache Container.
@@ -109,7 +109,7 @@ class Cache_Container_dbx extends Cache_Container
     var $persistent = true;
     
 
-    function Cache_Container_dbx($options)
+    function __construct($options)
     {
         if (!is_array($options) ) {
             return new Cache_Error('No options specified!', __FILE__, __LINE__);

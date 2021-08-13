@@ -1,7 +1,6 @@
 <?php
-
 /*
- * Copyright (C) 2004 $ThePhpWikiProgrammingTeam
+ * Copyright © 2004 $ThePhpWikiProgrammingTeam
  *
  * This file is part of PhpWiki.
  *
@@ -18,6 +17,9 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
  */
 
 /**
@@ -50,7 +52,7 @@
  * TODO:
  *  - use a template.
  *  - use the phpwiki internal user foaf data (stored by a UserPreferences extension)
- *  - fix the pear FOAF Parser or we'll write our own (based on our XmlParser)
+ *  - fix the pear FOAF Parser or we'll write our own (based on our PhpWikiXmlParser)
  */
 class WikiPlugin_FoafViewer
     extends WikiPlugin
@@ -134,7 +136,7 @@ class WikiPlugin_FoafViewer
                     return HTML(HTML::p(_("Resource isn't available: Something went wrong, probably a 404!")));
                 }
                 // Create new Parser object
-                $parser = new XML_FOAF_Parser;
+                $parser = new XML_FOAF_Parser();
                 // Parser FOAF into $foaffile
                 $parser->parseFromMem($foaffile);
                 $a = $parser->toArray();
@@ -198,7 +200,7 @@ class WikiPlugin_FoafViewer
      * @param array $array Source array
      * @param int $index Element Index to use.
      * @param null $dc
-     * @return \RawXml
+     * @return RawXml
      * @todo Make sure it can look more than 1 layer deep
      * @todo Pass in dublincore metadata
      */
@@ -233,11 +235,3 @@ class WikiPlugin_FoafViewer
         return HTML::raw($html);
     }
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

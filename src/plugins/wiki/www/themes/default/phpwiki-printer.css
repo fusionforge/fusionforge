@@ -112,7 +112,7 @@ a {
 
 /**
  * Get rid of extra space at bottom (which may contain a bg image)
- * this br was used to clear past the xhtml validator
+ * this br was used to clear past the html validator
  * buttons which are not visible here.
  */
 table + br.clear-floats {
@@ -138,8 +138,8 @@ hr.printer {
     background: white;
 }
 
-/* Hide (diff) links and days buttons in RecentChanges */
-.wiki-rc-action {
+/* Do not print selection box in RecentChanges */
+fieldset.wiki-rc-action {
     display: none;
 }
 
@@ -172,10 +172,6 @@ textarea.wikiedit {
     margin-bottom: 0.5ex;
     margin-top: 0.5ex;
     padding: 2px;
-}
-
-#editarea-size {
-    display: none;
 }
 
 /* IncludePage plugin ================================================= */
@@ -226,9 +222,8 @@ textarea.wikiedit {
     margin: 0;
 }
 
-/**
- * Calendar plugin
- */
+/* Calendar plugin ==================================================== */
+
 table.cal {
     border: thin outset gray;
     margin: 0.5ex 0.5em;
@@ -277,7 +272,7 @@ table.cal td.cal-today {
  */
 
 /* Hide the w3.org validator images */
-#xhtml-validator {
+#html-validator {
     display: none;
 }
 

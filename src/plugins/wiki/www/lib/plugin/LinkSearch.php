@@ -1,7 +1,6 @@
 <?php
-
-/*
- * Copyright 2007 Reini Urban
+/**
+ * Copyright © 2007 Reini Urban
  *
  * This file is part of PhpWiki.
  *
@@ -18,6 +17,9 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
  */
 
 require_once 'lib/TextSearchQuery.php';
@@ -28,6 +30,7 @@ require_once 'lib/PageList.php';
  *
  * @author: Reini Urban
  */
+
 class WikiPlugin_LinkSearch
     extends WikiPlugin
 {
@@ -107,10 +110,10 @@ function dirsign_switch() {
         $direction->pushContent(HTML::option($out, _("outgoing")));
         $direction->pushContent(HTML::option($in, _("incoming")));
         */
-        $submit = Button('submit:search', _("LinkSearch"), false);
+        $submit = Button('submit:search', _("LinkSearch"));
         $instructions = _("Search in pages for links with the matching name.");
         $form = HTML::form(array('action' => $action,
-                'method' => 'GET',
+                'method' => 'get',
                 'accept-charset' => 'UTF-8'),
             $dirsign_switch,
             $hiddenfield,
@@ -133,11 +136,27 @@ function dirsign_switch() {
     function run($dbi, $argstr, &$request, $basepage)
     {
         $args = $this->getArgs($argstr, $request);
+        extract($args);
+
+        if (($noform == '0') || ($noform == 'false')) {
+            $noform = false;
+        } elseif (($noform == '1') || ($noform == 'true')) {
+            $noform = true;
+        } else {
+            return $this->error(sprintf(_("Argument '%s' must be a boolean"), "noform"));
+        }
+
+        if (($noheader == '0') || ($noheader == 'false')) {
+            $noheader = false;
+        } elseif (($noheader == '1') || ($noheader == 'true')) {
+            $noheader = true;
+        } else {
+            return $this->error(sprintf(_("Argument '%s' must be a boolean"), "noheader"));
+        }
 
         if (empty($args['page']))
             $args['page'] = "*";
         $form = $this->showForm($dbi, $request, $args);
-        extract($args);
         if (empty($s))
             return $form;
         $pagequery = new TextSearchQuery($page, $args['case_exact'], $args['regex']);
@@ -155,7 +174,7 @@ function dirsign_switch() {
         if (!$noheader) {
             // We put the form into the caption just to be able to return one pagelist object,
             // and to still have the convenience form at the top. we could workaround this by
-            // putting the form as WikiFormRich into the actionpage. but thid doesnt look as
+            // putting the form as WikiFormRich into the actionpage. But this does not look as
             // nice as this here.
             $pagelist->setCaption
             ( // on mozilla the form doesn't fit into the caption very well.
@@ -170,7 +189,7 @@ function dirsign_switch() {
 class _PageList_Column_LinkSearch_link
     extends _PageList_Column
 {
-    function _PageList_Column_LinkSearch_link($field, $heading, &$pagelist)
+    function __construct($field, $heading, &$pagelist)
     {
         $this->_field = $field;
         $this->_heading = $heading;
@@ -179,19 +198,13 @@ class _PageList_Column_LinkSearch_link
         $this->_pagelist =& $pagelist;
     }
 
-    function _getValue($page, $revision_handle)
+    function _getValue($page_handle, $revision_handle)
     {
-        if (is_object($page)) $text = $page->getName();
-        else $text = $page;
+        if (is_object($page_handle))
+            $text = $page_handle->getName();
+        else
+            $text = $page_handle;
         $link = $this->_pagelist->_links[$this->current_row];
         return WikiLink($link['linkvalue'], 'if_known');
     }
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

@@ -1,11 +1,17 @@
-Date: Mon, 29 Jun 2015 12:04:27 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Wed, 10 Apr 2019 16:39:09 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=Geringf%C3%BCgige%C3%84nderungen;
-  flags=PAGE_LOCKED;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
   charset=UTF-8
 Content-Transfer-Encoding: binary
 
-Hier ist eine Liste der vor kurzem bearbeiteten Seiten in diesem Wiki. Alle geringfügigen Änderungen werden gezeigt, nicht nur die neuesten Änderungen. (Siehe NeuesteÄnderungen für die neuesten Hauptänderungen).
---------
-<<RecentChanges days||=3 show_all||=1 show_minor=1 daylist=1,3,7,30,90,0 >>
+Hier ist eine Liste der vor kurzem bearbeiteten Seiten in diesem Wiki. Alle geringfügigen Änderungen werden gezeigt, nicht nur die neuesten Änderungen.
+
+//Siehe [[NeuesteÄnderungen]] für die neuesten Hauptänderungen.//
+
+----
+<<RecentChanges days||=7 show_all||=1 show_minor||=1 daylist=1,3,7,30,90,0>>
+
+----
+[[KategorieAktionSeite]]

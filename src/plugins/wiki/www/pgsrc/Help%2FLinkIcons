@@ -1,5 +1,5 @@
-Date: Mon, 29 Jun 2015 12:04:28 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Sun, 31 Mar 2019 19:53:22 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FLinkIcons;
   flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
@@ -29,8 +29,8 @@ the administrator has enabled this feature.
 === URLs ===
 
 * Email address [[mailto:phpwiki-talk@lists.sourceforge.net|PhpWiki-talk mailing list]]
-* Normal http link [[http://phpwiki.fr|PhpWiki's Home Page]]
-* Secure http link [[https://phpwiki.fr|PhpWiki's Home Page]]
+* Normal http link [[http://phpwiki.demo.free.fr|PhpWiki's Home Page]]
+* Secure http link [[https://phpwiki.demo.free.fr|PhpWiki's Home Page]]
 * File transfer [[ftp://ftp.sourceforge.net]]
 
 //A generic icon is shown for other less common link types.//

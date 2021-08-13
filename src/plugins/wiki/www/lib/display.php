@@ -1,6 +1,6 @@
 <?php
-
-/* Copyright (C) 2004-2011 $ThePhpWikiProgrammingTeam
+/**
+ * Copyright © 2004-2011 $ThePhpWikiProgrammingTeam
  *
  * This file is part of PhpWiki.
  *
@@ -17,6 +17,9 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
  */
 
 // display.php: fetch page or get default content
@@ -257,7 +260,7 @@ function displayPage(&$request, $template = null)
             $request->finish();
         } else {
             $request->cacheControl();
-            echo('<div style="display:none;" />');
+            echo('<div style="display:none;"></div>');
             $request->_is_buffering_output = false; // avoid wrong Content-Length with errors
             $request->finish();
             exit();
@@ -453,11 +456,3 @@ function displayPage(&$request, $template = null)
     }
     return '';
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

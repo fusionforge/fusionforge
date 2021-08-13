@@ -1,5 +1,5 @@
 <?php if ($fail_message) { ?>
-  <p><strong><?php echo $fail_message?></strong></p>
+  <p class="error"><?php echo $fail_message?></p>
   <hr />
 <?php } ?>
 <br class="clear-floats" />
@@ -7,9 +7,9 @@
 <?php
 $dbh = $request->getDbh();
 if (READONLY) {
-  echo asXML(HTML::h2("System is locked as read-only for maintenance"));
+  echo asXML(HTML::p(array('class' => 'warning_msg'), _("System is locked as read-only for maintenance")));
 } elseif ($dbh->readonly) {
-  echo asXML(HTML::h2("Database is locked as read-only for maintenance"));
+  echo asXML(HTML::p(array('class' => 'warning_msg'), _("Database is locked as read-only for maintenance")));
 }
 
 if (DEBUG & _DEBUG_LOGIN) {
@@ -68,16 +68,16 @@ if (ALLOW_BOGO_LOGIN && $require_level <= WIKIAUTH_BOGO) {
 <legend><?php echo _("Sign In") ?></legend>
 <table>
 <tr>
-  <td class="align-right"><?php echo _("UserId:") ?></td>
-  <td><input type="text" name="auth[userid]" size="12" maxlength="256" value="<?php echo $userid?>" tabindex="1" />
+  <td class="align-right"><label for="userid"><?php echo _('UserId')._(':') ?></label></td>
+  <td><input id="userid" type="text" name="auth[userid]" size="12" maxlength="256" value="<?php echo $userid?>" tabindex="1" />
     <?php if (ENABLE_AUTH_OPENID) { ?>
-    &nbsp;&nbsp;<?php echo _("or")?> <a href="http://openid.net/"><?php echo _("OpenID") ?></a>:&nbsp;<input type="text" id="inp-openid" name="openid_url" size="32" maxlength="256" value="" tabindex="3" />
+    &nbsp;&nbsp;<?php echo _("or")?> <a href="http://openid.net/"><?php echo _("OpenID")._(':') ?></a>&nbsp;<input type="text" id="inp-openid" name="openid_url" size="32" maxlength="256" value="" tabindex="3" />
     <?php } ?>
 </td>
 </tr>
 <tr>
-  <td class="align-right"><?php echo _("Password:") ?></td>
-  <td><input type="password" name="auth[passwd]" size="12" maxlength="256" tabindex="2" /></td>
+  <td class="align-right"><label for="passwd"><?php echo _("Password:") ?></label></td>
+  <td><input id="passwd" type="password" name="auth[passwd]" size="12" maxlength="256" tabindex="2" /></td>
 </tr>
 <tr><td></td><td class="align-left">
   <?php echo Button("submit:", _("Sign In"), 'wikiaction')?>

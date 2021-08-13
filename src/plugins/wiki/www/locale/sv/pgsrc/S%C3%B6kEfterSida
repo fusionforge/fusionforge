@@ -1,29 +1,65 @@
-Date: Mon, 29 Jun 2015 12:04:25 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Mon, 18 Dec 2020 18:49:20 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=S%C3%B6kEfterSida;
-  flags=PAGE_LOCKED;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
   charset=UTF-8
 Content-Transfer-Encoding: binary
 
 Här är några bra startpunkter för att leta.
 
-* [[HurManAnvänderWiki]] är en snabb introduktion till hur man skriver i Wiki.
+* [[Hjälp:HurManAnvänderWiki|HurManAnvänderWiki]] är en snabb introduktion till hur man skriver i Wiki.
 * [[SenasteÄndringar]] ändras automatiskt.
-* [[MerOmMekanismerna]] om hur man söker och ändrar på den här servern.
+* [[Hjälp:MerOmMekanismerna|MerOmMekanismerna]] om hur man söker och ändrar på den här servern.
 
-Här är titelsökningen. Försök med ord wom //wiki// eller //smörgås//.
+== Titelsökningen ==
 
-<?plugin-form TitleSearch?>
+Här är titelsökningen. Försök med ord wom ##wiki## eller ##smörgås##.
+
+<<WikiFormRich action=TitleSearch method=GET nobr=1 class=wikiaction
+  editbox[] name=s text=""
+  submit[]
+  checkbox[] name=case_exact
+  pulldown[] name=regex value="auto,none,glob,posix,pcre,sql">>
+
+== Fulltextsökning ==
 
 Använd följande för fulltextsökning. Det kan ta några
-sekunder. Resultatet visar alla rader på en sidan som innehåller
-en träff.
+sekunder. Resultatet visar alla rader på en sidan som innehåller en träff.
 
-<?plugin-form FullTextSearch?>
+<<WikiFormRich action=FullTextSearch method=GET nobr=1 class=wikiaction
+  editbox[] name=s text=""
+  submit[]
+  checkbox[] name=case_exact
+  pulldown[] name=regex value="auto,none,glob,posix,pcre,sql">>
+
+== Fuzzy Search ==
+
+In a fuzzy pages search the titles of all pages are examined to find
+those which are similarly spelled or similar sounding (English).
+
+<<WikiFormRich action=FuzzyPages method=GET nobr=1 class=wikiaction
+  editbox[] name=s text=""
+  submit[]
+  checkbox[] name=case_exact>>
 
 ------
-Separera ord med mellanslag. Alla ord måste matcha.
-%%%För att exkludera ord sätt ett "-" framför.
-%%%Exempel: "wiki text -php" söker på alla sidor som innehåller orden "wiki"
-**och** "text", men **inte** innehåller ordet "php".
+
+== Tips ==
+
+* Separera ord med mellanslag. Alla ord måste matcha.
+* '##OR##', grouping with parenthesis, string-quoting and some glob-style wildcard characters are also supported.
+* För att exkludera ord sätt ett '##-##' framför.
+* Use '##^xx##' or '##xx~*##' to match words starting with '##xx##'.
+* Use '##~*xx##' or '##xx$##' to match words ending with '##xx##'.
+* Use '##^word$##' to match exact words.
+* Use //regex=auto// and '##re:##' like '##re:word.*xx##' or //regex=posix// to use Posix regular expressions. (not yet)
+* Use //regex=auto// and '##//##' like '##/^word$/##' or //regex=pcre// to match using Perl-style regular expressions.
+* Use //regex=sql// to match using SQL-style wildcards '##%##' and '##_##'.
+* Use //regex=none// to match any wildcards verbatim.
+
+=== Exempel ===
+* '##wiki text -php##' söker på alla sidor som innehåller orden '##wiki##' och '##text##', men **inte** innehåller ordet '##php##'.
+
+----
+[[PhpWikiDocumentation]]

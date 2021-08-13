@@ -1,8 +1,7 @@
 <?php
-
 /**
- * Copyright 1999,2000,2001,2002,2007 $ThePhpWikiProgrammingTeam
- * Copyright 2008-2009 Marc-Etienne Vargenau, Alcatel-Lucent
+ * Copyright © 1999,2000,2001,2002,2007 $ThePhpWikiProgrammingTeam
+ * Copyright © 2008-2009 Marc-Etienne Vargenau, Alcatel-Lucent
  *
  * This file is part of PhpWiki.
  *
@@ -19,6 +18,9 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
  */
 
 include_once 'lib/WikiPlugin.php';
@@ -28,7 +30,7 @@ class _RecentChanges_Formatter
     public $_absurls = false;
     public $action = "RecentChanges";
 
-    function _RecentChanges_Formatter($rc_args)
+    function __construct($rc_args)
     {
         $this->_args = $rc_args;
         $this->_diffargs = array('action' => 'diff');
@@ -48,13 +50,13 @@ class _RecentChanges_Formatter
         if ($author) {
             $title = $author;
             if ($title == '[]') {
-                $title = $request->_user->getID();
+                $title = $request->_user->getId();
             }
             $title = _("UserContribs") . ": $title";
         } elseif ($owner) {
             $title = $owner;
             if ($title == '[]') {
-                $title = $request->_user->getID();
+                $title = $request->_user->getId();
             }
             $title = _("UserContribs") . ": $title";
         } elseif ($only_new) {
@@ -99,7 +101,7 @@ class _RecentChanges_Formatter
     function historyURL($rev)
     {
         $page = $rev->getPage();
-        return WikiURL($page, array('action' => _("PageHistory")),
+        return WikiURL($page, array('action' => __("PageHistory")),
             $this->_absurls);
     }
 
@@ -118,7 +120,7 @@ class _RecentChanges_Formatter
 
     function authorURL($author)
     {
-        return $this->authorHasPage() ? WikiURL($author) : false;
+        return $this->authorHasPage($author) ? WikiURL($author) : false;
     }
 
     function status($rev)
@@ -191,7 +193,6 @@ class _RecentChanges_HtmlFormatter
 
     function pageLink($rev, $link_text = '')
     {
-
         return WikiLink($this->include_versions_in_URLs() ? $rev : $rev->getPage(),
             'auto', $link_text);
         /*
@@ -226,14 +227,14 @@ class _RecentChanges_HtmlFormatter
         $author = $rev->get('author');
         if (preg_match("/^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$/", $author)) return '';
         return HTML('(',
-            Button(array('action' => _("RecentChanges"),
+            Button(array('action' => __("RecentChanges"),
                     'format' => 'contribs',
                     'author' => $author,
                     'days' => 360),
                 _("contribs"),
                 $author),
             ' | ',
-            Button(array('action' => _("RecentChanges"),
+            Button(array('action' => __("RecentChanges"),
                     'format' => 'contribs',
                     'owner' => $author,
                     'days' => 360),
@@ -294,28 +295,6 @@ class _RecentChanges_HtmlFormatter
         return DEBUG ? $this->format_icon("rdf", $args) : '';
     }
 
-    function rdfs_icon($args = array())
-    {
-        return DEBUG ? $this->format_icon("rdfs", $args) : '';
-    }
-
-    function owl_icon($args = array())
-    {
-        return DEBUG ? $this->format_icon("owl", $args) : '';
-    }
-
-    function grazr_icon($args = array())
-    {
-        global $request, $WikiTheme;
-        if (is_localhost()) return '';
-        if (SERVER_PROTOCOL == "https") return '';
-        $our_url = WikiURL($request->getArg('pagename'),
-            array_merge(array('action' => $this->action, 'format' => 'rss2'), $args),
-            true);
-        $rss_url = 'http://grazr.com/gzpanel.html?' . $our_url;
-        return $WikiTheme->makeButton("grazr", $rss_url, 'rssicon');
-    }
-
     function pre_description()
     {
         extract($this->_args);
@@ -333,13 +312,13 @@ class _RecentChanges_HtmlFormatter
         if (!empty($author)) {
             global $request;
             if ($author == '[]')
-                $author = $request->_user->getID();
+                $author = $request->_user->getId();
             $edits .= sprintf(_(" for pages changed by %s"), $author);
         }
         if (!empty($owner)) {
             global $request;
             if ($owner == '[]')
-                $owner = $request->_user->getID();
+                $owner = $request->_user->getId();
             $edits .= sprintf(_(" for pages owned by %s"), $owner);
         }
         if (!empty($category)) {
@@ -419,9 +398,6 @@ class _RecentChanges_HtmlFormatter
             $this->rss2_icon(),
             $this->atom_icon(),
             $this->rdf_icon(),
-            /*$this->rdfs_icon(),
-              $this->owl_icon(),*/
-            $this->grazr_icon(),
             $this->sidebar_link());
     }
 
@@ -451,7 +427,7 @@ class _RecentChanges_HtmlFormatter
         $sidebar_button = $WikiTheme->makeButton("sidebar", 'javascript:addPanel();', 'sidebaricon',
             array('title' => _("Click to add this feed to your sidebar"),
                 'style' => 'font-size:9pt;font-weight:normal; vertical-align:middle;'));
-        $addsidebarjsclick = asXML($sidebar_button);
+        $addsidebarjsclick = AsXML($sidebar_button);
         $jsc = JavaScript("if ((typeof window.sidebar == 'object') &&\n"
                 . "    (typeof window.sidebar.addPanel == 'function'))\n"
                 . "   {\n"
@@ -572,8 +548,8 @@ class _RecentChanges_UserContribsFormatter
     {
         global $request;
         extract($this->_args);
-        if ($author == '[]') $author = $request->_user->getID();
-        if ($owner == '[]') $owner = $request->_user->getID();
+        if ($author == '[]') $author = $request->_user->getId();
+        if ($owner == '[]') $owner = $request->_user->getId();
         $author_args = $owner
             ? array('owner' => $owner)
             : array('author' => $author);
@@ -582,8 +558,7 @@ class _RecentChanges_UserContribsFormatter
             $this->rss_icon($author_args),
             $this->rss2_icon($author_args),
             $this->atom_icon($author_args),
-            $this->rdf_icon($author_args),
-            $this->grazr_icon($author_args));
+            $this->rdf_icon($author_args));
     }
 
     function format($changes)
@@ -688,7 +663,7 @@ class _RecentChanges_SideBarFormatter
         $linkurl->setAttr('target', '_content');
         $linkurl->setAttr('rel', 'nofollow');
         // FIXME: Smelly hack to get smaller diff buttons in sidebar
-        $linkurl = new RawXML(str_replace('<img ', '<img style="height:2ex" ', asXML($linkurl)));
+        $linkurl = new RawXML(str_replace('<img ', '<img style="height:2ex" ', AsXML($linkurl)));
         return $linkurl;
     }
 
@@ -697,11 +672,11 @@ class _RecentChanges_SideBarFormatter
         $linkurl = parent::historyLink($rev);
         $linkurl->setAttr('target', '_content');
         // FIXME: Smelly hack to get smaller history buttons in sidebar
-        $linkurl = new RawXML(str_replace('<img ', '<img style="height:2ex" ', asXML($linkurl)));
+        $linkurl = new RawXML(str_replace('<img ', '<img style="height:2ex" ', AsXML($linkurl)));
         return $linkurl;
     }
 
-    function pageLink($rev, $link_text = false)
+    function pageLink($rev, $link_text = '')
     {
         $linkurl = parent::pageLink($rev);
         $linkurl->setAttr('target', '_content');
@@ -741,17 +716,17 @@ class _RecentChanges_SideBarFormatter
         elseif (!empty($pagematch))
             $title = $pagematch; else
             $title = WIKI_NAME . $show_minor ? _("RecentEdits") : _("RecentChanges");
-        printf("<title>" . $title . "</title>\n");
+        print("<title>" . $title . "</title>\n");
         global $WikiTheme;
         $css = $WikiTheme->getCSS();
-        $css->PrintXML();
-        printf("</head>\n");
+        $css->printXML();
+        print("</head>\n");
 
-        printf("<body class=\"sidebar\">\n");
-        $html->PrintXML();
-        echo '<a href="http://www.feedvalidator.org/check.cgi?url=http://phpwiki.fr/RecentChanges?format=rss"><img src="themes/default/buttons/valid-rss.png" alt="[Valid RSS]" title="Validate the RSS feed" width="44" height="15" /></a>';
-        printf("\n</body>\n");
-        printf("</html>\n");
+        print("<body class=\"sidebar\">\n");
+        $html->printXML();
+        echo '<a href="http://www.feedvalidator.org/check.cgi?url=http://phpwiki.demo.free.fr/index.php/RecentChanges?format=rss"><img src="themes/default/buttons/valid-rss.png" alt="[Valid RSS]" title="Validate the RSS feed" width="44" height="15" /></a>';
+        print("\n</body>\n");
+        print("</html>\n");
 
         $request->finish(); // cut rest of page processing short
     }
@@ -841,7 +816,7 @@ class _RecentChanges_RssFormatter
     {
 
         include_once 'lib/RssWriter.php';
-        $rss = new RssWriter;
+        $rss = new RssWriter();
         $rss->channel($this->channel_properties());
 
         if (($props = $this->image_properties()))
@@ -959,7 +934,7 @@ class _RecentChanges_Rss2Formatter
     function format($changes)
     {
         include_once 'lib/RssWriter2.php';
-        $rss = new RssWriter2;
+        $rss = new RssWriter2();
 
         $rss->channel($this->channel_properties());
         if (($props = $this->cloud_properties()))
@@ -1031,7 +1006,7 @@ class _RecentChanges_AtomFormatter
     {
         global $request;
         include_once 'lib/RssWriter.php';
-        $rss = new AtomFeed;
+        $rss = new AtomFeed();
 
         // "channel" is called "feed" in atom
         $rc_url = WikiURL($request->getArg('pagename'), array(), 'absurl');
@@ -1338,7 +1313,7 @@ class WikiPlugin_RecentChanges
         return $args;
     }
 
-    function getMostRecentParams(&$args)
+    function getMostRecentParams($args)
     {
         $show_all = false;
         $show_minor = false;
@@ -1354,13 +1329,13 @@ class WikiPlugin_RecentChanges
         if (!empty($args['author'])) {
             global $request;
             if ($args['author'] == '[]')
-                $args['author'] = $request->_user->getID();
+                $args['author'] = $request->_user->getId();
             $params['author'] = $args['author'];
         }
         if (!empty($args['owner'])) {
             global $request;
             if ($args['owner'] == '[]')
-                $args['owner'] = $request->_user->getID();
+                $args['owner'] = $request->_user->getId();
             $params['owner'] = $args['owner'];
         }
         if (!empty($days)) {
@@ -1417,7 +1392,7 @@ class WikiPlugin_RecentChanges
             elseif ($format == 'atom')
                 $fmt_class = '_RecentChanges_AtomFormatter';
             elseif ($format == 'rss091') {
-                include_once 'lib/RSSWriter091.php';
+                include_once 'lib/RssWriter091.php';
                 $fmt_class = '_RecentChanges_RssFormatter091';
             } elseif ($format == 'sidebar')
                 $fmt_class = '_RecentChanges_SideBarFormatter';
@@ -1644,11 +1619,3 @@ class OptionsButtonBars extends HtmlElement
         return ($newpages_button == $only_new) ? $selected : $unselected;
     }
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

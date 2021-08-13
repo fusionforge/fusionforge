@@ -1,12 +1,12 @@
-Date: Mon, 29 Jun 2015 12:04:28 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Mon,  2 Sep 2019 14:11:56 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FHowToUseWiki;
   flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
   charset=UTF-8
 Content-Transfer-Encoding: binary
 
-//"Wiki wiki"// means "quick" in Hawai'ian.
+//“Wiki wiki”// means “quick” in Hawai'ian.
 
 **All you really need to know is:**
 * To edit any page click on the //Edit//. You should do that right now, and read the source code of this page. It will make more sense.
@@ -24,9 +24,9 @@ Content-Transfer-Encoding: binary
 }}}
 * You separate paragraphs with an extra blank line. Example:
 
-  I am a paragraph.
+I am a paragraph.
 
-  I am a paragraph too. We're just very small paragraphs.
+I am a paragraph too. We're just very small paragraphs.
 
 * You can get horizontal rules with four or more dashes like this:
 
@@ -42,7 +42,7 @@ Content-Transfer-Encoding: binary
 * To link to pages outside the Wiki, you can just type in the URL and
   Wiki will link it for you: http://www.nytimes.com/
 * To put images in, just provide the hyperlink in brackets like this:
-  ~[~http://www.yourhost.yourdomain/images/picture.png]. Image URLs not
+  ~[~[~http://www.yourhost.yourdomain/images/picture.png]]. Image URLs not
   in brackets will just appear as hyperlinks to the image.
 * Now you are ready to begin [[Help:AddingPages|adding pages]].
 

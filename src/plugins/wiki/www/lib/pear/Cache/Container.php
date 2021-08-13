@@ -19,7 +19,7 @@
 //
 // $Id: Container.php 293863 2010-01-23 03:46:52Z clockwerx $
 
-require_once 'Cache/Error.php';
+require_once 'lib/pear/Cache/Error.php';
 
 /**
 * Common base class of all cache storage container.

@@ -1,5 +1,5 @@
-Date: Mon, 29 Jun 2015 12:04:28 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Wed,  4 Aug 2021 09:27:34 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=FullTextSearch;
   flags=PAGE_LOCKED;
@@ -12,11 +12,21 @@ Content-Transfer-Encoding: binary
 
 Additional Searches:
 
-<<WikiFormRich action=TitleSearch method=GET nobr=1 class=wikiaction editbox[] name=s text="" submit[] >>
+<<WikiFormRich action=TitleSearch method=GET nobr=1 class=wikiaction
+  editbox[] name=s text=""
+  submit[]
+>>
 
-<<WikiFormRich action=FullTextSearch method=GET nobr=1 class=wikiaction editbox[] name=s text="" submit[] >>
+<<WikiFormRich action=FullTextSearch method=GET nobr=1 class=wikiaction
+  editbox[] name=s text=""
+  submit[]
+>>
 
-<<WikiFormRich action=FuzzyPages method=GET nobr=1 class=wikiaction editbox[] name=s text="" submit[] >>
+<<WikiFormRich action=FuzzyPages method=GET nobr=1 class=wikiaction
+  editbox[] name=s text=""
+  submit[]
+>>
+
 ----
 
 Create or edit page:

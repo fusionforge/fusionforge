@@ -1,6 +1,6 @@
 <?php
-/*
- * Copyright 1999-2010 $ThePhpWikiProgrammingTeam
+/**
+ * Copyright © 1999-2010 $ThePhpWikiProgrammingTeam
  * = array(
  * "Steve Wainstead", "Clifford A. Adams", "Lawrence Akka",
  * "Scott R. Anderson", "Jon Åslund", "Neil Brown", "Jeff Dairiki",
@@ -26,14 +26,17 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
  */
 
 require_once (dirname(__FILE__) . '/lib/prepend.php');
 require_once(dirname(__FILE__) . '/lib/IniConfig.php');
 IniConfig(dirname(__FILE__) . "/config/config.ini");
 
-if (version_compare(PHP_VERSION, '5.3', '<')) {
-    exit(_("Your PHP version is too old. You must have at least PHP 5.3."));
+if (version_compare(PHP_VERSION, '5.3.3', '<')) {
+    exit(_("Your PHP version is too old. You must have at least PHP 5.3.3."));
 }
 
 ////////////////////////////////////////////////////////////////
@@ -55,11 +58,3 @@ if (version_compare(PHP_VERSION, '5.3', '<')) {
 // Without the dir check it might fail for index.php via DirectoryIndex
 if (@is_dir(SCRIPT_FILENAME) or realpath(SCRIPT_FILENAME) == realpath(__FILE__))
     include(dirname(__FILE__) . "/lib/main.php");
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

@@ -1,0 +1,56 @@
+Date: Mon, 30 Mar 2020 15:49:22 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
+Content-Type: application/x-phpwiki;
+  pagename=Aide%2FGreffonIns%C3%A9rer;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
+  charset=UTF-8
+Content-Transfer-Encoding: binary
+
+Le [[Aide:GreffonWiki|greffon]] **Insérer** (//Transclude//) peut être utilisé pour embarquer en inclusion des pages (extérieures) dans une page wiki.
+
+Les pages sont insérées en utilisant les balises ##<iframe>##.
+
+== Arguments ==
+
+{| class="bordered"
+|-
+! Argument
+! Description
+! Valeur par défaut
+|-
+| **src**
+| L'URL de la page à insérer
+| //none//
+|-
+| **title**
+| Le titre de la page à insérer
+| //Transcluded page//
+|-
+| **height**
+| La hauteur (initiale) du cadre d'importation. Si possible, après que la page à inclure est chargée, la cadre est redimensionné via Javascript de telle sorte qu'il remplisse entièrement la page d'importation (voir plus bas pour plus d'info).
+| 450
+|-
+| **quiet**
+| Si activé, le cadre apparaît comme du contenu normal.
+| false
+|}
+
+== Bugs / Avertissements ==
+
+* Quand c'est possible, du code Javascript est utilisé pour ajuster la hauteur de l'//iframe// de telle sorte qu'il remplisse entièrement la page qui l'accueille. Malheureusement, cela semble possible quand la page à incorporer vient du même serveur que la page wiki (cette restriction est due à des impératifs de sécurité du langage Javascript).
+* Le code de détection de récursivité ne fonctionne pas encore. Soyez prudent en évitant les imporations récursives ou vous serez désolé (ou au moins amusé).
+
+== Exemple ==
+
+{{{
+<<Transclude src="https://sourceforge.net/p/phpwiki/code/HEAD/tree/trunk/pgsrc/ReleaseNotes?view=markup">>
+}}}
+
+donne
+
+<<Transclude src="https://sourceforge.net/p/phpwiki/code/HEAD/tree/trunk/pgsrc/ReleaseNotes?view=markup">>
+
+<noinclude>
+----
+[[DocumentationDePhpWiki]] [[CatégorieGreffonWiki]]
+</noinclude>

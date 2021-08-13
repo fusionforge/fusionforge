@@ -1,7 +1,6 @@
 <?php
-
-/*
- * Copyright (C) 2006 Alain Peyrat
+/**
+ * Copyright © 2006 Alain Peyrat
  *
  * This file is part of PhpWiki.
  *
@@ -18,30 +17,37 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
  */
 
 /** Call the FusionForge functions to get the username
  *
  */
-class _FusionForgePassUser extends _PassUser
+
+class _FusionForgePassUser
+    extends _PassUser
 {
 
     public $_is_external = 0;
 
-    function _FusionForgePassUser($UserName = '', $prefs = false)
+    function __construct($UserName = '', $prefs = false)
     {
         if ($prefs) $this->_prefs = $prefs;
         if (!isset($this->_prefs->_method))
-            _PassUser::_PassUser($UserName);
-        if ($UserName) $this->_userid = $UserName;
+            parent::__construct($UserName);
+        if ($UserName)
+            $this->_userid = $UserName;
         $this->_authmethod = 'FusionForge';
 
         // Is this double check really needed?
         // It is not expensive so we keep it for now.
-        if ($this->userExists())
+        if ($this->userExists()) {
             return $this;
-        else
+        } else {
             return $GLOBALS['ForbiddenUser'];
+        }
     }
 
     function userExists()
@@ -102,11 +108,3 @@ class _FusionForgePassUser extends _PassUser
         return false;
     }
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

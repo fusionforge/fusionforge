@@ -1,8 +1,7 @@
 <?php
-
-/*
- * Copyright 2004,2005 $ThePhpWikiProgrammingTeam
- * Copyright 2008-2010 Marc-Etienne Vargenau, Alcatel-Lucent
+/**
+ * Copyright © 2004,2005 $ThePhpWikiProgrammingTeam
+ * Copyright © 2008-2010 Marc-Etienne Vargenau, Alcatel-Lucent
  *
  * This file is part of PhpWiki.
  *
@@ -19,6 +18,9 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
  */
 
 /**
@@ -49,21 +51,22 @@ class WikiPlugin_CreateToc
 
     function getDefaultArguments()
     {
-        return array('extracollapse' => 1, // provide an entry +/- link to collapse
+        return array(
+            'extracollapse' => true, // provide an entry +/- link to collapse
             'firstlevelstyle' => 'number', // 'number', 'letter' or 'roman'
             'headers' => "1,2,3,4,5", // "!!!"=>h2, "!!"=>h3, "!"=>h4
-            // "1"=>h2, "2"=>h3, "3"=>h4, "4"=>h5, "5"=>h6
+                                      // "1"=>h2, "2"=>h3, "3"=>h4, "4"=>h5, "5"=>h6
             'indentstr' => '&nbsp;&nbsp;',
-            'jshide' => 0, // collapsed TOC as DHTML button
+            'jshide' => false, // collapsed TOC as DHTML button
             'liststyle' => 'dl', // 'dl' or 'ul' or 'ol'
-            'noheader' => 0, // omit "Table of Contents" header
-            'notoc' => 0, // do not display TOC, only number headers
+            'noheader' => false, // omit "Table of Contents" header
+            'notoc' => false, // do not display TOC, only number headers
             'pagename' => '[pagename]', // TOC of another page here?
             'position' => 'full', // full, right or left
+            'version' => false, // Most recent version
             'width' => '200px',
-            'with_counter' => 0,
-            'with_toclink' => 0, // link back to TOC
-            'version' => false,
+            'with_counter' => false,
+            'with_toclink' => false, // link back to TOC
         );
     }
 
@@ -159,10 +162,11 @@ class WikiPlugin_CreateToc
     {
         if (TOC_FULL_SYNTAX) {
             $theading = TransformInline($heading);
-            if ($theading)
+            if ($theading) {
                 return preg_quote($theading->asXML(), "/");
-            else
+            } else {
                 return htmlspecialchars(preg_quote($heading, "/"), ENT_COMPAT, 'UTF-8');
+            }
         } else {
             return htmlspecialchars(preg_quote($heading, "/"), ENT_COMPAT, 'UTF-8');
         }
@@ -189,8 +193,9 @@ class WikiPlugin_CreateToc
                 if (method_exists($content[$j], 'asXML')) {
                     $content[$j]->_basepage = $basepage;
                     $content[$j] = $content[$j]->asXML();
-                } else
+                } else {
                     $content[$j] = $content[$j]->asString();
+                }
                 // shortcut for single wikiword or link headers
                 if ($content[$j] == $heading
                     and substr($content[$j - 1], -4, 4) == "<$h>"
@@ -207,11 +212,13 @@ class WikiPlugin_CreateToc
                         $hstart = $j - 1;
                         $joined = '';
                         for ($k = max($j - 1, $start_index); $k < count($content); $k++) {
-                            if (is_string($content[$k]))
+                            if (is_string($content[$k])) {
                                 $joined .= $content[$k];
-                            elseif (method_exists($content[$k], 'asXML'))
-                                $joined .= $content[$k]->asXML(); else
+                            } elseif (method_exists($content[$k], 'asXML')) {
+                                $joined .= $content[$k]->asXML();
+                            } else {
                                 $joined .= $content[$k]->asString();
+                            }
                             if (preg_match("/<$h>$qheading<\/$h>/", $joined)) {
                                 $hend = $k;
                                 return $k;
@@ -326,14 +333,16 @@ class WikiPlugin_CreateToc
                                 $counterString = $this->getCounter($tocCounter, $firstlevelstyle);
                             if (($hstart === 0) && is_string($markup->_content[$j])) {
                                 if ($backlink) {
-                                    if ($counter)
+                                    if ($counter) {
                                         $anchorString = "<a href=\"$url\" id=\"$manchor\">$counterString</a> - \$2";
-                                    else
+                                    } else {
                                         $anchorString = "<a href=\"$url\" id=\"$manchor\">\$2</a>";
+                                    }
                                 } else {
                                     $anchorString = "<a id=\"$manchor\"></a>";
-                                    if ($counter)
+                                    if ($counter) {
                                         $anchorString .= "$counterString - ";
+                                    }
                                 }
                                 if ($x = preg_replace('/(<h\d>)(' . $qheading . ')(<\/h\d>)/',
                                     "\$1$anchorString\$2\$3", $x, 1)
@@ -390,6 +399,7 @@ class WikiPlugin_CreateToc
     {
         global $WikiTheme;
         extract($this->getArgs($argstr, $request));
+
         if ($pagename) {
             // Expand relative page names.
             $page = new WikiPageName($pagename, $basepage);
@@ -398,6 +408,55 @@ class WikiPlugin_CreateToc
         if (!$pagename) {
             return $this->error(sprintf(_("A required argument “%s” is missing."), 'pagename'));
         }
+
+        if (($extracollapse == '0') || ($extracollapse == 'false')) {
+            $extracollapse = false;
+        } elseif (($extracollapse == '1') || ($extracollapse == 'true')) {
+            $extracollapse = true;
+        } else {
+            return $this->error(sprintf(_("Argument '%s' must be a boolean"), "extracollapse"));
+        }
+
+        if (($jshide == '0') || ($jshide == 'false')) {
+            $jshide = false;
+        } elseif (($jshide == '1') || ($jshide == 'true')) {
+            $jshide = true;
+        } else {
+            return $this->error(sprintf(_("Argument '%s' must be a boolean"), "jshide"));
+        }
+
+        if (($noheader == '0') || ($noheader == 'false')) {
+            $noheader = false;
+        } elseif (($noheader == '1') || ($noheader == 'true')) {
+            $noheader = true;
+        } else {
+            return $this->error(sprintf(_("Argument '%s' must be a boolean"), "noheader"));
+        }
+
+        if (($notoc == '0') || ($notoc == 'false')) {
+            $notoc = false;
+        } elseif (($notoc == '1') || ($notoc == 'true')) {
+            $notoc = true;
+        } else {
+            return $this->error(sprintf(_("Argument '%s' must be a boolean"), "notoc"));
+        }
+
+        if (($with_counter == '0') || ($with_counter == 'false')) {
+            $with_counter = false;
+        } elseif (($with_counter == '1') || ($with_counter == 'true')) {
+            $with_counter = true;
+        } else {
+            return $this->error(sprintf(_("Argument '%s' must be a boolean"), "with_counter"));
+        }
+
+        if (($with_toclink == '0') || ($with_toclink == 'false')) {
+            $with_toclink = false;
+        } elseif (($with_toclink == '1') || ($with_toclink == 'true')) {
+            $with_toclink = true;
+        } else {
+            return $this->error(sprintf(_("Argument '%s' must be a boolean"), "with_toclink"));
+        }
+
         if (($notoc) or ($liststyle == 'ol')) {
             $with_counter = 1;
         }
@@ -486,25 +545,20 @@ class WikiPlugin_CreateToc
         if ($noheader) {
         } else {
             $toctoggleid = GenerateId("toctoggle");
-            if ($extracollapse)
+            if ($extracollapse) {
                 $toclink = HTML(_("Table of Contents"),
                     " ",
                     HTML::a(array('id' => 'TOC')),
                     HTML::img(array(
                         'id' => $toctoggleid,
                         'class' => 'wikiaction',
-                        'title' => _("Click to display to TOC"),
-                        'onclick' => "toggletoc(this, '" . $open . "', '" . $close . "', '" . $toclistid . "')",
+                        'title' => ($jshide ? _('Click to display the TOC') : _('Click to hide the TOC')),
+                        'onclick' => "toggletoc(this, '" . $open . "', '" . $close . "', '" . $toclistid . "', '" . _('Click to display the TOC') . "', '" . _('Click to hide the TOC') . "')",
                         'alt' => 'toctoggle',
                         'src' => $jshide ? $close : $open)));
-            else
-                $toclink = HTML::a(array('id' => 'TOC',
-                        'class' => 'wikiaction',
-                        'title' => _("Click to display"),
-                        'onclick' => "toggletoc(this, '" . $open . "', '" . $close . "', '" . $toclistid . "')"),
-                    _("Table of Contents"),
-                    HTML::span(array('style' => 'display:none',
-                        'id' => $toctoggleid), " "));
+            } else {
+                $toclink = HTML(_("Table of Contents"), HTML::a(array('id' => 'TOC')));
+            }
             $html->pushContent(HTML::p(array('class' => 'toctitle'), $toclink));
         }
         $html->pushContent($list);
@@ -515,11 +569,3 @@ class WikiPlugin_CreateToc
         return $html;
     }
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

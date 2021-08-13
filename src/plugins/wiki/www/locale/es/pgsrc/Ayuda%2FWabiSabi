@@ -1,33 +1,52 @@
-Date: Mon, 29 Jun 2015 12:04:26 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Mon, 18 Dec 2020 18:49:20 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=Ayuda%2FWabiSabi;
-  flags="";
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
   charset=UTF-8
 Content-Transfer-Encoding: binary
 
-Debido a que wabi-sabi representa un punto de vista del mundo Japones o un sistema asceta, es dificil explicarlo en terminos occidentales.  Según Leonard Koren, wabi-sabi es la característica más visible de lo que pensamos sobre belleza tradicional japonesa y "ocupa la misma posición en la lista de valores ascetas japoneses de la misma manera que lo hacen los ideales de la belleza y perfección Griesgas que se usan en Occidente."
+Debido a que wabi-sabi representa un punto de vista del mundo Japones o
+un sistema asceta, es dificil explicarlo en terminos occidentales.
+Según Leonard Koren, wabi-sabi es la característica más visible de lo
+que pensamos sobre belleza tradicional japonesa y //«ocupa la misma posición
+en la lista de valores ascetas japoneses de la misma manera que lo hacen
+los ideales de la belleza y perfección Griesgas que se usan en Occidente.»//
 
-Wabi-sabi es la belleza del las cosas imperfectas, no permamentes e incompletas.
+//«Wabi-sabi es la belleza del las cosas imperfectas, no permamentes e incompletas.»//
 
-Es la belleza de cosas modestas y humildes.
+//«Es la belleza de cosas modestas y humildes.»//
 
-Es la belleza de cosas no convencionales.
+//«Es la belleza de cosas no convencionales.»//
 
-Los conceptos de wabi-sabi están relacionados con los conceptos del budismo Zen, asi los primeros japoneses que practicaron wabi-sabi eran maestros de té, curas y monjes que practicaban el Zen. El budismo Zen es originario de la India, pasó a China en el siglo 6, y fué introducido por primera vez en Japón sobre el siglo 12. El Zen enfatiza la "penetración intuitiva en la verdad transcendental más allá de todo concepto intelectual." El corazón del wabi-sabi es la importancia de caminos transcendentales sobre la observación y el pensamiento sobre las cosas y la existencia.
+(quoted from “[[http://www.amazon.com/exec/obidos/tg/detail/-/1880656124/qid=1054098290/sr=1-1/ref=sr_1_1/104-9834820-5562358?v=glance&s=books|WABI-SABI: FOR ARTISTS,DESIGNERS, POETS & PHILOSOPHERS]],” 1994, Leonard Koren)
+
+Los conceptos de wabi-sabi están relacionados con los conceptos del budismo Zen,
+asi los primeros japoneses que practicaron wabi-sabi eran maestros de té,
+curas y monjes que practicaban el Zen. El budismo Zen es originario de
+la India, pasó a China en el siglo 6, y fué introducido por primera vez
+en Japón sobre el siglo 12. El Zen enfatiza la //«penetración intuitiva
+en la verdad transcendental más allá de todo concepto
+intelectual.»// El corazón del wabi-sabi es la importancia de
+caminos transcendentales sobre la observación y el pensamiento sobre las cosas y la existencia.
+
 * Todas las cosas son no permamentes
 * Todas las cosas son imperfectas
 * Todas las cosas son incompletas
 
-Características materiales de wabi-sabi:
+(also taken from WABI-SABI: FOR ARTISTS,DESIGNERS, POETS & PHILOSOPHERS, 1994, Leonard Koren):
 
-* sugerencia de un proceso natural
-* irregular
-* intima
-* no pretenciosa
-* terrenal
-* simple
+//Características materiales de wabi-sabi://
+* //sugerencia de un proceso natural//
+* //irregular//
+* //intima//
+* //no pretenciosa//
+* //terrenal//
+* //simple//
 
-Para saber mas sobre wabi-sabi, mira en:
-http://www.art.unt.edu/ntieva/artcurr/japan/wabisabi.htm
+Para saber mas sobre wabi-sabi, mira en: [[http://c2.com/cgi/wiki?WabiSabi]].
 
+<noinclude>
+----
+[[PhpWikiDocumentation]]
+</noinclude>

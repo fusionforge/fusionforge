@@ -1,5 +1,5 @@
-Date: Mon, 29 Jun 2015 12:04:28 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Mon, 30 Mar 2020 15:49:22 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=AllPages;
   flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
@@ -7,7 +7,8 @@ Content-Type: application/x-phpwiki;
 Content-Transfer-Encoding: binary
 
 Here is the list of **all pages** on this Wiki, including any
-[[OrphanedPages|orphaned pages]] which are otherwise inaccessible. [[AllUserPages|Show only user pages]].
+[[OrphanedPages|orphaned pages]] which are otherwise inaccessible.
+[[AllUserPages|Show only user pages]].
 
 <<AllPages info||=mtime,author,hits sortby||=pagename>>
 

@@ -1,11 +1,35 @@
 <?php
-/* lib/prepend.php
+/**
+ * Copyright © 2001-2003 Jeff Dairiki
+ * Copyright © 2001-2002 Carsten Klapp
+ * Copyright © 2004-2007 Reini Urban
+ *
+ * This file is part of PhpWiki.
+ *
+ * PhpWiki is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * PhpWiki is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
+ */
+
+/*
  *
  * Things which must be done and defined before anything else.
  */
 
-// see lib/stdlib.php: phpwiki_version()
-define('PHPWIKI_VERSION', '1.5.4');
+define('PHPWIKI_VERSION', '1.6.0');
 
 // A new php-5.1.x feature: Turn off php-5.1.x auto_globals_jit = On, or use this mess below.
 if (empty($GLOBALS['HTTP_SERVER_VARS'])) {
@@ -46,7 +70,7 @@ if (defined('DEBUG') and (DEBUG & 32) and extension_loaded("apd")) {
 // Used for debugging purposes
 class DebugTimer
 {
-    function DebugTimer()
+    function __construct()
     {
         $this->_start = $this->microtime();
         // Function 'posix_times' does not exist on Windows
@@ -104,7 +128,7 @@ class DebugTimer
     }
 }
 
-$RUNTIMER = new DebugTimer;
+$RUNTIMER = new DebugTimer();
 require_once(dirname(__FILE__) . '/ErrorManager.php');
 require_once(dirname(__FILE__) . '/WikiCallback.php');
 
@@ -138,11 +162,3 @@ if (!defined('DEBUG') or (defined('DEBUG') and DEBUG > 2)) {
 } else {
     $ErrorManager->setPostponedErrorMask(E_USER_NOTICE | E_NOTICE);
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

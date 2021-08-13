@@ -1,8 +1,8 @@
-Date: Mon, 29 Jun 2015 12:04:26 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Thu, 24 Dec 2020 18:13:17 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FCalendarPlugin;
-  flags="";
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
   charset=UTF-8
 Content-Transfer-Encoding: binary
 
@@ -14,7 +14,7 @@ CalendarPlugin 可以用來在 wiki 頁面的月曆. 對 PersonalWiki~s 來說�
 ''此功能是從 [Manila|http://manila.userland.com/] 得到啟示,
 並且首先由 GaryBenson 所實作. 後來則被 JeffDairiki 實作為 WikiPlugin.''
 
-===用法:
+== 用法 ==
 
 {{{
 <<Calendar>>
@@ -23,68 +23,85 @@ CalendarPlugin 可以用來在 wiki 頁面的月曆. 對 PersonalWiki~s 來說�
 你將會得到:
 <<Calendar>>
 
---------
+== 引數 ==
 
-=== Plugin 引數
+{| class="bordered"
+|-
+! 引數
+! Description
+! 預設
+|-
+| colspan="3" class="align-center" | **月份的選擇**
+|-
+| **year**
+| 為月曆指定年.
+| 目前的年份
+|-
+| **month**
+| 為月曆指定月份.
+| 目前的月份
+|-
+| **month_offset**
+| 加到 //month//. 可以用來含括好幾個月的月曆到一個 wiki 頁面.
+| 0
+|-
+| colspan="3" class="align-center" | **“Day Page” (日頁面)名稱**
+|-
+| **date_format**
+| 使用 [[[php-function:strftime|strftime]] 風格的格式字串來為 “day pages” 產生頁面名稱.
+| 預設值為 ##%Y-%m-%d##.
+|-
+| **prefix**
+| Prepended to the date (formatted per //date_format//) to generate the “day page” names.
+| The default value is ##~[pagename]/##.
+|-
+| colspan="3" class="align-center" | **Appearance**
+|-
+| **month_format**
+| 使用 [[php-function:strftime|strftime]] 風格的格式字串產生 月曆的標題.
+| (預設為 ##%B %Y##.)
+|-
+| **wday_format**
+| 使用 [[php-function:strftime|strftime]] 風格的格式字串產生 在月曆上頭的 day-of-week 名稱.
+|
+|-
+| **start_wday**
+| 每週是由那一天開始.  這會是一個介於 0 (Sunday)到 6(Saturday) 的整數.
+|
+|}
 
-==== 月份的選擇
+== Examples ==
 
-**year**:
+{{{
+<<Calendar month_offset=+1>>
+}}}
 
-  為月曆指定年. (預設: 目前的年份.)
+will get you:
+<<Calendar month_offset=+1>>
 
-**month**:
+{{{
+<<Calendar start_wday=0>>
+}}}
 
-  為月曆指定月份. (預設: 目前的月份.)
+will get you:
+<<Calendar start_wday=0>>
 
-**month_offset**:
+== 參閱 ==
 
-  加到 ''month''. 可以用來含括好幾個月的月曆到一個 wiki 頁面.
+* [[Help:CalendarListPlugin]]
 
-  <<Calendar month_offset=+1>>
+Often used together like this:
 
-==== "Day Page" (日頁面)名稱
+{{{
+<<Calendar>>
+<<CalendarList>>
+}}}
 
-**date_format**:
+== Authors ==
 
-  使用 [Strftime| php-function:strftime] 風格的格式字串來為 "day pages"
-  產生頁面名稱.  預設值為 =%Y-%m-%d=.
-
-**prefix**:
-
-  Prepended to the date (formatted per ''date_format'') to generate
-  the "day page" names. The default value is =~[pagename]/=.
-
-==== Appearance
-
-**month_format**:
-
-  使用 [Strftime| php-function:strftime] 風格的格式字串產生
-  月曆的標題. (預設為 =%B, %Y=.)
-
-**wday_format**:
-
-  使用 [Strftime| php-function:strftime] 風格的格式字串產生
-  在月曆上頭的 day-of-week 名稱.
-
-**start_wday**:
-
-  每週是由那一天開始.  這會是一個介於 0 (Sunday)到 6(Saturday) 的整數.
-
-  <<Calendar start_wday=1 >>
-
------
-
-==== Patch for 1.2
-
-GaryBenson wrote the first calendar implementation for PhpWiki 1.2.
-(Since 1.2 doesn't support plugins, it uses a =###CALENDAR###= token
-as a trigger.) Gary provides a screenshot at
-http://inauspicious.org/files/screenshots/calender.png|screenshot, a
-[patch|http://inauspicious.org/files/phpwiki/phpwiki-1.2.0-calendar.patch]
-(on 1.2.0), and
-[calendar.php|http://inauspicious.org/files/phpwiki/calendar.php]
-(which renders a view of the year.)
+This feature was inspired by [[http://manila.userland.com/|Calendar]],
+and first implemented by Gary Benson. It was later implemented as a
+[[Help:WikiPlugin|plugin]] by [[Help:Jeff Dairiki|Jeff Dairiki]].
 
 <noinclude>
 ----

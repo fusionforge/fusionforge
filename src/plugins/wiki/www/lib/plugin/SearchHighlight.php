@@ -1,9 +1,8 @@
 <?php
-
-/*
- * Copyright 2004,2007 $ThePhpWikiProgrammingTeam
+/**
+ * Copyright © 2004,2007 $ThePhpWikiProgrammingTeam
  *
- * This file is NOT part of PhpWiki.
+ * This file is part of PhpWiki.
  *
  * PhpWiki is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,6 +17,9 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
  */
 
 require_once 'lib/TextSearchQuery.php';
@@ -32,6 +34,7 @@ require_once 'lib/PageList.php';
  * The highlighting is done through InlineParser automatically if ENABLE_SEARCHHIGHLIGHT is enabled.
  * If hits = 1, then the list of found terms is also printed.
  */
+
 class WikiPlugin_SearchHighlight
     extends WikiPlugin
 {
@@ -68,6 +71,15 @@ class WikiPlugin_SearchHighlight
             return HTML();
         }
         extract($args);
+
+        if (($case_exact == '0') || ($case_exact == 'false')) {
+            $case_exact = false;
+        } elseif (($case_exact == '1') || ($case_exact == 'true')) {
+            $case_exact = true;
+        } else {
+            return $this->error(sprintf(_("Argument '%s' must be a boolean"), "case_exact"));
+        }
+
         $html = HTML();
         if (!$noheader and isset($request->_searchhighlight)) {
             $engine = $request->_searchhighlight['engine'];
@@ -111,11 +123,3 @@ class WikiPlugin_SearchHighlight
         return $html;
     }
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

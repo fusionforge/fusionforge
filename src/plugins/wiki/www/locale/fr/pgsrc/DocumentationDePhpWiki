@@ -1,22 +1,22 @@
-Date: Mon, 29 Jun 2015 12:04:23 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Fri, 12 Apr 2019 15:36:06 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=DocumentationDePhpWiki;
-  flags=PAGE_LOCKED;
+  flags=EXTERNAL_PAGE;
   charset=UTF-8
 Content-Transfer-Encoding: binary
 
-=== Sommaire
+== Sommaire ==
 
 <<SiteMap
          noheader=true
-         exclude=PageAccueil
+         exclude=PageAccueil,PgsrcTranslation
          reclimit=1
          direction=forward
          firstreversed=1
 >>
 
-==== Pages dans cette catégorie :
+== Pages dans cette catégorie ==
 
 <<BackLinks
          exclude||=''
@@ -24,4 +24,5 @@ Content-Transfer-Encoding: binary
          noheader||=0
          page||=[pagename]
          info||=pagename,mtime
+         sortby||=pagename
 >>

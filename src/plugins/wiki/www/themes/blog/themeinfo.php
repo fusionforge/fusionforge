@@ -1,4 +1,27 @@
 <?php
+/**
+ * Copyright © 2004-2005,2007 Reini Urban
+ *
+ * This file is part of PhpWiki.
+ *
+ * PhpWiki is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * PhpWiki is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
+ */
+
 // Avoid direct call to this file.
 // PHPWIKI_VERSION is defined in lib/prepend.php
 if (!defined('PHPWIKI_VERSION')) {
@@ -38,7 +61,7 @@ class WikiTheme_blog extends WikiTheme
 {
     function __construct($theme_name = 'blog')
     {
-        $this->WikiTheme($theme_name);
+        parent::__construct($theme_name);
         $this->calendarInit();
     }
 
@@ -156,23 +179,15 @@ class WikiTheme_blog extends WikiTheme
          * You may adjust the formats used for formatting dates and times
          * below.  (These examples give the default formats.)
          * Formats are given as format strings to PHP strftime() function See
-         * http://www.php.net/manual/en/function.strftime.php for details.
+         * https://www.php.net/manual/en/function.strftime.php for details.
          * Do not include the server's zone (%Z), times are converted to the
          * user's time zone.
          */
-        //$this->setDateFormat("%B %d, %Y");
-        $this->setDateFormat("%A, %B %e, %Y"); // must not contain time
+        //$this->setDateFormat("%d %B %Y");
+        $this->setDateFormat("%A, %e %B %Y"); // must not contain time
         $this->setTimeFormat("%H:%M:%S");
     }
 }
 
 $WikiTheme = new WikiTheme_blog('blog');
 define("PAGETRAIL_ARROW", " » ");
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

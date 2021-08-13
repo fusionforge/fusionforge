@@ -1,5 +1,5 @@
-Date: Mon, 29 Jun 2015 12:04:28 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Wed, 11 Aug 2021 10:03:04 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=ReleaseNotes;
   flags=PAGE_LOCKED;
@@ -7,6 +7,66 @@ Content-Type: application/x-phpwiki;
 Content-Transfer-Encoding: binary
 
 <<CreateToc with_toclink||=1 headers||=1,2,3 width=300px position=right>>
+
+== 1.6.0 2021-08-12 Marc-Etienne Vargenau ==
+
+Major release:
+* PHP 7 and 8 compatible (works from PHP 5.3.3 to PHP 8.0)
+* Full HTML 5: Add HTML 5 <main> <header> <footer> <nav> in all themes. Add ARIA roles.
+* Flash is dead
+* Internet Explorer is dead
+
+=== Fixes ===
+* Make function IsSafeURL more strict
+* Make XHTML ZIP Snapshot work again (broken since ~PhpWiki 1.5.3)
+* It was possible to rename a page to a name with illegal characters, like ~[~]
+* Better handling of page names with slash
+* Remove wrong calls to setTightness in ##lib/~InlineParser.php## (bug reported by Harold Hallikainen)
+* Importing a ZIP from an old wiki in Latin 1 (ISO 8859-1) failed. Reported by Frank Michael.
+* Better check arguments for ~GoogleMaps plugin
+* Revert Subversion commit 9111, bad side effects; re-opening Bug#607 BackLinks do not work inside a RichTable
+* Security fixes
+
+=== Changes ===
+* All revisions are kept.
+* Add new button in Edit Toolbar: convert Tab Separated Values to Wikicreole table
+* Update jQuery to 2.2.4
+* Pear: use ##mysqli## instead of ##mysql##
+* Update PEAR.php to release 1.10.12
+* Update Pear DB library to 1.10.0
+* Update Pear Cache library to 1.5.6
+* Update Adodb to version 5.20.19
+* Update ASCIIMathPHP to version 2.1 (from Zefling/ASCIIMathPHP on github.com)
+* Update highlight.js to version 9.15.6
+* Allow Wikicreole syntax for plugins in theme templates
+* Valid HTML5 and CSS3 logos (in debug mode)
+* Better is_localhost() function (allow IPv6, allow Windows IIS). Patch by Thierry Nabeth.
+* Remove Fusionforge-specific files (g view.php wikiadmin.php wikilist.php)
+* Remove USE_SAFE_DBSESSION (always true), DISABLE_HTTP_REDIRECT
+* PDO patch by Sébastien Le Callonnec
+* Updated pgsrc pages in all languages
+* Adding SPDX-License-Identifier in PHP source files
+
+===  Plugins ===
+* ~UpLoad plugin: put date and author in history
+* ~UpLoad plugin: don't inline images
+* PhpWeather removed, uses deprecated mysql functions
+* ~HtmlConverter plugin: check file is encoded in UTF-8; ~HtmlConverter plugin allowed in Fusionforge
+* Use jquery.autoheight.js plugin for Transclude plugin
+* Repair [[Help:PhotoAlbumPlugin|PhotoAlbumPlugin]]
+* Rename action page ~DebugInfo as ~DebugBackendInfo (to be consistent with plugin name)
+* Better check boolean arguments in plugins
+
+== 1.5.5 2015-12-11 Marc-Etienne Vargenau ==
+
+* Fix tooltip translation in ~CreateToc plugin
+* Remove access keys
+* Check MAX_PAGENAME_LENGTH in CreatePage
+* Fix fatal database error with multiple comma-delimited sortby args
+* Remove forbidden characters: ~<~>~[~]~{~}~"~|~# from pagename
+* New property: ALLOWED_LOAD giving list of directories from which it is allowed to load pages.
+* Upload~: replace multiple spaces by single space
+* Make functions merged and is_conflict public in lib/diff3.php (support request #162)
 
 == 1.5.4 2015-06-29 Marc-Etienne Vargenau ==
 
@@ -18,7 +78,7 @@ Content-Transfer-Encoding: binary
 * New icons in Edit Toolbar
 * Make static templates in Edit Toolbar work
 * Fix memory_limit for WIKI_SOAP
-* Remove MockRequest
+* Remove ~MockRequest
 * Update jquery to 1.11.3
 
 == 1.5.3 2015-03-04 Marc-Etienne Vargenau ==
@@ -42,7 +102,7 @@ Content-Transfer-Encoding: binary
 == 1.5.2 2014-10-10 Marc-Etienne Vargenau ==
 
 This is a security fix release.
-* Fix CVE-2014-5519: vulnerability in Ploticus plugin. [[http://www.cvedetails.com/cve/CVE-2014-5519/]] 
+* Fix CVE-2014-5519: vulnerability in Ploticus plugin. [[http://www.cvedetails.com/cve/CVE-2014-5519/]]
 
 This vulnerability is present in ~PhpWiki 1.5.0 and 1.5.1. All users are advised to upgrade to ~PhpWiki 1.5.2.
 
@@ -118,7 +178,7 @@ the new fusionforge theme is to be used together with [[http://fusionforge.org|F
 * fix Bug#1752172 undefined method {{{TextSearchQuery_node_or::_sql_quote()}}}
 * dba: fix sorting for empty mtime field
 * ~LdapSearch: fix layout and logic
-* ~FileInfo: fix Upload: links
+* ~FileInfo: fix ##Upload~:## links
 * XHTML validation corrections (vargenau)
 * avoid recursive modification when renaming a page like '~PageFoo to '~PageFooTwo' (vargenau)
 * fix Bug#1808002 Table of contents plugin does not nest numbering (vargenau)
@@ -589,7 +649,7 @@ Because of SQL changes you'd need to ?action=upgrade to update for SQL.
 * new Error-style with collapsed output of repeated messages
 * whitespace trim pagenames to avoid abuse
 * no double login page header, better login msg.
-* improved ~FileFinder include_path logic (~NormalizeLocalFileName, ...)
+* improved ~FileFinder include_path logic (~normalizeLocalFileName, ...)
 ** init global ~FileFinder to add proper include paths at startup
    adds PHPWIKI_DIR to the front if started from another dir, lib/pear to the end.
 ** fix slashify for Windows
@@ -1026,7 +1086,9 @@ also want to add mSQL support and test it under Zend, the new PHP4.
 == 1.0.3 ==
 
 Below are the release notes for version 1.03, the last release of the
-1.0 ~PhpWiki series. --Steve Wainstead, mailto:swain@panix.com
+1.0 ~PhpWiki series.
+
+--Steve Wainstead, mailto:swain@panix.com
 
 ~PhpWiki was written because I am so interested in ~WikiWikiWeb~s, and I
 haven't used PHP since version 2.0. I wanted to see how it had
@@ -1049,10 +1111,10 @@ default for security reasons.
 Version 1.01 includes a patch that fixes a small error with rendering
 <hr> lines. Thanks to Gerry Barksdale.
 
-See the =HISTORY= file for a rundown on the whole development process
+See the ##HISTORY## file for a rundown on the whole development process
 if that sort of thing really interests you :-)
 
---Steve Wainstead
+-- [[Help:Steve Wainstead|Steve Wainstead]]
 
 ----
 [[PhpWikiDocumentation]]

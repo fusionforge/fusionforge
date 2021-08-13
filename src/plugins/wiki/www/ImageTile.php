@@ -1,4 +1,27 @@
 <?php
+/**
+ * Copyright © 2005,2007 Reini Urban
+ *
+ * This file is part of PhpWiki.
+ *
+ * PhpWiki is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * PhpWiki is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
+ */
+
 // FIXME! This is a mess. Everything.
 require_once 'lib/stdlib.php';
 
@@ -24,7 +47,15 @@ if (preg_match('/^(http|ftp|https):\/\//i', $_REQUEST['url'])) {
     @$fp = fopen($file, 'w+');
     if (!$fp) {
         header("Content-type: text/html");
-        echo "<html><head></head><body>ERROR : unable to open $file in write mode</body></html>";
+        echo "<!DOCTYPE html>\n";
+        echo "<html xml:lang=\"en\" lang=\"en\">\n";
+        echo "<head>\n";
+        echo "<title>ERROR: unable to open $file in write mode</title>\n";
+        echo "</head>\n";
+        echo "<body>\n";
+        echo "<p>ERROR: unable to open $file in write mode</p>\n";
+        echo "</body>\n";
+        echo "</html>";
     }
     fwrite($fp, $source);
     $remove = 1;
@@ -35,7 +66,15 @@ if (preg_match('/^(http|ftp|https):\/\//i', $_REQUEST['url'])) {
     if (!$fp) {
 
         header("Content-type: text/html");
-        echo "<html><head></head><body>Not an image</body></html>";
+        echo "<!DOCTYPE html>\n";
+        echo "<html xml:lang=\"en\" lang=\"en\">\n";
+        echo "<head>\n";
+        echo "<title>Not an image</title>\n";
+        echo "</head>\n";
+        echo "<body>\n";
+        echo "<p>Not an image</p>\n";
+        echo "</body>\n";
+        echo "</html>";
         exit();
 
     } else {
@@ -56,54 +95,62 @@ switch ($type) {
         if (function_exists("imagecreatefromjpeg"))
             $img = @imagecreatefromjpeg($file);
         else
-            show_plain($file);
+            show_plain();
         break;
     case '3':
         if (function_exists("imagecreatefrompng"))
             $img = @imagecreatefrompng($file);
         else
-            show_plain($file);
+            show_plain();
         break;
     case '1':
         if (function_exists("imagecreatefromgif"))
             $img = @imagecreatefromgif($file);
         else
-            show_plain($file);
+            show_plain();
         break;
     case '15':
         if (function_exists("imagecreatefromwbmp"))
             $img = @imagecreatefromwbmp($file);
         else
-            show_plain($file);
+            show_plain();
         break;
     case '16':
         if (function_exists("imagecreatefromxbm"))
             $img = @imagecreatefromxbm($file);
         else
-            show_plain($file);
+            show_plain();
         break;
     case 'xpm':
         if (function_exists("imagecreatefromxpm"))
             $img = @imagecreatefromxpm($file);
         else
-            show_plain($file);
+            show_plain();
         break;
     case 'gd':
         if (function_exists("imagecreatefromgd"))
             $img = @imagecreatefromgd($file);
         else
-            show_plain($file);
+            show_plain();
         break;
     case 'gd2':
         if (function_exists("imagecreatefromgd2"))
             $img = @imagecreatefromgd2($file);
         else
-            show_plain($file);
+            show_plain();
         break;
     default:
         //we are not stupid...
         header("Content-type: text/html");
-        echo "<html><head></head><body>Not an image</body></html>";
+        echo "<!DOCTYPE html>\n";
+        echo "<html xml:lang=\"en\" lang=\"en\">\n";
+        echo "<head>\n";
+        echo "<title>Not an image</title>\n";
+        echo "</head>\n";
+        echo "<body>\n";
+        echo "<p>Not an image</p>\n";
+        echo "</body>\n";
+        echo "</html>";
         exit();
         break;
 }
@@ -141,11 +188,3 @@ function show_plain()
     readfile($_REQUEST['url']);
     exit();
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

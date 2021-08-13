@@ -1,5 +1,5 @@
-Date: Mon, 29 Jun 2015 12:04:28 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Fri, 30 Jul 2021 15:10:38 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=Template%2FExample;
   flags="";
@@ -9,24 +9,24 @@ Content-Transfer-Encoding: binary
 <noinclude>
 The following predefined variables are automatically expanded by
 the [[Help:CreatePagePlugin|CreatePage]] plugin if existing:
-  PAGENAME
-  MTIME     - last modified date + time
-  CTIME     - creation date + time
-  AUTHOR    - last author
-  OWNER
-  CREATOR   - first author
-  SERVER_URL, DATA_PATH, SCRIPT_NAME, PHPWIKI_BASE_URL and BASE_URL
+|= PAGENAME
+|= MTIME      | last modified date + time
+|= CTIME      | creation date + time
+|= AUTHOR     | last author
+|= OWNER
+|= CREATOR    | first author
+|= SERVER_URL
+|= DATA_PATH
+|= SCRIPT_NAME
+|= PHPWIKI_BASE_URL
+|= BASE_URL
 </noinclude>
-
-Title: %%TITLE%%   Year: %%YEAR%%
----
 * Pagename: %%PAGENAME%%
 * Author: %%AUTHOR%%
 * Last modified time: %%MTIME%%
 * Created time: %%CTIME%%
 * Owner: %%OWNER%%
 * Creator: %%CREATOR%%
-
 * SERVER_URL: %%SERVER_URL%%
 * DATA_PATH: %%DATA_PATH%%
 * SCRIPT_NAME: %%SCRIPT_NAME%%

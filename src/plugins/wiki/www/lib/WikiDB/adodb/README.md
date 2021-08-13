@@ -1,12 +1,22 @@
-ADODB Library for PHP5
+ADOdb Library for PHP5
 ======================
 
-(c) 2000-2014 John Lim (jlim@natsoft.com)
+[![Join chat on Gitter](https://img.shields.io/gitter/room/form-data/form-data.svg)](https://gitter.im/adodb/adodb?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Download ADOdb](https://img.shields.io/sourceforge/dm/adodb.svg)](https://sourceforge.net/projects/adodb/files/latest/download)
 
-Released under both BSD and GNU Lesser GPL library license.
-This means you can use it in proprietary products.
+(c) 2000-2013 John Lim (jlim@natsoft.com)  
+(c) 2014      Damien Regad, Mark Newnham and the
+              [ADOdb community](https://github.com/ADOdb/ADOdb/graphs/contributors)
 
-Home page: http://adodb.sourceforge.net/
+The ADOdb Library is dual-licensed, released under both the
+[BSD 3-Clause](https://github.com/ADOdb/ADOdb/blob/master/LICENSE.md#bsd-3-clause-license) 
+and the
+[GNU Lesser General Public Licence (LGPL) v2.1](https://github.com/ADOdb/ADOdb/blob/master/LICENSE.md#gnu-lesser-general-public-license)
+or, at your option, any later version. 
+This means you can use it in proprietary products;
+see [License](https://github.com/ADOdb/ADOdb/blob/master/LICENSE.md) for details.
+
+Home page: http://adodb.org/
 
 
 Introduction
@@ -51,18 +61,14 @@ print "</pre>";
 Documentation and Examples
 ==========================
 
-Refer to the `docs` directory for library documentation and examples.
+Refer to the [ADOdb website](http://adodb.org/) for library documentation and examples. The documentation can also be [downloaded for offline viewing](https://sourceforge.net/projects/adodb/files/Documentation/).
 
-- Main documentation: `docs-adodb.htm`.
-  Query, update and insert records using a portable API.
-- Data dictionary docs: `docs-datadict.htm`.
-  Describes how to create database tables and indexes in a portable manner.
-- Database performance monitoring docs: `docs-perf.htm`.
-  Allows you to perform health checks, tune and monitor your database.
-- Database-backed session docs: `docs-session.htm`.
+- [Main documentation](http://adodb.org/dokuwiki/doku.php?id=v5:userguide:userguide_index): Query, update and insert records using a portable API.
+- [Data dictionary](http://adodb.org/dokuwiki/doku.php?id=v5:dictionary:dictionary_index) describes how to create database tables and indexes in a portable manner.
+- [Database performance monitoring](http://adodb.org/dokuwiki/doku.php?id=v5:performance:performance_index) allows you to perform health checks, tune and monitor your database.
+- [Database-backed sessions](http://adodb.org/dokuwiki/doku.php?id=v5:session:session_index).
 
-There is also a tutorial `tute.htm` that contrasts ADOdb code with
-mysql code.
+There is also a [tutorial](http://adodb.org/dokuwiki/doku.php?id=v5:userguide:mysql_tutorial) that contrasts ADOdb code with PHP native MySQL code.
 
 
 Files
@@ -78,8 +84,11 @@ statement for databases described in testdatabases.inc.php. The benchmark
 tables are created in test.php.
 
 
-Feature Requests and Bug Reports
-================================
+Support
+=======
+
+To discuss with the ADOdb development team and users, connect to our
+[Gitter chatroom](https://gitter.im/adodb/adodb) using your Github credentials.
 
 Please report bugs, issues and feature requests on Github:
 
@@ -87,7 +96,6 @@ https://github.com/ADOdb/ADOdb/issues
 
 You may also find legacy issues in
 
-- the old [ADOdb forums](http://phplens.com/lens/lensforum/topics.php?id=4) on phplens.com
 - the [SourceForge tickets section](http://sourceforge.net/p/adodb/_list/tickets)
 
 However, please note that they are not actively monitored and should

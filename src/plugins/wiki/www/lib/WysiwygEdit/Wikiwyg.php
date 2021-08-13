@@ -1,4 +1,27 @@
 <?php
+/**
+ * Copyright © 2006 Reini Urban, Jean-Nicolas Gereone
+ * Copyright © 2007 Sabri Labbenes
+ *
+ * This file is part of PhpWiki.
+ *
+ * PhpWiki is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * PhpWiki is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
+ */
 
 /**
  * Wikiwyg is compatible with most internet browsers which
@@ -42,7 +65,7 @@ class WysiwygEdit_Wikiwyg extends WysiwygEdit
                      "Wikiwyg/Wysiwyg.js", "Wikiwyg/Phpwiki.js", "Wikiwyg/HTML.js",
                      "Wikiwyg/Toolbar.js") as $js) {
             $WikiTheme->addMoreHeaders
-            (Javascript('', array('src' => $this->BasePath . '/' . $js,
+            (JavaScript('', array('src' => $this->BasePath . '/' . $js,
                 'language' => 'JavaScript')));
         }
         $doubleClickToEdit = ($request->getPref('doubleClickEdit') or ENABLE_DOUBLECLICKEDIT)
@@ -318,11 +341,3 @@ function replace_rich_table($matched)
         return $xmlcontent->AsXML();
     }
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

@@ -1,42 +1,65 @@
-Date: Mon, 29 Jun 2015 12:04:27 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Thu, 25 Jul 2019 15:34:07 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=SeiteFinden;
-  flags=PAGE_LOCKED;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
   charset=UTF-8
 Content-Transfer-Encoding: binary
 
-Als Startpunkt zum Herumstöbern im Wiki eignen sich am besten die
-folgenden Seiten:
+Als Startpunkt zum Herumstöbern im Wiki eignen sich am besten die folgenden Seiten:
 
-* WieManWikiBenutzt sagt wie die Sache hier in einem Wiki
-  funktioniert.
-* NeuesteÄnderungen ist eine automatisch erstellte Liste der zuletzt
-  geänderten Seiten.
-* WikiTechnik erklärt die Technik, mit der PhpWiki arbeitet.
+* [[Hilfe:WieManWikiBenutzt|WieManWikiBenutzt]] sagt wie die Sache hier in einem Wiki funktioniert.
+* [[NeuesteÄnderungen]] ist eine automatisch erstellte Liste der zuletzt geänderten Seiten.
+* [[Hilfe:WikiTechnik|WikiTechnik]] erklärt die Technik, mit der PhpWiki arbeitet.
 
+== Suche nach Seitentiteln ==
 
-Hier ist eine Suche nach Seitentiteln. Suchen Sie zum Beispiel nach
-''wiki'' oder ''sandwich''.
+Hier ist eine Suche nach Seitentiteln. Suchen Sie zum Beispiel nach ##wiki## oder ##sandwich##.
 
-<?plugin-form TitleSearch?>
+<<WikiFormRich action=TitleSearch method=GET nobr=1 class=wikiaction
+  editbox[] name=s text=""
+  submit[]
+  checkbox[] name=case_exact
+  pulldown[] name=regex value="auto,none,glob,posix,pcre,sql">>
 
-Und hier ist eine Volltextsuche. Die Suche dauert ein paar Sekunden.
-Im Suchergebnis werden die Zeilen aus den gefundenen Seiten
-angezeigt, in denen ein Suchbegriff gefunden wurde.
+== Volltextsuche ==
 
-<?plugin-form FullTextSearch?>
+Und hier ist eine Volltextsuche.
+Im Suchergebnis werden die Zeilen aus den gefundenen Seiten angezeigt, in denen ein Suchbegriff gefunden wurde.
 
-Mit der FuzzySuche findet man alle Seitentitel, die ähnlich
+<<WikiFormRich action=FullTextSearch method=GET nobr=1 class=wikiaction
+  editbox[] name=s text=""
+  submit[]
+  checkbox[] name=case_exact
+  pulldown[] name=regex value="auto,none,glob,posix,pcre,sql">>
+
+== Fuzzysuche ==
+
+Mit der Fuzzysuche findet man alle Seitentitel, die ähnlich
 ausgesprochen werden.
 
-<?plugin-form FuzzyPages?>
+<<WikiFormRich action=FuzzyPages method=GET nobr=1 class=wikiaction
+  editbox[] name=s text=""
+  submit[]
+  checkbox[] name=case_exact>>
 
 ------
-==== Tips
-Wörter mit Leerzeichen trennen. Alle Wörter müssen enthalten sein.
-(UND-Verknüpfung)
-%%%Um Seiten zu finden, in denen ein Wort nicht vorkommt, ein '-'
-davor hängen.
-%%%Beispiel: 'wiki text -php' sucht nach Seiten mit dem Wörtern
-'wiki' **und** 'text', die das Wort 'php' **nicht** enthalten.
+
+== Tips ==
+
+* Wörter mit Leerzeichen trennen. Alle Wörter müssen enthalten sein.
+* '##OR##', grouping with parenthesis, string-quoting and some glob-style wildcard characters are also supported.
+* Um Seiten zu finden, in denen ein Wort nicht vorkommt, ein '##-##' davor hängen.
+* Use '##^xx##' or '##xx~*##' to match words starting with '##xx##'.
+* Use '##~*xx##' or '##xx$##' to match words ending with '##xx##'.
+* Use '##^word$##' to match exact words.
+* Use //regex=auto// and '##re:##' like '##re:word.*xx##' or //regex=posix// to use Posix regular expressions. (not yet)
+* Use //regex=auto// and '##//##' like '##/^word$/##' or //regex=pcre// to match using Perl-style regular expressions.
+* Use //regex=sql// to match using SQL-style wildcards '##%##' and '##_##'.
+* Use //regex=none// to match any wildcards verbatim.
+
+=== Beispiel ===
+* '##wiki text -php##' sucht nach Seiten mit dem Wörtern '##wiki##' und '##text##', die das Wort '##php##' **nicht** enthalten.
+
+----
+[[PhpWikiDokumentation]]

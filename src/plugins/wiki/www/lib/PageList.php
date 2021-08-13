@@ -1,6 +1,7 @@
 <?php
-/* Copyright (C) 2004-2010 $ThePhpWikiProgrammingTeam
- * Copyright (C) 2008-2010 Marc-Etienne Vargenau, Alcatel-Lucent
+/**
+ * Copyright © 2004-2010 $ThePhpWikiProgrammingTeam
+ * Copyright © 2008-2010 Marc-Etienne Vargenau, Alcatel-Lucent
  *
  * This file is part of PhpWiki.
  *
@@ -17,6 +18,9 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
  */
 
 /**
@@ -90,7 +94,7 @@ class _PageList_Column_base
             //Fixme: pass all also other GET args along. (limit, p[])
             //TODO: support GET and POST
             $s = HTML::a(array('href' =>
-                $request->GetURLtoSelf(array('sortby' => $sortby)),
+                $request->getURLtoSelf(array('sortby' => $sortby)),
                     'class' => 'pagetitle',
                     'title' => sprintf(_("Sort by %s"), $this->_field)),
                 HTML::u($this->_heading));
@@ -140,7 +144,7 @@ class _PageList_Column_base
             }
             $s = HTML::a(array('href' =>
                 //Fixme: pass all also other GET args along. (limit is ok, p[])
-                $request->GetURLtoSelf(array('sortby' => $sortby,
+                $request->getURLtoSelf(array('sortby' => $sortby,
                     'id' => $pagelist->id)),
                     'class' => 'gridbutton',
                     'title' => sprintf($title, $this->_heading)),
@@ -178,7 +182,7 @@ class _PageList_Column_base
 
 class _PageList_Column extends _PageList_Column_base
 {
-    function _PageList_Column($field, $default_heading, $align = false)
+    function __construct($field, $default_heading, $align = false)
     {
         parent::__construct($default_heading, $align);
 
@@ -403,11 +407,12 @@ class _PageList_Column_content extends _PageList_Column
         ) {
             $revision_handle = $page_handle->getCurrentRevision(true);
         }
+        if (!empty($revision_handle->_data['%pagedata'])) {
+            $revision_handle->_data['%pagedata']['_cached_html'] = '';
+        }
+        $c =&$revision_handle->getPackedContent();
 
         if ($this->_field == 'hi_content') {
-            if (!empty($revision_handle->_data['%pagedata'])) {
-                $revision_handle->_data['%pagedata']['_cached_html'] = '';
-            }
             $search = $this->search;
             $score = '';
             if (is_object($page_handle) and !empty($page_handle->score))
@@ -431,7 +436,6 @@ class _PageList_Column_content extends _PageList_Column
             // Remove special characters so that highlighting works
             $search = preg_replace('/^[\^\*]/', '', $search);
             $search = preg_replace('/[\^\*]$/', '', $search);
-            $c =& $revision_handle->getPackedContent();
             if ($search and ($i = strpos(strtolower($c), strtolower($search))) !== false) {
                 $l = strlen($search);
                 $j = max(0, $i - ($this->bytes / 2));
@@ -449,8 +453,11 @@ class _PageList_Column_content extends _PageList_Column
                 return HTML::div(array('class' => 'align-center'),
                     $c . " " . ($score ? sprintf("[%0.1f]", $score) : ""));
             }
-        } elseif (($len = strlen($c)) > $this->bytes) {
-            $c = substr($c, 0, $this->bytes);
+        } else {
+            $len = strlen($c);
+            if ($len > $this->bytes) {
+                $c = substr($c, 0, $this->bytes);
+            }
         }
         include_once 'lib/BlockParser.php';
         // false --> don't bother processing hrefs for embedded WikiLinks
@@ -941,7 +948,7 @@ class PageList
                 $this->addPage($page);
             }
         }
-        if (!is_array($page_iter->_options) || !array_key_exists('limit_by_db', $page_iter->_options) || !$page_iter->_options['limit_by_db'])
+        if (!is_array($page_iter->_options))
             $this->_options['slice'] = 1;
         if ($i and empty($this->_options['count']))
             $this->_options['count'] = $i;
@@ -1082,23 +1089,13 @@ class PageList
         if ($action == 'get') {
             return $order . $column;
         } elseif ($action == 'flip_order') {
-            if (0 and DEBUG)
-                trigger_error("flip $order $column " . $this->id, E_USER_NOTICE);
             return ($order == '+' ? '-' : '+') . $column;
         } elseif ($action == 'init') { // only allowed from PageList::PageList
-            if (0 and DEBUG) {
-                if ($this->sortby($column, 'clicked')) {
-                    trigger_error("clicked $order $column $this->id", E_USER_NOTICE);
-                }
-            }
             $this->_sortby[$column] = $order; // forces show icon
             return $order . $column;
         } elseif ($action == 'check') { // show icon?
             //if specified via arg or if clicked
             $show = (!empty($this->_sortby[$column]) or $this->sortby($column, 'clicked'));
-            if (0 and $show and DEBUG) {
-                trigger_error("show $order $column " . $this->id, E_USER_NOTICE);
-            }
             return $show;
         } elseif ($action == 'clicked') { // flip sort order?
             global $request;
@@ -1385,6 +1382,8 @@ class PageList
      */
     public function _addColumn($column)
     {
+        global $request;
+
         if (isset($this->_columns_seen[$column]))
             return false; // Already have this one.
         if (!isset($this->_types[$column]))
@@ -1443,7 +1442,7 @@ class PageList
     /**
      * Compare _PageList_Page objects.
      **/
-    private function pageCompare(&$a, &$b)
+    private function pageCompare($a, $b)
     {
         if (empty($this->_sortby) or count($this->_sortby) == 0) {
             // No columns to sort by
@@ -1907,7 +1906,7 @@ class PageList_Selectable
 
     function addPageList($array)
     {
-        while (list($pagename, $selected) = each($array)) {
+        foreach ($array as $pagename => $selected) {
             if ($selected) $this->addPageSelected((string)$pagename);
             $this->addPage((string)$pagename);
         }
@@ -1936,7 +1935,7 @@ class PageList_Unselectable
 
     function addPageList($array)
     {
-        while (list($pagename, $selected) = each($array)) {
+        foreach ($array as $pagename => $selected) {
             if ($selected) $this->addPageSelected((string)$pagename);
             $this->addPage((string)$pagename);
         }
@@ -1947,11 +1946,3 @@ class PageList_Unselectable
         $this->_selected[$pagename] = 1;
     }
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

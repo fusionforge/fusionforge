@@ -1,8 +1,17 @@
-Date: Mon, 29 Jun 2015 12:04:26 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Mon,  8 Apr 2019 14:45:11 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=%E3%83%9B%E3%83%BC%E3%83%A0%E3%83%9A%E3%83%BC%E3%82%B8;
+  flags="";
   charset=UTF-8
 Content-Transfer-Encoding: binary
 
-ここに[ホームページ]を記述しまぃ
+* What is a [[Help:WikiWikiWeb|WikiWikiWeb]]? A description of this application.
+* Learn [[Help:HowToUseWiki|HowToUseWiki]] and learn about [[Help:AddingPages|AddingPages]].
+* Use the [[SandBox]] page to experiment with Wiki pages.
+* Please sign your name in [[RecentVisitors]].
+* See [[RecentChanges]] for the latest page additions and changes.
+* Find out which pages are [[MostPopular]].
+* Read the [[ReleaseNotes]] and [[RecentReleases]].
+* Administer this wiki via [[PhpWikiAdministration]].
+* See more [[:PhpWikiDocumentation]].

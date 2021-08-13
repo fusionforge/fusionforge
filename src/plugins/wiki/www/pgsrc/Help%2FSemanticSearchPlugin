@@ -1,5 +1,5 @@
-Date: Mon, 29 Jun 2015 12:04:28 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Tue, 23 Feb 2021 09:33:05 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FSemanticSearchPlugin;
   flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
@@ -67,7 +67,7 @@ All [[Help:PageList|PageList]] arguments, plus the following ones:
 |
 |-
 | **case_exact**
-|
+| Boolean. If true, search with case exact.
 | true
 |-
 | **regex**
@@ -75,11 +75,11 @@ All [[Help:PageList|PageList]] arguments, plus the following ones:
 | auto
 |-
 | **noform**
-| don't show form with results.
+| Boolean. If true, don't show form with results.
 | false
 |-
 | **noheader**
-| no caption
+| Boolean. If true, header should be omitted.
 | false
 |-
 | **info**
@@ -103,6 +103,7 @@ All [[Help:PageList|PageList]] arguments, plus the following ones:
 * [[Help:FullTextSearchPlugin]]
 * [[Help:ExternalSearchPlugin]]
 * [[Help:InterWikiSearchPlugin]]
+* [[Help:LinkSearchPlugin]]
 
 <noinclude>
 ----

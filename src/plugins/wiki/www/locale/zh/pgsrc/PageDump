@@ -1,5 +1,5 @@
-Date: Mon, 29 Jun 2015 12:04:26 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Thu, 24 Dec 2020 18:13:17 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=PageDump;
   flags=PAGE_LOCKED;
@@ -7,7 +7,7 @@ Content-Type: application/x-phpwiki;
 Content-Transfer-Encoding: binary
 
 以 MIME 格式查看 wiki 頁面或下載為一份單一頁面備份.
-_所有頁面的完整下載可以在 PhpWikiAdministration 中取得._
+//所有頁面的完整下載可以在 [[PhpWikiAdministration]] 中取得.//
 
 <<PageDump>>
 ----
@@ -17,5 +17,9 @@ _所有頁面的完整下載可以在 PhpWikiAdministration 中取得._
 TitleSearch 標題搜尋:
 <?plugin-form TitleSearch?>
 
+== 參閱 ==
+* [[phpwiki:?action=viewsource|ViewSource]]
+* [[PluginManager]]
+
 ----
-參閱: ViewSource, PluginManager.
+[[CategoryActionPage]]

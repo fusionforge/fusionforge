@@ -56,8 +56,8 @@ showHide.prototype.init = function (id) {
 
 var cShowHide;
 
-/* recursive xml => html converter. 
-   This might need a attribute type checker in a bad world. 
+/* recursive xml => html converter.
+   This might need a attribute type checker in a bad world.
    e.g. disable all on* events */
 function CreateHtmlFromXml (xml) {
     if (xml == null) {

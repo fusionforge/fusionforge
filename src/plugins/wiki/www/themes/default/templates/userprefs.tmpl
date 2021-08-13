@@ -122,9 +122,9 @@ if ($isForm) {
 
 ?>
 <?php echo $errmsg ?>
-
+<p>
 <?php echo fmt("User preferences for user %s", WikiLink($user->UserName())) ?>
-
+</p>
 <?php if ($isForm) { ?>
 <form action="<?php echo $request->getPostURL() ?>" method="post">
 <?php } else {

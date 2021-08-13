@@ -1,5 +1,5 @@
-Date: Mon, 29 Jun 2015 12:04:28 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Mon,  9 Aug 2021 18:24:57 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=PhpWikiAdministration;
   flags=PAGE_LOCKED;
@@ -34,14 +34,14 @@ Pages without individual access rights will use these default access rights.
 
 <?plugin-form PasswordReset textinput=user method=post ?>
 
-=== Email Verification ===
+=== E-mail Verification ===
 
 This is currently non-strict, leaving some possible holes in not being able to
 connect to certain mail hosts, which can be overridden below.
 
-This button will show a list of all users with registered emails and buttons to set the verification status manually.
+This button will show a list of all users with registered e-mails and buttons to set the verification status manually.
 
-<<WikiAdminUtils action=email-verification label="Email Verification">>
+<<WikiAdminUtils action=email-verification>>
 
 == Cleanup ==
 
@@ -101,16 +101,13 @@ server. You can also use this form to load from an http: or ftp: URL.
 
 Do some verification checks and upgrade changes automatically, after having installed a
 new phpwiki engine update:
-* Upgrade new or changed page revisions from pgsrc,
-* Upgrade the database schema (mysql //page.id auto_increment//, ADD //session.sess_ip//),
+* Upgrade new or changed page revisions from pgsrc
 
 You can force overwrite or not:
 * **[[phpwiki:HomePage?action=upgrade|Upgrade]]**
 * **[[phpwiki:HomePage?action=upgrade&overwrite=1|Upgrade & Overwrite]]**
 
 == Format of the files ==
-
-=== Current Format ===
 
 Currently the pages are stored, one per file, as MIME (RFC:2045)
 e-mail (RFC:822) messages. The content-type //application/x-phpwiki//
@@ -119,23 +116,6 @@ parameters. (If the file contains several versions of a page, it will
 have type //multipart/mixed//, and contain several sub-parts, each
 with type //application/x-phpwiki//.)  The message body contains the
 page text.
-
-=== Old Formats ===
-
-==== Serialized Files ====
-
-The dump to directory command used to dump the pages as PHP
-//serialized()// strings. For humans, this made the files very hard
-to read, and nearly impossible to edit.
-
-==== Plain Files ====
-
-Before that the page text was just dumped to a file--this means that
-all page meta-data was lost. Note that when loading //plain files//,
-the page name is deduced from the file name.
-
-The upload and load functions will automatically recognize each of
-these three types of files, and handle them accordingly.
 
 == Dump pages as XHTML ==
 

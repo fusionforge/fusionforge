@@ -1,5 +1,6 @@
 <?php
-/* Copyright (C) 2002,2004,2005,2006,2008,2009,2010 $ThePhpWikiProgrammingTeam
+/**
+ * Copyright © 2002,2004,2005,2006,2008,2009,2010 $ThePhpWikiProgrammingTeam
  *
  * This file is part of PhpWiki.
  *
@@ -16,6 +17,9 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
  */
 
 /**
@@ -37,7 +41,7 @@
  *
  * @param string $type
  * One of:<dl>
- * <dt>'unknown'</dt><dd>Make link appropriate for a non-existant page.</dd>
+ * <dt>'unknown'</dt><dd>Make link appropriate for a nonexistent page.</dd>
  * <dt>'known'</dt><dd>Make link appropriate for an existing page.</dd>
  * <dt>'auto'</dt><dd>Either 'unknown' or 'known' as appropriate.</dd>
  * <dt>'button'</dt><dd>Make a button-style link.</dd>
@@ -219,7 +223,7 @@ class WikiTheme
      * @param string $theme_name
      * @param bool $noinit
      */
-    function WikiTheme($theme_name = 'default', $noinit = false)
+    function __construct($theme_name = 'default', $noinit = false)
     {
         /**
          * @var WikiRequest $request
@@ -227,8 +231,8 @@ class WikiTheme
         global $request;
 
         $this->_name = $theme_name;
-        $this->_themes_dir = NormalizeLocalFileName("themes");
-        $this->_path = defined('PHPWIKI_DIR') ? NormalizeLocalFileName("") : "";
+        $this->_themes_dir = normalizeLocalFileName("themes");
+        $this->_path = defined('PHPWIKI_DIR') ? normalizeLocalFileName("") : "";
         $this->_theme = "themes/$theme_name";
         $this->_parents = array();
 
@@ -240,8 +244,8 @@ class WikiTheme
                     $this->_default_theme = new WikiTheme('default', true);
                     $this->_parents[] = $this->_default_theme;
                 } elseif ($parent) {
-                    $this->_parents[] = new WikiTheme
-                    (preg_replace("/^WikiTheme_/i", "", $parent), true);
+                    $this->_parents[] = new WikiTheme(
+                        preg_replace("/^WikiTheme_/i", "", $parent), true);
                 }
             }
         }
@@ -259,9 +263,10 @@ class WikiTheme
         $this->addMoreHeaders(JavaScript('', array('src' => $this->_findData("wikicommon.js"))));
         if (!(defined('FUSIONFORGE') && FUSIONFORGE)) {
             // FusionForge already loads this
-            $this->addMoreHeaders(JavaScript('', array('src' => $this->_findData("jquery-1.11.3.min.js"))));
+            $this->addMoreHeaders(JavaScript('', array('src' => $this->_findData("jquery-2.2.4.min.js"))));
             $this->addMoreHeaders(JavaScript('', array('src' => $this->_findData("jquery.tablesorter.min.js"))));
         }
+        $this->addMoreHeaders(JavaScript('', array('src' => $this->_findData("jquery.autoheight.js"))));
         // by pixels
         if ((is_object($request) // guard against unittests
             and $request->getPref('doubleClickEdit'))
@@ -291,8 +296,6 @@ class WikiTheme
             $path = $parent->_findFile($file, 1);
             if ($path) {
                 return $path;
-            } elseif (0 and DEBUG & (_DEBUG_VERBOSE + _DEBUG_REMOTE)) {
-                trigger_error("$parent->_theme/$file: not found", E_USER_NOTICE);
             }
         }
         if (isset($this->_default_theme)) {
@@ -348,8 +351,8 @@ class WikiTheme
     // http://msdn.microsoft.com/library/default.asp?url=/library/en-us/vclib/html/_crt_strftime.2c_.wcsftime.asp
     // As a result, we have to use %d, and strip out leading zeros ourselves.
 
-    private $dateFormat = "%B %d, %Y";
-    private $timeFormat = "%I:%M %p";
+    private $dateFormat = "%d %B %Y";
+    private $timeFormat = "%H:%M";
     private $showModTime = true;
 
     /**
@@ -402,7 +405,7 @@ class WikiTheme
     }
 
     /**
-     * Format a date.
+     * Format a time.
      *
      * Any time zone offset specified in the users preferences is
      * taken into account by this method.
@@ -879,13 +882,25 @@ class WikiTheme
         $qtext = urlencode($text);
         $url = $this->_findButton("$qtext.png");
         if ($url && strstr($url, '%')) {
-            $url = preg_replace('|([^/]+)$|e', 'urlencode("\\1")', $url);
+            $url = preg_replace_callback(
+                '|([^/]+)$|',
+                 function (array $matches) {
+                     return urlencode($matches[1]);
+                 },
+                 $url
+            );
         }
         if (!$url) { // Jeff complained about png not supported everywhere.
             // This was not PC until 2005.
             $url = $this->_findButton("$qtext.gif");
             if ($url && strstr($url, '%')) {
-                $url = preg_replace('|([^/]+)$|e', 'urlencode("\\1")', $url);
+                $url = preg_replace_callback(
+                    '|([^/]+)$|',
+                     function (array $matches) {
+                         return urlencode($matches[1]);
+                     },
+                     $url
+                );
             }
         }
         if ($url and $this->DUMP_MODE) {
@@ -1030,39 +1045,7 @@ class WikiTheme
         if ($action == 'browse')
             unset($attr['action']);
 
-        $options = $this->fixAccesskey($options);
-
         return $this->makeButton($label, WikiURL($pagename, $attr), $class, $options);
-    }
-
-    function tooltipAccessKeyPrefix()
-    {
-        static $tooltipAccessKeyPrefix = null;
-        if ($tooltipAccessKeyPrefix) return $tooltipAccessKeyPrefix;
-
-        $tooltipAccessKeyPrefix = 'alt';
-        if (isBrowserOpera()) $tooltipAccessKeyPrefix = 'shift-esc';
-        elseif (isBrowserSafari() or browserDetect("Mac") or isBrowserKonqueror())
-            $tooltipAccessKeyPrefix = 'ctrl'; // ff2 win and x11 only
-        elseif ((browserDetect("firefox/2") or browserDetect("minefield/3") or browserDetect("SeaMonkey/1.1"))
-            and ((browserDetect("windows") or browserDetect("x11")))
-        )
-            $tooltipAccessKeyPrefix = 'alt-shift';
-        return $tooltipAccessKeyPrefix;
-    }
-
-    /*
-     * Define the access key in the title only, with ending [p] or [alt-p].
-     *  This fixes the prefix in the title and sets the access key.
-     */
-    function fixAccesskey($attrs)
-    {
-        if (!empty($attrs['title']) and preg_match("/\[(alt-)?(.)\]$/", $attrs['title'], $m)) {
-            if (empty($attrs['accesskey'])) $attrs['accesskey'] = $m[2];
-            // firefox 'alt-shift', MSIE: 'alt', ... see wikibits.js
-            $attrs['title'] = preg_replace("/\[(alt-)?(.)\]$/", "[" . $this->tooltipAccessKeyPrefix() . "-\\2]", $attrs['title']);
-        }
-        return $attrs;
     }
 
     /**
@@ -1214,8 +1197,6 @@ class WikiTheme
     {
         // Don't set title on default style.  This makes it clear to
         // the user which is the default (i.e. most supported) style.
-        if ($is_alt and isBrowserKonqueror())
-            return HTML();
         $link = HTML::link(array('rel' => $is_alt ? 'alternate stylesheet' : 'stylesheet',
             'type' => 'text/css',
             'href' => $this->_findData($css_file)));
@@ -1438,7 +1419,7 @@ else window.onload = downloadJSAtOnload;');
 
         // This allows one to manually select "Printer" style (when browsing page)
         // to see what the printer style looks like.
-        $this->addAlternateCSS(_("Printer"), 'phpwiki-printer.css', 'print, screen');
+        $this->addAlternateCSS(_("Printer"), 'phpwiki-printer.css');
         $this->addAlternateCSS(_("Top & bottom toolbars"), 'phpwiki-topbottombars.css');
         $this->addAlternateCSS(_("Modern"), 'phpwiki-modern.css');
 
@@ -1491,7 +1472,7 @@ else window.onload = downloadJSAtOnload;');
          * You may adjust the formats used for formatting dates and times
          * below.  (These examples give the default formats.)
          * Formats are given as format strings to PHP strftime() function See
-         * http://www.php.net/manual/en/function.strftime.php for details.
+         * https://www.php.net/manual/en/function.strftime.php for details.
          * Do not include the server's zone (%Z), times are converted to the
          * user's time zone.
          *
@@ -1502,21 +1483,21 @@ else window.onload = downloadJSAtOnload;');
          *   $this->setDateFormat("%x");
          *   $this->setTimeFormat("%X");
          */
-        //$this->setDateFormat("%B %d, %Y");
-        //$this->setTimeFormat("%I:%M %p");
+        //$this->setDateFormat("%d %B %Y");
+        //$this->setTimeFormat("%H:%M");
 
         /*
          * To suppress times in the "Last edited on" messages, give a
          * give a second argument of false:
          */
-        //$this->setDateFormat("%B %d, %Y", false);
+        //$this->setDateFormat("%d %B %Y", false);
 
         /*
          * Custom UserPreferences:
          * A list of name => _UserPreference class pairs.
          * Rationale: Certain themes should be able to extend the predefined list
          * of preferences. Display/editing is done in the theme specific userprefs.tmpl
-         * but storage/sanification/update/... must be extended to the Get/SetPreferences methods.
+         * but storage/sanification/update/... must be extended to the get/setPreferences methods.
          * See themes/wikilens/themeinfo.php
          */
         //$this->customUserPreference();
@@ -1538,7 +1519,7 @@ else window.onload = downloadJSAtOnload;');
      * A list of name => _UserPreference class pairs.
      * Rationale: Certain themes should be able to extend the predefined list
      * of preferences. Display/editing is done in the theme specific userprefs.tmpl
-     * but storage/sanification/update/... must be extended to the Get/SetPreferences methods.
+     * but storage/sanification/update/... must be extended to the get/setPreferences methods.
      * These values are just ignored if another theme is used.
      */
     function customUserPreferences($array)
@@ -1755,16 +1736,16 @@ class Button extends HtmlElement
      * @param string $text The text for the button.
      * @param string $url The url (href) for the button.
      * @param string $class The CSS class for the button.
-     * @param array $options  Additional attributes for the &lt;input&gt; tag.
+     * @param array $options  Additional attributes for the <input> tag.
      */
-    function Button($text, $url, $class = '', $options = array())
+    function __construct($text, $url, $class = '', $options = array())
     {
         /**
          * @var WikiRequest $request
          */
         global $request;
 
-        $this->_init('a', array('href' => $url));
+        parent::_init('a', array('href' => $url));
         if ($class)
             $this->setAttr('class', $class);
         if (!empty($options) and is_array($options)) {
@@ -1778,30 +1759,28 @@ class Button extends HtmlElement
             $this->setAttr('rel', 'nofollow');
         $this->pushContent($GLOBALS['WikiTheme']->maybeSplitWikiWord($text));
     }
-
 }
 
 /*
  * A clickable image button.
  */
-class ImageButton extends Button
+class ImageButton extends HtmlElement
 {
     /**
-     *
-     * @param $text string The text for the button.
-     * @param $url string The url (href) for the button.
-     * @param $class string The CSS class for the button.
-     * @param $img_url string URL for button's image.
-     * @param $img_attr array Additional attributes for the &lt;img&gt; tag.
+     * @param string $text The text for the button.
+     * @param string $url The url (href) for the button.
+     * @param string $class The CSS class for the button.
+     * @param string $img_url URL for button's image.
+     * @param array $img_attr array Additional attributes for the <img> tag.
      */
-    function ImageButton($text, $url, $class, $img_url, $img_attr = array())
+    function __construct($text, $url, $class, $img_url, $img_attr = array())
     {
         /**
          * @var WikiRequest $request
          */
         global $request;
 
-        $this->__construct('a', array('href' => $url));
+        parent::__construct('a', array('href' => $url));
         if ($class)
             $this->setAttr('class', $class);
         // Google honors this
@@ -1825,14 +1804,14 @@ class ImageButton extends Button
 class SubmitButton extends HtmlElement
 {
     /**
-     * @param $text string The text for the button.
-     * @param $name string The name of the form field.
-     * @param $class string The CSS class for the button.
-     * @param $options array Additional attributes for the &lt;input&gt; tag.
+     * @param string $text The text for the button.
+     * @param string $name The name of the form field.
+     * @param string $class  The CSS class for the button.
+     * @param array $options Additional attributes for the <input> tag.
      */
-    function SubmitButton($text, $name = '', $class = '', $options = array())
+    function __construct($text, $name = '', $class = '', $options = array())
     {
-        $this->__construct('input', array('type' => 'submit', 'value' => $text));
+        parent::__construct('input', array('type' => 'submit', 'value' => $text));
         if ($name)
             $this->setAttr('name', $name);
         if ($class)
@@ -1848,20 +1827,20 @@ class SubmitButton extends HtmlElement
 /*
  * A class representing an image form <samp>submit</samp> button.
  */
-class SubmitImageButton extends SubmitButton
+class SubmitImageButton extends HtmlElement
 {
     /**
-     * @param $text string The text for the button.
-     * @param $name string The name of the form field.
-     * @param $class string The CSS class for the button.
-     * @param $img_url string URL for button's image.
-     * @param $img_attr array Additional attributes for the &lt;img&gt; tag.
+     * @param string $text The text for the button.
+     * @param string $name The name of the form field.
+     * @param string $class The CSS class for the button.
+     * @param string $img_url URL for button's image.
+     * @param array $img_attr Additional attributes for the <img> tag.
      */
-    function SubmitImageButton($text, $name = '', $class = '', $img_url, $img_attr = array())
+    function __construct($text, $name, $class, $img_url, $img_attr = array())
     {
-        $this->__construct('input', array('type' => 'image',
-            'src' => $img_url,
-            'alt' => $text));
+        parent::__construct('input', array('type' => 'image',
+                                           'src' => $img_url,
+                                           'alt' => $text));
         if ($name)
             $this->setAttr('name', $name);
         if ($class)
@@ -1889,7 +1868,7 @@ class SubmitImageButton extends SubmitButton
  */
 class SidebarBox
 {
-    function SidebarBox($title, $body)
+    function __construct($title, $body)
     {
         require_once 'lib/WikiPlugin.php';
         $this->title = $title;
@@ -1912,7 +1891,7 @@ class PluginSidebarBox extends SidebarBox
 
     public $_plugin, $_args = false, $_basepage = false;
 
-    function PluginSidebarBox($name, $args = false, $basepage = false)
+    function __construct($name, $args = false, $basepage = false)
     {
         require_once 'lib/WikiPlugin.php';
 
@@ -1943,7 +1922,7 @@ class PluginSidebarBox extends SidebarBox
 // Various boxes which are no plugins
 class RelatedLinksBox extends SidebarBox
 {
-    function RelatedLinksBox($title = false, $body = '', $limit = 20)
+    function __construct($title = false, $body = '', $limit = 20)
     {
         /**
          * @var WikiRequest $request
@@ -1970,7 +1949,7 @@ class RelatedLinksBox extends SidebarBox
 
 class RelatedExternalLinksBox extends SidebarBox
 {
-    function RelatedExternalLinksBox($title = false, $body = '', $limit = 20)
+    function __construct($title = false, $body = '', $limit = 20)
     {
         /**
          * @var WikiRequest $request
@@ -2035,11 +2014,3 @@ function listAvailableLanguages()
     natcasesort($available_languages);
     return $available_languages;
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

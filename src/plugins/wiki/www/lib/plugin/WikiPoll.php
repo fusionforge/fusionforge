@@ -1,8 +1,7 @@
 <?php
-
-/*
- * Copyright 2004 $ThePhpWikiProgrammingTeam
- * Copyright 2008 Marc-Etienne Vargenau, Alcatel-lucent
+/**
+ * Copyright © 2004 $ThePhpWikiProgrammingTeam
+ * Copyright © 2008 Marc-Etienne Vargenau, Alcatel-lucent
  *
  * This file is part of PhpWiki.
  *
@@ -19,36 +18,19 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
  */
+
 /**
  * This plugin provides configurable polls.
- *
- * Usage:
-<<WikiPoll require_all=0 require_least=2
-question[1]="Do you like PhpWiki?"
-answer[1][1]="Yes" answer[1][2]="Do not know" answer[1][3]="No"
-question[2]="Do you have PhpWiki installed by your own?"
-answer[2][1]="Yes" answer[2][2]="No"
-question[3]="Did you install any other wiki engine?"
-answer[3][1]="Yes" answer[3][2]="No"
-question[4]="What wiki engine do you like most?"
-answer[4][1]="c2Wiki" answer[4][2]="MoinMoin" answer[4][3]="PhpWiki"
-answer[4][4]="usemod" answer[4][5]="Twiki" answer[4][5]="guiki"
-answer[4][6]="Mediawiki" answer[4][7]="Other"
-question[5]="Which PhpWiki version do you use?"
-answer[5][1]="1.2.x" answer[5][2]="1.3.1-12" answer[5][3]="1.3.13"
-answer[5][4]="1.3.14"
->>
- *
- * Administration:
- * <<WikiPoll page=PhpWikiPoll admin=1 >>
- * and protect this page properly (e.g. PhpWikiPoll/Admin)
  *
  * TODO:
  *     admin page (view and reset statistics)
  *     for now only radio, support checkboxes (multiple selections) also?
  *
- * Author: ReiniUrban
+ * Author: Reini Urban
  */
 
 class WikiPlugin_WikiPoll
@@ -111,8 +93,7 @@ class WikiPlugin_WikiPoll
 
         foreach (array_merge($argstr_args, $argstr_defaults) as $arg => $val) {
             if (!preg_match("/^(answer_|question_)/", $arg))
-                trigger_error(sprintf(_("Argument “%s” not declared by plugin."),
-                    $arg), E_USER_NOTICE);
+                trigger_error(sprintf(_("Argument “%s” not declared by plugin."), $arg));
         }
 
         return $args;
@@ -173,7 +154,8 @@ class WikiPlugin_WikiPoll
         $disable_submit = false;
         if (isset($poll['ip'][$ip]) and ((time() - $poll['ip'][$ip]) < 20 * 60)) {
             //view at least the result or disable the Go button
-            $html = HTML(HTML::strong(
+            $html = HTML::div();
+            $html->pushContent(HTML::div(array('class' => 'warning'),
                 _("Sorry! You must wait at least 20 minutes until you can vote again!")));
             $html->pushContent($this->doPoll($page, $request, $request->getArg('answer'), true));
             return $html;
@@ -201,7 +183,8 @@ class WikiPlugin_WikiPoll
                 // update statistics and present them the user
                 return $this->doPoll($page, $request, $request->getArg('answer'));
             } else {
-                $html->pushContent(HTML::p(HTML::strong(_("Not enough questions answered!"))));
+                $html->pushContent(HTML::div(array('class' => 'warning'), _("Not enough questions answered!")));
+
             }
         }
 
@@ -228,13 +211,15 @@ class WikiPlugin_WikiPoll
                         $row->pushContent(HTML::div(
                             HTML::input(array('type' => 'radio',
                                 'name' => "answer[$i]",
-                                'value' => $j)),
-                            HTML::raw("&nbsp;"), $a[$j]));
+                                'value' => $j,
+                                'id' => "answer[$i]-$j")),
+                            HTML::raw("&nbsp;"),
+                            HTML::label(array('for' => "answer[$i]-$j"), $a[$j])));
                 }
                 $html->pushContent(HTML::p(HTML::strong($q)), $row);
             }
         }
-        if (!$disable_submit)
+        if (!$disable_submit) {
             $html->pushContent(HTML::p(
                 HTML::input(array('type' => 'submit',
                     'name' => "WikiPoll",
@@ -242,22 +227,23 @@ class WikiPlugin_WikiPoll
                 HTML::input(array('type' => 'reset',
                     'name' => "reset",
                     'value' => _("Reset")))));
-        else
-            $html->pushContent(HTML::p(), HTML::strong(
+        } else {
+            $html->pushContent(HTML::div(array('class' => 'warning'),
                 _("Sorry! You must wait at least 20 minutes until you can vote again!")));
+        }
         return $html;
     }
 
     private function bar($percent)
     {
         global $WikiTheme;
-        return HTML(HTML::img(array('src' => $WikiTheme->getImageUrl('leftbar'),
+        return HTML(HTML::img(array('src' => $WikiTheme->getImageURL('leftbar'),
                 'alt' => '<')),
-            HTML::img(array('src' => $WikiTheme->getImageUrl('mainbar'),
+            HTML::img(array('src' => $WikiTheme->getImageURL('mainbar'),
                 'alt' => '-',
                 'width' => sprintf("%02d", $percent),
                 'height' => 14)),
-            HTML::img(array('src' => $WikiTheme->getImageUrl('rightbar'),
+            HTML::img(array('src' => $WikiTheme->getImageURL('rightbar'),
                 'alt' => '>')));
     }
 
@@ -349,11 +335,3 @@ class WikiPlugin_WikiPoll
     }
 
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

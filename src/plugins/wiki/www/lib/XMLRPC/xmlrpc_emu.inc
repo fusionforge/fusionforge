@@ -6,8 +6,8 @@ xmlrpc_emu.inc -- xmlrpc.inc wrapper.
 08/30/01 - last modified by Dan Libby <dan@libby.com>
 
 This code provides API compatibility with Edd Dumbill's php xmlrpc
-library (http://phpxmlrpc.sourceforge.net/) but uses the xmlrpc-epi 
-engine for the actual xml processing.  It is intended to provide a 
+library (http://phpxmlrpc.sourceforge.net/) but uses the xmlrpc-epi
+engine for the actual xml processing.  It is intended to provide a
 smooth transition path for those who would like to be able to use either
 implementation.
 
@@ -161,8 +161,7 @@ class xmlrpc_client
     var $username = "";
     var $password = "";
 
-    // constructor
-    function xmlrpc_client($path, $server, $port = 80)
+    function __construct($path, $server, $port = 80)
     {
         $this->port = $port;
         $this->server = $server;
@@ -229,8 +228,7 @@ class xmlrpcresp
     var $fs;
     var $hdrs;
 
-    // constructor.
-    function xmlrpcresp($val, $fcode = 0, $fstr = "")
+    function __construct($val, $fcode = 0, $fstr = "")
     {
         if ($fcode != 0) {
             $this->fn = $fcode;
@@ -283,8 +281,7 @@ class xmlrpcmsg
     var $params = array();
     var $debug = 0;
 
-    // constructor
-    function xmlrpcmsg($meth, $pars = 0)
+    function __construct($meth, $pars = 0)
     {
         $this->methodname = $meth;
         if (is_array($pars) && sizeof($pars) > 0) {
@@ -385,8 +382,7 @@ class xmlrpcval
     var $me = array();
     var $mytype = 0;
 
-    // constructor
-    function xmlrpcval($val = -1, $type = "")
+    function __construct($val = -1, $type = "")
     {
         global $xmlrpcTypes;
         $this->me = array();

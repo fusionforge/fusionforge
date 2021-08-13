@@ -1,0 +1,41 @@
+Date: Sat, 26 Dec 2020 12:40:06 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
+Content-Type: application/x-phpwiki;
+  pagename=Hilfe%2FSeitenErzeugen;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
+  charset=UTF-8
+Content-Transfer-Encoding: binary
+
+Um dem Wiki eine neue Seite hinzuzufügen mußt du dir nur einen sinnvollen Titel
+und zwischen {{{[[doppelte Klammern]]}}} setzen.
+
+Dann kannst du das Fragezeichen am Ende des neuen Hyperlinks anklicken,
+und Wiki öffnet einen Editor zum Erstellen der neuen Seite.
+
+The page name can contain any character, except:
+* angle brackets (<>),
+* square brackets ([]),
+* curly brackets ({}),
+* double quotes ("),
+* pipe (|),
+* and hash sign (#) that is used for anchors.
+
+Wenn du ein Dokument mit aufwendigen Formatierungen zum Wiki hinzufügen willst,
+ist es vielleicht einfacher, einen Link zu diesem Dokument ins Wiki einzufügen
+statt das Dokument selbst. Zum Beispiel:
+{{{
+[[http://phpwiki.sourceforge.net/|Homepage des PhpWiki Projektes]]
+}}}
+[[http://phpwiki.sourceforge.net/|Homepage des PhpWiki Projektes]]
+
+Wiki unterstüzt keine HTML-Tags (siehe [[Hilfe:TextFormatierungsRegeln|TextFormatierungsRegeln]]).
+<tags>werden einfach wie normaler Text angezeigt.</tags> Wiki soll so einfach
+wie möglich sein, damit es jeder benutzen kann.
+
+Es gibt eine Funktion, durch die der Systemverwalter HTML in Dokumenten erlauben
+kann, das führt aber zu Sicherheitsrisiken.
+
+<noinclude>
+----
+[[PhpWikiDokumentation]]
+</noinclude>

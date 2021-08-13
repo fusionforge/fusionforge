@@ -20,8 +20,8 @@
 //
 // $Id: mdb.php 174777 2004-12-15 09:09:33Z dufuz $
 
-require_once 'MDB.php';
-require_once 'Cache/Container.php';
+require_once 'lib/pear/MDB.php';
+require_once 'lib/pear/Cache/Container.php';
 
 /**
 * PEAR/MDB Cache Container.
@@ -86,7 +86,7 @@ class Cache_Container_mdb extends Cache_Container
      *
      * @param mixed Array with connection info or dsn string
      */
-    function Cache_Container_mdb($options)
+    function __construct($options)
     {
         $this->db = &MDB::Connect($options);
         if (MDB::isError($this->db)) {

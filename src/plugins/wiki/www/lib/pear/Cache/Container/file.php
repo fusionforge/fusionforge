@@ -18,7 +18,7 @@
 //
 // $Id: file.php 293864 2010-01-23 03:49:21Z clockwerx $
 
-require_once 'Cache/Container.php';
+require_once 'lib/pear/Cache/Container.php';
 
 /**
 * Stores cache contents in a file.
@@ -100,7 +100,7 @@ class Cache_Container_file extends Cache_Container
     *
     * @param    array   Config options: ["cache_dir" => ..., "filename_prefix" => ...]
     */
-     function Cache_Container_file($options = '')
+     function __construct($options = '')
      {
         if (is_array($options)) {
             $this->setOptions($options, array_merge($this->allowed_options, array('cache_dir', 'filename_prefix', 'max_userdata_linelength')));
@@ -109,11 +109,11 @@ class Cache_Container_file extends Cache_Container
         if ($this->cache_dir) {
             // make relative paths absolute for use in deconstructor.
             // it looks like the deconstructor has problems with relative paths
-            if (OS_UNIX && '/' != $this->cache_dir{0}  )
+            if (OS_UNIX && '/' != $this->cache_dir[0]  )
                 $this->cache_dir = realpath( getcwd() . '/' . $this->cache_dir) . '/';
 
             // check if a trailing slash is in cache_dir
-            if ($this->cache_dir{strlen($this->cache_dir)-1} != DIRECTORY_SEPARATOR)
+            if ($this->cache_dir[strlen($this->cache_dir)-1] != DIRECTORY_SEPARATOR)
                  $this->cache_dir .= '/';
 
             if  (!file_exists($this->cache_dir) || !is_dir($this->cache_dir))
@@ -275,7 +275,8 @@ class Cache_Container_file extends Cache_Container
             krsort($this->entries);
             reset($this->entries);
             
-            while ($this->total_size > $this->lowwater && list($lastmod, $entry) = each($this->entries)) {
+            foreach ($this->entries as $lastmod => $entry) {
+                if ($this->total_size <= $this->lowwater) break;
                 if (@unlink($entry['file'])) {
                     $this->total_size -= $entry['size'];
                 } else {

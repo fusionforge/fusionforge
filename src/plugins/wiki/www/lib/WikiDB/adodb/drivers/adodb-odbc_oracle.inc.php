@@ -1,12 +1,14 @@
 <?php
 /*
-V5.20dev  ??-???-2014  (c) 2000-2014 John Lim (jlim#natsoft.com). All rights reserved.
+@version   v5.20.19  13-Dec-2020
+@copyright (c) 2000-2013 John Lim (jlim#natsoft.com). All rights reserved.
+@copyright (c) 2014      Damien Regad, Mark Newnham and the ADOdb community
   Released under both BSD license and Lesser GPL library license.
   Whenever there is any discrepancy between the two licenses,
   the BSD license will take precedence.
 Set tabs to 4 for best viewing.
 
-  Latest version is available at http://adodb.sourceforge.net
+  Latest version is available at http://adodb.org/
 
   Oracle support via ODBC. Requires ODBC. Works on Windows.
 */
@@ -31,12 +33,7 @@ class  ADODB_odbc_oracle extends ADODB_odbc {
 
 	//var $_bindInputArray = false;
 
-	function ADODB_odbc_oracle()
-	{
-		$this->ADODB_odbc();
-	}
-
-	function MetaTables()
+	function MetaTables($ttype = false, $showSchema = false, $mask = false)
 	{
 		$false = false;
 		$rs = $this->Execute($this->metaTablesSQL);
@@ -79,11 +76,9 @@ class  ADODB_odbc_oracle extends ADODB_odbc {
 	// returns true or false
 	function _connect($argDSN, $argUsername, $argPassword, $argDatabasename)
 	{
-	global $php_errormsg;
-
-		$php_errormsg = '';
+		$last_php_error = $this->resetLastError();
 		$this->_connectionID = odbc_connect($argDSN,$argUsername,$argPassword,SQL_CUR_USE_ODBC );
-		$this->_errorMsg = $php_errormsg;
+		$this->_errorMsg = $this->getChangedErrorMsg($last_php_error);
 
 		$this->Execute("ALTER SESSION SET NLS_DATE_FORMAT='YYYY-MM-DD HH24:MI:SS'");
 		//if ($this->_connectionID) odbc_autocommit($this->_connectionID,true);
@@ -92,10 +87,9 @@ class  ADODB_odbc_oracle extends ADODB_odbc {
 	// returns true or false
 	function _pconnect($argDSN, $argUsername, $argPassword, $argDatabasename)
 	{
-	global $php_errormsg;
-		$php_errormsg = '';
+		$last_php_error = $this->resetLastError();
 		$this->_connectionID = odbc_pconnect($argDSN,$argUsername,$argPassword,SQL_CUR_USE_ODBC );
-		$this->_errorMsg = $php_errormsg;
+		$this->_errorMsg = $this->getChangedErrorMsg($last_php_error);
 
 		$this->Execute("ALTER SESSION SET NLS_DATE_FORMAT='YYYY-MM-DD HH24:MI:SS'");
 		//if ($this->_connectionID) odbc_autocommit($this->_connectionID,true);
@@ -107,8 +101,8 @@ class  ADORecordSet_odbc_oracle extends ADORecordSet_odbc {
 
 	var $databaseType = 'odbc_oracle';
 
-	function ADORecordSet_odbc_oracle($id,$mode=false)
+	function __construct($id,$mode=false)
 	{
-		return $this->ADORecordSet_odbc($id,$mode);
+		return parent::__construct($id,$mode);
 	}
 }

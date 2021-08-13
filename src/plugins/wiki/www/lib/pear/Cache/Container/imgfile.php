@@ -16,7 +16,7 @@
 // |          Sebastian Bergmann <sb@sebastian-bergmann.de>               |
 // +----------------------------------------------------------------------+
 
-require_once 'Cache/Container.php';
+require_once 'lib/pear/Cache/Container.php';
 
 /**
 * Stores cache contents in a file.
@@ -71,7 +71,7 @@ class Cache_Container_file extends Cache_Container {
     *
     * @param    array   Config options: ["cache_dir" => ..., "filename_prefix" => ...]
     */
-     function Cache_Container_file($options = '') {
+     function __construct($options = '') {
         if (is_array($options))
             $this->setOptions($options, array_merge($this->allowed_options, array('cache_dir', 'filename_prefix')));
 
@@ -80,7 +80,7 @@ class Cache_Container_file extends Cache_Container {
         {
             // make relative paths absolute for use in deconstructor.
             // it looks like the deconstructor has problems with relative paths
-            if (OS_UNIX && '/' != $this->cache_dir{0}  )
+            if (OS_UNIX && '/' != $this->cache_dir[0]  )
                 $this->cache_dir = realpath( getcwd() . '/' . $this->cache_dir) . '/';
 
             // check if a trailing slash is in cache_dir

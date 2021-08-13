@@ -17,7 +17,7 @@
 //
 // $Id: Function.php 174777 2004-12-15 09:09:33Z dufuz $
 
-require_once 'Cache.php';
+require_once 'lib/pear/Cache.php';
 
 /**
 * Function_Cache
@@ -55,12 +55,12 @@ require_once 'Cache.php';
 *   $cache->call('foobar');
 *
 * Note:
-* 
-*   You cannot cache every function. You should only cache 
+*
+*   You cannot cache every function. You should only cache
 *   functions that only depend on their arguments and don't use
-*   global or static variables, don't rely on database queries or 
+*   global or static variables, don't rely on database queries or
 *   files, and so on.
-* 
+*
 * @author       Sebastian Bergmann <sb@sebastian-bergmann.de>
 * @module       Function_Cache
 * @modulegroup  Function_Cache
@@ -79,15 +79,14 @@ class Cache_Function extends Cache
     * @param    array   Array with container class options
     * @param    integer Number of seconds for which to cache
     */
-    function Cache_Function($container  = 'file',
-                            $container_options = array('cache_dir'       => '.',
-                                                       'filename_prefix' => 'cache_'
-                                                      ),
-                            $expires = 3600
-                           )
+    function __construct($container  = 'file',
+                         $container_options = array('cache_dir' => '.',
+                                                    'filename_prefix' => 'cache_'
+                                                   ),
+                         $expires = 3600)
     {
-      $this->Cache($container, $container_options);
-      $this->expires = $expires;      
+      parent::__construct($container, $container_options);
+      $this->expires = $expires;
     }
 
     /**

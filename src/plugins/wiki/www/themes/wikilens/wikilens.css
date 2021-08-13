@@ -4,7 +4,6 @@
  * WikiLens overrides
  */
 body {
-    /* ivory #ffe #fffff0*/
     background: #FEFEFE;
     font-size: 90%; /* The default is too large. But enlarge monospace below */
     margin: 0;
@@ -33,6 +32,11 @@ img {
     border: 0;
 }
 
+img.inlineimage {
+    display: inline;
+    vertical-align: middle;
+}
+
 #logo img {
     margin: 0;
     float: left;
@@ -44,28 +48,4 @@ img {
 
 img.toolbar:hover {
     cursor: pointer;
-}
-
-table.sortable th.header {
-    background-image: url(../default/buttons/sort_none.gif);
-    cursor: pointer;
-    background-repeat: no-repeat;
-    background-position: center right;
-    padding-right: 20px;
-}
-
-table.sortable th.headerSortUp {
-    background-image: url(../default/buttons/sort_up.gif);
-    cursor: pointer;
-    background-repeat: no-repeat;
-    background-position: center right;
-    padding-right: 20px;
-}
-
-table.sortable th.headerSortDown {
-    background-image: url(../default/buttons/sort_down.gif);
-    cursor: pointer;
-    background-repeat: no-repeat;
-    background-position: center right;
-    padding-right: 20px;
 }

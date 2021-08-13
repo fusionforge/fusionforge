@@ -1,7 +1,6 @@
 <?php
-
-/*
- * Copyright 2003 Arnaud Fontaine
+/**
+ * Copyright © 2003 Arnaud Fontaine
  *
  * This file is part of PhpWiki.
  *
@@ -18,10 +17,15 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
-*/
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
+ */
+
 /**
  * @author: Arnaud Fontaine
  */
+
 include 'lib/RssParser.php';
 
 class WikiPlugin_RssFeed
@@ -37,11 +41,15 @@ class WikiPlugin_RssFeed
     {
         return array('feed' => "",
             'description' => "",
-            'url' => "", //"http://phpwiki.fr/RecentChanges?format=rss",
+            'url' => "", // "http://phpwiki.demo.free.fr/index.php/RecentChanges?format=rss",
             'maxitem' => 0,
             'titleonly' => false,
             'debug' => false,
         );
+    }
+
+    function handle_plugin_args_cruft($argstr, $args)
+    {
     }
 
     /**
@@ -54,6 +62,14 @@ class WikiPlugin_RssFeed
     function run($dbi, $argstr, &$request, $basepage)
     {
         extract($this->getArgs($argstr, $request));
+
+        if (($titleonly == '0') || ($titleonly == 'false')) {
+            $titleonly = false;
+        } elseif (($titleonly == '1') || ($titleonly == 'true')) {
+            $titleonly = true;
+        } else {
+            return $this->error(sprintf(_("Argument '%s' must be a boolean"), "titleonly"));
+        }
 
         $rss_parser = new RSSParser();
 
@@ -124,7 +140,7 @@ class WikiPlugin_RssFeed
         if (empty($title))
             $title = _("RssFeed");
         if (empty($url))
-            $url = 'http://phpwiki.fr/RecentChanges?format=rss';
+            $url = 'http://phpwiki.demo.free.fr/RecentChanges?format=rss';
         $argstr = "url=$url";
         if (isset($maxitem) and is_numeric($maxitem))
             $argstr .= " maxitem=$maxitem";
@@ -133,11 +149,3 @@ class WikiPlugin_RssFeed
     }
 
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

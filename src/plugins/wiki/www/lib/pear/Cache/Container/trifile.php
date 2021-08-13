@@ -19,7 +19,7 @@
 //
 // $Id: trifile.php 184642 2005-04-18 19:05:01Z dufuz $
 
-require_once 'Cache/Container/file.php';
+require_once 'lib/pear/Cache/Container/file.php';
 
 /**
  * Tri-file cache.

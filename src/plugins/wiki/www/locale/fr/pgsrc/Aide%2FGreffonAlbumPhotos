@@ -1,0 +1,189 @@
+Date: Tue,  3 Sep 2019 18:01:13 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
+Content-Type: application/x-phpwiki;
+  pagename=Aide%2FGreffonAlbumPhotos;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
+  charset=UTF-8
+Content-Transfer-Encoding: binary
+
+Le [[Aide:GreffonWiki|greffon]] **~AlbumPhotos** (//PhotoAlbum//) fabrique un album en affichant un ensemble de photos dont la liste est
+un fichier de texte avec des descriptions optionnelles.
+
+== Utilisation ==
+
+{{{
+<<PhotoAlbum
+         src=http://server/textfile
+         mode=[column|row]
+         align=[center|left|right]
+         desc=true
+         sort=false
+         height=100%
+         width=100%
+>>
+}}}
+
+== Arguments ==
+
+##src## est le seul paramètre obligatoire.
+
+{| class="bordered"
+|-
+! Argument
+! Description
+! Valeur par défaut
+|-
+| **src**
+|
+Url ou chemin local pour un fichier CSV où chaque ligne est un nom de
+fichier de photo et une description de la photo. Les photos sont dans le
+même répertoire que le fichier. Les descriptions sont facultatives.
+
+Si le chemin local est un répertoire relatif à PHPWIKI_DIR et que le script
+principal est dans PHPWIKI_DIR, alors la localisation des fichiers ne
+doit pas être donnée et toutes les images du répertoire sont affichées.
+|
+|-
+| **url**
+| Defines the webpath to the srcdir directory
+|
+|-
+| **mode**
+|
+Spécifie comment les images sont rangées.
+* "normal" - Normal table which shows photos full-size
+* "thumbs" - WinXP thumbnail style
+* "tiles"  - WinXP tiles style
+* "list"   - WinXP list style
+* "row"    - inline thumbnails
+* "column" - photos full-size, displayed in 1 column
+* "slide"  - slideshow mode, needs Javascript on client
+| normal
+|-
+| **numcols**
+| photos per row, columns
+| 3
+|-
+| **showdesc**
+|
+* "none"   - No descriptions next to photos
+* "name"   - Only filename shown
+* "desc"   - Only description (from textfile) shown
+* "both"   - If no description found, then filename will be used
+| both
+|-
+| **link**
+|
+true or false
+
+If true, each image will be hyperlinked to a page where the single
+photo will be shown full-size. Only works when mode != 'normal'
+| true
+|-
+| **attrib**
+| attrib arg allows multiple attributes: attrib=sort,nowrap,alt
+* "sort" sorts alphabetically,
+* "nowrap" for cells,
+* "alt" to use descs instead of filenames in image ALT-tags
+|-
+| **align**
+| center, right ou left
+| center
+|-
+| **desc**
+| Affiche les descriptions données dans le fichier
+| true
+|-
+| **sort**
+| Tri les images par nom de fichier
+| Par défaut, c'est l'ordre dans le fichier texte qui est suivi.
+|-
+| **bgcolor**
+| cell bgcolor
+| #eae8e8 (lightgrey)
+|-
+| **hlcolor**
+| highlight color
+| #c0c0ff (lightblue)
+|-
+| **height**, **width**
+|
+Height and width are calculated compared to original metrics
+retrieved by [[php-function:getimagesize]] and can be absolute (50px)
+or a percentage (e.g. "50%").
+|
+|-
+| **attrib**
+|
+attrib arg allows multiple attributes: attrib=sort,nowrap,alt
+'sort' sorts alphabetically, 'nowrap' for cells, 'alt' to use
+descs instead of filenames in image ALT-tags
+|
+|-
+| **cellwidth**
+|
+cell (auto|equal|image|75|100%)
+
+Width of cells in table. Either absolute value in pixels, HTML
+style percentage, "auto" (no special action), "equal" (where
+all columns are equally sized) or "image" (take height and
+width of the photo in that cell).
+|
+|-
+| **tablewidth**
+|
+table (75|100%)
+| false
+|-
+| **p**
+| "displaythissinglephoto.jpg" only
+| false
+|-
+| **h**
+| "highlightcolorofthisphoto.jpg" only
+| false
+|-
+| **duration**
+| in slide mode, duration in seconds
+| 6
+|-
+| **thumbswidth**
+| width of thumbnails
+| 80
+|}
+
+== Exemples ==
+
+=== Fichier texte ===
+
+Contenu possible d'une fichier texte valide :
+
+{{{
+photo-01.jpg; Ma femme et moi !
+photo-02.jpg
+jn.gif; Joyeux Noël !
+}}}
+
+=== Exemples d'album ===
+
+Dossier local :
+{{{
+<<PhotoAlbum src="themes/Hawaiian/images/pictures/" >>
+}}}
+ou par une adresse extérieure :
+{{{
+<<PhotoAlbum src="http://phpwiki.sourceforge.net/demo/themes/Hawaiian/images/pictures/PhotoAlbum.csv" >>
+}}}
+
+[[/Slides]]
+
+== Auteurs ==
+
+* [[mailto:teddy@jouwfeestje.com|Ted Vinke]] : auteur original
+* [[Help:Reini Urban|Reini Urban]] : système de fichiers local
+* Thomas Harding : slides and thumbs
+
+<noinclude>
+----
+[[DocumentationDePhpWiki]] [[CatégorieGreffonWiki]]
+</noinclude>

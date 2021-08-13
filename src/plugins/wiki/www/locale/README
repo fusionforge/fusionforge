@@ -200,7 +200,6 @@ before you can edit them.
    Content-Type: application/x-phpwiki;
      pagename=G%C3%A4steBuch;
      flags="";
-     markup=2;
      charset=UTF-8
    Content-Transfer-Encoding: binary
 
@@ -372,5 +371,3 @@ Jan Nieuwenhuizen <janneke@gnu.org>
 Arno Hollosi <ahollosi@mail.com>
 Carsten Klapp <carstenklapp@users.sourceforge.net>
 Reini Urban <rurban@x-ray.at>
-
-$Id: README 7001 2009-07-06 14:23:30Z vargenau $

@@ -26,25 +26,25 @@ of your theme to index.php.
 == Template Structure ==
 
 Templates currently must use the .tmpl extension (simple PHP parsed files).
-Other file extensions are reserved for future use (i.e. .tpl for Smarty or 
+Other file extensions are reserved for future use (i.e. .tpl for Smarty or
 .html for our old template expansion.)
 
 Only one template is called, usually the "html.tmpl" template,
 which includes all other templates then.
 
-WikiTheme templates are regular xhtml, but the php parts within "<?php" and "?>" 
-are treated especially by phpwiki. HTML entities within the php parts 
-should be created by our HtmlElement methods, which create well-formed 
-HTML objects. 
+WikiTheme templates are regular xhtml, but the php parts within "<?php" and "?>"
+are treated especially by phpwiki. HTML entities within the php parts
+should be created by our HtmlElement methods, which create well-formed
+HTML objects.
 Pure HTML entities, e.g. <?php echo "<br>" ?> will be escaped to &lt;br&gt;.
 
 You can easily embed other templates by your own, e.g. <?php echo Template('body') ?>
 
 Templates are used
-* by the master action (html and htmldump), which include most other 
-  plugins in a hierarchical manner, 
-* by certain actions (editpage) or plugins (e.g. info, userprefs, 
-  addcomment, ...) or 
+* by the master action (html and htmldump), which include most other
+  plugins in a hierarchical manner,
+* by certain actions (editpage) or plugins (e.g. info, userprefs,
+  addcomment, ...) or
 * by certain pagetypes (e.g. wikiblog, comment, wikiforum)
 
 To include templates from other themes use this syntax:
@@ -52,9 +52,9 @@ To include templates from other themes use this syntax:
 includes the search template from the default theme.
 
 Warning!
-When you write your own templates or change existing ones, you might 
-easily destroy XHTML validity of the generated pages. By using 
-the various HTML() methods within a plugin's php code it is guaranteed 
+When you write your own templates or change existing ones, you might
+easily destroy XHTML validity of the generated pages. By using
+the various HTML() methods within a plugin's php code it is guaranteed
 to produce validating XHTML, by using custom templates not.
 
 ----

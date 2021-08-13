@@ -1,10 +1,10 @@
-Installing phpwiki with SQLite 
+Installing phpwiki with SQLite
 ------------------------------
 
-SQLite support is highly experimental but necessary. 
+SQLite support is highly experimental but necessary.
 
-SQLite is from PHP5 on the default database, built in PHP's core. 
-MySQL is only a extension module and relatively hard to setup (or 
+SQLite is from PHP5 on the default database, built in PHP's core.
+MySQL is only a extension module and relatively hard to setup (or
 impossible on certain windows builds such as php-5.0.0b4), similar to dba.
 sqlite extensions exist for php-4.3.x but not for 4.2.x
 Get the 4..3.x windows dll at http://snaps.php.net/win32/PECL_4_3/php_sqlite.dll
@@ -12,7 +12,7 @@ Get the 4..3.x windows dll at http://snaps.php.net/win32/PECL_4_3/php_sqlite.dll
 To setup the initial tables you currently need the external sqlite
 executable client. On Microsoft Windows download the sqlite.exe binary
 from http://www.sqlite.org/sqlite.zip
-We work on a solution to setup the database on a virgin wiki 
+We work on a solution to setup the database on a virgin wiki
 automatically, so that the sqlite binary is not needed anymore.
 
 sqlite /tmp/phpwiki-sqlite.db < schemas/sqlite-initialize.sql
@@ -35,5 +35,5 @@ echo ".dump" | sqlite /tmp/phpwiki-sqlite.db > dump.sql
 mv /tmp/phpwiki-sqlite.db /tmp/phpwiki-sqlite.old
 sqlite /tmp/phpwiki-sqlite.db < dump.sql
 
-Authors: 
+Authors:
 ReiniUrban (phpwiki developer) and Matthew Palmer (phpwiki debian maintainer)

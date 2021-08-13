@@ -1,4 +1,27 @@
 <?php
+/**
+ * Copyright © 2001 Jeff Dairiki
+ * Copyright © 2004 Reini Urban
+ *
+ * This file is part of PhpWiki.
+ *
+ * PhpWiki is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * PhpWiki is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
+ */
 
 /**
  * A callback
@@ -52,7 +75,7 @@ class WikiFunctionCb
     /**
      * @param string $functionName Name of global function to call.
      */
-    public function __construct($functionName)
+    function __construct($functionName)
     {
         $this->functionName = $functionName;
     }
@@ -95,39 +118,3 @@ class WikiMethodCb
         return array($this->object, $this->methodName);
     }
 }
-
-/**
- * Anonymous function callback.
- */
-class WikiAnonymousCb
-    extends WikiCallback
-{
-    /**
-     * @param string $args Argument declarations
-     * @param string $code Function body
-     * @see create_function().
-     */
-    function __construct($args, $code)
-    {
-        $this->function = create_function($args, $code);
-    }
-
-    function call_array($args)
-    {
-        return call_user_func_array($this->function, $args);
-    }
-
-    function toPearCb()
-    {
-        trigger_error("Can't convert WikiAnonymousCb to Pear callback",
-            E_USER_ERROR);
-    }
-}
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

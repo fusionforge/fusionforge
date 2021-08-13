@@ -1,6 +1,6 @@
 <?php
-/*
- * Copyright (C) 2002 Johannes Große
+/**
+ * Copyright © 2002 Johannes Große
  *
  * This file is part of PhpWiki.
  *
@@ -17,6 +17,9 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
  */
 
 /**
@@ -93,7 +96,7 @@ function deduceUsername()
  */
 function mainImageCache()
 {
-    $request = new Request;
+    $request = new Request();
     // normalize pagename
     $request->setArg('pagename', deducePagename($request));
     $pagename = $request->getArg('pagename');
@@ -111,7 +114,7 @@ function mainImageCache()
     $id = $request->getArg('id');
     $args = $request->getArg('args');
     $request->setArg('action', 'imagecache');
-    $cache = new WikiPluginCached;
+    $cache = new WikiPluginCached();
 
     if ($id) {
         // this indicates a direct call (script wasn't called as
@@ -134,7 +137,6 @@ function mainImageCache()
                     . ' obtained.)');
             return;
         }
-        //$cacheparams = $GLOBALS['CacheParams'];
         if (!preg_match(':^(.*/)?' . PLUGIN_CACHED_FILENAME_PREFIX . '([^\?/]+)\.img(\?args=([^\?&]*))?$:', $uri, $matches)) {
             $cache->printError('png', "I do not understand this URL: $uri");
             return;
@@ -152,11 +154,3 @@ function mainImageCache()
 }
 
 mainImageCache();
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

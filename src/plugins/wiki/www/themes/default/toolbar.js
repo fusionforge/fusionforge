@@ -25,7 +25,7 @@ function showPulldown(title, pages, okbutton, closebutton, fromid) {
        }
    };
   pullwin.window.document.writeln(doctype);
-  pullwin.window.document.writeln('<html>\n<head>\n<title>'+escapeQuotes(title)+'</title>');
+  pullwin.window.document.writeln('<html xml:lang="en" lang="en" >\n<head>\n<title>'+escapeQuotes(title)+'</title>');
   pullwin.window.document.writeln(cssfile);
   pullwin.window.document.writeln('</head>\n<body>');
   pullwin.window.document.writeln('<p>\nYou can double-click to insert.\n</p>');
@@ -135,6 +135,30 @@ function insertTags(tagOpen, tagClose, sampleText) {
   }
   // reposition cursor if possible
   if (txtarea.createTextRange) txtarea.caretPos = document.selection.createRange().duplicate();
+}
+
+function convert_tab_to_table() {
+
+    // obtain the object reference for the <textarea>
+    var txtarea = document.getElementById('edit-content');
+    // obtain the index of the first selected character
+    var start = txtarea.selectionStart;
+    // obtain the index of the last selected character
+    var finish = txtarea.selectionEnd;
+    //obtain all Text
+    var allText = txtarea.value;
+    // obtain the selected text
+    var theSelection = allText.substring(start, finish);
+
+    // replace tabs by pipe surrounded by spaces
+    theSelection = theSelection.replace(/\t/g, ' | ');
+    // add pipe followed by space at beginning of lines
+    theSelection = theSelection.replace(/^/g, '| ');
+    theSelection = theSelection.replace(/\n/g, '\n| ');
+
+    // append the text
+    var newText=allText.substring(0, start)+theSelection+allText.substring(finish, allText.length);
+    txtarea.value=newText;
 }
 
 // JS_SEARCHREPLACE from walterzorn.de

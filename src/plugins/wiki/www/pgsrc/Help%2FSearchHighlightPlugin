@@ -1,5 +1,5 @@
-Date: Mon, 29 Jun 2015 12:04:28 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Tue, 23 Feb 2021 09:05:00 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FSearchHighlightPlugin;
   flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
@@ -11,7 +11,7 @@ which is only used internally.
 
 When someone is referred from a search engine like Google, Yahoo
 or our own fulltextsearch, the terms the user searched for are highlighted.
-See also http://wordpress.org/about/shots/1.2/plugins.png
+See also [[http://wordpress.org/about/shots/1.2/plugins.png]].
 
 == Arguments ==
 
@@ -23,15 +23,15 @@ See also http://wordpress.org/about/shots/1.2/plugins.png
 |-
 | **s**
 | The search term
-|
+| //none//
 |-
 | **case_exact**
-| boolean
-|
+| Boolean. If true, highlight only case exact searches.
+| false
 |-
 | **regex**
-| boolean
-|
+| not yet supported
+| false
 |}
 
 <noinclude>

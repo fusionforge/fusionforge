@@ -1,17 +1,5 @@
 <?php
-
 /**
- * Simple RSSParser Class
- * Based on Duncan Gough RSSParser class
- * Copyleft Arnaud Fontaine
- * Licence : GPL
- * See lib/plugin/RssFeed.php and lib/XmlParser.php
- *
- * The myth of RSS compatibility:
- *   http://diveintomark.org/archives/2004/02/04/incompatible-rss
- */
-
-/*
  * This file is part of PhpWiki.
  *
  * PhpWiki is free software; you can redistribute it and/or modify
@@ -27,6 +15,20 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
+ */
+
+/**
+ * Simple RSSParser Class
+ * Based on Duncan Gough RSSParser class
+ * Copyleft Arnaud Fontaine
+ * Licence : GPL
+ * See lib/plugin/RssFeed.php and lib/PhpWikiXmlParser.php
+ *
+ * The myth of RSS compatibility:
+ *   http://diveintomark.org/archives/2004/02/04/incompatible-rss
  */
 
 /**
@@ -39,10 +41,10 @@
  *     http://ws.audioscrobbler.com/rdf/ for example
  */
 
-require_once 'lib/XmlParser.php';
+require_once 'lib/PhpWikiXmlParser.php';
 
 class RSSParser
-    extends XmlParser
+    extends PhpWikiXmlParser
 {
 
     public $title = "";
@@ -182,11 +184,3 @@ class RSSParser
         }
     }
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

@@ -1,7 +1,6 @@
 <?php
-
-/*
- * Copyright (C) 2004 ReiniUrban
+/**
+ * Copyright © 2004 Reini Urban
  *
  * This file is part of PhpWiki.
  *
@@ -18,6 +17,9 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
  */
 
 /**
@@ -27,10 +29,11 @@
  *   define('AUTH_SESS_USER','userid');
  *   define('AUTH_SESS_LEVEL',2);
  */
+
 class _SessionPassUser
     extends _PassUser
 {
-    function _SessionPassUser($UserName = '', $prefs = false)
+    function __construct($UserName = '', $prefs = false)
     {
         if ($prefs) $this->_prefs = $prefs;
         if (!defined("AUTH_SESS_USER") or !defined("AUTH_SESS_LEVEL")) {
@@ -57,7 +60,7 @@ class _SessionPassUser
             $this->_userid = $sess[AUTH_SESS_USER];
         }
         if (!isset($this->_prefs->_method))
-            _PassUser::_PassUser($this->_userid);
+            parent::__construct($this->_userid);
         $this->_level = AUTH_SESS_LEVEL;
         $this->_authmethod = 'Session';
     }
@@ -77,11 +80,3 @@ class _SessionPassUser
         return false;
     }
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

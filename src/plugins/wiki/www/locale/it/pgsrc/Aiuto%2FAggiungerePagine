@@ -1,29 +1,41 @@
-Date: Mon, 29 Jun 2015 12:04:22 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Thu, 16 Dec 2020 12:01:56 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=Aiuto%2FAggiungerePagine;
-  flags="";
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
   charset=UTF-8
 Content-Transfer-Encoding: binary
 
-Scrivere parole sensate in maiuscolo nel Wiki, come ad esempio
-UnaStringaComeQuesta aggiunge una pagina e da senso all'argomento di cui
-si andrà a trattare.
-Wiki magicamente riconoscerà che la parola in maiuscolo sarà un link,
-alternativamente è possibile comunque definirlo attraverso le [parentesi quadre]
+Per aggiungere una nuova pagina al wiki, tutto ciò che devi fare è trovare un
+titolo significativo e inserirlo tra {{{[[parentesi quadre doppie]]}}}.
 
-Ora puoi procedere a CliccareSulPuntoEsclamativo alla fine del tuo nuovo
+Ora puoi procedere a cliccare sul punto esclamativo alla fine del tuo nuovo
 link e Wiki aprirà una finestra in cui potrai scrivere la nuova pagina.
+
+The page name can contain any character, except:
+* angle brackets (<>),
+* square brackets ([]),
+* curly brackets ({}),
+* double quotes ("),
+* pipe (|),
+* and hash sign (#) that is used for anchors.
 
 Se vuoi aggiungere documenti con marcature complesse al Wiki, puoi
 provare a fornire un indirizzo piuttosto che aggiungere del testo
 all'interno del documento come ad esempio:
+{{{
+[[http://phpwiki.sourceforge.net/|PhpWiki project homepage]]
+}}}
+[[http://phpwiki.sourceforge.net/|PhpWiki project homepage]]
 
- La pagina del progetto PhpWiki: http://phpwiki.sourceforge.net/
-
-Wiki non supporta tag HTML (guarda RegoleDiFormattazioneDelTesto.
+Wiki non supporta tag HTML (guarda [[Aiuto:RegoleFormattazioneTesto|RegoleFormattazioneTesto]]).
 <tags>Mostrerannno solo testo</tags> Wiki si pone come obiettivo quello
 di essere il più semplice possibile.
 
 C'è in effetti la possibilità di utilizzare l'HTML ma è necessario
-accordarsi con l'amministratore di sistema del Wiki
+accordarsi con l'amministratore di sistema del Wiki.
+
+<noinclude>
+----
+[[PhpWikiDocumentation]]
+</noinclude>

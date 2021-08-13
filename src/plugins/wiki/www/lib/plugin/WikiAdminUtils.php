@@ -1,8 +1,7 @@
 <?php
-
 /**
- * Copyright 2003,2004,2006 $ThePhpWikiProgrammingTeam
- * Copyright 2009 Marc-Etienne Vargenau, Alcatel-Lucent
+ * Copyright © 2003,2004,2006 $ThePhpWikiProgrammingTeam
+ * Copyright © 2009 Marc-Etienne Vargenau, Alcatel-Lucent
  *
  * This file is part of PhpWiki.
  *
@@ -19,18 +18,21 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
  */
 
 /**
-valid actions:
-purge-cache
-purge-bad-pagenames
-purge-empty-pages
-email-verification
-convert-cached-html
-db-check
-db-rebuild
+ * valid actions:
+ * purge-cache
+ * purge-bad-pagenames
+ * purge-empty-pages
+ * email-verification
+ * db-check
+ * db-rebuild
  */
+
 class WikiPlugin_WikiAdminUtils
     extends WikiPlugin
 {
@@ -85,7 +87,7 @@ class WikiPlugin_WikiAdminUtils
         return $this->_makeButton($request, $args, $label);
     }
 
-    protected function _makeButton(&$request, $args, $label)
+    protected function _makeButton($request, $args, $label)
     {
         $args['return_url'] = $request->getURLtoSelf();
         return HTML::form(array('action' => $request->getPostURL(),
@@ -97,7 +99,7 @@ class WikiPlugin_WikiAdminUtils
             HiddenInputs($request->getArgs(), false, array('action')));
     }
 
-    function do_action(&$request, $args)
+    function do_action($request, $args)
     {
         $method = strtolower('_do_' . str_replace('-', '_', $args['action']));
         if (!method_exists($this, $method))
@@ -118,15 +120,14 @@ class WikiPlugin_WikiAdminUtils
         $labels = array('purge-cache' => _("Purge Markup Cache"),
             'purge-bad-pagenames' => _("Purge all Pages With Invalid Names"),
             'purge-empty-pages' => _("Purge all empty, unreferenced Pages"),
-            'email-verification' => _("E-mail address confirmation"),
-            'convert-cached-html' => _("Convert cached_html"),
-            'db-check' => _("DB Check"),
-            'db-rebuild' => _("Db Rebuild")
+            'email-verification' => _("E-mail Verification"),
+            'db-check' => _("Check Wiki Database"),
+            'db-rebuild' => _("Rebuild Wiki Database")
         );
         return @$labels[$action];
     }
 
-    private function _do_purge_cache(&$request, $args)
+    private function _do_purge_cache($request, $args)
     {
         $dbi = $request->getDbh();
         $pages = $dbi->getAllPages('include_empty'); // Do we really want the empty ones too?
@@ -136,9 +137,8 @@ class WikiPlugin_WikiAdminUtils
         return _("Markup cache purged!");
     }
 
-    private function _do_purge_bad_pagenames(&$request, $args)
+    private function _do_purge_bad_pagenames($request, $args)
     {
-        // FIXME: this should be moved into WikiDB::normalize() or something...
         $dbi = $request->getDbh();
         $count = 0;
         $list = HTML::ol(array('class' => 'align-left'));
@@ -153,9 +153,9 @@ class WikiPlugin_WikiAdminUtils
             }
         }
         $pages->free();
-        if (!$count)
+        if (!$count) {
             return _("No pages with bad names had to be deleted.");
-        else {
+        } else {
             return HTML(fmt("Deleted %d pages with invalid names:", $count),
                 HTML::div(array('class' => 'align-left'), $list));
         }
@@ -168,7 +168,7 @@ class WikiPlugin_WikiAdminUtils
      * @param array $args
      * @return string|XmlContent
      */
-    private function _do_purge_empty_pages(&$request, $args)
+    private function _do_purge_empty_pages($request, $args)
     {
         $dbi = $request->getDbh();
         $count = 0;
@@ -192,52 +192,44 @@ class WikiPlugin_WikiAdminUtils
             }
         }
         $pages->free();
-        if (!$count)
+        if (!$count) {
             return _("No empty, unreferenced pages were found.");
-        else
+        } else {
             return HTML(fmt("Deleted %d unreferenced pages:", $count),
                 HTML::div(array('class' => 'align-left'), $list),
                 ($notpurgable ?
                     fmt("The %d not-purgable pages/links are links in some page(s). You might want to edit them.",
                         $notpurgable)
                     : ''));
-    }
-
-    private function _do_convert_cached_html(&$request, $args)
-    {
-
-        require_once 'lib/upgrade.php';
-        $dbh = $request->_dbi;
-        _upgrade_db_init($dbh);
-
-        $count = _upgrade_cached_html($dbh, false);
-
-        if (!$count)
-            return _("No old _cached_html pagedata found.");
-        else {
-            return HTML(fmt("Converted successfully %d pages", $count),
-                HTML::div(array('class' => 'align-left'), $list));
         }
     }
 
-    private function _do_db_check(&$request, $args)
+    private function _do_db_check($request, $args)
     {
         longer_timeout(180);
         $dbh = $request->getDbh();
-        //FIXME: display result.
-        return $dbh->_backend->check($args);
+        $result = $dbh->_backend->check($args);
+        if ($result) {
+            return _("Database check was successful.");
+        } else {
+            return _("Database check failed.");
+        }
     }
 
-    private function _do_db_rebuild(&$request, $args)
+    private function _do_db_rebuild($request, $args)
     {
         longer_timeout(240);
         $dbh = $request->getDbh();
-        //FIXME: display result.
-        return $dbh->_backend->rebuild($args);
+        $result = $dbh->_backend->rebuild($args);
+        if ($result) {
+            return _("Database rebuild was successful.");
+        } else {
+            return _("Database rebuild failed.");
+        }
     }
 
     // pagelist with enable/disable button
-    private function _do_email_verification(&$request, &$args)
+    private function _do_email_verification($request, $args)
     {
         $dbi = $request->getDbh();
         $pagelist = new PageList('pagename', array(), $args);
@@ -297,13 +289,12 @@ class WikiPlugin_WikiAdminUtils
                 WIKIAUTH_ADMIN)),
                 HiddenInputs($request->getArgs()),
                 $pagelist->_generateTable(),
-                HTML::p(Button('submit:', _("Change Verification Status"),
-                        'wikiadmin'),
-                    HTML::raw('&nbsp;'),
-                    Button('cancel', _("Cancel")))
+                HTML::p(Button('submit:', _("Change Verification Status"), 'wikiadmin'),
+                        HTML::raw('&nbsp;&nbsp;'),
+                        Button('cancel', _("Cancel")))
             );
         }
-    return HTML::raw('');
+        return HTML::raw('');
     }
 }
 
@@ -312,24 +303,24 @@ require_once 'lib/PageList.php';
 class _PageList_Column_email
     extends _PageList_Column
 {
-    function _getValue($prefs, $dummy)
+    function _getValue($page_handle, $revision_handle)
     {
-        return $prefs->get('email');
+        return $page_handle->get('email');
     }
 }
 
 class _PageList_Column_emailVerified
     extends _PageList_Column
 {
-    function _getValue($prefs, $status)
+    function _getValue($page_handle, $revision_handle)
     {
-        $name = $prefs->get('userid');
+        $name = $page_handle->get('userid');
         $input = HTML::input(array('type' => 'checkbox',
             'name' => 'wikiadminutils[verified][' . $name . ']',
             'value' => 1));
-        if ($prefs->get('emailVerified'))
+        if ($page_handle->get('emailVerified'))
             $input->setAttr('checked', '1');
-        if ($status)
+        if ($revision_handle)
             $input->setAttr('disabled', '1');
         return HTML($input, HTML::input
         (array('type' => 'hidden',
@@ -337,11 +328,3 @@ class _PageList_Column_emailVerified
             'value' => $name)));
     }
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

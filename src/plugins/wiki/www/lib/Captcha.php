@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Session Captcha v1.0
  *   by Gavin M. Roy <gmr@bteg.net>
@@ -20,6 +19,9 @@
  * You should have received a copy of the GNU General Public License along
  * with This File; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
  */
 
 class Captcha
@@ -102,7 +104,7 @@ class Captcha
     function get_dictionary_word()
     {
         // Load In the Word List
-        $fp = fopen(findfile("lib/captcha/dictionary"), "r");
+        $fp = fopen(findFile("lib/captcha/dictionary"), "r");
         $text = array();
         while (!feof($fp))
             $text[] = trim(fgets($fp, 1024));
@@ -146,10 +148,10 @@ class Captcha
         $height =& $this->height;
 
         // Create the Image
-        $jpg = ImageCreate($width, $height);
-        $bg = ImageColorAllocate($jpg, 255, 255, 255);
-        $tx = ImageColorAllocate($jpg, 185, 140, 140);
-        ImageFilledRectangle($jpg, 0, 0, $width, $height, $bg);
+        $jpg = imagecreate($width, $height);
+        $bg = imagecolorallocate($jpg, 255, 255, 255);
+        $tx = imagecolorallocate($jpg, 185, 140, 140);
+        imagefilledrectangle($jpg, 0, 0, $width, $height, $bg);
 
         $x = rand(0, $width);
         $y = rand(0, $height);
@@ -170,7 +172,7 @@ class Captcha
             elseif ($y > $height - 10) $y = $height - 11;
             $x += rand($size, $size * 2);
             imagettftext($jpg, $size, $angle, $x, $y, $tx,
-                realpath(findfile("lib/captcha/Vera.ttf")),
+                realpath(findFile("lib/captcha/Vera.ttf")),
                 $word[$i]);
         }
 
@@ -183,26 +185,18 @@ class Captcha
         imageline($jpg, 0, $height - 1, $width - 1, $height - 1, $tx);
         imageline($jpg, $width - 1, 0, $width - 1, $height - 1, $tx);
 
-        if (function_exists("ImageJpeg")) {
+        if (function_exists("imagejpeg")) {
             header("Content-type: image/jpeg");
-            ImageJpeg($jpg);
-        } elseif (function_exists("ImagePNG")) {
+            imagejpeg($jpg);
+        } elseif (function_exists("imagepng")) {
             header("Content-type: image/png");
-            ImagePNG($jpg);
-        } elseif (function_exists("ImageGIF")) {
+            imagepng($jpg);
+        } elseif (function_exists("imagegif")) {
             header("Content-type: image/gif");
-            ImageGIF($jpg);
+            imagegif($jpg);
         } else {
             trigger_error("missing GD bitmap support", E_USER_WARNING);
         }
     }
 
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

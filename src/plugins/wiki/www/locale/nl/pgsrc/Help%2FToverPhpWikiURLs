@@ -1,93 +1,108 @@
-Date: Mon, 29 Jun 2015 12:04:25 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Thu, 24 Dec 2020 18:24:26 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FToverPhpWikiURLs;
-  flags=PAGE_LOCKED;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
   charset=UTF-8
 Content-Transfer-Encoding: binary
 
-== Over phpwiki: URLs
+== Over //phpwiki:// URLs ==
 
 Een speciaal typen URL is beschikbaar voor het maken van koppelingen
-naar beheers- en andere speciale functies in PhpWiki.  Hier is een
+naar beheers- en andere speciale functies in ~PhpWiki.  Hier is een
 korte beschrijving hoe ze werken.
 
 De basissyntax van een phpwiki: URL is
-  **phpwiki:**''paginanaam''**?**''vraag-argen''
 
-Als ''paginanaam'' wordt weggelaten, wordt het de huidige pagina.
+**phpwiki:**//paginanaam//**?**//vraag-argen//
 
-''Vraag-argen'' moet een reeks van parameters in standaard HTTP GET
-formaat zijn.
+Als //paginanaam// wordt weggelaten, wordt het de huidige pagina.
 
-''Vraag-argen''
+//Vraag-argen// moet een reeks van parameters in standaard HTTP GET formaat zijn.
 
-FIXME: can these be localised?
-De "action=''x''" parameter moet altijd worden opgegeven.  Het kan er
-een zijn van **browse**, **info**, **diff**, **search**, **edit**,
-**zip**, **dumpserial**, **loadserial**, **remove**, **lock**,
-**unlock**, **login**, **logout**, **setprefs** of **save**.
+De "action=//x//" parameter moet altijd worden opgegeven.  Het kan er een zijn van
+**browse**, **diff**, **edit**, **viewsource**,
+**zip**, **dumpserial**, **loadserial**,
+**remove**, **lock**, **unlock**,
+**login**, **logout**, **setprefs** of **save**.
 The standaard actie is **browse**.
-
 
 Sommige van deze acties accepteren andere parameters.
 
-;**info**: Accepteert **showpagesource**.
-;**search**: Accepteert **searchterm**, and **searchtype**.
-;**edit**: Accepteert **version**.
-;**remove**: Accepteert **verify**.
-;**save**: Accepteert **editversion**, **minor_edit**, en **content**.
-;**setprefs**: Accepteert **edit_area_width**, **edit_area_height**.
+| **FullTextSearch**, **TitleSearch** | Accepteert **s**=zoekterm, en **size**=invoergrootte.
+| **edit**                            | Accepteert **version**.
+| **remove**                          | Accepteert **verify**.
+| **save**                            | Accepteert **editversion**, **minor_edit**, en **content**.
+| **setprefs**                        | Accepteert **edit_area_width** en **edit_area_height**.
 
-=== Tover Koppelingen Schrijven in Wiki Pagina's
+=== Tover Koppelingen Schrijven in Wiki Pagina's ===
 
 Een toverkoppeling ziet eruit als:
 
-  **[[** ''tekst'' **|** ''phpwiki-url'' **]**
+**~[~[** //tekst// **|** //phpwiki-url// **]]**
 
-
-Het "''tekst'' **|**" deel is optioneel maar meestal wel aan te raden.
+Het "//tekst// **|**" deel is optioneel maar meestal wel aan te raden.
 Als dit is opgegeven wordt dit het etiket voor de koppeling.
 
-Het ''phpwiki-url'' gedeelte is ook optioneel.  Als dit wordt
-weggelaten, wijst de koppeling naar de huidige wiki-pagina.
+The //phpwiki-url// is a //phpwiki:// URL as described above.
 
-==== Enkele voorbeelden
+==== Enkele voorbeelden ====
 
-  [[ Verander de !ZandBak | phpwiki:!ZandBak?action=edit ]
+{{{
+[[phpwiki:ZandBak?action=edit|Verander de ZandBak]]
+}}}
 zal een koppeling maken die je direct naar het wijzigen van de ZandBak brengt,
-aldus:
-[ Verander de ZandBak | phpwiki:ZandBak?action=edit ].
+aldus: [[phpwiki:ZandBak?action=edit|Verander de ZandBak]].
 
 Andere mogelijkheden:
-* [ Diff de ZandBak | phpwiki:ZandBak?action=diff ],
-* [ Sluit de ThuisPagina af | phpwiki:ThuisPagina?action=lock ],
-* [ Krijg een Volledige Zip Stort | phpwiki:?action=zip&include=all ],
-* [ Paginatitels die 'wiki' bevatten | phpwiki:?action=search&searchterm=wiki ],
+* [[phpwiki:ZandBak?action=diff|Diff de ZandBak]],
+* [[phpwiki:ThuisPagina?action=lock|Sluit de ThuisPagina]],
+* [[phpwiki:?action=zip&include=all|Krijg een Volledige Zip Stort]],
+* Search for [[phpwiki:?action=TitleSearch&s=wiki|Paginatitels die 'wiki' bevatten]]
 
-=== Tover Formulieren schrijven in Wiki Pagina's
+=== Tover Formulieren schrijven in Wiki Pagina's ===
 
-Als een van de ''vraag-argen'' een waarde heeft als
-  ''arg''**=**''opt-breedte''**(**''opt-verstek-waarde''**)**
-zal de koppeling worden weergegeven als een formulier, in plaats van een anker.
+**//Note://** //The old syntax for Magic forms is no longer supported.
+They are superseded by// ##<?plugin-form>##.
 
-''Opt-breedte'', als opgegeven specificeert de breedte van het invoerveld,
-terwijld ''opt-verstek-waarde'' de verstekwaarde voor de invoer specificeert.
-Als ''tekst'' wordt opgegeven in de koppelijng, dan wordt een submit-knop
-met dat etiket opgenomen in het formulier, zoniet wordt de submit knop
-achterwege gelaten.
+If the plugin is called using **<?plugin-form** instead of **<?plugin**
+and the plugin supports searching, then it will be rendered as a form.
 
-Voorbeelden:
+| //size// | If given, specifies the size of the input area.
+| //s//    | Specifies the default value for the input.
 
-  [[ Volledige Zoektocht | phpwiki:?action=search&searchtype=full&searchterm=() ]
-geeft
-[ Volledige Zoektocht | phpwiki:?action=search&searchtype=full&searchterm=() ]
+==== Voorbeelden ====
 
-Terwijl
-  [[ phpwiki:?action=search&searchterm=12() ]
-oplevert
-[ phpwiki:?action=search&searchterm=12() ]
+A search plugin invoked with **<?plugin** instead of **<?plugin-form**
+simply inserts the search results of the plugin:
 
-Andere voorbeelden:
-[ Blader Pagina | phpwiki:?action=browse&pagename=() ]
+{{{
+<<TitleSearch s=wiki noheader=true limit=10>>
+}}}
 
+Search results for Page titles containing 'wiki':
+
+<<TitleSearch s=wiki noheader=true limit=10>>
+
+{{{
+<?plugin-form FullTextSearch ?>
+}}}
+
+gives
+
+<?plugin-form FullTextSearch ?>
+
+While
+
+{{{
+<?plugin-form TitleSearch formsize=12 ?>
+}}}
+
+yields
+
+<?plugin-form TitleSearch formsize=12 ?>
+
+<noinclude>
+----
+[[PhpWikiDocumentatie]]
+</noinclude>

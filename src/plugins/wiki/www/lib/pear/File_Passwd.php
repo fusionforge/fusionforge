@@ -18,7 +18,7 @@
 //
 // Manipulate standard UNIX passwd,.htpasswd and CVS pserver passwd files
 
-require_once 'PEAR.php';
+require_once 'lib/pear/PEAR.php';
 
 /**
 * Class to manage passwd-style files
@@ -72,15 +72,14 @@ class File_Passwd {
     * breaks bc to v1.3 and smaller).
     * Don't forget to call close() to save changes!
     *
-    * @param $file        name of the passwd file
-    * @param $lock        if 'true' $lockfile will be locked
-    * @param $lockfile    name of the temp file, where changes are saved
+    * @param string $file        name of the passwd file
+    * @param bool $lock          if 'true' $lockfile will be locked
+    * @param string $lockfile    name of the temp file, where changes are saved
     *
-    * @access public
     * @see close()
     */
 
-    function File_Passwd($file, $lock = 0, $lockfile = "") {
+    function __construct($file, $lock = false, $lockfile = "") {
         $this->filename = $file;
         if( !empty( $lockfile) ) {
             $this->lockfile = $lockfile;
@@ -95,7 +94,7 @@ class File_Passwd {
                     flock($this->fplock, LOCK_UN);
                     fclose($this->fplock);
                 } else {
-                    trigger_error('File_Passwd lock conflict: Try &force_unlock=1',E_USER_NOTICE);
+                    trigger_error('File_Passwd lock conflict: Try &force_unlock=1');
                 }
             }
             $this->fplock = fopen($this->lockfile, 'w');
@@ -125,11 +124,11 @@ class File_Passwd {
     /**
     * Adds a user
     *
-    * @param $user new user id
-    * @param $pass password for new user
-    * @param $cvs  cvs user id (needed for pserver passwd files)
+    * @param string $user new user id
+    * @param string $pass password for new user
+    * @param string $cvsuser  cvs user id (needed for pserver passwd files)
     *
-    * @return mixed returns PEAR_Error, if the user already exists
+    * @return bool|PEAR_Error returns PEAR_Error, if the user already exists
     * @access public
     */
     function addUser($user, $pass, $cvsuser = "") {
@@ -145,11 +144,11 @@ class File_Passwd {
     /**
     * Modifies a user
     *
-    * @param $user user id
-    * @param $pass new password for user
-    * @param $cvs  cvs user id (needed for pserver passwd files)
+    * @param string $user user id
+    * @param string $pass new password for user
+    * @param string $cvsuser  cvs user id (needed for pserver passwd files)
     *
-    * @return mixed returns PEAR_Error, if the user doesn't exists
+    * @return bool|PEAR_Error returns PEAR_Error, if the user doesn't exists
     * @access public
     */
 
@@ -166,9 +165,9 @@ class File_Passwd {
     /**
     * Deletes a user
     *
-    * @param $user user id
+    * @param string $user user id
     *
-    * @return mixed returns PEAR_Error, if the user doesn't exists
+    * @return bool|PEAR_Error returns PEAR_Error, if the user doesn't exists
     * @access public
     */
 
@@ -176,6 +175,7 @@ class File_Passwd {
         if (isset($this->users[$user]) && $this->locked) {
             unset($this->users[$user]);
             unset($this->cvs[$user]);
+            return true;
         } else {
             return new PEAR_Error( "Couldn't delete user '$user', because the user doesn't exists!", 3, PEAR_ERROR_RETURN) ;
         }
@@ -184,8 +184,8 @@ class File_Passwd {
     /**
     * Verifies a user's password
     *
-    * @param $user user id
-    * @param $pass password for user
+    * @param string $user user id
+    * @param string $pass password for user
     *
     * @return boolean true if password is ok
     * @access public
@@ -260,11 +260,3 @@ class File_Passwd {
         }
     } // end func close()
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

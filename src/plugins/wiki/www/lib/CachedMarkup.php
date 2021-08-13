@@ -1,8 +1,8 @@
 <?php
-
-/* Copyright (C) 2002 Geoffrey T. Dairiki <dairiki@dairiki.org>
- * Copyright (C) 2004-2010 $ThePhpWikiProgrammingTeam
- * Copyright (C) 2008-2009 Marc-Etienne Vargenau, Alcatel-Lucent
+/**
+ * Copyright © 2002 Geoffrey T. Dairiki <dairiki@dairiki.org>
+ * Copyright © 2004-2010 $ThePhpWikiProgrammingTeam
+ * Copyright © 2008-2009 Marc-Etienne Vargenau, Alcatel-Lucent
  *
  * This file is part of PhpWiki.
  *
@@ -19,6 +19,9 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
  */
 
 require_once 'lib/Units.php';
@@ -57,7 +60,7 @@ class CacheableMarkup extends XmlContent
             return false;
 
         // ZLIB format has a five bit checksum in its header.
-        // Lets check for sanity.
+        // Let's check for sanity.
         if (((ord($packed[0]) * 256 + ord($packed[1])) % 31 == 0)
             and (substr($packed, 0, 2) == "\037\213")
             or (substr($packed, 0, 2) == "x\332")
@@ -79,7 +82,7 @@ class CacheableMarkup extends XmlContent
         return false;
     }
 
-    /** Get names of wikipages linked to.
+    /** Get names of wiki pages linked to.
      *
      * @return array of hashes { linkto=>pagename, relation=>pagename }
      */
@@ -246,7 +249,7 @@ abstract class Cached_DynamicContent
         $cache[] = $this;
     }
 
-    abstract protected function expand($basepage, &$obj);
+    abstract function expand($basepage, &$markup);
 
     function getWikiPageLinks($basepage)
     {
@@ -256,7 +259,7 @@ abstract class Cached_DynamicContent
 
 class XmlRpc_LinkInfo
 {
-    function XmlRpc_LinkInfo($page, $type, $href, $relation = '')
+    function __construct($page, $type, $href, $relation = '')
     {
         $this->page = $page;
         $this->type = $type;
@@ -387,7 +390,6 @@ class Cached_WikiLink extends Cached_Link
     function _getURL($basepage)
     {
         return WikiURL($this->getPagename($basepage));
-        //return WikiURL($this->getPagename($basepage), false, 'abs_url');
     }
 
     function expand($basepage, &$markup)
@@ -448,19 +450,18 @@ class Cached_WikiLinkIfKnown extends Cached_WikiLink
 
 class Cached_SpellCheck extends Cached_WikiLink
 {
-    function __construct($word, $suggs)
+    function __construct($word, $suggestions)
     {
         $this->_page = $word;
-        $this->suggestions = $suggs;
+        $this->suggestions = $suggestions;
     }
 
     function expand($basepage, &$markup)
     {
-        $link = HTML::a(array('class' => 'spell-wrong',
+        return HTML::a(array('class' => 'spell-wrong',
                 'title' => 'SpellCheck: ' . join(', ', $this->suggestions),
                 'name' => $this->_page),
             $this->_page);
-        return $link;
     }
 }
 
@@ -851,8 +852,7 @@ class Cached_PluginInvocation extends Cached_DynamicContent
         global $request;
 
         $loader = $this->_getLoader();
-        $xml = $loader->expandPI($this->_pi, $request, $markup, $basepage);
-        return $xml;
+        return $loader->expandPI($this->_pi, $request, $markup, $basepage);
     }
 
     function asString()
@@ -878,11 +878,3 @@ class Cached_PluginInvocation extends Cached_DynamicContent
         return $loader;
     }
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

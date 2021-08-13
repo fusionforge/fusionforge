@@ -17,8 +17,8 @@
 //
 // $Id: HTTP_Request.php 174777 2004-12-15 09:09:33Z dufuz $
 
-require_once 'Cache.php';
-require_once 'HTTP/Request.php';
+require_once 'lib/pear/Cache.php';
+require_once 'lib/pear/HTTP/Request.php';
 
 define('CACHE_HTTP_REQUEST_GROUP_NAME', 'cache_http_request');
 define('CACHE_HTTP_REQUEST_SUCCESS_RESPONSE_CODE', 200);
@@ -106,8 +106,6 @@ class Cache_HTTP_Request extends Cache
     // --- Public methods ---
 
     /**
-    * Constructor
-    *
     * @param $url The url to access
     * @param $params Associative array of parameters which can be:
     *                  method     - Method to use, GET, POST etc
@@ -128,9 +126,9 @@ class Cache_HTTP_Request extends Cache
     * @see Cache, HTTP_Request
     * @access public
     */
-    function Cache_HTTP_Request($url, $params = null, $container  = 'file',
-                                $containerOptions = null, $expires = 3600,
-                                $mode = CACHE_HTTP_REQUEST_KEEP_LOCAL_COPY)
+    function __construct($url, $params = null, $container  = 'file',
+                         $containerOptions = null, $expires = 3600,
+                         $mode = CACHE_HTTP_REQUEST_KEEP_LOCAL_COPY)
     {
         if (!isset($params)) {
             $params = array();
@@ -142,7 +140,7 @@ class Cache_HTTP_Request extends Cache
                 'filename_prefix' => 'cache_'
             );
         }
-        $this->Cache($container, $containerOptions);
+        parent::__construct($container, $containerOptions);
         $this->_request = new HTTP_Request($url, $params);
         $this->_id = md5($url.serialize($params));
         $this->_id2 = md5($this->_id); // we need two keys

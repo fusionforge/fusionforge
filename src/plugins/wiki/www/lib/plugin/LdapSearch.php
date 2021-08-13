@@ -1,7 +1,7 @@
 <?php
 /**
- * Copyright 2004 John Lines
- * Copyright 2007 $ThePhpWikiProgrammingTeam
+ * Copyright © 2004 John Lines
+ * Copyright © 2007 $ThePhpWikiProgrammingTeam
  *
  * This file is part of PhpWiki.
  *
@@ -18,13 +18,16 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
  */
 
 /**
  * WikiPlugin which searches an LDAP directory.
  *
  * Uses the config.ini constants as defaults.
- * See http://phpwiki.fr/Help/LdapSearchPlugin
+ * See http://phpwiki.demo.free.fr/index.php/Help/LdapSearchPlugin
  * TODO: Return a pagelist on certain attributes
  *
  * Usage Samples:
@@ -76,6 +79,12 @@ class WikiPlugin_LdapSearch
      */
     function run($dbi, $argstr, &$request, $basepage)
     {
+
+        global $WikiTheme;
+        if ($WikiTheme->DUMP_MODE) {
+            return HTML::p();
+        }
+
         $args = $this->getArgs($argstr, $request);
         extract($args);
         //include_once("lib/WikiUser/LDAP.php");
@@ -200,11 +209,3 @@ class WikiPlugin_LdapSearch
         return HTML::table(array('class' => 'bordered'), $html);
     }
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

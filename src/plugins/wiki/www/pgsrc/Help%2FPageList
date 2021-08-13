@@ -1,5 +1,5 @@
-Date: Mon, 29 Jun 2015 12:04:28 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Fri, 30 Jul 2021 12:55:59 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FPageList;
   flags="";
@@ -27,31 +27,31 @@ It also allows dynamic expansion of those plugins to include more columns in the
 ! Default value
 |-
 | **info**
-| which columns to display
+| Which columns to display
 | pagename
 |-
 | **exclude**
-| which pages to exclude. Wildcards, comma-separated lists and <!plugin-list !> arrays allowed.
+| Which pages to exclude. Wildcards, comma-separated lists and <!plugin-list !> arrays allowed.
 | //none//
 |-
 | **author**
-| select pages by author; current user by ~[~]
+| Select pages by author; current user by ~[~]
 | false
 |-
 | **owner**
-| select pages by owner; current user by ~[~]
+| Select pages by owner; current user by ~[~]
 | false
 |-
 | **creator**
-| select pages by creator; current user by ~[~]
+| Select pages by creator; current user by ~[~]
 | false
 |-
 | **sortby**
-| select column to sort
+| Select column to sort
 | //none//
 |-
 | **limit**
-| number of rows, or start index and number of rows (see below)
+| Number of rows, or start index and number of rows (see below)
 | 50
 |-
 | **paging**
@@ -67,11 +67,11 @@ It also allows dynamic expansion of those plugins to include more columns in the
 | 0
 |-
 | **comma**
-| condensed comma-separated list, 1 if without links, 2 if with
+| Condensed comma-separated list, 1 if without links, 2 if with
 | 0
 |-
 | **commasep**
-| comma separator
+| Comma separator
 | ', '
 |-
 | **listtype**
@@ -121,11 +121,11 @@ Special, custom columns, either theme or plugin (~WikiAdmin*) specific:
 |= remove              | Remove
 |= renamed_pagename    | Rename to
 |= ratingwidget        | wikilens theme specific.
-|= custom              | See plugin/WikiTranslation
+|= custom              | See plugin ~WikiTranslation
 
 Symbolic 'info=' arguments:
 |= all  | All columns except the special columns
-|= most | pagename, mtime, author, size, hits, ...
+|= most | pagename, mtime, author, hits
 |= some | pagename, mtime, author
 
 <noinclude>

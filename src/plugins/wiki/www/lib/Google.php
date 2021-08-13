@@ -1,36 +1,41 @@
 <?php
 /**
+ * Copyright © 2002 Intercept Vector
+ * Copyright © 2004 Reini Urban
+ *
+ * This file is part of PhpWiki.
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: LGPL-2.1-or-later
+ *
+ */
+
+/**
  * Google API
  *
  * @author: Chris Petersen, Reini Urban
- */
-/*
- Copyright (c) 2002 Intercept Vector
- Copyright (c) 2004 Reini Urban
-
- This library is free software; you can redistribute it and/or
- modify it under the terms of the GNU Lesser General Public
- License as published by the Free Software Foundation; either
- version 2.1 of the License, or (at your option) any later version.
-
- This library is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- Lesser General Public License for more details.
-
- You should have received a copy of the GNU Lesser General Public
- License along with this library; if not, write to the Free Software Foundation, Inc.,
- 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
-
- If you have any questions or comments, please email:
-
- Chris Petersen
- admin@interceptvector.com
- Intercept Vector
- http://www.interceptvector.com
-*/
-
-/*
+ *
+ * If you have any questions or comments, please email:
+ *
+ * Chris Petersen
+ * admin@interceptvector.com
+ * Intercept Vector
+ * http://www.interceptvector.com
+ *
  * @seealso: http://scripts.incutio.com/google/
  */
 
@@ -89,7 +94,7 @@ class GoogleSearchResults
     public $_fields = "documentFiltering,searchComments,estimatedTotalResultsCount,estimateIsExact,searchQuery,startIndex,endIndex,searchTips,directoryCategories,searchTime,resultElements";
     public $resultElements, $results;
 
-    function GoogleSearchResults($result)
+    function __construct($result)
     {
         $this->fields = explode(',', $this->_fields);
         foreach ($this->fields as $f) {
@@ -145,7 +150,7 @@ class GoogleSearchResult
 {
     public $_fields = "summary,URL,snippet,title,cachedSize,relatedInformationPresent,hostName,directoryCategory,directoryTitle";
 
-    function GoogleSearchResult($result)
+    function __construct($result)
     {
         $this->fields = explode(',', $this->_fields);
         foreach ($this->fields as $f) {
@@ -157,8 +162,7 @@ class GoogleSearchResult
 
 class Google
 {
-
-    function Google($maxResults = 10, $license_key = false)
+    function __construct($maxResults = 10, $license_key = false)
     {
         if ($license_key)
             $this->license_key = $license_key;
@@ -170,7 +174,7 @@ class Google
         } else
             $this->license_key = GOOGLE_LICENSE_KEY;
 
-        $this->soapclient = new soapclient(SERVER_URL . NormalizeWebFileName("GoogleSearch.wsdl"), "wsdl");
+        $this->soapclient = new soapclient(SERVER_URL . normalizeWebFileName("GoogleSearch.wsdl"), "wsdl");
         $this->proxy = $this->soapclient->getProxy();
         if ($maxResults > 10) $maxResults = 10;
         if ($maxResults < 1) $maxResults = 1;
@@ -283,11 +287,3 @@ class Google
             $phrase);
     }
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

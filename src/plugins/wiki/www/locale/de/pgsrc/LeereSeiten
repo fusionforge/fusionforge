@@ -1,4 +1,23 @@
-Nicht alle diese Seiten werden wirklich benötigt. Der Linkextraktor ist immer noch viel zu optimistisch, bei Interlinks, usw. D.h. viele dieser Links sind gar keine internen Seiten.
-Einige Web-Robots erzeugen manchmal auch leere Seiten.
+Date: Thu, 25 Jul 2019 15:34:07 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
+Content-Type: application/x-phpwiki;
+  pagename=LeereSeiten;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
+  charset=UTF-8
+Content-Transfer-Encoding: binary
 
-<<WantedPages limit=20 with_count=0 as_tree=0 maxlinks=5 sort='pagename'>>
+Here is a list of pages that have been cited on this wiki but are not
+yet written. Although they appear to be wanted, they may be
+misspellings of existing pages or pages too trivial to merit creation.
+
+The best course of action for these pages isn't necessarily to create
+a page. Often, it is better to change the references so they are no
+longer ~WikiNames. Where applicable, you can just change the case, add
+spaces or insert an escape character ~~.
+
+----
+
+<<WantedPages>>
+
+----
+[[KategorieAktionSeite]]

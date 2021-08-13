@@ -1,4 +1,31 @@
 <?php
+/**
+ * Copyright © 2000 Steve Wainstead
+ * Copyright © 2001 Arno Hollosi
+ * Copyright © 2001-2003 Jeff Dairiki
+ * Copyright © 2001-2003 Carsten Klapp
+ * Copyright © 2004-2008 Reini Urban
+ * Copyright © 2009-2015 Marc-Etienne Vargenau, Alcatel-Lucent
+ *
+ * This file is part of PhpWiki.
+ *
+ * PhpWiki is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * PhpWiki is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
+ */
 
 /**
  * Routines for Mime mailification of pages.
@@ -31,7 +58,12 @@ function QuotedPrintableDecode($string)
 {
     // Eliminate soft line-breaks.
     $string = preg_replace('/=[ \t\r]*\n/', '', $string);
-    return quoted_printable_decode($string);
+    $decoded = quoted_printable_decode($string);
+    // When importing e.g. a ZIP from an old wiki in Latin 1 (ISO 8859-1)
+    if (!is_utf8($decoded)) {
+        $decoded = utf8_encode($decoded);
+    }
+    return $decoded;
 }
 
 define('MIME_TOKEN_REGEXP', "[-!#-'*+.0-9A-Z^-~]+");
@@ -40,7 +72,7 @@ function MimeContentTypeHeader($type, $subtype, $params)
 {
     $header = "Content-Type: $type/$subtype";
     reset($params);
-    while (list($key, $val) = each($params)) {
+    foreach ($params as $key => $val) {
         //FIXME:  what about non-ascii printables in $val?
         if (!preg_match('/^' . MIME_TOKEN_REGEXP . '$/', $val))
             $val = '"' . addslashes($val) . '"';
@@ -244,7 +276,7 @@ function GenerateFootnotesFromRefs($params)
 {
     $footnotes = array();
     reset($params);
-    while (list($p, $reference) = each($params)) {
+    foreach ($params as $p => $reference) {
         if (preg_match('/^ref([1-9][0-9]*)$/', $p, $m))
             $footnotes[$m[1]] = sprintf(_("[%d] See [%s]"),
                 $m[1], rawurldecode($reference));
@@ -387,11 +419,3 @@ function ParseMimeifiedPages($data)
 
     return array($page);
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

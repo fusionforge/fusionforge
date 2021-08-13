@@ -23,7 +23,7 @@ Please report bugs to mailto:phpwiki-talk@lists.sourceforge.net
 ! Developers
 
 ;[ Marc-Etienne Vargenau | mailto:vargenau@users.sourceforge.net ] :
-;: Chief of FusionForge integration, WikiCreole integration, 
+;: Chief of FusionForge integration, WikiCreole integration,
 ;: HTML conformity, documentation, ...
 
 ;Sabri Labbenes
@@ -35,12 +35,12 @@ Please report bugs to mailto:phpwiki-talk@lists.sourceforge.net
 ;: Inactive
 
 ;[Joel Uckelman | mailto:uckelman@nomic.net ] :
-;: Ported the dbmlib.php to the new dba_* interface, which is the default 
+;: Ported the dbmlib.php to the new dba_* interface, which is the default
 ;: in PHP 4.0.4 and later.
 ;: Inactive
 
 ;[ Dan Frankowski | http://wikilens.org ] :
-;: Initiated and maintains the wikilens lib and project ("rating system"), 
+;: Initiated and maintains the wikilens lib and project ("rating system"),
 ;: several plugins.
 
 ; Joe Edelman :
@@ -81,8 +81,8 @@ Please report bugs to mailto:phpwiki-talk@lists.sourceforge.net
 ;: contributed Swedish translation
 
 ; [ Arno Hollosi <ahollosi@mail.com> ] :
-;: contributed German translation, 
-;: updates by Helmer Pardun <pardunpress@t-online.de>, 
+;: contributed German translation,
+;: updates by Helmer Pardun <pardunpress@t-online.de>,
 ;: Carsten Klapp, Reini Urban
 
 ;[ Marco Milanesi | mailto:kpanic@ada2.unipv.it ] :
@@ -90,9 +90,9 @@ Please report bugs to mailto:phpwiki-talk@lists.sourceforge.net
 
 ;[ Pierrick Meignen <meignen.pierrick@wanadoo.fr> ] :
 ;: contributed and maintains the French translation
-;: Updates by Trique <roland.trique@free.fr>, Stéphane Gourichon 
-;: <stephane.gourichon@lip6.fr>, Pascal <pascal@phpfrance.com>, 
-;: Benoit Masson, Jean-Philippe Georget <jpgeorget@ouvaton.org> 
+;: Updates by Trique <roland.trique@free.fr>, Stéphane Gourichon
+;: <stephane.gourichon@lip6.fr>, Pascal <pascal@phpfrance.com>,
+;: Benoit Masson, Jean-Philippe Georget <jpgeorget@ouvaton.org>
 
 ;[ Tadashi Jokagi <webmaster@elf.no-ip.org> ] :
 ;: contributed and maintains the Japanese translation
@@ -144,13 +144,13 @@ Please report bugs to mailto:phpwiki-talk@lists.sourceforge.net
 ; John Cole (several patches, esp. groups and LDAP)
 ; Michael Van Dam (several patches, EditMetaDataPlugin, GoToPlugin, WikiBlogPlugin)
 ; Charles Corrigan (several patches and AccessLogSql)
-; Arnaud Fontaine + L. Lunati : 
+; Arnaud Fontaine + L. Lunati :
 ;: http://wiki.crao.net/ crao theme, RssParser, JabberPresencePlugin, ...
 ; Kai Krakow (several patches)
 ; Ernie Oporto (LDAP, WikiGroup)
 ; Nicolas Noble (several patches, PopUpPlugin)
 ; Rasmus Watjen (PopAuth implementation)
-; Konstantin Zadorozhny 
+; Konstantin Zadorozhny
 ; Pablo Martinez  (several patches)
 ; Jason Buberel (HttpAuth patch)
 ; Mikhail Vladimirov (auth patches)
@@ -179,7 +179,7 @@ Please report bugs to mailto:phpwiki-talk@lists.sourceforge.net
 ; Martin Norbäck (CalendarListPlugin)
 ; Alister Bulman (Calendar patch)
 ; Sebastien Delahaye (locale)
-; Manuel Vacelet 
+; Manuel Vacelet
 ; Matti Airas (several patches)
 ; Micki Kaufman (IncludeSiteMap, ...)
 ; Oliver Betz (several patches)

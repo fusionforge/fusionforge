@@ -1,7 +1,6 @@
 <?php
-
-/*
- * Copyright (C) 2002,2004,2005,2006,2009 $ThePhpWikiProgrammingTeam
+/**
+ * Copyright © 2002,2004,2005,2006,2009 $ThePhpWikiProgrammingTeam
  *
  * This file is part of PhpWiki.
  *
@@ -18,6 +17,9 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
  */
 
 class Request
@@ -27,12 +29,15 @@ class Request
     private $_is_compressing_output;
     public $_is_buffering_output;
     public $_ob_get_length;
+    private $_ob_initial_level;
     private $_do_chunked_output;
     public $_finishing;
 
     function __construct()
     {
         global $request;
+
+        $this->_ob_initial_level = ob_get_level();
 
         $this->_fix_multipart_form_data();
 
@@ -49,8 +54,8 @@ class Request
                 break;
         }
 
-        $this->session = new Request_SessionVars;
-        $this->cookies = new Request_CookieVars;
+        $this->session = new Request_SessionVars();
+        $this->cookies = new Request_CookieVars();
 
         if (ACCESS_LOG or ACCESS_LOG_SQL) {
             $this->_accesslog = new Request_AccessLog(ACCESS_LOG, ACCESS_LOG_SQL);
@@ -164,36 +169,32 @@ class Request
     }
 
     /* Redirects after edit may fail if no theme signature image is defined.
-     * Set DISABLE_HTTP_REDIRECT = true then.
      */
     function redirect($url, $noreturn = true)
     {
-        $bogus = defined('DISABLE_HTTP_REDIRECT') && DISABLE_HTTP_REDIRECT;
 
-        if (!$bogus) {
-            header("Location: $url");
-            /*
-             * "302 Found" is not really meant to be sent in response
-             * to a POST.  Worse still, according to (both HTTP 1.0
-             * and 1.1) spec, the user, if it is sent, the user agent
-             * is supposed to use the same method to fetch the
-             * redirected URI as the original.
-             *
-             * That means if we redirect from a POST, the user-agent
-             * supposed to generate another POST.  Not what we want.
-             * (We do this after a page save after all.)
-             *
-             * Fortunately, most/all browsers don't do that.
-             *
-             * "303 See Other" is what we really want.  But it only
-             * exists in HTTP/1.1
-             *
-             * FIXME: this is still not spec compliant for HTTP
-             * version < 1.1.
-             */
-            $status = $this->httpVersion() >= 1.1 ? 303 : 302;
-            $this->setStatus($status);
-        }
+        header("Location: $url");
+        /*
+         * "302 Found" is not really meant to be sent in response
+         * to a POST.  Worse still, according to (both HTTP 1.0
+         * and 1.1) spec, the user, if it is sent, the user agent
+         * is supposed to use the same method to fetch the
+         * redirected URI as the original.
+         *
+         * That means if we redirect from a POST, the user-agent
+         * supposed to generate another POST.  Not what we want.
+         * (We do this after a page save after all.)
+         *
+         * Fortunately, most/all browsers don't do that.
+         *
+         * "303 See Other" is what we really want.  But it only
+         * exists in HTTP/1.1
+         *
+         * FIXME: this is still not spec compliant for HTTP
+         * version < 1.1.
+         */
+        $status = $this->httpVersion() >= 1.1 ? 303 : 302;
+        $this->setStatus($status);
 
         if ($noreturn) {
             $this->discardOutput(); // This might print the gzip headers. Not good.
@@ -203,20 +204,6 @@ class Request
             $tmpl = new Template('redirect', $this, array('REDIRECT_URL' => $url));
             $tmpl->printXML();
             $this->finish();
-        } elseif ($bogus) {
-            // Safari needs window.location.href = targeturl
-            return JavaScript("
-              function redirect(url) {
-                if (typeof location.replace == 'function')
-                  location.replace(url);
-                else if (typeof location.assign == 'function')
-                  location.assign(url);
-                else if (self.location.href)
-                  self.location.href = url;
-                else
-                  window.location = url;
-              }
-              redirect('" . addslashes($url) . "')");
         }
     }
 
@@ -372,7 +359,7 @@ class Request
             $compress = false;
 
         // "output handler 'ob_gzhandler' cannot be used twice"
-        // http://www.php.net/ob_gzhandler
+        // https://www.php.net/ob_gzhandler
         if ($compress and ini_get("zlib.output_compression"))
             $compress = false;
 
@@ -441,15 +428,15 @@ class Request
     function chunkOutput()
     {
         if (!empty($this->_is_buffering_output)
-            or (@ob_get_level())
+            or (@ob_get_level() > $this->_ob_initial_level)
         ) {
             $this->_do_chunked_output = true;
             if (empty($this->_ob_get_length)) $this->_ob_get_length = 0;
             $this->_ob_get_length += ob_get_length();
-            while (ob_get_level() > 0) {
+            while (ob_get_level() > $this->_ob_initial_level) {
                 ob_end_flush();
             }
-            if (ob_get_level() > 0) {
+            if (ob_get_level() > $this->_ob_initial_level) {
                 ob_end_clean();
             }
             ob_start();
@@ -485,7 +472,7 @@ class Request
             }
             $this->_is_buffering_output = false;
             ob_end_flush();
-        } elseif (@ob_get_level()) {
+        } elseif (@ob_get_level() > $this->_ob_initial_level) {
             ob_end_flush();
         }
         session_write_close();
@@ -634,29 +621,6 @@ class Request_CookieVars
         return false;
     }
 
-    function get_old($key)
-    {
-        if (defined('FUSIONFORGE') && FUSIONFORGE) {
-            return false;
-        }
-        $vars = &$GLOBALS['HTTP_COOKIE_VARS'];
-        if (isset($vars[$key])) {
-            @$decode = base64_decode($vars[$key]);
-            if (strlen($decode) > 3 and substr($decode, 1, 1) == ':') {
-                @$val = unserialize($decode);
-                if (!empty($val))
-                    return $val;
-            }
-            @$val = unserialize($vars[$key]);
-            if (!empty($val))
-                return $val;
-            @$val = $vars[$key];
-            if (!empty($val))
-                return $val;
-        }
-        return false;
-    }
-
     function set($key, $val, $persist_days = false, $path = false)
     {
         // if already defined, ignore
@@ -754,7 +718,7 @@ class Request_UploadedFile
                 }
                 $tmp_file .= '/' . basename($fileinfo['tmp_name']);
                 /* ending slash in php.ini upload_tmp_dir is required. */
-                if (realpath(ereg_replace('/+', '/', $tmp_file)) != realpath($fileinfo['tmp_name'])) {
+                if (realpath(preg_replace('#/+#', '/', $tmp_file)) != realpath($fileinfo['tmp_name'])) {
                     trigger_error(sprintf("Uploaded tmpfile illegal: %s != %s.", $tmp_file, $fileinfo['tmp_name']) .
                             "\n" .
                             "Probably illegal TEMP environment or upload_tmp_dir setting. " .
@@ -1423,11 +1387,3 @@ class HTTP_ValidatorSet
         return _HTTP_VAL_PASS;
     }
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

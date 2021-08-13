@@ -1,12 +1,14 @@
 <?php
 /*
-V5.20dev  ??-???-2014  (c) 2000-2014 John Lim (jlim#natsoft.com). All rights reserved.
+@version   v5.20.19  13-Dec-2020
+@copyright (c) 2000-2013 John Lim (jlim#natsoft.com). All rights reserved.
+@copyright (c) 2014      Damien Regad, Mark Newnham and the ADOdb community
   Released under both BSD license and Lesser GPL library license.
   Whenever there is any discrepancy between the two licenses,
   the BSD license will take precedence.
 Set tabs to 4 for best viewing.
 
-  Latest version is available at http://adodb.sourceforge.net
+  Latest version is available at http://adodb.org/
 
   Native mssql driver. Requires mssql client. Works on Windows.
     http://www.microsoft.com/sql/technologies/php/default.mspx
@@ -61,7 +63,7 @@ if (!function_exists('sqlsrv_log_set_subsystems')) {
 //
 // Also if your month is showing as month-1,
 //   e.g. Jan 13, 2002 is showing as 13/0/2002, then see
-//     http://phplens.com/lens/lensforum/msgs.php?id=7048&x=1
+//     PHPLens Issue No: 7048&x=1
 //   it's a localisation problem.
 //----------------------------------------------------------------
 
@@ -123,43 +125,41 @@ class ADODB_mssqlnative extends ADOConnection {
 	var $_bindInputArray = true;
 	var $_dropSeqSQL = "drop table %s";
 	var $connectionInfo = array();
+	var $cachedSchemaFlush = false;
 	var $sequences = false;
 	var $mssql_version = '';
 
-	function ADODB_mssqlnative()
+	function __construct()
 	{
 		if ($this->debug) {
 			ADOConnection::outp("<pre>");
 			sqlsrv_set_error_handling( SQLSRV_ERRORS_LOG_ALL );
 			sqlsrv_log_set_severity( SQLSRV_LOG_SEVERITY_ALL );
 			sqlsrv_log_set_subsystems(SQLSRV_LOG_SYSTEM_ALL);
-			sqlsrv_configure('warnings_return_as_errors', 0);
+			sqlsrv_configure('WarningsReturnAsErrors', 0);
 		} else {
 			sqlsrv_set_error_handling(0);
 			sqlsrv_log_set_severity(0);
 			sqlsrv_log_set_subsystems(SQLSRV_LOG_SYSTEM_ALL);
-			sqlsrv_configure('warnings_return_as_errors', 0);
+			sqlsrv_configure('WarningsReturnAsErrors', 0);
 		}
 	}
+
+	/**
+	 * Initializes the SQL Server version.
+	 * Dies if connected to a non-supported version (2000 and older)
+	 */
 	function ServerVersion() {
 		$data = $this->ServerInfo();
-		if (preg_match('/^09/',$data['version'])){
-			/*
-			 * SQL Server 2005
-			 */
-			$this->mssql_version = 9;
-		} elseif (preg_match('/^10/',$data['version'])){
-			/*
-			 * SQL Server 2008
-			 */
-			$this->mssql_version = 10;
-		} elseif (preg_match('/^11/',$data['version'])){
-			/*
-			 * SQL Server 2012
-			 */
-			$this->mssql_version = 11;
-		} else
+		preg_match('/^\d{2}/', $data['version'], $matches);
+		$version = (int)reset($matches);
+
+		// We only support SQL Server 2005 and up
+		if($version < 9) {
 			die("SQL SERVER VERSION {$data['version']} NOT SUPPORTED IN mssqlnative DRIVER");
+		}
+
+		$this->mssql_version = $version;
 	}
 
 	function ServerInfo() {
@@ -209,26 +209,26 @@ class ADODB_mssqlnative extends ADOConnection {
 		switch($this->mssql_version){
 		case 9:
 		case 10:
-			return $this->GenID2008();
+			return $this->GenID2008($seq, $start);
 			break;
-		case 11:
-			return $this->GenID2012();
+		default:
+			return $this->GenID2012($seq, $start);
 			break;
 		}
 	}
 
 	function CreateSequence($seq='adodbseq',$start=1)
 	{
-		if (!$this->mssql_vesion)
+		if (!$this->mssql_version)
 			$this->ServerVersion();
 
 		switch($this->mssql_version){
 		case 9:
 		case 10:
-			return $this->CreateSequence2008();
+			return $this->CreateSequence2008($seq, $start);
 			break;
-		case 11:
-			return $this->CreateSequence2012();
+		default:
+			return $this->CreateSequence2012($seq, $start);
 			break;
 		}
 
@@ -256,7 +256,7 @@ class ADODB_mssqlnative extends ADOConnection {
 	/**
 	 * Proper Sequences Only available to Server 2012 and up
 	 */
-	function CreateSequence2012($seq='adodb',$start=1){
+	function CreateSequence2012($seq='adodbseq',$start=1){
 		if (!$this->sequences){
 			$sql = "SELECT name FROM sys.sequences";
 			$this->sequences = $this->GetCol($sql);
@@ -287,7 +287,7 @@ class ADODB_mssqlnative extends ADOConnection {
 		}
 		$num = $this->GetOne("select id from $seq");
 		sqlsrv_commit($this->_connectionID);
-		return true;
+		return $num;
 	}
 	/**
 	 * Only available to Server 2012 and up
@@ -311,7 +311,7 @@ class ADODB_mssqlnative extends ADOConnection {
 		}
 		if (!is_array($this->sequences)
 		|| is_array($this->sequences) && !in_array($seq,$this->sequences)){
-			$this->CreateSequence2012($seq='adodbseq',$start=1);
+			$this->CreateSequence2012($seq, $start);
 
 		}
 		$num = $this->GetOne("SELECT NEXT VALUE FOR $seq");
@@ -458,28 +458,38 @@ class ADODB_mssqlnative extends ADOConnection {
 				$this->_errorMsg .= "Error Code: ".$arrError[ 'code']."\n";
 				$this->_errorMsg .= "Message: ".$arrError[ 'message']."\n";
 			}
-		} else {
-			$this->_errorMsg = "No errors found";
 		}
 		return $this->_errorMsg;
 	}
 
 	function ErrorNo()
 	{
-		if ($this->_logsql && $this->_errorCode !== false) return $this->_errorCode;
 		$err = sqlsrv_errors(SQLSRV_ERR_ALL);
-		if($err[0]) return $err[0]['code'];
-		else return -1;
+		if ($err && $err[0]) 
+			return $err[0]['code'];
+		else 
+			return 0;
 	}
 
 	// returns true or false
 	function _connect($argHostname, $argUsername, $argPassword, $argDatabasename)
 	{
 		if (!function_exists('sqlsrv_connect')) return null;
+		
+		if (!empty($this->port))
+			/*
+			* Port uses a comma 
+			*/
+			$argHostname .= ",".$this->port;
+
 		$connectionInfo = $this->connectionInfo;
 		$connectionInfo["Database"]=$argDatabasename;
 		$connectionInfo["UID"]=$argUsername;
 		$connectionInfo["PWD"]=$argPassword;
+		
+		foreach ($this->connectionParameters as $parameter=>$value)
+		    $connectionInfo[$parameter] = $value;
+		
 		if ($this->debug) ADOConnection::outp("<hr>connecting... hostname: $argHostname params: ".var_export($connectionInfo,true));
 		//if ($this->debug) ADOConnection::outp("<hr>_connectionID before: ".serialize($this->_connectionID));
 		if(!($this->_connectionID = sqlsrv_connect($argHostname,$connectionInfo))) {
@@ -524,7 +534,12 @@ class ADODB_mssqlnative extends ADOConnection {
 			$arr = $args;
 		}
 
-		array_walk($arr, create_function('&$v', '$v = "CAST(" . $v . " AS VARCHAR(255))";'));
+		array_walk(
+			$arr,
+			function(&$value, $key) {
+				$value = "CAST(" . $value . " AS VARCHAR(255))";
+			}
+		);
 		$s = implode('+',$arr);
 		if (sizeof($arr) > 0) return "$s";
 
@@ -563,7 +578,7 @@ class ADODB_mssqlnative extends ADOConnection {
 
 		$insert = false;
 		// handle native driver flaw for retrieving the last insert ID
-		if(preg_match('/^\W*(insert [^;]+);?$/i', $sql)) {
+		if(preg_match('/^\W*insert[\s\w()[\]",.]+values\s*\((?:[^;\']|\'\'|(?:(?:\'\')*\'[^\']+\'(?:\'\')*))*;?$/i', $sql)) {
 			$insert = true;
 			$sql .= '; '.$this->identitySQL; // select scope_identity()
 		}
@@ -579,9 +594,10 @@ class ADODB_mssqlnative extends ADOConnection {
 			$rez = false;
 		} else if ($insert) {
 			// retrieve the last insert ID (where applicable)
-			sqlsrv_next_result($rez);
-			sqlsrv_fetch($rez);
-			$this->lastInsertID = sqlsrv_get_field($rez, 0);
+			while ( sqlsrv_next_result($rez) ) {
+				sqlsrv_fetch($rez);
+				$this->lastInsertID = sqlsrv_get_field($rez, 0);
+			}
 		}
 		return $rez;
 	}
@@ -837,7 +853,7 @@ class ADORecordset_mssqlnative extends ADORecordSet {
 	var $fieldOffset = 0;
 	// _mths works only in non-localised system
 
-	function ADORecordset_mssqlnative($id,$mode=false)
+	function __construct($id,$mode=false)
 	{
 		if ($mode === false) {
 			global $ADODB_FETCH_MODE;
@@ -845,7 +861,7 @@ class ADORecordset_mssqlnative extends ADORecordSet {
 
 		}
 		$this->fetchMode = $mode;
-		return $this->ADORecordSet($id,$mode);
+		return parent::__construct($id,$mode);
 	}
 
 
@@ -887,7 +903,13 @@ class ADORecordset_mssqlnative extends ADORecordSet {
 	/* Use associative array to get fields array */
 	function Fields($colname)
 	{
-		if ($this->fetchMode != ADODB_FETCH_NUM) return $this->fields[$colname];
+		if (!is_array($this->fields))
+			/*
+			* Too early
+			*/
+			return;
+		if ($this->fetchMode != ADODB_FETCH_NUM) 
+			return $this->fields[$colname];
 		if (!$this->bind) {
 			$this->bind = array();
 			for ($i=0; $i < $this->_numOfFields; $i++) {
@@ -909,7 +931,7 @@ class ADORecordset_mssqlnative extends ADORecordSet {
 	{
 		$_typeConversion = array(
 			-155 => 'datetimeoffset',
-			-154 => 'time',
+			-154 => 'char',
 			-152 => 'xml',
 			-151 => 'udt',
 			-11 => 'uniqueidentifier',
@@ -1067,9 +1089,18 @@ class ADORecordset_mssqlnative extends ADORecordSet {
 		is running. All associated result memory for the specified result identifier will automatically be freed.	*/
 	function _close()
 	{
-		$rez = sqlsrv_free_stmt($this->_queryID);
-		$this->_queryID = false;
-		return $rez;
+		/*
+		* If we are closing down a failed query, collect any
+		* error messages. This is a hack fix to the "close too early"
+		* problem so this might go away later
+		*/
+		$this->connection->errorMsg();
+		if(is_resource($this->_queryID)) {
+			$rez = sqlsrv_free_stmt($this->_queryID);
+			$this->_queryID = false;
+			return $rez;
+		}
+		return true;
 	}
 
 	// mssql uses a default date like Dec 30 2000 12:00AM
@@ -1086,9 +1117,9 @@ class ADORecordset_mssqlnative extends ADORecordSet {
 
 
 class ADORecordSet_array_mssqlnative extends ADORecordSet_array {
-	function ADORecordSet_array_mssqlnative($id=-1,$mode=false)
+	function __construct($id=-1,$mode=false)
 	{
-		$this->ADORecordSet_array($id,$mode);
+		parent::__construct($id,$mode);
 	}
 
 		// mssql uses a default date like Dec 30 2000 12:00AM

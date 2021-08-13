@@ -1,12 +1,17 @@
-Date: Mon, 29 Jun 2015 12:04:22 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Thu, 26 Mar 2020 12:01:56 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=Aiuto%2FPhpWiki;
-  flags="";
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
   charset=UTF-8
 Content-Transfer-Encoding: binary
 
-Stai usando PhpWiki in questo momento. Incredibile, vero?
+Stai usando ~PhpWiki in questo momento. Incredibile, vero?
 
-Visita la nostra home page su [[http://phpwiki.sourceforge.net]] e guarda
-PhpWiki in azione su [[http://phpwiki.fr]].
+Visita la nostra home page su [[https://sourceforge.net/projects/phpwiki/]] e guarda ~PhpWiki
+in azione su [[http://phpwiki.demo.free.fr]] (and of course here too :-)).
+
+<noinclude>
+----
+[[PhpWikiDocumentation]]
+</noinclude>

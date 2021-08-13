@@ -4,7 +4,7 @@ Here are the coding guidelines for PhpWiki.
 
 We follow, for the most part, the PEAR coding standards:
 
-    <http://www.php.net/manual/en/pear.standards.php>
+    <https://www.php.net/manual/en/pear.standards.php>
 
 There's code snippets for configuring Emacs and Vim as well as several
 other text editors at the above URL.
@@ -29,7 +29,7 @@ in your .emacs file:
 	   (lambda ()
 	     (c-set-style "gnu")
 	     ;; This syntax table mod makes the second line in:
-	     ;; 
+	     ;;
 	     ;;   function( $arg1,
 	     ;;             $arg2 );
 	     ;;
@@ -58,7 +58,7 @@ strings, it does not know about php's dot operator.
 You can now use _("foo") as an alias for gettext("foo").
 
  OKAY:  gettext("This is a message.");
- OKAY:  _("Fazool."); 
+ OKAY:  _("Fazool.");
  OKAY:  sprintf(_("Hello %s"), $name);
  OKAY:  sprintf(_("Hello %s"), $name);
 

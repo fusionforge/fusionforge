@@ -1,7 +1,6 @@
 <?php
-
-/*
- * Copyright 1999,2000,2001,2002,2007 $ThePhpWikiProgrammingTeam
+/**
+ * Copyright © 1999,2000,2001,2002,2007 $ThePhpWikiProgrammingTeam
  *
  * This file is part of PhpWiki.
  *
@@ -18,6 +17,9 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
  */
 
 /**
@@ -39,10 +41,10 @@
  *
  * ./configure --with-gd
  *
- * See <http://www.php.net/manual/pl/ref.image.php> for more info.
+ * See <https://www.php.net/manual/pl/ref.image.php> for more info.
  */
-if (!defined('text2png_debug'))
-    define('text2png_debug', DEBUG & _DEBUG_VERBOSE);
+
+// define('text2png_debug', DEBUG & _DEBUG_VERBOSE);
 
 class WikiPlugin_text2png
     extends WikiPlugin
@@ -75,17 +77,18 @@ class WikiPlugin_text2png
      */
     function run($dbi, $argstr, &$request, $basepage)
     {
-        if (ImageTypes() & IMG_PNG) {
+        if (imagetypes() & IMG_PNG) {
             // we have gd & png so go ahead.
             $args = $this->getArgs($argstr, $request);
             return $this->text2png($args);
         } else {
             // we don't have png and/or gd.
             $error_html = _("Sorry, this version of PHP cannot create PNG image files.");
-            $link = "http://www.php.net/manual/pl/ref.image.php";
-            $error_html .= sprintf(_("See %s"), $link) . ".";
-            trigger_error($error_html, E_USER_NOTICE);
-            return HTML::p($error_html);
+            $error_html .= " ";
+            $error_html .= _("See") . _(": ");
+            $url = "https://www.php.net/manual/en/ref.image.php";
+            $link = HTML::a(array('href' => $url), $url);
+            return HTML::span(array('class' => 'error'), $error_html, $link);
         }
     }
 
@@ -99,7 +102,7 @@ class WikiPlugin_text2png
         if ($h[0] != '#') return $default;
         $rgb = substr($h, 1);
         if (strlen($rgb) == 3)
-            return array(hexdec($rgb{0}), hexdec($rgb{1}), hexdec($rgb{2}));
+            return array(hexdec($rgb[0]), hexdec($rgb[1]), hexdec($rgb[2]));
         elseif (strlen($rgb) == 6)
             return array(hexdec(substr($rgb, 0, 2)), hexdec(substr($rgb, 2, 2)), hexdec(substr($rgb, 4, 2)));
         return $default;
@@ -123,19 +126,14 @@ class WikiPlugin_text2png
          *        user's locale preferences.
          */
 
-        if ($l == "C") {
-            $l = "en"; //english=C
-        } else {
-            $l = urlencode($l); // who on earth forgot his?
-        }
         $basedir = "text2png-image";
-        $filepath = getUploadFilePath() . "$basedir/$l";
+        $filepath = getUploadFilePath() . "$basedir";
         if ($_force or !file_exists($filepath . $filename)) {
             if (!file_exists($filepath)) {
                 $oldumask = umask(0);
                 // permissions affected by user the www server is running as
-                mkdir(getUploadFilePath() . $basedir, 0777);
-                mkdir($filepath, 0777);
+                mkdir(getUploadFilePath() . $basedir);
+                mkdir($filepath);
                 umask($oldumask);
             }
             $filepath .= "/";
@@ -150,7 +148,8 @@ class WikiPlugin_text2png
             if (defined('TTFONT'))
                 $ttfont = TTFONT;
             elseif (PHP_OS == "Darwin") // Mac OS X
-                $ttfont = "/System/Library/Frameworks/JavaVM.framework/Versions/1.3.1/Home/lib/fonts/LucidaSansRegular.ttf"; elseif (isWindows()) {
+                $ttfont = "/System/Library/Frameworks/JavaVM.framework/Versions/1.3.1/Home/lib/fonts/LucidaSansRegular.ttf";
+            elseif (isWindows()) {
                 $ttfont = $_ENV['windir'] . '\Fonts\Arial.ttf';
             } else {
                 $ttfont = 'luximr'; // This is the only what sourceforge offered.
@@ -163,42 +162,46 @@ class WikiPlugin_text2png
              */
 
             // get ready to draw
-            $s = ImageTTFBBox($fontsize, 0, $ttfont, $text);
-            $im = @ImageCreate(abs($s[4]) + 20, abs($s[7]) + 10);
+
+            $error_html = _("PHP was unable to create a new GD image stream. Read 'lib/plugin/text2png.php' for details.");
+            $error_html .= " ";
+            $error_html .= _("See") . _(": ");
+            $url = "https://www.php.net/manual/en/function.imagecreate.php";
+            $link = HTML::a(array('href' => $url), $url);
+
+            $s = imagettfbbox($fontsize, 0, $ttfont, $text);
+            if ($s === false) {
+                return HTML::span(array('class' => 'error'), $error_html, $link);
+            }
+            $im = imagecreate(abs($s[4]) + 20, abs($s[7]) + 10);
             if (empty($im)) {
-                $error_html = _("PHP was unable to create a new GD image stream. Read 'lib/plugin/text2png.php' for details.");
-                // FIXME: Error manager does not transform URLs passed
-                //        through it.
-                $link = "http://www.php.net/manual/en/function.imagecreate.php";
-                $error_html .= sprintf(_("See %s"), $link) . ".";
-                trigger_error($error_html, E_USER_NOTICE);
-                return HTML::p($error_html);
+                return HTML::span(array('class' => 'error'), $error_html, $link);
             }
             $rgb = $this->hexcolor($backcolor, array(255, 255, 255));
-            $bg_color = ImageColorAllocate($im, $rgb[0], $rgb[1], $rgb[2]);
+            $bg_color = imagecolorallocate($im, $rgb[0], $rgb[1], $rgb[2]);
             if ($with_shadow) {
                 $rgb = $this->hexcolor($shadowcolor, array(175, 175, 175));
-                $text_color = ImageColorAllocate($im, $rgb[0], $rgb[1], $rgb[2]);
+                $text_color = imagecolorallocate($im, $rgb[0], $rgb[1], $rgb[2]);
                 // shadow is 1 pixel down and 2 pixels right
-                ImageTTFText($im, $fontsize, 0, 12, abs($s[7]) + 6, $text_color, $ttfont, $text);
+                imagettftext($im, $fontsize, 0, 12, abs($s[7]) + 6, $text_color, $ttfont, $text);
             }
             // draw text
             $rgb = $this->hexcolor($fontcolor, array(0, 0, 0));
-            $text_color = ImageColorAllocate($im, $rgb[0], $rgb[1], $rgb[2]);
-            ImageTTFText($im, $fontsize, 0, 10, abs($s[7]) + 5, $text_color, $ttfont, $text);
+            $text_color = imagecolorallocate($im, $rgb[0], $rgb[1], $rgb[2]);
+            imagettftext($im, $fontsize, 0, 10, abs($s[7]) + 5, $text_color, $ttfont, $text);
 
             /**
-             * An alternate text drawing method in case ImageTTFText
+             * An alternate text drawing method in case imagettftext
              * doesn't work.
              **/
-            //ImageString($im, 2, 10, 40, $text, $text_color);
+            //imagestring($im, 2, 10, 40, $text, $text_color);
 
             // To dump directly to browser:
             //header("Content-type: image/png");
-            //ImagePng($im);
+            //imagepng($im);
 
             // to save to file:
-            $success = ImagePng($im, $filepath . $filename);
+            $success = imagepng($im, $filepath . $filename);
 
         } else {
             $filepath .= "/";
@@ -212,30 +215,21 @@ class WikiPlugin_text2png
                 switch ($success) {
                     case 1:
                         trigger_error(sprintf(_("Image saved to cache file: %s"),
-                                $filepath . $filename),
-                            E_USER_NOTICE);
+                                $filepath . $filename));
                     case 2:
                         trigger_error(sprintf(_("Image loaded from cache file: %s"),
-                                $filepath . $filename),
-                            E_USER_NOTICE);
+                                $filepath . $filename));
                 }
             }
-            $url = getUploadDataPath() . "$basedir/" . urlencode($l) . "/" . urlencode($filename);
+            $url = getUploadDataPath() . "$basedir/" . urlencode($filename);
             $html->pushContent(HTML::img(array('src' => $url,
                 'alt' => $text,
                 'title' => '"' . $text . '"' . _(" produced by ") . $this->getName())));
         } else {
-            trigger_error(sprintf(_("couldn't open file “%s” for writing"),
-                $filepath . $filename), E_USER_NOTICE);
+            return HTML::span(array('class' => 'error'),
+                              sprintf(_("couldn't open file “%s” for writing"),
+                                      $filepath . $filename));
         }
         return $html;
     }
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

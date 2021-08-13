@@ -1,7 +1,6 @@
 <?php
-
-/*
- * Copyright 2004 Mike Cassano
+/**
+ * Copyright © 2004 Mike Cassano
  *
  * This file is part of PhpWiki.
  *
@@ -18,6 +17,9 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
  */
 
 function addPageTextData($user, $dbi, $new_data, $START_DELIM, $DELIM)
@@ -39,9 +41,9 @@ function addPageTextData($user, $dbi, $new_data, $START_DELIM, $DELIM)
     }
 
     // add new data to the appropriate line
-    if (preg_match('/^' . preg_quote($START_DELIM) . '/', $text)) {
+    if (preg_match('/^' . preg_quote($START_DELIM, '/') . '/', $text)) {
         // need multiline modifier to match EOL correctly
-        $text = preg_replace('/(^' . preg_quote($START_DELIM) . '.*)$/m',
+        $text = preg_replace('/(^' . preg_quote($START_DELIM, '/') . '.*)$/m',
             '$1' . $DELIM . $new_data, $text);
     } else {
         // handle case where the line does not yet exist
@@ -96,11 +98,3 @@ function notEmptyName($var)
 {
     return $var != "";
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

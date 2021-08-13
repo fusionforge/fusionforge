@@ -1,14 +1,32 @@
 <?php
+/**
+ * Copyright © 2000, 2001 Geoffrey T. Dairiki <dairiki@dairiki.org>
+ *
+ * This file is part of PhpWiki.
+ *
+ * PhpWiki is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * PhpWiki is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
+ */
 
 // difflib.php
 //
 // A PHP diff engine for phpwiki.
-//
-// Copyright (C) 2000, 2001 Geoffrey T. Dairiki <dairiki@dairiki.org>
-// You may copy this code freely under the conditions of the GPL.
-//
 
-abstract class _DiffOp
+abstract class DiffOp
 {
     public $type;
     public $orig;
@@ -27,11 +45,11 @@ abstract class _DiffOp
     }
 }
 
-class _DiffOp_Copy extends _DiffOp
+class DiffOp_Copy extends DiffOp
 {
     public $type = 'copy';
 
-    function _DiffOp_Copy($orig, $final = false)
+    function __construct($orig, $final = false)
     {
         if (!is_array($final))
             $final = $orig;
@@ -41,15 +59,15 @@ class _DiffOp_Copy extends _DiffOp
 
     public function reverse()
     {
-        return new _DiffOp_Copy($this->final, $this->orig);
+        return new DiffOp_Copy($this->final, $this->orig);
     }
 }
 
-class _DiffOp_Delete extends _DiffOp
+class DiffOp_Delete extends DiffOp
 {
     public $type = 'delete';
 
-    function _DiffOp_Delete($lines)
+    function __construct($lines)
     {
         $this->orig = $lines;
         $this->final = false;
@@ -57,15 +75,15 @@ class _DiffOp_Delete extends _DiffOp
 
     public function reverse()
     {
-        return new _DiffOp_Add($this->orig);
+        return new DiffOp_Add($this->orig);
     }
 }
 
-class _DiffOp_Add extends _DiffOp
+class DiffOp_Add extends DiffOp
 {
     public $type = 'add';
 
-    function _DiffOp_Add($lines)
+    function __construct($lines)
     {
         $this->final = $lines;
         $this->orig = false;
@@ -73,15 +91,15 @@ class _DiffOp_Add extends _DiffOp
 
     public function reverse()
     {
-        return new _DiffOp_Delete($this->final);
+        return new DiffOp_Delete($this->final);
     }
 }
 
-class _DiffOp_Change extends _DiffOp
+class DiffOp_Change extends DiffOp
 {
     public $type = 'change';
 
-    function _DiffOp_Change($orig, $final)
+    function __construct($orig, $final)
     {
         $this->orig = $orig;
         $this->final = $final;
@@ -89,7 +107,7 @@ class _DiffOp_Change extends _DiffOp
 
     public function reverse()
     {
-        return new _DiffOp_Change($this->final, $this->orig);
+        return new DiffOp_Change($this->final, $this->orig);
     }
 }
 
@@ -113,7 +131,7 @@ class _DiffOp_Change extends _DiffOp
  * @author Geoffrey T. Dairiki
  * @access private
  */
-class _DiffEngine
+class DiffEngine
 {
     public $xchanged;
     public $ychanged;
@@ -172,11 +190,11 @@ class _DiffEngine
         }
 
         // Find the LCS.
-        $this->_compareseq(0, sizeof($this->xv), 0, sizeof($this->yv));
+        $this->compareseq(0, sizeof($this->xv), 0, sizeof($this->yv));
 
         // Merge edits when possible
-        $this->_shift_boundaries($from_lines, $this->xchanged, $this->ychanged);
-        $this->_shift_boundaries($to_lines, $this->ychanged, $this->xchanged);
+        $this->shift_boundaries($from_lines, $this->xchanged, $this->ychanged);
+        $this->shift_boundaries($to_lines, $this->ychanged, $this->xchanged);
 
         // Compute the edit operations.
         $edits = array();
@@ -193,7 +211,7 @@ class _DiffEngine
                 ++$yi;
             }
             if ($copy)
-                $edits[] = new _DiffOp_Copy($copy);
+                $edits[] = new DiffOp_Copy($copy);
 
             // Find deletes & adds.
             $delete = array();
@@ -205,10 +223,11 @@ class _DiffEngine
                 $add[] = $to_lines[$yi++];
 
             if ($delete && $add)
-                $edits[] = new _DiffOp_Change($delete, $add);
+                $edits[] = new DiffOp_Change($delete, $add);
             elseif ($delete)
-                $edits[] = new _DiffOp_Delete($delete); elseif ($add)
-                $edits[] = new _DiffOp_Add($add);
+                $edits[] = new DiffOp_Delete($delete);
+            elseif ($add)
+                $edits[] = new DiffOp_Add($add);
         }
         return $edits;
     }
@@ -229,7 +248,7 @@ class _DiffEngine
      * match.  The caller must trim matching lines from the beginning and end
      * of the portions it is going to specify.
      */
-    private function _diag($xoff, $xlim, $yoff, $ylim, $nchunks)
+    private function diag($xoff, $xlim, $yoff, $ylim, $nchunks)
     {
         $flip = false;
 
@@ -267,14 +286,14 @@ class _DiffEngine
                     continue;
                 $matches = $ymatches[$line];
                 reset($matches);
-                while (list ($junk, $y) = each($matches))
+                foreach ($matches as $junk => $y)
                     if (empty($this->in_seq[$y])) {
-                        $k = $this->_lcs_pos($y);
+                        $k = $this->lcs_pos($y);
                         assert($k > 0);
                         $ymids[$k] = $ymids[$k - 1];
                         break;
                     }
-                while (list ($junk, $y) = each($matches)) {
+                foreach ($matches as $junk => $y) {
                     if ($y > $this->seq[$k - 1]) {
                         assert($y < $this->seq[$k]);
                         // Optimization: this is a common case:
@@ -283,7 +302,7 @@ class _DiffEngine
                         $this->seq[$k] = $y;
                         $this->in_seq[$y] = 1;
                     } elseif (empty($this->in_seq[$y])) {
-                        $k = $this->_lcs_pos($y);
+                        $k = $this->lcs_pos($y);
                         assert($k > 0);
                         $ymids[$k] = $ymids[$k - 1];
                     }
@@ -303,7 +322,7 @@ class _DiffEngine
         return array($this->lcs, $seps);
     }
 
-    private function _lcs_pos($ypos)
+    private function lcs_pos($ypos)
     {
         $end = $this->lcs;
         if ($end == 0 || $ypos > $this->seq[$end]) {
@@ -340,7 +359,7 @@ class _DiffEngine
      * Note that XLIM, YLIM are exclusive bounds.
      * All line numbers are origin-0 and discarded lines are not counted.
      */
-    private function _compareseq($xoff, $xlim, $yoff, $ylim)
+    private function compareseq($xoff, $xlim, $yoff, $ylim)
     {
         // Slide down the bottom initial diagonal.
         while ($xoff < $xlim && $yoff < $ylim
@@ -364,7 +383,7 @@ class _DiffEngine
             //$nchunks = max(2,min(8,(int)$nchunks));
             $nchunks = min(7, $xlim - $xoff, $ylim - $yoff) + 1;
             list ($lcs, $seps)
-                = $this->_diag($xoff, $xlim, $yoff, $ylim, $nchunks);
+                = $this->diag($xoff, $xlim, $yoff, $ylim, $nchunks);
         }
 
         if ($lcs == 0) {
@@ -379,7 +398,7 @@ class _DiffEngine
             reset($seps);
             $pt1 = $seps[0];
             while ($pt2 = next($seps)) {
-                $this->_compareseq($pt1[0], $pt2[0], $pt1[1], $pt2[1]);
+                $this->compareseq($pt1[0], $pt2[0], $pt1[1], $pt2[1]);
                 $pt1 = $pt2;
             }
         }
@@ -397,7 +416,7 @@ class _DiffEngine
      *
      * This is extracted verbatim from analyze.c (GNU diffutils-2.7).
      */
-    private function _shift_boundaries($lines, &$changed, $other_changed)
+    private function shift_boundaries($lines, &$changed, $other_changed)
     {
         $i = 0;
         $j = 0;
@@ -515,16 +534,15 @@ class Diff
     public $edits;
 
     /**
-     * Constructor.
      * Computes diff between sequences of strings.
      *
      * @param $from_lines array An array of strings.
      *        (Typically these are lines from a file.)
      * @param $to_lines array An array of strings.
      */
-    function Diff($from_lines, $to_lines)
+    function __construct($from_lines, $to_lines)
     {
-        $eng = new _DiffEngine;
+        $eng = new DiffEngine();
         $this->edits = $eng->diff($from_lines, $to_lines);
     }
 
@@ -569,7 +587,7 @@ class Diff
      *
      * @return array The sequence of strings.
      */
-    public function _final()
+    public function finalize()
     {
         $lines = array();
 
@@ -588,8 +606,6 @@ class MappedDiff
     extends Diff
 {
     /**
-     * Constructor.
-     *
      * Computes diff between sequences of strings.
      *
      * This can be used to compute things like
@@ -610,14 +626,14 @@ class MappedDiff
      * @param $mapped_to_lines array This array should
      *  have the same number of elements as $to_lines.
      */
-    function MappedDiff($from_lines, $to_lines,
-                        $mapped_from_lines, $mapped_to_lines)
+    function __construct($from_lines, $to_lines,
+                         $mapped_from_lines, $mapped_to_lines)
     {
 
         assert(sizeof($from_lines) == sizeof($mapped_from_lines));
         assert(sizeof($to_lines) == sizeof($mapped_to_lines));
 
-        $this->Diff($mapped_from_lines, $mapped_to_lines);
+        parent::__construct($mapped_from_lines, $mapped_to_lines);
 
         $xi = $yi = 0;
         // Optimizing loop invariants:
@@ -679,7 +695,9 @@ class DiffFormatter
         $nlead = $this->leading_context_lines;
         $ntrail = $this->trailing_context_lines;
 
-        $this->_start_diff();
+        $this->start_diff();
+        $x0 = 0;
+        $y0 = 0;
 
         foreach ($diff->edits as $edit) {
             if ($edit->type == 'copy') {
@@ -689,9 +707,9 @@ class DiffFormatter
                     } else {
                         if ($ntrail) {
                             $context = array_slice($edit->orig, 0, $ntrail);
-                            $block[] = new _DiffOp_Copy($context);
+                            $block[] = new DiffOp_Copy($context);
                         }
-                        $this->_block($x0, $ntrail + $xi - $x0,
+                        $this->block($x0, $ntrail + $xi - $x0,
                             $y0, $ntrail + $yi - $y0,
                             $block);
                         $block = false;
@@ -705,7 +723,7 @@ class DiffFormatter
                     $y0 = $yi - sizeof($context);
                     $block = array();
                     if ($context)
-                        $block[] = new _DiffOp_Copy($context);
+                        $block[] = new DiffOp_Copy($context);
                 }
                 $block[] = $edit;
             }
@@ -717,41 +735,44 @@ class DiffFormatter
         }
 
         if (is_array($block))
-            $this->_block($x0, $xi - $x0,
+            $this->block($x0, $xi - $x0,
                 $y0, $yi - $y0,
                 $block);
 
-        return $this->_end_diff();
+        return $this->end_diff();
     }
 
-    private function _block($xbeg, $xlen, $ybeg, $ylen, &$edits)
+    private function block($xbeg, $xlen, $ybeg, $ylen, &$edits)
     {
-        $this->_start_block($this->_block_header($xbeg, $xlen, $ybeg, $ylen));
+        $this->start_block($this->block_header($xbeg, $xlen, $ybeg, $ylen));
         foreach ($edits as $edit) {
             if ($edit->type == 'copy')
-                $this->_context($edit->orig);
+                $this->context($edit->orig);
             elseif ($edit->type == 'add')
-                $this->_added($edit->final); elseif ($edit->type == 'delete')
-                $this->_deleted($edit->orig); elseif ($edit->type == 'change')
-                $this->_changed($edit->orig, $edit->final); else
+                $this->added($edit->final);
+            elseif ($edit->type == 'delete')
+                $this->deleted($edit->orig);
+            elseif ($edit->type == 'change')
+                $this->changed($edit->orig, $edit->final);
+            else
                 trigger_error("Unknown edit type", E_USER_ERROR);
         }
-        $this->_end_block();
+        $this->end_block();
     }
 
-    protected function _start_diff()
+    protected function start_diff()
     {
         ob_start();
     }
 
-    protected function _end_diff()
+    protected function end_diff()
     {
         $val = ob_get_contents();
         ob_end_clean();
         return $val;
     }
 
-    protected function _block_header($xbeg, $xlen, $ybeg, $ylen)
+    protected function block_header($xbeg, $xlen, $ybeg, $ylen)
     {
         if ($xlen > 1)
             $xbeg .= "," . ($xbeg + $xlen - 1);
@@ -761,41 +782,41 @@ class DiffFormatter
         return $xbeg . ($xlen ? ($ylen ? 'c' : 'd') : 'a') . $ybeg;
     }
 
-    protected function _start_block($header)
+    protected function start_block($header)
     {
         echo $header;
     }
 
-    protected function _end_block()
+    protected function end_block()
     {
     }
 
-    protected function _lines($lines, $prefix = ' ')
+    protected function lines($lines, $prefix = ' ')
     {
         foreach ($lines as $line)
             echo "$prefix $line\n";
     }
 
-    protected function _context($lines)
+    protected function context($lines)
     {
-        $this->_lines($lines);
+        $this->lines($lines);
     }
 
-    protected function _added($lines)
+    protected function added($lines)
     {
-        $this->_lines($lines, ">");
+        $this->lines($lines, ">");
     }
 
-    protected function _deleted($lines)
+    protected function deleted($lines)
     {
-        $this->_lines($lines, "<");
+        $this->lines($lines, "<");
     }
 
-    protected function _changed($orig, $final)
+    protected function changed($orig, $final)
     {
-        $this->_deleted($orig);
+        $this->deleted($orig);
         echo "---\n";
-        $this->_added($final);
+        $this->added($final);
     }
 }
 
@@ -812,7 +833,7 @@ class UnifiedDiffFormatter extends DiffFormatter
         $this->trailing_context_lines = $context_lines;
     }
 
-    protected function _block_header($xbeg, $xlen, $ybeg, $ylen)
+    protected function block_header($xbeg, $xlen, $ybeg, $ylen)
     {
         if ($xlen != 1)
             $xbeg .= "," . $xlen;
@@ -821,20 +842,20 @@ class UnifiedDiffFormatter extends DiffFormatter
         return "@@ -$xbeg +$ybeg @@\n";
     }
 
-    protected function _added($lines)
+    protected function added($lines)
     {
-        $this->_lines($lines, "+");
+        $this->lines($lines, "+");
     }
 
-    protected function _deleted($lines)
+    protected function deleted($lines)
     {
-        $this->_lines($lines, "-");
+        $this->lines($lines, "-");
     }
 
-    protected function _changed($orig, $final)
+    protected function changed($orig, $final)
     {
-        $this->_deleted($orig);
-        $this->_added($final);
+        $this->deleted($orig);
+        $this->added($final);
     }
 }
 
@@ -851,13 +872,13 @@ class UnifiedDiffFormatter extends DiffFormatter
  */
 class BlockDiffFormatter extends DiffFormatter
 {
-    function BlockDiffFormatter($context_lines = 4)
+    function __construct($context_lines = 4)
     {
         $this->leading_context_lines = $context_lines;
         $this->trailing_context_lines = $context_lines;
     }
 
-    protected function _lines($lines, $prefix = '')
+    protected function lines($lines, $prefix = '')
     {
         if (!$prefix == '')
             echo "$prefix\n";
@@ -867,32 +888,24 @@ class BlockDiffFormatter extends DiffFormatter
             echo "$prefix\n";
     }
 
-    protected function _added($lines)
+    protected function added($lines)
     {
-        $this->_lines($lines, ">>>>>>>");
+        $this->lines($lines, ">>>>>>>");
     }
 
-    protected function _deleted($lines)
+    protected function deleted($lines)
     {
-        $this->_lines($lines, "<<<<<<<");
+        $this->lines($lines, "<<<<<<<");
     }
 
-    protected function _block_header($xbeg, $xlen, $ybeg, $ylen)
+    protected function block_header($xbeg, $xlen, $ybeg, $ylen)
     {
         return "";
     }
 
-    protected function _changed($orig, $final)
+    protected function changed($orig, $final)
     {
-        $this->_deleted($orig);
-        $this->_added($final);
+        $this->deleted($orig);
+        $this->added($final);
     }
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

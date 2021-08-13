@@ -1,4 +1,28 @@
 <?php
+/**
+ * Copyright © 2001-2003 Jeff Dairiki
+ * Copyright © 2001-2003 Carsten Klapp
+ * Copyright © 2002,2004-2007 Reini Urban
+ *
+ * This file is part of PhpWiki.
+ *
+ * PhpWiki is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * PhpWiki is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
+ */
 
 require_once 'lib/ErrorManager.php';
 
@@ -13,7 +37,7 @@ class Template
      * @param WikiRequest $request
      * @param array $args
      */
-    function Template($name, &$request, $args = array())
+    function __construct($name, &$request, $args = array())
     {
         global $WikiTheme;
 
@@ -55,32 +79,19 @@ class Template
 
     private function _munge_input($template)
     {
+        // Convert < ?plugin expr ? > to < ?php $this->_printPlugin("expr"); ? >
+        $orig[] = '/<\?plugin.*?\?>/s';
+        $repl[] = "<?php \$this->_printPlugin('\\0'); ?>";
 
-        // Convert < ?plugin expr ? > to < ?php $this->_printPluginPI("expr"); ? >
-        $orig[] = '/<\?plugin.*?\?>/se';
-        $repl[] = "\$this->_mungePlugin('\\0')";
-
-        // Convert < ?= expr ? > to < ?php $this->_print(expr); ? >
-        $orig[] = '/<\?=(.*?)\?>/s';
-        $repl[] = '<?php $this->_print(\1);?>';
+        // Convert <<expr>> to < ?php $this->_printPlugin("expr"); ? >
+        $orig[] = '/<<(.*?)>>/s';
+        $repl[] = "<?php \$this->_printPlugin('<?plugin \\1 ?>'); ?>";
 
         // Convert < ?php echo expr ? > to < ?php $this->_print(expr); ? >
         $orig[] = '/<\?php echo (.*?)\?>/s';
         $repl[] = '<?php $this->_print(\1);?>';
 
-        // Avoid PHP 5.5 warning about /e
-        return @preg_replace($orig, $repl, $template);
-    }
-
-    private function _mungePlugin($pi)
-    {
-        // HACK ALERT: PHP's preg_replace, with the /e option seems to
-        // escape both single and double quotes with backslashes.
-        // So we need to unescape the double quotes here...
-
-        $pi = preg_replace('/(?!<\\\\)\\\\"/x', '"', $pi);
-        return sprintf('<?php $this->_printPlugin(%s); ?>',
-            "'" . str_replace("'", "\'", $pi) . "'");
+        return preg_replace($orig, $repl, $template);
     }
 
     private function _printPlugin($pi)
@@ -105,9 +116,6 @@ class Template
 
     private function _expandSubtemplate(&$template)
     {
-        // FIXME: big hack!
-        //if (!$template->_request)
-        //    $template->_request = &$this->_request;
         if (DEBUG) {
             echo "<!-- Begin $template->_name -->\n";
         }
@@ -147,7 +155,6 @@ class Template
             $revision = false;
 
         global $WikiTheme;
-        //$this->_dump_template();
         $SEP = $WikiTheme->getButtonSeparator();
 
         global $ErrorManager;
@@ -181,22 +188,8 @@ class Template
         return $this->getExpansion();
     }
 
-    // Debugging:
-    private function _dump_template()
-    {
-        $lines = explode("\n", $this->_munge_input($this->_tmpl));
-        $pre = HTML::pre();
-        $n = 1;
-        foreach ($lines as $line)
-            $pre->pushContent(fmt("%4d  %s\n", $n++, $line));
-        $pre->printXML();
-    }
-
     public function _errorHandler($error)
     {
-        //if (!preg_match('/: eval\(\)\'d code$/', $error->errfile))
-        //    return false;
-
         if (preg_match('/: eval\(\)\'d code$/', $error->errfile)) {
             $error->errfile = "In template '$this->_name'";
             // Hack alert: Ignore 'undefined variable' messages for variables
@@ -266,14 +259,14 @@ function GeneratePage($content, $title, $page_revision = false, $args = array())
     if (!isset($args['HEADER']))
         $args['HEADER'] = $title;
 
-    printXML(new Template('html', $request, $args));
+    PrintXML(new Template('html', $request, $args));
 }
 
 /**
  * For dumping pages as html to a file.
  * Used for action=dumphtml,action=ziphtml,format=pdf,format=xml
  */
-function GeneratePageasXML($content, $title, $page_revision = null, $args = array())
+function GeneratePageAsXML($content, $title, $page_revision = null, $args = array())
 {
     global $request;
 
@@ -294,17 +287,9 @@ function GeneratePageasXML($content, $title, $page_revision = null, $args = arra
         $WikiTheme->DUMP_MODE = 'HTML';
 
     // FIXME: unfatal errors and login requirements
-    $html = asXML(new Template('htmldump', $request, $args));
+    $html = AsXML(new Template('htmldump', $request, $args));
 
     $HIDE_TOOLBARS = false;
     //$WikiTheme->DUMP_MODE = false;
     return $html;
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

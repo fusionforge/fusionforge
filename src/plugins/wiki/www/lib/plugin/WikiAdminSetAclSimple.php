@@ -1,8 +1,7 @@
 <?php
-
-/*
- * Copyright 2004 $ThePhpWikiProgrammingTeam
- * Copyright 2009-2010 Marc-Etienne Vargenau, Alcatel-Lucent
+/**
+ * Copyright © 2004 $ThePhpWikiProgrammingTeam
+ * Copyright © 2009-2010 Marc-Etienne Vargenau, Alcatel-Lucent
  *
  * This file is part of PhpWiki.
  *
@@ -19,6 +18,9 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
  */
 
 /**
@@ -98,11 +100,12 @@ class WikiPlugin_WikiAdminSetAclSimple
         $pagelist->addPageList($pages);
         $button_label_liberal = _("Set Liberal Access Rights");
         $button_label_restrictive = _("Set Restrictive Access Rights");
-        $header = $this->setaclForm($header, $pages);
+        $header = $this->setaclFormSimple($header, $pages);
         $header->pushContent(HTML::legend(_("Select the pages where to change access rights")));
 
         $buttons = HTML::p(Button('submit:admin_setacl[aclliberal]', $button_label_liberal, 'wikiadmin'),
-            Button('submit:admin_setacl[aclrestricted]', $button_label_restrictive, 'wikiadmin'));
+                           HTML::raw("&nbsp;&nbsp;"),
+                           Button('submit:admin_setacl[aclrestricted]', $button_label_restrictive, 'wikiadmin'));
         $header->pushContent($buttons);
 
         return HTML::form(array('action' => $request->getPostURL(),
@@ -172,7 +175,7 @@ class WikiPlugin_WikiAdminSetAclSimple
         return $perm;
     }
 
-    function setaclForm(&$header, $pagehash)
+    function setaclFormSimple(&$header, $pagehash)
     {
 
         $pages = array();
@@ -184,11 +187,3 @@ class WikiPlugin_WikiAdminSetAclSimple
         return $header;
     }
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

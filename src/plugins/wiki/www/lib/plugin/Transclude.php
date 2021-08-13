@@ -1,7 +1,6 @@
 <?php
-
 /**
- * Copyright 1999,2000,2001,2002,2006 $ThePhpWikiProgrammingTeam
+ * Copyright © 1999,2000,2001,2002,2006 $ThePhpWikiProgrammingTeam
  *
  * This file is part of PhpWiki.
  *
@@ -18,6 +17,9 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
  */
 
 /**
@@ -33,9 +35,6 @@
  * @see http://www.cs.tut.fi/~jkorpela/html/iframe.html
  *
  * KNOWN ISSUES
- *  Will only work if the browser supports <iframe>s (which is a recent,
- *  but standard tag)
- *
  *  The auto-vertical resize javascript code only works if the transcluded
  *  page comes from the PhpWiki server.  Otherwise (due to "tainting"
  *  security checks in JavaScript) I can't figure out how to deduce the
@@ -44,6 +43,7 @@
  *  Sometimes the auto-vertical resize code doesn't seem to make the iframe
  *  quite big enough --- the scroll bars remain.  Not sure why.
  */
+
 class WikiPlugin_Transclude
     extends WikiPlugin
 {
@@ -92,80 +92,22 @@ class WikiPlugin_Transclude
         if ($src == $request->getURLtoSelf()) {
             return $this->error(fmt("Recursive inclusion of url %s", $src));
         }
-        if (!IsSafeURL($src)) {
-            return $this->error(_("Bad url in src: remove all of <, >, \""));
+        if (!IsSafeURL($src, true)) { // http or https only
+            return $this->error(_("Bad URL in src"));
         }
 
         $params = array('title' => $title,
             'src' => $src,
-            'width' => "100%",
             'height' => $height,
-            'marginwidth' => 0,
-            'marginheight' => 0,
-            'class' => 'transclude',
-            "onload" => "adjust_iframe_height(this);");
+            'class' => 'autoHeight transclude');
 
-        $noframe_msg[] = fmt("See: %s", HTML::a(array('href' => $src), $src));
-
-        $noframe_msg = HTML::div(array('class' => 'transclusion'),
-            HTML::p(array(), $noframe_msg));
-
-        $iframe = HTML::iframe($params, $noframe_msg);
-
-        /* This doesn't work very well...  maybe because CSS screws up NS4 anyway...
-        $iframe = new HtmlElement('ilayer', array('src' => $src), $iframe);
-        */
+        $iframe = HTML::iframe($params);
 
         if ($quiet) {
-            return HTML($this->_js(), $iframe);
+            return $iframe;
         } else {
             return HTML(HTML::p(array('class' => 'transclusion-title'),
-                    fmt("Transcluded from %s", LinkURL($src))),
-                $this->_js(), $iframe);
+                    fmt("Transcluded from %s", LinkURL($src))), $iframe);
         }
     }
-
-    /**
-     * Produce our javascript.
-     *
-     * This is used to resize the iframe to fit the content.
-     * Currently it only works if the transcluded document comes
-     * from the same server as the wiki server.
-     */
-    private function _js()
-    {
-        static $seen = false;
-
-        if ($seen)
-            return '';
-        $seen = true;
-
-        return JavaScript('
-          function adjust_iframe_height(frame) {
-            var content = frame.contentDocument;
-            try {
-                frame.height = content.height + 2 * frame.marginHeight;
-            }
-            catch (e) {
-              // Cannot get content.height unless transcluded doc
-              // is from the same server...
-              return;
-            }
-          }
-
-          window.addEventListener("resize", function() {
-            f = this.document.body.getElementsByTagName("iframe");
-            for (var i = 0; i < f.length; i++)
-              adjust_iframe_height(f[i]);
-          }, false);
-          ');
-    }
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

@@ -2,11 +2,11 @@ Some files may be removed from this directory to save space, if
 needed.
 *The default theme must always be present,* even when using another
 theme! Wherever a theme has no specific variant (override) of a
-template or button or image, PhpWiki will look for one in the default 
-theme. Same with the language: 
-Language and theme specific specific buttons will be search in 
-sub-directories like <theme>/buttons/en, and if none will be found, 
-the default buttons, which might be language-independent, in default/buttons 
+template or button or image, PhpWiki will look for one in the default
+theme. Same with the language:
+Language and theme specific specific buttons will be search in
+sub-directories like <theme>/buttons/en, and if none will be found,
+the default buttons, which might be language-independent, in default/buttons
 will be used.
 
 List of current themes:

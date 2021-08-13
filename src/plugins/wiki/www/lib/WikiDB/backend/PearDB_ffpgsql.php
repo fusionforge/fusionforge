@@ -1,8 +1,7 @@
 <?php
-
-/*
- * Copyright (C) 2001-2009 $ThePhpWikiProgrammingTeam
- * Copyright (C) 2010 Alain Peyrat, Alcatel-Lucent
+/**
+ * Copyright © 2001-2009 $ThePhpWikiProgrammingTeam
+ * Copyright © 2010 Alain Peyrat, Alcatel-Lucent
  *
  * This file is part of PhpWiki.
  *
@@ -19,6 +18,9 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
 */
 
 /*
@@ -115,7 +117,7 @@ class WikiDB_backend_PearDB_ffpgsql
             return;
         }
 
-        $this->lock(array($page_tbl), true);
+        $this->lock(array($page_tbl));
         $data = $this->get_pagedata($pagename);
         if (!$data) {
             $data = array();
@@ -176,8 +178,7 @@ class WikiDB_backend_PearDB_ffpgsql
      * @param int $version Which version to get
      * @param bool $want_content Do we need content?
      *
-     * @return array hash The version data, or false if specified version does not
-     *              exist.
+     * @return array The version data, or false if specified version does not exist.
      */
     function get_versiondata($pagename, $version, $want_content = false)
     {
@@ -252,7 +253,7 @@ class WikiDB_backend_PearDB_ffpgsql
 
         $id = $dbh->getOne($query);
         if (empty($id)) {
-            $this->lock(array($page_tbl), true); // write lock
+            $this->lock(array($page_tbl)); // write lock
             $max_id = $dbh->getOne("SELECT MAX(id) FROM $page_tbl");
             $id = $max_id + 1;
             // requires createSequence and on mysql lock the interim table ->getSequenceName
@@ -275,7 +276,7 @@ class WikiDB_backend_PearDB_ffpgsql
         extract($this->_table_names);
 
         $this->lock();
-        if (($id = $this->_get_pageid($pagename, false))) {
+        if (($id = $this->_get_pageid($pagename))) {
             $dbh->query("DELETE FROM $nonempty_tbl WHERE id=$id");
             $dbh->query("DELETE FROM $recent_tbl   WHERE id=$id");
             $dbh->query("DELETE FROM $version_tbl  WHERE id=$id");
@@ -297,8 +298,19 @@ class WikiDB_backend_PearDB_ffpgsql
         return $result;
     }
 
-    /*
+    /**
      * Find pages which link to or are linked from a page.
+     *
+     * @param string    $pagename       Page name
+     * @param bool      $reversed       True to get backlinks
+     * @param bool      $include_empty  True to get empty pages
+     * @param string    $sortby
+     * @param string    $limit
+     * @param string    $exclude        Pages to exclude
+     * @param bool      $want_relations
+     *
+     * FIXME: array or iterator?
+     * @return object A WikiDB_backend_iterator.
      *
      * TESTME relations: get_links is responsible to add the relation to the pagehash
      * as 'linkrelation' key as pagename. See WikiDB_PageIterator::next
@@ -412,12 +424,10 @@ class WikiDB_backend_PearDB_ffpgsql
             // extract from,count from limit
             list($from, $count) = $this->limit($limit);
             $result = $dbh->limitQuery($sql, $from, $count);
-            $options = array('limit_by_db' => 1);
         } else {
             $result = $dbh->query($sql);
-            $options = array('limit_by_db' => 0);
         }
-        return new WikiDB_backend_PearDB_iter($this, $result, $options);
+        return new WikiDB_backend_PearDB_iter($this, $result);
     }
 
     /*
@@ -574,17 +584,21 @@ class WikiDB_backend_PearDB_ffpgsql
         return new WikiDB_backend_PearDB_generic_iter($this, $result);
     }
 
-    /*
+    /**
      * Rename page in the database.
+     *
+     * @param string $pagename Current page name
+     * @param string $to       Future page name
      */
+
     function rename_page($pagename, $to)
     {
         $dbh = &$this->_dbh;
         extract($this->_table_names);
 
         $this->lock();
-        if (($id = $this->_get_pageid($pagename, false))) {
-            if ($new = $this->_get_pageid($to, false)) {
+        if (($id = $this->_get_pageid($pagename))) {
+            if ($new = $this->_get_pageid($to)) {
                 // Cludge Alert!
                 // This page does not exist (already verified before), but exists in the page table.
                 // So we delete this page.
@@ -757,16 +771,6 @@ class WikiDB_backend_PearDB_ffpgsql_search
         // $word = str_replace(" ", "&", $word); // phrase fix
 
         // @alu: use _quote maybe instead of direct pg_escape_string
-        $word = pg_escape_string($word);
-
-        return $word;
+        return pg_escape_string($word);
     }
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

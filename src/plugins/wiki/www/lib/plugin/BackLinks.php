@@ -1,7 +1,6 @@
 <?php
-
 /**
- * Copyright 1999,2000,2001,2002,2006 $ThePhpWikiProgrammingTeam
+ * Copyright © 1999,2000,2001,2002,2006 $ThePhpWikiProgrammingTeam
  *
  * This file is part of PhpWiki.
  *
@@ -18,6 +17,9 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
  */
 
 require_once 'lib/PageList.php';
@@ -65,6 +67,23 @@ class WikiPlugin_BackLinks
         }
 
         extract($args);
+
+        if (($include_self == '0') || ($include_self == 'false')) {
+            $include_self = false;
+        } elseif (($include_self == '1') || ($include_self == 'true')) {
+            $include_self = true;
+        } else {
+            return $this->error(sprintf(_("Argument '%s' must be a boolean"), "include_self"));
+        }
+
+        if (($noheader == '0') || ($noheader == 'false')) {
+            $noheader = false;
+        } elseif (($noheader == '1') || ($noheader == 'true')) {
+            $noheader = true;
+        } else {
+            return $this->error(sprintf(_("Argument '%s' must be a boolean"), "noheader"));
+        }
+
         if (empty($page) and $page != '0') {
             return '';
         }
@@ -192,18 +211,10 @@ class WikiPlugin_BackLinks
 // how many links from this backLink to other pages
 class _PageList_Column_BackLinks_count extends _PageList_Column
 {
-    function _getValue($page, $revision_handle)
+    function _getValue($page_handle, $revision_handle)
     {
-        $iter = $page->getPageLinks();
+        $iter = $page_handle->getPageLinks();
         $count = $iter->count();
         return $count;
     }
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

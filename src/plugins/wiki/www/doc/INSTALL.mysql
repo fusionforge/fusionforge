@@ -1,7 +1,7 @@
-Installing phpwiki with MySQL 
+Installing phpwiki with MySQL
 -----------------------------
 
-A MySQL configuration is relatively hard to setup and slow, compared 
+A MySQL configuration is relatively hard to setup and slow, compared
 to dba or better SQL databases.
 
 This assumes that you have a working MySQL server and client setup.
@@ -22,7 +22,7 @@ For more information on MySQL go to http://www.mysql.org/
 
    A MySQL grant statement for this user would look like this:
 
-	GRANT select, insert, update, delete, lock tables 
+	GRANT select, insert, update, delete, lock tables
 	ON phpwiki.*
 	TO wikiuser@localhost
 	IDENTIFIED BY 'password';
@@ -44,14 +44,14 @@ For more information on MySQL go to http://www.mysql.org/
 	b) DATABASE_DSN should be set to something like
            'mysql://guest@unix(/var/lib/mysql/mysql.sock)/phpwiki".
 	   (where 'phpwiki' is the mysql database name.)
-        c) Note that if you set DATABASE_PREFIX to a 
+        c) Note that if you set DATABASE_PREFIX to a
            non-empty string, you will have to edit
            schemas/mysql-initialize.sql before you perform step
            three (above).  (Sorry.)  (You might also edit
            schemas/mysql-destroy.sql at the same time, so you
            don't forget.)
 
-That's it. Phpwiki should now work. 
+That's it. Phpwiki should now work.
 DATABASE_DIRECTORY and DATABASE_DBA_HANDLER are ignored for mysql.
 
 If you run into problems then check that your MySQL-user has
@@ -69,10 +69,10 @@ Upgrading a MySQL phpwiki
 If schemas/mysql-initialize.sql has changed for your old phpwiki
 installation (or changed when compared to the old "mysql.sql" file),
 you can either create missing tables manually and ALTER the changed
-tables manually.  
+tables manually.
 Or you can run ?action=upgrade (also from "Upgrade"
 at PhpWikiAdministration), but then your database user needs the
-necessary ALTER and CREATE permissions. 
+necessary ALTER and CREATE permissions.
 You might want to set DBADMIN_USER temporarily in your config.ini.
 ?action=upgrade also brings all changed pgsrc files up-to-date.
 

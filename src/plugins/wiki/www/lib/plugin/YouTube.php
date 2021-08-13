@@ -1,8 +1,7 @@
 <?php
-
-/*
- * Copyright 2007 Reini Urban
- * Copyright 2008 Marc-Etienne Vargenau, Alcatel-Lucent
+/**
+ * Copyright © 2007 Reini Urban
+ * Copyright © 2008 Marc-Etienne Vargenau, Alcatel-Lucent
  *
  * This file is part of PhpWiki.
  *
@@ -19,6 +18,9 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
  */
 
 /**
@@ -191,9 +193,6 @@ class WikiPlugin_YouTube
             'type' => 'application/x-shockwave-flash',
             'width' => $width,
             'height' => $height);
-        if (isBrowserSafari()) {
-            return HTML::object($attrs);
-        }
         $object->pushContent(HTML::param(array('name' => 'movie', 'value' => $url)));
         $object->pushContent(HTML::param(array('name' => 'wmode', 'value' => 'transparent')));
         $object->pushContent(HTML::object($attrs));
@@ -209,11 +208,3 @@ class WikiPlugin_YouTube
         return '';
     }
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

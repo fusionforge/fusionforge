@@ -3,16 +3,16 @@
   <td>
   <div class="actionbuttons">
     <?php echo WikiLink(HOME_PAGE, "known",_("Home")) ?>
-    <?php echo $SEP?><?php echo WikiLink(_("About")) ?>
-    <?php echo $SEP?><?php echo WikiLink(_("BlogArchives"),'',_("Archives")) ?>
-    <?php echo $SEP?><?php echo WikiLink(_("PhotoAlbum")) ?>
-    <?php echo $SEP?><?php echo WikiLink(_("HowTo")) ?>
-    <?php echo $SEP?><?php echo WikiLink(_("RecentChanges")) ?>
-    <?php echo $SEP?><?php echo Button("PageInfo", _("Info")) ?>
+    <?php echo $SEP?><?php echo WikiLink(__("About")) ?>
+    <?php echo $SEP?><?php echo WikiLink(__("BlogArchives"), '', _("Archives")) ?>
+    <?php echo $SEP?><?php echo WikiLink(__("PhotoAlbum")) ?>
+    <?php echo $SEP?><?php echo WikiLink(__("HowTo")) ?>
+    <?php echo $SEP?><?php echo WikiLink(__("RecentChanges")) ?>
+    <?php echo $SEP?><?php echo Button(__("PageInfo"), _("Info")) ?>
 <?php
 if ($user->isAuthenticated()) {
     if (mayAccessPage('edit', $page->getName()))
-        $EditB = Button("edit",_("Edit"),false,array('id'=>'btn-edit'));
+        $EditB = Button("edit", _("Edit"), false, array('id'=>'btn-edit'));
     else
         $EditB = Button("viewsource", _("View Source"));
 ?>

@@ -1,7 +1,6 @@
 <?php
-
-/*
- * Copyright (C) 2004 $ThePhpWikiProgrammingTeam
+/**
+ * Copyright © 2004 $ThePhpWikiProgrammingTeam
  *
  * This file is part of PhpWiki.
  *
@@ -18,6 +17,9 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
  */
 
 /**
@@ -27,7 +29,7 @@
  * TODO:
  * For admin user, put checkboxes beside comments to allow for bulk removal.
  *
- * @author: ReiniUrban
+ * @author: Reini Urban
  */
 
 include_once 'lib/plugin/WikiBlog.php';
@@ -59,7 +61,7 @@ class WikiPlugin_AddComment
         return array('pagename' => '[pagename]',
             'order' => 'normal',
             'mode' => 'add,show',
-            'jshide' => '0',
+            'jshide' => false,
             'noheader' => false,
             //'sortby'     => '-pagename' // oldest first. reverse by order=reverse
         );
@@ -79,6 +81,24 @@ class WikiPlugin_AddComment
             return $this->error(sprintf(_("A required argument “%s” is missing."), 'pagename'));
         }
 
+        $jshide = $args['jshide'];
+        if (($jshide == '0') || ($jshide == 'false')) {
+            $jshide = false;
+        } elseif (($jshide == '1') || ($jshide == 'true')) {
+            $jshide = true;
+        } else {
+            return $this->error(sprintf(_("Argument '%s' must be a boolean"), "jshide"));
+        }
+
+        $noheader = $args['noheader'];
+        if (($noheader == '0') || ($noheader == 'false')) {
+            $noheader = false;
+        } elseif (($noheader == '1') || ($noheader == 'true')) {
+            $noheader = true;
+        } else {
+            return $this->error(sprintf(_("Argument '%s' must be a boolean"), "noheader"));
+        }
+
         // Get our form args.
         $comment = $request->getArg("comment");
         $request->setArg('comment', false);
@@ -90,10 +110,10 @@ class WikiPlugin_AddComment
         // Now we display previous comments and/or provide entry box
         // for new comments
         $html = HTML();
-        if ($args['jshide']) {
+        if ($jshide) {
             $div = HTML::div(array('id' => 'comments', 'style' => 'display:none;'));
             //$list->setAttr('style','display:none;');
-            $div->pushContent(Javascript("
+            $div->pushContent(JavaScript("
 function togglecomments(a) {
   comments=document.getElementById('comments');
   if (comments.style.display=='none') {
@@ -139,11 +159,3 @@ function togglecomments(a) {
     }
 
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

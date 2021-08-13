@@ -16,4 +16,4 @@ The following scripts are available as examples of SOAP use:
 * titlesearch
 
 The WSDL file is taken from environment variable PHPWIKI_WSDL_URL.
-If this variable is not set, http://phpwiki.fr/PhpWiki.wsdl is used.
+If this variable is not set, http://phpwiki.demo.free.fr/PhpWiki.wsdl is used.

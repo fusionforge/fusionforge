@@ -1,7 +1,6 @@
 <?php
-
 /**
- * Copyright 2006,2007 $ThePhpWikiProgrammingTeam
+ * Copyright © 2006,2007 $ThePhpWikiProgrammingTeam
  *
  * This file is part of PhpWiki.
  *
@@ -18,6 +17,9 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
  */
 
 /**
@@ -86,8 +88,7 @@ class WikiPlugin_SpellCheck
         $words = preg_split('/[\W]+?/', $text);
 
         $misspelled = $return = array();
-        $pspell_config = pspell_config_create($lang, "", "", 'UTF-8',
-            PSPELL_NORMAL | PSPELL_RUN_TOGETHER);
+        $pspell_config = pspell_config_create($lang, "", "", 'UTF-8');
         //pspell_config_runtogether($pspell_config, true);
         if (PSPELL_PWL)
             pspell_config_personal($pspell_config, PSPELL_PWL);
@@ -144,7 +145,7 @@ class WikiPlugin_SpellCheck
             $args .= " --lang=" . $lang;
             // use -C or autosplit wikiwords in the text
             $commandLine = ASPELL_EXE . " -a -C $args ";
-            $cache = new WikiPluginCached;
+            $cache = new WikiPluginCached();
             $code = $cache->filterThroughCmd($source, $commandLine);
             if (empty($code))
                 return $this->error(fmt("Couldn't start commandline “%s”", $commandLine));
@@ -161,13 +162,7 @@ class WikiPlugin_SpellCheck
         }
         //$html->pushContent(HTML::hr(),HTML::h1(_("Spellcheck")));
         $page = $request->getPage();
-        if ($version) {
-            $revision = $page->getRevision($version);
-            if (!$revision)
-                NoSuchRevision($request, $page, $version);
-        } else {
-            $revision = $page->getCurrentRevision();
-        }
+        $revision = $page->getCurrentRevision();
         $request->setArg('suggestions', $sugg);
         include_once 'lib/BlockParser.php';
         $ori_html = TransformText($revision, $page);
@@ -191,11 +186,3 @@ class WikiPlugin_SpellCheck
         return $html;
     }
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

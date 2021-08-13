@@ -1,13 +1,5 @@
-== Blockers ==
-* can no longer save UserPreferences: Warning: "Attempt to assign property of non-object"
-  (partial revert to get in work again)
-* WantedPages give too many pages (from interwiki map)
-  (to be tested in both Pear and ADODB)
-* revert of Patch 3024787 by Sébastien Le Callonnec (caused an SQL syntax error)
-
-----
-
 short-term TODO:
+* WantedPages gives too many pages (from interwiki map)
 * rename should check existing subpages and rename these also.
 * Sidebar: merge AVL theme (internal MonoBook derivate with customizable
   box states) with Sidebar
@@ -24,9 +16,9 @@ architecture:
 * Move serialized data from page_data / version_data to separate SQL columns.
 * WikiDB hooks. (?)
 * Content expansion hooks in transformer. (SearchHighlight)
-* Convert RecentChanges to PageList as source for format options. 
+* Convert RecentChanges to PageList as source for format options.
   Generic rss, rdf handling.
-* embedd basic RDF in XHTML (dc, foaf, ...) for GRDDL. 
+* embedd basic RDF in XHTML (dc, foaf, ...) for GRDDL.
 * Do Microformats automatically? It's a stupid hack so support it only optionally.
   ToDo: for Calendar, CalendarList, FoafPlugin
 
@@ -44,7 +36,7 @@ new:
 * support missing REST interfaces (optional): action=remove => DELETE,
   action=editpage and minor updates (rating,...) => PUT.
   with fallbacks to POST
-* format=mm (FreeMind) for RecentChanges, SemanticWeb's and simple PageList's. 
+* format=mm (FreeMind) for RecentChanges, SemanticWeb's and simple PageList's.
   See http://wikkawiki.org/FreeMind. Maybe format=mmap for the commercial MindMap.
 * Spellcheck AJAX backend (see DokuWiki)
 * GeSHi Highlighter plugin
@@ -52,7 +44,7 @@ new:
 fixes:
 * fix pagelist nopage unification (store just key as names?)
 * pcre textsearch with multiple words: order-independency
-* SQL textsearch with multiple words: AND 
+* SQL textsearch with multiple words: AND
   (the two new failing unit tests)
 * fix textsearch optimize with "word -word -word"
 
@@ -84,7 +76,7 @@ already done lately:
 * display login page on "$action is disallowed on this wiki for user ..."
 * remove "Invalid username" warning on "sign in as" button click
 * themes/blog, BlogArchivesPlugin
-* test WikiPluginCached support for image maps and svg, swf, eps, ...
+* test WikiPluginCached support for image maps and svg, eps, ...
   defer header logic
 * don't print php notices and warnings as red errors.
   just green or grey
@@ -96,7 +88,7 @@ already done lately:
 * pdf button when an external html2pdf app is defined
   (enabled at PhpWikiDemo)
 * enhanced WikiPluginCached (static, ondemand)
-* added LdapSearchPlugin 
+* added LdapSearchPlugin
 * more PageList options
 
 2004-11-10 20:25:13 rurban
@@ -116,7 +108,7 @@ already done lately:
 2004-11-09 18:10:22 rurban
 * revert to the wikidb ref passing. there's no memory abuse there.
 * use new wikidb->_cache->_id_cache[] instead of wikidb->_iwpcache, to effectively
-  store page ids with getPageLinks (GleanDescription) of all existing pages, which 
+  store page ids with getPageLinks (GleanDescription) of all existing pages, which
   are also needed at the rendering for linkExistingWikiWord().
   pass options to pageiterator.
   use this cache also for _get_pageid()
@@ -129,12 +121,12 @@ already done lately:
     * fix more sf.net bugs and patches (90%)
     * fix LDAP with USER_AUTH_POLICY=old (100%)
     * ADODB lock and transaction fixes (50%)
-    * some more theme beautification, new crao and nuke theme, 
+    * some more theme beautification, new crao and nuke theme,
       cut or split long sidebar links somehow (100%)
-    * add some basic Recommender engine to enable rating recommendations, 
+    * add some basic Recommender engine to enable rating recommendations,
       fix metadata getAvg and test it. (100%)
     * fix metadata RateIt methods and RateIt usergroups, (100%)
-    * rewrite WikiGroup to be current_user independent to be able 
+    * rewrite WikiGroup to be current_user independent to be able
       to ask for group membership of any user. (100%)
     * more action=upgrade (diffs, multi-page interface) (60%)
     * finish PdfOutput plugin and button (80%)
@@ -151,7 +143,7 @@ already done lately:
 
     * fix WikiAdminSetAcl (least common ACL denominator) (100%)
     * enable ACL's in the mime dumps (100%)
-    * force strict PagePermissions on all plugins, which require now 
+    * force strict PagePermissions on all plugins, which require now
       admin and some more administrative actions (90%)
     * complete full paging support (limit=, prev/next buttons in PageList) (95%)
       fix paging in MostPopular

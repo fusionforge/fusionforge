@@ -41,6 +41,8 @@
  * ALONE BASIS."
  */
 
+@import url(../default/phpwiki-common.css);
+
 /**
  * General
  */
@@ -49,6 +51,15 @@ body {
     margin: 0 0 0 0;
     font-family: Verdana, Arial, Helvetica, sans-serif;
     color: #565c5e; /* Alcatel-Lucent grey */
+}
+
+hr {
+    height: 2px;
+    background-color: #aaaaaa;
+}
+
+textarea {
+    font-family: monospace;
 }
 
 form {
@@ -61,11 +72,11 @@ img {
 }
 
 h1 {
-    font-size: 1.8em;
+    font-size: 1.6em;
 }
 
 h2 {
-    font-size: 1.6em;
+    font-size: 1.4em;
     line-height: 1.1em;
 }
 
@@ -89,22 +100,20 @@ h6 {
 
 /* Titles in the page. */
 h1, .titlebar, .widget_titlebar {
-    padding-top: 4px;
-    padding-bottom: 6px;
-    vertical-align: middle;
+    border-bottom: 2px solid #bcbcad;
+    padding-bottom: 3px;
     font-family: 'trebuchet MS', Arial, Helvetica, sans-serif;
-    color: #554295; /* Alcatel-Lucent violet */
+    color: #124191; /* Nokia blue */
+    font-size: 1.6em;
     font-weight: normal;
-    font-size: 1.8em;
     line-height: 1.3em;
     text-align: left;
-    height: 24px;
     margin-top: 4px;
 }
 
 /* Hack for the wiki that inserts an unneccessary </p> */
 .titlebar p {
-    color: #554295; /* Alcatel-Lucent violet */
+    color: #124191;
     font-size: 1em;
     margin-bottom: 0;
     margin-top: 0;
@@ -123,6 +132,8 @@ div.wikitext table p {
     margin-top: 0.3em;
     margin-bottom: 0.3em;
 }
+
+.wikitext input { display: inline; }
 
 input {
     margin: 0.1em;
@@ -153,28 +164,8 @@ caption {
     white-space: nowrap;
 }
 
-table.sortable th.header {
-    background-image: url(../default/buttons/sort_none.gif);
-    cursor: pointer;
-    background-repeat: no-repeat;
-    background-position: center right;
-    padding-right: 20px;
-}
-
-table.sortable th.headerSortUp {
-    background-image: url(../default/buttons/sort_up.gif);
-    cursor: pointer;
-    background-repeat: no-repeat;
-    background-position: center right;
-    padding-right: 20px;
-}
-
-table.sortable th.headerSortDown {
-    background-image: url(../default/buttons/sort_down.gif);
-    cursor: pointer;
-    background-repeat: no-repeat;
-    background-position: center right;
-    padding-right: 20px;
+label {
+    display: inline-block;
 }
 
 /**
@@ -183,16 +174,14 @@ table.sortable th.headerSortDown {
  * The div inside the wikiadmin upload form does not
  * have a class yet, so it must be referenced indirectly
  */
-/* div.wikiaction, div.wikiadmin { */
 div.wikiaction, form.wikiadmin div {
     border: 1px solid #96a2ae;
     border-right-color: #d8d8e7;
     border-bottom-color: #d8d8e7;
-
     margin-top: 0.5ex;
     margin-bottom: 0.5ex;
     padding: 0.5ex 0.5em;
-    /* Emulate the display behaviour of a table, to shrink it's width. */
+    /* Emulate the display behaviour of a table, to shrink its width. */
     display: table;
 }
 
@@ -218,6 +207,7 @@ img.linkicon {
 }
 
 img.inlineimage {
+    display: inline;
     vertical-align: middle;
 }
 
@@ -263,7 +253,6 @@ body.sidebar h2 {
  * Link styles
  */
 .wiki, .named-wiki {
-    /* text-decoration: none; */
     font-weight: bold;
 }
 
@@ -436,24 +425,21 @@ input.button {
     border: 1px solid ButtonFace;
 }
 
-.tooltitle {
-    font-weight: bold;
-}
-
-nav, nav ul {
+nav#actionbuttons, nav#actionbuttons ul {
     padding: 0;
 }
 
-nav ul {
+nav#actionbuttons ul {
     display: inline;
     margin-right: 10px;
+    margin-left: -10px;
 }
 
 #actionbuttons {
     white-space: nowrap;
-    margin-left: 0;
+    margin-left: 10px;
     margin-top: 10px;
-    margin-bottom: 0;
+    margin-bottom: -1px;
 }
 
 #actionbuttons .named-wiki,
@@ -477,6 +463,7 @@ nav ul {
     padding-left: 0.8em;
     padding-right: 0.8em;
     margin-right: 10px;
+    margin-left: 0;
 }
 
 #actionbuttons li.bold a {
@@ -504,16 +491,11 @@ nav ul {
 
 /* Make the textarea the full page width */
 textarea.wikiedit {
+    font-family: monospace;
     width: 100%;
     margin-bottom: 0.5ex;
     margin-top: 0.5ex;
     padding: 2px;
-}
-
-#editarea-size {
-    margin-top: 1ex;
-    text-align: right;
-    font-size: smaller;
 }
 
 #search-replace {
@@ -532,21 +514,6 @@ textarea.wikiedit {
 .search-term {
     background: yellow;
     font-weight: normal;
-}
-
-#LSResult {
-    position: absolute;
-    text-align: left;
-    display: none;
-    z-index: 100;
-    background-color: white;
-    border: 1px solid #d0d0d0;
-    font-size: 9px;
-    overflow: hidden;
-}
-
-#LSResult .evenrow {
-    background-color: #f0f0f0;
 }
 
 /* PageTrail plugin =================================================== */
@@ -624,9 +591,6 @@ table.cal-header tr, table.cal-header td {
 }
 
 /* Day-names header */
-table.cal tbody tr .cal-dayname {
-}
-
 .cal-dayname td {
     text-align: center;
     font-size: smaller;
@@ -643,10 +607,6 @@ a.cal-hide {
 table.cal td.cal-today {
     margin: 1px;
     border: 1px solid gray;
-}
-
-/* text */
-table.cal td.cal-today a.cal-hide {
 }
 
 /* Diff plugin ======================================================== */
@@ -671,7 +631,6 @@ table.cal td.cal-today a.cal-hide {
     border: 1px solid #494f5d;
     border-right-color: #c6d2de;
     border-bottom-color: #c6d2de;
-
     padding: 0;
     clear: both;
 }
@@ -841,7 +800,6 @@ p.information {
 
 .error, .warning, .debug, .hint {
     font-weight: bold;
-    font-size: 11px;
     text-align: left;
     border: 1px solid;
     padding: 0.5em;
@@ -861,7 +819,7 @@ span.error, span.warning, span.debug, span.hint {
     padding: 0;
 }
 
-/* Disabled Plugins  ================================================== */
+/* Disabled plugins =================================================== */
 
 .disabled-plugin {
     clear: both;
@@ -882,16 +840,6 @@ span.error, span.warning, span.debug, span.hint {
     background: #ddd;
     margin: 0;
     padding: 0.3ex 0.5em;
-}
-
-/* RedirectTo plugin ================================================== */
-
-/* "(Redirected from ...)" message. */
-span.redirectfrom {
-    font-size: small;
-    font-style: oblique;
-    font-weight: normal;
-    padding-left: 1em;
 }
 
 /*
@@ -946,14 +894,6 @@ blockquote.mail-style-quote {
 /*
  * wikiblog
  */
-.floatleft {
-    float: left;
-}
-
-.floatright {
-    float: right;
-}
-
 div.wikiblog {
     margin: 1ex 2em;
     padding: 0 0;
@@ -964,12 +904,7 @@ div.wikiblog > div {
     padding: 0.5ex 0.5em;
 }
 
-div.wikiblog-header {
-    /* background-color: #ccf; */
-}
-
 div.wikiblog > div.wikiblog-footer {
-    /* background-color: #eee; */
     padding: 0.2ex 0.5em;
 }
 
@@ -1038,45 +973,9 @@ table.interwiki-map {
     padding-left: 3em;
 }
 
-.dialog {
-    background-color: #cdf;
-    color: black;
-    margin: 2em auto 2em auto;
-    border: thin black solid;
-    width: 50%;
-}
-
-.dialog h1, .dialog p, .dialog div {
-    text-align: center;
-}
-
-.dialog h1 {
-    font-size: large;
-    margin: 0.5em 0 1em 0;
-}
-
-.dialog div.message {
-    background-color: white;
-    color: black;
-    margin: 0 1em;
-    padding: 0.5em 0.5em;
-}
-
-.dialog p.buttons {
-    margin: 1em 0 0.5em 0;
-}
-
-.clear-floats {
-    clear: both;
-}
-
 /* postnuke css:*/
 .gensmall {
     font-size: 10px
-}
-
-.genmed {
-    font-size: 11px
 }
 
 td.cat {
@@ -1236,43 +1135,6 @@ img.tex {
     font-style: italic;
 }
 
-/* WikicreoleTable, MediawikiTable and RichTable plugins ============== */
-
-/*
- * table class="boxed"
- * will put a border around the table (but not around the cells)
- *
- * table class="bordered"
- * will put a border around the table and the cells
- *
- * In both cases, the caption will be bold and centered under the table
- *
- * In both cases, the headers (th) will have a "#d8d8d8" background
- */
-
-table.boxed, table.bordered, table.bordered th, table.bordered td {
-    border: 1px solid;
-    border-collapse: collapse;
-    vertical-align: top;
-}
-
-table.boxed td, table.bordered td,
-table.boxed th, table.bordered th {
-    padding: 0 5px;
-}
-
-table.boxed caption, table.bordered caption {
-    text-align: center;
-    font-weight: bold;
-    caption-side: bottom;
-    padding-top: 0.8em;
-}
-
-table.boxed th, table.bordered th {
-    font-weight: bold;
-    background-color: #d8d8d8;
-}
-
 /* BoxRight plugin ==================================================== */
 
 div.boxright {
@@ -1293,7 +1155,7 @@ td.tdselected, td.tdunselected {
 
 td.tdselected {
     color: white;
-    background-color: #554295;
+    background-color: #124191;
 }
 
 td.tdunselected {

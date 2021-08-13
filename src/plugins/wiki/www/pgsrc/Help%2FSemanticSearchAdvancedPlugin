@@ -1,0 +1,74 @@
+Date: Tue, 23 Feb 2021 14:45:30 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
+Content-Type: application/x-phpwiki;
+  pagename=Help%2FSemanticSearchAdvancedPlugin;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
+  charset=UTF-8
+Content-Transfer-Encoding: binary
+
+Parse and execute a full query expression.
+
+== Usage ==
+
+{{{
+<<SemanticSearchAdvanced arguments>>
+}}}
+
+== Arguments ==
+
+All [[Help:PageList|PageList]] arguments, plus the following ones:
+
+{| class="bordered"
+|-
+! Argument
+! Description
+! Default value
+|-
+| **s**
+| query expression
+| *
+|-
+| **page**
+| which pages (glob allowed)
+| ~* (all)
+|-
+| **case_exact**
+| Boolean. If true, search with case exact.
+| false
+|-
+| **regex**
+| Type of regular expression used for searching
+| auto
+|-
+| **noform**
+| Boolean. If true, don't show form with results.
+| false
+|-
+| **noheader**
+| Boolean. If true, header should be omitted.
+| false
+|}
+
+== Example ==
+
+{{{
+<<SemanticSearchAdvanced>>
+}}}
+
+<<SemanticSearchAdvanced>>
+
+== Author ==
+* [[Help:Reini Urban|Reini Urban]]
+
+== See Also ==
+* [[Help:SemanticSearch]]
+* [[Help:TitleSearchPlugin]]
+* [[Help:FullTextSearchPlugin]]
+* [[Help:ExternalSearchPlugin]]
+* [[Help:InterWikiSearchPlugin]]
+* [[Help:LinkSearchPlugin]]
+
+<noinclude>
+----
+[[PhpWikiDocumentation]] [[CategoryWikiPlugin]]
+</noinclude>

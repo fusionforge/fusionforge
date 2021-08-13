@@ -1,27 +1,27 @@
-Date: Mon, 29 Jun 2015 12:04:23 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Thu, 11 Dec 2020 16:07:57 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=Cat%C3%A9gorieCat%C3%A9gorie;
   flags=EXTERNAL_PAGE;
   charset=UTF-8
 Content-Transfer-Encoding: binary
 
-This is the base Category.
+Ceci est la catégorie de base.
 
-The following pages are part of this category:
+Les pages suivantes font partie de cette catégorie :
 <<BackLinks sortby||=pagename noheader||=1 exclude="Category*" limit=1000 >>
 
-This category has the following subcategories:
+Cette catégorie a les sous-catégories suivantes :
 <<BackLinks sortby||=pagename noheader||=1 exclude="-Category*" limit=1000 >>
 
-== Category ==
+== Catégorie ==
 
-This is a Category. Adding a link to this page puts the page under this Category.
-When [[Help:EditText|editing]] a page, use the {{/themes/default/images/ed_category.png|[C]}}
-button of the edit toolbar to insert a category into your page.
+Ceci est une catégorie. Ajouter un lien vers cette page la placer dans cette catégorie.
+Quand vous [[Aide:ÉditerLeContenu|modifiez]] une page, utilisez le bouton {{/themes/default/images/ed_category.png|[C]}}
+de la barre d'outils pour insérer une catégorie dans votre page.
 
-== Create a new Category ==
+== Créer une nouvelle catégorie ==
 
-To create a new category, enter its name (starting with “Category”) and hit button.
+Pour créer une nouvelle catégorie, entrez son nom (commençant par « Catégorie ») et cliquez sur le bouton.
 
-<?plugin-form CreatePage s=CategoryBla template=Template/Category ?>
+<?plugin-form CreatePage s=CatégorieTruc template=Template/Category ?>

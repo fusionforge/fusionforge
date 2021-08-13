@@ -17,8 +17,8 @@
 // +----------------------------------------------------------------------+
 //
 
-require_once 'PEAR.php';
-require_once 'Cache/Error.php';
+require_once 'lib/pear/PEAR.php';
+require_once 'lib/pear/Cache/Error.php';
 
 /**
 * Cache is a base class for cache implementations.
@@ -124,9 +124,9 @@ class Cache extends PEAR {
     * @param    string  Name of container class
     * @param    array   Array with container class options
     */
-    function Cache($container, $container_options = '')
+    function __construct($container, $container_options = '')
     {
-        $this->PEAR();
+        parent::__construct();
         $container = strtolower($container);
         $container_class = 'Cache_Container_' . $container;
         $container_classfile = 'Cache/Container/' . $container . '.php';

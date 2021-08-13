@@ -1,7 +1,7 @@
 <?php
-/*
- * Copyright 1999,2000,2001,2002,2004,2005,2006,2007 $ThePhpWikiProgrammingTeam
- * Copyright 2008-2010 Marc-Etienne Vargenau, Alcatel-Lucent
+/**
+ * Copyright © 1999,2000,2001,2002,2004,2005,2006,2007 $ThePhpWikiProgrammingTeam
+ * Copyright © 2008-2010 Marc-Etienne Vargenau, Alcatel-Lucent
  *
  * This file is part of PhpWiki.
  *
@@ -18,6 +18,9 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
  */
 
 require_once 'lib/mimelib.php';
@@ -63,8 +66,6 @@ function StartLoadDump(&$request, $title, $html = null)
  */
 function EndLoadDump(&$request)
 {
-    global $WikiTheme;
-
     $action = $request->getArg('action');
     if ($action == 'browse') // loading virgin
         $pagelink = WikiLink(HOME_PAGE);
@@ -98,36 +99,7 @@ function EndLoadDump(&$request)
 
     PrintXML(HTML::p(HTML::strong(_("Complete."))),
         HTML::p(fmt("Return to %s", $pagelink)));
-    // Ugly hack to get valid XHTML code
-    if (is_a($WikiTheme, 'WikiTheme_fusionforge')) {
-        echo "</div>\n";
-        echo "</div>\n";
-        echo "</main>\n";
-        echo "</div>\n";
-    } elseif (is_a($WikiTheme, 'WikiTheme_Sidebar')
-        or is_a($WikiTheme, 'WikiTheme_MonoBook')
-    ) {
-        echo "</div>\n";
-        echo "</div>\n";
-        echo "</div>\n";
-        echo "</div>\n";
-    } elseif (is_a($WikiTheme, 'WikiTheme_wikilens')) {
-        echo "</div>\n";
-        echo "</td>\n";
-        echo "</tr>\n";
-        echo "</table>\n";
-    } elseif (is_a($WikiTheme, 'WikiTheme_blog')) {
-        echo "</div>\n";
-        echo "</div>\n";
-    } elseif (is_a($WikiTheme, 'WikiTheme_Crao')
-        or is_a($WikiTheme, 'WikiTheme_Hawaiian')
-        or is_a($WikiTheme, 'WikiTheme_MacOSX')
-        or is_a($WikiTheme, 'WikiTheme_shamino_com')
-        or is_a($WikiTheme, 'WikiTheme_smaller')
-    ) {
-        echo "</div>\n";
-    }
-    echo "</body></html>\n";
+    close_tags(); // HACK
 }
 
 ////////////////////////////////////////////////////////////////
@@ -243,7 +215,7 @@ function MakeWikiZip(&$request)
     // We may need much memory for the dump
     ini_set("memory_limit", -1);
     $zip = new ZipArchive();
-    $tmpfilename = "/tmp/" . $zipname;
+    $tmpfilename = TEMP_DIR . '/' . $zipname;
     if (file_exists($tmpfilename)) {
         unlink ($tmpfilename);
     }
@@ -310,6 +282,7 @@ function MakeWikiZip(&$request)
     header('Content-Length: '.filesize($tmpfilename));
 
     readfile($tmpfilename);
+    unlink($tmpfilename);
     exit;
 }
 
@@ -319,18 +292,36 @@ function MakeWikiZip(&$request)
 function DumpToDir(&$request)
 {
     $directory = $request->getArg('directory');
-    if (empty($directory))
-        $directory = DEFAULT_DUMP_DIR; // See lib/plugin/WikiForm.php:87
-    if (empty($directory))
-        $request->finish(_("You must specify a directory to dump to"));
+    if (empty($directory)) {
+        $directory = DEFAULT_DUMP_DIR;
+    }
+    if (empty($directory)) {
+        $html = HTML::p(array('class' => 'error'),
+                        _("You must specify a directory to dump to"));
+        StartLoadDump($request, _("Dumping Pages"), $html);
+        EndLoadDump($request);
+        return;
+    }
 
     // see if we can access the directory the user wants us to use
     if (!file_exists($directory)) {
-        if (!mkdir($directory, 0755))
-            $request->finish(fmt("Cannot create directory “%s”", $directory));
-        else
+        if (!mkdir_p($directory, 0755)) {
+            $html = HTML::p(array('class' => 'error'),
+                            fmt("Cannot create directory “%s”", $directory));
+            StartLoadDump($request, _("Dumping Pages"), $html);
+            EndLoadDump($request);
+            return;
+        } else {
             $html = HTML::p(fmt("Created directory “%s” for the page dump...",
                 $directory));
+        }
+    } elseif (!is_writable($directory)) {
+        $html = HTML::p(array('class' => 'error'),
+                        fmt("Cannot use directory “%s”, it is not writable",
+                             $directory));
+        StartLoadDump($request, _("Dumping Pages"), $html);
+        EndLoadDump($request);
+        return;
     } else {
         $html = HTML::p(fmt("Using directory “%s”", $directory));
     }
@@ -368,7 +359,7 @@ function DumpToDir(&$request)
         flush();
 
         if (in_array($pagename, $excludeList)) {
-            PrintXML(_("Skipped."));
+            PrintXML(_("Skipped"));
             flush();
             continue;
         }
@@ -416,15 +407,16 @@ function mkdir_p($pathname, $permission = 0777)
         return mkdir($pathname, $permission);
     }
     $s = array_shift($arr);
-    $ok = TRUE;
+    $ok = true;
     foreach ($arr as $p) {
         $curr = "$s/$p";
         if (!is_dir($curr))
             $ok = mkdir($curr, $permission);
         $s = $curr;
-        if (!$ok) return FALSE;
+        if (!$ok)
+            return false;
     }
-    return TRUE;
+    return true;
 }
 
 /**
@@ -449,7 +441,7 @@ function DumpHtmlToDir(&$request)
 
     // See if we can access the directory the user wants us to use
     if (!file_exists($directory)) {
-        if (!mkdir($directory, 0755))
+        if (!mkdir_p($directory, 0755))
             $request->finish(fmt("Cannot create directory “%s”", $directory));
         else
             $html = HTML::p(fmt("Created directory “%s” for the page dump...",
@@ -589,12 +581,12 @@ function _DumpHtmlToDir($target, $page_iter, $exclude = false, $zipname='', $tmp
     // check if the dumped file will be accessible from outside
     $doc_root = $request->get("DOCUMENT_ROOT");
     if ($WikiTheme->DUMP_MODE == 'HTML') {
-        $ldir = NormalizeLocalFileName($directory);
-        $wikiroot = NormalizeLocalFileName('');
+        $ldir = normalizeLocalFileName($directory);
+        $wikiroot = normalizeLocalFileName('');
         if (string_starts_with($ldir, $doc_root)) {
             $link_prefix = substr($directory, strlen($doc_root)) . "/";
         } elseif (string_starts_with($ldir, $wikiroot)) {
-            $link_prefix = NormalizeWebFileName(substr($directory, strlen($wikiroot))) . "/";
+            $link_prefix = normalizeWebFileName(substr($directory, strlen($wikiroot))) . "/";
         } else {
             $prefix = '';
             if (isWindows()) {
@@ -647,7 +639,7 @@ function _DumpHtmlToDir($target, $page_iter, $exclude = false, $zipname='', $tmp
         }
         if (in_array($pagename, $excludeList)) {
             if (!$silent) {
-                PrintXML(_("Skipped."));
+                PrintXML(_("Skipped"));
                 flush();
             }
             continue;
@@ -682,7 +674,7 @@ function _DumpHtmlToDir($target, $page_iter, $exclude = false, $zipname='', $tmp
         $msg = HTML();
 
         $DUMP_MODE = $WikiTheme->DUMP_MODE;
-        $data = GeneratePageasXML(new Template('browse', $request, $args),
+        $data = GeneratePageAsXML(new Template('browse', $request, $args),
             $pagename, $current, $args);
         $WikiTheme->DUMP_MODE = $DUMP_MODE;
 
@@ -782,7 +774,7 @@ function _DumpHtmlToDir($target, $page_iter, $exclude = false, $zipname='', $tmp
                     }
                 } else {
                     $target = "images/" . basename($from);
-                    $zip->addSrcFile($target, $WikiTheme->_path . $from);
+                    $zip->addFile($from, $target);
                 }
             } elseif (!$silent) {
                 _copyMsg($from, _("... not found"));
@@ -817,7 +809,7 @@ function _DumpHtmlToDir($target, $page_iter, $exclude = false, $zipname='', $tmp
                     }
                 } else {
                     $target = "images/buttons/" . basename($from);
-                    $zip->addSrcFile($target, $WikiTheme->_path . $from);
+                    $zip->addFile($from, $target);
                 }
             } elseif (!$silent) {
                 _copyMsg($from, _("... not found"));
@@ -847,7 +839,7 @@ function _DumpHtmlToDir($target, $page_iter, $exclude = false, $zipname='', $tmp
                 } else {
                     //$attrib = array('is_ascii' => 0);
                     $target = basename($css_file);
-                    $zip->addSrcFile($target, $WikiTheme->_path . $from);
+                    $zip->addFile($from, $target);
                 }
             } elseif (!$silent) {
                 _copyMsg($from, _("... not found"));
@@ -865,6 +857,7 @@ function _DumpHtmlToDir($target, $page_iter, $exclude = false, $zipname='', $tmp
         header('Content-Length: '.filesize($tmpfilename));
 
         readfile($tmpfilename);
+        unlink($tmpfilename);
         exit;
     }
 
@@ -879,7 +872,7 @@ function _DumpHtmlToDir($target, $page_iter, $exclude = false, $zipname='', $tmp
                 fclose($fp);
             }
             if (!headers_sent()) {
-                Header('Content-Type: application/pdf');
+                header('Content-Type: application/pdf');
                 passthru($cmd);
             } else {
                 $tmpdir = getUploadFilePath();
@@ -1068,7 +1061,7 @@ function SavePage(&$request, &$pageinfo, $source)
     }
 
     if ($skip)
-        PrintXML(HTML::em(WikiLink($pagename)), $mesg);
+        PrintXML(HTML::p(HTML::em(WikiLink($pagename)), $mesg));
     else
         PrintXML($mesg);
     flush();
@@ -1105,7 +1098,7 @@ function RevertPage(&$request)
         // noreturn
     }
     if (!$request->getArg('verify')) {
-        $mesg->pushContent(HTML::p(fmt("Are you sure to revert %s to version $version?", WikiLink($pagename))),
+        $mesg->pushContent(HTML::p(fmt("Are you sure to revert %s to version %d?", WikiLink($pagename), $version)),
             HTML::form(array('action' => $request->getPostURL(),
                     'method' => 'post'),
                 HiddenInputs($request->getArgs(), false, array('verify')),
@@ -1157,7 +1150,7 @@ function _tryinsertInterWikiMap($content)
         $error_html = sprintf(" " . _("%s: not defined"), "INTERWIKI_MAP_FILE");
         $goback = true;
     }
-    $mapfile = FindFile(INTERWIKI_MAP_FILE, 1);
+    $mapfile = findFile(INTERWIKI_MAP_FILE, 1);
     if (!$goback && !file_exists($mapfile)) {
         $error_html = sprintf(" " . _("File “%s” not found."), INTERWIKI_MAP_FILE);
         $goback = true;
@@ -1432,7 +1425,7 @@ function LoadAny(&$request, $file_or_dir, $files = array(), $exclude = array())
         // with broken dirname or basename functions.
         // FIXME: windows uses \ and :
         if (is_integer(strpos($file_or_dir, "/"))) {
-            $newfile = FindFile($file_or_dir, true);
+            $newfile = findFile($file_or_dir, true);
             // Panic. urlencoded by the browser (e.g. San%20Diego => San Diego)
             if (!$newfile)
                 $file_or_dir = dirname($file_or_dir) . "/"
@@ -1441,6 +1434,10 @@ function LoadAny(&$request, $file_or_dir, $files = array(), $exclude = array())
             // This is probably just a file.
             $file_or_dir = rawurlencode($file_or_dir);
         }
+    }
+
+    if (!file_exists($file_or_dir)) {
+        $request->finish(fmt("Not existing source. Unable to load: %s", $file_or_dir));
     }
 
     $type = filetype($file_or_dir);
@@ -1474,8 +1471,29 @@ function LoadAny(&$request, $file_or_dir, $files = array(), $exclude = array())
 function LoadFileOrDir(&$request)
 {
     $source = $request->getArg('source');
-    $finder = new FileFinder;
+    $finder = new FileFinder();
     $source = $finder->slashifyPath($source);
+    if (!(defined('ALLOWED_LOAD'))) {
+       define('ALLOWED_LOAD', '/tmp');
+    }
+    $allowed_dirs = explode(':', ALLOWED_LOAD);
+    if ($source[0] == '/') { // Absolute path
+        $allowed = false;
+        foreach ($allowed_dirs as $path) {
+            if (string_starts_with($source, $path)) {
+                $allowed = true;
+            }
+        }
+        if (!$allowed) {
+            $html = HTML::p(array('class' => 'error'),
+                            _("Fatal PhpWiki Error")._(': ')
+                            .sprintf(_("Not in allowed list. Unable to load: %s"), $source));
+            GeneratePage($html, $request->_deducePagename());
+            flush();
+            return;
+        }
+    }
+
     StartLoadDump($request, sprintf(_("Loading “%s”"), $source));
     LoadAny($request, $source);
     EndLoadDump($request);
@@ -1504,9 +1522,9 @@ function SetupWiki(&$request)
 
     StartLoadDump($request, _("Loading up virgin wiki"));
 
-    $pgsrc = FindLocalizedFile(WIKI_PGSRC);
-    $default_pgsrc = FindFile(DEFAULT_WIKI_PGSRC);
-    $theme_pgsrc = FindFile("themes/".THEME."/".WIKI_PGSRC, true);
+    $pgsrc = findLocalizedFile(WIKI_PGSRC);
+    $default_pgsrc = findFile(DEFAULT_WIKI_PGSRC);
+    $theme_pgsrc = findFile("themes/".THEME."/".WIKI_PGSRC, true);
 
     $request->setArg('overwrite', true);
     // Load theme pgsrc, if it exists
@@ -1522,9 +1540,10 @@ function SetupWiki(&$request)
     $dbi =& $request->_dbi;
 
     // Ensure that all mandatory pages are loaded
-    $finder = new FileFinder;
+    $finder = new FileFinder();
 
-    $mandatory = array('SandBox',
+    $mandatory = array('InterWikiMap',
+                       'SandBox',
                        'Template/Category',
                        'Template/Talk',
                        'SpecialPages',
@@ -1546,10 +1565,10 @@ function SetupWiki(&$request)
         $epage = urlencode($page);
         if (!$dbi->isWikiPage($page)) {
             // translated version provided?
-            if ($lf = FindLocalizedFile($pgsrc . $finder->_pathsep . $epage, 1)) {
+            if ($lf = findLocalizedFile($pgsrc . $finder->_pathsep . $epage, 1)) {
                 LoadAny($request, $lf);
             } else { // load english version of required action page
-                LoadAny($request, FindFile(DEFAULT_WIKI_PGSRC . $finder->_pathsep . urlencode($f)));
+                LoadAny($request, findFile(DEFAULT_WIKI_PGSRC . $finder->_pathsep . urlencode($f)));
                 $page = $f;
             }
         }
@@ -1585,11 +1604,3 @@ function LoadPostFile(&$request)
 
     EndLoadDump($request);
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

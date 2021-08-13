@@ -1,4 +1,29 @@
 <?php
+/**
+ * Copyright © 2001 Jeff Dairiki
+ * Copyright © 2002 Lawrence Akka
+ * Copyright © 2004-2007 Reini Urban
+ *
+ * This file is part of PhpWiki.
+ *
+ * PhpWiki is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * PhpWiki is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
+ */
+
 require_once 'lib/WikiDB/backend.php';
 
 /**
@@ -6,10 +31,11 @@ require_once 'lib/WikiDB/backend.php';
  *
  * This iterator will work with any backends.
  */
+
 class WikiDB_backend_dumb_MostRecentIter
     extends WikiDB_backend_iterator
 {
-    function __construct(&$backend, &$pages, $params)
+    function __construct($backend, $pages, $params)
     {
         $limit = false;
         extract($params);
@@ -81,11 +107,3 @@ function WikiDB_backend_dumb_MostRecentIter_sortf_rev($a, $b)
     $bcreated = $b['versiondata']['mtime'];
     return $acreated - $bcreated;
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

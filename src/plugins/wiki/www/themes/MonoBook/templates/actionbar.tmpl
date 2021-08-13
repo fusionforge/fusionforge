@@ -1,18 +1,18 @@
 <?php
-  //$p = $WikiTheme->tooltipAccessKeyPrefix();
   $dbh = $request->getDbh();
   $isAdmin = $user->isAdmin();
   $pagename = $page->getName();
   $isActionPage = isActionPage($pagename);
   $isBrowse = $request->getArg('action') == 'browse';
 ?>
+<nav role="navigation" aria-label="<?php echo _("Actions Menu") ?>">
 <div class="portlet" id="p-cactions">
   <ul>
     <?php if (!string_ends_with($pagename, '/'._("Discussion"))) { ?>
       <?php $talk = new WikiPageName('Talk:'.$pagename); ?>
       <?php echo ActionButton(array(),
                $isActionPage ? _("Action Page") : _("Article"),
-               $talk->getParent(), array('class'=>$isBrowse ? "selected" : "", 'title' => "View the page [alt-c]")) ?>
+               $talk->getParent(), array('class'=>$isBrowse ? "selected" : "", 'title' => "View the page")) ?>
       <?php if (!$isActionPage) { ?>
         <?php if ($dbh->isWikiPage($talk->getName())) { ?>
       <?php echo ActionButton(array('action'=>'browse'), _("Discussion"), $talk->getName()) ?>
@@ -24,19 +24,19 @@
       <?php } ?>
     <?php } else {
       $talk = new WikiPageName($pagename); ?>
-      <?php echo ActionButton(array(),$isActionPage ? _("Action Page") : _("Article"), $talk->getParent(), array('title' => "View the page [alt-c]")) ?>
-      <?php echo ActionButton(array(),_("Discussion"), $talk->getName(), array('class'=>$isBrowse ? "selected" : "")) ?>
+      <?php echo ActionButton(array(),$isActionPage ? _("Action Page") : _("Article"), $talk->getParent(), array('title' => "View the page")) ?>
+      <?php echo ActionButton(array(), _("Discussion"), $talk->getName(), array('class'=>$isBrowse ? "selected" : "")) ?>
     <?php } ?>
     <?php if (($isAdmin or mayAccessPage('edit', $pagename)) and $revision) { ?>
     <?php echo ActionButton("edit", $dbh->isWikiPage($page->getName()) ? ($revision->isCurrent() ? _("Edit") : _("Edit Old Revision")) : _("Create Page"), false,
-             array('id' => 'btn-edit', 'title' => "You can edit this page. Please use the preview button before saving. [alt-e]")) ?>
+             array('id' => 'btn-edit', 'title' => "You can edit this page. Please use the preview button before saving.")) ?>
     <?php } else { ?>
       <?php echo ActionButton("viewsource", _("View Source")) ?>
     <?php } ?>
 
     <?php if ($dbh->isWikiPage($page->getName())) { ?>
 
-      <?php echo ActionButton(_("PageHistory"),_("History"),false,array('title'=>"Past versions of this page. [alt-h]")) ?>
+      <?php echo ActionButton(__("PageHistory"), _("History"), false, array('title'=>"Past versions of this page.")) ?>
 
       <?php if (!empty($revision) and ($isAdmin or mayAccessPage('purge', $pagename))) { ?>
         <?php echo ActionButton("purge") ?>
@@ -51,10 +51,12 @@
 
     <?php if ( $user->isSignedIn() ) { ?>
       <?php echo ActionButton(_("WatchPage"), _("Watch"), false,
-               array('title'=>"Add/Remove this to/from the list of pages you're monitoring for changes [alt-l]")) ?>
+               array('title'=>"Add/Remove this to/from the list of pages you're monitoring for changes")) ?>
     <?php } ?>
   </ul>
 </div>
+</nav>
+<nav role="navigation" aria-label="<?php echo _("Special Actions Menu") ?>">
 <div class="portlet" id="p-tbx">
   <h2><?php echo _("Special Actions") ?></h2>
   <div class="pBody">
@@ -70,10 +72,10 @@
       <?php echo ActionButton('remove') ?>
      <?php } ?>
     <?php } ?>
-    <?php echo ActionButton(array('action'=>_("PageInfo")), _("Page info"), $pagename) ?>
-    <?php echo ActionButton(array('action'=>_("AuthorHistory")), _("Author history"), $pagename) ?>
+    <?php echo ActionButton(array('action'=>__("PageInfo")), _("Page Info"), $pagename) ?>
+    <?php echo ActionButton(array('action'=>__("AuthorHistory")), _("Author history"), $pagename) ?>
     <?php echo ActionButton("diff") ?>
-    <?php echo ActionButton(array('action'=>_("PageDump")), _("Page dump"), $pagename) ?>
+    <?php echo ActionButton(array('action'=>__("PageDump")), _("Page Dump"), $pagename) ?>
     <?php if (DEBUG and USECACHE) {
       $PurgeCache = ActionButton(array('nocache' => 'purge'),
                      _("Purge HTML cache"), $pagename);
@@ -83,3 +85,4 @@
   </ul>
   </div>
 </div>
+</nav>

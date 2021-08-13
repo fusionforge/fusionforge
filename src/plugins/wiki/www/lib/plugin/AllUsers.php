@@ -1,7 +1,6 @@
 <?php
-
-/*
- * Copyright 2002,2004 $ThePhpWikiProgrammingTeam
+/**
+ * Copyright © 2002,2004 $ThePhpWikiProgrammingTeam
  *
  * This file is part of PhpWiki.
  *
@@ -18,6 +17,9 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
  */
 
 require_once 'lib/PageList.php';
@@ -30,6 +32,7 @@ require_once 'lib/PageList.php';
  * users with db prefs and
  * externally authenticated users with a db users table, if auth_user_exists is defined.
  */
+
 class WikiPlugin_AllUsers
     extends WikiPlugin
 {
@@ -75,6 +78,14 @@ class WikiPlugin_AllUsers
 
         extract($args);
 
+        if (($include_empty == '0') || ($include_empty == 'false')) {
+            $include_empty = false;
+        } elseif (($include_empty == '1') || ($include_empty == 'true')) {
+            $include_empty = true;
+        } else {
+            return $this->error(sprintf(_("Argument '%s' must be a boolean"), "include_empty"));
+        }
+
         $group = $request->getGroup();
         if (method_exists($group, '_allUsers')) {
             $allusers = $group->_allUsers();
@@ -100,11 +111,3 @@ class WikiPlugin_AllUsers
         return $pagelist;
     }
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

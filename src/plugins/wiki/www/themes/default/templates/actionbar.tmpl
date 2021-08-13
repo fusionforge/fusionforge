@@ -1,4 +1,5 @@
 <?php if (!$WikiTheme->DUMP_MODE) { ?>
+<nav role="navigation" aria-label="<?php echo _("Actions Menu") ?>">
 <table class="fullwidth">
 <tr class="baseline">
   <td>
@@ -19,16 +20,16 @@
       <?php echo $SEP?><?php echo Button('rename') ?>
     <?php }} ?>
     <?php if ($revision and ($user->isAdmin() or mayAccessPage('remove', $page->getName()))) { ?>
-      <?php echo $SEP?><?php echo Button('revert',_("Revert"), $revision->isCurrent() ? $page->GetRevisionBefore() : $revision) ?>
+      <?php echo $SEP?><?php echo Button('revert', _("Revert"), $revision->isCurrent() ? $page->GetRevisionBefore() : $revision) ?>
       <?php echo $SEP?><?php echo Button('remove') ?>
     <?php } ?>
-    <?php echo $SEP?><?php echo Button("PageHistory", _("PageHistory")) ?>
+    <?php echo $SEP?><?php echo Button(__("PageHistory"), _("PageHistory")) ?>
     <?php echo $SEP?><?php echo Button("diff") ?>
-    <?php echo $SEP?><?php echo Button("PageInfo", _("PageInfo")) ?>
+    <?php echo $SEP?><?php echo Button(__("PageInfo"), _("Page Info")) ?>
 <?php if ((DEBUG and $request->getArg('action') == 'browse') || $user->isAdmin()) { ?>
-    <!-- Buttons really only for debugging -->
-    <?php echo $SEP?><?php echo Button("DebugInfo", _("DebugInfo")) ?>
-    <?php echo $SEP?><?php echo Button("PageDump", _("PageDump")) ?>
+    <?php // Buttons really only for debugging ?>
+    <?php echo $SEP?><?php echo Button(__("DebugBackendInfo"), _("DebugBackendInfo")) ?>
+    <?php echo $SEP?><?php echo Button(__("PageDump"), _("Page Dump")) ?>
 <?php
     if (DEBUG & _DEBUG_SQL and USECACHE) {
       $PurgeCache = Button(array('nocache' => 'purge'),
@@ -37,10 +38,10 @@
 ?>
       <?php echo $SEP?><?php echo $PurgeCache ?>
 <?php } ?>
-    <!-- End debugging buttons -->
+    <?php // End debugging buttons ?>
 <?php } ?>
 <?php if (defined('USE_EXTERNAL_HTML2PDF') and USE_EXTERNAL_HTML2PDF) { ?>
-      <?php echo $SEP?><?php echo Button("pdf","Pdf",'wikiclear',array('id'=>'btn-pdf')) ?>
+      <?php echo $SEP?><?php echo Button("pdf", "Pdf", 'wikiclear', array('id'=>'btn-pdf')) ?>
 <?php } ?>
   </div>
   </td>
@@ -51,4 +52,5 @@
 <?php } ?>
 </tr>
 </table>
+</nav>
 <?php } ?>

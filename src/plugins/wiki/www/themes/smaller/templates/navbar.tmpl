@@ -1,23 +1,25 @@
-<!-- The top navigation/search bar -->
+<nav role="navigation" aria-label="<?php echo _("Main Menu") ?>">
+<?php // The top navigation/search bar ?>
 <form action="<?php echo WikiURL(_("TitleSearch"))?>"
       method="get" accept-charset="UTF-8">
   <div id="navbuttons">
-   <?php echo WikiLink(_("RecentChanges"), "","News") ?>
-   <?php echo $SEP?><?php echo WikiLink(_("FindPage"), "","Search:") ?>
+   <?php echo WikiLink(__("RecentChanges"), "", _("News")) ?>
+   <?php echo $SEP?><?php echo WikiLink(__("FindPage"), "", _("Search")._(":")) ?>
    <input type="hidden" name="auto_redirect" value="1" />
       <input type="text"  name="s" size="12" maxlength="256"
              title='<?php echo _("Quick Search")?>'
              onmouseover="window.status='<?php echo _("Quick Search")?>'; return true;"
              onmouseout="window.status=''; return true;" />
     <?php if (!empty($revision)) { ?>
-     <?php echo $SEP?><?php echo Button(array('action'=>_("LikePages")),_("LikePages"),$page->getName()) ?>
-     <?php echo $SEP?><?php echo Button(array('action'=>_("BackLinks")), _("BackLinks"),$page->getName()) ?>
+     <?php echo $SEP?><?php echo Button(array('action'=>__("LikePages")), _("LikePages"), $page->getName()) ?>
+     <?php echo $SEP?><?php echo Button(array('action'=>__("BackLinks")), _("BackLinks"), $page->getName()) ?>
     <?php } ?>
     <?php if (!empty($user) && $user->isAdmin()) { ?>
-     <?php echo $SEP?><?php echo WikiLink(_("PhpWikiAdministration"), "","Admin") ?>
+     <?php echo $SEP?><?php echo WikiLink(__("PhpWikiAdministration"), "", _("Admin")) ?>
     <?php } ?>
     <?php if (!empty($user) && $user->isSignedIn()) { ?>
-     <?php echo $SEP?><?php echo WikiLink(_("UserPreferences"), "","Preferences") ?>
+     <?php echo $SEP?><?php echo WikiLink(__("UserPreferences"), "", _("Preferences")) ?>
     <?php } ?>
   </div>
 </form>
+</nav>

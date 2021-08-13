@@ -1,12 +1,12 @@
-Date: Mon, 29 Jun 2015 12:04:23 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Thu, 11 Apr 2019 16:07:57 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=CarteInterWiki;
   pagetype=interwikimap;
-  flags=PAGE_LOCKED;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE
   charset=UTF-8
 Content-Transfer-Encoding: binary
 
-The **~InterWiki map** used on this wiki is listed below.  The map is taken
-from the text in the verbatim block below.  (But this only works if
-this page is locked.)
+La **carte ~InterWiki** utilisée par ce wiki est listée ci-dessous. La carte est récupérée
+du texte dans le bloc verbatim ci-dessous. (Mais cela ne fonctionne que si
+cette page est verrouillée.)

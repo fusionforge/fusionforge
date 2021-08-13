@@ -1,7 +1,6 @@
 <?php
-
 /**
- * Copyright 1999,2000,2001,2002,2005 $ThePhpWikiProgrammingTeam
+ * Copyright © 1999,2000,2001,2002,2005 $ThePhpWikiProgrammingTeam
  *
  * This file is part of PhpWiki.
  *
@@ -18,6 +17,9 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
  */
 
 require_once 'lib/PageList.php';
@@ -26,6 +28,7 @@ require_once 'lib/PageList.php';
  * With 1.3.11 the "pages" argument was renamed to "numpages".
  * action=upgrade should deal with pages containing RandomPage modified earlier than 2005-01-24
  */
+
 class WikiPlugin_RandomPage
     extends WikiPlugin
 {
@@ -59,6 +62,22 @@ class WikiPlugin_RandomPage
 
         $args = $this->getArgs($argstr, $request);
         extract($args);
+
+        if (($redirect == '0') || ($redirect == 'false')) {
+            $redirect = false;
+        } elseif (($redirect == '1') || ($redirect == 'true')) {
+            $redirect = true;
+        } else {
+            return $this->error(sprintf(_("Argument '%s' must be a boolean"), "redirect"));
+        }
+
+        if (($hidename == '0') || ($hidename == 'false')) {
+            $hidename = false;
+        } elseif (($hidename == '1') || ($hidename == 'true')) {
+            $hidename = true;
+        } else {
+            return $this->error(sprintf(_("Argument '%s' must be a boolean"), "hidename"));
+        }
 
         // Redirect would break HTML dump
         if ($request->getArg('action') != 'browse') {
@@ -112,11 +131,3 @@ class WikiPlugin_RandomPage
         return implode(",", $exclude);
     }
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

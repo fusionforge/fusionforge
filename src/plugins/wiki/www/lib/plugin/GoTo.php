@@ -1,7 +1,6 @@
 <?php
-
 /*
- * Copyright (C) 2004 $ThePhpWikiProgrammingTeam
+ * Copyright © 2004 $ThePhpWikiProgrammingTeam
  *
  * This file is part of PhpWiki.
  *
@@ -18,6 +17,9 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
  */
 
 /**
@@ -26,7 +28,7 @@
  *  that page; if not, edit (create) that page.
  *  Note: pagenames are absolute, not relative to the actual subpage.
  *
- *  Usage: <<GoTo >>
+ *  Usage: <<GoTo size=32>>
  * @author: Michael van Dam
  */
 
@@ -81,7 +83,7 @@ class WikiPlugin_GoTo
             'size' => $size,
             'name' => 'goto[target]'));
 
-        $button = Button('submit:goto[go]', _("Go"), false);
+        $button = Button('submit:goto[go]', _("Go"));
 
         $form->pushContent($textfield, $button);
 
@@ -89,11 +91,3 @@ class WikiPlugin_GoTo
 
     }
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

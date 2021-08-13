@@ -1,5 +1,5 @@
-Date: Mon, 29 Jun 2015 12:04:28 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Tue, 21 Apr 2020 14:21:37 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FPhpHighlightPlugin;
   flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
@@ -7,7 +7,7 @@ Content-Type: application/x-phpwiki;
 Content-Transfer-Encoding: binary
 
 The **~PhpHighlight** [[Help:WikiPlugin|plugin]] pretty-prints PHP code using the
-php-function:highlight-string.
+[[php-function:highlight-string]].
 
 == Usage ==
 
@@ -24,16 +24,15 @@ code to be highlighted
 
 Depending on the ##wrap## option, then the plugin will take care of
 adding ##<?php## and ##?>## to the code before passing it to
-php-function:highlight-string. If the PHP delimiters were added, then
-the plugin removes them again from the highlighted string, before
-presenting it.
+[[php-function:highlight-string]]. If the PHP delimiters were added, then
+the plugin removes them again from the highlighted string, before presenting it.
 
 == Options ==
 
 === Automatic Wrapping ===
 
 If you don't want the plugin to automatically wrap the source code
-in ##<?php## and ##?>##, then set ##wrap## to ##0##. The default value is ##1##
+in ##<?php## and ##?>##, then set ##wrap## to ##0##. The default value is ##1##,
 which means that the plugin takes care of adding and removing ##<?php## and ##?>## automatically.
 
 If you set ##wrap## to ##0##, then you'll be able to mix PHP code with
@@ -49,7 +48,7 @@ hexadecimal color or
 in lowercase, such as ##'#0f0344'## or ##blue##. You can set the
 following options: ##string##, ##comment##, ##keyword##, ##bg##, ##default##, and ##html##.
 
-**Note:** ##bg## no longer exists in PHP 5.4.
+**Note:** ##bg## no longer exists in PHP >= 5.4.
 
 == Examples ==
 

@@ -1,5 +1,5 @@
-Date: Mon, 29 Jun 2015 12:04:28 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Sat, 20 Feb 2021 11:52:37 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FCalendarListPlugin;
   flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
@@ -11,9 +11,6 @@ It was written for those who use a wiki as a personal information manager.
 
 Just click any date in the calendar, edit the for that date, then come back to
 this page. The event should be listed below the calendar.
-
-Honors now year + month args as start base - together with Calendar navigation.
-The behaviour before 2007 with last/next_n_days was to start now.
 
 == Usage ==
 

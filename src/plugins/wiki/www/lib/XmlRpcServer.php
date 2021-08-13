@@ -1,10 +1,8 @@
 <?php
-
-/* Copyright (C) 2002, Lawrence Akka <lakka@users.sourceforge.net>
- * Copyright (C) 2004,2005,2006,2007 $ThePhpWikiProgrammingTeam
+/**
+ * Copyright © 2002, Lawrence Akka <lakka@users.sourceforge.net>
+ * Copyright © 2004,2005,2006,2007 $ThePhpWikiProgrammingTeam
  *
- * LICENCE
- * =======
  * This file is part of PhpWiki.
  *
  * PhpWiki is free software; you can redistribute it and/or modify
@@ -21,6 +19,11 @@
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
+ */
+
+/*
  * LIBRARY USED - POSSIBLE PROBLEMS
  * ================================
  *
@@ -696,7 +699,7 @@ function listPlugins($params)
     $plugin_dir = 'lib/plugin';
     if (defined('PHPWIKI_DIR'))
         $plugin_dir = PHPWIKI_DIR . "/$plugin_dir";
-    $pd = new fileSet($plugin_dir, '*.php');
+    $pd = new FileSet($plugin_dir, '*.php');
     $plugins = $pd->getFiles();
     unset($pd);
     sort($plugins);
@@ -706,7 +709,7 @@ function listPlugins($params)
         $w = new WikiPluginLoader();
         foreach ($plugins as $plugin) {
             $pluginName = str_replace(".php", "", $plugin);
-            $p = $w->getPlugin($pluginName, false); // second arg?
+            $p = $w->getPlugin($pluginName);
             // trap php files which aren't WikiPlugin~s: wikiplugin + wikiplugin_cached only
             if (strtolower(substr(get_parent_class($p), 0, 10)) == 'wikiplugin') {
                 $RetArray[] = short_string($pluginName);
@@ -737,7 +740,7 @@ function getPluginSynopsis($params)
     require_once 'lib/WikiPlugin.php';
     $w = new WikiPluginLoader();
     $synopsis = '';
-    $p = $w->getPlugin($pluginName, false); // second arg?
+    $p = $w->getPlugin($pluginName);
     // trap php files which aren't WikiPlugin~s: wikiplugin + wikiplugin_cached only
     if (strtolower(substr(get_parent_class($p), 0, 10)) == 'wikiplugin') {
         $plugin_args = '';
@@ -779,7 +782,7 @@ function callPlugin($params)
     $basepage = ''; //$pluginName;
     require_once 'lib/WikiPlugin.php';
     $w = new WikiPluginLoader();
-    $p = $w->getPlugin($pluginName, false); // second arg?
+    $p = $w->getPlugin($pluginName);
     $pagelist = $p->run($dbi, $plugin_args, $request, $basepage);
     $list = array();
     if (is_object($pagelist) and is_a($pagelist, 'PageList')) {
@@ -944,7 +947,7 @@ class XmlRpcServer extends xmlrpc_server
                 $dmap['wiki.' . $name] = $val;
         }
 
-        $this->xmlrpc_server($dmap, 0 /* delay service*/);
+        parent::__construct($dmap, 0 /* delay service*/);
     }
 
     function service()
@@ -966,11 +969,3 @@ class XmlRpcServer extends xmlrpc_server
         return true;
     }
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

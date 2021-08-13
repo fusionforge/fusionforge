@@ -1,14 +1,14 @@
-Date: Mon, 29 Jun 2015 12:04:28 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Thu, 13 Oct 2016 15:09:28 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=PageHistory;
   flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
   charset=UTF-8
 Content-Transfer-Encoding: binary
 
-This wiki stores **all** changes as new versions. Deleting a page just empties the content, all previous versions are not lost.
+This wiki stores **all** changes as new versions.
 
-Click on two checkbox to see the **diff**, the changes between those two versions.
+Click on two checkboxes to see the **diff**, the changes between those two versions.
 
 <<PageHistory>>
 

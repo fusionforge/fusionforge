@@ -1,5 +1,29 @@
 <?php
 /**
+ * Copyright © 2010 Reini Urban
+ * Copyright © 2014 Marc-Etienne Vargenau, Alcatel-Lucent
+ *
+ * This file is part of PhpWiki.
+ *
+ * PhpWiki is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * PhpWiki is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
+ */
+
+/**
  * Code for writing the HTML subset of XML.
  * @author: Jeff Dairiki
  *
@@ -70,12 +94,10 @@ class HtmlElement extends XmlElement
     /** Add a "tooltip" to an element.
      *
      * @param string $tooltip_text The tooltip text.
-     * @param string $accesskey.
      */
-    function addTooltip($tooltip_text, $accesskey = '')
+    function addTooltip($tooltip_text)
     {
         $this->setAttr('title', $tooltip_text);
-        if ($accesskey) $this->setAccesskey($accesskey);
 
         // FIXME: this should be initialized from title by an onLoad() function.
         //        (though, that may not be possible.)
@@ -83,28 +105,6 @@ class HtmlElement extends XmlElement
             sprintf('window.status="%s"; return true;',
                 addslashes($tooltip_text)));
         $this->setAttr('onmouseout', "window.status='';return true;");
-    }
-
-    function setAccesskey($key)
-    {
-        global $WikiTheme;
-        if (strlen($key) != 1) return;
-        $this->setAttr("accesskey", $key);
-
-        if (!empty($this->_attr['title'])) {
-            if (preg_match("/\[(alt-)?(.)\]$/", $this->_attr['title'], $m)) {
-                $this->_attr['title'] = preg_replace
-                ("/\[(alt-)?(.)\]$/",
-                    "[" . $WikiTheme->tooltipAccessKeyPrefix() . "-\\2]",
-                    $this->_attr['title']);
-            } else {
-                $this->_attr['title'] .=
-                    " [" . $WikiTheme->tooltipAccessKeyPrefix() . "-$key]";
-            }
-        } else {
-            $this->_attr['title'] =
-                "[" . $WikiTheme->tooltipAccessKeyPrefix() . "-$key]";
-        }
     }
 
     function emptyTag()
@@ -701,11 +701,3 @@ function IfJavaScript($if_content = false, $else_content = false)
     }
     return HTML($html);
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

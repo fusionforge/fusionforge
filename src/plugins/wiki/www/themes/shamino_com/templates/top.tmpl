@@ -1,28 +1,29 @@
-<!-- The logo -->
+<?php // The logo ?>
 <div id="logo"><a class="wikilink"
     href="<?php echo WikiURL(HOME_PAGE)?>"
     ><img src="<?php echo $WikiTheme->getImageURL('logo')?>" id="logo-img"
           alt="<?php echo fmt(_("%s: %s"), WIKI_NAME, HOME_PAGE) ?>"
           class="align-right" /></a></div>
-<!-- The top navigation/search bar -->
+<?php // The top navigation/search bar ?>
+<nav role="navigation" aria-label="<?php echo _("Main Menu") ?>">
 <div class="wikinavbar">
 <a class="wikilink" href="<?php echo WikiURL(HOME_PAGE)?>">
 <?php echo WIKI_NAME ?></a> -
-<!-- Wiki description here -->
-<!-- Page title -->
+<?php // Wiki description here ?>
+<?php // Page title ?>
 <?php echo $HEADER ?>
 <?php if (empty($GLOBALS['HIDE_TOOLBARS'])) { ?>
  - <form action="<?php echo WikiURL(_("TitleSearch"))?>"
       method="get" accept-charset="UTF-8" style="display: inline">
    <a class="wikilink" href="<?php echo WikiURL(_("RecentChanges"))?>"><?php echo _("RecentChanges")?></a>
-   - <a class="wikilink" href="<?php echo WikiURL(_("FindPage"))?>"><?php echo _("FindPage")?>:</a>
+   - <a class="wikilink" href="<?php echo WikiURL(_("FindPage"))?>"><?php echo _("FindPage")._(':')?></a>
    <input type="hidden" name="auto_redirect" value="1" />
       <input type="text"  name="s" size="12" maxlength="256"
              title='<?php echo _("Quick Search")?>'
              onmouseover="window.status='<?php echo _("Quick Search")?>'; return true;"
              onmouseout="window.status=''; return true;" />
     <?php if (!empty($user) && $user->isSignedIn()) { ?>
-     - <a class="wikilink" href="<?php echo WikiURL(_("UserPreferences"))?>"><?php echo _("Preferences")?>:</a>
+     - <a class="wikilink" href="<?php echo WikiURL(_("UserPreferences"))?>"><?php echo _("Preferences")._(':')?></a>
     <?php } // isSignedIn ?>
   </form>
   <?php if (empty($NOSIGNIN)) { ?>
@@ -30,3 +31,4 @@
   <?php } // $NOSIGNIN?>
 </div>
 <?php } // HIDE_TOOLBARS ?>
+</nav>

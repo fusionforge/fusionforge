@@ -1,12 +1,6 @@
 <?php
-
 /**
- * HtmlParser Class: Conversion HTML => wikimarkup
- * Requires XmlParser, XmlElement and the expat (or now the libxml) library. This is all in core.
- */
-
-/*
- * Copyright (C) 2004 Reini Urban
+ * Copyright © 2004 Reini Urban
  *
  * This file is part of PhpWiki.
  *
@@ -23,6 +17,14 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
+ */
+
+/**
+ * HtmlParser Class: Conversion HTML => wikimarkup
+ * Requires PhpWikiXmlParser, XmlElement and the expat (or now the libxml) library. This is all in core.
  */
 
 /**
@@ -38,10 +40,10 @@
  */
 
 // RssParser contains the XML (expat) and url-grabber methods
-require_once 'lib/XmlParser.php';
+require_once 'lib/PhpWikiXmlParser.php';
 
 class HtmlParser
-    extends XmlParser
+    extends PhpWikiXmlParser
 {
     public $dialect, $_handlers, $root;
 
@@ -49,13 +51,13 @@ class HtmlParser
     {
         $this->dialect = new HtmlParser_PhpWiki();
         $this->_handlers =& $this->dialect->_handlers;
-        $this->XmlParser($encoding);
+        $this->PhpWikiXmlParser($encoding);
         xml_parser_set_option($this->_parser, XML_OPTION_CASE_FOLDING, 0);
         xml_parser_set_option($this->_parser, XML_OPTION_SKIP_WHITE, 1);
     }
 
     // The three callbacks, called on walking through the HTML tree.
-    // No extensions needed from XmlParser.
+    // No extensions needed from PhpWikiXmlParser.
     /*
     function tag_open($parser, $name, $attrs='') {
     }
@@ -483,11 +485,3 @@ class HtmlParser_PhpWiki
         return "[ $file $attr_str ]";
     }
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

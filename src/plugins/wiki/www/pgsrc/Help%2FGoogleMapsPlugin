@@ -1,5 +1,5 @@
-Date: Mon, 29 Jun 2015 12:04:28 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Tue, 10 Aug 2021 10:45:37 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FGoogleMapsPlugin;
   flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
@@ -79,16 +79,6 @@ Then enter the key in {{{config/config.ini}}} under {{{GOOGLE_LICENSE_KEY=}}}
           height=400px
 >>
 }}}
-
-<<GoogleMaps
-          Latitude=53.053
-          Longitude=7.803
-          ZoomFactor=10
-          Marker=true
-          MapType=Hybrid
-          width=500px
-          height=400px
->>
 
 == Author ==
 * [[Help:Reini Urban|Reini Urban]]

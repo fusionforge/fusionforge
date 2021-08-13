@@ -1,8 +1,7 @@
 <?php
-
 /**
- * Copyright 1999, 2000, 2001, 2002 $ThePhpWikiProgrammingTeam
- * Copyright 2009 Marc-Etienne Vargenau, Alcatel-Lucent
+ * Copyright © 1999, 2000, 2001, 2002 $ThePhpWikiProgrammingTeam
+ * Copyright © 2009 Marc-Etienne Vargenau, Alcatel-Lucent
  *
  * This file is part of PhpWiki.
  *
@@ -19,6 +18,9 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
  */
 
 /**
@@ -128,8 +130,7 @@ class WikiPlugin_PhpHighlight
             } elseif (($length < $MAXLEN + 1) && in_array($color, $html4colors)) {
                 // stop checking, ok to go
             } else {
-                trigger_error(sprintf(_("Invalid color: %s"),
-                    $color), E_USER_NOTICE);
+                trigger_error(sprintf(_("Invalid color: %s"), $color));
                 // FIXME: also change color to something valid like "black" or ini_get("highlight.xxx")
             }
         }
@@ -162,11 +163,3 @@ class WikiPlugin_PhpHighlight
     }
 
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

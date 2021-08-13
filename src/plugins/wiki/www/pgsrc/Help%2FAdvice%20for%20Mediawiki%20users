@@ -1,5 +1,5 @@
-Date: Mon, 29 Jun 2015 12:04:28 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Fri, 26 Apr 2019 14:50:46 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FAdvice%20for%20Mediawiki%20users;
   flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
@@ -16,14 +16,14 @@ Here are some differences between Mediawiki and Phpwiki:
 * Italics are ##//## (but you can also use ##''## like in Wikipedia)
 * Bold is ##~*~*## (you //cannot use// ##'''## like in Wikipedia)
 * Line break is ##~\~\## in Wikicreole, ##~<br />## in Mediawiki
-* There is **no automatic capitalisation** of first character of page name. Pages *<samp>~[~[foo~]~]</samp>* and *<samp>~[~[Foo~]~]</samp>* are different.
-* A space in a page name in not equivalent to an underscore. Pages *<samp>~[~[foo bar~]~]</samp>* and *<samp>~[~[foo_bar~]~]</samp>* are different. We recommend to use a space in the page names.
-* Many things that are built-in in Mediawiki use plug-ins in Phpwiki (table of contents, redirections, back links, etc.).
+* There is **no automatic capitalisation** of first character of page name. Pages ##~[~[foo~]~]## and ##~[~[Foo~]~]## are different.
+* A space in a page name in not equivalent to an underscore. Pages ##~[~[foo bar~]~]## and ##~[~[foo_bar~]~]## are different. We recommend to use a space in the page names.
+* Many things that are built-in in Mediawiki use plugins in Phpwiki (table of contents, redirections, back links, etc.).
 * Redirections are less sophisticated in Phpwiki (e.g. backlinks do not show redirected pages)
 
 == Tables ==
 
-You can use in ACOS Forge the [[Help:MediawikiTablePlugin|Mediawiki table syntax]].
+You can use the [[Help:MediawikiTablePlugin|Mediawiki table syntax]].
 
 <noinclude>
 ----

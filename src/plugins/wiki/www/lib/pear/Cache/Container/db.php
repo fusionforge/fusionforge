@@ -19,8 +19,8 @@
 //
 // $Id: db.php 178288 2005-01-26 09:42:30Z dufuz $
 
-require_once 'DB.php';
-require_once 'Cache/Container.php';
+require_once 'lib/pear/DB.php';
+require_once 'lib/pear/Cache/Container.php';
 
 /**
 * PEAR/DB Cache Container.
@@ -79,7 +79,7 @@ class Cache_Container_db extends Cache_Container
     */
     var $db;
 
-    function Cache_Container_db($options)
+    function __construct($options)
     {
         if (!is_array($options) || !isset($options['dsn'])) {
             return new Cache_Error('No dsn specified!', __FILE__, __LINE__);

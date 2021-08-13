@@ -1,7 +1,6 @@
 <?php
-
-/*
- * Copyright 1999-2002,2004,2005,2007,2009 $ThePhpWikiProgrammingTeam
+/**
+ * Copyright © 1999-2002,2004,2005,2007,2009 $ThePhpWikiProgrammingTeam
  *
  * This file is part of PhpWiki.
  *
@@ -18,6 +17,9 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
  */
 
 require_once 'lib/TextSearchQuery.php';
@@ -75,6 +77,38 @@ class WikiPlugin_FullTextSearch
                            _("You must enter a search term."));
         }
         extract($args);
+
+        if (($hilight == '0') || ($hilight == 'false')) {
+            $hilight = false;
+        } elseif (($hilight == '1') || ($hilight == 'true')) {
+            $hilight = true;
+        } else {
+            return $this->error(sprintf(_("Argument '%s' must be a boolean"), "hilight"));
+        }
+
+        if (($case_exact == '0') || ($case_exact == 'false')) {
+            $case_exact = false;
+        } elseif (($case_exact == '1') || ($case_exact == 'true')) {
+            $case_exact = true;
+        } else {
+            return $this->error(sprintf(_("Argument '%s' must be a boolean"), "case_exact"));
+        }
+
+        if (($noheader == '0') || ($noheader == 'false')) {
+            $noheader = false;
+        } elseif (($noheader == '1') || ($noheader == 'true')) {
+            $noheader = true;
+        } else {
+            return $this->error(sprintf(_("Argument '%s' must be a boolean"), "noheader"));
+        }
+
+        if (($quiet == '0') || ($quiet == 'false')) {
+            $quiet = false;
+        } elseif (($quiet == '1') || ($quiet == 'true')) {
+            $quiet = true;
+        } else {
+            return $this->error(sprintf(_("Argument '%s' must be a boolean"), "quiet"));
+        }
 
         $query = new TextSearchQuery($s, $case_exact, $regex);
         $pages = $dbi->fullSearch($query, $sortby, $limit, $exclude);
@@ -165,25 +199,17 @@ class _PageList_Column_hilight extends _PageList_Column
 {
     private $parentobj;
 
-    function _PageList_Column_WantedPages_links(&$params)
+    function __construct(&$params)
     {
         $this->parentobj =& $params[3];
-        $this->_PageList_Column($params[0], $params[1], $params[2]);
+        parent::__construct($params[0], $params[1], $params[2]);
     }
 
-    function _getValue($page, $revision_handle)
+    function _getValue($page_handle, $revision_handle)
     {
-        $pagename = $page->getName();
+        $pagename = $page_handle->getName();
         $count = count($this->parentobj->_wpagelist[$pagename]);
-        return LinkURL(WikiURL($page, array('action' => 'BackLinks'), false),
+        return LinkURL(WikiURL($page_handle, array('action' => 'BackLinks')),
             fmt("(%d Links)", $count));
     }
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

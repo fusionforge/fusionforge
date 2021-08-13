@@ -1,5 +1,28 @@
 <?php
 /**
+ * Copyright © 2004,2007 Reini Urban
+ *
+ * This file is part of PhpWiki.
+ *
+ * PhpWiki is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * PhpWiki is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
+ */
+
+/**
  * What to do on ?format=rdf  What to do on ?format=owl
  *
  * Map relations on a wikipage to a RDF ressource to build a "Semantic Web"
@@ -72,33 +95,12 @@
 ... (facts and rules described in XML)
  *
  * Links:
- *   http://phpwiki.fr/Help/SemanticRelations,
+ *   http://phpwiki.demo.free.fr/index.php/Help/SemanticRelations,
  *   http://en.wikipedia.org/wiki/Knowledge_representation
  *   http://www.ontoweb.org/
  *   http://www.semwebcentral.org/ (OWL on top of FusionForge)
  *
- *
  * Author: Reini Urban <rurban@x-ray.at>
- */
-/*============================================================================*/
-/*
- * Copyright 2004,2007 Reini Urban
- *
- * This file is part of PhpWiki.
- *
- * PhpWiki is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- *
- * PhpWiki is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
 require_once 'lib/RssWriter.php';
@@ -285,20 +287,13 @@ class ModelWriter extends OwlWriter
 class SemanticAttributeSearchQuery
     extends NumericSearchQuery
 {
-    /*
-    public $base_units = array('m'   => explode(',','km,miles,cm,dm,mm,ft,inch,inches,meter'),
-                'm^2' => explode(',','km^2,ha,cm^2,mi^2'),
-                'm^3' => explode(',','km^3,lit,cm^3,dm^3,gallons'),
-                );
-    */
-
     /**
      * We need to detect units from the freetext query:
      * population > 1 million
      */
     function __construct($search_query, $placeholders, $unit = '')
     {
-        $this->NumericSearchQuery($search_query, $placeholders);
+        parent::__construct($search_query, $placeholders);
         $this->_units = new Units();
         $this->unit = $unit;
     }
@@ -376,7 +371,7 @@ class SemanticSearchQuery
  */
 class ReasonerBackend
 {
-    function ReasonerBackend()
+    function __construct()
     {
         ;
     }
@@ -417,11 +412,3 @@ class ReasonerBackend_Racer extends ReasonerBackend
 class ReasonerBackend_KM extends ReasonerBackend
 {
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

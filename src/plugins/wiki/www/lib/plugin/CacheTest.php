@@ -1,7 +1,6 @@
 <?php
-
-/*
- * Copyright (C) 2002 Johannes Große
+/**
+ * Copyright © 2002 Johannes Große
  *
  * This file is part of PhpWiki.
  *
@@ -18,35 +17,23 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
  */
 
-// +---------------------------------------------------------------------+
-// | CacheTest.php                                                       |
 // +---------------------------------------------------------------------+
 // | simple test of the WikiPluginCached class which provides a          |
 // | text to image conversion.                                           |
 // | This is a usage example of WikiPluginCached.                        |
-// |                                                                     |
-// | You may copy this code freely under the conditions of the GPL       |
 // +---------------------------------------------------------------------+
 
 /*------------------------------------------------------------------------
- | CacheTest
- *------------------------------------------------------------------------
  |
  | You may call this plugin as follows:
  |
  |        <<CacheTest text="What a wonderful test!" >>
  |
-
-/*-----------------------------------------------------------------------
- |
- |  Source
- |
- *----------------------------------------------------------------------*/
-
-/*-----------------------------------------------------------------------
- | WikiPlugin_CacheTest
  *----------------------------------------------------------------------*/
 
 require_once 'lib/WikiPluginCached.php';
@@ -125,7 +112,7 @@ class WikiPlugin_CacheTest
     function produceGraphics($text, $font)
     {
         // The idea (and some code) is stolen from the text2png plugin
-        // but I did not want to use TTF. ImageString is quite ugly
+        // but I did not want to use TTF. Imagestring is quite ugly
         // and quite compatible. It's only a usage example.
 
         if ($font < 1 || $font > 5) {
@@ -134,14 +121,14 @@ class WikiPlugin_CacheTest
             $font = 3;
         }
 
-        $ok = ($im = @ImageCreate(400, 40));
-        $bg_color = ImageColorAllocate($im, 240, 240, 240);
-        $text_color1 = ImageColorAllocate($im, 120, 120, 120);
-        $text_color2 = ImageColorAllocate($im, 0, 0, 0);
+        $ok = ($im = @imagecreate(400, 40));
+        $bg_color = imagecolorallocate($im, 240, 240, 240);
+        $text_color1 = imagecolorallocate($im, 120, 120, 120);
+        $text_color2 = imagecolorallocate($im, 0, 0, 0);
 
-        ImageFilledRectangle($im, 0, 0, 149, 49, $bg_color);
-        ImageString($im, $font, 11, 12, $text, $text_color1);
-        ImageString($im, $font, 10, 10, $text, $text_color2);
+        imagefilledrectangle($im, 0, 0, 149, 49, $bg_color);
+        imagestring($im, $font, 11, 12, $text, $text_color1);
+        imagestring($im, $font, 10, 10, $text, $text_color2);
 
         if (!$ok) {
             // simple error handling by WikiPluginImageCache
@@ -175,11 +162,3 @@ class WikiPlugin_CacheTest
     } // lazy_produceGraphics
 
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

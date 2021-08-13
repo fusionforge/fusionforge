@@ -1,8 +1,8 @@
-Date: Mon, 29 Jun 2015 12:04:28 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Wed,  3 Aug 2021 09:27:34 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=FindPage;
-  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
+  flags=PAGE_LOCKED;
   charset=UTF-8
 Content-Transfer-Encoding: binary
 
@@ -12,13 +12,18 @@ Here are some good starting points for browsing.
 * [[RecentChanges]] recorded automatically.
 * [[Help:MoreAboutMechanics|MoreAboutMechanics]] of browsing and editing on this server.
 
-Here's a title search. Try something like ##wiki or sandwich##.
+== Title Search ==
+
+Here's a title search. Try something like ##wiki## or ##sandwich##.
 
 <<WikiFormRich action=TitleSearch method=GET nobr=1 class=wikiaction
   editbox[] name=s text=""
   submit[]
   checkbox[] name=case_exact
-  pulldown[] name=regex value="auto,none,glob,posix,pcre,sql">>
+  pulldown[] name=regex value="auto,none,glob,posix,pcre,sql"
+>>
+
+== Full Text Search ==
 
 Use the following for a full text search.
 The results will show all lines on a given page which contain a match.
@@ -27,14 +32,19 @@ The results will show all lines on a given page which contain a match.
   editbox[] name=s text=""
   submit[]
   checkbox[] name=case_exact
-  pulldown[] name=regex value="auto,none,glob,posix,pcre,sql">>
+  pulldown[] name=regex value="auto,none,glob,posix,pcre,sql"
+>>
+
+== Fuzzy Search ==
 
 In a fuzzy pages search the titles of all pages are examined to find
 those which are similarly spelled or similar sounding (English).
 
-<?plugin-form FuzzyPages ?>
-
-------
+<<WikiFormRich action=FuzzyPages method=GET nobr=1 class=wikiaction
+  editbox[] name=s text=""
+  submit[]
+  checkbox[] name=case_exact
+>>
 
 == Tips ==
 
@@ -50,7 +60,7 @@ those which are similarly spelled or similar sounding (English).
 * Use //regex=none// to match any wildcards verbatim.
 
 === Example ===
-* '##wiki text -php##' looks for all pages containing the words '##wiki##' and '##text##', but not containing the word '##php##'.
+* '##wiki text -php##' looks for all pages containing the words '##wiki##' and '##text##', but **not** containing the word '##php##'.
 
 ----
 [[PhpWikiDocumentation]]

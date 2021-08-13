@@ -4,12 +4,9 @@
  * Wiki
  */
 body {
-    /* ivory #ffe #fffff0*/
     background: #dddddd;
-    /* background: #000099; */
     font-family: Arial, Helvetica, sans-serif;
     font-size: 80%; /* The default is too large. But enlarge monospace below */
-    /*margin: 1.5ex 1em; */
 }
 
 /**
@@ -20,8 +17,6 @@ div#navbuttons a.wikiaction, div#navbuttons a.wikiadmin {
     border: 0;
     -moz-appearance: none;
     -webkit-appearance: none;
-    -moz-box-sizing: content-box;
-    -webkit-box-sizing: content-box;
     box-sizing: content-box;
     border-radius: 0;
 }

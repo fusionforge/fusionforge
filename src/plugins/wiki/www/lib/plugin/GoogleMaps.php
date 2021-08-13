@@ -1,7 +1,6 @@
 <?php
-
 /**
- * Copyright 2005 $ThePhpWikiProgrammingTeam
+ * Copyright © 2005 $ThePhpWikiProgrammingTeam
  *
  * This file is part of PhpWiki.
  *
@@ -18,6 +17,9 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
  */
 
 /**
@@ -55,6 +57,7 @@
  *   drawing polygons
  *   Automatic route following
  */
+
 class WikiPlugin_GoogleMaps
     extends WikiPlugin
 {
@@ -94,8 +97,14 @@ class WikiPlugin_GoogleMaps
         if ($Longitude === '') {
             return $this->error(sprintf(_("A required argument “%s” is missing."), 'Longitude'));
         }
+        if (!is_numeric($Longitude)) {
+            return $this->error(_('Longitude must be a number.'));
+        }
         if ($Latitude === '') {
             return $this->error(sprintf(_("A required argument “%s” is missing."), 'Latitude'));
+        }
+        if (!is_numeric($Latitude)) {
+            return $this->error(_('Latitude must be a number.'));
         }
 
         $maps = JavaScript('', array('src' => "http://maps.google.com/maps?file=api&v=1&key=" . GOOGLE_LICENSE_KEY));
@@ -148,7 +157,7 @@ map.setMapType(" . $type . ");" .
                 ($Marker
                     ? "
 var point = new GPoint(" . $Longitude . "," . $Latitude . ");
-var marker = createMarker(point, '" . $markertext->asXml() . "'); map.addOverlay(marker);"
+var marker = createMarker(point, '" . $markertext->asXML() . "'); map.addOverlay(marker);"
                     : "")
         );
         if ($Marker)
@@ -157,11 +166,3 @@ var marker = createMarker(point, '" . $markertext->asXml() . "'); map.addOverlay
             return HTML($maps, $div, $run);
     }
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

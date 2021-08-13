@@ -1,14 +1,14 @@
-Date: Mon, 29 Jun 2015 12:04:23 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Mon, 30 Mar 2020 15:49:22 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=HistoriqueDeLaPage;
   flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
   charset=UTF-8
 Content-Transfer-Encoding: binary
 
-This wiki stores **all** changes as new versions. Deleting a page just empties the content, all previous versions are not lost.
+Ceci wiki stocke **toutes** les modifications en tant que nouvelles versions.
 
-Click on two checkbox to see the **diff**, the changes between those two versions.
+Cliquez sur deux cases à cocher pour voir les **diff**, les modifications entre ces deux versions.
 
 <<PageHistory>>
 

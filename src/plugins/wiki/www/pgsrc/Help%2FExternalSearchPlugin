@@ -1,5 +1,5 @@
-Date: Mon, 29 Jun 2015 12:04:28 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Sat, 20 Feb 2021 11:52:37 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FExternalSearchPlugin;
   flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
@@ -26,23 +26,23 @@ The **~ExternalSearch** [[Help:WikiPlugin|plugin]] creates a form to query [[Hel
 ! Default value
 |-
 | **url**
-| Specify a wiki from the InterWikiMap or a url. Any text entered by
-the user will be appended to the search url. The string placeholder
-'##**%s**##' can be used to insert a search query into the url rather
+| Specify a wiki from the [[InterWikiMap]] or a URL. Any text entered by
+the user will be appended to the search URL. The string placeholder
+'##**%s**##' can be used to insert a search query into the URL rather
 than appending it.
 |
 |-
 | **name**
 | Text to display in the submit button.
-| For ~InterWiki sites the default is the wiki name, for other urls the default is the text “External Search”.
+| For ~InterWiki sites the default is the wiki name, for other URLs the default is the text “External Search”.
 |-
 | **formsize**
 | Specify the input area size.
 | 30 characters
 |-
 | **debug**
-| Don't really redirect to the external site, just print out the url that would be redirected to.
-|
+| Boolean. If true, don't really redirect to the external site, just print out the URL that would be redirected to.
+| false
 |}
 
 == Examples ==
@@ -64,7 +64,7 @@ Perform a full-text search on [[MeatBall:SiteSearch|MeatBall]] wiki:
 Search the PHP web site for a function name:
 <<ExternalSearch url=php-lookup name="PHP Lookup">>
 
-Enter the name of a PHP function to view the documentation page:%%%
+Enter the name of a PHP function to view the documentation page:
 <<ExternalSearch url=php-function>>
 
 Enter any existing page name on ~PhpWiki to jump to that page:
@@ -73,8 +73,9 @@ Enter any existing page name on ~PhpWiki to jump to that page:
 == See Also ==
 * [[Help:TitleSearchPlugin]]
 * [[Help:FullTextSearchPlugin]]
-* [[Help:ExternalSearchPlugin]]
 * [[Help:InterWikiSearchPlugin]]
+* [[Help:LinkSearchPlugin]]
+* [[Help:SemanticSearchPlugin]]
 
 <noinclude>
 ----

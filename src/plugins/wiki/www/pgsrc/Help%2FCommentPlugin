@@ -1,12 +1,13 @@
-Date: Mon, 29 Jun 2015 12:04:28 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Mon, 30 Mar 2020 15:49:22 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FCommentPlugin;
   flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
   charset=UTF-8
 Content-Transfer-Encoding: binary
 
-The **Comment** [[Help:WikiPlugin|plugin]] lets you hide parts of a Wiki page without actually deleting the text. Comments will only be visible in the Wiki markup when editing or viewing the source.
+The **Comment** [[Help:WikiPlugin|plugin]] lets you hide parts of a Wiki page without actually deleting the text.
+Comments will only be visible in the Wiki markup when editing or viewing the source.
 
 == Usage ==
 

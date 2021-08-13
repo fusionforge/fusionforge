@@ -1,0 +1,77 @@
+Date: Tue, 23 Feb 2021 14:45:30 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
+Content-Type: application/x-phpwiki;
+  pagename=Help%2FLinkSearchPlugin
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
+  charset=UTF-8
+Content-Transfer-Encoding: binary
+
+Search in pages for links with the matching name.
+
+== Usage ==
+
+{{{
+<<LinkSearch arguments>>
+}}}
+
+== Arguments ==
+
+All [[Help:PageList|PageList]] arguments, plus the following ones:
+
+{| class="bordered"
+|-
+! Argument
+! Description
+! Default value
+|-
+| **s**
+| linkvalue query string
+| *
+|-
+| **page**
+| which pages (glob allowed)
+| ~* (all)
+|-
+| **direction**
+| out or in
+| out
+|-
+| **case_exact**
+| Boolean. If true, search with case exact.
+| false
+|-
+| **regex**
+| no word splitting, if no regex op is present, defaults to exact match
+| auto
+|-
+| **noform**
+| Boolean. If true, don't show form with results.
+| false
+|-
+| **noheader**
+| Boolean. If true, header should be omitted.
+| false
+|}
+
+== Example ==
+
+{{{
+<<LinkSearch>>
+}}}
+
+<<LinkSearch>>
+
+== Author ==
+* [[Help:Reini Urban|Reini Urban]]
+
+== See Also ==
+* [[Help:TitleSearchPlugin]]
+* [[Help:FullTextSearchPlugin]]
+* [[Help:ExternalSearchPlugin]]
+* [[Help:InterWikiSearchPlugin]]
+* [[Help:SemanticSearchPlugin]]
+
+<noinclude>
+----
+[[PhpWikiDocumentation]] [[CategoryWikiPlugin]]
+</noinclude>

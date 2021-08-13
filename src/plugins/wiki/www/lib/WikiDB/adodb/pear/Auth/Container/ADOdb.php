@@ -1,12 +1,14 @@
 <?php
 /*
-V5.20dev  ??-???-2014  (c) 2000-2014 John Lim (jlim#natsoft.com). All rights reserved.
+@version   v5.20.19  13-Dec-2020
+@copyright (c) 2000-2013 John Lim (jlim#natsoft.com). All rights reserved.
+@copyright (c) 2014      Damien Regad, Mark Newnham and the ADOdb community
   Released under both BSD license and Lesser GPL library license.
   Whenever there is any discrepancy between the two licenses,
   the BSD license will take precedence. See License.txt.
   Set tabs to 4 for best viewing.
 
-  Latest version is available at http://adodb.sourceforge.net
+  Latest version is available at http://adodb.org/
 
 	Original Authors: Martin Jansen <mj#php.net>
 	Richard Tango-Lowy <richtl#arscognita.com>
@@ -22,7 +24,7 @@ require_once 'adodb-errorpear.inc.php';
  *
  * This storage driver can use all databases which are supported
  * by the ADBdb DB abstraction layer to fetch login data.
- * See http://php.weblogs.com/adodb for information on ADOdb.
+ * See http://adodb.org/ for information on ADOdb.
  * NOTE: The ADOdb directory MUST be in your PHP include_path!
  *
  * @author   Richard Tango-Lowy <richtl@arscognita.com>
@@ -61,7 +63,7 @@ class Auth_Container_ADOdb extends Auth_Container
      * @param  string Connection data or DB object
      * @return object Returns an error object if something went wrong
      */
-    function Auth_Container_ADOdb($dsn)
+    function __construct($dsn)
     {
         $this->_setDefaults();
 
@@ -197,7 +199,7 @@ class Auth_Container_ADOdb extends Auth_Container
         /* Include additional fields if they exist */
         if(!empty($this->options['db_fields'])){
             if(is_array($this->options['db_fields'])){
-                $this->options['db_fields'] = join($this->options['db_fields'], ', ');
+                $this->options['db_fields'] = join(', ', $this->options['db_fields']);
             }
             $this->options['db_fields'] = ', '.$this->options['db_fields'];
         }

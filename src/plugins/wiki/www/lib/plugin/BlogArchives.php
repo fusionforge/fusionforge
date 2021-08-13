@@ -1,7 +1,6 @@
 <?php
-
-/*
- * Copyright (C) 2004 $ThePhpWikiProgrammingTeam
+/**
+ * Copyright © 2004 $ThePhpWikiProgrammingTeam
  *
  * This file is part of PhpWiki.
  *
@@ -18,6 +17,9 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
  */
 
 require_once 'lib/plugin/WikiBlog.php';
@@ -32,6 +34,7 @@ require_once 'lib/plugin/WikiBlog.php';
  *       leave off time subpage? Blogs just per day with one summary title only?
  * @author: Reini Urban
  */
+
 class WikiPlugin_BlogArchives
     extends WikiPlugin_WikiBlog
 {
@@ -90,7 +93,7 @@ class WikiPlugin_BlogArchives
         //    unset($pagelist->_columns['pagename']);
 
         if (!empty($args['month'])) {
-            $prefix = $parent . $this->blogPrefix('wikiblog') . '/' . $args['month'];
+            $prefix = $parent . $this->blogPrefix() . '/' . $args['month'];
             $pages = $dbi->titleSearch(new TextSearchQuery("^" . $prefix, true, 'posix'));
             $html = HTML::ul();
             while ($page = $pages->next()) {
@@ -106,7 +109,7 @@ class WikiPlugin_BlogArchives
                 return $html;
         }
 
-        $blogs = $this->findBlogs($dbi, $args['user'], 'wikiblog');
+        $blogs = $this->findBlogs($dbi, $args['user']);
         if ($blogs) {
             if (!$basepage) $basepage = _("BlogArchives");
             $html = HTML::ul();
@@ -156,11 +159,3 @@ class WikiPlugin_BlogArchives
         return $this->makeBox(_("Archives"), $this->run($request->_dbi, $args, $request, $basepage));
     }
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

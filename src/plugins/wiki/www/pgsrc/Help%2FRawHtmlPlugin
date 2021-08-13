@@ -1,5 +1,5 @@
-Date: Mon, 29 Jun 2015 12:04:28 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Fri, 12 Apr 2019 15:36:06 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FRawHtmlPlugin;
   flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
@@ -30,7 +30,6 @@ For this plugin to work, the page must be locked by the administrator. If you ar
     <ul>
       <li><a href="http://www.gnu.org//provide.html">What we provide</a></li>
       <li><a href="http://www.gnu.org//philosophy/philosophy.html">Why we exist</a></li>
-
       <li><a href="http://www.gnu.org//gnu/gnu-history.html">Where we are going</a></li>
     </ul>
     </td>
@@ -38,7 +37,6 @@ For this plugin to work, the page must be locked by the administrator. If you ar
     <ul>
       <li><a href="http://www.gnu.org//help/help.html">How you can help us get there</a></li>
       <li><a href="http://www.gnu.org//people/people.html">Who we are</a></li>
-
       <li><a href="http://www.gnu.org//testimonials/testimonials.html">What users think of GNU software</a></li>
     </ul>
     </td>

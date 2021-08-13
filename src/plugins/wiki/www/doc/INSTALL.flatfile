@@ -1,29 +1,21 @@
 If you cannot run PhpWiki on top of a relational database like
 MySQL or Postgresql, and your system does not support DBA files
-or (worse) has a broken implementation like NDBM on Solaris or 
-GDBM on Linux, then a flat file Wiki should work for you. 
+or (worse) has a broken implementation like NDBM on Solaris or
+GDBM on Linux, then a flat file Wiki should work for you.
 
 Installation is similar to using a DBA file for storing the pages.
 You should read the main INSTALL file before this one (it's not long
 and complicated so go ahead and we'll wait for you right here).
 
-INSTALLATION NOTES for 1.3
+INSTALLATION NOTES
 
 Set DATABASE_TYPE = file in config/config.ini,
 check DATABASE_DIRECTORY not to start with /tmp,
 and fire up the wiki url in your browser.
-The webserver will then start to create this directory with 
+The webserver will then start to create this directory with
 the correct permissions and populate the database.
 
-INSTALLATION NOTES for 1.2
-
-First, edit lib/config.php and set the database to "file":
-
-   $WhichDatabase = 'file'; // use one of "dbm", "mysql", "pgsql", "msql",
-			    // or "file"
-
-
-Now, the key thing is you need a directory that the web server can 
+Now, the key thing is you need a directory that the web server can
 read and write to. This is where it will store current and archived
 pages.
 
@@ -67,7 +59,7 @@ probably runs as user "nobody," so I log in as root and run the chown
 command:
 
 [swain@localhost phpwiki]$ su
-Password: 
+Password:
 [root@localhost phpwiki]# chown nobody:nobody pages
 
 Now the directory is read/writable by "nobody" and should work
@@ -108,7 +100,7 @@ and create a PHP file like this:
 
 <?php
 
-   /* 
+   /*
       I created this to set up server-writable files
       for the Wiki. You shouldn't have world writable files.
    */
@@ -121,7 +113,7 @@ and create a PHP file like this:
 
 Put the file in the phpwiki/ directory and call it through a web
 browser. This should create a directory owned by the web server in the
-phpwiki/ directory. 
+phpwiki/ directory.
 
 IMPORTANT
 Now you need to restore the permissions of the phpwiki directory

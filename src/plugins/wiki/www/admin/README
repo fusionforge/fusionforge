@@ -2,7 +2,7 @@
 
 It is recommended to do daily backups of your database and/or your wiki pages.
 
-In this directory are some sample scripts, which could help to setup your 
+In this directory are some sample scripts, which could help to setup your
 cronjobs, on the server or even remotely (zipdump or dumpserial).
 
   # berkeley db backup
@@ -43,9 +43,9 @@ See http://www.xapian.org/
     <input name="P" size="18" maxlength="256"
       value="<?php echo $s?>"
       onfocus="if (this.value == '<?php echo _("Search")?>') {this.value = '';}"
-      onmouseout="window.status=''; return true;" 
+      onmouseout="window.status=''; return true;"
       onmouseover="window.status='<?php echo _("Quick Search")?>'; return true;"
-      type="text" id="search2" 
+      type="text" id="search2"
       title="<?php echo _("Search term(s)") ?>" />
     <div align="right" style="padding-right:10px;">
       <input type="submit" name="searchtype" value="fulltext" class="searchButton" title="External Fulltext Search">

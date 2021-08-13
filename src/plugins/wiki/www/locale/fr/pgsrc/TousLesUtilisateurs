@@ -1,5 +1,5 @@
-Date: Mon, 29 Jun 2015 12:04:23 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Mon, 30 Mar 2020 15:49:22 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=TousLesUtilisateurs;
   flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
@@ -7,7 +7,7 @@ Content-Type: application/x-phpwiki;
 Content-Transfer-Encoding: binary
 
 Voici la liste de tous les utilisateurs qui se sont déjà connectés,
-ont créé leur page personnelle et ont définis des préférences.
+ont créé leur page personnelle ou ont enregistré leurs [[PréférencesUtilisateur]] au moins une fois.
 ----
 <<AllUsers>>
 

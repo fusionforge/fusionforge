@@ -7,7 +7,7 @@ if (count($argv) != 4) {
 
 $wsdl = getenv('PHPWIKI_WSDL_URL');
 if ($wsdl === false) {
-    $wsdl = "http://phpwiki.fr/PhpWiki.wsdl";
+    $wsdl = "http://phpwiki.demo.free.fr/PhpWiki.wsdl";
 }
 
 try {

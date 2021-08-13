@@ -1,7 +1,6 @@
 <?php
-
 /**
- * Copyright (C) 2006 $ThePhpWikiProgrammingTeam
+ * Copyright © 2006 $ThePhpWikiProgrammingTeam
  *
  * This file is part of PhpWiki.
  *
@@ -18,6 +17,9 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
  */
 
 /**
@@ -35,6 +37,7 @@
  * 2. Admin may reset any users password, with verification.
  *    => action=reset&user=username
  */
+
 class WikiPlugin_PasswordReset
     extends WikiPlugin
 {
@@ -104,7 +107,8 @@ class WikiPlugin_PasswordReset
             $header = HTML::p(_("Reset password of user: "),
                 HTML::raw('&nbsp;'),
                 HTML::input(array('type' => 'text',
-                    'name' => "user",
+                    'required' => 'required',
+                    'name' => 'user',
                     'value' => $userid))
             );
         }
@@ -114,7 +118,7 @@ class WikiPlugin_PasswordReset
                     $isadmin ? _("Yes") : _("Send e-mail"),
                     $isadmin ? 'wikiadmin' : 'button'),
                 HTML::raw('&nbsp;'),
-                Button('submit:admin_reset[cancel]', _("Cancel"), 'button'));
+                Button('submit:admin_reset[cancel]', _("Cancel"), 'button', array('formnovalidate' => 'formnovalidate')));
         }
         return HTML::form(array('action' => $request->getPostURL(),
                 'method' => 'post'),
@@ -140,9 +144,12 @@ class WikiPlugin_PasswordReset
         if (!$userid) $userid = $request->getArg('user');
         $isadmin = $user->isAdmin();
         if ($request->isPost()) {
-            @$reset = $post_args['reset'];
-            if (empty($reset))
+            if ($post_args === false) {
                 return $this->doForm($request, $userid);
+            }
+            if (!array_key_exists('reset', $post_args)) {
+                return $this->doForm($request, $userid);
+            }
             if (!$userid) {
                 $alert = new Alert(_("Warning:"),
                     _("You need to specify the userid!"));
@@ -158,7 +165,7 @@ class WikiPlugin_PasswordReset
                     return '';
                 }
             } elseif (empty($post_args['verify'])) {
-                //TODO: verify should check if the user exists, his prefs can be read/safed
+                //TODO: verify should check if the user exists, his prefs can be read/saved
                 //      and the email is verified, even if admin.
                 $buttons = HTML::p(Button('submit:admin_reset[reset]',
                         $isadmin ? _("Yes") : _("Send e-mail"),
@@ -205,11 +212,3 @@ class WikiPlugin_PasswordReset
         }
     }
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

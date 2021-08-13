@@ -1,52 +1,57 @@
 <?php
 // With MonoBook it is similar to Sidebar, named boxes at the left.
 // actionbuttons, navigation, search, toolbox
-$p = $WikiTheme->tooltipAccessKeyPrefix();
+//
+// The left navigation/search bar
+// Here you should add favorite Links and Categories
 ?>
-<!-- The left navigation/search bar -->
-<!-- Here you should add favorite Links and Categories -->
+<nav role="navigation" aria-label="<?php echo _("Main Menu") ?>">
 <div class="portlet" id="p-navigation">
   <div class="_pBody">
     <ul>
-      <li id="n-mainpage"><?php echo WikiLink(HOME_PAGE) ?></li>
-      <li><?php echo WikiLink("Help:HowToUseWiki","auto","How to use this Wiki") ?></li>
-      <li><?php echo WikiLink("Help:AddingPages","auto","Adding Pages") ?></li>
-      <li><?php echo WikiLink("CategoryCategory","auto","List all Categories") ?></li>
+      <li><?php echo WikiLink(HOME_PAGE) ?></li>
+      <li><?php echo WikiLink("Help:HowToUseWiki", "auto", "How to use this Wiki") ?></li>
+      <li><?php echo WikiLink("Help:AddingPages", "auto", "Adding Pages") ?></li>
+      <li><?php echo WikiLink("CategoryCategory", "auto", "List all Categories") ?></li>
     </ul>
   </div>
 </div>
+</nav>
 
+<nav role="navigation" aria-label="<?php echo _("Main Categories Menu") ?>">
 <div class="portlet" id="p-nav1">
   <h2><?php echo _("Main Categories")?></h2>
   <div class="pBody">
     <ul>
-      <li><?php echo WikiLink("CategoryWikiPlugin") ?></li>
-      <li><?php echo WikiLink("CategoryActionPage") ?></li>
+      <li><?php echo WikiLink(__("CategoryWikiPlugin")) ?></li>
+      <li><?php echo WikiLink(__("CategoryActionPage")) ?></li>
     </ul>
   </div>
 </div>
+</nav>
 
-<div class="portlet" id="p-search">
+<div role="search" class="portlet" id="p-search">
   <h2><?php echo _("Search")?></h2>
   <div class="pBody">
 <?php echo Template("search",
-             array('SEARCH_BEFORE' => ''/*HTML::h2(WikiLink(_("FindPage")))*/,
+             array('SEARCH_BEFORE' => ''/*HTML::h2(WikiLink(__("FindPage")))*/,
              'SEARCH_AFTER'  => HTML::raw('<br /><input type="submit" name="searchtype" value="title" class="searchButton" title="Press to perform a wiki title search" />&nbsp;<input type="submit" name="searchtype" value="fulltext" class="searchButton" title="Wiki fulltext search" />'))) ?>
   </div>
 </div>
 
+<nav role="navigation" aria-label="<?php echo _("Toolbox Menu") ?>">
 <div class="portlet" id="p-tb">
       <h2><?php echo _("Toolbox") ?><?php echo $WikiTheme->folderArrow('p-tb', 'Open') ?></h2>
   <div class="pBody" id="p-tb-body">
     <ul>
-    <li><?php $link = WikiLink(_("RecentChanges"), "",_("RecentChanges")); $link->setAttr("accesskey","r"); $link->addTooltip(_("The list of recent changes in the wiki.")." [$p-r]"); ?><?php echo $link ?> </li>
-    <li><?php echo WikiLink(_("RecentNewPages")) ?></li>
+    <li><?php $link = WikiLink(__("RecentChanges"), "", _("Recent Changes")); $link->addTooltip(_("The list of recent changes in the wiki.")); ?><?php echo $link ?> </li>
+    <li><?php echo WikiLink(__("RecentNewPages")) ?></li>
     <?php if (!empty($revision)) { ?>
-      <li id="t-whatlinkshere"><?php echo Button(array('action'=>_("BackLinks")), _("What links here"), $page->getName()) ?></li>
+      <li><?php echo Button(array('action'=>__("BackLinks")), _("What links here"), $page->getName()) ?></li>
     <?php } ?>
     <?php if (!empty($user) && $user->isSignedIn()) { ?>
-      <li><?php $link = WikiLink(_("UpLoad"),"",_("Upload File")); $link->setAttr("accesskey","u"); $link->addTooltip(_("Upload images or media files")." [$p-u]"); ?><?php echo $link ?></li>
-      <li><?php echo WikiLink(_("UserPreferences"), "",_("Preferences")) ?></li>
+      <li><?php $link = WikiLink(__("UpLoad"), "", _("Upload File")); $link->addTooltip(_("Upload images or media files")); ?><?php echo $link ?></li>
+      <li><?php echo WikiLink(__("UserPreferences"), "", _("Preferences")) ?></li>
     <?php } ?>
       <?php $PrintableLink = $WikiTheme->makeButton(_("Printable version"), "javascript:PrinterStylesheet();", 'wikiaction'); ?>
 <script type="text/javascript"><!--
@@ -56,15 +61,16 @@ document.write('<li><?php echo $PrintableLink ?></li>'); // -->
       // Do not display the pdf icon
       $btn = new Button(_("Display as Pdf"), WikiURL($page->getName(), array('action' => 'pdf')), 'wikiaction');
       ?>
-      <li><?php echo $btn ?> &nbsp;&nbsp; <?php echo WikiLink("Help:PDF","",HTML::img(array('src'=>$WikiTheme->_findData('images/mini_help.png'),'width'=>12,'height'=>13,'alt'=>'PDF help','title'=>'PDF help'))) ?></li>
+      <li><?php echo $btn ?> &nbsp;&nbsp; <?php echo WikiLink("Help:PDF", "", HTML::img(array('src'=>$WikiTheme->_findData('images/mini_help.png'),'width'=>12,'height'=>13,'alt'=>'PDF help','title'=>'PDF help'))) ?></li>
     <?php } ?>
-    <li><?php echo WikiLink(_("AllPages")) ?></li>
+    <li><?php echo WikiLink(__("AllPages"), "", _("All pages")) ?></li>
     <?php if (!empty($user) && $user->isAdmin()) { ?>
-      <li><?php echo WikiLink(_("PhpWikiAdministration"), "", _("Administration")) ?></li>
+      <li><?php echo WikiLink(__("PhpWikiAdministration"), "", _("Administration")) ?></li>
     <?php } ?>
   </ul>
   </div>
 </div>
+</nav>
 <?php echo Template('rc') ?>
 <?php echo Template('tags') ?>
-<!-- end of the left (by default at least) column -->
+<?php // end of the left (by default at least) column ?>

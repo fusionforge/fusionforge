@@ -1,8 +1,8 @@
 <?php
-
-/* Copyright (C) 2002 Geoffrey T. Dairiki <dairiki@dairiki.org>
- * Copyright (C) 2004-2010 Reini Urban
- * Copyright (C) 2008-2010 Marc-Etienne Vargenau, Alcatel-Lucent
+/**
+ * Copyright © 2002 Geoffrey T. Dairiki <dairiki@dairiki.org>
+ * Copyright © 2004-2010 Reini Urban
+ * Copyright © 2008-2010 Marc-Etienne Vargenau, Alcatel-Lucent
  *
  * This file is part of PhpWiki.
  *
@@ -19,7 +19,11 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
  */
+
 /**
  * This is the code which deals with the inline part of the
  * wiki-markup.
@@ -147,7 +151,7 @@ class RegexpSet
     //   S - STUDY
     private function _match($text, $regexps, $repeat)
     {
-        $match = new RegexpSet_match;
+        $match = new RegexpSet_match();
 
         // Optimization: if the matches are only "$" and another, then omit "$"
         assert(!empty($repeat));
@@ -332,13 +336,19 @@ function LinkBracketLink($bracketlink)
             $rawlink = preg_replace("/%2F(%20)+\./i", "%2F.", $rawlink);
         }
     } else {
-        // Check page name lenght
+        // Check page name length
         if (!string_starts_with($rawlink, "Upload:")) {
             if (strlen($rawlink) > MAX_PAGENAME_LENGTH) {
                 return HTML::span(array('class' => 'error'),
                     _('Page name too long'));
             }
         }
+        // Page name cannot end with a slash
+        if (substr($rawlink, -1) == "/") {
+            return HTML::span(array('class' => 'error'),
+                sprintf(_("Page name “%s” cannot end with a slash."), $rawlink));
+        }
+
         // Check illegal characters in page names: <>[]{}|"
         if (preg_match("/[<\[\{\|\"\}\]>]/", $rawlink, $matches) > 0) {
             return HTML::span(array('class' => 'error'),
@@ -439,10 +449,6 @@ function LinkBracketLink($bracketlink)
             $pagename = $link;
             $anchor = false;
         }
-
-        global $backlinks;
-        $backlinks[] = array('linkto' => $pagename);
-
         return new Cached_WikiLink($pagename, $label, $anchor);
     }
 }
@@ -1098,7 +1104,7 @@ class Markup_template_plugin extends SimpleMarkup
             if ((strpos($imagename, "http://") === 0) || (strpos($imagename, "https://") === 0)) {
                 return LinkImage($imagename, $alt);
             } elseif ($imagename[0] == '/') {
-                return LinkImage(DATA_PATH . '/' . $imagename, $alt);
+                return LinkImage(DATA_PATH . $imagename, $alt);
             } else {
                 return LinkImage(getUploadDataPath() . $imagename, $alt);
             }
@@ -1141,35 +1147,6 @@ class Markup_template_plugin extends SimpleMarkup
         else
             $s = '<' . '?plugin Template page="' . $page . '" ?' . '>';
         return new Cached_PluginInvocation($s);
-    }
-}
-
-// "..." => "&#133;"  browser specific display (not cached?)
-// Support some HTML::Entities: (C) for copy, --- for mdash, -- for ndash
-// TODO: "--" => "&emdash;" browser specific display (not cached?)
-
-class Markup_html_entities extends SimpleMarkup
-{
-    //public $_match_regexp = '(: \.\.\.|\-\-|\-\-\-|\(C\) )';
-
-    function __construct()
-    {
-        $this->_entities = array('...' => '&#133;',
-            '--' => '&ndash;',
-            '---' => '&mdash;',
-            '(C)' => '&copy;',
-            '&copy;' => '&copy;',
-            '&trade;' => '&trade;',
-        );
-        $this->_match_regexp =
-            '(: ' .
-                join('|', array_map('preg_quote', array_keys($this->_entities))) .
-                ' )';
-    }
-
-    function markup($match)
-    {
-        return HTML::raw($this->_entities[$match]);
     }
 }
 
@@ -1219,7 +1196,7 @@ class InlineTransformer
                 'wikicreole_underline',
                 'old_emphasis', 'nestled_emphasis',
                 'html_emphasis', 'html_abbr', 'plugin', 'plugin_wikicreole',
-                'isonumchars', 'isohexchars', /*'html_entities'*/
+                'isonumchars', 'isohexchars',
             );
             if (defined('DISABLE_MARKUP_WIKIWORD') and DISABLE_MARKUP_WIKIWORD)
                 $markup_types = array_remove($markup_types, 'wikiword');
@@ -1273,7 +1250,7 @@ class InlineTransformer
         $regexps = new RegexpSet($regexps);
 
         $input = $text;
-        $output = new XmlContent;
+        $output = new XmlContent();
 
         $match = $regexps->match($input);
 
@@ -1285,7 +1262,6 @@ class InlineTransformer
                     and is_a($markup, 'Markup_plugin')
                 ) {
                     $current =& $output->_content[count($output->_content) - 1];
-                    $current->setTightness(true, true);
                 }
                 $output->pushContent($match->prematch);
                 $text = $match->postmatch;
@@ -1309,13 +1285,7 @@ class InlineTransformer
             else
                 $current = $markup->markup($match->match, $body);
             $input = $match->postmatch;
-            if (isset($markup) and is_object($markup)
-                and is_a($markup, 'Markup_plugin')
-            ) {
-                $current->setTightness(true, true);
-            }
             $output->pushContent($match->prematch, $current);
-
             $match = $regexps->match($input);
         }
 
@@ -1364,7 +1334,7 @@ class NowikiTransformer extends InlineTransformer
         parent::__construct
         (array('linebreak',
             'html_emphasis', 'html_abbr', 'plugin', 'plugin_wikicreole',
-            'isonumchars', 'isohexchars', /*'html_entities',*/
+            'isonumchars', 'isohexchars',
         ));
     }
 }
@@ -1379,7 +1349,7 @@ function TransformInline($text, $basepage = false)
     static $trfm;
     $action = $request->getArg('action');
     if (empty($trfm) or $action == 'SpellCheck') {
-        $trfm = new InlineTransformer;
+        $trfm = new InlineTransformer();
     }
 
     if ($basepage) {
@@ -1393,7 +1363,7 @@ function TransformLinks($text, $basepage = false)
     static $trfm;
 
     if (empty($trfm)) {
-        $trfm = new LinkTransformer;
+        $trfm = new LinkTransformer();
     }
 
     if ($basepage) {
@@ -1410,18 +1380,10 @@ function TransformInlineNowiki($text, $basepage = false)
     static $trfm;
 
     if (empty($trfm)) {
-        $trfm = new NowikiTransformer;
+        $trfm = new NowikiTransformer();
     }
     if ($basepage) {
         return new CacheableMarkup($trfm->parse($text), $basepage);
     }
     return $trfm->parse($text);
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

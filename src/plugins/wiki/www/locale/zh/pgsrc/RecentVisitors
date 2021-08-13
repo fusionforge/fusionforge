@@ -1,5 +1,5 @@
-Date: Mon, 29 Jun 2015 12:04:26 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Tue,  9 Apr 2019 11:19:11 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=RecentVisitors;
   flags="";
@@ -8,4 +8,8 @@ Content-Transfer-Encoding: binary
 
 在下面簽上你的大名與參訪日期.
 
-Arno Hollosi, Aredridel Stauck, Jeff Dairiki, Steve Wainstead 是 PhpWiki 的作者群.
+Arno Hollosi, Aredridel Stauck, Jeff Dairiki, Steve Wainstead, Carsten Klapp,
+Reini Urban, Marc-Etienne Vargenau 是 PhpWiki 的作者群.
+
+----
+[[PhpWikiDocumentation]]

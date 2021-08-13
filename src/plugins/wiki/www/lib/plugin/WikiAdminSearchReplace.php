@@ -1,8 +1,7 @@
 <?php
-
-/*
- * Copyright 2004,2007 $ThePhpWikiProgrammingTeam
- * Copyright 2008-2009 Marc-Etienne Vargenau, Alcatel-Lucent
+/**
+ * Copyright © 2004,2007 $ThePhpWikiProgrammingTeam
+ * Copyright © 2008-2009 Marc-Etienne Vargenau, Alcatel-Lucent
  *
  * This file is part of PhpWiki.
  *
@@ -19,6 +18,9 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
  */
 
 /**
@@ -26,6 +28,7 @@
  * Author:  Reini Urban <rurban@x-ray.at>
  *
  */
+
 require_once 'lib/PageList.php';
 require_once 'lib/plugin/WikiAdminSelect.php';
 
@@ -129,7 +132,7 @@ class WikiPlugin_WikiAdminSearchReplace
             $button_label = _("Replace");
             $header->pushContent(
                 HTML::p(HTML::strong(
-                    _("Are you sure you want to replace text in the selected files?"))));
+                    _("Are you sure you want to replace text in the selected pages?"))));
             $this->replaceForm($header, $post_args);
         } else {
             $pagelist = new PageList_Selectable($args['info'], $args['exclude'], $columns);
@@ -139,7 +142,8 @@ class WikiPlugin_WikiAdminSearchReplace
         }
 
         $buttons = HTML::p(Button('submit:admin_replace[replace]', $button_label, 'wikiadmin'),
-            Button('submit:admin_replace[cancel]', _("Cancel"), 'button'));
+                           HTML::raw("&nbsp;&nbsp;"),
+                           Button('submit:admin_replace[cancel]', _("Cancel"), 'button'));
         $header->pushContent($buttons);
 
         $result->pushContent(HTML::form(array('action' => $request->getPostURL(),
@@ -164,7 +168,7 @@ class WikiPlugin_WikiAdminSearchReplace
             $version = $current->getVersion();
             $text = $current->getPackedContent();
             if ($regex) {
-                $newtext = preg_replace("/" . $from . "/" . ($case_exact ? '' : 'i'), $to, $text);
+                $newtext = preg_replace('/' . str_replace('/', '\/', $from) . '/' .($case_exact?'':'i'), $to, $text);
             } else {
                 if ($case_exact) {
                     $newtext = str_replace($from, $to, $text);
@@ -249,11 +253,3 @@ class WikiPlugin_WikiAdminSearchReplace
         return $header;
     }
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

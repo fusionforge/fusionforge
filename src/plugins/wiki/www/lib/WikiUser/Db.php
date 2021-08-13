@@ -1,7 +1,6 @@
 <?php
-
-/*
- * Copyright (C) 2004 ReiniUrban
+/**
+ * Copyright © 2004 Reini Urban
  *
  * This file is part of PhpWiki.
  *
@@ -18,6 +17,9 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
  */
 
 /**
@@ -49,7 +51,7 @@ class _DbPassUser
 
     // This can only be called from _PassUser, because the parent class
     // sets the auth_dbi and pref methods, before this class is initialized.
-    function _DbPassUser($UserName = '', $prefs = false)
+    function __construct($UserName = '', $prefs = false)
     {
         /**
          * @var WikiRequest $request
@@ -60,7 +62,7 @@ class _DbPassUser
             if ($prefs) $this->_prefs = $prefs;
         }
         if (!isset($this->_prefs->_method))
-            _PassUser::_PassUser($UserName);
+            parent::__construct($UserName);
         elseif (!$this->isValidName($UserName)) {
             trigger_error(_("Invalid username."), E_USER_WARNING);
             return false;
@@ -100,11 +102,3 @@ class _DbPassUser
     }
 
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

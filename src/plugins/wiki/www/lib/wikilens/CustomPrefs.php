@@ -1,11 +1,33 @@
 <?php
+/**
+ * Copyright © 2004 Reini Urban
+ *
+ * This file is part of PhpWiki.
+ *
+ * PhpWiki is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * PhpWiki is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
+ */
 
 /**
  * Custom UserPreferences:
  * A list of name => _UserPreference class pairs.
  * Rationale: Certain themes should be able to extend the predefined list
  * of preferences. Display/editing is done in the theme specific userprefs.tmpl
- * but storage/sanification/update/... must be extended to the Get/SetPreferences methods.
+ * but storage/sanification/update/... must be extended to the get/setPreferences methods.
  *
  * This is just at alpha stage, a recommendation to the wikilens group.
  */
@@ -55,11 +77,3 @@ $WikiTheme->customUserPreferences
     //recnnbr: typically 15-30 for item-based, 40-80 for user-based algos
     'recnnbr' => new _UserPreference_recnnbr(10, 14, 80),
 ));
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

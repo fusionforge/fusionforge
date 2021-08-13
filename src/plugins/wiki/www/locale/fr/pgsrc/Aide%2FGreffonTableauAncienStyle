@@ -1,0 +1,84 @@
+Date: Mon, 30 Mar 2020 15:49:22 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
+Content-Type: application/x-phpwiki;
+  pagename=Aide%2FGreffonTableauAncienStyle;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
+  charset=UTF-8
+Content-Transfer-Encoding: binary
+
+Le [[Aide:GreffonWiki|greffon]] **~TableauAncienStyle** (//OldStyleTable//) peut être utilisé pour inclure des
+tableaux dans une page wiki avec l'ancienne syntaxe.
+
+Ce greffon n'est fourni que pour des raisons historiques. Nous recommandons
+d'utiliser [[Help:Wikicreole#Tables|les tableaux Wikicreole]]
+ou [[Help:MediawikiTablePlugin|les tableaux Mediawiki]] à la place.
+
+== Utilisation ==
+
+{{{
+<<OldStyleTable caption="Tableau ancien style" border||=2
+||^  *Identité*             |v *Prix*       |v *Notes*
+| *Prénom*     | *Nom*
+|> Jeff        |< Dairiki   |^ Bon marché   |< Sans valeur
+|> Marco       |< Polo      |  Moins cher   |< Pas disponible
+>>
+}}}
+
+affichera
+
+<<OldStyleTable caption="Tableau ancien style" border||=2
+||^  *Identité*             |v *Prix*       |v *Notes*
+| *Prénom*     | *Nom*
+|> Jeff        |< Dairiki   |^ Bon marché   |< Sans valeur
+|> Marco       |< Polo      |  Moins cher   |< Pas disponible
+>>
+
+Remarquez que de multiple **|** conduisent à des colonnes étendues et que des**v** peuvent êtr
+utilisés pour étendre des lignes. Un **>** engendre une colonne justifiée à droite, **<**
+une colonne justifiée à gauche et **^** une colonne centrée (position par
+défaut).
+
+== Arguments ==
+
+{| class="bordered"
+|-
+! Argument
+! Description
+! Valeur par défaut
+|-
+| **caption**
+| N'importe quelle chaîne
+| Chaîne vide
+|-
+| **border**
+| N'importe quel nombre
+| 1
+|-
+| **cellspacing**
+| N'importe quel nombre
+| 1
+|-
+| **cellpadding**
+| N'importe quel nombre
+| 1
+|}
+
+== Syntaxe ==
+
+Notez que dans chaque cellule du tableau, le //nouveau style// est utilisé.
+Vous pouvez seulement utiliser les marques en ligne --- des groupes de marques
+par niveau sont autorisés dans les cellules.
+
+(Utiliser l'ancien style ne devrait pas avoir beaucoup plus de sens puisqu'on
+ne peut pas inclure d'appels de greffon sur plusieurs lignes en utilisant
+les anciennes règles.)
+
+== Voir aussi ==
+* [[Help:MediawikiTablePlugin]]
+* [[Aide:GreffonBeauTableau]]
+* [[Help:WikicreoleTablePlugin]]
+
+<noinclude>
+----
+[[DocumentationDePhpWiki]] [[CatégorieGreffonWiki]]
+</noinclude>

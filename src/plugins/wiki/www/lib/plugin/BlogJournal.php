@@ -1,7 +1,6 @@
 <?php
-
-/*
- * Copyright (C) 2005 $ThePhpWikiProgrammingTeam
+/**
+ * Copyright © 2005 $ThePhpWikiProgrammingTeam
  *
  * This file is part of PhpWiki.
  *
@@ -18,6 +17,9 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
  */
 
 require_once 'lib/plugin/WikiBlog.php';
@@ -31,6 +33,7 @@ require_once 'lib/plugin/WikiBlog.php';
  *
  * @author: Reini Urban
  */
+
 class WikiPlugin_BlogJournal
     extends WikiPlugin_WikiBlog
 {
@@ -81,7 +84,7 @@ class WikiPlugin_BlogJournal
         }
         $parent = (empty($args['user']) ? '' : $args['user'] . '/');
 
-        $prefix = $base = $parent . $this->blogPrefix('wikiblog');
+        $prefix = $base = $parent . $this->blogPrefix();
         if ($args['month'])
             $prefix .= ('/' . $args['month']);
         $pages = $dbi->titleSearch(new TextSearchQuery("^" . $prefix . '/', true, 'posix'));
@@ -108,11 +111,3 @@ class WikiPlugin_BlogJournal
             return $html;
     }
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

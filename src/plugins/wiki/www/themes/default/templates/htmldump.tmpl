@@ -5,12 +5,12 @@
  */
 ?>
 <!DOCTYPE html>
-<html>
+<html xml:lang="<?php echo $GLOBALS['LANG']?>" lang="<?php echo $GLOBALS['LANG']?>">
 <head>
 <meta charset="UTF-8" />
 <link rel="home" title="<?php echo HOME_PAGE?>" href="<?php echo WikiURL(HOME_PAGE)?>" />
-<link rel="help" title="<?php echo _("HowToUseWiki")?>" href="<?php echo WikiURL(_("HowToUseWiki"))?>" />
-<link rel="copyright" title="<?php echo COPYRIGHTPAGE_TITLE?>" href="<?php echo COPYRIGHTPAGE_URL?>" />
+<link rel="help" title="<?php echo _("Help").":"._("HowToUseWiki")?>" href="<?php echo WikiURL(_("Help").":"._("HowToUseWiki"))?>" />
+<link rel="license" title="<?php echo COPYRIGHTPAGE_TITLE?>" href="<?php echo COPYRIGHTPAGE_URL?>" />
 <link rel="author" title="<?php echo AUTHORPAGE_TITLE?>" href="<?php echo AUTHORPAGE_URL?>" />
 <?php $ROBOTS_CONTENT = isset($ROBOTS_META) ? $ROBOTS_META : "noindex,nofollow"; ?>
 <meta name="robots" content="<?php echo $ROBOTS_CONTENT ?>" />

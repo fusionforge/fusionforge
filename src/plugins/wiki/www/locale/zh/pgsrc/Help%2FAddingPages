@@ -1,25 +1,33 @@
-Date: Mon, 29 Jun 2015 12:04:26 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Thu, 24 Dec 2020 18:13:17 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FAddingPages;
-  flags="";
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
   charset=UTF-8
 Content-Transfer-Encoding: binary
 
-要加入一個新的頁面到 wiki, 你所要做的,就是使用一個有意義的標題,
-並且將每個單字的第一個字母改為大寫,像是 StringThemTogetherLikeThis.
-Wiki 會自動辨認為超連結. 除此之外,你也可以把任何單字放到中括號中,
-像這樣 [square brackets].
+要加入一個新的頁面到 wiki, 你所要做的,就是使用一個有意義的標題, 除此之外,你也可以把任何單字放到中括號中,
+像這樣 {{{[[square brackets]]}}}.
 
 然後你可以點選新超連結後的問號繼續 ClickTheQuestionMark,
 而 Wiki 將會給你一個製作新頁面的視窗.
 
+The page name can contain any character, except:
+* angle brackets (<>),
+* square brackets ([]),
+* curly brackets ({}),
+* double quotes ("),
+* pipe (|),
+* and hash sign (#) that is used for anchors.
+
 如果你想要加入一份帶有複雜標記的文件到 Wiki, 你最好是提供一個 URL,
 這會比直接貼上文件的內容好,像這樣:
+{{{
+[[http://phpwiki.sourceforge.net/|PhpWiki project homepage]]
+}}}
+[[http://phpwiki.sourceforge.net/|PhpWiki project homepage]]
 
-PhpWiki project homepage: http://phpwiki.sourceforge.net/
-
-Wiki 不支援 HTML 標籤 (參閱 TextFormattingRules).
+Wiki 不支援 HTML 標籤 (參閱 [[Help:TextFormattingRules|TextFormattingRules]]).
 <tags>標籤就只會顯示為標籤.</tags> 為鼓勵使用, Wiki 盡可能地保持簡單.
 
 你的管理者可以打開允許嵌入 HTML 的功能, 但這樣可能就會牽涉到安全性議題.

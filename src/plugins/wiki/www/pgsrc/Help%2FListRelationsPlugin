@@ -1,0 +1,42 @@
+Date: Thu, 13 Oct 2016 15:09:28 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
+Content-Type: application/x-phpwiki;
+  pagename=Help%2FListRelationsPlugin;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
+  charset=UTF-8
+Content-Transfer-Encoding: binary
+
+Display the list of all defined relations and optionnally attributes in this entire wiki.
+
+== Usage ==
+
+{{{
+<<ListRelations arguments>>
+}}}
+
+== Arguments ==
+
+All [[Help:PageList|PageList]] arguments, plus the following one:
+
+{| class="bordered"
+|-
+! Argument
+! Description
+! Default value
+|-
+| **mode**
+| "relations" or "attributes" or "all"
+| relations
+|}
+
+== Author ==
+* [[Help:Reini Urban|Reini Urban]]
+
+== See Also ==
+* [[SemanticRelations]], [[ListRelations]], [[SemanticSearch]]
+* [[Help:SemanticRelationsPlugin|SemanticRelationsPlugin]], [[Help:SemanticSearchPlugin|SemanticSearchPlugin]]
+
+<noinclude>
+----
+[[PhpWikiDocumentation]]
+</noinclude>

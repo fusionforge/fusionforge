@@ -1,7 +1,6 @@
 <?php
-
-/*
- * Copyright 2010 Sébastien Le Callonnec
+/**
+ * Copyright © 2010 Sébastien Le Callonnec
  *
  * This file is part of PhpWiki.
  *
@@ -18,10 +17,15 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
 */
+
 /**
  * @author: Sébastien Le Callonnec
  */
+
 require_once 'lib/WikiPlugin.php';
 require_once 'lib/AtomParser.php';
 
@@ -54,6 +58,15 @@ class WikiPlugin_AtomFeed
     function run($dbi, $argstr, &$request, $basepage)
     {
         extract($this->getArgs($argstr, $request));
+
+        if (($titleonly == '0') || ($titleonly == 'false')) {
+            $titleonly = false;
+        } elseif (($titleonly == '1') || ($titleonly == 'true')) {
+            $titleonly = true;
+        } else {
+            return $this->error(sprintf(_("Argument '%s' must be a boolean"), "titleonly"));
+        }
+
         $parser = new AtomParser();
 
         assert(!empty($url));

@@ -1,7 +1,6 @@
 <?php
-
-/*
- * Copyright (C) 2004 ReiniUrban
+/**
+ * Copyright © 2004 Reini Urban
  *
  * This file is part of PhpWiki.
  *
@@ -18,7 +17,11 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
  */
+
 include_once 'lib/WikiUser/Db.php';
 
 class _PearDbPassUser
@@ -33,7 +36,7 @@ class _PearDbPassUser
 {
     public $_authmethod = 'PearDb';
 
-    function _PearDbPassUser($UserName = '', $prefs = false)
+    function __construct($UserName = '', $prefs = false)
     {
         /**
          * @var WikiRequest $request
@@ -46,7 +49,7 @@ class _PearDbPassUser
             }
         }
         if (!isset($this->_prefs->_method)) {
-            _PassUser::_PassUser($UserName);
+            _PassUser::__construct($UserName);
         } elseif (!$this->isValidName($UserName)) {
             trigger_error(_("Invalid username."), E_USER_WARNING);
             return false;
@@ -56,84 +59,6 @@ class _PearDbPassUser
         // but do auth checks only once
         $this->_auth_crypt_method = $request->_dbi->getAuthParam('auth_crypt_method');
         return $this;
-    }
-
-    function getPreferences()
-    {
-        // override the generic slow method here for efficiency and not to
-        // clutter the homepage metadata with prefs.
-        _AnonUser::getPreferences();
-        $this->getAuthDbh();
-        if (isset($this->_prefs->_select)) {
-            $dbh = &$this->_auth_dbi;
-            $db_result = $dbh->query(sprintf($this->_prefs->_select, $dbh->quote($this->_userid)));
-            // patched by frederik@pandora.be
-            $prefs = $db_result->fetchRow();
-            $prefs_blob = @$prefs["prefs"];
-            if ($restored_from_db = $this->_prefs->retrieve($prefs_blob)) {
-                $this->_prefs->updatePrefs($restored_from_db);
-                return $this->_prefs;
-            }
-        }
-        if (isset($this->_HomePagehandle) && $this->_HomePagehandle) {
-            if ($restored_from_page = $this->_prefs->retrieve
-            ($this->_HomePagehandle->get('pref'))
-            ) {
-                $this->_prefs->updatePrefs($restored_from_page);
-                return $this->_prefs;
-            }
-        }
-        return $this->_prefs;
-    }
-
-    function setPreferences($prefs, $id_only = false)
-    {
-        /**
-         * @var WikiRequest $request
-         */
-        global $request;
-
-        // if the prefs are changed
-        if ($count = _AnonUser::setPreferences($prefs, 1)) {
-            //global $request;
-            //$user = $request->_user;
-            //unset($user->_auth_dbi);
-            // this must be done in $request->_setUser, not here!
-            //$request->setSessionVar('wiki_user', $user);
-            $this->getAuthDbh();
-            $packed = $this->_prefs->store();
-            if (!$id_only and isset($this->_prefs->_update)) {
-                $dbh = &$this->_auth_dbi;
-                // check if the user already exists (not needed with mysql REPLACE)
-                $db_result = $dbh->query(sprintf($this->_prefs->_select,
-                    $dbh->quote($this->_userid)));
-                $prefs = $db_result->fetchRow();
-                $prefs_blob = @$prefs["prefs"];
-                // If there are prefs for the user, update them.
-                if ($prefs_blob != "") {
-                    $dbh->simpleQuery(sprintf($this->_prefs->_update,
-                        $dbh->quote($packed),
-                        $dbh->quote($this->_userid)));
-                } else {
-                    // Otherwise, insert a record for them and set it to the defaults.
-                    // johst@deakin.edu.au
-                    $dbi = $request->getDbh();
-                    $this->_prefs->_insert = $this->prepare($dbi->getAuthParam('pref_insert'),
-                        array("pref_blob", "userid"));
-                    $dbh->simpleQuery(sprintf($this->_prefs->_insert,
-                        $dbh->quote($packed), $dbh->quote($this->_userid)));
-                }
-                //delete pageprefs:
-                if (isset($this->_HomePagehandle) && $this->_HomePagehandle and $this->_HomePagehandle->get('pref'))
-                    $this->_HomePagehandle->set('pref', '');
-            } else {
-                //store prefs in homepage, not in cookie
-                if (isset($this->_HomePagehandle) && $this->_HomePagehandle and !$id_only)
-                    $this->_HomePagehandle->set('pref', $packed);
-            }
-            return $count; //count($this->_prefs->unpack($packed));
-        }
-        return 0;
     }
 
     function userExists()
@@ -282,11 +207,3 @@ class _PearDbPassUser
         return true;
     }
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

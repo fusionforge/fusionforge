@@ -1,5 +1,5 @@
-Date: Mon, 29 Jun 2015 12:04:28 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Mon,  8 Apr 2019 14:45:11 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FMoreAboutMechanics;
   flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
@@ -7,7 +7,7 @@ Content-Type: application/x-phpwiki;
 Content-Transfer-Encoding: binary
 
 ~PhpWiki is written in the server-side scripting language PHP,
-available from [[http://www.php.net/]]. PHP resembles C and Perl in its
+available from [[https://www.php.net/]]. PHP resembles C and Perl in its
 syntax, and functions much like ASP, ~EmbPerl or JSP.
 
 ~PhpWiki consists of a dozen or so files of mixed PHP and HTML. The web
@@ -17,7 +17,7 @@ database, ~PhpWiki works with DBM, MySQL, PostgreSQL or text files.)
 
 Every time a user hits the site, the page requested is pulled from the
 database and rendered on the fly. The user only really ever requests
-the file =index.php=, which then decides which other php files to
+the file ##index.php##, which then decides which other PHP files to
 include.
 
 Links to pages in the Wiki are automatically linked: [[FindPage]].

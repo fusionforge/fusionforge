@@ -1,6 +1,6 @@
 <?php
-/*
- * Copyright 2005 $ThePhpWikiProgrammingTeam
+/**
+ * Copyright © 2005 $ThePhpWikiProgrammingTeam
  *
  * This file is part of PhpWiki.
  *
@@ -17,6 +17,9 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
  */
 
 /**
@@ -24,6 +27,7 @@
  *
  * @author: Reini Urban
  */
+
 class DbSession_PDO
     extends DbSession
 {
@@ -34,8 +38,6 @@ class DbSession_PDO
         $this->_dbh = $dbh;
         $this->_table = $table;
 
-        ini_set('session.save_handler', 'user');
-        session_module_name('user'); // new style
         session_set_save_handler(array(&$this, 'open'),
             array(&$this, 'close'),
             array(&$this, 'read'),
@@ -166,44 +168,21 @@ class DbSession_PDO
         if (is_a($dbh, 'ADODB_postgres64'))
             $sess_data = base64_encode($sess_data);
 
-        /* AffectedRows with sessions seems to be unstable on certain platforms.
-         * Enable the safe and slow USE_SAFE_DBSESSION then.
-         */
-        if (USE_SAFE_DBSESSION) {
-            $this->_backend->beginTransaction();
-            $rs = $this->query("DELETE FROM $table"
-                . " WHERE sess_id=$id");
-            $sth = $dbh->prepare("INSERT INTO $table"
-                . " (sess_id, sess_data, sess_date, sess_ip)"
-                . " VALUES (?, ?, ?, ?)");
-            $sth->bindParam(1, $id, PDO::PARAM_STR, 32);
-            $sth->bindParam(2, $sess_data, PDO::PARAM_LOB);
-            $sth->bindParam(3, $time, PDO::PARAM_INT);
-            $sth->bindParam(4, $request->get('REMOTE_ADDR'), PDO::PARAM_STR, 15);
-            if ($result = $sth->execute()) {
-                $this->_backend->commit();
-            } else {
-                $this->_backend->rollBack();
-            }
+        $this->_backend->beginTransaction();
+        $delete = $this->prepare("DELETE FROM $table WHERE sess_id=?");
+        $delete->bindParam(1, $id, PDO::PARAM_STR, 32);
+        $delete->execute();
+        $sth = $dbh->prepare("INSERT INTO $table"
+            . " (sess_id, sess_data, sess_date, sess_ip)"
+            . " VALUES (?, ?, ?, ?)");
+        $sth->bindParam(1, $id, PDO::PARAM_STR, 32);
+        $sth->bindParam(2, $sess_data, PDO::PARAM_LOB);
+        $sth->bindParam(3, $time, PDO::PARAM_INT);
+        $sth->bindParam(4, $request->get('REMOTE_ADDR'), PDO::PARAM_STR, 15);
+        if ($result = $sth->execute()) {
+            $this->_backend->commit();
         } else {
-            $sth = $dbh->prepare("UPDATE $table"
-                . " SET sess_data=?, sess_date=?, sess_ip=?"
-                . " WHERE sess_id=?");
-            $sth->bindParam(1, $sess_data, PDO::PARAM_LOB);
-            $sth->bindParam(2, $time, PDO::PARAM_INT);
-            $sth->bindParam(3, $request->get('REMOTE_ADDR'), PDO::PARAM_STR, 15);
-            $sth->bindParam(4, $id, PDO::PARAM_STR, 32);
-            $result = $sth->execute(); // implicit affected rows
-            if ($result === false or $result < 1) { // false or int > 0
-                $sth = $dbh->prepare("INSERT INTO $table"
-                    . " (sess_id, sess_data, sess_date, sess_ip)"
-                    . " VALUES (?, ?, ?, ?)");
-                $sth->bindParam(1, $id, PDO::PARAM_STR, 32);
-                $sth->bindParam(2, $sess_data, PDO::PARAM_LOB);
-                $sth->bindParam(3, $time, PDO::PARAM_INT);
-                $sth->bindParam(4, $request->get('REMOTE_ADDR'), PDO::PARAM_STR, 15);
-                $result = $sth->execute();
-            }
+            $this->_backend->rollBack();
         }
         $this->_disconnect();
         return $result;
@@ -276,11 +255,3 @@ class DbSession_PDO
         return $sessions;
     }
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

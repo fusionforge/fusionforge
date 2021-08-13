@@ -1,7 +1,7 @@
 <?php
-/*
- * Copyright (C) 2002 Johannes Große
- * Copyright (C) 2004,2007 Reini Urban
+/**
+ * Copyright © 2002 Johannes Große
+ * Copyright © 2004,2007 Reini Urban
  *
  * This file is part of PhpWiki.
  *
@@ -18,15 +18,17 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
  */
 
 /**
- * You should set up the options in config/config.ini at Part seven:
- * $ pear install http://pear.php.net/get/Cache
- * This file belongs to WikiPluginCached.
+ * You should set up the options in config/config.ini at Part seven.
  */
 
 require_once 'lib/WikiPlugin.php';
+require_once 'lib/pear/Cache.php';
 
 // types:
 define('PLUGIN_CACHED_HTML', 0); // cached html (extensive calculation)
@@ -34,7 +36,6 @@ define('PLUGIN_CACHED_IMG_INLINE', 1); // gd images
 define('PLUGIN_CACHED_MAP', 2); // area maps
 define('PLUGIN_CACHED_SVG', 3); // special SVG/SVGZ object
 define('PLUGIN_CACHED_SVG_PNG', 4); // special SVG/SVGZ object with PNG fallback
-define('PLUGIN_CACHED_SWF', 5); // special SWF (flash) object
 define('PLUGIN_CACHED_PDF', 6); // special PDF object (inlinable?)
 define('PLUGIN_CACHED_PS', 7); // special PS object (inlinable?)
 // boolean tests:
@@ -55,7 +56,7 @@ define('PLUGIN_CACHED_STATIC', 128); // make it available via /uploads/, not via
  *
  * @author  Johannes Große, Reini Urban
  */
-abstract class WikiPluginCached extends WikiPlugin
+class WikiPluginCached extends WikiPlugin
 {
     public $_static;
 
@@ -253,6 +254,11 @@ abstract class WikiPluginCached extends WikiPlugin
 
     /* --------------------- abstract functions ----------- */
 
+    protected function getDescription()
+    {
+        trigger_error('pure virtual', E_USER_ERROR);
+    }
+
     /**
      * Sets the type of the plugin to html, image or map
      * production
@@ -267,7 +273,11 @@ abstract class WikiPluginCached extends WikiPlugin
      *             <li>PLUGIN_CACHED_MAP</li>
      *             </ul>
      */
-    abstract protected function getPluginType();
+
+    protected function getPluginType()
+    {
+        trigger_error('pure virtual', E_USER_ERROR);
+    }
 
     /**
      * Creates an image handle from the given user arguments.
@@ -283,7 +293,10 @@ abstract class WikiPluginCached extends WikiPlugin
      * @return mixed imagehandle image handle if successful
      *                                false if an error occured
      */
-    abstract protected function getImage($dbi, $argarray, $request);
+    protected function getImage($dbi, $argarray, $request)
+    {
+        trigger_error('pure virtual', E_USER_ERROR);
+    }
 
     /**
      * Sets the life time of a cache entry in seconds.
@@ -317,7 +330,7 @@ abstract class WikiPluginCached extends WikiPlugin
      * @param  Request $request
      * @return string 'png', 'jpeg' or 'gif'
      */
-    protected function getImageType(&$dbi, $argarray, &$request)
+    protected function getImageType($dbi, $argarray, $request)
     {
         if (in_array($argarray['imgtype'], preg_split('/\s*:\s*/', PLUGIN_CACHED_IMGTYPES)))
             return $argarray['imgtype'];
@@ -355,7 +368,10 @@ abstract class WikiPluginCached extends WikiPlugin
      * @return string html to be printed in place of the plugin command
      *                                false if an error occured
      */
-    abstract protected function getHtml($dbi, $argarray, $request, $basepage);
+    protected function getHtml($dbi, $argarray, $request, $basepage)
+    {
+        trigger_error('pure virtual', E_USER_ERROR);
+    }
 
     /**
      * Creates HTML output to be cached.
@@ -373,7 +389,10 @@ abstract class WikiPluginCached extends WikiPlugin
      *                                image.
      *                                array(false,false) if an error occured
      */
-    abstract protected function getMap($dbi, $argarray, $request);
+    protected function getMap($dbi, $argarray, $request)
+    {
+        trigger_error('pure virtual', E_USER_ERROR);
+    }
 
     /* --------------------- produce Html ----------------------------- */
 
@@ -438,7 +457,7 @@ abstract class WikiPluginCached extends WikiPlugin
     }
 
     /**
-     * svg?, swf, ...
+     * svg?, ...
     <object type="audio/x-wav" standby="Loading Audio" data="example.wav">
     <param name="src" value="example.wav" valuetype="data"></param>
     <param name="autostart" value="false" valuetype="data"></param>
@@ -479,15 +498,6 @@ abstract class WikiPluginCached extends WikiPlugin
         static $staticcache;
 
         if (!is_object($staticcache)) {
-            if (!class_exists('Cache')) {
-                // uuh, pear not in include_path! should print a warning.
-                // search some possible pear paths.
-                $pearFinder = new PearFileFinder;
-                if ($lib = $pearFinder->findFile('Cache.php', 'missing_ok'))
-                    require_once($lib);
-                else // fall back to our own copy
-                    require_once 'lib/pear/Cache.php';
-            }
             $cacheparams = array();
             foreach (explode(':', 'database:cache_dir:filename_prefix:highwater:lowwater'
                 . ':maxlifetime:maxarglen:usecache:force_syncmap') as $key) {
@@ -521,7 +531,7 @@ abstract class WikiPluginCached extends WikiPlugin
         }
 
         $supportedtypes = array();
-        // Todo: swf, pdf, ...
+        // Todo: pdf, ...
         $imagetypes = array(
             'png' => IMG_PNG,
             'gif' => IMG_GIF,
@@ -534,7 +544,7 @@ abstract class WikiPluginCached extends WikiPlugin
             'xbm'   => IMG_XBM,
             */
         );
-        $presenttypes = ImageTypes();
+        $presenttypes = imagetypes();
         foreach ($imagetypes as $imgtype => $bitmask)
             if ($presenttypes && $bitmask)
                  array_push($supportedtypes, $imgtype);
@@ -570,7 +580,7 @@ abstract class WikiPluginCached extends WikiPlugin
     } // writeImage
 
     /**
-     * Sends HTTP Header for some predefined file types.
+     * Sends HTTP header for some predefined file types.
      * There is no parameter check.
      *
      * @param   string $doctype 'gif', 'png', 'jpeg', 'html'
@@ -588,8 +598,8 @@ abstract class WikiPluginCached extends WikiPlugin
             'gd2' => 'Content-type: image/gd2',
             'wbmp' => 'Content-type: image/vnd.wap.wbmp', // wireless bitmaps for PDA's and such.
             'html' => 'Content-type: text/html');
-        // Todo: swf, pdf, svg, svgz
-        Header($IMAGEHEADER[$doctype]);
+        // Todo: pdf, svg, svgz
+        header($IMAGEHEADER[$doctype]);
     }
 
     /**
@@ -604,7 +614,7 @@ abstract class WikiPluginCached extends WikiPlugin
     {
         if (!empty($argarray)) {
             $argstr = '';
-            while (list($key, $value) = each($argarray)) {
+            foreach ($argarray as $key => $value) {
                 $argstr .= $key . '=' . '"' . $value . '" ';
                 // FIXME: How are values quoted? Can a value contain '"'?
                 // TODO: rawurlencode(value)
@@ -736,7 +746,7 @@ abstract class WikiPluginCached extends WikiPlugin
         }
         if (is_resource($imagehandle)) {
             $this->writeImage($content['imagetype'], $imagehandle, $tmpfile);
-            ImageDestroy($imagehandle);
+            imagedestroy($imagehandle);
             sleep(0.2);
         } elseif (is_string($imagehandle)) {
             $content['file'] = getUploadFilePath() . basename($tmpfile);
@@ -916,7 +926,7 @@ abstract class WikiPluginCached extends WikiPlugin
         $talkedallready = ob_get_contents() || headers_sent();
         if (($imgtype == 'html') || $talkedallready) {
             if (is_object($errortext))
-                $errortext = $errortext->asXml();
+                $errortext = $errortext->asXML();
             trigger_error($errortext, E_USER_WARNING);
         } else {
             $red = array(255, 0, 0);
@@ -930,7 +940,7 @@ abstract class WikiPluginCached extends WikiPlugin
             }
             $this->writeHeader($imgtype);
             $this->writeImage($imgtype, $im);
-            ImageDestroy($im);
+            imagedestroy($im);
         }
     } // printError
 
@@ -977,8 +987,8 @@ abstract class WikiPluginCached extends WikiPlugin
             'width' => 600,
             'height' => 350);
 
-        $charx = ImageFontWidth($fontnr);
-        $chary = ImageFontHeight($fontnr);
+        $charx = imagefontwidth($fontnr);
+        $chary = imagefontheight($fontnr);
         $marginx = $charx;
         $marginy = floor($chary / 2);
 
@@ -1010,16 +1020,16 @@ abstract class WikiPluginCached extends WikiPlugin
         $IMAGESIZE['height'] = $IMAGESIZE['rows'] * $chary + 2 * $marginy;
 
         // create blank image
-        $im = @ImageCreate($IMAGESIZE['width'], $IMAGESIZE['height']);
+        $im = @imagecreate($IMAGESIZE['width'], $IMAGESIZE['height']);
 
-        $col = ImageColorAllocate($im, $textcol[0], $textcol[1], $textcol[2]);
-        $bg = ImageColorAllocate($im, $bgcol[0], $bgcol[1], $bgcol[2]);
+        $col = imagecolorallocate($im, $textcol[0], $textcol[1], $textcol[2]);
+        $bg = imagecolorallocate($im, $bgcol[0], $bgcol[1], $bgcol[2]);
 
-        ImageFilledRectangle($im, 0, 0, $IMAGESIZE['width'] - 1, $IMAGESIZE['height'] - 1, $bg);
+        imagefilledrectangle($im, 0, 0, $IMAGESIZE['width'] - 1, $IMAGESIZE['height'] - 1, $bg);
 
         // write text lines
         foreach ($lines as $nr => $textstr) {
-            ImageString($im, $fontnr, $marginx, $marginy + $nr * $chary,
+            imagestring($im, $fontnr, $marginx, $marginy + $nr * $chary,
                 $textstr, $col);
         }
         return $im;
@@ -1054,7 +1064,7 @@ abstract class WikiPluginCached extends WikiPlugin
             // It is important that you close any pipes before calling
             // proc_close in order to avoid a deadlock
             proc_close($process);
-            if (empty($buf)) printXML($this->error($stderr));
+            if (empty($buf)) PrintXML($this->error($stderr));
             return $buf;
         }
         return '';
@@ -1105,11 +1115,3 @@ abstract class WikiPluginCached extends WikiPlugin
     }
 
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

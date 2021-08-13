@@ -1,9 +1,8 @@
 <?php
-
-/*
- * Copyright 1999-2008 $ThePhpWikiProgrammingTeam
- * Copyright (C) 2008-2010 Marc-Etienne Vargenau, Alcatel-Lucent
- * Copyright (C) 2009 Roger Guignard, Alcatel-Lucent
+/**
+ * Copyright © 1999-2008 $ThePhpWikiProgrammingTeam
+ * Copyright © 2008-2010 Marc-Etienne Vargenau, Alcatel-Lucent
+ * Copyright © 2009 Roger Guignard, Alcatel-Lucent
  *
  * This file is part of PhpWiki.
  *
@@ -20,11 +19,11 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
  */
 
-define ('USE_PREFS_IN_PAGE', true);
-
-//include "lib/config.php";
 require_once 'lib/stdlib.php';
 require_once 'lib/Request.php';
 require_once 'lib/WikiDB.php';
@@ -58,8 +57,7 @@ class WikiRequest extends Request
         // first mysql request costs [958ms]! [670ms] is mysql_connect()
 
         if (in_array('File', $this->_dbi->getAuthParam('USER_AUTH_ORDER'))) {
-            // force our local copy, until the pear version is fixed.
-            include_once(dirname(__FILE__) . "/pear/File_Passwd.php");
+            include_once 'lib/pear/File_Passwd.php';
         }
         // Preload all necessary userclasses. Otherwise session => __PHP_Incomplete_Class_Name
         // There's no way to demand-load it later. This way it's much slower, but needs slightly
@@ -94,7 +92,6 @@ class WikiRequest extends Request
 // Fixme: Does pear reset the error mask to 1? We have to find the culprit
 //$x = error_reporting();
 
-        $this->version = phpwiki_version();
         parent::__construct(); // [90ms]
 
         // Normalize args...
@@ -171,7 +168,7 @@ class WikiRequest extends Request
             if (isset($this->_user->_authhow) and $this->_user->_authhow == 'session')
                 $user_lang = $GLOBALS['LANG'];
             update_locale($user_lang);
-            FindLocalizedButtonFile(".", 'missing_ok', 'reinit');
+            findLocalizedButtonFile(".", 'missing_ok', 'reinit');
         }
         //if (empty($_lang->lang) and $GLOBALS['LANG'] != $_lang->default_value) ;
     }
@@ -306,7 +303,7 @@ class WikiRequest extends Request
         }
     }
 
-    function & getUser()
+    function &getUser()
     {
         if (isset($this->_user))
             return $this->_user;
@@ -314,7 +311,7 @@ class WikiRequest extends Request
             return $GLOBALS['ForbiddenUser'];
     }
 
-    function & getGroup()
+    function &getGroup()
     {
         if (isset($this->_user) and isset($this->_user->_group))
             return $this->_user->_group;
@@ -333,13 +330,13 @@ class WikiRequest extends Request
     // Convenience function:
     function getPref($key)
     {
-        if (isset($this->_prefs)) {
+        if (isset($this->_prefs) && is_object($this->_prefs)) {
             return $this->_prefs->get($key);
         }
         return false;
     }
 
-    function & getDbh()
+    function &getDbh()
     {
         return $this->_dbi;
     }
@@ -464,8 +461,10 @@ class WikiRequest extends Request
         }
         $this->_user->_group = $this->getGroup();
         $this->setSessionVar('wiki_user', $user);
-        $this->_prefs->set('userid',
-            $isSignedIn ? $user->getId() : '');
+        if ($isSignedIn) {
+            $this->_prefs->set('userid', $user->getId());
+        }
+
         $this->initializeTheme($isSignedIn ? 'login' : 'logout');
         define('MAIN_setUser', true);
     }
@@ -536,8 +535,9 @@ class WikiRequest extends Request
                 $this->finish();
                 return;
             }
-        } elseif ($require_level == WIKIAUTH_BOGO)
-            $msg = fmt("You must sign in to %s.", $what); elseif ($require_level == WIKIAUTH_USER) {
+        } elseif ($require_level == WIKIAUTH_BOGO) {
+            $msg = fmt("You must sign in to %s.", $what);
+        } elseif ($require_level == WIKIAUTH_USER) {
             // LoginForm should display the relevant messages...
             $msg = "";
             /*if (!ALLOW_ANON_USER)
@@ -778,13 +778,19 @@ class WikiRequest extends Request
         $pagename = $page->getName();
         if (strlen($pagename) > MAX_PAGENAME_LENGTH) {
             $pagename = substr($pagename, 0, MAX_PAGENAME_LENGTH - 1) . '…';
-            $CONTENT = HTML::div(array('class' => 'error'),
+            $CONTENT = HTML::p(array('class' => 'error'),
                 _('Page name too long'));
             GeneratePage($CONTENT, $pagename);
             $this->finish();
         }
+        // Page name cannot end with a slash, redirect to page without slashes at the end
+        if (substr($pagename, -1) == "/") {
+            $pagename = rtrim($pagename, "/");
+            global $request;
+            $request->redirect(WikiURL($pagename, array(), 'absurl')); // noreturn
+        }
         if (preg_match("/[<\[\{\|\"\}\]>]/", $pagename, $matches) > 0) {
-            $CONTENT = HTML::div(
+            $CONTENT = HTML::p(
                 array('class' => 'error'),
                 sprintf(_("Illegal character “%s” in page name."),
                     $matches[0]));
@@ -847,12 +853,9 @@ class WikiRequest extends Request
         $ErrorManager->flushPostponedErrors();
 
         if (!empty($errormsg)) {
-            PrintXML(HTML::br(),
-                HTML::hr(),
-                HTML::h2(_("Fatal PhpWiki Error")),
-                $errormsg);
-            // HACK:
-            echo "\n</body></html>";
+            PrintXML(HTML::p(array('class' => 'error'),
+                             _("Fatal PhpWiki Error")._(': ').$errormsg));
+            close_tags(); // HACK
         }
         if (is_object($this->_user)) {
             $this->_user->page = $this->getArg('pagename');
@@ -874,8 +877,17 @@ class WikiRequest extends Request
      */
     function _deducePagename()
     {
-        if (trim(rawurldecode($this->getArg('pagename'))))
-            return rawurldecode($this->getArg('pagename'));
+        $raw_name = trim(rawurldecode($this->getArg('pagename')));
+        if ($raw_name) {
+            // Remove forbidden characters: <>[]{}"|#
+            $forbidden = array('<', '>', '[', ']', '{', '}', '"', '|', '#');
+            $safe_name = str_replace($forbidden, '', $raw_name);
+            if ($safe_name != $raw_name) {
+                trigger_error(sprintf(_('Illegal chars %s removed'),
+                                      '<>[]{}"|#'));
+            }
+            return $safe_name;
+        }
 
         if (USE_PATH_INFO) {
             $pathinfo = $this->get('PATH_INFO');
@@ -998,6 +1010,9 @@ class WikiRequest extends Request
 
         if ($userid = $this->getCookieVar(getCookieName())) {
             if (!empty($userid) and substr($userid, 0, 2) != 's:') {
+                if (!isset($this->_user)) {
+                    $this->_user = new stdClass();
+                }
                 $this->_user->_authhow = 'cookie';
                 return $userid;
             }
@@ -1135,7 +1150,7 @@ class WikiRequest extends Request
 
     function action_dump()
     {
-        $action = $this->findActionPage(_("PageDump"));
+        $action = $this->findActionPage(__("PageDump"));
         if ($action) {
             $this->actionpage($action);
         } else {
@@ -1386,8 +1401,8 @@ function validateSessionPath()
 
 function main()
 {
-    if (version_compare(PHP_VERSION, '5.3', '<')) {
-        exit(_("Your PHP version is too old. You must have at least PHP 5.3."));
+    if (version_compare(PHP_VERSION, '5.3.3', '<')) {
+        exit(_("Your PHP version is too old. You must have at least PHP 5.3.3."));
     }
 
     if (!USE_DB_SESSION)
@@ -1481,11 +1496,3 @@ if (!defined('PHPWIKI_NOMAIN') or !PHPWIKI_NOMAIN) {
     require_once 'lib/WikiTheme.php';
     $WikiTheme = new WikiTheme('default');
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

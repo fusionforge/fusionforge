@@ -1,12 +1,12 @@
-Date: Mon, 29 Jun 2015 12:04:23 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Thu, 24 Dec 2020 18:24:26 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=Aide%2FURLMagiquesPhpWiki;
-  flags=PAGE_LOCKED;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
   charset=UTF-8
 Content-Transfer-Encoding: binary
 
-===À propos des URL de PhpWiki
+== À propos des URL //phpwiki:// ==
 
 Un type spécial d'URL est disponible pour créer des liens permettant de réaliser
 des tâches administratives ou particulières dans PhpWiki. Voici une brève description de leur
@@ -14,97 +14,75 @@ fonctionnement.
 
 La syntaxe de base d'un URL phpwiki est :
 
-<pre>
-**phpwiki:**''nomdelapage''**?**''arguments''
-</pre>
+**phpwiki:**//nomdelapage//**?**//arguments//
 
-* si ''nomdelapage'' est omis, sa valeur par défaut est la page courante.
-* ''arguments'' doit être un ensemble de paramètres au format standard HTTP GET.
+Si //nomdelapage// est omis, sa valeur par défaut est la page courante.
 
-Le paramètre "action=''x''" doit presque toujours être donné. Il peut valoir
+//arguments// doit être un ensemble de paramètres au format standard HTTP GET.
+
+Le paramètre "action=//x//" doit presque toujours être donné. Il peut valoir
 **browse**, **info**, **diff**, **search**, **edit**,
 **zip**, **dumpserial**, **loadserial**,
 **remove**, **lock**, **unlock**,
 **login**, **logout**, **setprefs** ou **save**.
 L'action par défaut est **browse**.
 
-Certaines actions acceptent d'autres paramètres :
+Certaines actions acceptent d'autres paramètres.
 
-**!FullTextSearch**, **!TitleSearch**:
+| **FullTextSearch**, **TitleSearch** | Accepte **s**=terme à rechercher, and **size**=taille de l'entrée.
+| **edit**                            | Accepte **version**.
+| **remove**                          | Accepte **verify**.
+| **save**                            | Accepte **editversion**, **minor_edit** et  **content**.
+| **setprefs**                        | Accepte **edit_area_width** et **edit_area_height**.
 
-  accepte **s**=terme à rechercher, et **size**=taille de l'entrée.
-
-**edit**:
-
-  accepte **version**.
-
-**remove**:
-
-  accepte **verify**.
-
-**save**:
-
-  accepte **editversion**, **minor_edit**, et  **content**.
-
-**setprefs**:
-
-  accepte **edit_area_width**, **edit_area_height**.
-
-
-=== Rédiger des liens Magiques dans les pages du Wiki
+== Rédiger des liens magiques dans les pages du wiki ==
 
 Un lien magique a cette allure :
 
+**~[~[** //text// **|** //url-phpwiki// **]]**
+
+Le //texte// est optionnel mais est habituellement recommandé.
+S'il est donné, il fournira le label du lien.
+
+L'//url-phpwiki// est une URL //phpwiki:// comme décrit plus haut.
+
+==== Exemples ====
+
 {{{
-[ texte | url-phpwiki ]
+[[phpwiki:BacÀSable?action=edit|Éditer le BacÀSable]]
 }}}
-
-La partie ''texte'' est optionnelle mais est habituellement recommandée.
-S'il est donné, il fournira le label du lien. L' ''url-phpwiki'' est
-un URL **phpwiki:** comme décrit plus haut.
-
-===Exemples
-
-{{{
-[ Éditer le BacÀSable | phpwiki:BacÀSable?action=edit ]
-}}}
-générera un lien qui vous emmènera directement à l'édition du [BacÀSable], comme ceci :
-[ Éditer le BacÀSable | phpwiki:BacÀSable?action=edit ].
+générera un lien qui vous emmènera directement à l'édition du [[BacÀSable]], comme ceci :
+[[phpwiki:BacÀSable?action=edit|Éditer le BacÀSable]].
 
 Autres possibilités :
-* [ Diff du BacÀSable | phpwiki:BacÀSable?action=diff ],
-* [ Verrouiller la page d'accueil | phpwiki:PageAccueil?action=lock ],
-* [ Obtenir un vidage Zip complet | phpwiki:?action=zip&include=all ],
-* Recherche pour [ Titres de page contenant 'wiki' | phpwiki:RechercheParTitre?s=wiki ],
+* [[phpwiki:BacÀSable?action=diff|Diff du BacÀSable]],
+* [[phpwiki:PageAccueil?action=lock|Verrouiller la page d'accueil]],
+* [[phpwiki:?action=zip&include=all|Obtenir un vidage ZIP complet]],
+* Recherche pour [[phpwiki:RechercheParTitre?s=wiki|Titres de page contenant 'wiki']].
 
-=== Insertion de Formulaires Magiques dans les Pages du Wiki
+== Insertion de formulaires magiques dans les pages du wiki ==
 
-''**Note**: L'ancienne syntaxe des formulaires magiques n'est plus supportée.
-Ils ont été remplacés par =<?plugin-form>=.''
+//**Note**://** //L'ancienne syntaxe des formulaires magiques n'est plus supportée.
+Ils ont été remplacés par// ##<?plugin-form>##.
 
-Si le plugin est appelé en utilisant *<?plugin-form* au lieu de *<?plugin* et
-que le plugin supporte les recherches alors sera rendu comme un formulaire.
+Si le greffon est appelé en utilisant **<?plugin-form** au lieu de **<?plugin** et
+que le greffon supporte les recherches alors sera rendu comme un formulaire.
 
-''size'':
+| //size// | Si c'est donné, spécifie la taille de la zone de saisie.
+| //s//    | Spécifie la valeur par défaut de l'entrée.
 
-  Si c'est donné, spécifie la taille de la zone de saisie.
+==== Exemples =====
 
-''s'':
-
-  Spécifie la valeur par défaut de l'entrée.
-
-==== Exemples:
-
-Un plugin de recherche appelé avec *<?plugin* au lieu de *<?plugin-form*
-insère simplement le résultat de la recherche du plugin :
+Un greffon de recherche appelé avec **<?plugin** au lieu de **<?plugin-form**
+insère simplement le résultat de la recherche du greffon :
 
 {{{
-<<TitleSearch s=wiki noheader=true>>
+<<TitleSearch s=wiki noheader=true limit=10>>
 }}}
 
 Résultats de recherche pour les pages dont le titre contient 'wiki' :
 
-<<TitleSearch s=wiki noheader=true>>
+<<TitleSearch s=wiki noheader=true limit=10>>
 
 {{{
 <?plugin-form FullTextSearch ?>

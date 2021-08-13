@@ -1,7 +1,7 @@
 <?php
-/*
- * Copyright 1999-2008 $ThePhpWikiProgrammingTeam
- * Copyright 2008-2009 Marc-Etienne Vargenau, Alcatel-Lucent
+/**
+ * Copyright © 1999-2008 $ThePhpWikiProgrammingTeam
+ * Copyright © 2008-2009 Marc-Etienne Vargenau, Alcatel-Lucent
  *
  * This file is part of PhpWiki.
  *
@@ -18,6 +18,9 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
  */
 
 /*
@@ -26,7 +29,7 @@
     AbsoluteURL ($url)
     IconForLink ($protocol_or_url)
     PossiblyGlueIconToText($proto_or_url, $text)
-    IsSafeURL($url)
+    IsSafeURL($url, $http_only)
     LinkURL ($url, $linktext)
     LinkImage ($url, $alt)
     ImgObject ($img, $url)
@@ -54,10 +57,10 @@
 
     file_mtime ($filename)
     sort_file_mtime ($a, $b)
-    class fileSet {fileSet($directory, $filepattern = false),
+    class FileSet {FileSet($directory, $filepattern = false),
                    getFiles($exclude='', $sortby='', $limit='') }
-    class imageSet extends fileSet
-    class imageOrVideoSet extends fileSet
+    class ImageSet extends FileSet
+    class ImageOrVideoSet extends FileSet
 
     glob_to_pcre ($glob)
     glob_match ($glob, $against, $case_sensitive = true)
@@ -69,7 +72,6 @@
     subPageSlice ($pagename, $pos)
     isActionPage ($filename)
 
-    phpwiki_version ()
     isWikiWord ($word)
     url_get_contents ($uri)
     GenerateId ($name)
@@ -269,7 +271,7 @@ function IconForLink($protocol_or_url)
         // display apache style icon for file type instead of protocol icon
         // - archive: unix:gz,bz2,tgz,tar,z; mac:dmg,dmgz,bin,img,cpt,sit; pc:zip;
         // - document: html, htm, text, txt, rtf, pdf, doc
-        // - non-inlined image: jpg,jpeg,png,gif,tiff,tif,swf,pict,psd,eps,ps
+        // - non-inlined image: jpg,jpeg,png,gif,tiff,tif,pict,psd,eps,ps
         // - audio: mp3,mp2,aiff,aif,au
         // - multimedia: mpeg,mpg,mov,qt
     } else {
@@ -343,16 +345,29 @@ function PossiblyGlueIconToText($proto_or_url, $text)
 }
 
 /**
- * Determines if the url passed to function is safe, by detecting if the characters
- * '<', '>', or '"' are present.
- * Check against their urlencoded values also.
+ * Determines if the url passed to function is safe
+ * 1) By detecting if the characters '<', '>', or '"' are present.
+ *    Check against their urlencoded values also.
+ * 2) By checking the URL syntax is valid
  *
- * @param string $url URL to check for unsafe characters.
- * @return boolean True if same, false else.
+ * @param string $url URL to check
+ * @param bool $http_only if true, accept only http and https URLs
+ * @return bool true if safe, false else.
  */
-function IsSafeURL($url)
+function IsSafeURL($url, $http_only = false)
 {
-    return !preg_match('/([<>"])|(%3C)|(%3E)|(%22)/', $url);
+    if (preg_match('/([<>"])|(%3C)|(%3E)|(%22)/', $url)) {
+        return false;
+    }
+    if ($http_only) {
+        if (filter_var($url, FILTER_VALIDATE_URL) === false) {
+            return false;
+        }
+        $scheme = parse_url($url, PHP_URL_SCHEME);
+        return ($scheme == 'http') || ($scheme == 'https');
+    } else {
+        return true;
+    }
 }
 
 /**
@@ -366,7 +381,7 @@ function LinkURL($url, $linktext = '')
 {
     // FIXME: Is this needed (or sufficient?)
     if (!IsSafeURL($url)) {
-        $link = HTML::span(array('class' => 'error'), _('Bad URL -- remove all of <, >, "'));
+        $link = HTML::span(array('class' => 'error'), _('Bad URL').' -- '._('Remove all of <, >, "'));
         return $link;
     } else {
         if (!$linktext)
@@ -387,7 +402,7 @@ function LinkURL($url, $linktext = '')
  * Disallows sizes which are too small.
  * Spammers may use such (typically invisible) image attributes to raise their GoogleRank.
  *
- * Handle embeddable objects, like svg, class, vrml, swf, svgz, pdf, avi, wmv especially.
+ * Handle embeddable objects, like svg, class, vrml, svgz, pdf, avi, wmv especially.
  */
 function LinkImage($url, $alt = "")
 {
@@ -404,7 +419,7 @@ function LinkImage($url, $alt = "")
     $arr = explode(' ', $url);
     if (!empty($arr)) $url = $arr[0];
     if (!IsSafeURL($url)) {
-        $link = HTML::span(array('class' => 'error'), _('Bad URL for image -- remove all of <, >, "'));
+        $link = HTML::span(array('class' => 'error'), _('Bad URL for image').' -- '._('Remove all of <, >, "'));
         return $link;
     }
     // spaces in inline images must be %20 encoded!
@@ -465,7 +480,7 @@ function LinkImage($url, $alt = "")
     // Correct silently the most common error
     if ($url != $ori_url and empty($arr) and !preg_match("/^http/", $url)) {
         // space belongs to the path
-        $file = NormalizeLocalFileName($ori_url);
+        $file = normalizeLocalFileName($ori_url);
         if (file_exists($file)) {
             $link = HTML::img(array('src' => $ori_url));
             trigger_error(
@@ -508,9 +523,9 @@ function LinkImage($url, $alt = "")
         elseif (preg_match("/^http/", $url)) { // external url
             $size = @getimagesize($url);
         } else { // local file
-            if (file_exists($file = NormalizeLocalFileName($url))) { // here
+            if (file_exists($file = normalizeLocalFileName($url))) { // here
                 $size = @getimagesize($file);
-            } elseif (file_exists(NormalizeLocalFileName(urldecode($url)))) {
+            } elseif (file_exists(normalizeLocalFileName(urldecode($url)))) {
                 $size = @getimagesize($file);
                 $link->setAttr('src', rawurldecode($url));
             } elseif (string_starts_with($url, getUploadDataPath())) { // there
@@ -648,9 +663,6 @@ function ImgObject($img, $url)
     if ($params) {
         foreach ($params as $param) $object->pushContent($param);
     }
-    if (isBrowserSafari() and !isBrowserSafari(532)) { // recent chrome can do OBJECT
-        return HTML::embed($object->_attr, $object->_content);
-    }
     $object->pushContent(HTML::embed($object->_attr));
     return $object;
 }
@@ -701,7 +713,7 @@ function SplitQueryArgs($query_args = '')
     // FIXME: use the arg-separator which might not be &
     $split_args = explode('&', $query_args);
     $args = array();
-    while (list($key, $val) = each($split_args))
+    foreach ($split_args as $key => $val)
         if (preg_match('/^ ([^=]+) =? (.*) /x', $val, $m))
             $args[$m[1]] = $m[2];
     return $args;
@@ -1188,8 +1200,8 @@ function CTime($time = 0)
  * Short format is used for PageList
  * Long format is used in PageInfo
  *
- * @param $bytes       int.  Default: 0.
- * @param $longformat  bool. Default: false.
+ * @param int $bytes       Default: 0.
+ * @param bool $longformat Default: false.
  * @return FormattedText (XmlElement.php).
  */
 function ByteFormatter($bytes = 0, $longformat = false)
@@ -1333,7 +1345,7 @@ function sort_file_mtime($a, $b)
     return ($ma > $mb) ? -1 : 1;
 }
 
-class fileSet
+class FileSet
 {
     function __construct($directory, $filepattern = false)
     {
@@ -1369,7 +1381,7 @@ class fileSet
      * Subdirectories are not traversed.
      *
      * (This was a function LoadDir in lib/loadsave.php)
-     * See also http://www.php.net/manual/en/function.readdir.php
+     * See also https://www.php.net/manual/en/function.readdir.php
      */
     public function getFiles($exclude = '', $sortby = '', $limit = '')
     {
@@ -1377,7 +1389,7 @@ class fileSet
 
         if ($sortby) {
             require_once 'lib/PageList.php';
-            switch (Pagelist::sortby($sortby, 'db')) {
+            switch (PageList::sortby($sortby, 'db')) {
                 case 'pagename ASC':
                     break;
                 case 'pagename DESC':
@@ -1410,7 +1422,7 @@ class fileSet
     }
 }
 
-class imageSet extends fileSet
+class ImageSet extends FileSet
 {
     /**
      * A file is considered an image when the suffix matches one from
@@ -1422,7 +1434,7 @@ class imageSet extends fileSet
     }
 }
 
-class imageOrVideoSet extends fileSet
+class ImageOrVideoSet extends FileSet
 {
     protected function _filenameSelector($filename)
     {
@@ -1445,7 +1457,7 @@ function glob_to_pcre($glob)
     $glob = str_replace("/", "\\/", $glob);
     // first convert some unescaped expressions to pcre style: . => \.
     $special = '.^$';
-    $re = preg_replace('/([^\xff])?([' . preg_quote($special) . '])/',
+    $re = preg_replace('/([^\xff])?([' . preg_quote($special, '/') . '])/',
         "\\1\xff\\2", $glob);
 
     // * => .*, ? => .
@@ -1559,7 +1571,7 @@ function rand_ascii_readable($length = 6)
  * Recursively count all non-empty elements
  * in array of any dimension or mixed - i.e.
  * array('1' => 2, '2' => array('1' => 3, '2' => 4))
- * See http://www.php.net/manual/en/function.count.php
+ * See https://www.php.net/manual/en/function.count.php
  */
 function count_all($arg)
 {
@@ -1664,24 +1676,6 @@ class Alert
     }
 }
 
-// 1.3.8     => 1030.08
-// 1.3.9-p1  => 1030.091
-// 1.3.10pre => 1030.099
-// 1.3.11pre-20041120 => 1030.1120041120
-// 1.3.12-rc1 => 1030.119
-function phpwiki_version()
-{
-    static $PHPWIKI_VERSION;
-    if (!isset($PHPWIKI_VERSION)) {
-        $arr = explode('.', preg_replace('/\D+$/', '', PHPWIKI_VERSION)); // remove the pre
-        $arr[2] = preg_replace('/\.+/', '.', preg_replace('/\D/', '.', $arr[2]));
-        $PHPWIKI_VERSION = $arr[0] * 1000 + $arr[1] * 10 + 0.01 * $arr[2];
-        if (strstr(PHPWIKI_VERSION, 'pre') or strstr(PHPWIKI_VERSION, 'rc'))
-            $PHPWIKI_VERSION -= 0.01;
-    }
-    return $PHPWIKI_VERSION;
-}
-
 function phpwiki_gzhandler($ob)
 {
     /**
@@ -1716,7 +1710,7 @@ function isAsciiString($s)
 /**
  * Workaround for allow_url_fopen, to get the content of an external URI.
  * It returns the contents in one slurp. Parsers might want to check for allow_url_fopen
- * and use fopen, fread chunkwise. (see lib/XmlParser.php)
+ * and use fopen, fread chunkwise. (see lib/PhpWikiXmlParser.php)
  */
 function url_get_contents($uri)
 {
@@ -1821,7 +1815,7 @@ function extractSection($section, $content, $page, $quiet = false, $sectionhead 
 }
 
 // Extract the first $sections sections of the page
-function extractSections($sections, $content, $page, $quiet = false, $sectionhead = false)
+function extractSections($sections, $content)
 {
 
     $mycontent = $content;
@@ -1839,8 +1833,7 @@ function extractSections($sections, $content, $page, $quiet = false, $sectionhea
             $section = $match[2];
             // Strip trailing blanks lines and ---- <hr>s
             $text = preg_replace("/\\s*^-{4,}\\s*$/m", "", $match[3]);
-            if ($sectionhead)
-                $text = $match[1] . $section . "\n" . $text;
+            $text = $match[1] . $section . "\n" . $text;
             $result .= $text;
 
             $mycontent = explode("\n", $match[4]);
@@ -1924,7 +1917,7 @@ function printSimpleTrace($bt)
  * @return integer
  * @desc Feed a sorted array to $haystack and a value to search for to $needle.
 It will return false if not found or the index where it was found.
-From dennis.decoene@moveit.be http://www.php.net/array_search
+From dennis.decoene@moveit.be https://www.php.net/array_search
  */
 function binary_search($needle, $haystack)
 {
@@ -1951,7 +1944,7 @@ function binary_search($needle, $haystack)
 
 function is_localhost()
 {
-    return $_SERVER['SERVER_ADDR'] == '127.0.0.1';
+    return in_array($_SERVER['REMOTE_ADDR'], array('127.0.0.1', '::1'));
 }
 
 /**
@@ -2068,7 +2061,7 @@ function parse_attributes($line)
 
 /**
  * Returns true if the filename ends with an image suffix.
- * Uses INLINE_IMAGES if defined, else "png|jpg|jpeg|gif|swf"
+ * Uses INLINE_IMAGES if defined, else "png|jpg|jpeg|gif"
  */
 function is_image($filename)
 {
@@ -2076,7 +2069,7 @@ function is_image($filename)
     if (defined('INLINE_IMAGES')) {
         $inline_images = INLINE_IMAGES;
     } else {
-        $inline_images = "png|jpg|jpeg|gif|swf";
+        $inline_images = "png|jpg|jpeg|gif";
     }
 
     foreach (explode("|", $inline_images) as $suffix) {
@@ -2089,13 +2082,12 @@ function is_image($filename)
 
 /**
  * Returns true if the filename ends with an video suffix.
- * Currently FLV, OGG, MP4 and WebM.
+ * Currently OGG, MP4 and WebM.
  */
 function is_video($filename)
 {
 
-    return string_ends_with(strtolower($filename), ".flv")
-        or string_ends_with(strtolower($filename), ".ogg")
+    return string_ends_with(strtolower($filename), ".ogg")
         or string_ends_with(strtolower($filename), ".mp4")
         or string_ends_with(strtolower($filename), ".webm");
 }
@@ -2113,17 +2105,93 @@ function strip_accents($text)
 }
 
 /**
- * Sanify filename: replace all disallowed characters with dashes
+ * Sanify filename:
+ * - remove spaces from the beginning and end
+ * - replace multiple spaces by single space
+ * - replace all disallowed characters with dashes
  */
 function sanify_filename($filename)
 {
+    $filename = trim($filename);
+    $filename = preg_replace('!\s+!', ' ', $filename);
     return mb_ereg_replace('[^\w\. \-]', '-', $filename);
 }
 
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:
+/**
+ * Close all open tags depending on WikiTheme
+ */
+function close_tags()
+{
+    global $WikiTheme;
+
+    // Ugly hack to get valid XHTML code
+    if (is_a($WikiTheme, 'WikiTheme_fusionforge')) {
+        echo "</div>\n";
+        echo "</div>\n";
+        echo "</main>\n";
+        echo "</div>\n";
+        echo "</div>\n";
+    } elseif (is_a($WikiTheme, 'WikiTheme_Sidebar')
+        or is_a($WikiTheme, 'WikiTheme_MonoBook')
+    ) {
+        echo "</div>\n";
+        echo "</div>\n";
+        echo "</div>\n";
+        echo "</div>\n";
+    } elseif (is_a($WikiTheme, 'WikiTheme_wikilens')) {
+        echo "</div>\n";
+        echo "</td>\n";
+        echo "</tr>\n";
+        echo "</table>\n";
+    } elseif (is_a($WikiTheme, 'WikiTheme_blog')) {
+        echo "</div>\n";
+        echo "</div>\n";
+    } elseif (is_a($WikiTheme, 'WikiTheme_Crao')
+        or is_a($WikiTheme, 'WikiTheme_Hawaiian')
+        or is_a($WikiTheme, 'WikiTheme_MacOSX')
+        or is_a($WikiTheme, 'WikiTheme_shamino_com')
+        or is_a($WikiTheme, 'WikiTheme_smaller')
+    ) {
+        echo "</div>\n";
+    }
+    echo "</body></html>\n";
+}
+
+// Fusionforge already defines is_utf8
+if (!(defined('FUSIONFORGE') && FUSIONFORGE)) {
+
+/**
+ * is_utf8 - utf-8 detection
+ *
+ * @param   string  $str the string to analyze
+ * @return bool
+ *
+ * From https://www.php.net/manual/en/function.mb-detect-encoding.php#85294
+ */
+function is_utf8($str) {
+    $c=0; $b=0;
+    $bits=0;
+    $len=strlen($str);
+    for($i=0; $i<$len; $i++){
+        $c=ord($str[$i]);
+        if($c > 128){
+            if(($c >= 254)) return false;
+            elseif($c >= 252) $bits=6;
+            elseif($c >= 248) $bits=5;
+            elseif($c >= 240) $bits=4;
+            elseif($c >= 224) $bits=3;
+            elseif($c >= 192) $bits=2;
+            else return false;
+            if(($i+$bits) > $len) return false;
+            while($bits > 1){
+                $i++;
+                $b=ord($str[$i]);
+                if($b < 128 || $b > 191) return false;
+                $bits--;
+            }
+        }
+    }
+    return true;
+}
+
+} // END FUSIONFORGE

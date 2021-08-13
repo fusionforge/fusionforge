@@ -1,12 +1,12 @@
-Date: Mon, 29 Jun 2015 12:04:26 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Tue,  9 Apr 2019 11:19:11 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=RecentChanges;
-  flags=PAGE_LOCKED;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
   charset=UTF-8
 Content-Transfer-Encoding: binary
 
-這裡提供了此 wiki 最新的變更頁面. (參閱 RecentEdits 取得所有最新的次要編輯與變更).
+<<RecentChanges days||=7 daylist=1,3,7,30,90,0 show_deleted||=1>>
 
---------
-<<RecentChanges days||=7 daylist=1,3,7,30,90, 0 >>
+----
+[[CategoryActionPage]]

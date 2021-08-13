@@ -115,18 +115,6 @@ div.wikitext {
     color: #006;
 }
 
-/*
-.wikiaction, .wikiaction table, span.wikiaction {
-  background-color: #ddd;
-}
-.wikiadmin, .wikiadmin table {
-  background-color: #fdd;
-}
-.wikiunsafe {
-  background-color: #ccc;
-}
-*/
-
 /* Unknown links */
 .wikiunknown a, .named-wikiunknown a, .wikiunknown u {
     text-decoration: none;
@@ -290,12 +278,6 @@ textarea.wikiedit {
     padding: 2px;
 }
 
-#editarea-size {
-    margin-top: 1ex;
-    text-align: right;
-    font-size: smaller;
-}
-
 /* IncludePage plugin ================================================= */
 
 .transclusion-title {
@@ -347,9 +329,8 @@ textarea.wikiedit {
     margin-bottom: 1ex;
 }
 
-/**
- * Calendar plugin
- */
+/* Calendar plugin ==================================================== */
+
 table.cal {
     border: thin outset gray;
     background: #ddd;
@@ -500,6 +481,10 @@ td.pageinfo {
 
 /* Link icons */
 img.linkicon {
+    vertical-align: middle;
+}
+
+img.inlineimage {
     vertical-align: middle;
 }
 

@@ -1,5 +1,5 @@
-Date: Mon, 29 Jun 2015 12:04:23 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Mon, 15 Apr 2019 14:46:57 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=RechercheInterWiki;
   flags=PAGE_LOCKED;
@@ -10,7 +10,7 @@ Interroge chaque Wiki apparaissant dans la [[CarteInterWiki]] en entrant
 un nom de page souhaité ci-dessous.
 
 Pour ajouter une de ces recherches à une autre page, utiliser
-le greffon [[Aide:PluginRechercheExterne|RechercheExterne]].
+le greffon [[Aide:GreffonRechercheExterne|RechercheExterne]].
 
 <<InterWikiSearch>>
 

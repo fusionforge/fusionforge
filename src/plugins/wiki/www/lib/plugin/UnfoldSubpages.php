@@ -1,7 +1,6 @@
 <?php
-
-/*
- * Copyright 2002,2004,2005 $ThePhpWikiProgrammingTeam
+/**
+ * Copyright © 2002,2004,2005 $ThePhpWikiProgrammingTeam
  *
  * This file is part of PhpWiki.
  *
@@ -18,12 +17,15 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
  */
 
 /**
  * UnfoldSubpages:  Lists the content of all SubPages of the current page.
  *   This is e.g. useful for the CalendarPlugin, to see all entries at once.
- *   Warning: Better don't use it with non-existant sections!
+ *   Warning: Better don't use it with nonexistent sections!
  *              The section extractor is currently quite unstable.
  * Usage:   <<UnfoldSubpages sortby=-mtime words=50 maxpages=5 >>
  * Author:  Reini Urban <rurban@x-ray.at>
@@ -48,23 +50,17 @@ class WikiPlugin_UnfoldSubpages
             PageList::supportedArgs(),
             array(
                 'pagename' => '[pagename]', // default: current page
-                //'header'  => '',  // expandable string
                 'quiet' => false, // print no header
                 'sortby' => '', // [+|-]pagename, [+|-]mtime, [+|-]hits
                 'maxpages' => false, // maximum number of pages to include (== limit)
-                'smalltitle' => false, // if set, hide transclusion-title,
-                //  just have a small link at the start of
-                //  the page.
-                'words' => false, // maximum number of words
-                //  per page to include
-                'lines' => false, // maximum number of lines
-                //  per page to include
-                'bytes' => false, // maximum number of bytes
-                //  per page to include
+                'smalltitle' => false,  // if set, hide transclusion-title,
+                                        // just have a small link at the start of the page.
+                'words' => false, // maximum number of words per page to include
+                'lines' => false, // maximum number of lines per page to include
+                'bytes' => false, // maximum number of bytes per page to include
                 'sections' => false, // maximum number of sections per page to include
                 'section' => false, // this named section per page only
-                'sectionhead' => false // when including a named
-                //  section show the heading
+                'sectionhead' => false // when including a named section show the heading
             ));
     }
 
@@ -110,7 +106,7 @@ class WikiPlugin_UnfoldSubpages
                     $cpagename));
             }
 
-            // trap any remaining nonexistant subpages
+            // Trap any remaining nonexistent subpages
             if ($page->exists()) {
                 $r = $page->getCurrentRevision();
                 $c = $r->getContent(); // array of lines
@@ -177,11 +173,3 @@ class WikiPlugin_UnfoldSubpages
         return $content;
     }
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

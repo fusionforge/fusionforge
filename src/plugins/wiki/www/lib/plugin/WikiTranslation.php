@@ -1,7 +1,6 @@
 <?php
-
-/*
- * Copyright 2004,2005 $ThePhpWikiProgrammingTeam
+/**
+ * Copyright © 2004,2005 $ThePhpWikiProgrammingTeam
  *
  * This file is part of PhpWiki.
  *
@@ -18,10 +17,13 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
  */
 
 /**
- * _WikiTranslation:  Display pagenames and other strings in various languages.
+ * WikiTranslation:  Display pagenames and other strings in various languages.
  * Can also be used to let a favorite translation service translate a whole page.
  * Current favorite: translate.google.com if from_lang = en or fr
  *
@@ -57,10 +59,8 @@ $pgsrc_container =
     _("AsciiMath") . ',' .
     _("AsciiSVG") . ',' .
     _("AtomFeed") . ',' .
-    _("DebugAuthInfo") . ',' .
     _("AuthorHistory") . ',' .
     _("AuthorHistoryPlugin") . ',' .
-    _("DebugBackendInfo") . ',' .
     _("BackLinks") . ',' .
     _("BlogArchives") . ',' .
     _("BlogJournal") . ',' .
@@ -83,7 +83,10 @@ $pgsrc_container =
     _("CreateTocPlugin") . ',' .
     _("CurrentTime") . ',' .
     _("DeadEndPages") . ',' .
-    _("DebugInfo") . ',' .
+    _("DebugAuthInfo") . ',' .
+    _("DebugBackendInfo") . ',' .
+    _("DebugGroupInfo") . ',' .
+    _("DebugRetransform") . ',' .
     _("Diff") . ',' .
     _("DynamicIncludePage") . ',' .
     _("EditMetaData") . ',' .
@@ -102,7 +105,6 @@ $pgsrc_container =
     _("GooglePlugin") . ',' .
     _("GoTo") . ',' .
     _("GraphViz") . ',' .
-    _("DebugGroupInfo") . ',' .
     _("HelloWorld") . ',' .
     _("HelloWorldPlugin") . ',' .
     _("HomePageAlias") . ',' .
@@ -143,8 +145,6 @@ $pgsrc_container =
     _("PhotoAlbumPlugin") . ',' .
     _("PhpHighlight") . ',' .
     _("PhpHighlightPlugin") . ',' .
-    _("PhpWeather") . ',' .
-    _("PhpWeatherPlugin") . ',' .
     _("PhpWiki") . ',' .
     _("PhpWikiAdministration") . ',' .
     _("PhpWikiDocumentation") . ',' .
@@ -176,7 +176,6 @@ $pgsrc_container =
     _("Remove") . ',' .
     _("Rename") . ',' .
     _("Replace") . ',' .
-    _("DebugRetransform") . ',' .
     _("RichTable") . ',' .
     _("RichTablePlugin") . ',' .
     _("RssFeed") . ',' .
@@ -186,8 +185,8 @@ $pgsrc_container =
     _("SemanticSearchAdvanced") . ',' .
     _("SetAcl") . ',' .
     _("SiteMap") . ',' .
-    _("SpellCheck") . ',' .
     _("SpecialPages") . ',' .
+    _("SpellCheck") . ',' .
     _("SqlResult") . ',' .
     _("SyncWiki") . ',' .
     _("SyntaxHighlighter") . ',' .
@@ -437,8 +436,8 @@ class WikiPlugin_WikiTranslation
                 if (!is_array($exclude))
                     $exclude = $pagelist->explodePageList($exclude, false, $sortby,
                         $limit, $exclude);
-                $path = FindLocalizedFile(WIKI_PGSRC);
-                $pgsrc = new fileSet($path);
+                $path = findLocalizedFile(WIKI_PGSRC);
+                $pgsrc = new FileSet($path);
                 foreach ($pgsrc->getFiles($exclude, $sortby, $limit) as $pagename) {
                     $pagename = urldecode($pagename);
                     if (substr($pagename, -1, 1) == '~') continue;
@@ -474,7 +473,7 @@ class WikiPlugin_WikiTranslation
             // navbar links, actionpages, and admin requests
             case 'buttons':
                 $buttons = $GLOBALS['AllActionPages'];
-                $fileset = new FileSet(FindFile("themes/MacOSX/buttons/en"),
+                $fileset = new FileSet(findFile("themes/MacOSX/buttons/en"),
                     "*.png");
                 foreach ($fileset->getFiles() as $file) {
                     $b = urldecode(substr($file, 0, -4));
@@ -494,7 +493,7 @@ class WikiPlugin_WikiTranslation
 
 class _PageList_Column_customlang extends _PageList_Column
 {
-    function _PageList_Column_customlang($field, $from_lang, $plugin)
+    function __construct($field, $from_lang, $plugin)
     {
         /**
          * @var WikiRequest $request
@@ -512,13 +511,15 @@ class _PageList_Column_customlang extends _PageList_Column
             $this->_field = substr($field, 7);
         //$heading = $field;
         $this->dbi = &$request->getDbh();
-        $this->_PageList_Column_base($this->_field);
+        _PageList_Column_base::__construct($this->_field);
     }
 
-    function _getValue($page, $revision_handle)
+    function _getValue($page_handle, $revision_handle)
     {
-        if (is_object($page)) $text = $page->getName();
-        else $text = $page;
+        if (is_object($page_handle))
+            $text = $page_handle->getName();
+        else
+            $text = $page_handle;
         $trans = $this->_plugin->fast_translate($text, $this->_field,
             $this->_from_lang);
         // how to markup untranslated words and not existing pages?
@@ -546,10 +547,10 @@ class _PageList_Column_customlang extends _PageList_Column
                 $text->setAttr('style', 'text-decoration:line-through');
                 $link->pushContent($text);
                 return $link;
-            } elseif (is_object($page))
+            } elseif (is_object($page_handle))
                 return ''; else // not existing: empty
                 return '';
-        } elseif (is_object($page)) {
+        } elseif (is_object($page_handle)) {
             if (!$this->_nolinks)
                 return WikiLink($trans, 'auto');
             else
@@ -559,11 +560,3 @@ class _PageList_Column_customlang extends _PageList_Column
         }
     }
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

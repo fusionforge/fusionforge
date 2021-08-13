@@ -6,7 +6,9 @@ global $ADODB_INCLUDED_LIB;
 $ADODB_INCLUDED_LIB = 1;
 
 /*
-  @version V5.20dev  ??-???-2014  (c) 2000-2014 John Lim (jlim#natsoft.com). All rights reserved.
+  @version   v5.20.19  13-Dec-2020
+  @copyright (c) 2000-2013 John Lim (jlim#natsoft.com). All rights reserved.
+  @copyright (c) 2014      Damien Regad, Mark Newnham and the ADOdb community
   Released under both BSD license and Lesser GPL library license.
   Whenever there is any discrepancy between the two licenses,
   the BSD license will take precedence. See License.txt.
@@ -17,7 +19,7 @@ $ADODB_INCLUDED_LIB = 1;
 
 function adodb_strip_order_by($sql)
 {
-	$rez = preg_match('/(\sORDER\s+BY\s(?:[^)](?!limit))*)(?:\sLIMIT\s+[0-9]+)?/is', $sql, $arr);
+	$rez = preg_match('/(\sORDER\s+BY\s(?:[^)](?!LIMIT))*)/is', $sql, $arr);
 	if ($arr)
 		if (strpos($arr[1], '(') !== false) {
 			$at = strpos($sql, $arr[1]);
@@ -38,7 +40,7 @@ function adodb_strip_order_by($sql)
 			$sql = str_replace($arr[1], '', $sql);
 		}
 	return $sql;
- }
+}
 
 if (false) {
 	$sql = 'select * from (select a from b order by a(b),b(c) desc)';
@@ -117,7 +119,7 @@ function  adodb_transpose(&$arr, &$newarr, &$hdr, &$fobjs)
 }
 
 // Force key to upper.
-// See also http://www.php.net/manual/en/function.array-change-key-case.php
+// See also https://www.php.net/manual/en/function.array-change-key-case.php
 function _array_change_key_case($an_array)
 {
 	if (is_array($an_array)) {
@@ -175,7 +177,7 @@ function _adodb_replace(&$zthis, $table, $fieldArray, $keyCol, $autoQuote, $has_
 				if ($zthis->poorAffectedRows) {
 				/*
 				 The Select count(*) wipes out any errors that the update would have returned.
-				http://phplens.com/lens/lensforum/msgs.php?id=5696
+				PHPLens Issue No: 5696
 				*/
 					if ($zthis->ErrorNo()<>0) return 0;
 
@@ -210,178 +212,184 @@ function _adodb_replace(&$zthis, $table, $fieldArray, $keyCol, $autoQuote, $has_
 		return ($rs) ? 2 : 0;
 }
 
-// Requires $ADODB_FETCH_MODE = ADODB_FETCH_NUM
 function _adodb_getmenu(&$zthis, $name,$defstr='',$blank1stItem=true,$multiple=false,
 			$size=0, $selectAttr='',$compareFields0=true)
 {
-	$hasvalue = false;
+	global $ADODB_FETCH_MODE;
 
-	if ($multiple or is_array($defstr)) {
-		if ($size==0) $size=5;
-		$attr = ' multiple size="'.$size.'"';
-		if (!strpos($name,'[]')) $name .= '[]';
-	} else if ($size) $attr = ' size="'.$size.'"';
-	else $attr ='';
+	$s = _adodb_getmenu_select($name, $defstr, $blank1stItem, $multiple, $size, $selectAttr);
 
-	$s = '<select name="'.$name.'"'.$attr.' '.$selectAttr.'>';
-	if ($blank1stItem)
-		if (is_string($blank1stItem))  {
-			$barr = explode(':',$blank1stItem);
-			if (sizeof($barr) == 1) $barr[] = '';
-			$s .= "\n<option value=\"".$barr[0]."\">".$barr[1]."</option>";
-		} else $s .= "\n<option></option>";
-
-	if ($zthis->FieldCount() > 1) $hasvalue=true;
-	else $compareFields0 = true;
+	$hasvalue = $zthis->FieldCount() > 1;
+	if (!$hasvalue) {
+		$compareFields0 = true;
+	}
 
 	$value = '';
-    $optgroup = null;
-    $firstgroup = true;
-    $fieldsize = $zthis->FieldCount();
 	while(!$zthis->EOF) {
 		$zval = rtrim(reset($zthis->fields));
 
-		if ($blank1stItem && $zval=="") {
+		if ($blank1stItem && $zval == "") {
 			$zthis->MoveNext();
 			continue;
 		}
 
-        if ($fieldsize > 1) {
-			if (isset($zthis->fields[1]))
-				$zval2 = rtrim($zthis->fields[1]);
-			else
-				$zval2 = rtrim(next($zthis->fields));
+		if ($hasvalue) {
+			if ($ADODB_FETCH_MODE == ADODB_FETCH_ASSOC) {
+				// Get 2nd field's value regardless of its name
+				$zval2 = current(array_slice($zthis->fields, 1, 1));
+			} else {
+				// With NUM or BOTH fetch modes, we have a numeric index
+				$zval2 = $zthis->fields[1];
+			}
+			$zval2 = trim($zval2);
+			$value = 'value="' . htmlspecialchars($zval2) . '"';
 		}
-		$selected = ($compareFields0) ? $zval : $zval2;
 
-        $group = '';
-		if ($fieldsize > 2) {
-            $group = rtrim($zthis->fields[2]);
-        }
-/*
-        if ($optgroup != $group) {
-            $optgroup = $group;
-            if ($firstgroup) {
-                $firstgroup = false;
-                $s .="\n<optgroup label='". htmlspecialchars($group) ."'>";
-            } else {
-                $s .="\n</optgroup>";
-                $s .="\n<optgroup label='". htmlspecialchars($group) ."'>";
-            }
-		}
-*/
-		if ($hasvalue)
-			$value = " value='".htmlspecialchars($zval2)."'";
+		$s .= _adodb_getmenu_option($defstr, $compareFields0 ? $zval : $zval2, $value, $zval);
 
-		if (is_array($defstr))  {
-
-			if (in_array($selected,$defstr))
-				$s .= "\n<option selected='selected'$value>".htmlspecialchars($zval).'</option>';
-			else
-				$s .= "\n<option".$value.'>'.htmlspecialchars($zval).'</option>';
-		}
-		else {
-			if (strcasecmp($selected,$defstr)==0)
-				$s .= "\n<option selected='selected'$value>".htmlspecialchars($zval).'</option>';
-			else
-				$s .= "\n<option".$value.'>'.htmlspecialchars($zval).'</option>';
-		}
 		$zthis->MoveNext();
 	} // while
 
-    // closing last optgroup
-    if($optgroup != null) {
-        $s .= "\n</optgroup>";
-	}
 	return $s ."\n</select>\n";
 }
 
-// Requires $ADODB_FETCH_MODE = ADODB_FETCH_NUM
 function _adodb_getmenu_gp(&$zthis, $name,$defstr='',$blank1stItem=true,$multiple=false,
 			$size=0, $selectAttr='',$compareFields0=true)
 {
-	$hasvalue = false;
+	global $ADODB_FETCH_MODE;
 
-	if ($multiple or is_array($defstr)) {
-		if ($size==0) $size=5;
-		$attr = ' multiple size="'.$size.'"';
-		if (!strpos($name,'[]')) $name .= '[]';
-	} else if ($size) $attr = ' size="'.$size.'"';
-	else $attr ='';
+	$s = _adodb_getmenu_select($name, $defstr, $blank1stItem, $multiple, $size, $selectAttr);
 
-	$s = '<select name="'.$name.'"'.$attr.' '.$selectAttr.'>';
-	if ($blank1stItem)
-		if (is_string($blank1stItem))  {
-			$barr = explode(':',$blank1stItem);
-			if (sizeof($barr) == 1) $barr[] = '';
-			$s .= "\n<option value=\"".$barr[0]."\">".$barr[1]."</option>";
-		} else $s .= "\n<option></option>";
-
-	if ($zthis->FieldCount() > 1) $hasvalue=true;
-	else $compareFields0 = true;
+	$hasvalue = $zthis->FieldCount() > 1;
+	$hasgroup = $zthis->FieldCount() > 2;
+	if (!$hasvalue) {
+		$compareFields0 = true;
+	}
 
 	$value = '';
-    $optgroup = null;
-    $firstgroup = true;
-    $fieldsize = sizeof($zthis->fields);
+	$optgroup = null;
+	$firstgroup = true;
 	while(!$zthis->EOF) {
 		$zval = rtrim(reset($zthis->fields));
+		$group = '';
 
 		if ($blank1stItem && $zval=="") {
 			$zthis->MoveNext();
 			continue;
 		}
 
-        if ($fieldsize > 1) {
-			if (isset($zthis->fields[1]))
-				$zval2 = rtrim($zthis->fields[1]);
-			else
-				$zval2 = rtrim(next($zthis->fields));
-		}
-		$selected = ($compareFields0) ? $zval : $zval2;
-
-        $group = '';
-		if (isset($zthis->fields[2])) {
-            $group = rtrim($zthis->fields[2]);
-        }
-
-        if ($optgroup != $group) {
-            $optgroup = $group;
-            if ($firstgroup) {
-                $firstgroup = false;
-                $s .="\n<optgroup label='". htmlspecialchars($group) ."'>";
-            } else {
-                $s .="\n</optgroup>";
-                $s .="\n<optgroup label='". htmlspecialchars($group) ."'>";
-            }
+		if ($hasvalue) {
+			if ($ADODB_FETCH_MODE == ADODB_FETCH_ASSOC) {
+				// Get 2nd field's value regardless of its name
+				$fields = array_slice($zthis->fields, 1);
+				$zval2 = current($fields);
+				if ($hasgroup) {
+					$group = trim(next($fields));
+				}
+			} else {
+				// With NUM or BOTH fetch modes, we have a numeric index
+				$zval2 = $zthis->fields[1];
+				if ($hasgroup) {
+					$group = trim($zthis->fields[2]);
+				}
+			}
+			$zval2 = trim($zval2);
+			$value = "value='".htmlspecialchars($zval2)."'";
 		}
 
-		if ($hasvalue)
-			$value = " value='".htmlspecialchars($zval2)."'";
-
-		if (is_array($defstr))  {
-
-			if (in_array($selected,$defstr))
-				$s .= "\n<option selected='selected'$value>".htmlspecialchars($zval).'</option>';
-			else
-				$s .= "\n<option".$value.'>'.htmlspecialchars($zval).'</option>';
+		if ($optgroup != $group) {
+			$optgroup = $group;
+			if ($firstgroup) {
+				$firstgroup = false;
+			} else {
+				$s .="\n</optgroup>";
+			}
+			$s .="\n<optgroup label='". htmlspecialchars($group) ."'>";
 		}
-		else {
-			if (strcasecmp($selected,$defstr)==0)
-				$s .= "\n<option selected='selected'$value>".htmlspecialchars($zval).'</option>';
-			else
-				$s .= "\n<option".$value.'>'.htmlspecialchars($zval).'</option>';
-		}
+
+		$s .= _adodb_getmenu_option($defstr, $compareFields0 ? $zval : $zval2, $value, $zval);
+
 		$zthis->MoveNext();
 	} // while
 
-    // closing last optgroup
-    if($optgroup != null) {
-        $s .= "\n</optgroup>";
+	// closing last optgroup
+	if($optgroup != null) {
+		$s .= "\n</optgroup>";
 	}
 	return $s ."\n</select>\n";
 }
 
+/**
+ * Generate the opening SELECT tag for getmenu functions.
+ *
+ * ADOdb internal function, used by _adodb_getmenu() and _adodb_getmenu_gp().
+ *
+ * @param string $name
+ * @param string $defstr
+ * @param bool   $blank1stItem
+ * @param bool   $multiple
+ * @param int    $size
+ * @param string $selectAttr
+ *
+ * @return string HTML
+ */
+function _adodb_getmenu_select($name, $defstr = '', $blank1stItem = true,
+							   $multiple = false, $size = 0, $selectAttr = '')
+{
+	if ($multiple || is_array($defstr)) {
+		if ($size == 0 ) {
+			$size = 5;
+		}
+		$attr = ' multiple size="' . $size . '"';
+		if (!strpos($name,'[]')) {
+			$name .= '[]';
+		}
+	} elseif ($size) {
+		$attr = ' size="' . $size . '"';
+	} else {
+		$attr = '';
+	}
+
+	$html = '<select name="' . $name . '"' . $attr . ' ' . $selectAttr . '>';
+	if ($blank1stItem) {
+		if (is_string($blank1stItem))  {
+			$barr = explode(':',$blank1stItem);
+			if (sizeof($barr) == 1) {
+				$barr[] = '';
+			}
+			$html .= "\n<option value=\"" . $barr[0] . "\">" . $barr[1] . "</option>";
+		} else {
+			$html .= "\n<option></option>";
+		}
+	}
+
+	return $html;
+}
+
+/**
+ * Print the OPTION tags for getmenu functions.
+ *
+ * ADOdb internal function, used by _adodb_getmenu() and _adodb_getmenu_gp().
+ *
+ * @param string $defstr  Default values
+ * @param string $compare Value to compare against defaults
+ * @param string $value   Ready-to-print `value="xxx"` (or empty) string
+ * @param string $display Display value
+ *
+ * @return string HTML
+ */
+function _adodb_getmenu_option($defstr, $compare, $value, $display)
+{
+	if (   is_array($defstr) && in_array($compare, $defstr)
+		|| !is_array($defstr) && strcasecmp($compare, $defstr) == 0
+	) {
+		$selected = ' selected="selected"';
+	} else {
+		$selected = '';
+	}
+
+	return "\n<option $value$selected>" . htmlspecialchars($display) . '</option>';
+}
 
 /*
 	Count the number of records this sql statement will return by using
@@ -414,18 +422,26 @@ function _adodb_getcount(&$zthis, $sql,$inputarr=false,$secs2cache=0)
 			} else
 				$rewritesql = "SELECT COUNT(*) FROM (".$rewritesql.")";
 
-		} else if (strncmp($zthis->databaseType,'postgres',8) == 0 || strncmp($zthis->databaseType,'mysql',5) == 0)  {
+		} else if (strncmp($zthis->databaseType,'postgres',8) == 0
+			|| strncmp($zthis->databaseType,'mysql',5) == 0
+		|| strncmp($zthis->databaseType,'mssql',5) == 0
+			|| strncmp($zthis->dsnType,'sqlsrv',5) == 0
+			|| strncmp($zthis->dsnType,'mssql',5) == 0
+		){
 			$rewritesql = "SELECT COUNT(*) FROM ($rewritesql) _ADODB_ALIAS_";
 		} else {
 			$rewritesql = "SELECT COUNT(*) FROM ($rewritesql)";
 		}
 	} else {
 		// now replace SELECT ... FROM with SELECT COUNT(*) FROM
-		$rewritesql = preg_replace(
-					'/^\s*SELECT\s.*\s+FROM\s/Uis','SELECT COUNT(*) FROM ',$sql);
+		if ( strpos($sql, '_ADODB_COUNT') !== FALSE ) {
+			$rewritesql = preg_replace('/^\s*?SELECT\s+_ADODB_COUNT(.*)_ADODB_COUNT\s/is','SELECT COUNT(*) ',$sql);
+		} else {
+			$rewritesql = preg_replace('/^\s*SELECT\s.*\s+FROM\s/Uis','SELECT COUNT(*) FROM ',$sql);
+		}
 		// fix by alexander zhukov, alex#unipack.ru, because count(*) and 'order by' fails
 		// with mssql, access and postgresql. Also a good speedup optimization - skips sorting!
-		// also see http://phplens.com/lens/lensforum/msgs.php?id=12752
+		// also see PHPLens Issue No: 12752
 		$rewritesql = adodb_strip_order_by($rewritesql);
 	}
 
@@ -550,39 +566,79 @@ function _adodb_pageexecute_no_last_page(&$zthis, $sql, $nrows, $page, $inputarr
 	$atfirstpage = false;
 	$atlastpage = false;
 
-	if (!isset($page) || $page <= 1) {	// If page number <= 1, then we are at the first page
+	if (!isset($page) || $page <= 1) {
+		// If page number <= 1, then we are at the first page
 		$page = 1;
 		$atfirstpage = true;
 	}
-	if ($nrows <= 0) $nrows = 10;	// If an invalid nrows is supplied, we assume a default value of 10 rows per page
+	if ($nrows <= 0) {
+		// If an invalid nrows is supplied, we assume a default value of 10 rows per page
+		$nrows = 10;
+	}
 
-	// ***** Here we check whether $page is the last page or whether we are trying to retrieve a page number greater than
-	// the last page number.
-	$pagecounter = $page + 1;
-	$pagecounteroffset = ($pagecounter * $nrows) - $nrows;
-	if ($secs2cache>0) $rstest = $zthis->CacheSelectLimit($secs2cache, $sql, $nrows, $pagecounteroffset, $inputarr);
-	else $rstest = $zthis->SelectLimit($sql, $nrows, $pagecounteroffset, $inputarr, $secs2cache);
-	if ($rstest) {
-		while ($rstest && $rstest->EOF && $pagecounter>0) {
-			$atlastpage = true;
-			$pagecounter--;
-			$pagecounteroffset = $nrows * ($pagecounter - 1);
-			$rstest->Close();
-			if ($secs2cache>0) $rstest = $zthis->CacheSelectLimit($secs2cache, $sql, $nrows, $pagecounteroffset, $inputarr);
-			else $rstest = $zthis->SelectLimit($sql, $nrows, $pagecounteroffset, $inputarr, $secs2cache);
+	$pagecounteroffset = ($page * $nrows) - $nrows;
+
+	// To find out if there are more pages of rows, simply increase the limit or
+	// nrows by 1 and see if that number of records was returned. If it was,
+	// then we know there is at least one more page left, otherwise we are on
+	// the last page. Therefore allow non-Count() paging with single queries
+	// rather than three queries as was done before.
+	$test_nrows = $nrows + 1;
+	if ($secs2cache > 0) {
+		$rsreturn = $zthis->CacheSelectLimit($secs2cache, $sql, $nrows, $pagecounteroffset, $inputarr);
+	} else {
+		$rsreturn = $zthis->SelectLimit($sql, $test_nrows, $pagecounteroffset, $inputarr, $secs2cache);
+	}
+
+	// Now check to see if the number of rows returned was the higher value we asked for or not.
+	if ( $rsreturn->_numOfRows == $test_nrows ) {
+		// Still at least 1 more row, so we are not on last page yet...
+		// Remove the last row from the RS.
+		$rsreturn->_numOfRows = ( $rsreturn->_numOfRows - 1 );
+	} elseif ( $rsreturn->_numOfRows == 0 && $page > 1 ) {
+		// Likely requested a page that doesn't exist, so need to find the last
+		// page and return it. Revert to original method and loop through pages
+		// until we find some data...
+		$pagecounter = $page + 1;
+		$pagecounteroffset = ($pagecounter * $nrows) - $nrows;
+
+		$rstest = $rsreturn;
+		if ($rstest) {
+			while ($rstest && $rstest->EOF && $pagecounter > 0) {
+				$atlastpage = true;
+				$pagecounter--;
+				$pagecounteroffset = $nrows * ($pagecounter - 1);
+				$rstest->Close();
+				if ($secs2cache>0) {
+					$rstest = $zthis->CacheSelectLimit($secs2cache, $sql, $nrows, $pagecounteroffset, $inputarr);
+				}
+				else {
+					$rstest = $zthis->SelectLimit($sql, $nrows, $pagecounteroffset, $inputarr, $secs2cache);
+				}
+			}
+			if ($rstest) $rstest->Close();
 		}
-		if ($rstest) $rstest->Close();
+		if ($atlastpage) {
+			// If we are at the last page or beyond it, we are going to retrieve it
+			$page = $pagecounter;
+			if ($page == 1) {
+				// We have to do this again in case the last page is the same as
+				// the first page, that is, the recordset has only 1 page.
+				$atfirstpage = true;
+			}
+		}
+		// We get the data we want
+		$offset = $nrows * ($page-1);
+		if ($secs2cache > 0) {
+			$rsreturn = $zthis->CacheSelectLimit($secs2cache, $sql, $nrows, $offset, $inputarr);
+		}
+		else {
+			$rsreturn = $zthis->SelectLimit($sql, $nrows, $offset, $inputarr, $secs2cache);
+		}
+	} elseif ( $rsreturn->_numOfRows < $test_nrows ) {
+		// Rows is less than what we asked for, so must be at the last page.
+		$atlastpage = true;
 	}
-	if ($atlastpage) {	// If we are at the last page or beyond it, we are going to retrieve it
-		$page = $pagecounter;
-		if ($page == 1) $atfirstpage = true;	// We have to do this again in case the last page is the same as the first
-			//... page, that is, the recordset has only 1 page.
-	}
-
-	// We get the data we want
-	$offset = $nrows * ($page-1);
-	if ($secs2cache > 0) $rsreturn = $zthis->CacheSelectLimit($secs2cache, $sql, $nrows, $offset, $inputarr);
-	else $rsreturn = $zthis->SelectLimit($sql, $nrows, $offset, $inputarr, $secs2cache);
 
 	// Before returning the RecordSet, we set the pagination properties we need
 	if ($rsreturn) {
@@ -721,7 +777,7 @@ function _adodb_getupdatesql(&$zthis,&$rs, $arrFields,$forceUpdate=false,$magicq
 				if (preg_match('/\s(ORDER\s.*)/is', $whereClause[1], $discard));
 				else if (preg_match('/\s(LIMIT\s.*)/is', $whereClause[1], $discard));
 				else if (preg_match('/\s(FOR UPDATE.*)/is', $whereClause[1], $discard));
-				else preg_match('/\s.*(\) WHERE .*)/is', $whereClause[1], $discard); # see http://sourceforge.net/tracker/index.php?func=detail&aid=1379638&group_id=42718&atid=433976
+				else preg_match('/\s.*(\) WHERE .*)/is', $whereClause[1], $discard); # see https://sourceforge.net/p/adodb/bugs/37/
 			} else
 				$whereClause = array(false,false);
 

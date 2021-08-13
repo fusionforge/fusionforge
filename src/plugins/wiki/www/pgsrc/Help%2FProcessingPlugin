@@ -1,0 +1,59 @@
+Date: Thu, 13 Oct 2016 15:09:28 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
+Content-Type: application/x-phpwiki;
+  pagename=Help%2FProcessingPlugin;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
+  charset=UTF-8
+Content-Transfer-Encoding: binary
+
+The **Processing** [[Help:WikiPlugin|plugin]] is an interface to
+http://ejohn.org/blog/processingjs/
+
+Syntax: http://ejohn.org/blog/overview-of-processing/
+
+== Usage ==
+
+{{{
+<<Processing arguments
+processing code
+>>
+}}}
+
+== Arguments ==
+
+{| class="bordered"
+|-
+! Argument
+! Description
+! Default value
+|-
+| **width**
+|
+| 200
+|-
+| **height**
+|
+| 200
+|-
+| **script**
+| One line script. Not very likely.
+| false
+|-
+| **onmousemove**
+|
+| false
+|}
+
+== Example ==
+
+TBD
+
+== Author ==
+* [[Help:Reini Urban|Reini Urban]]
+
+== See Also ==
+
+<noinclude>
+----
+[[PhpWikiDocumentation]] [[CategoryWikiPlugin]]
+</noinclude>

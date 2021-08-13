@@ -1,9 +1,8 @@
 <?php
-
-/*
- * Copyright (C) 2003 Olivier PLATHEY
- * Copyright (C) 200? Don Sebà
- * Copyright (C) 2004,2006,2007 Reini Urban
+/**
+ * Copyright © 2003 Olivier PLATHEY
+ * Copyright © 200? Don Sebà
+ * Copyright © 2004,2006,2007 Reini Urban
  *
  * This file is part of PhpWiki.
  *
@@ -20,6 +19,9 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
  */
 
 //define("USE_EXTERNAL_HTML2PDF", "htmldoc --quiet --format pdf14 --jpeg --webpage --no-toc --no-title %s");
@@ -41,7 +43,7 @@ function ConvertAndDisplayPdfPageList(&$request, $pagelist)
 
     array_unshift($pagelist->_pages, $request->_dbi->getPage($pagename));
     require_once 'lib/WikiPluginCached.php';
-    $cache = new WikiPluginCached;
+    $cache = new WikiPluginCached();
     $cache->newCache();
     $tmpfile = $cache->tempnam();
     $tmpdir = dirname($tmpfile);
@@ -80,11 +82,11 @@ function ConvertAndDisplayPdf(&$request)
     if (defined('USE_EXTERNAL_HTML2PDF')
         and USE_EXTERNAL_HTML2PDF
     ) { // htmldoc or ghostscript + html2ps or docbook (dbdoclet, xsltproc, fop)
-        Header('Content-Type: application/pdf');
+        header('Content-Type: application/pdf');
         $request->discardOutput();
         $request->buffer_output(false /*'nocompress'*/);
         require_once 'lib/WikiPluginCached.php';
-        $cache = new WikiPluginCached;
+        $cache = new WikiPluginCached();
         $cache->newCache();
         $tmpfile = $cache->tempnam('pdf.html');
         $fp = fopen($tmpfile, "wb");
@@ -101,11 +103,3 @@ function ConvertAndDisplayPdf(&$request)
         $request->discardOutput();
     }
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

@@ -1,8 +1,7 @@
 <?php
-
-/*
- * Copyright 2004,2007 $ThePhpWikiProgrammingTeam
- * Copyright 2009-2010 Marc-Etienne Vargenau, Alcatel-Lucent
+/**
+ * Copyright © 2004,2007 $ThePhpWikiProgrammingTeam
+ * Copyright © 2009-2010 Marc-Etienne Vargenau, Alcatel-Lucent
  *
  * This file is part of PhpWiki.
  *
@@ -19,6 +18,9 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
  */
 
 /**
@@ -357,7 +359,7 @@ class PagePermission
 {
     public $perm;
 
-    function PagePermission($hash = array())
+    function __construct($hash = array())
     {
         /**
          * @var WikiRequest $request
@@ -393,7 +395,7 @@ class PagePermission
             return true;
         }
         $allow = -1;
-        if (!empty($this->perm{$access})) {
+        if (!empty($this->perm[$access])) {
             foreach ($this->perm[$access] as $group => $bool) {
                 if ($this->isMember($user, $group)) {
                     return $bool;
@@ -584,7 +586,7 @@ class PagePermission
         foreach ($this->perm as $access => $perms) {
             $td = HTML::table(array('class' => 'cal'));
             foreach ($perms as $group => $bool) {
-                $td->pushContent(HTML::tr(HTML::td(array('align' => 'right'), $group),
+                $td->pushContent(HTML::tr(HTML::td(array('class' => 'align-right'), $group),
                     HTML::td($bool ? '[X]' : '[ ]')));
             }
             $table->pushContent(HTML::tr(array('class' => 'top'),
@@ -612,9 +614,9 @@ class PagePermission
         }
         $table = HTML::table();
         $table->pushContent(HTML::tr(
-            HTML::th(array('align' => 'left'),
+            HTML::th(array('class' => 'align-left'),
                 _("Access")),
-            HTML::th(array('align' => 'right'),
+            HTML::th(array('class' => 'align-right'),
                 _("Group/User")),
             HTML::th(_("Grant")),
             HTML::th(_("Del/+")),
@@ -681,30 +683,30 @@ class PagePermission
                     $table->pushContent(
                         HTML::tr(
                             HTML::td(HTML::strong($access . ":")),
-                            HTML::td(array('class' => 'cal-today', 'align' => 'right'),
+                            HTML::td(array('class' => 'cal-today align-right'),
                                 HTML::strong($this->groupName($group))),
-                            HTML::td(array('align' => 'center'), $nbsp, $checkbox),
-                            HTML::td(array('align' => 'right', 'style' => 'background: #aaa url(' . $deletesrc . ') no-repeat'), $deletebutton),
+                            HTML::td(array('class' => 'align-center'), $nbsp, $checkbox),
+                            HTML::td(array('class' => 'align-right', 'style' => 'background: #aaa url(' . $deletesrc . ') no-repeat'), $deletebutton),
                             HTML::td(HTML::em(getAccessDescription($access)))));
                     $first_only = false;
                 } else {
                     $table->pushContent(
                         HTML::tr(
                             HTML::td(),
-                            HTML::td(array('class' => 'cal-today', 'align' => 'right'),
+                            HTML::td(array('class' => 'cal-today align-right'),
                                 HTML::strong($this->groupName($group))),
-                            HTML::td(array('align' => 'center'), $nbsp, $checkbox),
-                            HTML::td(array('align' => 'right', 'style' => 'background: #aaa url(' . $deletesrc . ') no-repeat'), $deletebutton),
+                            HTML::td(array('class' => 'align-center'), $nbsp, $checkbox),
+                            HTML::td(array('class' => 'align-right', 'style' => 'background: #aaa url(' . $deletesrc . ') no-repeat'), $deletebutton),
                             HTML::td()));
                 }
             }
             if (!empty($groups))
                 $table->pushContent(
                     HTML::tr(array('class' => 'top'),
-                        HTML::td(array('align' => 'right'), _("add ")),
+                        HTML::td(array('class' => 'align-right'), _("add ")),
                         HTML::td($newgroup),
-                        HTML::td(array('align' => 'center'), $nbsp, $newperm),
-                        HTML::td(array('align' => 'right', 'style' => 'background: #ccc url(' . $addsrc . ') no-repeat'), $addbutton),
+                        HTML::td(array('class' => 'align-center'), $nbsp, $newperm),
+                        HTML::td(array('class' => 'align-right', 'style' => 'background: #ccc url(' . $addsrc . ') no-repeat'), $addbutton),
                         HTML::td(HTML::small(_("Check to add this ACL")))));
         }
         if ($type == 'default')
@@ -789,11 +791,3 @@ class PagePermission
         return $s;
     }
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

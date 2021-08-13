@@ -1,13 +1,13 @@
-Date: Mon, 29 Jun 2015 12:04:28 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Sat, 20 Feb 2021 11:52:37 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FIncludePagePlugin;
   flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
   charset=UTF-8
 Content-Transfer-Encoding: binary
 
-The **~IncludePage** [[Help:WikiPlugin|plugin]] will “include” other pages in this wiki. In the language of hypertext this is called //transclusion//.
-The pages will render in distinct tables.
+The **~IncludePage** [[Help:WikiPlugin|plugin]] will “include” other pages in this wiki. In the language of hypertext
+this is called //transclusion//.
 
 == Usage ==
 
@@ -28,35 +28,35 @@ The pages will render in distinct tables.
 | //None// (required argument)
 |-
 | **rev**
-| the revision
+| The revision
 | most recent revision
 |-
 | **quiet**
-| if set, inclusion appears as normal content
+| Boolean. If true, inclusion appears as normal content.
 | false
 |-
 | **bytes**
-| maximum number of bytes to include
-| //None// (include all page)
+| Maximum number of bytes to include
+| //None// (include whole page)
 |-
 | **words**
-| maximum number of words to include
-| //None// (include all page)
+| Maximum number of words to include
+| //None// (include whole page)
 |-
 | **lines**
-| maximum number of lines to include
-| //None// (include all page)
+| Maximum number of lines to include
+| //None// (include whole page)
 |-
 | **sections**
-| maximum number of sections to include
+| Maximum number of sections to include
 | //None// (include all sections)
 |-
 | **section**
-| include a named section
+| Include a named section
 | //None//
 |-
 | **sectionhead**
-| when including a named section show the heading
+| Boolean. If true, when including a named section show the heading
 | false
 |}
 
@@ -85,7 +85,7 @@ The pages will render in distinct tables.
 Does not work in Wikicreole syntax
 <!-- <<IncludePage page=Help/AllPagesPlugin sections=2>> -->
 
-== Known bugs ===
+== Known Problems ===
 
 * Line and word limit doesn't work if the included page itself includes a plugin.
 * "sections" parameter does not work if sections to include are in Wikicreole syntax.

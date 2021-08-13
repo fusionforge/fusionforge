@@ -1,5 +1,5 @@
-Date: Mon, 29 Jun 2015 12:04:28 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Mon, 22 Feb 2021 19:16:32 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FRecentReferrersPlugin;
   flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
@@ -25,7 +25,7 @@ All [[Help:PageList|PageList]] arguments, plus the following ones:
 ! Default value
 |-
 | **noheader**
-| do not display header
+| Boolean. If true, header should be omitted.
 | false
 |-
 | **limit**

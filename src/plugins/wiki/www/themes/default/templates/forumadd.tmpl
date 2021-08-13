@@ -13,7 +13,7 @@
          <td><input class="wikitext" type="text" size="60"
                     maxlength="256" name="forum[summary]" value="<?php echo isset($forum['summary']) ? $forum['summary'] : '' ?>" /></td>
      </tr>
-    <tr><th class="align-right"><?php echo _("Reply")?>:</th>
+    <tr><th class="align-right"><?php echo _("Reply")._(':')?></th>
          <td><textarea class="forumedit" rows="5" cols="60"
                        name="forum[body]"><?php echo isset($forum['body']) ? $forum['body'] : ''?></textarea></td>
      </tr>

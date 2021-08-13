@@ -1,5 +1,5 @@
-Date: Mon, 29 Jun 2015 12:04:28 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Fri, 12 Apr 2019 15:36:06 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FUnfoldSubpagesPlugin;
   flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
@@ -10,7 +10,7 @@ The **~UnfoldSubpages** [[Help:WikiPlugin|plugin]] is used to display all or som
 of the current or a given page.  This gives an overview for a
 [[Help:WikiBlogPlugin]], [[Help:CalendarPlugin]] or similar subpages.
 
-Warning: Don't use it with subpages with non-existant sections!
+Warning: Don't use it with subpages with nonexistent sections!
 The section extractor is currently quite unstable.
 
 == Usage ==
@@ -36,11 +36,11 @@ All [[Help:PageList|PageList]] arguments, plus the following ones:
 ! Default value
 |-
 | **pagename**
-| Any pagename or if empty the current page
+| Any pagename or if empty the current page.
 | empty
 |-
 | **quiet**
-| Print no header
+| Print no header.
 | false
 |-
 | **sortby**

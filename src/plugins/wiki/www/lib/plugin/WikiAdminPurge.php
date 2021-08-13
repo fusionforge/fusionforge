@@ -1,8 +1,7 @@
 <?php
-
 /*
- * Copyright 2002,2004 $ThePhpWikiProgrammingTeam
- * Copyright 2009 Marc-Etienne Vargenau, Alcatel-Lucent
+ * Copyright © 2002,2004 $ThePhpWikiProgrammingTeam
+ * Copyright © 2009 Marc-Etienne Vargenau, Alcatel-Lucent
  *
  * This file is part of PhpWiki.
  *
@@ -19,11 +18,15 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
  */
 
 /**
  * Usage:   <<WikiAdminPurge>>
  */
+
 require_once 'lib/PageList.php';
 require_once 'lib/plugin/WikiAdminSelect.php';
 
@@ -32,12 +35,12 @@ class WikiPlugin_WikiAdminPurge
 {
     function getDescription()
     {
-        return _("Permanently purge all selected pages.");
+        return _("Permanently purge selected pages").".";
     }
 
     /* getDefaultArguments() is inherited from WikiAdminSelect class */
 
-    protected function collectPages(&$list, &$dbi, $sortby, $limit = 0)
+    protected function collectPages(&$list, &$dbi, $sortby, $limit = 0, $exclude = '')
     {
 
         $allPages = $dbi->getAllPages('include_empty', $sortby, $limit);
@@ -150,16 +153,17 @@ class WikiPlugin_WikiAdminPurge
             $button_label = _("Yes");
             $header->pushContent(HTML::legend(_("Confirm purge")));
             $header->pushContent(HTML::p(HTML::strong(
-                    _("Are you sure you want to permanently purge the following files?"))));
+                    _("Are you sure you want to permanently purge the following pages?"))));
         } else {
             $pagelist = new PageList_Selectable($args['info'], $args['exclude'], array());
             $pagelist->addPageList($pages);
             $button_label = _("Permanently purge selected pages");
-            $header->pushContent(HTML::legend(_("Select the files to purge")));
+            $header->pushContent(HTML::legend(_("Select the pages to purge")));
         }
 
         $buttons = HTML::p(Button('submit:admin_purge[purge]', $button_label, 'wikiadmin'),
-            Button('submit:admin_purge[cancel]', _("Cancel"), 'button'));
+                           HTML::raw("&nbsp;&nbsp;"),
+                           Button('submit:admin_purge[cancel]', _("Cancel"), 'button'));
         $header->pushContent($buttons);
 
         return HTML::form(array('action' => $request->getPostURL(),
@@ -173,11 +177,3 @@ class WikiPlugin_WikiAdminPurge
                 'require_authority_for_post' => WIKIAUTH_ADMIN)));
     }
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

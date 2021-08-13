@@ -1,8 +1,7 @@
 <?php
-
 /**
- * Copyright (C) 2001,2002,2003,2004,2005 $ThePhpWikiProgrammingTeam
- * Copyright 2008-2009 Marc-Etienne Vargenau, Alcatel-Lucent
+ * Copyright © 2001,2002,2003,2004,2005 $ThePhpWikiProgrammingTeam
+ * Copyright © 2008-2009 Marc-Etienne Vargenau, Alcatel-Lucent
  *
  * This file is part of PhpWiki.
  *
@@ -19,6 +18,9 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
  */
 
 /**
@@ -30,6 +32,7 @@
  * WikiTheme extension: WikiThemes are able to extend the predefined list
  * of preferences.
  */
+
 class WikiPlugin_UserPreferences
     extends WikiPlugin
 {
@@ -54,9 +57,11 @@ class WikiPlugin_UserPreferences
             $pref = $user->getPreferences();
         }
         $prefs = array();
-        //we need a hash of pref => default_value
-        foreach ($pref->_prefs as $name => $obj) {
-            $prefs[$name] = $obj->default_value;
+        if ($pref) {
+            // We need a hash of pref => default_value
+            foreach ($pref->_prefs as $name => $obj) {
+                $prefs[$name] = $obj->default_value;
+            }
         }
         return $prefs;
     }
@@ -73,6 +78,7 @@ class WikiPlugin_UserPreferences
         $args = $this->getArgs($argstr, $request);
         $user =& $request->_user;
         $user->_request = $request;
+        $iserror = false;
         if (defined('FUSIONFORGE') && FUSIONFORGE) {
             if (!($user->isAuthenticated())) {
                 return HTML::p(array('class' => 'error'),
@@ -81,9 +87,8 @@ class WikiPlugin_UserPreferences
         }
         if ((!isActionPage($request->getArg('pagename'))
             and (!isset($user->_prefs->_method)
-                or !in_array($user->_prefs->_method, array('ADODB', 'SQL', 'PDO'))))
             or (in_array($request->getArg('action'), array('zip', 'ziphtml', 'dumphtml')))
-            or (is_a($user, '_ForbiddenUser'))
+            or (is_a($user, '_ForbiddenUser'))))
         ) {
             $no_args = $this->getDefaultArguments();
             $no_args['errmsg'] = HTML::p(array('class' => 'error'),
@@ -124,6 +129,7 @@ class WikiPlugin_UserPreferences
                 } elseif ($rp = $request->getArg('pref')) {
                     // replace only changed prefs in $pref with those from request
                     if (!empty($rp['passwd']) and ($rp['passwd2'] != $rp['passwd'])) {
+                        $iserror = true;
                         $errmsg = _("Wrong password. Try again.");
                     } else {
                         if (empty($rp['passwd'])) unset($rp['passwd']);
@@ -141,11 +147,13 @@ class WikiPlugin_UserPreferences
                                     $passchanged = $user->changePass($rp['passwd']);
                                 }
                                 if ($passchanged) {
-                                    $errmsg = _("Password updated.");
+                                    $errmsg = _("Password updated.") . " ";
                                 } else {
-                                    $errmsg = _("Password was not changed.");
+                                    $iserror = true;
+                                    $errmsg = _("Password was not changed.") . " ";
                                 }
                             } else {
+                                $iserror = true;
                                 $errmsg = _("Password cannot be changed.");
                             }
                         }
@@ -154,6 +162,7 @@ class WikiPlugin_UserPreferences
                         } else {
                             $request->_setUser($user);
                             $pref = $user->_prefs;
+                            update_locale($rp['lang']); // Update locale in case user has changed language
                             if ($num == 1) {
                                 $errmsg .= _("One UserPreferences field successfully updated.");
                             } else {
@@ -161,7 +170,11 @@ class WikiPlugin_UserPreferences
                             }
                         }
                     }
-                    $args['errmsg'] = HTML::div(array('class' => 'feedback'), HTML::p($errmsg));
+                    if ($iserror) {
+                        $args['errmsg'] = HTML::div(array('class' => 'error'), HTML::p($errmsg));
+                    } else {
+                        $args['errmsg'] = HTML::div(array('class' => 'feedback'), HTML::p($errmsg));
+                    }
 
                 }
             }
@@ -175,11 +188,3 @@ class WikiPlugin_UserPreferences
         }
     }
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

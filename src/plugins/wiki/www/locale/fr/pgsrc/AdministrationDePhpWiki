@@ -1,5 +1,5 @@
-Date: Mon, 29 Jun 2015 12:04:23 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Tue, 10 Aug 2021 18:24:57 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=AdministrationDePhpWiki;
   flags=PAGE_LOCKED;
@@ -21,26 +21,27 @@ ou appelez directement les actions ~WikiAdmin disponibles :
 
 | [[/Chown]] | [[/Purger]] | [[/Supprimer]] | [[/Renommer]] | [[/RechercherRemplacer]] | [[/DéfinirAcl]] | [[/DéfinirAclSimple]] | [[/SupprimerAcl]]
 
-== Global Access Rights ==
+== Droits d'accès globaux ==
 
-These action pages will allow you to set the default access rights for wiki pages.
-Pages without individual access rights will use these default access rights.
+Ces pages d'action permettent de définir les droits d'accès par défaut pour les pages wiki.
+Les pages sans droits d'accès individuels utiliseront ces droits d'accès par défaut.
 * [[SetGlobalAccessRightsSimple]]
 * [[SetGlobalAccessRights]]
 
-== User Management ==
+== Gestion des utilisateurs ==
 
-=== Reset a users password ===
+=== Réinitialiser le mot de passe d'un utilisateur ===
 
 <?plugin-form PasswordReset textinput=user method=post ?>
 
-== Vérification du courriel ==
+=== Vérification du courriel ===
 
-La vérification de courriel est habituellement non stricte laissant ainsi des trous possibles qui peuvent être administrés ci-dessous.
+La vérification de courriel est actuellement non stricte, laissant ainsi des trous possibles
+qui peuvent être administrés ci-dessous.
 
 Ce bouton affichera la liste de tous les utilisateurs qui ont une adresse reconnue et les boutons pour effectuer une vérification manuelle.
 
-<<WikiAdminUtils action=email-verification label="Vérification du courriel">>
+<<WikiAdminUtils action=email-verification">>
 
 == Nettoyage ==
 
@@ -51,13 +52,16 @@ dans un état virginal en chargeant sa version par défaut depuis pgsrc.
 
 == Sauvegarde des pages ==
 
-=== Récupération des fichiers ===
+===  Fichiers ZIP de la base de données ===
 
-Ces liens mènent à des fichiers compressés au format ZIP, générés à la volée et contenant toutes les pages de votre Wiki. Le fichier zip sera téléchargé sur votre ordinateur.
+Ces liens mènent à des fichiers compressés au format ZIP, générés à la volée et
+contenant toutes les pages de votre Wiki. Le fichier ZIP sera téléchargé sur
+votre ordinateur.
 
-Cette **[Sauvegarde ZIP | phpwiki:?action=zip]** ne contient que la dernière version de chaque page, tandis que cet **[Archivage ZIP | phpwiki:?action=zip&include=all]** contient toutes les versions archivées.
+Cette **[[phpwiki:?action=zip|Sauvegarde ZIP]]** ne contient que la
+dernière version de chaque page, tandis que cet **[[phpwiki:?action=zip&include=all|Archivage ZIP]]** contient toutes les versions archivées.
 
-Si le PhpWiki est configuré pour le permettre, n'importe qui peut télécharger un fichier zip.
+(Si le PhpWiki est configuré pour le permettre, n'importe qui peut télécharger un fichier ZIP.)
 
 === Sauvegarde dans un répertoire ===
 
@@ -69,57 +73,59 @@ La version la plus récente de chaque page sera écrite dans le répertoire, à 
 
 == Restauration ==
 
-Si vous avez sauvegardé un ensemble de pages de PhpWiki, vous pouvez les recharger ici. Notez que les pages dans votre base de données seront écrasées ; ainsi, si vous avez récupéré votre [PageAccueil], lorsque vous le rechargerez depuis ce formulaire, il écrasera celui qui est actuellement dans votre base de données. Si vous désirez être sélectif, effacez juste du répertoire (ou du fichier zip) les pages que vous ne voulez pas charger.
+Si vous avez sauvegardé un ensemble de pages de ~PhpWiki, vous pouvez les recharger
+ici. Notez que les pages dans votre base de données seront écrasées ; ainsi, si
+vous avez récupéré votre [[PageAccueil]], lorsque vous le rechargerez depuis ce formulaire,
+il écrasera celui qui est actuellement dans votre base de données. Si vous désirez être sélectif,
+effacez juste du répertoire (ou du fichier ZIP) les pages que vous ne
+voulez pas charger.
 
 === Déposer un fichier sur le serveur ===
 
-Ici vous pouvez déposer des archives ZIP ou des fichiers simples depuis votre machine cliente.
+Ici vous pouvez déposer des archives ZIP ou des fichiers simples depuis votre
+machine cliente.
 
 <<WikiForm action=upload>>
 <<WikiForm action=upload buttontext="Upload & Overwrite" overwrite=1>>
 
 === Télécharger un fichier ===
 
-Ici vous pouvez télécharger des archives ZIP, des fichiers individuels ou des répertoires entiers. Le fichier ou le répertoire doit être local au serveur http. Vous pouvez aussi utiliser ce formulaire pour charger les données d'un URL http: ou ftp:.
+Ici vous pouvez télécharger des archives ZIP, des fichiers individuels
+ou des répertoires entiers. Le fichier ou le répertoire doit être local au serveur http.
+Vous pouvez aussi utiliser ce formulaire pour charger les données d'un URL http: ou ftp:.
 
 <<WikiForm action=loadfile>>
 <<WikiForm action=loadfile buttontext="Load & Overwrite" overwrite=1>>
 
 === Mise à jour ===
 
-Fait quelques vérifications et mises à jours automatiquement après avoir installé un nouveau moteur phpwiki de mise à jour
+Fait quelques vérifications et mises à jours automatiquement après avoir installé
+un nouveau moteur phpwiki :
 * Met à jour les nouvelles pages ou les pages révisées depuis pgsrc
-* Met à jour la base de données (mysql //page.id auto_increment//, ADD //session.sess_ip//),
 
-Vous pouvez force le remplacement ou non :
+Vous pouvez forcer le remplacement ou non :
 * **[[phpwiki:HomePage?action=upgrade|Mettre à jour]]**
 * **[[phpwiki:HomePage?action=upgrade&overwrite=1|Mettre à jour et remplacer]]**
 
 == Format des fichiers ==
 
-=== Format actuel ===
-
-Actuellement, les pages sont stockées, une par fichier, sous forme de messages électronique (RFC:822) MIME (RFC:2045). Le content-type utilisé est ''application/x-phpwiki'', et les métadonnées de chaque page sont codées dans les paramètres du content-type. Si le fichier contient plusieurs versions d'une page, il aura comme type ''multipart/mixed'', et contiendra plusieurs sous-parties, chacune de type ''application/x-phpwiki''. Le corps du message contient le texte de la page.
-
-=== Anciens formats ===
-
-==== Fichiers sérialisés ====
-
-La commande de sauvegarde dans un répertoire récupérait les pages en tant que chaînes php ''serialized()''. Cela rendait les fichiers très difficiles à lire pour les humains, et presque impossibles à éditer.
-
-==== Fichiers simples ====
-
-Avant cela, le texte des pages était simplement enregistré dans un fichier -- ce qui signifie que toutes les métadonnées des pages étaient perdues. Notez que lorsqu'on charge des ''fichiers simples'', le nom de la page est déduit du nom du fichier.
-
-Les fonctions de téléchargement et de chargement reconnaîtront automatiquement chacun de ces trois types de fichiers, et les géreront convenablement.
+Actuellement, les pages sont stockées, une par fichier, sous forme de messages électroniques (RFC:822) MIME (RFC:2045).
+Le content-type utilisé est //application/x-phpwiki//, et les métadonnées de chaque page sont codées dans
+les paramètres du content-type. (Si le fichier contient plusieurs versions d'une page, il aura
+comme type //multipart/mixed//, et contiendra plusieurs sous-parties, chacune
+de type //application/x-phpwiki//. Le corps du message contient le
+texte de la page.
 
 == Sauvegarde des pages au format XHTML ==
 
 <<WikiForm action=dumphtml>>
 
-Ceci génèrera un répertoire de pages statiques convenables pour une distribution sur disque où des serveurs web ne sont pas disponible. Les liens variés pour les fonctions d'édition et de navigation sont enlevés de ces pages.
+Ceci génèrera un répertoire de pages statiques convenables pour
+une distribution sur disque où des serveurs web ne sont pas disponibles.
+Les liens variés pour les fonctions d'édition et de navigation sont enlevés de ces
+pages.
 
-La collection de fichiers XHTML peut aussi être téléchargée comme une **[XHTML ZIP Snapshot | phpwiki:?action=ziphtml]**.
+La collection de fichiers XHTML peut aussi être téléchargée comme une **[[phpwiki:?action=ziphtml|XHTML ZIP Snapshot]]**.
 
 ----
 [[CatégoriePageDAction]]

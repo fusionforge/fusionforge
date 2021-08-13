@@ -1,8 +1,7 @@
 <?php
-
 /**
- * Copyright 1999, 2000, 2001, 2002 $ThePhpWikiProgrammingTeam
- * Copyright (C) 2002 Johannes Große                                   |
+ * Copyright © 1999, 2000, 2001, 2002 $ThePhpWikiProgrammingTeam
+ * Copyright © 2002 Johannes Große                                   |
  *
  * This file is part of PhpWiki.
  *
@@ -19,14 +18,17 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
  */
 
 /* There is a bug in it:
-   When the cache is empty and you safe the wikipages,
-   an immediately created cached output of
-   RecentChanges will at the rss-image-link include
-   an action=edit
-*/
+ * When the cache is empty and you safe the wikipages,
+ * an immediately created cached output of
+ * RecentChanges will at the rss-image-link include
+ * an action=edit
+ */
 
 require_once 'lib/WikiPluginCached.php';
 require_once 'lib/plugin/RecentChanges.php';
@@ -65,16 +67,16 @@ class WikiPlugin_RecentChangesCached
      * better plugin methods.
      *
      * @param WikiDB $dbi
-     * @param string $args
+     * @param string $argarray
      * @param WikiRequest $request
      * @param string $basepage
      * @return mixed
      */
-    protected function getHtml($dbi, $args, $request, $basepage)
+    protected function getHtml($dbi, $argarray, $request, $basepage)
     {
         $plugin = new WikiPlugin_RecentChanges();
-        $changes = $plugin->getChanges($dbi, $args);
-        return $plugin->format($changes, $args);
+        $changes = $plugin->getChanges($dbi, $argarray);
+        return $plugin->format($changes, $argarray);
         /*
         $loader = new WikiPluginLoader();
         return $loader->expandPI('<?plugin RecentChanges '
@@ -164,11 +166,3 @@ class WikiPlugin_RecentChangesCached
     }
 
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

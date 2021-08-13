@@ -1,7 +1,6 @@
 <?php
-
-/*
- * Copyright 2005 $ThePhpWikiProgrammingTeam
+/**
+ * Copyright © 2005 $ThePhpWikiProgrammingTeam
  *
  * This file is part of PhpWiki.
  *
@@ -18,6 +17,9 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
  */
 
 /**
@@ -43,7 +45,7 @@ class WikiDB_backend_PDO_mysql
         }
 
         if ($this->_serverinfo['version'] > 401.0) {
-            mysql_query("SET NAMES 'UTF-8'");
+            $this->_dbh->query("SET NAMES 'UTF-8'");
         }
     }
 
@@ -55,7 +57,7 @@ class WikiDB_backend_PDO_mysql
     /**
      * Kill timed out processes. ( so far only called on about every 50-th save. )
      */
-    function _timeout()
+    private function _timeout()
     {
         if (empty($this->_dbparams['timeout'])) return;
         $sth = $this->_dbh->prepare("SHOW processlist");
@@ -95,37 +97,6 @@ class WikiDB_backend_PDO_mysql
         return $tables;
     }
 
-    function listOfFields($database, $table)
-    {
-        $old_db = $this->database();
-        if ($database != $old_db) {
-            try {
-                $dsn = preg_replace("/dbname=\w+;/", "dbname=" . $database, $this->_dsn);
-                $dsn = preg_replace("/database=\w+;/", "database=" . $database, $dsn);
-                $conn = new PDO($dsn,
-                    DBADMIN_USER ? DBADMIN_USER : $this->_parsedDSN['username'],
-                    DBADMIN_PASSWD ? DBADMIN_PASSWD : $this->_parsedDSN['password']);
-            } catch (PDOException $e) {
-                echo "<br>\nDB Connection failed: " . $e->getMessage();
-                echo "<br>\nDSN: '", $this->_dsn, "'";
-                echo "<br>\n_parsedDSN: '", print_r($this->_parsedDSN), "'";
-                $conn = $this->_dbh;
-            }
-        } else {
-            $conn = $this->_dbh;
-        }
-        $sth = $conn->prepare("SHOW COLUMNS FROM $table");
-        $sth->execute();
-        $field_list = array();
-        while ($row = $sth->fetch(PDO::FETCH_NUM)) {
-            $field_list[] = $row[0];
-        }
-        if ($database != $old_db) {
-            unset($conn);
-        }
-        return $field_list;
-    }
-
     /*
      * offset specific syntax within mysql
      * convert from,count to SQL "LIMIT $offset, $count"
@@ -145,11 +116,3 @@ class WikiDB_backend_PDO_mysql
     }
 
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

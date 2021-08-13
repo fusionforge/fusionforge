@@ -1,5 +1,7 @@
-<html>
-<head><title>Alpha Channel Test</title>
+<!DOCTYPE html>
+<html xml:lang="en" lang="en">
+<head>
+<title>Alpha Channel Test</title>
     <script type="text/javascript"><!--
     var backgroundcolor = [];
     backgroundcolor[0] = '#ffffff';

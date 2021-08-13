@@ -1,7 +1,6 @@
 <?php
-
-/*
- * Copyright 2002,2003,2007,2009 $ThePhpWikiProgrammingTeam
+/**
+ * Copyright © 2002,2003,2007,2009 $ThePhpWikiProgrammingTeam
  *
  * This file is part of PhpWiki.
  *
@@ -18,10 +17,14 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
  */
+
 /**
  * @author: MichaelVanDam, major refactor by JeffDairiki (as AddComment)
- * @author: Changed as baseclass to AddComment and WikiForum and EditToolbar integration by ReiniUrban.
+ * @author: Changed as baseclass to AddComment and WikiForum and EditToolbar integration by Reini Urban.
  */
 
 require_once 'lib/TextSearchQuery.php';
@@ -101,7 +104,7 @@ class WikiPlugin_WikiBlog
         $request->setArg("edit", false);
 
         if ($request->isPost() and !empty($blog['save'])) {
-            $this->add($request, $blog, 'wikiblog', $basepage); // noreturn
+            $this->add($request, $blog); // noreturn
         }
         //TODO: preview
 
@@ -416,11 +419,3 @@ class WikiPlugin_WikiBlog
     }
 
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

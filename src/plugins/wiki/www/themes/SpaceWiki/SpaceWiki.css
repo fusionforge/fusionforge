@@ -18,11 +18,18 @@
  * #ff7e00; orange
  */
 
+@import url(../default/phpwiki-common.css);
+
 /**
  * General
  */
 img {
     border: 0;
+}
+
+img.inlineimage {
+    display: inline;
+    vertical-align: middle;
 }
 
 form {
@@ -70,64 +77,12 @@ a:hover {
     color: #5791ff;
 }
 
-/* generic classes ----------------------------------------------- */
-
-.tt {
-    font-family: monospace;
-}
-
-.strike {
-    text-decoration: line-through;
-}
-
-.big {
-    font-size: larger;
-}
-
-.align-left {
-    text-align: left;
-}
-
-.align-right {
-    text-align: right;
-}
-
-.align-center {
-    text-align: center;
-}
-
-.top {
-    vertical-align: top;
-}
-
-.bottom {
-    vertical-align: bottom;
-}
-
-.middle {
-    vertical-align: middle;
-}
-
-.baseline {
-    vertical-align: baseline;
-}
-
-.nowrap {
-    white-space: nowrap;
-}
-
-.fullwidth {
-    width: 100%;
-}
-
 /* --------------------------------------------------------------- */
 
 /**
  * Wiki
  */
 body {
-    /* the background image url is relative to this file's directory */
-    /*background-image:  url(images/starfield.png) repeat; */
     font-family: Helvetica, Arial, sans-serif;
     color: white;
     background-color: black;
@@ -177,7 +132,6 @@ div.wikiaction, form.wikiadmin div {
     padding: 0.5ex 0.5em;
 }
 
-/* div.wikiadmin { background-color: black; } */
 form.wikiadmin div {
     background-color: black;
 }
@@ -398,12 +352,6 @@ caption {
     font-family: Arial, Helvetica, sans-serif;
 }
 
-.pagelist {
-}
-
-.pagelist thead, .pagelist thead u {
-}
-
 .pagelist tr.evenrow {
     background: #111;
 }
@@ -506,12 +454,6 @@ textarea.wikiedit {
     padding: 2px;
 }
 
-#editarea-size {
-    margin-top: 1ex;
-    text-align: right;
-    font-size: smaller;
-}
-
 /* IncludePage plugin ================================================= */
 
 .transclusion-title {
@@ -559,9 +501,8 @@ textarea.wikiedit {
     margin: 0;
 }
 
-/**
- * Calendar plugin
- */
+/* Calendar plugin ==================================================== */
+
 table.cal {
     border: 1px solid #006;
     background: black;
@@ -594,9 +535,6 @@ table.cal-header tr, table.cal-header td {
 }
 
 /* Day-names header */
-table.cal tbody tr .cal-dayname {
-}
-
 .cal-dayname td {
     text-align: center;
     font-size: smaller;
@@ -613,10 +551,6 @@ a.cal-hide {
 table.cal td.cal-today {
     margin: 1px;
     border: 1px solid gray;
-}
-
-/* text */
-table.cal td.cal-today a.cal-hide {
 }
 
 /**
@@ -744,10 +678,6 @@ b.wikisummary {
     padding: 0.5ex 0.5em;
     border: medium solid gray;
     display: table;
-}
-
-.clear-floats {
-    clear: both;
 }
 
 /**
@@ -893,7 +823,6 @@ p.wiki-rc-action a.wiki-rc-action:first-child {
 
 li.rc-major, li.rc-minor {
     display: table;
-    /*border-bottom: 1px solid #222;*/
     margin-bottom: .25ex;
     padding-left: 0.25em;
     padding-right: 0.25em;
@@ -997,69 +926,4 @@ div.toolbar .wiki:hover {
 b.wikisummary {
     padding: 2px;
     margin: 1px;
-}
-
-/* WikicreoleTable, MediawikiTable and RichTable plugins ============== */
-
-/*
- * table class="boxed"
- * will put a border around the table (but not around the cells)
- *
- * table class="bordered"
- * will put a border around the table and the cells
- *
- * In both cases, the caption will be bold and centered under the table
- *
- * In both cases, the headers (th) will have a "#d8d8d8" background
- */
-
-table.boxed, table.bordered, table.bordered th, table.bordered td {
-    border-width: 1px;
-    border-style: solid;
-    border-collapse: collapse;
-    vertical-align: top;
-}
-
-table.boxed td, table.bordered td,
-table.boxed th, table.bordered th {
-    padding-left: 5px;
-    padding-right: 5px;
-    padding-top: 0;
-    padding-bottom: 0;
-}
-
-table.boxed caption, table.bordered caption {
-    text-align: center;
-    font-weight: bold;
-    caption-side: bottom;
-    padding-top: 0.8em;
-}
-
-table.boxed th, table.bordered th {
-    font-weight: bold;
-    background-color: #d8d8d8;
-}
-
-table.sortable th.header {
-    background-image: url(../default/buttons/sort_none.gif);
-    cursor: pointer;
-    background-repeat: no-repeat;
-    background-position: center right;
-    padding-right: 20px;
-}
-
-table.sortable th.headerSortUp {
-    background-image: url(../default/buttons/sort_up.gif);
-    cursor: pointer;
-    background-repeat: no-repeat;
-    background-position: center right;
-    padding-right: 20px;
-}
-
-table.sortable th.headerSortDown {
-    background-image: url(../default/buttons/sort_down.gif);
-    cursor: pointer;
-    background-repeat: no-repeat;
-    background-position: center right;
-    padding-right: 20px;
 }

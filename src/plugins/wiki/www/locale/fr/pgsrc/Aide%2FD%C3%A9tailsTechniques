@@ -1,13 +1,13 @@
-Date: Mon, 29 Jun 2015 12:04:23 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Thu, 23 May 2019 18:18:07 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=Aide%2FD%C3%A9tailsTechniques;
-  flags="";
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
   charset=UTF-8
 Content-Transfer-Encoding: binary
 
 ~PhpWiki est écrit en PHP, langage de scripting côté serveur, disponible
-sur http://www.php.net/. PHP ressemble au C et à Perl dans sa syntaxe, et
+sur https://www.php.net/. PHP ressemble au C et à Perl dans sa syntaxe, et
 fonctionne comme ASP, ~EmbPerl ou JSP.
 
 ~PhpWiki est constitué d'une douzaine de fichiers environ de PHP mélangé à du HTML.
@@ -17,23 +17,22 @@ fichier DBM.
 
 Chaque fois qu'un utilisateur utilise le site, la page demandée est extraite de la DBM
 et rendue à la volée. L'utilisateur ne demande jamais que le fichier index.php, qui
-décide alors quels sont les fichiers php à inclure.
+décide alors quels sont les fichiers PHP à inclure.
 
-Les liens vers des pages au sein du wiki sont ajoutés automatiquement.
+Les liens vers des pages au sein du wiki sont ajoutés automatiquement : [[ChercherUnePage]].
 Ceci peut être l'aspect le plus intéressant d'un wiki, la capacité à ajouter des
 pages simplement en créant des liens vers elles. L'autre caractéristique la plus
 intéressante est la facilité avec laquelle on peut créer des URL externes tels que :
-
 # http://www.wcsb.org/
 # ftp://ftp.redhat.com/
 # news://news.mozilla.org/
-# http://www.slashdot.com/
+# http://slashdot.org/
 # http://theregister.co.uk/
 
 Combiné avec un seul espace de noms et un système de marquage simple, un Wiki exhibe
 nombre des caractéristiques du [[Aide:WabiSabi|WabiSabi]].
 
-PhpWiki est publié sous Licence Publique Générale GNU (GNU GPL), que vous devriez
+~PhpWiki est publié sous Licence Publique Générale GNU (GNU GPL), que vous devriez
 pouvoir lire ici : [[http://www.gnu.org/copyleft/gpl.txt]].
 
 <noinclude>

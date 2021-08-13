@@ -1,4 +1,5 @@
-<!-- Additional sidebar navigation -->
+<nav role="navigation" aria-label="<?php echo _("Main Menu") ?>">
+<?php // Additional sidebar navigation ?>
 <div class="box">
 <div class="box-title">
   <?php echo _("Navigation") ?>
@@ -6,15 +7,16 @@
 <div class="box-data">
 <ul>
 <?php if (!empty($revision)) { ?>
-<li><?php echo WikiLink(_("BackLinks"), "button",_("BackLinks")) ?></li>
+<li><?php echo WikiLink(__("BackLinks"), "button",_("BackLinks")) ?></li>
 <?php } ?>
 <?php if (!empty($user) && $user->isAdmin()) { ?>
-<li><?php echo WikiLink(_("PhpWikiAdministration"), "button", _("Admin")) ?></li>
+<li><?php echo WikiLink(__("PhpWikiAdministration"), "button", _("Admin")) ?></li>
 <?php } ?>
 <?php if (!empty($user) && $user->isSignedIn()) { ?>
-<li><?php echo WikiLink(_("UserPreferences"), "","Preferences") ?></li>
+<li><?php echo WikiLink(__("UserPreferences"), "", _("Preferences")) ?></li>
 <?php } ?>
 </ul>
 <?php echo Template("blog/signin") ?>
 </div>
 </div>
+</nav>

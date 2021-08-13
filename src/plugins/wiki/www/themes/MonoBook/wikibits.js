@@ -64,7 +64,7 @@ function histrowinit () {
     diffcheck();
 }
 // check selection and tweak visibility/class onclick
-function diffcheck() { 
+function diffcheck() {
     var dli = false; // the li where the diff radio is checked
     var oli = false; // the li where the oldid radio is checked
     hf = document.getElementById('pagehistory');
@@ -78,7 +78,7 @@ function diffcheck() {
                 if(oli) { // it's the second checked radio
                     if(inputs[1].checked) {
                     oli.className = "selected";
-                    return false 
+                    return false
                     }
                 } else if (inputs[0].checked) {
                     return false;

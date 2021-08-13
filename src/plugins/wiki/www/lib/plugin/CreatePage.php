@@ -1,7 +1,6 @@
 <?php
-
 /**
- * Copyright 2004,2007 $ThePhpWikiProgrammingTeam
+ * Copyright © 2004,2007 $ThePhpWikiProgrammingTeam
  *
  * This file is part of PhpWiki.
  *
@@ -18,6 +17,9 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
  */
 
 /**
@@ -49,10 +51,7 @@ class WikiPlugin_CreatePage
             'initial_content' => '',
             'template' => false,
             'vars' => false,
-            'overwrite' => false,
-            'verify' => false, // true or a pagename
-            //'buttontext' => false,
-            //'method'     => 'POST'
+            'overwrite' => false
         );
     }
 
@@ -66,32 +65,23 @@ class WikiPlugin_CreatePage
     function run($dbi, $argstr, &$request, $basepage)
     {
         extract($this->getArgs($argstr, $request));
-        // Prevent spaces at the start and end of a page name
-        $s = trim($s);
+
+        if (($overwrite == '0') || ($overwrite == 'false')) {
+            $overwrite = false;
+        } elseif (($overwrite == '1') || ($overwrite == 'true')) {
+            $overwrite = true;
+        } else {
+            return $this->error(sprintf(_("Argument '%s' must be a boolean"), "overwrite"));
+        }
+
+        // Prevent spaces and slashes at the start and end of a page name
+        $s = trim($s, " /");
+
         if (!$s) {
             return $this->error(_("Cannot create page with empty name!"));
         }
-        // TODO: javascript warning if "/" in s
-        if ($verify) {
-            $head = _("CreatePage failed");
-            if ($dbi->isWikiPage($verify)) {
-                $msg = _("Do you really want to create the page “%s”?");
-            } else {
-                $msg = _("Do you really want to create the page “%s”?");
-            }
-            if (isSubPage($s)) {
-                if (!$dbi->isWikiPage(subPageSlice(0))) {
-                    $msg .= "\n" . _("The new page you want to create will be a subpage.")
-                        . "\n" . _("Subpages cannot be created unless the parent page exists.");
-                    return alert($head, $msg);
-                } else {
-                    $msg .= "\n" . _("The new page you want to create will be a subpage.");
-                }
-            }
-            if (strpos($s, " \/")) {
-                $msg .= "\n" . _("Subpages with ending space are not allowed as directory name on Windows.");
-                return alert($head, $msg);
-            }
+        if (strlen($s) > MAX_PAGENAME_LENGTH) {
+            return $this->error(_("Page name too long"));
         }
 
         $param = array('action' => 'edit');
@@ -145,14 +135,6 @@ class WikiPlugin_CreatePage
                 $page->save($content, $version + 1, $meta);
             }
         }
-        return HTML($request->redirect($url, true));
+        return HTML($request->redirect($url));
     }
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

@@ -1,0 +1,54 @@
+Date: Tue,  3 Sep 2019 18:01:13 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
+Content-Type: application/x-phpwiki;
+  pagename=Aide%2FGreffonPagesFloues;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
+  charset=UTF-8
+Content-Transfer-Encoding: binary
+
+Le [[Aide:GreffonWiki|greffon]] **~PagesFloues** (//~FuzzyPages//) va rechercher les titres de toutes les pages
+qui s'écrivent ou sonnent de façon similaire (mais en anglais).
+
+Pages are considered similar by averaging the similarity scores of
+the spelling comparison and the metaphone comparison for each page
+title in the database (PHP's metaphone() is an improved soundex
+function).
+
+* https://www.php.net/manual/en/function.similar-text.php
+* https://www.php.net/manual/en/function.metaphone.php
+
+== Usage ==
+{{{
+<<FuzzyPages s=pagename>>
+}}}
+
+== Arguments ==
+
+{| class="bordered"
+|-
+! Argument
+! Description
+! Valeur par défaut
+|-
+| **s**
+| Pagename to look for
+| empty
+|}
+
+== Exemple ==
+
+{{{
+<<FuzzyPages s=HomePage>>
+}}}
+
+<<FuzzyPages s=HomePage>>
+
+== Auteur ==
+* [[Help:Reini Urban|Reini Urban]]
+
+== Voir aussi ==
+
+<noinclude>
+----
+[[PhpWikiDocumentation]] [[CategoryWikiPlugin]]
+</noinclude>

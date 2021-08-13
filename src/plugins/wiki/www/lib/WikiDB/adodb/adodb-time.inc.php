@@ -1,7 +1,12 @@
 <?php
 /*
 ADOdb Date Library, part of the ADOdb abstraction library
-Download: http://phplens.com/phpeverywhere/
+
+Latest version is available at http://adodb.org/
+
+@version   v5.20.19  13-Dec-2020
+@copyright (c) 2000-2013 John Lim (jlim#natsoft.com). All rights reserved.
+@copyright (c) 2014      Damien Regad, Mark Newnham and the ADOdb community
 
 PHP native date functions use integer timestamps for computations.
 Because of this, dates are restricted to the years 1901-2038 on Unix
@@ -59,15 +64,8 @@ COPYRIGHT
 
 (c) 2003-2014 John Lim and released under BSD-style license except for code by
 jackbbs, which includes adodb_mktime, adodb_get_gmt_diff, adodb_is_leap_year
-and originally found at http://www.php.net/manual/en/function.mktime.php
+and originally found at https://www.php.net/manual/en/function.mktime.php
 
-=============================================================================
-
-BUG REPORTS
-
-These should be posted to the ADOdb forums at
-
-	http://phplens.com/lens/lensforum/topics.php?id=4
 
 =============================================================================
 
@@ -343,7 +341,7 @@ January!!!), changed adodb_get_gmt_diff() to ignore daylight savings.
 
 - 9 Aug 2003 0.10
 Fixed bug with dates after 2038.
-See http://phplens.com/lens/lensforum/msgs.php?id=6980
+See PHPLens Issue No: 6980
 
 - 1 July 2003 0.09
 Added support for Q (Quarter).
@@ -415,6 +413,9 @@ $ADODB_DATETIME_CLASS = (PHP_VERSION >= 5.2);
 */
 
 if (!defined('ADODB_ALLOW_NEGATIVE_TS')) define('ADODB_NO_NEGATIVE_TS',1);
+
+if (!DEFINED('ADODB_FUTURE_DATE_CUTOFF_YEARS'))
+	DEFINE('ADODB_FUTURE_DATE_CUTOFF_YEARS',200);
 
 function adodb_date_test_date($y1,$m,$d=13)
 {
@@ -812,7 +813,7 @@ global $_month_table_normal,$_month_table_leaf;
 
 	if ($marr[$m] < $d) return false;
 
-	if ($y < 1000 && $y > 3000) return false;
+	if ($y < 1000 || $y > 3000) return false;
 
 	return true;
 }
@@ -825,12 +826,22 @@ global $_month_table_normal,$_month_table_leaf;
 function _adodb_getdate($origd=false,$fast=false,$is_gmt=false)
 {
 static $YRS;
-global $_month_table_normal,$_month_table_leaf;
+global $_month_table_normal,$_month_table_leaf, $_adodb_last_date_call_failed;
+
+	$_adodb_last_date_call_failed = false;
 
 	$d =  $origd - ($is_gmt ? 0 : adodb_get_gmt_diff_ts($origd));
 	$_day_power = 86400;
 	$_hour_power = 3600;
 	$_min_power = 60;
+
+	$cutoffDate = time() + (60 * 60 * 24 * 365 * ADODB_FUTURE_DATE_CUTOFF_YEARS);
+
+	if ($d > $cutoffDate)
+	{
+		$d = $cutoffDate;
+		$_adodb_last_date_call_failed = true;
+	}
 
 	if ($d < -12219321600) $d -= 86400*10; // if 15 Oct 1582 or earlier, gregorian correction
 
@@ -1371,7 +1382,7 @@ global $ADODB_DATE_LOCALE;
 		$sep = substr($tstr,2,1);
 		$hasAM = strrpos($tstr,'M') !== false;
 	*/
-		# see http://phplens.com/lens/lensforum/msgs.php?id=14865 for reasoning, and changelog for version 0.24
+		# see PHPLens Issue No: 14865 for reasoning, and changelog for version 0.24
 		$dstr = gmstrftime('%x',31366800); // 30 Dec 1970, 1 am
 		$sep = substr($dstr,2,1);
 		$tstr = strtoupper(gmstrftime('%X',31366800)); // 30 Dec 1970, 1 am
@@ -1455,4 +1466,17 @@ global $ADODB_DATE_LOCALE;
 	if ($ts === false) $ts = time();
 	$ret = adodb_date($fmtdate, $ts, $is_gmt);
 	return $ret;
+}
+
+/**
+* Returns the status of the last date calculation and whether it exceeds
+* the limit of ADODB_FUTURE_DATE_CUTOFF_YEARS
+*
+* @return boolean
+*/
+function adodb_last_date_status()
+{
+	global $_adodb_last_date_call_failed;
+
+	return $_adodb_last_date_call_failed;
 }

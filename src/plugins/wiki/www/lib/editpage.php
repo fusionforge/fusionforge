@@ -1,4 +1,35 @@
 <?php
+/**
+ * Copyright © 2000 Steve Wainstead
+ * Copyright © 2000-2001 Arno Hollosi
+ * Copyright © 2001 Joel Uckelman
+ * Copyright © 2001-2003 Jeff Dairiki
+ * Copyright © 2001-2003 Carsten Klapp
+ * Copyright © 2002 Lawrence Akka
+ * Copyright © 2004-2009 Reini Urban
+ * Copyright © 2007 Sabri Labbenes
+ * Copyright © 2008-2015 Marc-Etienne Vargenau, Alcatel-Lucent
+ *
+ * This file is part of PhpWiki.
+ *
+ * PhpWiki is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * PhpWiki is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
+ */
+
 require_once 'lib/Template.php';
 require_once 'lib/WikiUser.php';
 
@@ -215,7 +246,7 @@ class PageEditor
             $pagelink = WikiLink($this->page);
         }
 
-        $title = new FormattedText ($title_fs, $pagelink);
+        $title = new FormattedText($title_fs, $pagelink);
         // not for dumphtml or viewsource
         if (defined('ENABLE_WYSIWYG') and ENABLE_WYSIWYG and $template == 'editpage') {
             $WikiTheme->addMoreHeaders($this->WysiwygEdit->Head());
@@ -325,11 +356,6 @@ class PageEditor
         // New contents successfully saved...
         $this->updateLock();
 
-        // Clean out archived versions of this page.
-        require_once 'lib/ArchiveCleaner.php';
-        $cleaner = new ArchiveCleaner($GLOBALS['ExpireParams']);
-        $cleaner->cleanPageRevisions($page);
-
         /* generate notification emails done in WikiDB::save to catch
          all direct calls (admin plugins) */
 
@@ -427,9 +453,7 @@ class PageEditor
         // This will probably prevent from discussing sex or viagra related topics. So beware.
         if (ENABLE_SPAMASSASSIN) {
             require_once 'lib/spam_babycart.php';
-            if ($babycart = check_babycart($newtext, $request->get("REMOTE_ADDR"),
-                $this->user->getId())
-            ) {
+            if ($babycart = check_babycart($newtext, $request->get("REMOTE_ADDR"))) {
                 // TODO: mail the admin
                 if (is_array($babycart))
                     $this->tokens['PAGE_LOCKED_MESSAGE'] =
@@ -521,7 +545,7 @@ class PageEditor
                                        _("Versions are identical")));
         } else {
             // New CSS formatted unified diffs
-            $fmt = new HtmlUnifiedDiffFormatter;
+            $fmt = new HtmlUnifiedDiffFormatter();
             $html->pushContent($fmt->format($diff));
         }
         return $html;
@@ -628,7 +652,7 @@ class PageEditor
             $undo_btn = $WikiTheme->getImageURL("ed_undo.png");
             $undo_d_btn = $WikiTheme->getImageURL("ed_undo_d.png");
             // JS_SEARCHREPLACE from walterzorn.de
-            $js = Javascript("
+            $js = JavaScript("
 uri_undo_btn   = '" . $undo_btn . "'
 msg_undo_alt   = '" . _("Undo") . "'
 uri_undo_d_btn = '" . $undo_d_btn . "'
@@ -646,7 +670,7 @@ msg_repl_close     = '" . _("Close") . "'
                 $WikiTheme->addMoreHeaders($js);
                 $WikiTheme->addMoreAttr('body', "SearchReplace", " onload='define_f()'");
             } else { // from an actionpage: WikiBlog, AddComment, WikiForum
-                printXML($js);
+                PrintXML($js);
             }
         } else {
             $WikiTheme->addMoreAttr('body', "editfocus", "document.getElementById('edit-content]').editarea.focus()");
@@ -662,9 +686,9 @@ msg_repl_close     = '" . _("Close") . "'
                 $WikiTheme->addMoreHeaders($init);
                 $WikiTheme->addMoreHeaders($js);
             } else { // from an actionpage: WikiBlog, AddComment, WikiForum
-                printXML($init);
-                printXML($js);
-                printXML(JavaScript('define_f()'));
+                PrintXML($init);
+                PrintXML($js);
+                PrintXML(JavaScript('define_f()'));
             }
             $toolbar = HTML::div(array('class' => 'edit-toolbar', 'id' => 'toolbar'));
             $toolbar->pushContent(HTML::input(array('src' => $WikiTheme->getImageURL("ed_save.png"),
@@ -737,6 +761,11 @@ msg_repl_close     = '" . _("Close") . "'
                                                   'alt' => _('Sample table'),
                                                   'title' => _('Sample table'),
                                                   'onclick' => 'insertTags("\n{| class=\"bordered\"\n|+ This is the table caption\n|-\n! Header A !! Header B !! Header C\n|-\n| Cell A1 || Cell B1 || Cell C1\n|-\n| Cell A2 || Cell B2 || Cell C2\n|-\n| Cell A3 || Cell B3 || Cell C3\n|}\n","",""); return true;')));
+            $toolbar->pushContent(HTML::img(array('src' => $WikiTheme->getImageURL("ed_tab_to_table.png"),
+                                                  'class' => 'toolbar',
+                                                  'alt' => _('Convert tab to table'),
+                                                  'title' => _('Convert tab to table'),
+                                                  'onclick' => "convert_tab_to_table();")));
             $toolbar->pushContent(HTML::img(array('src' => $WikiTheme->getImageURL("ed_enumlist.png"),
                                                   'class' => 'toolbar',
                                                   'alt' => _('Enumeration'),
@@ -835,7 +864,7 @@ msg_repl_close     = '" . _("Close") . "'
         $plugin_dir = 'lib/plugin';
         if (defined('PHPWIKI_DIR'))
             $plugin_dir = PHPWIKI_DIR . "/$plugin_dir";
-        $pd = new fileSet($plugin_dir, '*.php');
+        $pd = new FileSet($plugin_dir, '*.php');
         $plugins = $pd->getFiles();
         unset($pd);
         sort($plugins);
@@ -846,7 +875,7 @@ msg_repl_close     = '" . _("Close") . "'
             foreach ($plugins as $plugin) {
                 $pluginName = str_replace(".php", "", $plugin);
                 if (in_array($pluginName, $AllAllowedPlugins)) {
-                    $p = $w->getPlugin($pluginName, false); // second arg?
+                    $p = $w->getPlugin($pluginName);
                     // trap php files which aren't WikiPlugin~s
                     if (strtolower(substr(get_parent_class($p), 0, 10)) == 'wikiplugin') {
                         $plugin_args = '';
@@ -944,12 +973,12 @@ msg_repl_close     = '" . _("Close") . "'
         global $WikiTheme, $request;
 
         $image_dir = getUploadFilePath();
-        $pd = new imageOrVideoSet($image_dir, '*');
+        $pd = new ImageOrVideoSet($image_dir, '*');
         $images = $pd->getFiles();
         unset($pd);
         if (defined('UPLOAD_USERDIR') and UPLOAD_USERDIR) {
             $image_dir .= "/" . $request->_user->_userid;
-            $pd = new imageOrVideoSet($image_dir, '*');
+            $pd = new ImageOrVideoSet($image_dir, '*');
             $images = array_merge($images, $pd->getFiles());
             unset($pd);
         }
@@ -1034,16 +1063,13 @@ msg_repl_close     = '" . _("Close") . "'
         }
         $el['PREVIEW_B'] = Button('submit:edit[preview]', _("Preview"),
             'wikiaction',
-            array('accesskey' => 'p',
-                'title' => _('Preview the current content [alt-p]')));
+            array('title' => _('Preview the current content')));
         $el['SAVE_B'] = Button('submit:edit[save]',
             _("Save"), 'wikiaction',
-            array('accesskey' => 's',
-                'title' => _('Save the current content as wikipage [alt-s]')));
+            array('title' => _('Save the current content as wikipage')));
         $el['CHANGES_B'] = Button('submit:edit[diff]',
             _("Changes"), 'wikiaction',
-            array('accesskey' => 'c',
-                'title' => _('Preview the current changes as diff [alt-c]')));
+            array('title' => _('Preview the current changes as diff')));
         $el['UPLOAD_B'] = Button('submit:edit[upload]',
             _("Upload"), 'wikiaction',
             array('title' => _('Select a local file and press Upload to attach into this page')));
@@ -1251,11 +1277,3 @@ class LoadFileConflictPageEditor
         return $message;
     }
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

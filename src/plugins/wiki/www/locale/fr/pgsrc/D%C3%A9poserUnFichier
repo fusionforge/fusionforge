@@ -1,15 +1,12 @@
-Date: Mon, 29 Jun 2015 12:04:23 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Fri, 12 Apr 2019 15:36:06 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=D%C3%A9poserUnFichier;
   flags=EXTERNAL_PAGE;
   charset=UTF-8
 Content-Transfer-Encoding: binary
 
-**Télécharger un fichier qui sera accessible avec la syntaxe:**
-{{{
-Upload:num_rev/nom_fichier
-}}}
+**Télécharger un fichier qui sera accessible en préfixant le nom de fichier par « Upload~: ».**
 ----
 <<UpLoad>>
 

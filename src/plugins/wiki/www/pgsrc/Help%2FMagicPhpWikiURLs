@@ -1,27 +1,24 @@
-Date: Mon, 29 Jun 2015 12:04:28 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Mon, 24 Dec 2020 15:49:22 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FMagicPhpWikiURLs;
   flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
   charset=UTF-8
 Content-Transfer-Encoding: binary
 
-== About phpwiki: URLs ==
+== About //phpwiki:// URLs ==
 
 A special type of URL is available for making links to perform
 administrative and other special functions in ~PhpWiki.  Here is a
 brief description of how they work.
 
-The basic syntax of a phpwiki: URL is
+The basic syntax of a //phpwiki:// URL is
 
-<pre>
 **phpwiki:**//pagename//**?**//query-args//
-</pre>
 
 If //pagename// is omitted it defaults to the current page.
 
-//Query-args// should be a set of parameters in standard HTTP GET
-format.
+//Query-args// should be a set of parameters in standard HTTP GET format.
 
 The "action=//x//" parameter should almost always be given.  It can be one of
 **browse**, **diff**, **edit**, **viewsource**,
@@ -35,35 +32,33 @@ Some of the actions accept other parameters.
 | **FullTextSearch**, **TitleSearch** | Accepts **s**=search term, and **size**=input size.
 | **edit**                            | Accepts **version**.
 | **remove**                          | Accepts **verify**.
-| **save**                            | Accepts **editversion**, **minor_edit**, and  **content**.
-| **setprefs**                        | Accepts **edit_area_width**, **edit_area_height**.
+| **save**                            | Accepts **editversion**, **minor_edit** and  **content**.
+| **setprefs**                        | Accepts **edit_area_width** and **edit_area_height**.
 
 === Writing Magic Links in Wiki Pages ===
 
 A magic link looks like:
 
-<pre>
-**~[** //text// **|** //phpwiki-url// **]**
-</pre>
+**~[~[** //text// **|** //phpwiki-url// **]]**
 
 The "//text// **|**" is optional but usually recommended.  If given it
 will provide the label for the link.
 
-The //phpwiki-url// is a **phpwiki:** URL as described above.
+The //phpwiki-url// is a //phpwiki:// URL as described above.
 
 ==== Some examples ====
 
 {{{
-[ Edit the SandBox | phpwiki:SandBox?action=edit ]
+[[phpwiki:SandBox?action=edit|Edit the SandBox]]
 }}}
 will generate a link which will take you directly to editing the
-SandBox, like so: [Edit the SandBox | phpwiki:SandBox?action=edit].
+SandBox, like so: [[phpwiki:SandBox?action=edit|Edit the SandBox]].
 
 Other possibilities:
-* [ Diff the SandBox | phpwiki:SandBox?action=diff ],
-* [ Lock the HomePage | phpwiki:HomePage?action=lock ],
-* [ Get a Full Zip Dump | phpwiki:?action=zip&include=all ],
-* Search for [ Page titles containing 'wiki' | phpwiki:?action=TitleSearch&s=wiki ]
+* [[phpwiki:SandBox?action=diff|Diff the SandBox]],
+* [[phpwiki:HomePage?action=lock|Lock the HomePage]],
+* [[phpwiki:?action=zip&include=all|Get a Full Zip Dump]],
+* Search for [[phpwiki:?action=TitleSearch&s=wiki|Page titles containing 'wiki']]
 
 === Writing Magic Forms in Wiki Pages ===
 

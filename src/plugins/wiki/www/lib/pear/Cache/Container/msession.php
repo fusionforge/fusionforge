@@ -17,7 +17,7 @@
 //
 // $Id: msession.php 178289 2005-01-26 09:47:28Z dufuz $
 
-require_once 'Cache/Container.php';
+require_once 'lib/pear/Cache/Container.php';
 
 /**
 * Stores cache contents in msessions.
@@ -81,7 +81,7 @@ class Cache_Container_msession extends Cache_Container
     var $ms = null;
 
     
-    function Cache_Container_msession($options = '')
+    function __construct($options = '')
     {
         if (is_array($options)) {
             $this->setOptions($options, array_merge($this->allowed_options, array('id_length', 'uniq', 'host', 'port', 'connect')));

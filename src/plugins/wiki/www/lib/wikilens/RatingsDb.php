@@ -1,4 +1,27 @@
 <?php
+/**
+ * Copyright © 2004,2007 Reini Urban
+ * Copyright © 2010 $ThePhpWikiProgrammingTeam
+ *
+ * This file is part of PhpWiki.
+ *
+ * PhpWiki is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * PhpWiki is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
+ */
 
 /*
  * @author:  Dan Frankowski (wikilens group manager), Reini Urban (as plugin)
@@ -9,6 +32,7 @@
  * - finish mysuggest.c (external engine with data from mysql)
  * - add the various show modes (esp. TopN queries in PHP)
  */
+
 /*
  CREATE TABLE rating (
         dimension INT(4) NOT NULL,
@@ -53,7 +77,7 @@ if (!defined('LIST_TYPE_DIMENSION'))
 class RatingsDb extends WikiDB
 {
 
-    function RatingsDb()
+    function __construct()
     {
         global $request;
         $this->_dbi = &$request->_dbi;
@@ -66,6 +90,9 @@ class RatingsDb extends WikiDB
             } elseif (is_a($this->_backend, 'WikiDB_backend_ADODOB')) {
                 $this->_sqlbackend = &$this->_backend;
                 $this->dbtype = "ADODB";
+            } elseif (is_a($this->_backend, 'WikiDB_backend_PDO')) {
+                $this->_sqlbackend = &$this->_backend;
+                $this->dbtype = "PDO";
             } else {
                 include_once 'lib/WikiDB/backend/ADODB.php';
                 // It is not possible to decouple a ref from the source again. (4.3.11)
@@ -403,9 +430,10 @@ class RatingsDb extends WikiDB
             $result = $dbi->_dbh->query($query);
             $iter = new $this->iter_class($this, $result);
             $row = $iter->next();
-            return $row['avg'];
+            return is_array($row) ? $row['avg'] : 0;
         } else {
-            if (!$pagename) return 0;
+            if (!$pagename) 
+                return 0;
             $page = $this->_dbi->getPage($pagename);
             $data = $page->get('rating');
             if (!empty($data[$dimension]))
@@ -625,7 +653,7 @@ class RatingsDb extends WikiDB
 
     function metadata_set_rating($userid, $pagename, $dimension, $rating = -1)
     {
-        if (!$pagename) return false;
+        if (!$pagename) return;
         $page = $this->_dbi->getPage($pagename);
         $data = $page->get('rating');
         if ($rating == -1)
@@ -640,11 +668,3 @@ class RatingsDb extends WikiDB
     }
 
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

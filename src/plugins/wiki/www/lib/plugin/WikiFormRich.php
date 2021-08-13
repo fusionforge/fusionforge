@@ -1,7 +1,6 @@
 <?php
-
-/*
- * Copyright 2004,2006,2007 $ThePhpWikiProgrammingTeam
+/**
+ * Copyright © 2004,2006,2007 $ThePhpWikiProgrammingTeam
  *
  * This file is part of PhpWiki.
  *
@@ -18,6 +17,9 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
  */
 
 /**
@@ -170,7 +172,6 @@ class WikiPlugin_WikiFormRich
                     E_USER_WARNING);
             }
         }
-        return;
     }
 
     /**
@@ -365,7 +366,7 @@ class WikiPlugin_WikiFormRich
                     $basepage = '';
                     require_once 'lib/WikiPlugin.php';
                     $w = new WikiPluginLoader();
-                    $p = $w->getPlugin($pluginName, false); // second arg?
+                    $p = $w->getPlugin($pluginName);
                     if (!is_object($p))
                         trigger_error("invalid input['method'] " . $input['method'], E_USER_WARNING);
                     $pagelist = $p->run($dbi, @$input['args'], $request, $basepage);
@@ -403,11 +404,3 @@ class WikiPlugin_WikiFormRich
         return true;
     }
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

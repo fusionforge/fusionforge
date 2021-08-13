@@ -1,5 +1,5 @@
-Date: Mon, 29 Jun 2015 12:04:28 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Thu, 13 Oct 2016 15:09:28 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FWikiPollPlugin;
   flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
@@ -9,11 +9,24 @@ Content-Transfer-Encoding: binary
 The **~WikiPoll** [[Help:WikiPlugin|plugin]] provides configurable polls.
 
 == Usage ==
+
 {{{
 <<WikiPoll arguments
-    questions
+    questions and possible answers
 >>
 }}}
+
+Syntax:
+{{{
+question[1]="Do you like PhpWiki?"
+answer[1][1]="Yes" answer[1][2]="Do not know" answer[1][3]="No"
+}}}
+
+Administration:
+{{{
+<<WikiPoll page=PhpWikiPoll admin=1>>
+}}}
+and protect this page properly (e.g. ~PhpWikiPoll/Admin)
 
 == Arguments ==
 

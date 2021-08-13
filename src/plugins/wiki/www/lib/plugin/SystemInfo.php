@@ -1,8 +1,7 @@
 <?php
-
 /**
- * Copyright (C) 1999, 2000, 2001, 2002 $ThePhpWikiProgrammingTeam
- * Copyright 2008-2009 Marc-Etienne Vargenau, Alcatel-Lucent
+ * Copyright © 1999, 2000, 2001, 2002 $ThePhpWikiProgrammingTeam
+ * Copyright © 2008-2009 Marc-Etienne Vargenau, Alcatel-Lucent
  *
  * This file is part of PhpWiki.
  *
@@ -19,6 +18,9 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
  */
 
 /**
@@ -86,7 +88,7 @@ class WikiPlugin_SystemInfo
         $loader = new WikiPluginLoader();
         return $loader->expandPI('<<SystemInfo '
             . WikiPluginCached::glueArgs($argarray) // all
-            . ' ?>', $request, $this, $basepage);
+            . ' >>', $request, $this, $basepage);
     }
 
     protected function getImage($dbi, $argarray, $request)
@@ -146,24 +148,6 @@ class WikiPlugin_SystemInfo
         //$s .= ", glv size: " . count($cache->_glv_cache);
         //$s .= ", cache hits: ?";
         //$s .= ", cache misses: ?";
-        return $s;
-    }
-
-    function ExpireParams()
-    {
-        global $ExpireParams;
-        $s = sprintf(_("Keep up to %d major edits, but keep them no longer than %d days."),
-            $ExpireParams['major']['keep'],
-            $ExpireParams['major']['max_age']);
-        $s .= sprintf(_(" Keep up to %d minor edits, but keep them no longer than %d days."),
-            $ExpireParams['minor']['keep'],
-            $ExpireParams['minor']['max_age']);
-        $s .= sprintf(_(" Keep the latest contributions of the last %d authors up to %d days."),
-            $ExpireParams['author']['keep'], $ExpireParams['author']['max_age']);
-        $s .= sprintf(_(" Additionally, try to keep the latest contributions of all authors in the last %d days (even if there are more than %d of them,) but in no case keep more than %d unique author revisions."),
-            $ExpireParams['author']['min_age'],
-            $ExpireParams['author']['keep'],
-            $ExpireParams['author']['max_keep']);
         return $s;
     }
 
@@ -431,8 +415,9 @@ class WikiPlugin_SystemInfo
         }
 
         $s = sprintf(_("Application size: %d KiB"), $appsize);
-        if ($pagesize)
-            $s .= ", " . sprintf(_("Pagedata size: %d KiB", $pagesize));
+        if ($pagesize) {
+            $s .= ", " . sprintf(_("Pagedata size: %d KiB"), $pagesize);
+        }
         return $s;
     }
 
@@ -453,14 +438,13 @@ class WikiPlugin_SystemInfo
 
     function available_plugins()
     {
-        $fileset = new FileSet(FindFile('lib/plugin'), '*.php');
+        $fileset = new FileSet(findFile('lib/plugin'), '*.php');
         $list = $fileset->getFiles();
         natcasesort($list);
         reset($list);
+        $plugin_function = function($f) { return substr($f,0,-4); };
         return sprintf(_("Total %d plugins: "), count($list))
-            . implode(', ', array_map(create_function('$f',
-                    'return substr($f,0,-4);'),
-                $list));
+            . implode(', ', array_map($plugin_function, $list));
     }
 
     function supported_languages()
@@ -515,17 +499,28 @@ class WikiPlugin_SystemInfo
         //$args = $this->getArgs($argstr, $request);
         $this->_dbi =& $dbi;
         $args['separator'] = ' ';
+
+        $appname_function = function() { return 'PhpWiki'; };
+        $version_function = function() { return sprintf('%s', PHPWIKI_VERSION); };
+        $LANG_function = function() { return $GLOBALS["LANG"]; };
+        $LC_ALL_function = function() { return setlocale(LC_ALL, 0); };
+        $current_language_function = function() { return $GLOBALS["LANG"]; };
+        $system_language_function = function() { return DEFAULT_LANGUAGE; };
+        $current_theme_function = function() { return $GLOBALS["WikiTheme"]->_name; };
+        $system_theme_function = function() { return THEME; };
+        $dummy_function = function() { return 'dummy'; };
+
         $availableargs = // name => callback + 0 args
-            array('appname' => create_function('', "return 'PhpWiki';"),
-                'version' => create_function('', "return sprintf('%s', PHPWIKI_VERSION);"),
-                'LANG' => create_function('', 'return $GLOBALS["LANG"];'),
-                'LC_ALL' => create_function('', 'return setlocale(LC_ALL, 0);'),
-                'current_language' => create_function('', 'return $GLOBALS["LANG"];'),
-                'system_language' => create_function('', 'return DEFAULT_LANGUAGE;'),
-                'current_theme' => create_function('', 'return $GLOBALS["WikiTheme"]->_name;'),
-                'system_theme' => create_function('', 'return THEME;'),
-                // more here or as method.
-                '' => create_function('', "return 'dummy';")
+            array('appname' => $appname_function,
+                  'version' => $version_function,
+                  'LANG' => $LANG_function,
+                  'LC_ALL' => $LC_ALL_function,
+                  'current_language' => $current_language_function,
+                  'system_language' => $system_language_function,
+                  'current_theme' => $current_theme_function,
+                  'system_theme' => $system_theme_function,
+                  // more here or as method.
+                  '' => $dummy_function
             );
         // split the argument string by any number of commas or space
         // characters, which include " ", \r, \t, \n and \f
@@ -542,7 +537,6 @@ class WikiPlugin_SystemInfo
                 //'accessstats'      => _("Access statistics"),
                 'hitstats' => _("Hit statistics"),
                 'discspace' => _("Harddisc usage"),
-                'expireparams' => _("Expiry parameters"),
                 'wikinameregexp' => _("Wikiname regexp"),
                 'allowedprotocols' => _("Allowed protocols"),
                 'inlineimages' => _("Inline images"),
@@ -609,17 +603,9 @@ function stddev(&$hits, $total = false)
 {
     $n = count($hits);
     if (!$total) $total = array_reduce($hits, 'rsum');
+    $mean_function = function($i) { global $mean; return ($i-$mean)*($i-$mean); };
     $GLOBALS['mean'] = $total / $n;
-    $r = array_map(create_function('$i', 'global $mean; return ($i-$mean)*($i-$mean);'),
-        $hits);
+    $r = array_map($mean_function, $hits);
     unset($GLOBALS['mean']);
     return (float)sqrt(mean($r, $total) * ($n / (float)($n - 1)));
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

@@ -1,5 +1,5 @@
-Date: Mon, 29 Jun 2015 12:04:28 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Mon, 28 Jun 2021 15:49:58 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=Help%2Ftext2pngPlugin;
   flags=PAGE_LOCKED;
@@ -7,7 +7,7 @@ Content-Type: application/x-phpwiki;
 Content-Transfer-Encoding: binary
 
 Convert text into a png image using GD without using [[Help:WikiPlugin|WikiPluginCached]].
-The images are stored in a private <PHPWIKI_DIR>/images/<LANG> subdirectory instead,
+The images are stored in a private <PHPWIKI_DIR>/images/ subdirectory instead,
 which are not timestamp checked at all. Delete the .png file(s) if you change anything.
 
 This is a really simple and stupid plugin, which might need some work.

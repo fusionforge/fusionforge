@@ -1,8 +1,7 @@
 <?php
-
-/*
- * Copyright (C) 2003, 2004 $ThePhpWikiProgrammingTeam
- * Copyright (C) 2010 Marc-Etienne Vargenau, Alcatel-Lucent
+/**
+ * Copyright © 2003, 2004 $ThePhpWikiProgrammingTeam
+ * Copyright © 2010 Marc-Etienne Vargenau, Alcatel-Lucent
  *
  * This file is part of PhpWiki.
  *
@@ -19,7 +18,12 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
  */
+
+require_once 'lib/pear/File_Passwd.php';
 
 if (!defined('GROUP_METHOD') or
     !in_array(GROUP_METHOD,
@@ -62,8 +66,6 @@ class WikiGroup
     public $username = '';
     /** User object if different from current user */
     public $user;
-    /** The global WikiRequest object */
-    //public $request;
     /** Array of groups $username is confirmed to belong to */
     public $membership;
     /** boolean if not the current user */
@@ -74,7 +76,7 @@ class WikiGroup
      * $group = &WikiGroup::getGroup();
      * @param bool $not_current
      */
-    function WikiGroup($not_current = false)
+    function __construct($not_current = false)
     {
         $this->not_current = $not_current;
     }
@@ -89,7 +91,7 @@ class WikiGroup
     {
         global $request;
         $user = (!empty($this->user)) ? $this->user : $request->getUser();
-        $username = $user->getID();
+        $username = $user->getId();
         if ($username != $this->username) {
             $this->membership = array();
             $this->username = $username;
@@ -116,7 +118,7 @@ class WikiGroup
                 break;
             case "DB":
                 if ($GLOBALS['DBParams']['dbtype'] == 'ADODB') {
-                    return new GroupDB_ADODB($not_current);
+                    return new GroupDb_ADODB($not_current);
                 } elseif ($GLOBALS['DBParams']['dbtype'] == 'SQL') {
                     return new GroupDb_PearDB($not_current);
                 } else {
@@ -237,7 +239,7 @@ class WikiGroup
     }
 
     /**
-     * Determines all of the groups of which the current user is a member.
+     * Determines all groups of which the current user is a member.
      *
      * This method is an abstraction.  An error is sent and an empty
      * array is returned.
@@ -268,7 +270,8 @@ class WikiGroup
         }
 
         /* WikiDB users from prefs (not from users): */
-        $dbi = _PassUser::getAuthDbh();
+        $user = new _PassUser();
+        $dbi = $user->getAuthDbh();
 
         if ($dbi and $dbh->getAuthParam('pref_select')) {
             //get prefs table
@@ -375,39 +378,6 @@ class WikiGroup
         }
     }
 
-    /**
-     * Add the current or specified user to a group.
-     *
-     * This method is an abstraction.  The group and user are ignored, an error
-     * is sent, and false (not added) is always returned.
-     * @param  string $group User added to this group.
-     * @param  string $user  Username to add to the group (default = current user).
-     * @return bool   On true user was added, false if not.
-     */
-    function setMemberOf($group, $user = '')
-    {
-        trigger_error(__sprintf("Method “%s” not implemented in this GROUP_METHOD %s",
-                'setMemberOf', GROUP_METHOD),
-            E_USER_WARNING);
-        return false;
-    }
-
-    /**
-     * Remove the current or specified user to a group.
-     *
-     * This method is an abstraction.  The group and user are ignored, and error
-     * is sent, and false (not removed) is always returned.
-     * @param  string $group User removed from this group.
-     * @param  string $user  Username to remove from the group (default = current user).
-     * @return bool   On true user was removed, false if not.
-     */
-    function removeMemberOf($group, $user = '')
-    {
-        trigger_error(__sprintf("Method “%s” not implemented in this GROUP_METHOD %s",
-                'removeMemberOf', GROUP_METHOD),
-            E_USER_WARNING);
-        return false;
-    }
 }
 
 /**
@@ -421,7 +391,6 @@ class GroupNone extends WikiGroup
 {
     function __construct()
     {
-        return;
     }
 
     /**
@@ -609,7 +578,7 @@ class GroupWikiPage extends WikiGroup
  * GroupDb is configured by $DbAuthParams[] statements
  *
  * Fixme: adodb
- * @author ReiniUrban
+ * @author Reini Urban
  */
 class GroupDb extends WikiGroup
 {
@@ -655,7 +624,7 @@ class GroupDb extends WikiGroup
 /**
  * PearDB methods
  *
- * @author ReiniUrban
+ * @author Reini Urban
  */
 class GroupDb_PearDB extends GroupDb
 {
@@ -743,7 +712,7 @@ class GroupDb_PearDB extends GroupDb
 /**
  * ADODB methods
  *
- * @author ReiniUrban
+ * @author Reini Urban
  */
 class GroupDb_ADODB extends GroupDb
 {
@@ -838,7 +807,7 @@ class GroupDb_ADODB extends GroupDb
  * GroupFile is configured by AUTH_GROUP_FILE
  * groupname: user1 user2 ...
  *
- * @author ReiniUrban
+ * @author Reini Urban
  */
 class GroupFile extends WikiGroup
 {
@@ -855,7 +824,6 @@ class GroupFile extends WikiGroup
             trigger_error(sprintf(_("Cannot open AUTH_GROUP_FILE %s"), AUTH_GROUP_FILE), E_USER_WARNING);
             return;
         }
-        require_once 'lib/pear/File_Passwd.php';
         $this->_file = new File_Passwd(AUTH_GROUP_FILE, false, AUTH_GROUP_FILE . ".lock");
     }
 
@@ -871,8 +839,6 @@ class GroupFile extends WikiGroup
      */
     function isMember($group)
     {
-        //$request = $this->request;
-        //$username = $this->username;
         if (isset($this->membership[$group])) {
             return $this->membership[$group];
         }
@@ -946,7 +912,7 @@ class GroupFile extends WikiGroup
 /**
  * Ldap is configured in index.php
  *
- * @author ReiniUrban
+ * @author Reini Urban
  */
 class GroupLdap extends WikiGroup
 {
@@ -988,8 +954,6 @@ class GroupLdap extends WikiGroup
         if (isset($this->membership[$group])) {
             return $this->membership[$group];
         }
-        //$request = $this->request;
-        //$username = $this->_getUserName();
         $this->membership[$group] = in_array($this->username, $this->getMembersOf($group));
         if ($this->membership[$group])
             return true;
@@ -1099,11 +1063,3 @@ class GroupLdap extends WikiGroup
         return $members;
     }
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

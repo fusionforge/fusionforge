@@ -1,0 +1,59 @@
+Date: Thu, 23 May 2019 18:18:07 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
+Content-Type: application/x-phpwiki;
+  pagename=Aide%2FGreffonAjouterDesCommentaires;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
+  charset=UTF-8
+Content-Transfer-Encoding: binary
+
+Le [[Aide:GreffonWiki|greffon]] **~AjouterDesCommentaires** (//AddComment//) permet aux utilisateurs d'ajouter des commentaires à
+la fin de la page. On peut changer l'apparence via les modèles
+comment.tmpl et addcomment.tmpl, et les classes CSS wikicomment,
+wikicomment-header, wikicomment-body, wikicomment-footer.
+
+== Utilisation ==
+{{{
+<<AddComment order||=normal jshide||=0 mode||=show,add noheader||=0>>
+}}}
+
+== Arguments ==
+
+{| class="bordered"
+|-
+! Argument
+! Description
+! Valeur par défaut
+|-
+| **jshide**
+| Booléen si les commentaires et/ou le texte doivent être initialement cachés et développés par un clic.
+| 0
+|-
+| **order**
+| Affiche les commentaires dans l'ordre chronologique (order=normal) ou inverse (order=reverse)
+| normal
+|-
+| **mode**
+| Ajouter et/ou montrer.
+| add,show
+|-
+| **noheader**
+| Booléen si le titre "Commentaires" au format h2 doit être omis.
+| 0
+|-
+| **pagename**
+| Attacher à quelle page ?
+| page courante
+|}
+
+== Avertissements ==
+
+* jshide pas vraiment bien testé.
+
+== Exemples ==
+
+<<AddComment jshide||=1>>
+
+<noinclude>
+----
+[[DocumentationDePhpWiki]] [[CatégorieGreffonWiki]]
+</noinclude>

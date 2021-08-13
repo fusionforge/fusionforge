@@ -1,5 +1,5 @@
 <?php
-/* 
+/*
 PrettyWiki startup script.
 Sample to override the default wiki (Theme, Language, DB, ...).
 Also For Wiki farms.
@@ -15,7 +15,7 @@ Note: This needs a webserver handler to PHP like this on Apache:
   <defined APACHE2>
     AcceptPathInfo on
   </defined>
-</Files> 
+</Files>
 */
 define('VIRTUAL_PATH', $_SERVER['SCRIPT_NAME']);
 

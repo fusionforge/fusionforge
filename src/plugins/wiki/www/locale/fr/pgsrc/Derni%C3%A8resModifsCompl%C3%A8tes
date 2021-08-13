@@ -1,18 +1,17 @@
-Date: Mon, 29 Jun 2015 12:04:23 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Fri, 12 Apr 2019 15:36:06 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=Derni%C3%A8resModifsCompl%C3%A8tes;
-  flags=PAGE_LOCKED;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
   charset=UTF-8
 Content-Transfer-Encoding: binary
 
-Voici une liste de **toutes** les pages modifiées récemment sur ce wiki, et
-pas seulement des plus récentes comme dans [[DernièresModifs]]. (Voir [[ÉditionsRécentes]]
-pour toutes les modifications mineures récentes).
+Voici une liste de **toutes** les pages modifiées récemment sur ce wiki, et pas seulement des plus récentes comme dans [[DernièresModifs]].
 
---------
+//Voir [[ÉditionsRécentes]] pour toutes les modifications mineures récentes.//
 
-<<RecentChanges days||=7 show_all||=1 daylist=1,3,7,30,90,0>>
+----
+<<RecentChanges days||=7 show_all||=1 show_minor||=1 daylist=1,3,7,30,90,0>>
 
 ----
 [[CatégoriePageDAction]]

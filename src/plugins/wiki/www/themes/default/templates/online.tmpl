@@ -10,7 +10,7 @@ if ($MAX_ONLINE_TIME and $MAX_ONLINE_NUM)
 
 <?php if ($mode == 'summary') {
     if ($allow_detail) {
-      $url = WikiUrl($pagename,array("mode"=>"detail"));
+      $url = WikiURL($pagename,array("mode"=>"detail"));
       $header = HTML::a(array('href'=>$url,'title'=>_("Switch to detailed list")),_("Who is Online"));
     }
 ?>
@@ -53,7 +53,7 @@ if ($MAX_ONLINE_TIME and $MAX_ONLINE_NUM)
 <?php } ?>
 
 <?php if ($mode == 'detail') {
-    $url = WikiUrl($pagename,array("mode"=>"summary"));
+    $url = WikiURL($pagename,array("mode"=>"summary"));
     $header = HTML::a(array('href'=>$url,'title'=>_("Switch to summary")),_("Who is Online"));
 ?>
 <table class="forumline fullwidth">

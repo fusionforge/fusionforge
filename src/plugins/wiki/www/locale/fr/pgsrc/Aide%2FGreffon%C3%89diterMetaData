@@ -1,0 +1,47 @@
+Date: Tue,  3 Sep 2019 18:01:13 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
+Content-Type: application/x-phpwiki;
+  pagename=Aide%2FGreffon%C3%89diterMetaData;
+  flags=PAGE_LOCKED;
+  charset=UTF-8
+Content-Transfer-Encoding: binary
+
+Le [[Aide:GreffonWiki|greffon]] **~ÉditerMetaData** (//EditMetaData//) vous permet
+d'ajouter/modifier/effacer des paires clé/valeur
+pour une page donnée. Vous devez être connecté comme administrateur pour le faire.
+La page de métadonnées contient des choses comme le compteur de visites,
+la date de dernière modification et d'autres choses.
+
+{{{
+<<AppendText argument>>
+}}}
+
+== Argument ==
+
+{| class="bordered"
+|-
+! Argument
+! Description
+! Valeur par défaut
+|-
+| **page**
+| Quelle page modifier
+| Page courante.
+|}
+
+== Exemples ==
+
+Éditer les métadonnées pour la page d'accueil devrait ressembler à :
+{{{
+<<EditMetaData page="PageAccueil">>
+}}}
+
+Sans argument, la page par défaut est la page courante :
+{{{
+<<EditMetaData>>
+}}}
+
+<noinclude>
+----
+[[DocumentationDePhpWiki]] [[CatégorieGreffonWiki]]
+</noinclude>

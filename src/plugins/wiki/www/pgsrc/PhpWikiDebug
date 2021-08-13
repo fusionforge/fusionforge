@@ -1,5 +1,5 @@
-Date: Mon, 29 Jun 2015 12:04:28 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Fri,  6 Aug 2021 16:19:21 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=PhpWikiDebug;
   flags=PAGE_LOCKED;
@@ -26,7 +26,7 @@ Hitting this button will delete all cached transformed
 content. (Each pages content will be transformed and re-cached next
 time someone views it.)
 
-<<WikiAdminUtils action=purge-cache label="Purge Markup Cache" >>
+<<WikiAdminUtils action=purge-cache>>
 
 == Clean Wiki Database of Illegal Filenames ==
 
@@ -36,35 +36,27 @@ might create one....
 
 This button will delete any pages with illegal page names, without possibility to restore.
 
-<<WikiAdminUtils action=purge-bad-pagenames label="Purge bad pagenames" >>
+<<WikiAdminUtils action=purge-bad-pagenames>>
 
 == Clean Wiki Database of empty and unreferenced pages ==
 
 **Warning!** This button will delete every empty and unreferenced page, without any possibility to restore them again.
 This will disable the possibility to revert or get back any deleted page.
 
-<<WikiAdminUtils action=purge-empty-pages label="Purge all empty unreferenced pages" >>
-
-== Convert cached_html to new SQL column ==
-
-This is only needed on SQL or ADODB if you didn't do action=upgrade, but created the
-new page.cached_html field separately, and now you want to move this data from
-page.pagedata over to page.cached_html.
-
-<<WikiAdminUtils action=convert-cached-html label="Convert cached_html" >>
+<<WikiAdminUtils action=purge-empty-pages>>
 
 == Check Wiki Database ==
 
 This button will check the Wiki page database for consistency. This can last several minutes.
 
-<<WikiAdminUtils action=db-check label="Check Wiki Database" >>
+<<WikiAdminUtils action=db-check>>
 
 == Rebuild Wiki Database ==
 
 This will retransform all pages and rebuild the Wiki database on consistency errors or parser updates.
 This can last several minutes, eat a lot of memory and possibly times out!!
 
-<<WikiAdminUtils action=db-rebuild label="Rebuild Wiki Database" >>
+<<WikiAdminUtils action=db-rebuild>>
 
 ----
 [[CategoryActionPage]]

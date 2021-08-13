@@ -1,7 +1,6 @@
 <?php
-
-/*
- * Copyright 2004 $ThePhpWikiProgrammingTeam
+/**
+ * Copyright © 2004 $ThePhpWikiProgrammingTeam
  *
  * This file is part of PhpWiki.
  *
@@ -18,11 +17,14 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
  */
 
 /**
  * The Ploticus plugin passes all its arguments to the ploticus
- * binary and displays the result as PNG, GIF, EPS, SVG or SWF.
+ * binary and displays the result as PNG, GIF, EPS or SVG.
  * Ploticus is a free, GPL, non-interactive software package
  * for producing plots, charts, and graphics from data.
  * See http://ploticus.sourceforge.net/doc/welcome.html
@@ -33,7 +35,7 @@
  * - For windows you need either a gd library with GIF support or
  *   a Ploticus with PNG support. This comes e.g. with the Cygwin build.
  * - We support only images supported by GD so far (PNG most likely).
- *   No EPS, PS, SWF, SVG or SVGZ support yet, due to limitations in WikiPluginCached.
+ *   No EPS, PS, SVG or SVGZ support yet, due to limitations in WikiPluginCached.
  *   This will be fixed soon.
  *
  * Usage:
@@ -81,13 +83,11 @@ class WikiPlugin_Ploticus
         if ($type == $this->_args['device'])
             return PLUGIN_CACHED_IMG_INLINE;
         $device = strtolower($this->_args['device']);
-        if (in_array($device, array('svg', 'swf', 'svgz', 'eps', 'ps', 'pdf', 'html'))) {
+        if (in_array($device, array('svg', 'svgz', 'eps', 'ps', 'pdf', 'html'))) {
             switch ($this->_args['device']) {
                 case 'svg':
                 case 'svgz':
                     return PLUGIN_CACHED_STATIC | PLUGIN_CACHED_SVG_PNG;
-                case 'swf':
-                    return PLUGIN_CACHED_STATIC | PLUGIN_CACHED_SWF;
                 default:
                     return PLUGIN_CACHED_STATIC | PLUGIN_CACHED_HTML;
             }
@@ -161,7 +161,7 @@ class WikiPlugin_Ploticus
      * This gives an alternative text description of
      * the image.
      */
-    function getAlt($dbi, $argstr, $request)
+    function getAlt($dbi, $argarray, $request)
     {
         return (!empty($this->_args['alt'])) ? $this->_args['alt']
             : $this->getDescription();
@@ -216,7 +216,7 @@ class WikiPlugin_Ploticus
     {
         // Check device
         $device = strtolower($argarray['device']);
-        if (!in_array($device, array('gif', 'png', 'jpeg', 'svg', 'svgz', 'eps', 'swf', 'ps', 'pdf', 'html'))) {
+        if (!in_array($device, array('gif', 'png', 'jpeg', 'svg', 'svgz', 'eps', 'ps', 'pdf', 'html'))) {
             $this->_errortext = _("wrong device");
             return false;
         }
@@ -242,7 +242,7 @@ class WikiPlugin_Ploticus
             $src .= $source;
             $source = $src;
         }
-        $tempfile = $this->tempnam('Ploticus', 'plo');
+        $tempfile = $this->tempnam('Ploticus');
         @unlink($tempfile);
         $args = "-$device -o $tempfile.$device";
         if (!empty($argarray['-csmap'])) {
@@ -311,11 +311,3 @@ class WikiPlugin_Ploticus
         return array($this->_mapfile, $img);
     }
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

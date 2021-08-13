@@ -41,16 +41,16 @@ function flipAll(formObj) {
    }
 }
 
-function toggletoc(a, open, close, toclist) {
+function toggletoc(a, open, close, toclist, titledisplay, titlehide) {
   var toc=document.getElementById(toclist)
   if (toc.style.display=='none') {
-    toc.style.display='block'
-    a.title='"._("Click to hide the TOC")."'
-    a.src = open
+    toc.style.display='block';
+    a.title=titlehide;
+    a.src = open;
   } else {
     toc.style.display='none';
-    a.title='"._("Click to display")."'
-    a.src = close
+    a.title=titledisplay;
+    a.src = close;
   }
 }
 

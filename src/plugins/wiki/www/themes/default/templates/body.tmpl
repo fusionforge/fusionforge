@@ -1,12 +1,13 @@
 <body <?php echo $WikiTheme->getMoreAttr('body') ?> >
-
+<header role="banner">
 <div id="header">
   <?php echo Template('top') ?>
 </div>
+</header>
+<main role="main">
 <div id="content">
-
 <?php echo $CONTENT ?>
-
 </div>
+</main>
 <?php echo Template('bottom') ?>
 </body>

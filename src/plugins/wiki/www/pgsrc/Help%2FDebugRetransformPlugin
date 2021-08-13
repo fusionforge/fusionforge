@@ -1,0 +1,42 @@
+Date: Wed, 16 Jun 2021 17:47:58 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
+Content-Type: application/x-phpwiki;
+  pagename=Help%2FDebugRetransformPlugin;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
+  charset=UTF-8
+Content-Transfer-Encoding: binary
+
+Show a markup retransformation of a wiki page.
+
+== Usage ==
+
+{{{
+<<DebugRetransform arguments>>
+}}}
+
+== Arguments ==
+
+{| class="bordered"
+|-
+! Argument
+! Description
+! Default value
+|-
+| **page**
+| The page to show markup retransformation from.
+| current pagename
+|}
+
+== Example ==
+
+<<DebugRetransform page=HomePage>>
+
+== Author ==
+* [[Help:Reini Urban|Reini Urban]]
+
+== See Also ==
+
+<noinclude>
+----
+[[PhpWikiDocumentation]] [[CategoryWikiPlugin]]
+</noinclude>

@@ -1,7 +1,6 @@
 <?php
-
 /*
- * Copyright 2002 $ThePhpWikiProgrammingTeam
+ * Copyright © 2002 $ThePhpWikiProgrammingTeam
  *
  * This file is part of PhpWiki.
  *
@@ -18,6 +17,9 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
  */
 
 /**
@@ -25,6 +27,7 @@
  *                Based on UnfoldSubpages.
  * Usage:   <<ListSubpages noheader=1 info=pagename,hits,mtime >>
  */
+
 require_once 'lib/PageList.php';
 
 class WikiPlugin_ListSubpages
@@ -84,6 +87,14 @@ class WikiPlugin_ListSubpages
         }
         extract($args);
 
+        if (($noheader == '0') || ($noheader == 'false')) {
+            $noheader = false;
+        } elseif (($noheader == '1') || ($noheader == 'true')) {
+            $noheader = true;
+        } else {
+            return $this->error(sprintf(_("Argument '%s' must be a boolean"), "noheader"));
+        }
+
         $content = HTML();
         //$subpages = array_reverse($subpages); // TODO: why?
         if ($maxpages) {
@@ -125,18 +136,10 @@ class WikiPlugin_ListSubpages
 // how many backlinks for this subpage
 class _PageList_Column_ListSubpages_count extends _PageList_Column
 {
-    function _getValue($page, $revision_handle)
+    function _getValue($page_handle, $revision_handle)
     {
-        $iter = $page->getBackLinks();
+        $iter = $page_handle->getBackLinks();
         $count = $iter->count();
         return $count;
     }
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

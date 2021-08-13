@@ -1,40 +1,62 @@
-Date: Mon, 29 Jun 2015 12:04:25 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Mon, 12 Dec 2020 14:11:56 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=Hj%C3%A4lp%2FHurManAnv%C3%A4nderWiki;
-  flags="";
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
   charset=UTF-8
 Content-Transfer-Encoding: binary
 
-//"Wiki wiki"// betyder "snabb" på Hawai.
+//”Wiki wiki”// betyder ”snabb” på Hawai.
 
 **Allt du behöver veta är:**
-
-* För att redigera en sida, klicka på länken längst ned på sidan. Du bör göra det nu på en gång och läsa källkoden för den här sidan. Det är vettigare.
+* För att redigera en sida, klicka på //Redigera//. Du bör göra det nu på en gång och läsa källkoden för den här sidan. Det är vettigare.
 * Du får lutande text genom att sätta två apostrofer på var sin sida om ordet //så här//.
 * Du får **fet text** genom att sätta två understreck på var sin sida.
 * Och **//fet lutande text//** genom att använda båda.
+* You get ##monospaced text## by using two hash signs on either side.
 * Du får punkter genom att använda asterisk i början av raden
 * För att få text med lika breda tecken, indentera med ett mellanslag:
-
- det här är en dikt
- om text med lika breda tecken
- det är lätt att rimma på dikt
- men inte med lika breda tecken
-
+{{{
+  det här är en dikt
+  om text med lika breda tecken
+  det är lätt att rimma på dikt
+  men inte med lika breda tecken
+}}}
 * Du kan separera paragrafer med en extra blankrad. Exempel:
 
 Jag är en paragraf.
 
 Jag är också en paragraf. Vi är bara väldigt små paragrafer.
 
-
 * Du kan få horisontella linjer genom att skriva fyra eller fler streck så här:
---------
-* För att skapa hyperlänkar behöver du bara skriva ord som börjar med stor bokstav och sätta ihop dem. Låt oss säga att du vill skapa en sida om att Steve Wainstead äter maskar. Allt du behöver göra är att skriva orden med stor bokstav i början och sätta ihop dem så här: SteveWainsteadEatsWorms. Om sidan inte existerar än kommer det finnas ett frågetecken efter länken som inbjuder dig att skapa sidan: [[DenHärSidanSkaInteFinnas]]. (Var snäll och inte förstör exemplet genom att skapa sidan.)
-* För att länka till sidor utanför Wikin kan du bara skriva URL:en och Wiki kommer skapa en länk åt dig: http://www.nytimes.com/
-* För att inkludera bilder, skriv en hyperlänk innanför hakparenteser så här: [[http://www.dindator.dindomän/bild.png]. URL:er till bilder som inte är innanför hakparenteser blir en vanlig länk till bilden.
-* Nu är du redo att [LäggaTillSidor].
+
+---------
+
+* För att skapa hyperlänkar behöver du bara skriva ord som börjar med stor
+  bokstav och sätta ihop dem. Låt oss säga att du vill skapa en sida om att Steve
+  Wainstead äter maskar. Allt du behöver göra är att skriva orden med stor
+  bokstav i början och sätta ihop dem så här: SteveWainsteadEatsWorms. Om sidan
+  inte existerar än kommer det finnas ett frågetecken efter länken som inbjuder
+  dig att skapa sidan: DenHärSidanSkaInteFinnas. (Var snäll och inte förstör
+  exemplet genom att skapa sidan.)
+* För att länka till sidor utanför Wikin kan du bara skriva URL:en och Wiki
+  kommer skapa en länk åt dig: http://www.nytimes.com/
+* För att inkludera bilder, skriv en hyperlänk innanför hakparenteser så här:
+  ~[~[~http://www.dindator.dindomän/bild.png]]. URL:er till bilder som inte är
+  innanför hakparenteser blir en vanlig länk till bilden.
+* Nu är du redo att [[Hjälp:LäggaTillSidor|LäggaTillSidor]].
 
 ----
-En [[Hjälp:WikiWikiWeb|WikiWikiWeb]] är menad att vara snabb och lätt att ändra. Den har ett enkelt uppmärkningsspråk som du kan läsa om i [[Textformateringsregler]].
+
+En [[Hjälp:WikiWikiWeb|WikiWikiWeb]] är menad att vara snabb och lätt att ändra. Den har ett enkelt
+uppmärkningsspråk som du kan läsa om i [[Textformateringsregler]].
+
+----
+
+If you don't like the size of the text editing window you get, you can
+change it. See [[UserPreferences]].
+
+<noinclude>
+----
+[[PhpWikiDocumentation]]
+</noinclude>

@@ -1,7 +1,7 @@
 <?php
-/*
- * Copyright 2003,2004,2007 $ThePhpWikiProgrammingTeam
- * Copyright 2008-2009 Marc-Etienne Vargenau, Alcatel-Lucent
+/**
+ * Copyright © 2003,2004,2007 $ThePhpWikiProgrammingTeam
+ * Copyright © 2008-2009 Marc-Etienne Vargenau, Alcatel-Lucent
  *
  * This file is part of PhpWiki.
  *
@@ -18,6 +18,9 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
  */
 
 /**
@@ -25,7 +28,7 @@
  *          which should preferably be added to the InterWikiMap
  * Usage:   <<UpLoad>>
  * Author:  NathanGass <gass@iogram.ch>
- * Changes: ReiniUrban <rurban@x-ray.at>,
+ * Changes: Reini Urban <rurban@x-ray.at>,
  *          qubit <rtryon@dartmouth.edu>
  *          Marc-Etienne Vargenau, Alcatel-Lucent
  */
@@ -64,7 +67,7 @@ class WikiPlugin_UpLoad
     function run($dbi, $argstr, &$request, $basepage)
     {
         $this->allowed_extensions = explode(",",
-            "7z,avi,bmp,bz2,c,cfg,diff,doc,docx,flv,gif,h,ics,ini,".
+            "7z,avi,bmp,bz2,c,cfg,diff,doc,docx,gif,h,ics,ini,".
             "jpeg,jpg,kmz,mp3,odg,odp,ods,odt,ogg,patch,pdf,png,ppt,".
             "pptx,rar,svg,tar,tar.gz,txt,xls,xlsx,xml,xsd,zip");
         $this->disallowed_extensions = explode(",",
@@ -129,7 +132,7 @@ class WikiPlugin_UpLoad
         $userfile = $request->getUploadedFile('userfile');
         if ($userfile) {
             $userfile_name = $userfile->getName();
-            $userfile_name = trim(basename($userfile_name));
+            $userfile_name = basename($userfile_name);
             if (UPLOAD_USERDIR) {
                 $username = $request->_user->_userid;
                 $file_dir .= $username;
@@ -186,7 +189,7 @@ class WikiPlugin_UpLoad
                 return HTML($message, $form);
             }
             if (move_uploaded_file($userfile_tmpname, $file_dir . $sanified_userfile_name) or
-                (IsWindows() and rename($userfile_tmpname, $file_dir . $sanified_userfile_name))) {
+                (isWindows() and rename($userfile_tmpname, $file_dir . $sanified_userfile_name))) {
                 $interwiki = new PageType_interwikimap();
                 if (UPLOAD_USERDIR) {
                     $link = $interwiki->link("[[Upload:$username/$sanified_userfile_name]]");
@@ -197,7 +200,7 @@ class WikiPlugin_UpLoad
                     $message->pushContent(HTML::div(array('class' => 'feedback'),
                         HTML::p(_("File successfully uploaded.")),
                         HTML::p($link),
-                        HTML::p(_("Note: some forbidden characters in filename have been replaced by dash."))));
+                        HTML::p(_("Note: filename was sanified: spaces from beginning and end removed, multiple spaces replaced by one, forbidden characters replaced by dash."))));
                 } else {
                     $message->pushContent(HTML::div(array('class' => 'feedback'),
                         HTML::p(_("File successfully uploaded.")),
@@ -206,7 +209,7 @@ class WikiPlugin_UpLoad
                 // the upload was a success and we need to mark this event in the "upload log"
                 if ($logfile) {
                     $upload_log = $file_dir . basename($logfile);
-                    $this->log($userfile, $upload_log, $message);
+                    $this->log($userfile, $upload_log);
                 }
                 if ($autolink) {
                     require_once 'lib/loadsave.php';
@@ -215,18 +218,27 @@ class WikiPlugin_UpLoad
                         $current = $pagehandle->getCurrentRevision();
                         $version = $current->getVersion();
                         $text = $current->getPackedContent();
-                        // don't inline images
                         if (UPLOAD_USERDIR) {
-                            $newtext = $text . "\n* [[Upload:$username/$sanified_userfile_name]]";
+                            $image_link = $username.'/'.$sanified_userfile_name;
                         } else {
-                            $newtext = $text . "\n* [[Upload:$sanified_userfile_name]]";
+                            $image_link = $sanified_userfile_name;
                         }
+                        if (!is_image($sanified_userfile_name)) {
+                            // Don't inline images
+                            $image_link = '[[Upload:' . $image_link . ']]';
+                        } else {
+                            // $image_link might contain a space
+                            $image_link = 'Upload:' . rawurlencode($image_link);
+                        }
+                        $newtext = $text . "\n* " . $image_link;
                         $meta = $current->_data;
                         if (UPLOAD_USERDIR) {
                             $meta['summary'] = sprintf(_("uploaded %s"), $username.'/'.$sanified_userfile_name);
                         } else {
                             $meta['summary'] = sprintf(_("uploaded %s"), $sanified_userfile_name);
                         }
+                        $meta['mtime'] = time();
+                        $meta['author'] = $request->getUser()->getId();
                         $pagehandle->save($newtext, $version + 1, $meta);
                     }
                 }
@@ -239,7 +251,7 @@ class WikiPlugin_UpLoad
         return HTML($message, $form);
     }
 
-    private function log($userfile, $upload_log, &$message)
+    private function log($userfile, $upload_log)
     {
         global $WikiTheme;
         /**
@@ -266,14 +278,5 @@ class WikiPlugin_UpLoad
                     . "<td>&nbsp;&nbsp;<em>" . $user->getId() . "</em></td></tr>");
             fclose($log_handle);
         }
-        return;
     }
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

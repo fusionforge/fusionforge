@@ -1,7 +1,6 @@
 <?php
-
-/*
- * Copyright (C) 2010 ReiniUrban
+/**
+ * Copyright © 2010 Reini Urban
  * Zend_OpenId_Consumer parts from Zend licensed under
  * http://framework.zend.com/license/new-bsd
  *
@@ -20,6 +19,9 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
  *
  * This is not yet finished. We do not want to use zend extensions.
  *
@@ -247,17 +249,9 @@ class _OpenIDPassUser
     }
 
     // no quotes and shorter than 128
-    function isValidName()
+    function isValidName($userid = false)
     {
         if (!$this->_userid) return false;
         return !preg_match('/[\"\']/', $this->_userid) and strlen($this->_userid) < 128;
     }
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

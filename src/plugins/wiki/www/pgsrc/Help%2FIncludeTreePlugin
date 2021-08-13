@@ -1,5 +1,5 @@
-Date: Mon, 29 Jun 2015 12:04:28 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Mon, 22 Feb 2021 19:16:32 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FIncludeTreePlugin;
   flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
@@ -23,31 +23,31 @@ Display Dynamic Category Tree.
 ! Default value
 |-
 | **exclude**
-|
-|
+| Comma-separated list of pages to exclude
+| empty
 |-
 | **include_self**
-|
-| 0
+| Boolean. If true, include yourself in the results.
+| false
 |-
 | **noheader**
-|
-| 0
+| Boolean. If true, header should be omitted.
+| false
 |-
 | **page**
-|
+| The page to start the include tree
 | The current page
 |-
 | **description**
-| Override default Description. Printed as header.
-|
+| Override default description. Printed as header.
+| Default description
 |-
 | **reclimit**
-|
+| Max recursion depth.
 | 2
 |-
 | **info**
-|
+| Info to display in the table
 | false
 |-
 | **direction**
@@ -55,18 +55,25 @@ Display Dynamic Category Tree.
 | back
 |-
 | **firstreversed**
-| If true, get BackLinks for the first page and forward links for the rest.  Only applicable when direction = 'forward'.
+| Boolean. If true, get BackLinks for the first page and forward links for the rest.  Only applicable when direction = 'forward'.
 | false
 |-
 | **excludeunknown**
-| If true (default) then exclude any mentioned pages which don't exist yet.  Only applicable when direction = 'forward'.
+| Boolean. If true, then exclude any mentioned pages which don't exist yet.  Only applicable when direction = 'forward'.
 | true
+|-
+| **includepages**
+|
+| words=100
+|-
+| **category**
+|
+| empty
 |-
 | **dtree**
 |
 | true
 |}
-
 
 == Example ==
 

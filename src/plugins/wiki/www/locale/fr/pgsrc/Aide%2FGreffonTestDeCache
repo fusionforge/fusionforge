@@ -1,0 +1,51 @@
+Date: Mon, 30 Mar 2020 15:49:22 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
+Content-Type: application/x-phpwiki;
+  pagename=Aide%2FGreffonTestDeCache;
+  flags=PAGE_LOCKED;
+  charset=UTF-8
+Content-Transfer-Encoding: binary
+
+**~TestDeCache** est un simple test de la classe ~WikiPluginCached qui convertit un texte en image.
+
+== Utilisation ==
+{{{
+<<CacheTest arguments>>
+}}}
+
+== Arguments ==
+
+{| class="bordered"
+|-
+! Argument
+! Description
+! Valeur par défaut
+|-
+| **text**
+| Text in image
+| This is a simple example using ~WikiPluginCached.
+|-
+| **font**
+|
+| 3
+|-
+| **type**
+|
+| png
+|}
+
+== Exemple ==
+
+{{{
+<<CacheTest>>
+}}}
+
+<<CacheTest>>
+
+== Auteur ==
+* Johannes Große
+
+<noinclude>
+----
+[[DocumentationDePhpWiki]] [[CatégorieGreffonWiki]]
+</noinclude>

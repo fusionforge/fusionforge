@@ -1,7 +1,6 @@
 <?php
-
 /*
- * Copyright 2009 Roger Guignard and Marc-Etienne Vargenau, Alcatel-Lucent
+ * Copyright © 2009 Roger Guignard and Marc-Etienne Vargenau, Alcatel-Lucent
  *
  * This file is part of PhpWiki.
  *
@@ -18,6 +17,9 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
  */
 
 /*
@@ -47,7 +49,7 @@ class WikiPlugin_Video
 {
     function getDescription()
     {
-        return _("Display video in Flash or HTML5.");
+        return _("Display video in HTML5.");
     }
 
     function getDefaultArguments()
@@ -78,6 +80,14 @@ class WikiPlugin_Video
         $height = $args['height'];
         $autoplay = $args['autoplay'];
 
+        if (($autoplay == '0') || ($autoplay == 'false')) {
+            $autoplay = false;
+        } elseif (($autoplay == '1') || ($autoplay == 'true')) {
+            $autoplay = true;
+        } else {
+            return $this->error(sprintf(_("Argument '%s' must be a boolean"), "autoplay"));
+        }
+
         if (!$url && !$file) {
             return $this->error(_("Both 'url' or 'file' parameters missing."));
         } elseif ($url && $file) {
@@ -100,71 +110,7 @@ class WikiPlugin_Video
             }
             return $video;
         }
-
-        $html = HTML();
-
-        if (isBrowserIE()) {
-            $object = HTML::object(array('id' => 'flowplayer',
-                'classid' => 'clsid:D27CDB6E-AE6D-11cf-96B8-444553540000',
-                'width' => $width,
-                'height' => $height));
-
-            $param = HTML::param(array('name' => 'movie',
-                'value' => SERVER_URL . $WikiTheme->_findData('flowplayer-3.2.4.swf')));
-            $object->pushContent($param);
-
-            $param = HTML::param(array('name' => "allowfullscreen",
-                'value' => "true"));
-            $object->pushContent($param);
-
-            $param = HTML::param(array('name' => "allowscriptaccess",
-                'value' => "false"));
-            $object->pushContent($param);
-
-            $flashvars = "config={'clip':{'url':'" . $url . "','autoPlay':" . $autoplay . "}}";
-
-            $param = HTML::param(array('name' => 'flashvars',
-                'value' => $flashvars));
-            $object->pushContent($param);
-
-            $embed = HTML::embed(array('type' => 'application/x-shockwave-flash',
-                'width' => $width,
-                'height' => $height,
-                'src' => SERVER_URL . $WikiTheme->_findData('flowplayer-3.2.4.swf'),
-                'flashvars' => $flashvars));
-            $object->pushContent($embed);
-
-            $html->pushContent($object);
-
-        } else {
-            $object = HTML::object(array('data' => SERVER_URL . $WikiTheme->_findData('flowplayer-3.2.4.swf'),
-                'type' => "application/x-shockwave-flash",
-                'width' => $width,
-                'height' => $height));
-
-            $param = HTML::param(array('name' => "allowfullscreen",
-                'value' => "true"));
-            $object->pushContent($param);
-
-            $param = HTML::param(array('name' => "allowscriptaccess",
-                'value' => "false"));
-            $object->pushContent($param);
-
-            $value = "config={'clip':{'url':'" . $url . "','autoPlay':" . $autoplay . "}}";
-            $param = HTML::param(array('name' => "flashvars",
-                'value' => $value));
-            $object->pushContent($param);
-
-            $html->pushContent($object);
-        }
-        return $html;
+        return HTML::span(array('class' => 'error'),
+                          _("Unknown video format"));
     }
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

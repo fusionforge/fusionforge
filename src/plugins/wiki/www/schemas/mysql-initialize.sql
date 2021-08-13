@@ -2,7 +2,7 @@ CREATE TABLE page (
 	id              INT NOT NULL AUTO_INCREMENT,
         pagename        VARCHAR(100) BINARY NOT NULL,
 	hits            INT NOT NULL DEFAULT 0,
-        pagedata        MEDIUMTEXT NOT NULL DEFAULT '',
+        pagedata        MEDIUMTEXT NOT NULL,
 -- dont add that by hand, better let action=upgrade convert your data
 	cached_html 	MEDIUMBLOB,
         PRIMARY KEY (id),
@@ -14,8 +14,8 @@ CREATE TABLE version (
         version         INT NOT NULL,
 	mtime           INT NOT NULL,
 	minor_edit      TINYINT DEFAULT 0,
-        content         MEDIUMTEXT NOT NULL DEFAULT '',
-        versiondata     MEDIUMTEXT NOT NULL DEFAULT '',
+        content         MEDIUMTEXT NOT NULL,
+        versiondata     MEDIUMTEXT NOT NULL,
         PRIMARY KEY (id,version),
 	INDEX (mtime)
 );
@@ -61,12 +61,12 @@ CREATE TABLE session (
 -- ALTER TABLE session CHANGE sess_ip sess_ip CHAR(40) NOT NULL;
 
 -- Optional DB Auth and Prefs
--- For these tables below the default table prefix must be used 
+-- For these tables below the default table prefix must be used
 -- in the DBAuthParam SQL statements also.
 
 CREATE TABLE pref (
   	userid 	VARCHAR(48) BINARY NOT NULL UNIQUE,
-  	prefs  	TEXT NULL DEFAULT '',
+  	prefs  	TEXT NULL,
   	passwd 	VARCHAR(48) BINARY DEFAULT '',
 	groupname VARCHAR(48) BINARY DEFAULT 'users',
   	PRIMARY KEY (userid)
@@ -78,7 +78,7 @@ CREATE TABLE pref (
 -- ALTER TABLE pref ADD groupname CHAR(48) BINARY DEFAULT 'users';
 
 -- deprecated since 1.3.12. only useful for separate databases.
--- better use the extra pref table where such users can be created easily 
+-- better use the extra pref table where such users can be created easily
 -- without password.
 
 -- CREATE TABLE user (
@@ -133,7 +133,7 @@ CREATE TABLE accesslog (
 	request_time  CHAR(28),
 	status 	      SMALLINT UNSIGNED,
 	bytes_sent    SMALLINT UNSIGNED,
-        referer       VARCHAR(255), 
+        referer       VARCHAR(255),
 	agent         VARCHAR(255),
 	request_duration FLOAT
 );

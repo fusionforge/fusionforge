@@ -1,4 +1,28 @@
 <?php
+/**
+ * Copyright © 2001,2003 Jeff Dairiki
+ * Copyright © 2001-2002 Carsten Klapp
+ * Copyright © 2004-2010 Reini Urban
+ *
+ * This file is part of PhpWiki.
+ *
+ * PhpWiki is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * PhpWiki is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
+ */
 
 require_once 'lib/WikiDB.php';
 
@@ -10,6 +34,7 @@ require_once 'lib/WikiDB.php';
  *
  * @author: Lawrence Akka, Reini Urban
  */
+
 class WikiDB_ADODB extends WikiDB
 {
     function __construct($dbparams)
@@ -26,7 +51,7 @@ class WikiDB_ADODB extends WikiDB
             if (is_string($dbparams['dsn']))
                 $dbparams['dsn'] = $backend . ':' . substr($dbparams['dsn'], 6);
         }
-        if (FindFile("lib/WikiDB/backend/ADODB_" . $backend . ".php", true)) {
+        if (findFile("lib/WikiDB/backend/ADODB_" . $backend . ".php", true)) {
             $backend = 'ADODB_' . $backend;
         } else {
             $backend = 'ADODB';
@@ -55,16 +80,16 @@ class WikiDB_ADODB extends WikiDB
     }
 
     // add surrounding quotes '' if string
-    public function quote($in)
+    public function quote($s)
     {
-        if (is_int($in) || is_double($in)) {
-            return $in;
-        } elseif (is_bool($in)) {
-            return $in ? 1 : 0;
-        } elseif (is_null($in)) {
+        if (is_int($s) || is_double($s)) {
+            return $s;
+        } elseif (is_bool($s)) {
+            return $s ? 1 : 0;
+        } elseif (is_null($s)) {
             return 'NULL';
         } else {
-            return $this->_backend->_dbh->qstr($in);
+            return $this->_backend->_dbh->qstr($s);
         }
     }
 
@@ -113,11 +138,3 @@ class WikiDB_ADODB extends WikiDB
     }
 
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

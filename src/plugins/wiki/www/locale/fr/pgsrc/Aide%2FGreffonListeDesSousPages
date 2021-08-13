@@ -1,0 +1,62 @@
+Date: Mon, 30 Mar 2020 15:49:22 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
+Content-Type: application/x-phpwiki;
+  pagename=Aide%2FGreffonListeDesSousPages;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
+  charset=UTF-8
+Content-Transfer-Encoding: binary
+
+Le [[Aide:GreffonWiki|greffon]] **~ListeDesSousPages** (//~ListSubpages//) liste le nom de toutes les sous-pages
+d'une page donnée (par défaut la page courante).
+
+== Utilisation ==
+
+{{{
+<<ListSubpages arguments>>
+}}}
+
+== Arguments ==
+
+Tous les arguments de [[Aide:ListeDePages|ListeDePages]], plus les suivants :
+
+{| class="bordered"
+|-
+! Argument
+! Description
+! Valeur par défaut
+|-
+| **basepage**
+| Le nom de la page concernée
+| La page courante
+|-
+| **maxpages**
+| Nombre maximum de pages à inclure
+| aucun
+|-
+| **noheader**
+| Ne pas afficher l'en-tête
+| false
+|-
+| **info**
+| Liste des colonnes à afficher
+| none
+|}
+
+== Exemple ==
+
+{{{
+<<ListSubpages basepage=Aide maxpages=20 cols=3>>
+}}}
+
+<<ListSubpages basepage=Aide maxpages=20 cols=3>>
+
+== Auteur ==
+* [[Aide:Reini Urban|Reini Urban]]
+
+== Voir aussi ==
+* [[Aide:GreffonDéplierLesSousPages]]
+
+<noinclude>
+----
+[[DocumentationDePhpWiki]] [[CatégorieGreffonWiki]]
+</noinclude>

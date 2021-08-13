@@ -7,6 +7,8 @@
  * used to reference the various CalendarPlugin elements.
  */
 
+@import url(phpwiki-common.css);
+
 /**
  * General
  */
@@ -30,63 +32,12 @@ caption {
     margin-bottom: .5ex;
 }
 
-/* generic classes ----------------------------------------------- */
-
-.tt {
-    font-family: monospace;
-}
-
-.strike {
-    text-decoration: line-through;
-}
-
-.big {
-    font-size: larger;
-}
-
-.align-left {
-    text-align: left;
-}
-
-.align-right {
-    text-align: right;
-}
-
-.align-center {
-    text-align: center;
-}
-
-.top {
-    vertical-align: top;
-}
-
-.bottom {
-    vertical-align: bottom;
-}
-
-.middle {
-    vertical-align: middle;
-}
-
-.baseline {
-    vertical-align: baseline;
-}
-
-.nowrap {
-    white-space: nowrap;
-}
-
-.fullwidth {
-    width: 100%;
-}
-
 /* --------------------------------------------------------------- */
 
 /**
  * Wiki
  */
 body {
-    /* ivory #ffe #fffff0*/
     background: #fffff0;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 85%; /* The default is too large. But enlarge monospace below */
@@ -171,7 +122,6 @@ div.wikiaction {
     background-color: #eee;
 }
 
-/* div.wikiadmin { background-color: #fee; } */
 form.wikiadmin div {
     background-color: #fee;
 }
@@ -185,7 +135,6 @@ form.wikiformrich {
  */
 .wiki, .named-wiki {
     text-decoration: none;
-    /* font-weight: normal; */
     font-weight: bold;
 }
 
@@ -235,7 +184,6 @@ h1 .backlinks {
 }
 
 /* Interwiki links */
-/* .wikipage  { font-weight: bold; } */
 .wikipage {
     font-weight: normal;
 }
@@ -380,12 +328,6 @@ textarea.wikiedit {
     padding: 2px;
 }
 
-#editarea-size {
-    margin-top: 1ex;
-    text-align: right;
-    font-size: smaller;
-}
-
 #search-replace {
     margin-top: 1ex;
     text-align: left;
@@ -414,25 +356,6 @@ textarea.wikiedit {
 .search-term {
     background: yellow;
     font-weight: normal;
-}
-
-#LSResult {
-    position: absolute;
-    text-align: left;
-    display: none;
-    z-index: 100;
-    background-color: white;
-    border: 1px solid #d0d0d0;
-    font-size: 9px;
-    overflow: hidden;
-}
-
-#LSHighlight {
-    background-color: #f08000;
-}
-
-#LSResult .evenrow {
-    background-color: #f0f0f0;
 }
 
 /* IncludePage plugin ================================================= */
@@ -474,10 +397,6 @@ textarea.wikiedit {
     margin-bottom: 1ex;
 }
 
-.wiki-edithelp .wiki {
-    /* color: #5454ff;*/
-}
-
 .wiki-edithelp p {
     font-family: Arial, Helvetica, sans-serif;
     padding-left: 0.5em;
@@ -487,9 +406,8 @@ textarea.wikiedit {
     margin: 0;
 }
 
-/**
- * Calendar plugin
- */
+/* Calendar plugin ==================================================== */
+
 table.cal {
     border: 1px outset gray;
     background: white;
@@ -520,9 +438,6 @@ table.cal-header tr, table.cal-header td {
 }
 
 /* Day-names header */
-table.cal tbody tr .cal-dayname {
-}
-
 .cal-dayname td {
     text-align: center;
     font-size: smaller;
@@ -539,10 +454,6 @@ a.cal-hide {
 table.cal td.cal-today {
     margin: 1px;
     border: 1px solid gray;
-}
-
-/* text */
-table.cal td.cal-today a.cal-hide {
 }
 
 /**
@@ -703,7 +614,8 @@ span.hint {
     padding: 0;
 }
 
-/* Disabled Plugins */
+/* Disabled plugins =================================================== */
+
 .disabled-plugin {
     clear: both;
     margin: 1ex 0;
@@ -723,14 +635,6 @@ span.hint {
     background: #ddd;
     margin: 0;
     padding: 0.3ex 0.5em;
-}
-
-/* "(Redirected from ...)" message. */
-span.redirectfrom {
-    font-size: small;
-    font-style: oblique;
-    font-weight: normal;
-    padding-left: 1em;
 }
 
 /*
@@ -783,16 +687,7 @@ blockquote.mail-style-quote {
 /*
  * wikiblog
  */
-.floatleft {
-    float: left;
-}
-
-.floatright {
-    float: right;
-}
-
 div.wikiblog {
-    /* border: thin black solid; */
     margin: 1ex 2em;
     padding: 0 0;
 }
@@ -800,10 +695,6 @@ div.wikiblog {
 div.wikiblog > div {
     margin: 0 0;
     padding: 0.5ex 0.5em;
-}
-
-div.wikiblog-header {
-    /* background-color: #ccf; */
 }
 
 div.wikiblog > div.wikiblog-footer {
@@ -817,10 +708,6 @@ h3.wikiblog-summary {
     margin: 0 0 1ex 0;
 }
 
-div.wikiblog.wikiblog-form {
-    /* background-color: #eee; */
-}
-
 table.wikiblog-form {
     width: auto;
     border-collapse: collapse;
@@ -828,7 +715,6 @@ table.wikiblog-form {
 }
 
 .wikiblog-form caption {
-    /* background-color: #ccf; */
     caption-side: top;
     font-weight: bold;
     text-align: left;
@@ -881,45 +767,9 @@ table.interwiki-map {
     padding-left: 3em;
 }
 
-.dialog {
-    background-color: #cdf;
-    color: black;
-    margin: 2em auto 2em auto;
-    border: thin black solid;
-    width: 50%;
-}
-
-.dialog h1, .dialog p, .dialog div {
-    text-align: center;
-}
-
-.dialog h1 {
-    font-size: large;
-    margin: 0.5em 0 1em 0;
-}
-
-.dialog div.message {
-    background-color: white;
-    color: black;
-    margin: 0 1em;
-    padding: 0.5em 0.5em;
-}
-
-.dialog p.buttons {
-    margin: 1em 0 0.5em 0;
-}
-
-.clear-floats {
-    clear: both;
-}
-
 /* postnuke css:*/
 .gensmall {
     font-size: 10px
-}
-
-.genmed {
-    font-size: 11px
 }
 
 td.cat {
@@ -990,7 +840,8 @@ td.sidebar {
     margin: 0;
 }
 
-/* plugin BoxRight */
+/* BoxRight plugin ==================================================== */
+
 div.boxright {
     background-color: #e9fbff;
     width: 200px;
@@ -1054,16 +905,14 @@ table.sqlresult td {
     border: 1px solid gray;
 }
 
-/**
- * TeX2png plugin
- */
+/* TeX2png plugin ===================================================== */
+
 img.tex {
     vertical-align: middle;
 }
 
-/**
- * PhotoAlbum plugin
- */
+/* PhotoAlbum plugin ================================================== */
+
 .boldsmall {
     font-weight: bold;
     font-size: 11px;
@@ -1128,6 +977,11 @@ img {
     vertical-align: baseline;
 }
 
+img.inlineimage {
+    display: inline;
+    vertical-align: middle;
+}
+
 input {
     margin: 0.1em;
 }
@@ -1142,7 +996,6 @@ input.numeric {
  * The div inside the wikiadmin upload form does not
  * have a class yet, so it must be referenced indirectly
  */
-/* div.wikiaction, div.wikiadmin { */
 div.wikiaction, form.wikiadmin div {
     border-bottom: 1px solid #d8d8e7;
     border-right: 1px solid #d8d8e7;
@@ -1152,8 +1005,6 @@ div.wikiaction, form.wikiadmin div {
     margin-top: 0.5ex;
     margin-bottom: 0.5ex;
     padding: 0.5ex 0.5em;
-    /* Emulate the display behaviour of a table, to shrink it's width.
-     * ie5.1Mac ignores this */
     display: table;
 }
 
@@ -1230,72 +1081,7 @@ a.wikibutton, a.wikibutton:visited, input.wikibutton {
     padding-right: 1px;
 }
 
-/* WikicreoleTable, MediawikiTable and RichTable plugins ============== */
-
-/*
- * table class="boxed"
- * will put a border around the table (but not around the cells)
- *
- * table class="bordered"
- * will put a border around the table and the cells
- *
- * In both cases, the caption will be bold and centered under the table
- *
- * In both cases, the headers (th) will have a "#d8d8d8" background
- */
-
-table.boxed, table.bordered, table.bordered th, table.bordered td {
-    border-width: 1px;
-    border-style: solid;
-    border-collapse: collapse;
-    vertical-align: top;
-}
-
-table.boxed td, table.bordered td,
-table.boxed th, table.bordered th {
-    padding-left: 5px;
-    padding-right: 5px;
-    padding-top: 0;
-    padding-bottom: 0;
-}
-
-table.boxed caption, table.bordered caption {
-    text-align: center;
-    font-weight: bold;
-    caption-side: bottom;
-    padding-top: 0.8em;
-}
-
-table.boxed th, table.bordered th {
-    font-weight: bold;
-    background-color: #d8d8d8;
-}
-
 #edit-public, h1.firstHeading-public, h1.firstHeading-rating-public {
     background-color: #ffce7b;
     border: 1px solid #ffa500;
-}
-
-table.sortable th.header {
-    background-image: url(../default/buttons/sort_none.gif);
-    cursor: pointer;
-    background-repeat: no-repeat;
-    background-position: center right;
-    padding-right: 20px;
-}
-
-table.sortable th.headerSortUp {
-    background-image: url(../default/buttons/sort_up.gif);
-    cursor: pointer;
-    background-repeat: no-repeat;
-    background-position: center right;
-    padding-right: 20px;
-}
-
-table.sortable th.headerSortDown {
-    background-image: url(../default/buttons/sort_down.gif);
-    cursor: pointer;
-    background-repeat: no-repeat;
-    background-position: center right;
-    padding-right: 20px;
 }

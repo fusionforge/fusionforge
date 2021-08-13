@@ -37,7 +37,7 @@ if ($user->isAuthenticated()) {
     $SignInJS = JavaScript('
      function SignIn(form,userid) {'.($editing_policy ? '
       if (window.focus) {
-        window.open("' . WikiUrl(EDITING_POLICY) . '",<!-- url -->
+        window.open("' . WikiURL(EDITING_POLICY) . '",<!-- url -->
                     "PleaseReadThisFirst",<!-- window name -->
                     "width=600,height=430,scrollbars=yes,resizable=yes,toolbar=yes");
       }':'').'

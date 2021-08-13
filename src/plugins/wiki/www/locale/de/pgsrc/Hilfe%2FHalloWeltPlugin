@@ -1,27 +1,26 @@
-Date: Mon, 29 Jun 2015 12:04:27 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Fri, 26 Jul 2019 10:46:32 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=Hilfe%2FHalloWeltPlugin;
-  flags="";
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
   charset=UTF-8
 Content-Transfer-Encoding: binary
 
 Ein einfaches Beispiels-Plugin.
 
-<<HelloWorld salutation="Hallo," name="WikiUser" >>
+<<HelloWorld salutation="Hallo," name="Wiki User" >>
 
 Vom Quellcode dieser Seite:
 
 {{{
-<<HelloWorld salutation="Hallo," name="WikiUser" >>
+<<HelloWorld salutation="Hallo," name="Wiki User" >>
 }}}
 
------
-PhpWiki's Plugin Architektur erlaubt dir benutzerdefinierte HTML Elemente deinem Wiki hinzuzufügen. Du mußt nur eine neue Klasse (Unterklasse) von der ~WikiPlugin Klasse ableiten, wie mit dem Namen unterhalb, und mit der run() Methode ja nach Wiki- oder Request Argumenten die HTML Ausgabe zu erzeugen.
+----
+~PhpWiki's Plugin Architektur erlaubt dir benutzerdefinierte HTML Elemente deinem Wiki hinzuzufügen. Du mußt nur eine neue Klasse (Unterklasse) von der ~WikiPlugin Klasse ableiten, wie mit dem Namen unterhalb, und mit der run() Methode ja nach Wiki- oder Request Argumenten die HTML Ausgabe zu erzeugen.
 
 * Entweder man erzeugt sie über die HTML Klassen,
-* oder über ein theme Template (Vorlage). Templates sind unübersichtlicher, und Verleiten zum
-  Erzeugen von ungültigem XHTML code, sind aber leichter anpassbar.
+* oder über ein theme Template (Vorlage). Templates sind unübersichtlicher, und Verleiten zum Erzeugen von ungültigem XHTML code, sind aber leichter anpassbar.
 
 <<PhpHighlight
 
@@ -36,8 +35,8 @@ PhpWiki's Plugin Architektur erlaubt dir benutzerdefinierte HTML Elemente deinem
  *          salutation="Grüße, "
  *          name=Wikimeister
  * > >
- * <<HelloWorld salutation=Hallo> >
- * <<HelloWorld name=WabiSabi> >
+ * <<HelloWorld salutation=Hallo > >
+ * <<HelloWorld name=WabiSabi > >
  */
 
 // Konstanten vor der Klasse definieren.
@@ -75,5 +74,7 @@ extends WikiPlugin
 };
 >>
 
+<noinclude>
 ----
 [[PhpWikiDokumentation]] [[KategorieWikiPlugin]]
+</noinclude>

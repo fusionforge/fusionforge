@@ -1,5 +1,6 @@
-<!-- Ratings -->
+<?php // Ratings ?>
 <?php if (!$WikiTheme->DUMP_MODE) {
   $loader = new WikiPluginLoader();
+  $dbi = $request->getDbh(); // Needed in PHP 8
   printXML($loader->expandPI("<"."?plugin RateIt show=top imgPrefix=BStar ?".">", $request, $dbi->_markup));
 } ?>

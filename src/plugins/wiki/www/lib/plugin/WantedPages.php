@@ -1,7 +1,6 @@
 <?php
-
-/*
- * Copyright (C) 2002, 2004 $ThePhpWikiProgrammingTeam
+/**
+ * Copyright © 2002, 2004 $ThePhpWikiProgrammingTeam
  *
  * This file is part of PhpWiki.
  *
@@ -18,6 +17,9 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
  */
 
 /**
@@ -29,7 +31,8 @@
  * or for just a single page, when the page argument is present.
  *
  * TODO: sort pagename col: disable backend fallback
- **/
+ */
+
 include_once 'lib/PageList.php';
 
 class WikiPlugin_WantedPages
@@ -80,6 +83,15 @@ class WikiPlugin_WantedPages
                 : $args['exclude_from']; // <! plugin-list !>
 
         extract($args);
+
+        if (($noheader == '0') || ($noheader == 'false')) {
+            $noheader = false;
+        } elseif (($noheader == '1') || ($noheader == 'true')) {
+            $noheader = true;
+        } else {
+            return $this->error(sprintf(_("Argument '%s' must be a boolean"), "noheader"));
+        }
+
         if ($page == _("WantedPages")) $page = "";
 
         // There's probably a more memory-efficient way to do this (eg
@@ -158,16 +170,16 @@ class WikiPlugin_WantedPages
 // which links to the missing page
 class _PageList_Column_WantedPages_wanted extends _PageList_Column
 {
-    function _PageList_Column_WantedPages_wanted(&$params)
+    function __construct(&$params)
     {
         $this->parentobj =& $params[3];
-        $this->_PageList_Column($params[0], $params[1], $params[2]);
+        parent::__construct($params[0], $params[1], $params[2]);
     }
 
-    function _getValue($page, $revision_handle)
+    function _getValue($page_handle, $revision_handle)
     {
         $html = false;
-        $pagename = $page->getName();
+        $pagename = $page_handle->getName();
         foreach ($this->parentobj->_wpagelist[$pagename] as $page) {
             if ($html)
                 $html->pushContent(', ', WikiLink($page));
@@ -183,25 +195,17 @@ class _PageList_Column_WantedPages_wanted extends _PageList_Column
  */
 class _PageList_Column_WantedPages_links extends _PageList_Column
 {
-    function _PageList_Column_WantedPages_links(&$params)
+    function __construct(&$params)
     {
         $this->parentobj =& $params[3];
-        $this->_PageList_Column($params[0], $params[1], $params[2]);
+        parent::__construct($params[0], $params[1], $params[2]);
     }
 
-    function _getValue($page, $revision_handle)
+    function _getValue($page_handle, $revision_handle)
     {
-        $pagename = $page->getName();
+        $pagename = $page_handle->getName();
         $count = count($this->parentobj->_wpagelist[$pagename]);
-        return LinkURL(WikiURL($page, array('action' => 'BackLinks'), false),
+        return LinkURL(WikiURL($pagename, array('action' => 'BackLinks')),
             fmt("(%d Links)", $count));
     }
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

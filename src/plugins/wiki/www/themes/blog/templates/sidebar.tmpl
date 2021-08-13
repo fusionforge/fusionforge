@@ -1,7 +1,4 @@
-<?php
-$id = isBrowserIE() ? 'sidebar' : 'moz-sidebar';
-?>
-<div id="<?php echo $id?>">
+<div id="sidebar">
 <?php
   /* Today's Blogs page for the current or admin user, if the subpage is defined. */
   $UserCalPageTitle = $user->getId() . '/' . _("Blog");
@@ -12,7 +9,7 @@ $id = isBrowserIE() ? 'sidebar' : 'moz-sidebar';
   }
 ?>
 <div class="box">
-<div class="box-title"><?php echo WikiLink($UserCalPageTitle,'known',_("Calendar")) ?></div>
+<div class="box-title"><?php echo WikiLink($UserCalPageTitle, 'known', _("Calendar")) ?></div>
 <div class="box-data">
     <?php echo Template('calendar') ?>
 </div></div>
@@ -33,7 +30,7 @@ $box = new PluginSidebarBox("WhoIsOnline");
 printXml($box->format());
 /*
 $box = new PluginSidebarBox("RssFeed",
-                            array('url' => 'http://phpwiki.fr/RecentChanges?format=rss',
+                            array('url' => 'http://phpwiki.demo.free.fr/index.php/RecentChanges?format=rss',
                                   'title' => _("PhpWiki News")));
 printXml($box->format());
 */
@@ -42,7 +39,7 @@ printXml($box->format());
 &middot; <?php echo Button(array('action'=>'pdf'), "Pdf") ?>
 <?php } ?>
 
-<!-- The top navigation/search bar -->
+<?php // The top navigation/search bar ?>
 <div class="toolbar"><?php echo Template('navbar') ?></div>
 
 </div>

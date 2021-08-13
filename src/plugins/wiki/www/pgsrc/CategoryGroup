@@ -1,5 +1,5 @@
-Date: Mon, 29 Jun 2015 12:04:28 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Mon, 30 Mar 2020 15:49:22 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=CategoryGroup;
   flags="";
@@ -8,8 +8,7 @@ Content-Transfer-Encoding: binary
 
 All links in this page will be used to find user groups for the
 WIKIPAGE group method.  User group pages must contain a list of
-usernames, and then for consistency after four hyphens a link to this
-page.
+usernames, and then for consistency after four hyphens a link to this page.
 
 ----
 [[CategoryCategory]]

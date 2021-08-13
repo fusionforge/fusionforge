@@ -1,7 +1,6 @@
 <?php
-
 /*
- * Copyright 2010 Reini Urban
+ * Copyright © 2010 Reini Urban
  *
  * This file is part of PhpWiki.
  *
@@ -18,6 +17,9 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
  */
 
 /**
@@ -71,7 +73,7 @@ class WikiPlugin_FacebookLike
         );
         $pagename = $request->getArg('pagename');
         $url = "http://www.facebook.com/plugins/like.php?"
-            . "href=" . urlencode(WikiUrl($pagename, $urlargs, true));
+            . "href=" . urlencode(WikiURL($pagename, $urlargs, true));
         $url = str_replace("%3D", "=", $url);
         $params = array("src" => $url,
             "scrolling" => 'no',
@@ -82,11 +84,3 @@ class WikiPlugin_FacebookLike
         return HTML::iframe($params);
     }
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

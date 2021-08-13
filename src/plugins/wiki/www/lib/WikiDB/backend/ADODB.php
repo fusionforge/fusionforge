@@ -1,7 +1,6 @@
 <?php
-
-/*
- * Copyright 2002,2004,2005,2006 $ThePhpWikiProgrammingTeam
+/**
+ * Copyright © 2002,2004,2005,2006 $ThePhpWikiProgrammingTeam
  *
  * This file is part of PhpWiki.
  *
@@ -18,6 +17,9 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
  */
 
 /**
@@ -76,7 +78,7 @@ class WikiDB_backend_ADODB
         $parsed = parseDSN($dbparams['dsn']);
         $this->_dbparams = $dbparams;
         $this->_parsedDSN =& $parsed;
-        $this->_dbh = &ADONewConnection($parsed['phptype']);
+        $this->_dbh = ADONewConnection($parsed['phptype']);
         if (DEBUG & _DEBUG_SQL) {
             $this->_dbh->debug = true;
             $GLOBALS['ADODB_OUTP'] = '_sql_debuglog';
@@ -371,8 +373,8 @@ class WikiDB_backend_ADODB
      * @param int $version Which version to get
      * @param bool $want_content Do we need content?
      *
-     * @return array hash The version data, or false if specified version does not
-     *              exist.
+     * @return array|false The version data, or false if specified version does not exist.
+
      */
     function get_versiondata($pagename, $version, $want_content = false)
     {
@@ -590,8 +592,12 @@ class WikiDB_backend_ADODB
         return $result;
     }
 
-    /*
-     * Update link table.
+    /**
+     * Set links for page.
+     *
+     * @param string $pagename Page name
+     * @param array  $links    List of page(names) which page links to.
+     *
      * on DEBUG: delete old, deleted links from page
      */
     function set_links($pagename, $links)
@@ -715,8 +721,6 @@ class WikiDB_backend_ADODB
                     }
                 }
                 if (!$skip) {
-                    if ($update) {
-                    }
                     if ($relation) {
                         $dbh->Execute("INSERT INTO $link_tbl (linkfrom, linkto, relation)"
                             . " VALUES ($pageid, $linkid, $relation)");
@@ -755,8 +759,19 @@ class WikiDB_backend_ADODB
         return true;
     }
 
-    /*
+    /**
      * Find pages which link to or are linked from a page.
+     *
+     * @param string    $pagename       Page name
+     * @param bool      $reversed       True to get backlinks
+     * @param bool      $include_empty  True to get empty pages
+     * @param string    $sortby
+     * @param string    $limit
+     * @param string    $exclude        Pages to exclude
+     * @param bool      $want_relations
+     *
+     * FIXME: array or iterator?
+     * @return object A WikiDB_backend_iterator.
      *
      * Optimization: save request->_dbi->_iwpcache[] to avoid further iswikipage checks
      * (linkExistingWikiWord or linkUnknownWikiWord)
@@ -1111,9 +1126,13 @@ class WikiDB_backend_ADODB
         return new WikiDB_backend_ADODB_iter($this, $result, array('pagename', 'wantedfrom'));
     }
 
-    /*
+    /**
      * Rename page in the database.
+     *
+     * @param string $pagename Current page name
+     * @param string $to       Future page name
      */
+
     function rename_page($pagename, $to)
     {
         $dbh = &$this->_dbh;
@@ -1293,31 +1312,6 @@ class WikiDB_backend_ADODB
     {
         return $this->_dbh->MetaTables();
     }
-
-    // other database needs another connection and other privileges.
-    function listOfFields($database, $table)
-    {
-        $field_list = array();
-        $old_db = $this->database();
-        if ($database != $old_db) {
-            $this->_dbh->Connect($this->_parsedDSN['hostspec'],
-                DBADMIN_USER ? DBADMIN_USER : $this->_parsedDSN['username'],
-                DBADMIN_PASSWD ? DBADMIN_PASSWD : $this->_parsedDSN['password'],
-                $database);
-        }
-        foreach ($this->_dbh->MetaColumns($table, false) as $field) {
-            $field_list[] = $field->name;
-        }
-        if ($database != $old_db) {
-            $this->_dbh->close();
-            $this->_dbh->Connect($this->_parsedDSN['hostspec'],
-                $this->_parsedDSN['username'],
-                $this->_parsedDSN['password'],
-                $old_db);
-        }
-        return $field_list;
-    }
-
 }
 
 class WikiDB_backend_ADODB_generic_iter
@@ -1591,11 +1585,3 @@ function parseDSN($dsn)
 
     return $parsed;
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

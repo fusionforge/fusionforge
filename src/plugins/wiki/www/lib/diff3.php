@@ -1,46 +1,66 @@
 <?php
+/**
+ * Copyright © 2001 Geoffrey T. Dairiki <dairiki@dairiki.org>
+ *
+ * This file is part of PhpWiki.
+ *
+ * PhpWiki is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * PhpWiki is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
+ */
 
 // diff3.php
 //
 // A class for computing three way diffs
-//
-// Copyright (C) 2001 Geoffrey T. Dairiki <dairiki@dairiki.org>
-// You may copy this code freely under the conditions of the GPL.
-//
 
 require_once 'lib/difflib.php';
 
-class _Diff3_Block
+class Diff3_Block
 {
     public $type = 'diff3';
 
-    function _Diff3_Block($orig = false, $final1 = false, $final2 = false)
+    function __construct($orig = false, $final1 = false, $final2 = false)
     {
         $this->orig = $orig ? $orig : array();
         $this->final1 = $final1 ? $final1 : array();
         $this->final2 = $final2 ? $final2 : array();
     }
 
-    protected function merged()
+    public function merged()
     {
-        if (!isset($this->_merged)) {
+        if (!isset($this->merged)) {
             if ($this->final1 === $this->final2)
-                $this->_merged = &$this->final1;
+                $this->merged = &$this->final1;
             elseif ($this->final1 === $this->orig)
-                $this->_merged = &$this->final2; elseif ($this->final2 === $this->orig)
-                $this->_merged = &$this->final1; else
-                $this->_merged = false;
+                $this->merged = &$this->final2;
+            elseif ($this->final2 === $this->orig)
+                $this->merged = &$this->final1;
+            else
+                $this->merged = false;
         }
-        return $this->_merged;
+        return $this->merged;
     }
 
-    protected function is_conflict()
+    public function is_conflict()
     {
         return $this->merged() === false;
     }
 }
 
-class _Diff3_CopyBlock extends _Diff3_Block
+class Diff3_CopyBlock extends Diff3_Block
 {
     public $type = 'copy';
 
@@ -51,18 +71,18 @@ class _Diff3_CopyBlock extends _Diff3_Block
         $this->final2 = &$this->orig;
     }
 
-    protected function merged()
+    public function merged()
     {
         return $this->orig;
     }
 
-    protected function is_conflict()
+    public function is_conflict()
     {
         return false;
     }
 }
 
-class _Diff3_BlockBuilder
+class Diff3_BlockBuilder
 {
     public $orig;
     public $final1;
@@ -70,17 +90,17 @@ class _Diff3_BlockBuilder
 
     function __construct()
     {
-        $this->_init();
+        $this->init();
     }
 
-    private function _init()
+    private function init()
     {
         $this->orig = array();
         $this->final1 = array();
         $this->final2 = array();
     }
 
-    private function _append(&$array, $lines)
+    private function append(&$array, $lines)
     {
         array_splice($array, sizeof($array), 0, $lines);
     }
@@ -88,19 +108,19 @@ class _Diff3_BlockBuilder
     public function input($lines)
     {
         if ($lines)
-            $this->_append($this->orig, $lines);
+            $this->append($this->orig, $lines);
     }
 
     public function out1($lines)
     {
         if ($lines)
-            $this->_append($this->final1, $lines);
+            $this->append($this->final1, $lines);
     }
 
     public function out2($lines)
     {
         if ($lines)
-            $this->_append($this->final2, $lines);
+            $this->append($this->final2, $lines);
     }
 
     private function is_empty()
@@ -113,8 +133,8 @@ class _Diff3_BlockBuilder
         if ($this->is_empty())
             return false;
         else {
-            $block = new _Diff3_Block($this->orig, $this->final1, $this->final2);
-            $this->_init();
+            $block = new Diff3_Block($this->orig, $this->final1, $this->final2);
+            $this->init();
             return $block;
         }
     }
@@ -124,16 +144,16 @@ class Diff3
 {
     function __construct($orig, $final1, $final2)
     {
-        $eng = new _DiffEngine;
+        $eng = new DiffEngine();
         $this->ConflictingBlocks = 0; //Conflict counter
-        $this->blocks = $this->__diff3($eng->diff($orig, $final1),
+        $this->blocks = $this->diff3blocks($eng->diff($orig, $final1),
             $eng->diff($orig, $final2));
     }
 
-    private function __diff3($edits1, $edits2)
+    private function diff3blocks($edits1, $edits2)
     {
         $blocks = array();
-        $bb = new _Diff3_BlockBuilder;
+        $bb = new Diff3_BlockBuilder();
 
         $e1 = current($edits1);
         $e2 = current($edits2);
@@ -147,7 +167,7 @@ class Diff3
 
                 $ncopy = min($e1->norig(), $e2->norig());
                 assert($ncopy > 0);
-                $blocks[] = new _Diff3_CopyBlock(array_slice($e1->orig, 0, $ncopy));
+                $blocks[] = new Diff3_CopyBlock(array_slice($e1->orig, 0, $ncopy));
 
                 if ($e1->norig() > $ncopy) {
                     array_splice($e1->orig, 0, $ncopy);
@@ -192,7 +212,7 @@ class Diff3
         return $blocks;
     }
 
-    public function merged_output($label1 = false, $label2 = false)
+    public function merged_output($label1 = '', $label2 = '')
     {
         $lines = array();
         foreach ($this->blocks as $block) {
@@ -212,11 +232,3 @@ class Diff3
         return $lines;
     }
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

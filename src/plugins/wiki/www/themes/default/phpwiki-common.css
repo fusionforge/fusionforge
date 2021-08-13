@@ -1,0 +1,173 @@
+/* generic classes ----------------------------------------------- */
+
+.tt {
+    font-family: monospace;
+}
+
+.strike {
+    text-decoration: line-through;
+}
+
+.big {
+    font-size: larger;
+}
+
+.align-left {
+    text-align: left;
+}
+
+.align-right {
+    text-align: right;
+}
+
+.align-center {
+    text-align: center;
+}
+
+.top {
+    vertical-align: top;
+}
+
+.bottom {
+    vertical-align: bottom;
+}
+
+.middle {
+    vertical-align: middle;
+}
+
+.baseline {
+    vertical-align: baseline;
+}
+
+.nowrap {
+    white-space: nowrap;
+}
+
+.fullwidth {
+    width: 100%;
+}
+
+.floatleft {
+    float: left;
+}
+
+.floatright {
+    float: right;
+}
+
+.clear-floats {
+    clear: both;
+}
+
+/* Alert class ======================================================== */
+
+.dialog {
+    background-color: #cdf;
+    color: black;
+    margin: 2em auto 2em auto;
+    border: thin black solid;
+    width: 50%;
+}
+
+.dialog h1, .dialog p, .dialog div {
+    text-align: center;
+}
+
+.dialog h1 {
+    font-size: large;
+    margin: 0.5em 0 1em 0;
+}
+
+.dialog div.message {
+    background-color: white;
+    color: black;
+    margin: 0 1em;
+    padding: 0.5em 0.5em;
+}
+
+.dialog p.buttons {
+    margin: 1em 0 0.5em 0;
+}
+
+/* Transclude plugin ================================================== */
+
+.transclude {
+    margin: 0;
+    width: 100%;
+}
+
+/* RedirectTo plugin ================================================== */
+
+/* "(Redirected from ...)" message. */
+span.redirectfrom {
+    font-size: small;
+    font-style: oblique;
+    font-weight: normal;
+    padding-left: 1em;
+}
+
+/* WikicreoleTable, MediawikiTable and RichTable plugins ============== */
+
+/*
+ * table class="boxed"
+ * will put a border around the table (but not around the cells)
+ *
+ * table class="bordered"
+ * will put a border around the table and the cells
+ *
+ * In both cases, the caption will be bold and centered under the table
+ *
+ * In both cases, the headers (th) will have a "#d8d8d8" background
+ */
+
+table.boxed, table.bordered, table.bordered th, table.bordered td {
+    border-width: 1px;
+    border-style: solid;
+    border-collapse: collapse;
+    vertical-align: top;
+}
+
+table.boxed td, table.bordered td,
+table.boxed th, table.bordered th {
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+table.boxed caption, table.bordered caption {
+    text-align: center;
+    font-weight: bold;
+    caption-side: bottom;
+    padding-top: 0.8em;
+}
+
+table.boxed th, table.bordered th {
+    font-weight: bold;
+    background-color: #d8d8d8;
+}
+
+table.sortable th.header {
+    background-image: url(../default/buttons/sort_none.gif);
+    cursor: pointer;
+    background-repeat: no-repeat;
+    background-position: center right;
+    padding-right: 20px;
+}
+
+table.sortable th.headerSortUp {
+    background-image: url(../default/buttons/sort_up.gif);
+    cursor: pointer;
+    background-repeat: no-repeat;
+    background-position: center right;
+    padding-right: 20px;
+}
+
+table.sortable th.headerSortDown {
+    background-image: url(../default/buttons/sort_down.gif);
+    cursor: pointer;
+    background-repeat: no-repeat;
+    background-position: center right;
+    padding-right: 20px;
+}

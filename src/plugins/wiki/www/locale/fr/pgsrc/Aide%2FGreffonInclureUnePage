@@ -1,0 +1,108 @@
+Date: Mon, 30 Mar 2020 15:49:22 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
+Content-Type: application/x-phpwiki;
+  pagename=Aide%2FGreffonInclureUnePage;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
+  charset=UTF-8
+Content-Transfer-Encoding: binary
+
+Le [[Aide:GreffonWiki|greffon]] **~InclureUnePage** (//~IncludePage//) « inclura » d'autres pages dans ce wiki. Dans le langage de l'hypertexte,
+ça s'appelle la //transclusion//.
+
+== Utilisation ==
+
+{{{
+<<IncludePage page=OtherPage rev=6 quiet=1 words=50 lines=6>>
+}}}
+
+== Arguments ==
+
+{| class="bordered"
+|-
+! Argument
+! Description
+! Valeur par défaut
+|-
+| **page**
+| La page à inclure
+| //Néant// (argument obligatoire)
+|-
+| **rev**
+| La version
+| Version la plus récente
+|-
+| **quiet**
+| Si activé, l'inclusion apparaît comme du contenu normal
+| false
+|-
+| **bytes**
+| Nombre maximal d'octets à inclure
+| //Néant// (inclure toute la page)
+|-
+| **words**
+| Nombre maximal de mots à inclure
+| //Néant// (inclure toute la page)
+|-
+| **lines**
+| Nombre maximal de lignes à inclure
+| //Néant// (inclure toute la page)
+|-
+| **sections**
+| Nombre maximal de sections à inclure
+| //Néant// (inclure toutes les sections)
+|-
+| **section**
+| Inclure une section nommée
+| //Néant//
+|-
+| **sectionhead**
+| Lors de l'inclusion d'une section nommée, ne pas inclure l'en-tête
+| false
+|}
+
+== Inclusion ==
+
+~<noinclude> .. ~</noinclude> is stripped.
+
+~<includeonly> .. ~</includeonly> is only expanded in included pages.
+
+== Exemples ==
+
+=== ~IncludePage page=Help/~AllPagesPlugin ===
+<<IncludePage page=Help/AllPagesPlugin>>
+
+=== ~IncludePage page=Help/~AllPagesPlugin lines=6 ===
+<<IncludePage page=Help/AllPagesPlugin lines=6>>
+
+=== ~IncludePage page=Help/~AllPagesPlugin section="Arguments" ===
+<<IncludePage page=Help/AllPagesPlugin section="Arguments">>
+
+=== ~IncludePage page=Help/~AllPagesPlugin section="Arguments" sectionhead=true ===
+<<IncludePage page=Help/AllPagesPlugin section="Arguments" sectionhead=true>>
+
+=== ~IncludePage page=Help/~AllPagesPlugin sections=2 ===
+
+Does not work in Wikicreole syntax
+<!-- <<IncludePage page=Help/AllPagesPlugin sections=2>> -->
+
+== Known Problems ===
+
+* Line and word limit doesn't work if the included page itself includes a plugin.
+* "sections" parameter does not work if sections to include are in Wikicreole syntax.
+* "section" parameter does not always work if sections to include use both Wikicreole/Mediawiki and classic Phpwiki syntax.
+
+== Auteurs ==
+
+* Joe Edelman
+* bug fixes by [[Help:Reini Urban|Reini Urban]]
+* "sections" parameter implemented by Marc-Etienne Vargenau, Alcatel-Lucent
+
+== Voir aussi ==
+
+* [[Help:IncludePagesPlugin]] (to include multiple pages)
+* [[Help:TemplatePlugin]] (to include a page with parameters)
+
+<noinclude>
+----
+[[DocumentationDePhpWiki]] [[CatégorieGreffonWiki]]
+</noinclude>

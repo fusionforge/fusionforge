@@ -1,12 +1,14 @@
 <?php
 /*
-V5.20dev  ??-???-2014  (c) 2000-2014 John Lim (jlim#natsoft.com). All rights reserved.
+@version   v5.20.19  13-Dec-2020
+@copyright (c) 2000-2013 John Lim (jlim#natsoft.com). All rights reserved.
+@copyright (c) 2014      Damien Regad, Mark Newnham and the ADOdb community
   Released under both BSD license and Lesser GPL library license.
   Whenever there is any discrepancy between the two licenses,
   the BSD license will take precedence.
 Set tabs to 4 for best viewing.
 
-  Latest version is available at http://adodb.sourceforge.net
+  Latest version is available at http://adodb.org/
 
   Native mssql driver. Requires mssql client. Works on Windows.
   To configure for Unix, see
@@ -105,7 +107,7 @@ class ADODB_mssql extends ADOConnection {
 	var $_bindInputArray = true;
 	var $forceNewConnect = false;
 
-	function ADODB_mssql()
+	function __construct()
 	{
 		$this->_has_mssql_init = (strnatcmp(PHP_VERSION,'4.1.0')>=0);
 	}
@@ -243,6 +245,8 @@ class ADODB_mssql extends ADOConnection {
 
 	function SelectLimit($sql,$nrows=-1,$offset=-1, $inputarr=false,$secs2cache=0)
 	{
+		$nrows = (int) $nrows;
+		$offset = (int) $offset;
 		if ($nrows > 0 && $offset <= 0) {
 			$sql = preg_replace(
 				'/(^\s*select\s+(distinctrow|distinct)?)/i','\\1 '.$this->hasTop." $nrows ",$sql);
@@ -678,7 +682,12 @@ order by constraint_name, referenced_table_name, keyno";
                 $arr = $args;
             }
 
-            array_walk($arr, create_function('&$v', '$v = "CAST(" . $v . " AS VARCHAR(255))";'));
+			array_walk(
+				$arr,
+				function(&$value, $key) {
+					$value = "CAST(" . $value . " AS VARCHAR(255))";
+				}
+			);
             $s = implode('+',$arr);
             if (sizeof($arr) > 0) return "$s";
 
@@ -727,7 +736,7 @@ order by constraint_name, referenced_table_name, keyno";
 			ADOConnection::outp( "{$prefix}Parameter(\$stmt, \$php_var='$var', \$name='$name', \$maxLen=$maxLen, \$type=$ztype);");
 		}
 		/*
-			See http://phplens.com/lens/lensforum/msgs.php?id=7231
+			See PHPLens Issue No: 7231
 
 			RETVAL is HARD CODED into php_mssql extension:
 			The return value (a long integer value) is treated like a special OUTPUT parameter,
@@ -796,7 +805,16 @@ order by constraint_name, referenced_table_name, keyno";
 						$decl .= "@P$i NVARCHAR($len)";
 					}
 
-					$params .= "@P$i=N". (strncmp($v,"'",1)==0? $v : $this->qstr($v));
+
+					if (substr($v,0,1) == "'" && substr($v,-1,1) == "'")
+						/*
+						* String is already fully quoted
+						*/
+						$inputVar = $v;
+					else
+						$inputVar = $this->qstr($v);
+
+					$params .= "@P$i=N" . $inputVar;	
 				} else if (is_integer($v)) {
 					$decl .= "@P$i INT";
 					$params .= "@P$i=".$v;
@@ -862,10 +880,10 @@ class ADORecordset_mssql extends ADORecordSet {
 
 	var $databaseType = "mssql";
 	var $canSeek = true;
-	var $hasFetchAssoc; // see http://phplens.com/lens/lensforum/msgs.php?id=6083
+	var $hasFetchAssoc; // see PHPLens Issue No: 6083
 	// _mths works only in non-localised system
 
-	function ADORecordset_mssql($id,$mode=false)
+	function __construct($id,$mode=false)
 	{
 		// freedts check...
 		$this->hasFetchAssoc = function_exists('mssql_fetch_assoc');
@@ -876,7 +894,7 @@ class ADORecordset_mssql extends ADORecordSet {
 
 		}
 		$this->fetchMode = $mode;
-		return $this->ADORecordSet($id,$mode);
+		return parent::__construct($id,$mode);
 	}
 
 
@@ -1049,10 +1067,14 @@ class ADORecordset_mssql extends ADORecordSet {
 
 	function _close()
 	{
-		$rez = mssql_free_result($this->_queryID);
-		$this->_queryID = false;
-		return $rez;
+		if($this->_queryID) {
+			$rez = mssql_free_result($this->_queryID);
+			$this->_queryID = false;
+			return $rez;
+		}
+		return true;
 	}
+
 	// mssql uses a default date like Dec 30 2000 12:00AM
 	static function UnixDate($v)
 	{
@@ -1068,9 +1090,9 @@ class ADORecordset_mssql extends ADORecordSet {
 
 
 class ADORecordSet_array_mssql extends ADORecordSet_array {
-	function ADORecordSet_array_mssql($id=-1,$mode=false)
+	function __construct($id=-1,$mode=false)
 	{
-		$this->ADORecordSet_array($id,$mode);
+		parent::__construct($id,$mode);
 	}
 
 		// mssql uses a default date like Dec 30 2000 12:00AM

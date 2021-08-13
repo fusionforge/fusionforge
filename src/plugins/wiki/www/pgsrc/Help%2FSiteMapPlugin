@@ -1,5 +1,5 @@
-Date: Mon, 29 Jun 2015 12:04:28 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Mon, 22 Feb 2021 19:16:32 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FSiteMapPlugin;
   flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
@@ -29,42 +29,42 @@ The list is as deep as the recursion level (##reclimit##).
 |-
 | **direction**
 | Get BackLinks or forward links (links listed on the page)
-|
+| back
 |-
 | **firstreversed**
-| If true, get BackLinks for the first page and forward links for the rest.  Only applicable when direction = 'forward'.
-|
+| Boolean. If true, get BackLinks for the first page and forward links for the rest.  Only applicable when direction = 'forward'.
+| false
 |-
 | **excludeunknown**
-| If true (default) then exclude any mentioned pages which don't exist yet.  Only applicable when direction = 'forward'.
-|
+| Boolean. If true, then exclude any mentioned pages which don't exist yet.  Only applicable when direction = 'forward'.
+| true
 |-
 | **exclude**
-|
-|
+| List of pagenames to exclude, separated by comma
+| (empty)
 |-
 | **include_self**
-|
-| 0
+| Boolean. If true, include yourself in the results.
+| false
 |-
 | **noheader**
-|
-| 0
+| Boolean. If true, header should be omitted.
+| false
 |-
 | **page**
-|
+| Page to get SiteMap from
 | The current page
 |-
 | **description**
-| Override default Description. Printed as header.
-|
+| Override default description. Printed as header.
+| Default description
 |-
 | **reclimit**
-|
+| Maximum recusion level
 | 4
 |-
 | **info**
-|
+| Info to display in the table
 | false
 |}
 

@@ -1,47 +1,51 @@
-Date: Mon, 29 Jun 2015 12:04:26 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Thu, 24 Dec 2020 18:13:17 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FWikiPlugin;
-  flags="";
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
   charset=UTF-8
 Content-Transfer-Encoding: binary
 
-The latest hacks include support for ~WikiPlugins.
+A **plugin** is some PHP code that:
+* lives in ##phpwiki/lib/plugin/<pluginname>.php##
+* implements the ~WikiPlugin interface by extending that class.
 
-~WikiPlugins 可以讓人簡單地為 wiki 頁面增加新的動態內容種類 (像是其他的功能).
-在這個 wiki 之中, RecentChanges, BackLinks, LikePages 和 DebugInfo 頁面都是
-使用 plugins 來實作的.
+There are many plugins already distributed with ~PhpWiki. Simply look
+in the ##lib/plugin## directory or see the [[PluginManager]] list or see all the
+[[phpwiki:TitleSearch?s=Help/*Plugin|Help/*Plugin pages]].
 
-我期盼搜尋結果頁面或是 PhpWikiAdministration 等能夠很快地以 plugin 形式被實
-作出來. (我想 oh-so-ugly [MagicPhpWikiURLs] 也能被 plugins 替代.)
+To write your own, look at the [[Help:HelloWorldPlugin]] (~HelloWorld.php
+in that directory), which is a minimal example of a plugin.
 
-== Example
+A ~WikiPlugin allows one to easily add new types of dynamic
+content (as well as other functionality) to wiki pages within ~PhpWiki.
+In this very wiki all actions which are not entirely lowercased
+are implemented using plugins, and some lowercased convenience
+actions also (rename, revert, setacl, diff, ...)
+
+Note that you can NOT extend the markup syntax with a plugin, as in other wiki engines.
+
+== Example ==
 
 現在,有人放了這麼一行字想要使用 plugin:
 
 {{{
-<<BackLinks>>
+<<AllPages limit=20 cols=3>>
 }}}
 
-到一個一般的 wiki-page. 這個特有的範例產生了連結到此頁面的頁面列表.
-結果如下:
+into a regular wiki-page.  That particular example produces a list
+of the first 20 existing pages in 3 columns, via the [[Help:PageList|PageList]] library.
 
-<<BackLinks>>
+<<AllPages limit=20 cols=3>>
 
-(這對分類與主題頁面來說是很棒的. 你可以使用它取得自動 in-line 的存在於分
-類或主題的頁面列表.)
+== Details ==
 
-== Details
-
-(This is all subject to change.)
-
-Plugins can take certain named arguments (most do).  The values of
-these arguments can be determined four different ways.  In order of
-precedence:
+Plugins can take certain named arguments, most do.  The values of
+these arguments can be determined four different ways.  In order of precedence:
 
 # The plugin invocation can specify the value for an argument, like so:
   {{{
-  <<BackLinks page=OtherPage >>
+  <<BackLinks page=OtherPage>>
   }}}
 
 # The argument can be specified via an HTTP query argument.  This
@@ -49,57 +53,139 @@ precedence:
   the plugin invocation:
 
   {{{
-  <<BackLinks page >>
+  <<BackLinks page>>
   }}}
 
 # Default values specified in the plugin invocation:
 
   {{{
-  <<BackLinks page||=OtherPage >>
+  <<BackLinks page||=OtherPage>>
   }}}
 
 # The plugin must supply default values for each argument it uses.
-  (The BackLinks plugin uses the current page as the default value for
-  the ''page'' argument.
+  Such default args may be overriden by URL arguments like so:
+  {{{
+    BackLinks?page=ThisPage&sortby=-mtime
+  }}}
+  (The ~BackLinks plugin uses the current page as the default value for
+  the **page** argument.)
 
-== Existing Plugins
+  Most plugins using the [[Help:PageList|PageList]] library inherit their
+  default arguments from the ~PageList.
 
-* BackLinks
-* CalendarPlugin
-* DebugInfo
-* FullTextSearch
-* IncludePage
-* LikePages
-* MostPopular
-* PageHistory
-* RecentChanges
-* text2png
-* TitleSearch
-* ViewSource
-* walkabout
-* PhpHighlightPlugin
+=== Standard Arguments ===
 
-== More Ideas for Plugins
+Most plugins display a list of pages, via the [[Help:PageList|PageList]]
+library. ~PageList provides automatic support for those arguments.
 
-* Integrate Search form with individual InterWiki map entries
-  e.g. Search Php Website for:[ ] (Search)
-* WantedPages, OrphanedPages, other various indexing schemes.
-* Diff, PageHistory
-* Redirect plugin -- =<<Redirect target=~OtherPage >>=
-* Insert XML/RSS/RDF news content from =location=xxx= where location
-  is a parameter to the plugin, maybe include some formatting control
-  of the output generated.
+  info, exclude, author, owner, creator, sortby, limit, paging, cols, azhead,
+  comma, commasep, ordered
 
------
+For details see the [[Help:PageList|PageList]] library documentation.
 
-Pages in this category:
+**exclude** and **pages** accept a list of pages. Either as comma-separated list,
+supporting glob-style wildcards, or via the ##<!plugin-list pluginname ~[args~] !>##
+invocation syntax, where pluginname might be any plugin returning a [[Help:PageList|PageList]].
 
-<<BackLinks page=[pagename] noheader=1>>
+Since most plugins return a ~PageList, this ~PageList is also a common
+input parameter for other plugins, actions or formats.
 
-* FullTextSearch: FindPage
-* TitleSearch: LikePages (match_head, match_tail).
+=== Basic Plugin Types ===
 
-<noinclude>
+All these plugins derive from the ##~WikiPlugin## class extending the
+run method,
+which returns a object tree of HTML objects, and may react on any
+provided arguments from the ~WikiPage (see the args below) or
+optionally overridden by arguments from the url (GET or POST args),
+if defined via '||='.
+
+A basic plugin just needs the run() method, and optionally getName,
+getDescription, getDefaultArguments. See the
+[[Help:HelloWorldPlugin]] for a short introduction.
+
+  **plugin** reacts on its arguments and the request and displays
+  arbitrary HTML.
+
+  **plugin-form** is used to display a input type=text box for the
+  default argument **s**.
+
+  **plugin-list** is used as argument to provide a dynamic list of
+  pagenames.
+
+  {{{
+    <?plugin PluginName [args...] ?>
+  }}}
+
+  {{{
+    <?plugin-form PluginName [args...] ?>
+  }}}
+
+  {{{
+    <?plugin PluginName args=<!plugin-list pluginname [args...] !> ?>
+  }}}
+
+==== The box Method ====
+
+Themes based on the "sidebar" theme may use the box method of any
+plugin, which displays a **title**
+and a condensed **content** in a box.
+
+==== ~WikiPluginCached ====
+
+Plugins deriving from the class ~WikiPluginCached must also define
+the methods getPluginType(),
+optionally getExpire(), managesValidators(), and dependent of the
+getPluginType the methods to display the **possibly cached** result.
+
+  getImage(), getMap() or getHtml(),
+
+optionally also
+
+  getAlt(), getImageType(), embedMap(), embedImg(), embedObject()
+
+See the config.ini PLUGIN_CACHED_* settings and ~WikiPluginCached
+
+=== Action Pages ===
+
+The term **[[Help:ActionPage|ActionPage]]** refers to a page containing a plugin
+invocation with the same or translated pluginname as the pagename.
+An **action** is together with the **pagename** argument the basic
+~PhpWiki argument.
+It can both be GET or POST actions. Actions are untranslated, always
+English, pagenames can be localized.
+Basic (and old) actions are all lowercase, like edit, browse, remove, ...
+Newer actions in ~CamelCase are invoked via plugins on their
+specific action page.
+
+We decoupled actions from plugins via action pages for the following
+reasons:
+
+# Support translated action buttons and customizable action descriptions.
+# Customize standard actions by tuning the plugin invocation arguments.
+  Override or add plugin defaults.
+# Split simple plugins into multiple actions, like RecentChanges/RecentEdits,
+  MostPopular/LeastPopular, AllPages/AllPagesCreatedByMe/AllPagesLastEditedByMe/
+  AllPagesOwnedByMe which differ only in one argument.
+# Simplify the syntax for actions on another actions using a ~PageList
+  as result of an actionpage as input parameter for another action or
+  format.
+
+* Those actions which have buttons or links in the theme or are
+  referenced in the standard pgsrc pageset require their
+  (possibly localized) actionpages, otherwise the actions will not work.
+* If the localized actionpage is not found the english version is
+  used.
+* If no actionpage is found, it is recommended to do action=upgrade,
+  which imports all missing and required action pages into the database.
+
+So for a hypothetical new ~MyActionPage plugin ~MyActionPage will
+invoke the plugin and ~Help:~MyActionPagePlugin should be the description page.
+
+== Existing Plugins ==
+
+See [[PluginManager]] for a detailed list. Most plugins should have their
+own description page as subpage of **Help/** with the name **Plugin**
+appended.
+
 ----
 [[PhpWikiDocumentation]]
-</noinclude>

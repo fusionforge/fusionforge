@@ -33,7 +33,7 @@ if ($user->isAuthenticated()) {
     $userid = $user->getId();
     if ($user->isSignedIn()) {
         echo sprintf(_("You are signed but not authenticated as %s. "),
-           asXml(HTML::a(array(
+           asXML(HTML::a(array(
                        'href'=>'#',
                        'title' => sprintf(_("Click to authenticate as %s"),$userid),
                        'onclick'=>'SignIn(document.forms["'.$FORMNAME.'"],"'.$userid.'");'),
@@ -43,7 +43,7 @@ if ($user->isAuthenticated()) {
     $SignInJS = JavaScript('
      function SignIn(form,userid) {'.($editing_policy ? '
       if (window.focus) {
-        window.open("' . WikiUrl(EDITING_POLICY) . '",<!-- url -->
+        window.open("' . WikiURL(EDITING_POLICY) . '",<!-- url -->
                     "PleaseReadThisFirst",<!-- window name -->
                     "width=600,height=430,scrollbars=yes,resizable=yes,toolbar=yes");
       }':'').'

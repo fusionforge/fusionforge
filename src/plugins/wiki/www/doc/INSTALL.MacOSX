@@ -97,20 +97,6 @@ can be used with Mac OS X are listed at:
     <http://versiontracker.com/macosx/>
     <http://fink.sourceforge.net/>
 
-PHP 4.1 and Mac OS X
---------------------
-
-The version of PHP 4.1 from Mark Liyanage's web site requires an
-updated PEAR library. PhpWiki seems to work anyway but it will produce
-warnings about a depreciated user function with each page load.
-
-1.  Move the current contents of '/System/Library/PHP' into a backup
-    folder, such as '/System/Library/PHP/PEAR-4.0.6'.
-
-2.  Take the contents of the 'pear' folder from the official PHP 4.1
-    tarball (php-4.1.0.tar.gz) and move it into '/System/Library/PHP'.
-
-
 PhpWiki Configuration Notes
 ---------------------------
 
@@ -158,8 +144,8 @@ into the mod_alias section as shown below.
     #
     # Note that if you include a trailing / on fakename then the server will
     # require it to be present in the URL.  So "/icons" isn't aliased in this
-    # example, only "/icons/".  If the fakename is slash-terminated, then the 
-    # realname must also be slash terminated, and if the fakename omits the 
+    # example, only "/icons/".  If the fakename is slash-terminated, then the
+    # realname must also be slash terminated, and if the fakename omits the
     # trailing slash, the realname must also omit it.
     #
     Alias /icons/ "/usr/share/httpd/icons/"
@@ -334,7 +320,7 @@ for SSH in Project Builder is important, send an email to:
       <macosx-tools-feedback@group.apple.com>
 
 
-Project Builder: Miscellaneous 
+Project Builder: Miscellaneous
 ------------------------------
 
 ProjectBuilder 1.1.1 has a new auto-indent feature but it does not yet

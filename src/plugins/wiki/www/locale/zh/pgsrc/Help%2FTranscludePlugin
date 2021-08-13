@@ -1,43 +1,56 @@
-Date: Mon, 29 Jun 2015 12:04:26 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Thu, 24 Dec 2020 18:13:17 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FTranscludePlugin;
-  flags="";
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
   charset=UTF-8
 Content-Transfer-Encoding: binary
 
 TranscludePlugin 用來嵌入整個(外部)網頁到 wiki 頁面.
 
-==== Plugin Arguments
+頁面是利用 ##<iframe>## 標籤達到 transclude 的目的.
 
-=src= |
-  要 transclude 的網頁 URL.
-=height= |
-  初始化 transclusion 框架的高度.
-  如果,可能的話,在 transcluded 頁面載入後,可以透過 javascript 改變框架大小,
-  讓它能塞下整個 transcluded 頁面. (參閱下面可以得到更多.)
+== 引數 ==
 
-==== Bugs / Caveats
+{| class="bordered"
+|-
+! 引數
+! Description
+! 預設
+|-
+| **src**
+| 要 transclude 的網頁 URL.
+| //none//
+|-
+| **title**
+| The title of the page to transclude
+| //Transcluded page//
+|-
+| **height**
+| 初始化 transclusion 框架的高度. 如果,可能的話,在 transcluded 頁面載入後,可以透過 javascript 改變框架大小, 讓它能塞下整個 transcluded 頁面. (參閱下面可以得到更多.)
+| 450
+|-
+| **quiet**
+| If set, frame appears as normal content
+| false
+|}
 
-o 頁面是利用 =<iframe>= 標籤達到 transclude 的目的. 舊的瀏覽器不支援
-  ''iframe''. 這種情況下,使用者將會看到超連結.
+== Bugs / Caveats ==
 
-o When possible, JavaScript code is used to adjust the height of the
-  _iframe_ so that it fits the entire transcluded page.
-  Unfortunately, this seems possible only when the transcluded page
-  comes from the same server as the wiki page.  (This restriction is
-  due to security checks built in to the JavaScript language.)
+* When possible, Javascript code is used to adjust the height of the //iframe// so that it fits the entire transcluded page.  Unfortunately, this seems possible only when the transcluded page comes from the same server as the wiki page.  (This restriction is due to security checks built in to the Javascript language.)
+* The recursion detection code does not currently work.  Be careful to avoid recursive transclusions, or you'll be sorry (or at least amused.)
 
-o The recursion detection code does not currently work.  Be careful to
-  avoid recursive transclusions, or you'll be sorry (or at least
-  amused.)
-
-==== Example
+== Example ==
 
 {{{
-<<Transclude src="http://phpwiki.sourceforge.net/demo/ChangeLog" >>
+<<Transclude src="https://sourceforge.net/p/phpwiki/code/HEAD/tree/trunk/pgsrc/ReleaseNotes?view=markup">>
 }}}
 
 將會得到
 
-<<Transclude src="http://phpwiki.sourceforge.net/demo/ChangeLog" >>
+<<Transclude src="https://sourceforge.net/p/phpwiki/code/HEAD/tree/trunk/pgsrc/ReleaseNotes?view=markup">>
+
+<noinclude>
+----
+[[PhpWikiDocumentation]] [[CategoryWikiPlugin]]
+</noinclude>

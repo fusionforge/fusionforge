@@ -1,15 +1,15 @@
-Date: Mon, 29 Jun 2015 12:04:26 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Thu, 24 Dec 2020 18:13:17 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FPhpWiki;
-  flags="";
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
   charset=UTF-8
 Content-Transfer-Encoding: binary
 
-你現在正在使用 PhpWiki. 很難以置信,不是嗎?
+你現在正在使用 ~PhpWiki. 很難以置信,不是嗎?
 
-參訪我們位於 [[http://phpwiki.sourceforge.net]] 的首頁並參閱這兒的 PhpWiki
-[[http://phpwiki.fr]].
+參訪我們位於 [[https://sourceforge.net/projects/phpwiki/]] 的首頁並參閱這兒的 ~PhpWiki
+[[http://phpwiki.demo.free.fr]] (and of course here too :-)).
 
 <noinclude>
 ----

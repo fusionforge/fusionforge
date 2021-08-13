@@ -1,4 +1,27 @@
 <?php
+/**
+ * Copyright © 2002,2004-2005 Reini Urban
+ * Copyright © 2003 Jeff Dairiki
+ *
+ * This file is part of PhpWiki.
+ *
+ * PhpWiki is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * PhpWiki is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
+ */
 
 /**
  * Store sessions data in Pear DB / ADODB / dba / PDO, ....
@@ -10,20 +33,17 @@
  * Quasi-major rewrite/decruft/fix by Jeff Dairiki <dairiki@dairiki.org>.
  * ADODB, dba and PDO classes by Reini Urban.
  *
- * Warning: Enable USE_SAFE_DBSESSION if you get INSERT duplicate id warnings.
  */
 class DbSession
 {
     /**
      * @param mixed $dbh
-     * DB handle, or WikiDB object (from which the DB handle will
-     * be extracted.
+     * DB handle, or WikiDB object (from which the DB handle will be extracted.
      *
      * @param string $table
-     * @return bool|DbSession
      * Name of SQL table containing session data.
      */
-    function __construct(&$dbh, $table = 'session')
+    function __construct($dbh, $table = 'session')
     {
         // Check for existing DbSession handler
         $db_type = $dbh->getParam('dbtype');
@@ -58,11 +78,3 @@ class DbSession
         return $string;
     }
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

@@ -17,7 +17,7 @@ else
 <a id="contentTop"></a>
 <h1>
 <span class="firstHeading<?php echo $rating ? '-rating' : '' ?>">
-<span style="float: left;"><?php echo $HEADER ?></span>
+<?php echo $HEADER ?>
 <?php if ($rating && $request->getArg('action') == 'browse') { ?>
 <span style="float: right;">
 <?php echo Template('ratings') ?>

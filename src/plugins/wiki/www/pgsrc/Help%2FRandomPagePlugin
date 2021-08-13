@@ -1,5 +1,5 @@
-Date: Mon, 29 Jun 2015 12:04:28 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Mon, 22 Feb 2021 13:05:38 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FRandomPagePlugin;
   flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
@@ -24,12 +24,16 @@ All [[Help:PageList|PageList]] arguments, plus the following ones:
 ! Default value
 |-
 | **numpages**
-| Number of pages to list.
+| Number of pages to list. The number of random pages should be between 1 and 20. If greater, 20 will be used.
 | 20
 |-
 | **redirect**
-| Do not display random page link, redirect to random page.
-| empty
+| Boolean. If true, do not display random page link, redirect to random page.
+| false
+|-
+| **hidename**
+| Boolean. If true, hide name (only for numpages=1)
+| false
 |-
 | **exclude**
 | Pages to exclude from random

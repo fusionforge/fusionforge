@@ -1,0 +1,15 @@
+Date: Wed, 10 Apr 2019 16:39:09 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
+Content-Type: application/x-phpwiki;
+  pagename=DebugBackendInfo;
+  flags=PAGE_LOCKED;
+  acl="view:_AUTHENTICATED; edit:_AUTHENTICATED; create:_AUTHENTICATED,_BOGOUSER; list:_AUTHENTICATED; remove:_ADMIN,_OWNER; change:_ADMIN,_OWNER; dump:_EVERY";
+  charset=UTF-8
+Content-Transfer-Encoding: binary
+
+Detailansicht der Seite. Das ist wahrscheinlich sinnvoller zum Debuggen als alles andere.
+
+<<DebugBackendInfo page||=''>>
+
+----
+[[KategorieAktionSeite]]

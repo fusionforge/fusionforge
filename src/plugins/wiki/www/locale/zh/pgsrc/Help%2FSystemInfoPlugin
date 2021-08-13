@@ -1,26 +1,28 @@
-Date: Mon, 29 Jun 2015 12:04:26 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Thu, 24 Dec 2020 18:13:17 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FSystemInfoPlugin;
-  flags="";
-  author=test;
-  version=3;
-  lastmodified=1068931996;
-  author_id=test;
-  hits=3;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
   charset=UTF-8
 Content-Transfer-Encoding: binary
 
-SystemInfoPlugin 提供了存取 PhpWiki 所在平台上的低階系統資訊.
+~SystemInfoPlugin 提供了存取 PhpWiki 所在平台上的低階系統資訊.
+
+== 用法 ==
 
 {{{
- Usage:  <<SystemInfo all >>
-      or <<SystemInfo pagestats cachestats discspace hitstats >>
-      or <<SystemInfo version >>
-      or <<SystemInfo current_theme >>
-      or <<SystemInfo PHPWIKI_DIR >>
+         <<SystemInfo all>>
+      or <<SystemInfo pagestats cachestats discspace hitstats>>
+      or <<SystemInfo version>>
+      or <<SystemInfo current_theme>>
+      or <<SystemInfo PHPWIKI_DIR>>
 }}}
 
-範例:
+== 範例 ==
 
-<<SystemInfo all >>
+<<SystemInfo all>>
+
+<noinclude>
+----
+[[PhpWikiDocumentation]] [[CategoryWikiPlugin]]
+</noinclude>

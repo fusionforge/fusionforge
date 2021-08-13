@@ -1,20 +1,37 @@
-Date: Mon, 29 Jun 2015 12:04:26 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Tue,  9 Apr 2019 11:19:11 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=TitleSearch;
-  flags=PAGE_LOCKED;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
   charset=UTF-8
 Content-Transfer-Encoding: binary
 
-<<TitleSearch >>
+<<TitleSearch>>
 
 ----
 
 其他搜尋方法:
-<?plugin-form TitleSearch?>
-<?plugin-form FullTextSearch?>
-<?plugin-form FuzzyPages?>
+
+<<WikiFormRich action=TitleSearch method=GET nobr=1 class=wikiaction
+  editbox[] name=s text=""
+  submit[]
+  checkbox[] name=case_exact
+  pulldown[] name=regex value="auto,none,glob,posix,pcre,sql">>
+
+<<WikiFormRich action=FullTextSearch method=GET nobr=1 class=wikiaction
+  editbox[] name=s text=""
+  submit[]
+  checkbox[] name=case_exact
+  pulldown[] name=regex value="auto,none,glob,posix,pcre,sql">>
+
+<<WikiFormRich action=FuzzyPages method=GET nobr=1 class=wikiaction
+  editbox[] name=s text=""
+  submit[]
+  checkbox[] name=case_exact>>
 
 ----
 
-<<IncludePage page=FindPage quiet=1 section=Tips sectionhead=1 >>
+<<IncludePage page=FindPage quiet=1 section=Tips sectionhead=1>>
+
+----
+[[CategoryActionPage]]

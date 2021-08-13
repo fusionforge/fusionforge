@@ -1,8 +1,8 @@
-Date: Mon, 29 Jun 2015 12:04:27 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Wed, 10 Apr 2019 16:39:09 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=WunschZettelSeiten;
-  flags="";
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
   charset=UTF-8
 Content-Transfer-Encoding: binary
 
@@ -16,4 +16,9 @@ sondern die Referenz so auszubessern, dass sie nicht mehr als ~WikiWort
 verlinkt werden.  Sie können entweder die Großschreibung anpassen,
 oder den Link mit "~~" verhindern.
 
-<<WantedPages >>
+----
+
+<<WantedPages>>
+
+----
+[[KategorieAktionSeite]]

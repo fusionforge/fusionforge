@@ -1,3 +1,5 @@
+@import url(../default/phpwiki-common.css);
+
 /*
  Classes:
 
@@ -70,56 +72,6 @@ div.wikiaction input[type=text],
 div.wikiadmin input[type=text],
 form.wikiadmin input[type=file] {
     margin-right: 0.5em;
-}
-
-/* generic classes ----------------------------------------------- */
-
-.tt {
-    font-family: monospace;
-}
-
-.strike {
-    text-decoration: line-through;
-}
-
-.big {
-    font-size: larger;
-}
-
-.align-left {
-    text-align: left;
-}
-
-.align-right {
-    text-align: right;
-}
-
-.align-center {
-    text-align: center;
-}
-
-.top {
-    vertical-align: top;
-}
-
-.bottom {
-    vertical-align: bottom;
-}
-
-.middle {
-    vertical-align: middle;
-}
-
-.baseline {
-    vertical-align: baseline;
-}
-
-.nowrap {
-    white-space: nowrap;
-}
-
-.fullwidth {
-    width: 100%;
 }
 
 /* --------------------------------------------------------------- */
@@ -266,6 +218,11 @@ img {
     border: 0;
 }
 
+img.inlineimage {
+    display: inline;
+    vertical-align: middle;
+}
+
 img.rssicon {
     vertical-align: middle;
 }
@@ -299,7 +256,8 @@ p.editdate {
     font-family: "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
-/* Calendar plugin */
+/* Calendar plugin ==================================================== */
+
 a.cal-hide,
 a.cal-arrow {
     text-decoration: none;
@@ -597,29 +555,6 @@ input.gridbutton, a.gridbutton, a:hover.gridbutton, a:visited.gridbutton {
     font-weight: normal;
 }
 
-#LSResult {
-    position: absolute;
-    text-align: left;
-    display: none;
-    z-index: 100;
-    background-color: white;
-    border: 1px solid #d0d0d0;
-    font-size: 9px;
-    overflow: hidden;
-}
-
-#LSHighlight {
-    background-color: #f08000;
-}
-
-#LSResult .evenrow {
-    background-color: #f0f0f0;
-}
-
-.clear-floats {
-    clear: both;
-}
-
 dl {
     display: table;
 }
@@ -716,7 +651,8 @@ td.pageinfo {
     display: none;
 }
 
-/* Disabled Plugins */
+/* Disabled plugins =================================================== */
+
 .disabled-plugin {
     clear: both;
     margin: 1ex 0;
@@ -738,14 +674,6 @@ td.pageinfo {
     padding: 0.3ex 0.5em;
 }
 
-/* "(Redirected from ...)" message. */
-span.redirectfrom {
-    font-size: small;
-    font-style: oblique;
-    font-weight: normal;
-    padding-left: 1em;
-}
-
 /*
  * "E-mail" style blockquote
  */
@@ -763,16 +691,7 @@ blockquote.mail-style-quote {
 /*
  * wikiblog
  */
-.floatleft {
-    float: left;
-}
-
-.floatright {
-    float: right;
-}
-
 div.wikiblog {
-    /* border: thin black solid; */
     margin: 1ex 2em;
     padding: 0 0;
 }
@@ -851,41 +770,9 @@ table.interwiki-map {
     padding-left: 3em;
 }
 
-.dialog {
-    background-color: #cdf;
-    color: black;
-    margin: 2em auto 2em auto;
-    border: thin black solid;
-    width: 50%;
-}
-
-.dialog h1, .dialog p, .dialog div {
-    text-align: center;
-}
-
-.dialog h1 {
-    font-size: large;
-    margin: 0.5em 0 1em 0;
-}
-
-.dialog div.message {
-    background-color: white;
-    color: black;
-    margin: 0 1em;
-    padding: 0.5em 0.5em;
-}
-
-.dialog p.buttons {
-    margin: 1em 0 0.5em 0;
-}
-
 /* postnuke css:*/
 .gensmall {
     font-size: 10px
-}
-
-.genmed {
-    font-size: 11px
 }
 
 td.cat {
@@ -956,7 +843,8 @@ td.sidebar {
     margin: 0;
 }
 
-/* plugin BoxRight */
+/* BoxRight plugin ==================================================== */
+
 div.boxright {
     background-color: #e9fbff;
     width: 200px;
@@ -1014,16 +902,14 @@ table.sqlresult td {
     border: 1px solid gray;
 }
 
-/**
- * TeX2png plugin
- */
+/* TeX2png plugin ===================================================== */
+
 img.tex {
     vertical-align: middle;
 }
 
-/**
- * PhotoAlbum plugin
- */
+/* PhotoAlbum plugin ================================================== */
+
 .boldsmall {
     font-weight: bold;
     font-size: 11px;
@@ -1155,69 +1041,4 @@ img.linkicon {
 .diff del, .diff ins {
     padding-left: 0.5ex;
     padding-right: 0.5ex;
-}
-
-/* WikicreoleTable, MediawikiTable and RichTable plugins ============== */
-
-/*
- * table class="boxed"
- * will put a border around the table (but not around the cells)
- *
- * table class="bordered"
- * will put a border around the table and the cells
- *
- * In both cases, the caption will be bold and centered under the table
- *
- * In both cases, the headers (th) will have a "#d8d8d8" background
- */
-
-table.boxed, table.bordered, table.bordered th, table.bordered td {
-    border-width: 1px;
-    border-style: solid;
-    border-collapse: collapse;
-    vertical-align: top;
-}
-
-table.boxed td, table.bordered td,
-table.boxed th, table.bordered th {
-    padding-left: 5px;
-    padding-right: 5px;
-    padding-top: 0;
-    padding-bottom: 0;
-}
-
-table.boxed caption, table.bordered caption {
-    text-align: center;
-    font-weight: bold;
-    caption-side: bottom;
-    padding-top: 0.8em;
-}
-
-table.boxed th, table.bordered th {
-    font-weight: bold;
-    background-color: #d8d8d8;
-}
-
-table.sortable th.header {
-    background-image: url(../default/buttons/sort_none.gif);
-    cursor: pointer;
-    background-repeat: no-repeat;
-    background-position: center right;
-    padding-right: 20px;
-}
-
-table.sortable th.headerSortUp {
-    background-image: url(../default/buttons/sort_up.gif);
-    cursor: pointer;
-    background-repeat: no-repeat;
-    background-position: center right;
-    padding-right: 20px;
-}
-
-table.sortable th.headerSortDown {
-    background-image: url(../default/buttons/sort_down.gif);
-    cursor: pointer;
-    background-repeat: no-repeat;
-    background-position: center right;
-    padding-right: 20px;
 }

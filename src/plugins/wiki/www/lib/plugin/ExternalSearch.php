@@ -1,7 +1,6 @@
 <?php
-
 /**
- * Copyright 1999,2000,2001,2002,2006 $ThePhpWikiProgrammingTeam
+ * Copyright © 1999,2000,2001,2002,2006 $ThePhpWikiProgrammingTeam
  *
  * This file is part of PhpWiki.
  *
@@ -18,6 +17,9 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
  */
 
 /**
@@ -29,6 +31,7 @@ url="http://www.geourl.org/near/?xsize=2048&ysize=1024&xoffset=1650&yoffset=550"
 useimage="http://www.geourl.org/maps/au.png"
 name="Go Godzilla All Over It"
  */
+
 if (!defined("EXTERNALSEARCH_DEFAULT_BUTTON_POSITION"))
     define("EXTERNALSEARCH_DEFAULT_BUTTON_POSITION", "right");
 
@@ -88,6 +91,14 @@ class WikiPlugin_ExternalSearch
             return '';
 
         extract($args);
+
+        if (($debug == '0') || ($debug == 'false')) {
+            $debug = false;
+        } elseif (($debug == '1') || ($debug == 'true')) {
+            $debug = true;
+        } else {
+            return $this->error(sprintf(_("Argument '%s' must be a boolean"), "debug"));
+        }
 
         $posted = $GLOBALS['HTTP_POST_VARS'];
         if (in_array('url', array_keys($posted))) {
@@ -158,11 +169,3 @@ class WikiPlugin_ExternalSearch
         return $form;
     }
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

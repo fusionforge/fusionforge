@@ -26,13 +26,13 @@ if (!$WikiTheme->DUMP_MODE) {
      <?php } ?>
      <?php echo $SEP?>
     <?php } ?>
-   <?php echo Button(array('action'=>'PageInfo'),_("Info"), $page->getName()) ?>
+   <?php echo Button(array('action'=>__('PageInfo')), _("Info"), $page->getName()) ?>
 <?php if (((defined('DEBUG') and DEBUG and $request->getArg('action') == 'browse')) || $user->isAdmin()) { ?>
-      <!-- Buttons really only for debugging -->
-      <?php echo $SEP?><?php echo Button(_("PageHistory")) ?>
+      <?php // Buttons really only for debugging ?>
+      <?php echo $SEP?><?php echo Button(__("PageHistory"), _("PageHistory")) ?>
       <?php echo $SEP?><?php echo Button("diff") ?>
-      <?php echo $SEP?><?php echo Button(_("PageDump")) ?>
-    <!-- End debugging buttons -->
+      <?php echo $SEP?><?php echo Button(__("PageDump"), _("Page Dump")) ?>
+    <?php // End debugging buttons ?>
     <?php } ?>
 <?php if (defined('USE_EXTERNAL_HTML2PDF') and USE_EXTERNAL_HTML2PDF) { ?>
     <?php echo $SEP?><?php echo Button("pdf") ?>

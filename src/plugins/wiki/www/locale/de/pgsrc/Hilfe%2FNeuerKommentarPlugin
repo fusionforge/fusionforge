@@ -1,39 +1,58 @@
-Date: Mon, 29 Jun 2015 12:04:27 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Fri, 26 Jul 2019 10:46:32 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=Hilfe%2FNeuerKommentarPlugin;
-  flags="";
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
   charset=UTF-8
 Content-Transfer-Encoding: binary
 
-<<CreateToc jshide||=1 >>
-
-[[Hilfe:WikiPlugin|WikiPlugin]] um Benutzer Kommentare zu Seiten ans Ende einer Seite anhängen zu lassen. Seit v1.3.8.
+Der **~NeuerKommentarPlugin** (//AddComment//)) [[Hilfe:WikiPlugin|WikiPlugin]] um Benutzer Kommentare zu Seiten ans Ende einer Seite anhängen zu lassen.
 Anpassungs des Layouts über die Vorlagen comment.tmpl und addcomment.tmpl, und die CSS Klassen
-wikicomment, wikicomment-header, wikicomment-body, wikicomment-footer
+wikicomment, wikicomment-header, wikicomment-body, wikicomment-footer.
 
-=== Benutzung
-
+== Benutzung ==
 {{{
-     <<AddComment order||=normal jshide||=0 mode||=show,add noheader||=0 >>
+<<AddComment order||=normal jshide||=0 mode||=show,add noheader||=0>>
 }}}
 
-=== Argumente
+== Argumente ==
 
-**jshide**: |
-  Bool'sche Variable, ob die Kommentare oder Eingabe-Textbox zuerst versteckt sein soll, und erst auf Klick erscheint. Vorgabe: 0
-**order**:  |
-  Liste Kommentare in chronologischer (order=normal) oder umgekehrter Reihenfolge (order=reverse)
-**mode**:  |
-  Liste von "add" und/oder "show".  Vorgabe: "add,show"
-**noheader**:  |
-  Bool'sche Variable, ob die "Kommentare" h2 Überschrift weggelassen soll. Vorgabe: 0
-**pagename**:  |
-  Hänge Kommentare an welche Seite an? Vorgabe: Aktueller Seitenname
+{| class="bordered"
+|-
+! Argument
+! Beschreibung
+! Vorgabe
+|-
+| **jshide**
+| Bool'sche Variable, ob die Kommentare oder Eingabe-Textbox zuerst versteckt sein soll, und erst auf Klick erscheint.
+| 0
+|-
+| **order**
+| Liste Kommentare in chronologischer (order=normal) oder umgekehrter Reihenfolge (order=reverse)
+| normal
+|-
+| **mode**
+| Liste von »add« und/oder »show«.
+| add,show
+|-
+| **noheader**
+| Bool'sche Variable, ob die »Kommentare« h2 Überschrift weggelassen soll.
+| 0
+|-
+| **pagename**
+| Hänge Kommentare an welche Seite an?
+| Aktueller Seitenname
+|}
 
-=== Beispiele
+== Known Problems ==
 
-<<AddComment jshide||=1 >>
+* jshide does not work yet. Not very well tested.
 
+== Beispiele ==
+
+<<AddComment jshide||=1>>
+
+<noinclude>
 ----
 [[PhpWikiDokumentation]] [[KategorieWikiPlugin]]
+</noinclude>

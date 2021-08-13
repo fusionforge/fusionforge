@@ -1,5 +1,5 @@
-Date: Mon, 29 Jun 2015 12:04:28 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Tue,  3 Sep 2019 18:01:13 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FCalendarPlugin;
   flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
@@ -48,17 +48,17 @@ will get you:
 |-
 | **date_format**
 | [[php-function:strftime|strftime]] style format string used to generate page names for the “day pages.”
-| The default value is =%Y-%m-%d=.
+| The default value is ##%Y-%m-%d##.
 |-
 | **prefix**
 | Prepended to the date (formatted per //date_format//) to generate the “day page” names.
-| The default value is =~[pagename]/=.
+| The default value is ##~[pagename]/##.
 |-
 | colspan="3" class="align-center" | **Appearance**
 |-
 | **month_format**
 | [[php-function:strftime|strftime]] style format string used to generate the title of the calendar.
-| (Default: =%B %Y=.)
+| (Default: ##%B %Y##.)
 |-
 | **wday_format**
 | [[php-function:strftime|strftime]] style format string used to generate the day-of-week names at the top of the calendar.

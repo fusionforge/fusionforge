@@ -1,18 +1,18 @@
-Date: Mon, 29 Jun 2015 12:04:28 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Tue,  3 Sep 2019 18:01:13 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FInterWiki;
   flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
   charset=UTF-8
 Content-Transfer-Encoding: binary
 
-This wiki supports ~InterWiki links in a style copied from [[UseMod:]]
+This wiki supports **~InterWiki** links in a style copied from [[UseMod:]]
 wiki. Links to pages in other wikis can be made without having to know
 or type the full URLs, for example: [[MeatBall:InterWiki]] will link to
 the page named "~InterWiki" at Meatball wiki.
 
 The ~InterWiki map is taken from the the <verbatim> block in
-InterWikiMap, but that page must be locked for it to work. This denies
+[[InterWikiMap]], but that page must be locked for it to work. This denies
 a potential hacker the ability to nefariously change every ~InterWiki
 link to point to some evil URL. If no map is found in InterWikiMap (or
 the page is not locked), ~PhpWiki will fall back to using the file

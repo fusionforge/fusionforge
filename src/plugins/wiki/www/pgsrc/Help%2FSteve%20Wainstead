@@ -1,5 +1,5 @@
-Date: Mon, 29 Jun 2015 12:04:28 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Mon, 30 Mar 2020 15:49:22 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FSteve%20Wainstead;
   flags="";
@@ -9,7 +9,7 @@ Content-Transfer-Encoding: binary
 Hi. I started building this [[Help:WikiWikiWeb|WikiWikiWeb]] but many others help me
 now. I'm at [[http://www.panix.com/~swain/]].
 
-Please report bugs to [[mailto:phpwiki-talk@lists.sourceforge.net]]
+Please report bugs to [[mailto:phpwiki-talk@lists.sourceforge.net]].
 
 <noinclude>
 ----

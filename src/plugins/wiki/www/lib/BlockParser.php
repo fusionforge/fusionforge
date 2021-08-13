@@ -1,7 +1,8 @@
 <?php
-/* Copyright (C) 2002 Geoffrey T. Dairiki <dairiki@dairiki.org>
- * Copyright (C) 2004,2005 Reini Urban
- * Copyright (C) 2008-2010 Marc-Etienne Vargenau, Alcatel-Lucent
+/**
+ * Copyright © 2002 Geoffrey T. Dairiki <dairiki@dairiki.org>
+ * Copyright © 2004,2005 Reini Urban
+ * Copyright © 2008-2010 Marc-Etienne Vargenau, Alcatel-Lucent
  *
  * This file is part of PhpWiki.
  *
@@ -18,6 +19,9 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
  */
 require_once 'lib/CachedMarkup.php';
 require_once 'lib/InlineParser.php';
@@ -90,7 +94,7 @@ class AnchoredRegexpSet
      *
      * @param $text string The text to search.
      *
-     * @return object A RegexpSet_match object, or false if no match.
+     * @return AnchoredRegexpSet_match|bool An AnchoredRegexpSet_match object, or false if no match.
      */
     function match($text)
     {
@@ -100,7 +104,7 @@ class AnchoredRegexpSet
             return false;
         }
 
-        $match = new AnchoredRegexpSet_match;
+        $match = new AnchoredRegexpSet_match();
         $match->postmatch = substr($text, strlen($m[0]));
         $match->match = $m[1];
         $match->regexp_ind = count($m) - 3;
@@ -123,7 +127,7 @@ class AnchoredRegexpSet
      * $prevMatch should be a match object obtained by a previous
      * match upon the same value of $text.
      *
-     * @return RegexpSet_match|bool A RegexpSet_match object, or false if no match.
+     * @return AnchoredRegexpSet_match|bool An AnchoredRegexpSet_match object, or false if no match.
      */
     function nextMatch($text, $prevMatch)
     {
@@ -139,7 +143,7 @@ class AnchoredRegexpSet
             return false;
         }
 
-        $match = new AnchoredRegexpSet_match;
+        $match = new AnchoredRegexpSet_match();
         $match->postmatch = substr($text, strlen($m[0]));
         $match->match = $m[1];
         $match->regexp_ind = count($m) - 3 + $prevMatch->regexp_ind + 1;
@@ -242,7 +246,7 @@ class BlockParser_Input
         //return ;
         $where = $this->where();
         $tab = str_repeat('____', $this->getDepth()) . $tab;
-        printXML(HTML::div("$tab $msg: at: '",
+        PrintXML(HTML::div("$tab $msg: at: '",
             HTML::samp($where),
             "'"));
         flush();
@@ -1439,11 +1443,3 @@ function TransformText($text, $basepage = false)
     }
     return new XmlContent($output->getContent());
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

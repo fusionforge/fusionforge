@@ -1,29 +1,27 @@
-Date: Mon, 29 Jun 2015 12:04:26 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Thu, 24 Dec 2020 18:13:17 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FHelloWorldPlugin;
-  flags="";
-  author=test;
-  version=10;
-  lastmodified=1068935007;
-  author_id=test;
-  hits=10;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
   charset=UTF-8
 Content-Transfer-Encoding: binary
 
 簡單的範例 plugin.
 
-<<HelloWorld salutation="Hello," name="WikiUser" >>
+<<HelloWorld salutation="Hello," name="Wiki User" >>
 
 From the source of this page:
 
 {{{
-<<HelloWorld salutation="Hello," name="WikiUser" >>
+<<HelloWorld salutation="Hello," name="Wiki User" >>
 }}}
 
------
-PhpWiki 的 plugin 架構允許你加入自訂的頁面元素. 你所要做的就是繼承 ~WikiPlugin
+----
+~PhpWiki 的 plugin 架構允許你加入自訂的頁面元素. 你所要做的就是繼承 ~WikiPlugin
 類別並實作你的 run() 方法.
+
+* either with the predefined HTML classes to create valid XHTML,
+* or by using templates, which are easier customizable, but generally more a mess to use and easier to create invalid XHTML.
 
 <<PhpHighlight
 
@@ -55,7 +53,6 @@ extends WikiPlugin
 
     function getDescription () {
         return _("Simple Sample Plugin");
-
     }
 
     // Establish default values for each of this plugin's arguments.

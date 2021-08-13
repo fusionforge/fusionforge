@@ -1,17 +1,18 @@
-<?php
-// Todo: set the body attr dynamically. here class="ns-2" for mozilla
-?>
 <body <?php echo $WikiTheme->getMoreAttr('body') ?> >
     <div id="global-wrapper">
       <div id="column-content">
     <div id="content">
+      <header role="banner">
       <?php echo Template('top') ?>
+      </header>
+      <main role="main">
       <div id="bodyContent">
         <?php echo $CONTENT ?>
 
-        <!-- end content -->
-        <div class="visualClear"></div>
+        <?php // end content ?>
+        <div class="clear-floats"></div>
       </div>
+      </main>
     </div>
     <?php if (empty($NOSIGNIN)) { ?>
       <?php echo Template('signin') ?>

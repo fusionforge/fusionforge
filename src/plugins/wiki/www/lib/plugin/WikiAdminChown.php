@@ -1,8 +1,7 @@
 <?php
-
-/*
- * Copyright 2004 $ThePhpWikiProgrammingTeam
- * Copyright 2008-2009 Marc-Etienne Vargenau, Alcatel-Lucent
+/**
+ * Copyright © 2004 $ThePhpWikiProgrammingTeam
+ * Copyright © 2008-2009 Marc-Etienne Vargenau, Alcatel-Lucent
  *
  * This file is part of PhpWiki.
  *
@@ -19,6 +18,9 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
  */
 
 /**
@@ -26,6 +28,7 @@
  * @author:  Reini Urban <rurban@x-ray.at>
  *
  */
+
 require_once 'lib/PageList.php';
 require_once 'lib/plugin/WikiAdminSelect.php';
 
@@ -34,7 +37,7 @@ class WikiPlugin_WikiAdminChown
 {
     function getDescription()
     {
-        return _("Change owner of selected pages.");
+        return _("Change owner of selected pages").".";
     }
 
     function getDefaultArguments()
@@ -167,7 +170,7 @@ class WikiPlugin_WikiAdminChown
         } else {
             $pagelist = new PageList_Selectable($args['info'], $args['exclude'], $args);
             $pagelist->addPageList($pages);
-            $button_label = _("Change owner of selected pages.");
+            $button_label = _("Change owner of selected pages");
             $header->pushContent(HTML::legend(_("Select the pages to change the owner")));
         }
 
@@ -177,7 +180,8 @@ class WikiPlugin_WikiAdminChown
             'size' => 40)));
 
         $buttons = HTML::p(Button('submit:admin_chown[chown]', $button_label, 'wikiadmin'),
-            Button('submit:admin_chown[cancel]', _("Cancel"), 'button'));
+                           HTML::raw("&nbsp;&nbsp;"),
+                           Button('submit:admin_chown[cancel]', _("Cancel"), 'button'));
         $header->pushContent($buttons);
 
         return HTML::form(array('action' => $request->getPostURL(),
@@ -193,11 +197,3 @@ class WikiPlugin_WikiAdminChown
                 : HiddenInputs(array('require_authority_for_post' => WIKIAUTH_ADMIN)));
     }
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

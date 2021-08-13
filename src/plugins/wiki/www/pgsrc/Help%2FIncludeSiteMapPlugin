@@ -1,5 +1,5 @@
-Date: Mon, 29 Jun 2015 12:04:28 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Mon, 22 Feb 2021 19:16:32 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FIncludeSiteMapPlugin;
   flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
@@ -26,45 +26,49 @@ The list is as deep as the recursion level (##reclimit##).
 ! Description
 ! Default value
 |-
-| **direction**
-| Get BackLinks or forward links (links listed on the page)
-|
-|-
-| **firstreversed**
-| If true, get BackLinks for the first page and forward links for the rest.  Only applicable when direction = 'forward'.
-|
-|-
-| **excludeunknown**
-| If true (default) then exclude any mentioned pages which don't exist yet.  Only applicable when direction = 'forward'.
-|
-|-
 | **exclude**
-|
-|
+| Comma-separated list of pages to exclude
+| empty
 |-
 | **include_self**
-|
-| 0
+| Boolean. If true, include yourself in the results.
+| false
 |-
 | **noheader**
-|
-| 0
+| Boolean. If true, header should be omitted.
+| false
 |-
 | **page**
-|
+| Page from which  site map starts
 | The current page
 |-
 | **description**
-| Override default Description. Printed as header.
-|
+| Override default description. Printed as header.
+| Default description
 |-
 | **reclimit**
-|
-| 4
+| Max recursion depth.
+| 2
 |-
 | **info**
-|
+| Info to display in the table
 | false
+|-
+| **direction**
+| Get BackLinks or forward links (links listed on the page)
+| back
+|-
+| **firstreversed**
+| If true, get BackLinks for the first page and forward links for the rest.  Only applicable when direction = 'forward'.
+| false
+|-
+| **excludeunknown**
+| If true, exclude any mentioned pages which don't exist yet.  Only applicable when direction = 'forward'.
+| true
+|-
+| **includepages**
+| Passed verbatim to the IncludePage plugin.
+| words=50
 |}
 
 == Example ==

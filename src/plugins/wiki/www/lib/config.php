@@ -1,9 +1,36 @@
 <?php
+/**
+ * Copyright © 2000-2001 Arno Hollosi
+ * Copyright © 2000-2001 Steve Wainstead
+ * Copyright © 2001-2003 Jeff Dairiki
+ * Copyright © 2002-2002 Carsten Klapp
+ * Copyright © 2002-2002 Lawrence Akka
+ * Copyright © 2002,2004-2009 Reini Urban
+ * Copyright © 2008-2014 Marc-Etienne Vargenau, Alcatel-Lucent
+ *
+ * This file is part of PhpWiki.
+ *
+ * PhpWiki is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * PhpWiki is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
+ */
 
 /*
  * NOTE: The settings here should probably not need to be changed.
  * The user-configurable settings have been moved to IniConfig.php
- * The run-time code has been moved to lib/IniConfig.php:fix_configs()
  */
 
 if (!defined("LC_ALL")) {
@@ -31,76 +58,6 @@ function isCGI()
 }
 
 /**
- * Browser Detection Functions
- *
- * @author: ReiniUrban
- */
-function browserAgent()
-{
-    static $HTTP_USER_AGENT = false;
-    if ($HTTP_USER_AGENT !== false) return $HTTP_USER_AGENT;
-    if (!$HTTP_USER_AGENT)
-        $HTTP_USER_AGENT = @$GLOBALS['HTTP_SERVER_VARS']['HTTP_USER_AGENT'];
-    if (!$HTTP_USER_AGENT) // CGI
-        $HTTP_USER_AGENT = @$GLOBALS['HTTP_ENV_VARS']['HTTP_USER_AGENT'];
-    if (!$HTTP_USER_AGENT) // local CGI testing
-        $HTTP_USER_AGENT = 'none';
-    return $HTTP_USER_AGENT;
-}
-
-function browserDetect($match)
-{
-    return (strpos(strtolower(browserAgent()), strtolower($match)) !== false);
-}
-
-// returns a similar number for Netscape/Mozilla (gecko=5.0)/IE/Opera features.
-function browserVersion()
-{
-    $agent = browserAgent();
-    if (strstr($agent, "Mozilla/4.0 (compatible; MSIE"))
-        return (float)substr($agent, 30);
-    elseif (strstr($agent, "Mozilla/5.0 (compatible; Konqueror/"))
-        return (float)substr($agent, 36);
-    elseif (strstr($agent, "AppleWebKit/"))
-        return (float)substr($agent, strpos($agent, "AppleWebKit/") + 12);
-    else
-        return (float)substr($agent, 8);
-}
-
-function isBrowserIE()
-{
-    return (browserDetect('Mozilla/') and
-        browserDetect('MSIE'));
-}
-
-// must omit display alternate stylesheets: konqueror 3.1.4
-// http://sourceforge.net/tracker/index.php?func=detail&aid=945154&group_id=6121&atid=106121
-function isBrowserKonqueror($version = false)
-{
-    if ($version)
-        return browserDetect('Konqueror/') and browserVersion() >= $version;
-    return browserDetect('Konqueror/');
-}
-
-// MacOSX Safari has certain limitations. Need detection and patches.
-// * no <object>, only <embed>
-function isBrowserSafari($version = false)
-{
-    $found = browserDetect('Spoofer/');
-    $found = browserDetect('AppleWebKit/') || $found;
-    if ($version)
-        return $found and browserVersion() >= $version;
-    return $found;
-}
-
-function isBrowserOpera($version = false)
-{
-    if ($version)
-        return browserDetect('Opera/') and browserVersion() >= $version;
-    return browserDetect('Opera/');
-}
-
-/**
  * If $LANG is undefined:
  * Smart client language detection, based on our supported languages
  * HTTP_ACCEPT_LANGUAGE="de-at,en;q=0.5"
@@ -108,15 +65,11 @@ function isBrowserOpera($version = false)
  * We should really check additionally if the i18n HomePage version is defined.
  * So must defer this to the request loop.
  *
- * @param array $languages
  * @return string
  */
-function guessing_lang($languages = array())
+function guessing_lang()
 {
-    if (!$languages) {
-        // make this faster
-        $languages = array("en", "de", "es", "fr", "it", "ja", "zh", "nl", "sv");
-    }
+    $languages = array("en", "de", "es", "fr", "it", "ja", "zh", "nl", "sv");
 
     $accept = false;
     if (isset($GLOBALS['request'])) // in fixup-dynamic-config there's no request yet
@@ -179,17 +132,15 @@ function guessing_lang($languages = array())
  */
 function guessing_setlocale($category, $locale)
 {
-    $alt = array('en' => array('C', 'en_US', 'en_GB', 'en_AU', 'en_CA', 'english'),
-        'de' => array('de_DE', 'de_DE', 'de_DE@euro',
-            'de_AT@euro', 'de_AT', 'German_Austria.1252', 'deutsch',
-            'german', 'ge'),
+    $alt = array(
+        'de' => array('de_DE', 'de_AT', 'de_CH', 'deutsch', 'german'),
+        'en' => array('en_US', 'en_GB', 'en_AU', 'en_CA', 'en_IE', 'english', 'C'),
         'es' => array('es_ES', 'es_MX', 'es_AR', 'spanish'),
-        'nl' => array('nl_NL', 'dutch'),
-        'fr' => array('fr_FR', 'français', 'french'),
-        'it' => array('it_IT'),
-        'sv' => array('sv_SE'),
-        'ja.utf-8' => array('ja_JP', 'ja_JP.utf-8', 'japanese'),
-        'ja.euc-jp' => array('ja_JP', 'ja_JP.eucJP', 'japanese.euc'),
+        'fr' => array('fr_FR', 'fr_BE', 'fr_CA', 'fr_CH', 'fr_LU', 'français', 'french'),
+        'it' => array('it_IT', 'it_CH', 'italian'),
+        'ja' => array('ja_JP', 'japanese'),
+        'nl' => array('nl_NL', 'nl_BE', 'dutch'),
+        'sv' => array('sv_SE', 'sv_FI', 'swedish'),
         'zh' => array('zh_TW', 'zh_CN'),
     );
     if (!$locale or $locale == 'C') {
@@ -221,8 +172,11 @@ function guessing_setlocale($category, $locale)
         if ($res = setlocale($category, $try))
             return $res;
         // Try with charset appended...
-        $try = $try . '.' . 'UTF-8';
-        if ($res = setlocale($category, $try))
+        $tryutf8 = $try . '.' . 'UTF-8';
+        if ($res = setlocale($category, $tryutf8))
+            return $res;
+        $tryutf8 = $try . '.' . 'utf8';
+        if ($res = setlocale($category, $tryutf8))
             return $res;
         foreach (array(".", '@', '_') as $sep) {
             if ($i = strpos($try, $sep)) {
@@ -334,7 +288,7 @@ function getUploadFilePath()
     }
     return defined('PHPWIKI_DIR')
         ? PHPWIKI_DIR . "/uploads/"
-        : realpath(dirname(__FILE__) . "/../uploads/");
+        : realpath(dirname(__FILE__) . "/../uploads/")."/";
 }
 
 function getUploadDataPath()
@@ -346,11 +300,3 @@ function getUploadDataPath()
     return SERVER_URL . (string_ends_with(DATA_PATH, "/") ? '' : "/")
         . DATA_PATH . '/uploads/';
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

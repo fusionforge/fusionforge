@@ -1,26 +1,28 @@
+<footer role="contentinfo">
 <?php // <hr class="printer" /> ?>
-    <div class="visualClear"></div>
-    <div id="f-poweredbyico"><a href="http://www.phpwiki.fr/"><img src="<?php echo $WikiTheme->getImageURL("poweredby_phpwiki_51x31.png") ?>" alt="Powered by PhpWiki" /></a></div>
+    <div class="clear-floats"></div>
+    <div id="f-poweredbyico"><a href="http://phpwiki.demo.free.fr"><img src="<?php echo $WikiTheme->getImageURL("poweredby_phpwiki_51x31.png") ?>" alt="Powered by PhpWiki" /></a></div>
     <ul id="f-list">
       <li id="f-lastmod"> <?php echo $WikiTheme->getOwnerMessage($page) ?>  <?php echo $WikiTheme->getLastModifiedMessage($revision) ?> <?php echo $WikiTheme->getAuthorMessage($revision) ?> </li>
       <li id="f-copyright">All text is available under the terms of the <a class="internal" href="http://www.gnu.org/copyleft/fdl.html">GNU Free Documentation License</a> (see <b>
-<?php if ($request->_dbi->isWikiPage(_("Copyrights"))) { ?>
-      <?php echo WikiLink(_("Copyrights")) ?>
+<?php if ($request->_dbi->isWikiPage(__("Copyrights"))) { ?>
+      <?php echo WikiLink(__("Copyrights")) ?>
 <?php } else { ?>
-      <a class="internal" href="http://www.phpwiki.fr/Copyrights">Copyrights</a>
+      <a class="internal" href="http://phpwiki.demo.free.fr/index.php/Copyrights">Copyrights</a>
 <?php } ?>
 </b> for details).<br /></li>
-<?php if ($request->_dbi->isWikiPage(_("About".WIKI_NAME))) { ?>
-      <?php echo WikiLink(_("About".WIKI_NAME)) ?>
+<?php if ($request->_dbi->isWikiPage(__("About").WIKI_NAME)) { ?>
+      <?php echo WikiLink(_("About").WIKI_NAME) ?>
 <?php } else { ?>
-      <li id="f-about"><a href="http://www.phpwiki.fr/Help/PhpWiki">About PhpWiki</a></li>
+      <li id="f-about"><a href="http://phpwiki.demo.free.fr/index.php/Help/PhpWiki">About PhpWiki</a></li>
 <?php } ?>
       <li id="f-disclaimer">
-<?php if ($request->_dbi->isWikiPage(_("GeneralDisclaimer"))) { ?>
-      <?php echo WikiLink(_("GeneralDisclaimer")) ?>
+<?php if ($request->_dbi->isWikiPage(__("GeneralDisclaimer"))) { ?>
+      <?php echo WikiLink(__("GeneralDisclaimer")) ?>
 <?php } else { ?>
-      <a href="http://www.phpwiki.fr/GeneralDisclaimer">Disclaimer</a>
+      <a href="http://phpwiki.demo.free.fr/index.php/GeneralDisclaimer">Disclaimer</a>
 <?php } ?>
 </li>
     </ul>
     <div id="f-copyrightico"><a href="http://www.gnu.org/copyleft/fdl.html"><img src="<?php echo $WikiTheme->getImageURL("gnu-fdl.png") ?>" alt="GNU Free Documentation License" /></a></div>
+</footer>

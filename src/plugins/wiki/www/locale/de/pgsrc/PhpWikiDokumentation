@@ -1,10 +1,28 @@
-Date: Mon, 29 Jun 2015 12:04:27 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Wed, 10 Apr 2019 16:39:09 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=PhpWikiDokumentation;
-  flags=PAGE_LOCKED;
+  flags=EXTERNAL_PAGE;
   charset=UTF-8
 Content-Transfer-Encoding: binary
 
-===Seiten in dieser Kategorie:
-<<BackLinks exclude||='' include_self||=1 noheader||=0 page||=[pagename] info||=mtime >>
+== Contents ==
+
+<<SiteMap
+         noheader=true
+         exclude=HomePage,PgsrcTranslation
+         reclimit=1
+         direction=forward
+         firstreversed=1
+>>
+
+== Seiten in dieser Kategorie ==
+
+<<BackLinks
+         exclude||=''
+         include_self||=1
+         noheader||=0
+         page||=[pagename]
+         info||=pagename,mtime
+         sortby||=pagename
+>>

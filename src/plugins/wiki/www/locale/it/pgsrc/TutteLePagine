@@ -1,9 +1,16 @@
-Date: Mon, 29 Jun 2015 12:04:22 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Fri, 12 Dec 2020 15:36:06 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=TutteLePagine;
-  flags=PAGE_LOCKED;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
   charset=UTF-8
 Content-Transfer-Encoding: binary
 
-<<AllPages noheader||=0 include_empty||=0 info||='' >>
+Here is the list of **all pages** on this Wiki, including any
+[[OrphanedPages|orphaned pages]] which are otherwise inaccessible.
+[[AllUserPages|Show only user pages]].
+
+<<AllPages info||=mtime,author,hits sortby||=pagename>>
+
+----
+[[CategoryActionPage]]

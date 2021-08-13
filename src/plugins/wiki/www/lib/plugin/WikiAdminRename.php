@@ -1,8 +1,7 @@
 <?php
-
-/*
- * Copyright 2004,2005,2007 $ThePhpWikiProgrammingTeam
- * Copyright 2008-2009 Marc-Etienne Vargenau, Alcatel-Lucent
+/**
+ * Copyright © 2004,2005,2007 $ThePhpWikiProgrammingTeam
+ * Copyright © 2008-2009 Marc-Etienne Vargenau, Alcatel-Lucent
  *
  * This file is part of PhpWiki.
  *
@@ -19,6 +18,9 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
  */
 
 /**
@@ -26,6 +28,7 @@
  * @author:  Reini Urban <rurban@x-ray.at>
  *
  */
+
 require_once 'lib/PageList.php';
 require_once 'lib/plugin/WikiAdminSelect.php';
 
@@ -34,7 +37,7 @@ class WikiPlugin_WikiAdminRename
 {
     function getDescription()
     {
-        return _("Rename selected pages.");
+        return _("Rename selected pages").".";
     }
 
     function getDefaultArguments()
@@ -53,7 +56,7 @@ class WikiPlugin_WikiAdminRename
     public static function renameHelper($name, $from, $to, $options = array())
     {
         if (isset($options['regex'])) {
-            return preg_replace('/' . $from . '/' . (isset($options['icase']) ? 'i' : ''), $to, $name);
+            return preg_replace('/' . str_replace('/', '\/', $from) . '/' . (isset($options['icase']) ? 'i' : ''), $to, $name);
         } elseif (isset($options['icase'])) {
             return str_ireplace($from, $to, $name);
         } else {
@@ -91,12 +94,15 @@ class WikiPlugin_WikiAdminRename
         $this->preSelectS($args, $request);
 
         $p = $request->getArg('p');
-        if (!$p) $p = $this->_list;
+        if (!$p) {
+            $p = $this->_list;
+        }
         $post_args = $request->getArg('admin_rename');
         $next_action = 'select';
         $pages = array();
-        if ($p && !$request->isPost())
+        if ($p && !$request->isPost()) {
             $pages = $p;
+        }
         if ($p && $request->isPost() &&
             !empty($post_args['rename']) && empty($post_args['cancel'])
         ) {
@@ -115,8 +121,9 @@ class WikiPlugin_WikiAdminRename
             }
         }
         if ($post_args['action'] == 'select') {
-            if (!empty($post_args['from']))
+            if (!empty($post_args['from'])) {
                 $next_action = 'verify';
+            }
             foreach ($p as $name => $c) {
                 $pages[$name] = 1;
             }
@@ -129,13 +136,12 @@ class WikiPlugin_WikiAdminRename
         /*if ($next_action == 'verify') {
             $args['info'] = "checkbox,pagename,renamed_pagename";
         }*/
-        $pagelist = new PageList_Selectable
-        (
+        $pagelist = new PageList_Selectable(
             $args['info'], $args['exclude'],
             array('types' =>
             array('renamed_pagename'
             => new _PageList_Column_renamed_pagename('rename', _("Rename to")),
-            )));
+        )));
         $pagelist->addPageList($pages);
 
         $header = HTML::div();
@@ -144,7 +150,7 @@ class WikiPlugin_WikiAdminRename
             $header->pushContent(
                 HTML::p(HTML::strong(
                     _("Are you sure you want to rename the selected pages?"))));
-            $header = $this->renameForm($header, $post_args, $singlepage);
+            $header = $this->renameForm($header, $post_args, $singlepage, true);
         } else {
             if ($singlepage === true) {
                 $button_label = _("Rename Page");
@@ -161,9 +167,9 @@ class WikiPlugin_WikiAdminRename
             }
         }
 
-        $buttons = HTML::p
-        (Button('submit:admin_rename[rename]', $button_label, 'wikiadmin'),
-            Button('submit:admin_rename[cancel]', _("Cancel"), 'button'));
+        $buttons = HTML::p(Button('submit:admin_rename[rename]', $button_label, 'wikiadmin'),
+                           HTML::raw("&nbsp;&nbsp;"),
+                           Button('submit:admin_rename[cancel]', _("Cancel"), 'button'));
 
         if ($singlepage === false) {
             $list = $pagelist->getContent();
@@ -194,8 +200,9 @@ class WikiPlugin_WikiAdminRename
             'name' => 'admin_rename[' . $name . ']',
             'id' => $id,
             'value' => 1));
-        if (!empty($post_args[$name]))
+        if (!empty($post_args[$name])) {
             $checkbox->setAttr('checked', 'checked');
+        }
         return HTML::div($checkbox, ' ', HTML::label(array('for' => $id), $msg));
     }
 
@@ -213,13 +220,26 @@ class WikiPlugin_WikiAdminRename
             if (($newname = $this->renameHelper($name, $from, $to, $options))
                 and $newname != $name
             ) {
-                if (strlen($newname) > MAX_PAGENAME_LENGTH)
+                if (strlen($newname) > MAX_PAGENAME_LENGTH) {
                     $ul->pushContent(HTML::li(_("Cannot rename. New page name too long.")));
-                elseif ($dbi->isWikiPage($newname))
+                // Page name cannot begin with a slash
+                } elseif ($newname[0] == "/") {
+                    $ul->pushContent(HTML::li(
+                        sprintf(_("Page name “%s” cannot begin with a slash."), $newname)));
+                // Page name cannot end with a slash
+                } elseif (substr($newname, -1) == "/") {
+                    $ul->pushContent(HTML::li(
+                        sprintf(_("Page name “%s” cannot end with a slash."), $newname)));
+                } elseif (preg_match("/[<\[\{\|\"\}\]>]/", $newname, $matches) > 0) {
+                    $ul->pushContent(HTML::li(
+                        sprintf(_("Illegal character “%s” in page name."), $matches[0])));
+                } elseif ($dbi->isWikiPage($newname)) {
                     $ul->pushContent(HTML::li(fmt("Page “%s” already exists. Ignored.",
-                        WikiLink($newname)))); elseif (!mayAccessPage('edit', $name))
+                        WikiLink($newname))));
+                } elseif (!mayAccessPage('edit', $name)) {
                     $ul->pushContent(HTML::li(fmt("Access denied to rename page “%s”.",
-                        WikiLink($name)))); elseif ($dbi->renamePage($name, $newname, $updatelinks)) {
+                        WikiLink($name))));
+                } elseif ($dbi->renamePage($name, $newname, $updatelinks)) {
                     /* not yet implemented for all backends */
                     $page = $dbi->getPage($newname);
                     $current = $page->getCurrentRevision();
@@ -273,30 +293,48 @@ class WikiPlugin_WikiAdminRename
         }
     }
 
-    private function renameForm(&$header, $post_args, $singlepage)
+    private function renameForm(&$header, $post_args, $singlepage, $confirm=false)
     {
         $table = HTML::table();
-        $this->tablePush($table, _("Rename") . " " . _("from") . _(": "),
-            HTML::input(array('name' => 'admin_rename[from]',
-                'size' => MAX_PAGENAME_LENGTH,
-                'maxlength' => MAX_PAGENAME_LENGTH,
-                'readonly' => 'readonly',
-                'value' => $post_args['from'])));
-        $this->tablePush($table, _("to") . _(": "),
-            HTML::input(array('name' => 'admin_rename[to]',
-                'size' => MAX_PAGENAME_LENGTH,
-                'maxlength' => MAX_PAGENAME_LENGTH,
-                'value' => $post_args['to'])));
+        if ($singlepage) {
+            $this->tablePush($table, _("Rename") . " " . _("from") . _(": "),
+                HTML::input(array('name' => 'admin_rename[from]',
+                    'size' => MAX_PAGENAME_LENGTH,
+                    'maxlength' => MAX_PAGENAME_LENGTH,
+                    'readonly' => 'readonly',
+                    'value' => $post_args['from'])));
+        } else {
+            $this->tablePush($table, _("Rename") . " " . _("from") . _(": "),
+                HTML::input(array('name' => 'admin_rename[from]',
+                    'size' => MAX_PAGENAME_LENGTH,
+                    'maxlength' => MAX_PAGENAME_LENGTH,
+                    'value' => $post_args['from'])));
+        }
+        if ($confirm) {
+            $this->tablePush($table, _("to") . _(": "),
+                HTML::input(array('name' => 'admin_rename[to]',
+                    'size' => MAX_PAGENAME_LENGTH,
+                    'maxlength' => MAX_PAGENAME_LENGTH,
+                    'readonly' => 'readonly',
+                    'value' => $post_args['to'])));
+        } else {
+            $this->tablePush($table, _("to") . _(": "),
+                HTML::input(array('name' => 'admin_rename[to]',
+                    'size' => MAX_PAGENAME_LENGTH,
+                    'maxlength' => MAX_PAGENAME_LENGTH,
+                    'value' => $post_args['to'])));
+        }
         if ($singlepage === false) {
             $this->tablePush($table, '',
                 $this->checkBox($post_args, 'regex', _("Regex?")));
             $this->tablePush($table, '',
                 $this->checkBox($post_args, 'icase', _("Case insensitive?")));
         }
-        if (defined('EXPERIMENTAL') and EXPERIMENTAL) // not yet stable
+        if (defined('EXPERIMENTAL') and EXPERIMENTAL) { // not yet stable
             $this->tablePush($table, '',
                 $this->checkBox($post_args, 'updatelinks',
                     _("Change pagename in all linked pages also?")));
+        }
         $this->tablePush($table, '',
             $this->checkBox($post_args, 'createredirect',
                 _("Create redirect from old to new name?")));
@@ -332,11 +370,3 @@ class _PageList_Column_renamed_pagename extends _PageList_Column
         return $div;
     }
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

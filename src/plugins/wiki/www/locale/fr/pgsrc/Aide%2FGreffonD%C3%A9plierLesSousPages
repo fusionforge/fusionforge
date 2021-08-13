@@ -1,0 +1,112 @@
+Date: Mon, 16 dec 2020 15:49:22 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
+Content-Type: application/x-phpwiki;
+  pagename=locale/fr/pgsrc/Aide%2FGreffonD%C3%A9plierLesSousPages;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
+  charset=UTF-8
+Content-Transfer-Encoding: binary
+
+Le [[Aide:GreffonWiki|greffon]] **~DéplierLesSousPages** (//UnfoldSubpages//) est utilisé pour afficher le contenu d'une partie ou
+de toutes les sous-pages de la page courante ou d'une page donnée. Ceci peut
+être utilisé pour obtenir un aperçu pour les greffons ~WikiBlog, Calendrier
+ou des ensembles de sous-pages similaires.
+
+Attention : ne pas l'utiliser avec des sous-pages avec des sections inexistantes !
+L'extracteur de section est encore un peu instable.
+
+== Utilisation ==
+
+{{{
+<<UnfoldSubpages>>
+<<UnfoldSubpages sortby=-mtime words=50 maxpages=5>>
+<<UnfoldSubpages quiet=1 smalltitle=1>>
+<<UnfoldSubpages sections=2 words=100>>
+<<UnfoldSubpages lines=3>>
+<<UnfoldSubpages pagename="AdministrationDePhpWiki"
+                 section="Arguments du greffon" sectionhead=1>>
+}}}
+
+== Arguments ==
+
+Tous les arguments de [[Aide:ListeDePages|ListeDePages]], plus les suivants :
+
+{| class="bordered"
+|-
+! Argument
+! Description
+! Valeur par défaut
+|-
+| **pagename**
+| Un nom de page ou le page courante lorsque le nom est vide.
+| vide
+|-
+| **quiet**
+| N'affiche pas d'en-tête.
+| false
+|-
+| **sortby**
+| Trier par + (ASC) ou - (DESC) et sur une colonne. Multiples colonnes comme sortby="-hits,-mtime" pas encore implémenté.\\Colonnes acceptées : ~[+|-]pagename, ~[+|-]mtime, ~[+|-]hits.| pagename
+| pagename
+|-
+| **maxpages**
+| Nombre maximum de pages à inclure ou toutes lorsque ce n'est précisé.
+| false
+|-
+| **sections**
+| Nombre maximum de parties par pages à inclure toutes lorsque ce n'est précisé.
+| false
+|-
+| **section**
+| Inclure cette section par page seulement lorsque c'est défini.
+| empty
+|-
+| **sectionhead**
+| Montre l'en-tête lorsqu'on inclus une partie nommée.
+| false
+|-
+| **smalltitle**
+| Si vrai, cache le titre d'importation, affiche seulement un petit lien au début de la page.
+| false
+|-
+| **words**
+| Nombre maximum de mots par pages à inclure.
+| false
+|-
+| **lines**
+| Nombre maximum de lignes par pages à inclure.
+| false
+|-
+| **bytes**
+| Nombre maximum d'octets par pages à inclure.
+| false
+|}
+
+== Arguments obsolètes ==
+
+{| class="bordered"
+|-
+! Argument
+! Description
+|-
+| **pages**
+| Obsolète. Renommé en maxpages.
+|-
+| **sort**
+| 'asc' ou 'desc'. Obsolète : utiliser "+" ou "-" avant le nom de la colonne avec sortby.
+|}
+
+== Exemple ==
+
+{{{
+<<UnfoldSubpages pagename=Aide maxpages=5 >>
+}}}
+
+<<UnfoldSubpages pagename=Aide maxpages=5 >>
+
+== Voir aussi ==
+* [[Aide:GreffonListeDesSousPages]]
+
+<noinclude>
+----
+[[DocumentationDePhpWiki]] [[CatégorieGreffonWiki]]
+</noinclude>

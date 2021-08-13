@@ -1,8 +1,7 @@
 <?php
-
-/*
- * Copyright 2004,2005 $ThePhpWikiProgrammingTeam
- * Copyright 2009 Marc-Etienne Vargenau, Alcatel-Lucent
+/**
+ * Copyright © 2004,2005 $ThePhpWikiProgrammingTeam
+ * Copyright © 2009 Marc-Etienne Vargenau, Alcatel-Lucent
  *
  * This file is part of PhpWiki.
  *
@@ -19,6 +18,9 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
  */
 
 /**
@@ -29,8 +31,8 @@
  *
  * Not yet ready! part 3/3 is missing: The moderator approve/reject methods.
  *
- * See http://phpwiki.fr/Help/ModeratedPagePlugin
- * Author: ReiniUrban
+ * See http://phpwiki.demo.free.fr/index.php/Help/ModeratedPagePlugin
+ * Author: Reini Urban
  */
 
 require_once 'lib/WikiPlugin.php';
@@ -345,7 +347,7 @@ class WikiPlugin_ModeratedPage
             //                              timestamp,user(obj)+userid
             // handle $moderated['data'][$id]['args']['action']
         } else {
-            return $this->approval_form($request, $args, $moderation, 'approve');
+            return $this->approval_form($request, $args, $moderation);
         }
         return '';
     }
@@ -426,7 +428,7 @@ class WikiPlugin_ModeratedPage
         if ($moderation['args']['action'] == 'edit') {
             $pagename = $moderation['args']['pagename'];
             $p = $request->_dbi->getPage($pagename);
-            $rev = $p->getCurrentRevision(true);
+            $rev = $p->getCurrentRevision();
             $curr_content = $rev->getPackedContent();
             $new_content = $moderation['args']['edit']['content'];
             include_once 'lib/difflib.php';
@@ -499,11 +501,3 @@ class WikiPlugin_ModeratedPage
     }
 
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

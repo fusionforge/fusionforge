@@ -2,7 +2,7 @@
   if (empty($revision)) $revision = $page->getCurrentRevision();
 ?>
 <hr class="printer" />
-<div class="visualClear"></div>
+<div class="clear-floats"></div>
 <div><?php echo $WikiTheme->getOwnerMessage($page) ?>  <?php echo $WikiTheme->getLastModifiedMessage($revision) ?> <?php echo $WikiTheme->getAuthorMessage($revision) ?><br />
 This page was accessed <?php echo $page->get('hits') ?> times, and edited <?php echo $revision->getVersion() ?> times.</div>
 

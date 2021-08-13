@@ -1,30 +1,64 @@
-Date: Mon, 29 Jun 2015 12:04:26 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Thu, 24 Dec 2020 18:13:17 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=FindPage;
-  flags=PAGE_LOCKED;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
   charset=UTF-8
 Content-Transfer-Encoding: binary
 
 這裡有一些很好的瀏覽起點.
 
-* HowToUseWiki 讓你能快速的學會使用 Wiki 標記.
-* RecentChanges 會自動紀錄.
-* MoreAboutMechanics 在此伺服器上進行瀏覽與編輯.
+* [[Help:HowToUseWiki|HowToUseWiki]] 讓你能快速的學會使用 Wiki 標記.
+* [[RecentChanges]] 會自動紀錄.
+* [[Help:MoreAboutMechanics|MoreAboutMechanics]] 在此伺服器上進行瀏覽與編輯.
 
-這裡則有標題搜索. 試著輸入 ''wiki'' 或 ''sandwich'' 看看.
-<?plugin-form TitleSearch?>
+== Title Search ==
 
-使用下面的全文搜索. 這可能會花點時間. 結果將會依列顯示出所有頁面中符合
-條件的資料.
-<?plugin-form FullTextSearch?>
+這裡則有標題搜索. 試著輸入 ##wiki## 或 ##sandwich## 看看.
+
+<<WikiFormRich action=TitleSearch method=GET nobr=1 class=wikiaction
+  editbox[] name=s text=""
+  submit[]
+  checkbox[] name=case_exact
+  pulldown[] name=regex value="auto,none,glob,posix,pcre,sql">>
+
+== Full Text Search ==
+
+使用下面的全文搜索.
+結果將會依列顯示出所有頁面中符合條件的資料.
+
+<<WikiFormRich action=FullTextSearch method=GET nobr=1 class=wikiaction
+  editbox[] name=s text=""
+  submit[]
+  checkbox[] name=case_exact
+  pulldown[] name=regex value="auto,none,glob,posix,pcre,sql">>
+
+== Fuzzy Search ==
 
 模糊搜尋搜索所有頁面的標題以得到最接近的字或最接近的發音(英文).
-<?plugin-form FuzzyPages?>
+
+<<WikiFormRich action=FuzzyPages method=GET nobr=1 class=wikiaction
+  editbox[] name=s text=""
+  submit[]
+  checkbox[] name=case_exact>>
 
 ------
 
-==== Tips
-使用空白分隔每個字. 所有的字都必須符合.
-%%%在標題搜索或全文檢索時,要排除某個字的話,在該字的前面加上 '-'.
-%%%Example: 'wiki text -php' 表示搜索所有頁面包含 'wiki' **和** 'text', 但 **不** 包含 'php'.
+== Tips ==
+
+* 使用空白分隔每個字. 所有的字都必須符合.
+* '##OR##', grouping with parenthesis, string-quoting and some glob-style wildcard characters are also supported.
+* 在標題搜索或全文檢索時,要排除某個字的話,在該字的前面加上 '##-##'.
+* Use '##^xx##' or '##xx~*##' to match words starting with '##xx##'.
+* Use '##~*xx##' or '##xx$##' to match words ending with '##xx##'.
+* Use '##^word$##' to match exact words.
+* Use //regex=auto// and '##re:##' like '##re:word.*xx##' or //regex=posix// to use Posix regular expressions. (not yet)
+* Use //regex=auto// and '##//##' like '##/^word$/##' or //regex=pcre// to match using Perl-style regular expressions.
+* Use //regex=sql// to match using SQL-style wildcards '##%##' and '##_##'.
+* Use //regex=none// to match any wildcards verbatim.
+
+=== Example ===
+* '##wiki text -php##' 表示搜索所有頁面包含 '##wiki##' **和** '##text##', 但 **不** 包含 '##php##'.
+
+----
+[[PhpWikiDocumentation]]

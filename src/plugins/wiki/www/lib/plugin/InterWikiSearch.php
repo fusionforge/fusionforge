@@ -1,7 +1,6 @@
 <?php
-
 /**
- * Copyright 1999, 2000, 2001, 2002 $ThePhpWikiProgrammingTeam
+ * Copyright © 1999, 2000, 2001, 2002 $ThePhpWikiProgrammingTeam
  *
  * This file is part of PhpWiki.
  *
@@ -18,10 +17,11 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
  */
-/**
- * @description
- */
+
 require_once 'lib/PageType.php';
 
 class WikiPlugin_InterWikiSearch
@@ -52,17 +52,14 @@ class WikiPlugin_InterWikiSearch
         extract($args);
 
         if (defined('DEBUG') && !DEBUG)
-            return $this->disabled("Sorry, this plugin is currently out of order.");
+            return $this->disabled(_("Sorry, this plugin is currently out of order."));
 
         $page = $dbi->getPage($request->getArg('pagename'));
-        return new TransformedText($page, __('InterWikiMap'), array(),
+        return new TransformedText($page, __("InterWikiMap"), array(),
             'searchableInterWikiMap');
     }
 }
 
-/**
- * @desc
- */
 if (defined('DEBUG') && DEBUG) {
     class PageFormatter_searchableInterWikiMap
         extends PageFormatter_interwikimap
@@ -124,11 +121,3 @@ if (defined('DEBUG') && DEBUG) {
         }
     }
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

@@ -1,29 +1,65 @@
-Date: Mon, 29 Jun 2015 12:04:25 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Thu, 24 Dec 2020 17:40:03 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=ZoekPagina;
-  flags=PAGE_LOCKED;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
   charset=UTF-8
 Content-Transfer-Encoding: binary
 
 Hier zijn een paar goede plaatsen om te beginnen met bladeren.
 
-* HoeWikiTeGebruiken maakt snel wegwijs in Wiki.
-* RecenteVeranderingen worden automatisch bijgehouden.
-* MeerOverTechnieken van het bladeren en veranderen van deze server.
+* [[Help:HoeWikiTeGebruiken|HoeWikiTeGebruiken]] maakt snel wegwijs in Wiki.
+* [[RecenteVeranderingen]] worden automatisch bijgehouden.
+* [[Help:MeerOverTechnieken|MeerOverTechnieken]] van het bladeren en veranderen van deze server.
 
+== Titel zoeker ==
 
-Hier is een titel zoeker.  Probeer iets als ''wiki'' of ''broodje''.
+Hier is een titel zoeker.  Probeer iets als ##wiki## of ##broodje##.
 
-<?plugin-form TitleSearch?>
+<<WikiFormRich action=TitleSearch method=GET nobr=1 class=wikiaction
+  editbox[] name=s text=""
+  submit[]
+  checkbox[] name=case_exact
+  pulldown[] name=regex value="auto,none,glob,posix,pcre,sql">>
 
-Gebruik deze voor het doorzoeken van alle tekst.  Dit kan een paar seconden duren.  De resultaten tonen alle regels op een pagina die een oplossing bevatten.
+== Full Text Search ==
 
-<?plugin-form FullTextSearch?>
+Gebruik deze voor het doorzoeken van alle tekst.
+De resultaten tonen alle regels op een pagina die een oplossing bevatten.
+
+<<WikiFormRich action=FullTextSearch method=GET nobr=1 class=wikiaction
+  editbox[] name=s text=""
+  submit[]
+  checkbox[] name=case_exact
+  pulldown[] name=regex value="auto,none,glob,posix,pcre,sql">>
+
+== Fuzzy Search ==
+
+In a fuzzy pages search the titles of all pages are examined to find
+those which are similarly spelled or similar sounding (English).
+
+<<WikiFormRich action=FuzzyPages method=GET nobr=1 class=wikiaction
+  editbox[] name=s text=""
+  submit[]
+  checkbox[] name=case_exact>>
+
 ------
-Scheid woorden met een spatie.  Alle woorden moeten gevonden worden.
-%%%Om woorden uit te zonderen, plak er een '-' voor.
-%%%Voorbeeld: 'wiki tekst -php' zoekt naar alle pagina's die de woorden
-'wiki' **en** 'tekst' bevatten, maar **niet** het woord 'php.
 
+== Tips ==
 
+* Scheid woorden met een spatie.  Alle woorden moeten gevonden worden.
+* '##OR##', grouping with parenthesis, string-quoting and some glob-style wildcard characters are also supported.
+* Om woorden uit te zonderen, plak er een '##-##' voor.
+* Use '##^xx##' or '##xx~*##' to match words starting with '##xx##'.
+* Use '##~*xx##' or '##xx$##' to match words ending with '##xx##'.
+* Use '##^word$##' to match exact words.
+* Use //regex=auto// and '##re:##' like '##re:word.*xx##' or //regex=posix// to use Posix regular expressions. (not yet)
+* Use //regex=auto// and '##//##' like '##/^word$/##' or //regex=pcre// to match using Perl-style regular expressions.
+* Use //regex=sql// to match using SQL-style wildcards '##%##' and '##_##'.
+* Use //regex=none// to match any wildcards verbatim.
+
+== Voorbeeld ==
+* '##wiki tekst -php##' zoekt naar alle pagina's die de woorden '##wiki##' en '##tekst##' bevatten, maar **niet** het woord '##php##.
+
+----
+[[PhpWikiDocumentation]]

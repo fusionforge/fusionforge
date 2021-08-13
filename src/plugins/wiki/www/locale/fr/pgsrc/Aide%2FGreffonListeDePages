@@ -1,0 +1,66 @@
+Date: Mon, 30 Mar 2020 15:49:22 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
+Content-Type: application/x-phpwiki;
+  pagename=Aide%2FGreffonListeDePages;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
+  charset=UTF-8
+Content-Transfer-Encoding: binary
+
+Le [[Aide:GreffonWiki|greffon]] **~ListeDePages** (//ListPages//) est le greffon le plus simple pour lister explicitement un ensemble de pages avec
+toules les options de [Aide:ListeDePages|ListeDePages]] disponibles
+il est principalement utilisé par le theme wikilens pour afficher les évaluations et les recommandations.
+
+Il faut aussi être utilisé avec la méthode ~PluginList pour lister un ensemble de pages généré par
+un autre greffon, et/ou exclure un ensemble de pages généré par un autre greffon.
+
+Consultez les options [[Aide:ListeDePages|ListeDePages]].
+
+== Utilisation ==
+
+{{{
+<<ListPages arguments>>
+}}}
+
+== Arguments ==
+
+Tous les arguments de [[Help:PageList|PageList]], plus les suivants :
+
+{| class="bordered"
+|-
+! Argument
+! Description
+! Valeur par défaut
+|-
+| **pages**
+| Pages à lister
+| false
+|-
+| **dimension**
+|
+| 0
+|}
+
+=== Additional info arguments ===
+
+|= top3recs     | recommandations (thème wikilens uniquement)
+|= numbacklinks | nombre de rétroliens (liens vers la page donnée)
+|= numpagelinks | nombre of liens directs (liens de la page donnée)
+
+== Exemples ==
+
+{{{
+<<ListPages pages=HomePage,FindPage>>
+}}}
+
+{{{
+<<ListPages info=hits
+            sortby=hits
+            pages=<!plugin-list BackLink page=[] !>
+            exclude=ListPagesPlugin,WikiPlugin
+>>
+}}}
+
+<noinclude>
+----
+[[DocumentationDePhpWiki]] [[CatégorieGreffonWiki]]
+</noinclude>

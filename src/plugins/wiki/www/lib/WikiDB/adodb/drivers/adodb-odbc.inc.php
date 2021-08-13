@@ -1,12 +1,14 @@
 <?php
 /*
-V5.20dev  ??-???-2014  (c) 2000-2014 John Lim (jlim#natsoft.com). All rights reserved.
+@version   v5.20.19  13-Dec-2020
+@copyright (c) 2000-2013 John Lim (jlim#natsoft.com). All rights reserved.
+@copyright (c) 2014      Damien Regad, Mark Newnham and the ADOdb community
   Released under both BSD license and Lesser GPL library license.
   Whenever there is any discrepancy between the two licenses,
   the BSD license will take precedence.
 Set tabs to 4 for best viewing.
 
-  Latest version is available at http://adodb.sourceforge.net
+  Latest version is available at http://adodb.org/
 
   Requires ODBC. Works on Windows and Unix.
 */
@@ -39,7 +41,7 @@ class ADODB_odbc extends ADOConnection {
 	var $_lastAffectedRows = 0;
 	var $uCaseTables = true; // for meta* functions, uppercase table names
 
-	function ADODB_odbc()
+	function __construct()
 	{
 		$this->_haserrorfunctions = ADODB_PHPVER >= 0x4050;
 		$this->_has_stupid_odbc_fetch_api_change = ADODB_PHPVER >= 0x4200;
@@ -48,8 +50,6 @@ class ADODB_odbc extends ADOConnection {
 		// returns true or false
 	function _connect($argDSN, $argUsername, $argPassword, $argDatabasename)
 	{
-	global $php_errormsg;
-
 		if (!function_exists('odbc_connect')) return null;
 
 		if (!empty($argDatabasename) && stristr($argDSN, 'Database=') === false) {
@@ -59,10 +59,10 @@ class ADODB_odbc extends ADOConnection {
 			$argDSN .= 'Database='.$argDatabasename;
 		}
 
-		if (isset($php_errormsg)) $php_errormsg = '';
+		$last_php_error = $this->resetLastError();
 		if ($this->curmode === false) $this->_connectionID = odbc_connect($argDSN,$argUsername,$argPassword);
 		else $this->_connectionID = odbc_connect($argDSN,$argUsername,$argPassword,$this->curmode);
-		$this->_errorMsg = isset($php_errormsg) ? $php_errormsg : '';
+		$this->_errorMsg = $this->getChangedErrorMsg($last_php_error);
 		if (isset($this->connectStmt)) $this->Execute($this->connectStmt);
 
 		return $this->_connectionID != false;
@@ -71,12 +71,10 @@ class ADODB_odbc extends ADOConnection {
 	// returns true or false
 	function _pconnect($argDSN, $argUsername, $argPassword, $argDatabasename)
 	{
-	global $php_errormsg;
-
 		if (!function_exists('odbc_connect')) return null;
 
-		if (isset($php_errormsg)) $php_errormsg = '';
-		$this->_errorMsg = isset($php_errormsg) ? $php_errormsg : '';
+		$last_php_error = $this->resetLastError();
+		$this->_errorMsg = '';
 		if ($this->debug && $argDatabasename) {
 			ADOConnection::outp("For odbc PConnect(), $argDatabasename is not used. Place dsn in 1st parameter.");
 		}
@@ -84,7 +82,7 @@ class ADODB_odbc extends ADOConnection {
 		if ($this->curmode === false) $this->_connectionID = odbc_connect($argDSN,$argUsername,$argPassword);
 		else $this->_connectionID = odbc_pconnect($argDSN,$argUsername,$argPassword,$this->curmode);
 
-		$this->_errorMsg = isset($php_errormsg) ? $php_errormsg : '';
+		$this->_errorMsg = $this->getChangedErrorMsg($last_php_error);
 		if ($this->_connectionID && $this->autoRollback) @odbc_rollback($this->_connectionID);
 		if (isset($this->connectStmt)) $this->Execute($this->connectStmt);
 
@@ -132,7 +130,7 @@ class ADODB_odbc extends ADOConnection {
 	}
 
 	var $_dropSeqSQL = 'drop table %s';
-	function DropSequence($seqname)
+	function DropSequence($seqname = 'adodbseq')
 	{
 		if (empty($this->_dropSeqSQL)) return false;
 		return $this->Execute(sprintf($this->_dropSeqSQL,$seqname));
@@ -501,9 +499,8 @@ See http://msdn.microsoft.com/library/default.asp?url=/library/en-us/odbc/htm/od
 	/* returns queryID or false */
 	function _query($sql,$inputarr=false)
 	{
-	GLOBAL $php_errormsg;
-		if (isset($php_errormsg)) $php_errormsg = '';
-		$this->_error = '';
+		$last_php_error = $this->resetLastError();
+		$this->_errorMsg = '';
 
 		if ($inputarr) {
 			if (is_array($sql)) {
@@ -512,7 +509,7 @@ See http://msdn.microsoft.com/library/default.asp?url=/library/en-us/odbc/htm/od
 				$stmtid = odbc_prepare($this->_connectionID,$sql);
 
 				if ($stmtid == false) {
-					$this->_errorMsg = isset($php_errormsg) ? $php_errormsg : '';
+					$this->_errorMsg = $this->getChangedErrorMsg($last_php_error);
 					return false;
 				}
 			}
@@ -553,14 +550,16 @@ See http://msdn.microsoft.com/library/default.asp?url=/library/en-us/odbc/htm/od
 			if ($this->_haserrorfunctions) {
 				$this->_errorMsg = '';
 				$this->_errorCode = 0;
-			} else
-				$this->_errorMsg = isset($php_errormsg) ? $php_errormsg : '';
+			} else {
+				$this->_errorMsg = $this->getChangedErrorMsg($last_php_error);
+			}
 		} else {
 			if ($this->_haserrorfunctions) {
 				$this->_errorMsg = odbc_errormsg();
 				$this->_errorCode = odbc_error();
-			} else
-				$this->_errorMsg = isset($php_errormsg) ? $php_errormsg : '';
+			} else {
+				$this->_errorMsg = $this->getChangedErrorMsg($last_php_error);
+			}
 		}
 		return $stmtid;
 	}
@@ -606,7 +605,7 @@ class ADORecordSet_odbc extends ADORecordSet {
 	var $useFetchArray;
 	var $_has_stupid_odbc_fetch_api_change;
 
-	function ADORecordSet_odbc($id,$mode=false)
+	function __construct($id,$mode=false)
 	{
 		if ($mode === false) {
 			global $ADODB_FETCH_MODE;
@@ -619,7 +618,7 @@ class ADORecordSet_odbc extends ADORecordSet {
 		// the following is required for mysql odbc driver in 4.3.1 -- why?
 		$this->EOF = false;
 		$this->_currentRow = -1;
-		//$this->ADORecordSet($id);
+		//parent::__construct($id);
 	}
 
 
@@ -683,7 +682,7 @@ class ADORecordSet_odbc extends ADORecordSet {
 		$this->fetchMode = $savem;
 
 		if ($this->fetchMode & ADODB_FETCH_ASSOC) {
-			$this->fields = $this->GetRowAssoc(ADODB_ASSOC_CASE);
+			$this->fields = $this->GetRowAssoc();
 		}
 
 		$results = array();
@@ -721,7 +720,7 @@ class ADORecordSet_odbc extends ADORecordSet {
 		}
 		if ($rez) {
 			if ($this->fetchMode & ADODB_FETCH_ASSOC) {
-				$this->fields = $this->GetRowAssoc(ADODB_ASSOC_CASE);
+				$this->fields = $this->GetRowAssoc();
 			}
 			return true;
 		}

@@ -21,16 +21,16 @@ Create the database. You might need system privileges to do this:
 
 [root@localhost phpwiki]# msqladmin create wiki
 Database "wiki" created.
-[root@localhost phpwiki]# 
+[root@localhost phpwiki]#
 
 Load the database schema (here I'm in the phpwiki/ directory created
 after untarring the application):
 
 [swain@localhost phpwiki]$ msql wiki < schemas/minisql-initialize.sql
 
-You will see a few error messages like this: 
+You will see a few error messages like this:
 
-mSQL >     -> 
+mSQL >     ->
 
 ERROR : Unknown table "wiki"
 
@@ -38,13 +38,13 @@ This is normal because the schema file drops the table and then
 creates it... dropping a nonexistent table is a nonfatal error and you
 don't have to worry about it. You should see a lot of these:
 
-mSQL >     ->     -> 
+mSQL >     ->     ->
 Query OK.  1 row(s) modified or retrieved.
 
 
 
 
-mSQL >     -> 
+mSQL >     ->
 Bye!
 
 

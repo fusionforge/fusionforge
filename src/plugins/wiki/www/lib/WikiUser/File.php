@@ -1,7 +1,6 @@
 <?php
-
-/*
- * Copyright (C) 2004 ReiniUrban
+/**
+ * Copyright © 2004 Reini Urban
  *
  * This file is part of PhpWiki.
  *
@@ -18,7 +17,12 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
  */
+
+include_once 'lib/pear/File_Passwd.php';
 
 class _FilePassUser
     extends _PassUser
@@ -33,26 +37,24 @@ class _FilePassUser
 
     // This can only be called from _PassUser, because the parent class
     // sets the pref methods, before this class is initialized.
-    function _FilePassUser($UserName = '', $prefs = false, $file = '')
+    function __construct($UserName = '', $prefs = false, $file = '')
     {
         if (!$this->_prefs and is_a($this, "_FilePassUser")) {
             if ($prefs) $this->_prefs = $prefs;
             if (!isset($this->_prefs->_method))
-                _PassUser::_PassUser($UserName);
+                parent::__construct($UserName);
         }
         $this->_userid = $UserName;
-        // read the .htaccess style file. We use our own copy of the standard pear class.
+        // read the .htaccess style file.
         $this->_may_change = defined('AUTH_USER_FILE_STORABLE') && AUTH_USER_FILE_STORABLE;
         if (empty($file) and defined('AUTH_USER_FILE'))
             $file = AUTH_USER_FILE;
-        // same style as in main.php
-        include_once(dirname(__FILE__) . "/../pear/File_Passwd.php");
-        // "__PHP_Incomplete_Class"
-        if (!empty($file) or empty($this->_file) or !is_a($this->_file, "File_Passwd"))
+        if (empty($file)) {
+            return;
+        }
+        if (empty($this->_file) or !is_a($this->_file, "File_Passwd")) {
             $this->_file = new File_Passwd($file, false, $file . '.lock');
-        else
-            return false;
-        return $this;
+        }
     }
 
     function mayChangePass()
@@ -81,7 +83,6 @@ class _FilePassUser
         if (!$this->_checkPassLength($submitted_password)) {
             return WIKIAUTH_FORBIDDEN;
         }
-        //include_once 'lib/pear/File_Passwd.php';
         if ($this->_file->verifyPassword($this->_userid, $submitted_password)) {
             $this->_authmethod = 'File';
             $this->_level = WIKIAUTH_USER;
@@ -108,13 +109,4 @@ class _FilePassUser
         }
         return false;
     }
-
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

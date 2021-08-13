@@ -1,8 +1,31 @@
 <?php
+/**
+ * Copyright © 2010 Reini Urban
+ *
+ * This file is part of PhpWiki.
+ *
+ * PhpWiki is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * PhpWiki is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
+ */
 
 /**
  * MS SQL extensions for the ADODB DB backend.
  */
+
 require_once 'lib/WikiDB/backend/ADODB.php';
 
 class WikiDB_backend_ADODB_mssqlnative
@@ -72,8 +95,12 @@ class WikiDB_backend_ADODB_mssqlnative
         return empty($data) ? array() : unserialize(stripslashes($data));
     }
 
-    /*
-     * Update link table.
+    /**
+     * Set links for page.
+     *
+     * @param string $pagename Page name
+     * @param array  $links    List of page(names) which page links to.
+     *
      * on DEBUG: delete old, deleted links from page
      */
     function set_links($pagename, $links)
@@ -198,8 +225,6 @@ class WikiDB_backend_ADODB_mssqlnative
                     }
                 }
                 if (!$skip) {
-                    if ($update) {
-                    }
                     if ($relation) {
                         $dbh->Execute("INSERT INTO $link_tbl (linkfrom, linkto, relation)"
                             . " VALUES ($pageid, $linkid, $relation)");
@@ -241,11 +266,3 @@ class WikiDB_backend_ADODB_mssqlnative
     }
 
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

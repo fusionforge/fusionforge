@@ -1,8 +1,7 @@
 <?php
-
-/*
- * Copyright 2002 $ThePhpWikiProgrammingTeam
- * Copyright 2008-2009 Marc-Etienne Vargenau, Alcatel-Lucent
+/**
+ * Copyright © 2002 $ThePhpWikiProgrammingTeam
+ * Copyright © 2008-2009 Marc-Etienne Vargenau, Alcatel-Lucent
  *
  * This file is part of PhpWiki.
  *
@@ -19,6 +18,9 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
  */
 
 /**
@@ -32,6 +34,7 @@
  * collectPages() and preSelectS().
  * "list" PagePermissions supported implicitly by PageList.
  */
+
 require_once 'lib/PageList.php';
 
 class WikiPlugin_WikiAdminSelect
@@ -160,9 +163,9 @@ class WikiPlugin_WikiAdminSelect
             $form->pushContent(HTML::input(array('type' => 'hidden',
                 'name' => 'action',
                 'value' => 'verify')));
-            $form->pushContent(Button('submit:verify', _("Select pages"),
-                    'wikiadmin'),
-                Button('submit:cancel', _("Cancel"), 'button'));
+            $form->pushContent(Button('submit:verify', _("Select pages"), 'wikiadmin'),
+                               HTML::raw("&nbsp;&nbsp;"),
+                               Button('submit:cancel', _("Cancel"), 'button'));
         } else {
             global $WikiTheme;
             $form->pushContent(HTML::input(array('type' => 'hidden',
@@ -173,7 +176,7 @@ class WikiPlugin_WikiAdminSelect
             $plugin_dir = 'lib/plugin';
             if (defined('PHPWIKI_DIR'))
                 $plugin_dir = PHPWIKI_DIR . "/$plugin_dir";
-            $fs = new fileSet($plugin_dir, 'WikiAdmin*.php');
+            $fs = new FileSet($plugin_dir, 'WikiAdmin*.php');
             $actions = $fs->getFiles();
             sort($actions);
             foreach ($actions as $f) {
@@ -262,11 +265,3 @@ class WikiPlugin_WikiAdminSelect
     }
 
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

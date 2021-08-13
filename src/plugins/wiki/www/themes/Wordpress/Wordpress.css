@@ -13,55 +13,7 @@
     Please tweak this and make it your own. :)
 */
 
-/* generic classes ----------------------------------------------- */
-
-.tt {
-    font-family: monospace;
-}
-
-.strike {
-    text-decoration: line-through;
-}
-
-.big {
-    font-size: larger;
-}
-
-.align-left {
-    text-align: left;
-}
-
-.align-right {
-    text-align: right;
-}
-
-.align-center {
-    text-align: center;
-}
-
-.top {
-    vertical-align: top;
-}
-
-.bottom {
-    vertical-align: bottom;
-}
-
-.middle {
-    vertical-align: middle;
-}
-
-.baseline {
-    vertical-align: baseline;
-}
-
-.nowrap {
-    white-space: nowrap;
-}
-
-.fullwidth {
-    width: 100%;
-}
+@import url(../default/phpwiki-common.css);
 
 /* --------------------------------------------------------------- */
 
@@ -74,6 +26,11 @@ body {
 
 img {
     border: 0;
+}
+
+img.inlineimage {
+    display: inline;
+    vertical-align: middle;
 }
 
 .wiki-edithelp {
@@ -204,7 +161,6 @@ a:hover {
 input {
     background: #fff;
     border: 1px solid #999;
-    /*        width: 80%; */
     font-size: smaller;
 }
 
@@ -220,7 +176,7 @@ input {
     font: italic normal 100% 'Times New Roman', Times, serif;
     letter-spacing: 0.1em;
     margin-top: 10px;
-    padding-bottom: 2px; /*border-bottom: dotted 1px #ccc;*/
+    padding-bottom: 2px;
 }
 
 #actionbar ul ul {
@@ -255,13 +211,10 @@ input {
     background: #fff;
     border: 1px solid #ddd;
     empty-cells: show;
-    /*        font-size: 14px; */
     margin: 0 0 0 -5px;
-    /*        width: 90%; */
 }
 
 .cal a {
-    /* display: block; */
     text-decoration: none;
     font-style: normal;
 }
@@ -273,9 +226,7 @@ input {
 
 .cal-header, .cal-dayname td {
     color: #999;
-    /*        font: normal 11px Verdana, Geneva, sans-serif; */
     padding: 1px 1px;
-    /*        text-align: right; */
 }
 
 /* from wp-calendar th  (with changes) */
@@ -342,12 +293,6 @@ img.toolbar:hover {
     border: 1px solid ButtonFace;
 }
 
-#editarea-size {
-    margin-top: 1ex;
-    text-align: right;
-    font-size: smaller;
-}
-
 #search-replace {
     margin-top: 1ex;
     text-align: left;
@@ -369,25 +314,6 @@ img.toolbar:hover {
 .search-term {
     background: yellow;
     font-weight: normal;
-}
-
-#LSResult {
-    position: absolute;
-    text-align: left;
-    display: none;
-    z-index: 100;
-    background-color: white;
-    border: 1px solid #d0d0d0;
-    font-size: 9px;
-    overflow: hidden;
-}
-
-#LSHighlight {
-    background-color: #f08000;
-}
-
-#LSResult .evenrow {
-    background-color: #f0f0f0;
 }
 
 /* IncludePage plugin ================================================= */
@@ -429,10 +355,6 @@ img.toolbar:hover {
     margin-bottom: 1ex;
 }
 
-.wiki-edithelp .wiki {
-    /* color: #5454ff;*/
-}
-
 .wiki-edithelp p {
     font-family: Arial, Helvetica, sans-serif;
     padding-left: 0.5em;
@@ -442,9 +364,8 @@ img.toolbar:hover {
     margin: 0;
 }
 
-/**
- * Calendar plugin
- */
+/* Calendar plugin ==================================================== */
+
 table.cal {
     border: 1px outset gray;
     background: white;
@@ -474,10 +395,6 @@ table.cal-header tr, table.cal-header td {
     text-decoration: none;
 }
 
-/* Day-names header */
-table.cal tbody tr .cal-dayname {
-}
-
 .cal-dayname td {
     text-align: center;
     font-size: smaller;
@@ -494,10 +411,6 @@ a.cal-hide {
 table.cal td.cal-today {
     margin: 1px;
     border: 1px solid gray;
-}
-
-/* text */
-table.cal td.cal-today a.cal-hide {
 }
 
 /**
@@ -658,7 +571,8 @@ span.hint {
     padding: 0;
 }
 
-/* Disabled Plugins */
+/* Disabled plugins =================================================== */
+
 .disabled-plugin {
     clear: both;
     margin: 1ex 0;
@@ -678,14 +592,6 @@ span.hint {
     background: #ddd;
     margin: 0;
     padding: 0.3ex 0.5em;
-}
-
-/* "(Redirected from ...)" message. */
-span.redirectfrom {
-    font-size: small;
-    font-style: oblique;
-    font-weight: normal;
-    padding-left: 1em;
 }
 
 /*
@@ -738,16 +644,7 @@ blockquote.mail-style-quote {
 /*
  * wikiblog
  */
-.floatleft {
-    float: left;
-}
-
-.floatright {
-    float: right;
-}
-
 div.wikiblog {
-    /* border: thin black solid; */
     margin: 1ex 2em;
     padding: 0 0;
 }
@@ -757,12 +654,7 @@ div.wikiblog > div {
     padding: 0.5ex 0.5em;
 }
 
-div.wikiblog-header {
-    /* background-color: #ccf; */
-}
-
 div.wikiblog > div.wikiblog-footer {
-    /* background-color: #eee; */
     padding: 0.2ex 0.5em;
 }
 
@@ -772,10 +664,6 @@ h3.wikiblog-summary {
     margin: 0 0 1ex 0;
 }
 
-div.wikiblog.wikiblog-form {
-    /* background-color: #eee; */
-}
-
 table.wikiblog-form {
     width: auto;
     border-collapse: collapse;
@@ -783,7 +671,6 @@ table.wikiblog-form {
 }
 
 .wikiblog-form caption {
-    /* background-color: #ccf; */
     caption-side: top;
     font-weight: bold;
     text-align: left;
@@ -836,45 +723,9 @@ table.interwiki-map {
     padding-left: 3em;
 }
 
-.dialog {
-    background-color: #cdf;
-    color: black;
-    margin: 2em auto 2em auto;
-    border: thin black solid;
-    width: 50%;
-}
-
-.dialog h1, .dialog p, .dialog div {
-    text-align: center;
-}
-
-.dialog h1 {
-    font-size: large;
-    margin: 0.5em 0 1em 0;
-}
-
-.dialog div.message {
-    background-color: white;
-    color: black;
-    margin: 0 1em;
-    padding: 0.5em 0.5em;
-}
-
-.dialog p.buttons {
-    margin: 1em 0 0.5em 0;
-}
-
-.clear-floats {
-    clear: both;
-}
-
 /* postnuke css:*/
 .gensmall {
     font-size: 10px
-}
-
-.genmed {
-    font-size: 11px
 }
 
 td.cat {
@@ -945,7 +796,8 @@ td.sidebar {
     margin: 0;
 }
 
-/* plugin BoxRight */
+/* BoxRight plugin ==================================================== */
+
 div.boxright {
     background-color: #e9fbff;
     width: 200px;
@@ -1003,16 +855,14 @@ table.sqlresult td {
     border: 1px solid gray;
 }
 
-/**
- * TeX2png plugin
- */
+/* TeX2png plugin ===================================================== */
+
 img.tex {
     vertical-align: middle;
 }
 
-/**
- * PhotoAlbum plugin
- */
+/* PhotoAlbum plugin ================================================== */
+
 .boldsmall {
     font-weight: bold;
     font-size: 11px;
@@ -1068,69 +918,4 @@ span.wikiwyg_control_link a {
     border-style: solid;
     padding: .2em;
     vertical-align: top;
-}
-
-/* WikicreoleTable, MediawikiTable and RichTable plugins ============== */
-
-/*
- * table class="boxed"
- * will put a border around the table (but not around the cells)
- *
- * table class="bordered"
- * will put a border around the table and the cells
- *
- * In both cases, the caption will be bold and centered under the table
- *
- * In both cases, the headers (th) will have a "#d8d8d8" background
- */
-
-table.boxed, table.bordered, table.bordered th, table.bordered td {
-    border-width: 1px;
-    border-style: solid;
-    border-collapse: collapse;
-    vertical-align: top;
-}
-
-table.boxed td, table.bordered td,
-table.boxed th, table.bordered th {
-    padding-left: 5px;
-    padding-right: 5px;
-    padding-top: 0;
-    padding-bottom: 0;
-}
-
-table.boxed caption, table.bordered caption {
-    text-align: center;
-    font-weight: bold;
-    caption-side: bottom;
-    padding-top: 0.8em;
-}
-
-table.boxed th, table.bordered th {
-    font-weight: bold;
-    background-color: #d8d8d8;
-}
-
-table.sortable th.header {
-    background-image: url(../default/buttons/sort_none.gif);
-    cursor: pointer;
-    background-repeat: no-repeat;
-    background-position: center right;
-    padding-right: 20px;
-}
-
-table.sortable th.headerSortUp {
-    background-image: url(../default/buttons/sort_up.gif);
-    cursor: pointer;
-    background-repeat: no-repeat;
-    background-position: center right;
-    padding-right: 20px;
-}
-
-table.sortable th.headerSortDown {
-    background-image: url(../default/buttons/sort_down.gif);
-    cursor: pointer;
-    background-repeat: no-repeat;
-    background-position: center right;
-    padding-right: 20px;
 }

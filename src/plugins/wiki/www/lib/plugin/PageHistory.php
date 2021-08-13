@@ -1,7 +1,6 @@
 <?php
-
 /**
- * Copyright 1999, 2000, 2001, 2002, 2007 $ThePhpWikiProgrammingTeam
+ * Copyright © 1999, 2000, 2001, 2002, 2007 $ThePhpWikiProgrammingTeam
  *
  * This file is part of PhpWiki.
  *
@@ -18,6 +17,9 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
  */
 
 require_once 'lib/plugin/RecentChanges.php';
@@ -176,7 +178,7 @@ class _PageHistory_HtmlFormatter
             'value' => $rev->getVersion()));
     }
 
-    function pageLink($rev, $link_text = false)
+    function pageLink($rev, $link_text = '')
     {
         $text = fmt("Version %d", $rev->getVersion());
         return _RecentChanges_HtmlFormatter::pageLink($rev, $text);
@@ -360,11 +362,3 @@ class WikiPlugin_PageHistory
         return $this->format($this->getChanges($dbi, $args), $args);
     }
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

@@ -1,0 +1,55 @@
+Date: Fri, 19 Apr 2019 17:28:11 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
+Content-Type: application/x-phpwiki;
+  pagename=Hilfe%2FZufallsSeitePlugin;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
+  charset=UTF-8
+Content-Transfer-Encoding: binary
+
+The **~RandomPage** [[Help:WikiPlugin|plugin]] displays a list of randomly chosen pages or redirects to a random page.
+
+== Benutzung ==
+{{{
+<<RandomPage Argumente>>
+}}}
+
+== Argumente ==
+
+All [[Help:PageList|PageList]] arguments, plus the following ones:
+
+{| class="bordered"
+|-
+! Argument
+! Beschreibung
+! Vorgabe
+|-
+| **numpages**
+| Number of pages to list. Die Anzahl der zufälligen ausgesuchten Seiten ist eine Zahl von 1 bis 20. If greater, 20 will be used.
+| 20
+|-
+| **redirect**
+| Do not display random page link, redirect to random page.
+| empty
+|-
+| **exclude**
+| Pages to exclude from random
+| RandomPage, HomePage, AllPages, RecentChanges, RecentEdits, FullRecentChanges
+|}
+
+== Example ==
+
+{{{
+<<RandomPage numpages=10 >>
+}}}
+
+<<RandomPage numpages=10 >>
+
+== Autor ==
+* [[Help:Reini Urban|Reini Urban]]
+
+== Siehe auch ==
+
+<noinclude>
+----
+[[PhpWikiDokumentation]] [[KategorieWikiPlugin]]
+</noinclude>

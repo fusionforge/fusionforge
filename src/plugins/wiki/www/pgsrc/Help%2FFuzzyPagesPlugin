@@ -1,5 +1,5 @@
-Date: Mon, 29 Jun 2015 12:04:28 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Thu, 13 Oct 2016 15:09:28 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FFuzzyPagesPlugin;
   flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
@@ -13,8 +13,8 @@ the spelling comparison and the metaphone comparison for each page
 title in the database (PHP's metaphone() is an improved soundex
 function).
 
-* http://www.php.net/manual/en/function.similar-text.php
-* http://www.php.net/manual/en/function.metaphone.php
+* https://www.php.net/manual/en/function.similar-text.php
+* https://www.php.net/manual/en/function.metaphone.php
 
 == Usage ==
 {{{

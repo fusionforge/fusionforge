@@ -4,7 +4,7 @@ $action = $request->getArg('action');
 ?>
 
 <?php if ($page->exists() and $revision and $revision->hasDefaultContents()) { ?>
-  <p class="error"><?php echo _("Error:")?>
+  <p class="error"><?php echo _('Error')._(': ')?>
   <?php echo _("This revision of the page does not exist.")?>
   <?php echo Button('browse', _("View the current version."), $page)?>
   </p>
@@ -30,7 +30,7 @@ $action = $request->getArg('action');
 <?php } ?>
 
 <?php if ($curuserprefs->get('pageTrail')) { ?>
-<?plugin PageTrail ?>
+<<PageTrail>>
 <?php } ?>
 
 <?php echo $CONTENT?>

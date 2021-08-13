@@ -1,5 +1,5 @@
-Date: Mon, 29 Jun 2015 12:04:26 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Tue,  9 Apr 2019 11:19:11 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=LikePages;
   flags=PAGE_LOCKED;
@@ -7,8 +7,11 @@ Content-Type: application/x-phpwiki;
 Content-Transfer-Encoding: binary
 
 LinkPages 是頁面名稱開頭或結尾為某字的頁面.
-也可以參閱 Wiki:LikePages 和 MeatBall:LikePages.
+也可以參閱 [[Wiki:LikePages]] 和 [[MeatBall:LikePages]].
 
 ----
 
-<<LikePages >>
+<<LikePages>>
+
+----
+[[CategoryActionPage]]

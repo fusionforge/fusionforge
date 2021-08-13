@@ -18,7 +18,7 @@
 //
 // $Id: Application.php 178289 2005-01-26 09:47:28Z dufuz $
 
-require_once 'Cache.php';
+require_once 'lib/pear/Cache.php';
 
 // Application level variables
 //
@@ -44,7 +44,7 @@ require_once 'Cache.php';
 //
 // $app =& new Cache_Application();
 // $app->register('foo');
-// $app->register('bar', $bar); 
+// $app->register('bar', $bar);
 //
 // $foo = 'Different data';
 //
@@ -53,7 +53,7 @@ require_once 'Cache.php';
 //
 // As with session_register(), the contents of the variable at the *end* of the
 // request is registered and not at the point of registration. Therefore in this
-// example, for the $foo variable, the string 'Different data' is stored and not 
+// example, for the $foo variable, the string 'Different data' is stored and not
 // 'Some data'. The exception to this rule is if you use the second argument to
 // register() as in the second call to it above. This will cause the data supplied
 // in the second argument to be stored and not the contents at the end of the request.
@@ -72,25 +72,22 @@ require_once 'Cache.php';
 
 class Cache_Application extends Cache
 {
-
     var $data;
     var $id;
     var $group;
     var $registered_vars;
 
     /**
-    * Constructor
-    *
     * @param    string  Name of container class
     * @param    array   Array with container class options
     */
-    function Cache_Application($container = 'file', $container_options = array('cache_dir' => '/tmp/', 'filename_prefix' => 'cache_'), $id = 'application_var', $group = 'application_cache')
+    function __construct($container = 'file', $container_options = array('cache_dir' => '/tmp/', 'filename_prefix' => 'cache_'), $id = 'application_var', $group = 'application_cache')
     {
         $this->id    = $id;
         $this->group = $group;
         $this->registered_vars = array();
 
-        $this->Cache($container, $container_options);
+        parent::__construct($container, $container_options);
         $this->data = $this->isCached($this->id, $this->group) ? unserialize($this->get($this->id, $this->group)) : array();
 
         // If register_globals on, global all registered variables

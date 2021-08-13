@@ -78,6 +78,11 @@ menu {
     display: none;
 }
 
+/* Do not print selection box in RecentChanges */
+fieldset.wiki-rc-action {
+    display: none;
+}
+
 /* Print links in black */
 a {
     color: black;

@@ -1,7 +1,6 @@
 <?php
-
-/*
- * Copyright 2002,2004,2005,2006 $ThePhpWikiProgrammingTeam
+/**
+ * Copyright © 2002,2004,2005,2006 $ThePhpWikiProgrammingTeam
  *
  * This file is part of PhpWiki.
  *
@@ -18,6 +17,9 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
  */
 
 require_once 'lib/WikiDB/backend.php';
@@ -29,34 +31,8 @@ class WikiDB_backend_PearDB
 
     function __construct($dbparams)
     {
-        // Find and include PEAR's DB.php. maybe we should force our private version again...
-        // if DB would have exported its version number, it would be easier.
-        @require_once('DB/common.php'); // Either our local pear copy or the system one
-        $name = "escapeSimple";
-        // TODO: apparently some Pear::Db version adds LIMIT 1,0 to getOne(),
-        // which is invalid for "select version()"
-        if (!in_array($name, get_class_methods("DB_common"))) {
-            $finder = new FileFinder;
-            $dir = dirname(__FILE__) . "/../../pear";
-            $finder->_prepend_to_include_path($dir);
-            include_once("$dir/DB/common.php"); // use our version instead.
-            if (!in_array($name, get_class_methods("DB_common"))) {
-                $pearFinder = new PearFileFinder("lib/pear");
-                $pearFinder->includeOnce('DB.php');
-            } else {
-                include_once("$dir/DB.php");
-            }
-        } else {
-            include_once 'DB.php';
-        }
-
-        // Install filter to handle bogus error notices from buggy DB.php's.
-        // TODO: check the Pear_DB version, but how?
-        if (DEBUG) {
-            global $ErrorManager;
-            $ErrorManager->pushErrorHandler(new WikiMethodCb($this, '_pear_notice_filter'));
-            $this->_pearerrhandler = true;
-        }
+        require_once('lib/pear/DB/common.php');
+        require_once('lib/pear/DB.php');
 
         // Open connection to database
         $this->_dsn = $dbparams['dsn'];
@@ -109,8 +85,9 @@ class WikiDB_backend_PearDB
      */
     function close()
     {
-        if (!$this->_dbh)
+        if (!$this->_dbh) {
             return;
+        }
         if ($this->_lock_count) {
             trigger_error("WARNING: database still locked " .
                     '(lock_count = $this->_lock_count)' . "\n<br />",
@@ -187,10 +164,13 @@ class WikiDB_backend_PearDB
         return $result ? $this->_extract_page_data($result) : false;
     }
 
-    public function  _extract_page_data($data)
+    public function _extract_page_data($data)
     {
-        if (empty($data)) return array();
-        elseif (empty($data['pagedata'])) return $data; else {
+        if (empty($data)) {
+            return array();
+        } elseif (empty($data['pagedata'])) {
+            return $data;
+        } else {
             $data = array_merge($data, $this->_unserialize($data['pagedata']));
             unset($data['pagedata']);
             return $data;
@@ -212,7 +192,7 @@ class WikiDB_backend_PearDB
             return;
         }
 
-        $this->lock(array($page_tbl), true);
+        $this->lock(array($page_tbl));
         $data = $this->get_pagedata($pagename);
         if (!$data) {
             $data = array();
@@ -291,7 +271,7 @@ class WikiDB_backend_PearDB
 
         $id = $dbh->getOne($query);
         if (empty($id)) {
-            $this->lock(array($page_tbl), true); // write lock
+            $this->lock(array($page_tbl)); // write lock
             $max_id = $dbh->getOne("SELECT MAX(id) FROM $page_tbl");
             $id = $max_id + 1;
             // requires createSequence and on mysql lock the interim table ->getSequenceName
@@ -343,8 +323,7 @@ class WikiDB_backend_PearDB
      * @param int $version Which version to get
      * @param bool $want_content Do we need content?
      *
-     * @return array hash The version data, or false if specified version does not
-     *              exist.
+     * @return array The version data, or false if specified version does not exist.
      */
     function get_versiondata($pagename, $version, $want_content = false)
     {
@@ -397,7 +376,8 @@ class WikiDB_backend_PearDB
         if (isset($query_result['content']))
             $data['%content'] = $query_result['content'];
         elseif ($query_result['have_content'])
-            $data['%content'] = true; else
+            $data['%content'] = true;
+        else
             $data['%content'] = '';
 
         // FIXME: this is ugly.
@@ -477,7 +457,7 @@ class WikiDB_backend_PearDB
         extract($this->_table_names);
 
         $this->lock();
-        if (($id = $this->_get_pageid($pagename, false))) {
+        if (($id = $this->_get_pageid($pagename))) {
             $dbh->query("DELETE FROM $nonempty_tbl WHERE id=$id");
             $dbh->query("DELETE FROM $recent_tbl   WHERE id=$id");
             $dbh->query("DELETE FROM $version_tbl  WHERE id=$id");
@@ -501,9 +481,11 @@ class WikiDB_backend_PearDB
         return $result;
     }
 
-    /*
-     * Update link table.
-     * on DEBUG: delete old, deleted links from page
+    /**
+     * Set links for page.
+     *
+     * @param string $pagename Page name
+     * @param array  $links    List of page(names) which page links to.
      */
     function set_links($pagename, $links)
     {
@@ -538,7 +520,6 @@ class WikiDB_backend_PearDB
                 $linkid = $this->_get_pageid($linkto, true);
                 if (!$linkid) {
                     echo("No link for $linkto on page $pagename");
-                    //printSimpleTrace(debug_backtrace());
                     trigger_error("No link for $linkto on page $pagename");
                 }
                 assert($linkid);
@@ -550,8 +531,19 @@ class WikiDB_backend_PearDB
         $this->unlock();
     }
 
-    /*
+    /**
      * Find pages which link to or are linked from a page.
+     *
+     * @param string    $pagename       Page name
+     * @param bool      $reversed       True to get backlinks
+     * @param bool      $include_empty  True to get empty pages
+     * @param string    $sortby
+     * @param string    $limit
+     * @param string    $exclude        Pages to exclude
+     * @param bool      $want_relations
+     *
+     * FIXME: array or iterator?
+     * @return object A WikiDB_backend_iterator.
      *
      * TESTME relations: get_links is responsible to add the relation to the pagehash
      * as 'linkrelation' key as pagename. See WikiDB_PageIterator::next
@@ -627,7 +619,9 @@ class WikiDB_backend_PearDB
         $dbh = &$this->_dbh;
         extract($this->_table_names);
         $orderby = $this->sortby($sortby, 'db');
-        if ($orderby) $orderby = ' ORDER BY ' . $orderby;
+        if ($orderby) {
+            $orderby = ' ORDER BY ' . $orderby;
+        }
         if ($exclude) { // array of pagenames
             $exclude = " AND $page_tbl.pagename NOT IN " . $this->_sql_set($exclude);
         } else {
@@ -673,12 +667,10 @@ class WikiDB_backend_PearDB
             // extract from,count from limit
             list($from, $count) = $this->limit($limit);
             $result = $dbh->limitQuery($sql, $from, $count);
-            $options = array('limit_by_db' => 1);
         } else {
             $result = $dbh->query($sql);
-            $options = array('limit_by_db' => 0);
         }
-        return new WikiDB_backend_PearDB_iter($this, $result, $options);
+        return new WikiDB_backend_PearDB_iter($this, $result);
     }
 
     /*
@@ -690,8 +682,9 @@ class WikiDB_backend_PearDB
         $dbh = &$this->_dbh;
         extract($this->_table_names);
         $orderby = $this->sortby($sortby, 'db');
-        if ($orderby) $orderby = ' ORDER BY ' . $orderby;
-
+        if ($orderby) {
+            $orderby = ' ORDER BY ' . $orderby;
+        }
         $searchclass = get_class($this) . "_search";
         // no need to define it everywhere and then fallback. memory!
         if (!class_exists($searchclass))
@@ -775,11 +768,11 @@ class WikiDB_backend_PearDB
         $dbh = &$this->_dbh;
         extract($this->_table_names);
         if ($limit < 0) {
-            $order = "hits ASC";
+            $order = "ASC";
             $limit = -$limit;
             $where = "";
         } else {
-            $order = "hits DESC";
+            $order = "DESC";
             $where = " AND hits > 0";
         }
         $orderby = '';
@@ -787,7 +780,7 @@ class WikiDB_backend_PearDB
             if ($order = $this->sortby($sortby, 'db'))
                 $orderby = " ORDER BY " . $order;
         } else {
-            $orderby = " ORDER BY $order";
+            $orderby = " ORDER BY hits $order";
         }
         $sql = "SELECT "
             . $this->page_tbl_fields
@@ -820,8 +813,9 @@ class WikiDB_backend_PearDB
         extract($this->_table_names);
 
         $pick = array();
-        if ($since)
+        if ($since) {
             $pick[] = "mtime >= $since";
+        }
 
         if ($include_all_revisions) {
             // Include all revisions of each page.
@@ -858,8 +852,9 @@ class WikiDB_backend_PearDB
             $limit = -$limit;
         }
         $where_clause = $join_clause;
-        if ($pick)
+        if ($pick) {
             $where_clause .= " AND " . join(" AND ", $pick);
+        }
         $sql = "SELECT "
             . $this->page_tbl_fields . ", " . $this->version_tbl_fields
             . " FROM $table"
@@ -885,10 +880,12 @@ class WikiDB_backend_PearDB
         if ($orderby = $this->sortby($sortby, 'db', array('pagename', 'wantedfrom')))
             $orderby = 'ORDER BY ' . $orderby;
 
-        if ($exclude_from) // array of pagenames
+        if ($exclude_from) { // array of pagenames
             $exclude_from = " AND pp.pagename NOT IN " . $this->_sql_set($exclude_from);
-        if ($exclude) // array of pagenames
+        }
+        if ($exclude) { // array of pagenames
             $exclude = " AND p.pagename NOT IN " . $this->_sql_set($exclude);
+        }
 
         $sql = "SELECT p.pagename, pp.pagename AS wantedfrom"
             . " FROM $page_tbl p, $link_tbl linked"
@@ -917,17 +914,21 @@ class WikiDB_backend_PearDB
         return substr($s, 0, -1) . ")";
     }
 
-    /*
+    /**
      * Rename page in the database.
+     *
+     * @param string $pagename Current page name
+     * @param string $to       Future page name
      */
+
     function rename_page($pagename, $to)
     {
         $dbh = &$this->_dbh;
         extract($this->_table_names);
 
         $this->lock();
-        if (($id = $this->_get_pageid($pagename, false))) {
-            if ($new = $this->_get_pageid($to, false)) {
+        if (($id = $this->_get_pageid($pagename))) {
+            if ($new = $this->_get_pageid($to)) {
                 // Cludge Alert!
                 // This page does not exist (already verified before), but exists in the page table.
                 // So we delete this page.
@@ -1042,8 +1043,9 @@ class WikiDB_backend_PearDB
      */
     function _serialize($data)
     {
-        if (empty($data))
+        if (empty($data)) {
             return '';
+        }
         assert(is_array($data));
         return serialize($data);
     }
@@ -1063,8 +1065,9 @@ class WikiDB_backend_PearDB
      */
     public function _pear_error_callback($error)
     {
-        if ($this->_is_false_error($error))
+        if ($this->_is_false_error($error)) {
             return;
+        }
 
         $this->_dbh->setErrorHandling(PEAR_ERROR_PRINT); // prevent recursive loops.
         $this->close();
@@ -1124,22 +1127,6 @@ class WikiDB_backend_PearDB
         return str_replace($this->_dsn, $safe_dsn, $message);
     }
 
-    /*
-     * Filter PHP errors notices from PEAR DB code.
-     *
-     * The PEAR DB code which ships with PHP 4.0.6 produces spurious
-     * errors and notices.  This is an error callback (for use with
-     * ErrorManager which will filter out those spurious messages.)
-     * @see _is_false_error, ErrorManager
-     */
-    function _pear_notice_filter($err)
-    {
-        return ($err->isNotice()
-            && preg_match('|DB[/\\\\]common.php$|', $err->errfile)
-            && $err->errline == 126
-            && preg_match('/Undefined offset: +0\b/', $err->errstr));
-    }
-
     /* some variables and functions for DB backend abstraction (action=upgrade) */
     function database()
     {
@@ -1164,28 +1151,6 @@ class WikiDB_backend_PearDB
     function listOfTables()
     {
         return $this->_dbh->getListOf('tables');
-    }
-
-    function listOfFields($database, $table)
-    {
-        if ($this->backendType() == 'mysql') {
-            $fields = array();
-            assert(!empty($database));
-            assert(!empty($table));
-            $result = mysql_list_fields($database, $table, $this->_dbh->connection) or
-                trigger_error(__FILE__ . ':' . __LINE__ . ' ' . mysql_error(), E_USER_WARNING);
-            if (!$result) return array();
-            $columns = mysql_num_fields($result);
-            for ($i = 0; $i < $columns; $i++) {
-                $fields[] = mysql_field_name($result, $i);
-            }
-            mysql_free_result($result);
-            return $fields;
-        } else {
-            // TODO: try ADODB version?
-            trigger_error("Unsupported dbtype and backend. Either switch to ADODB or check it manually.");
-            return false;
-        }
     }
 }
 
@@ -1299,11 +1264,3 @@ class WikiDB_backend_PearDB_search extends WikiDB_backend_search_sql
 {
     // no surrounding quotes because we know it's a string
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

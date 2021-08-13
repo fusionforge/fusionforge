@@ -1,5 +1,5 @@
-Date: Mon, 29 Jun 2015 12:04:28 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Fri, 16 Jul 2021 11:14:49 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FSemanticRelations;
   flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
@@ -31,7 +31,7 @@ Relations (link-types) are defined as link with the following syntax:
 == Attributes ==
 
 Attributes are defined as link to numbers (understandable by
-[GNU Units|http://www.gnu.org/software/units/units.html]) with
+[[https://www.gnu.org/software/units/units.html|GNU Units]]) with
 the following markup syntax:
 
 {{{
@@ -45,20 +45,20 @@ attributes not.
 
 == Example ==
 
-<em>Sample taken from http://wiki.ontoworld.org/index.php/San_Diego</em>
+//Sample taken from [[http://wiki.ontoworld.org/index.php/San_Diego]]//
 
 {{{
-San Diego [is_a::city] located in the southwestern corner of
-[California|located_in::California], the extreme southwestern corner
-of the [United States|country::United States]. It is the county seat
+San Diego [[is_a::city]] located in the southwestern corner of
+[[located_in::California|California]], the extreme southwestern corner
+of the [[country::United States|United States]]. It is the county seat
 of San Diego County. As of the 2000 census, the city had a total population of
-[1,223,400|population:=1,223,400]; as of 2005, the California Department
+[[population:=1,223,400|1,223,400]]; as of 2005, the California Department
 of Finance estimated the city to have 1,305,736 residents. The city
 is the second-largest in California and the seventh-largest in the
 United States and is noted for its temperate climate and many beaches.
 
 According to the United States Census Bureau, the city has a total
-area of [963.6 km²|area:=963.6 km^2] (372.0 mi²). 840.0 km²
+area of [[area:=963.6 km^2|963.6 km²]] (372.0 mi²). 840.0 km²
 (324.3 mi²) of it is land and 123.5 km² (47.7 mi²) of it is water.
 The total area is 12.82% water.
 

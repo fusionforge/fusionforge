@@ -1,5 +1,31 @@
 <?php
 /**
+ * Copyright © 2002 Carsten Klapp
+ * Copyright © 2002-2003 Jeff Dairiki
+ * Copyright © 2002,2004-2008,2010 Reini Urban
+ * Copyright © 2010 Marc-Etienne Vargenau, Alcatel-Lucent
+ *
+ * This file is part of PhpWiki.
+ *
+ * PhpWiki is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * PhpWiki is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
+ */
+
+/**
  * Code for writing XML.
  * @package Markup
  * @author: Jeff Dairiki,
@@ -237,7 +263,7 @@ class XmlElement extends XmlContent
         $this->setContent($args);
     }
 
-    /** Methods only needed for XmlParser,
+    /** Methods only needed for PhpWikiXmlParser,
      *  to be fully compatible to perl Html::Element
      */
     // doesn't yet work with php5 as __destruct()
@@ -263,7 +289,7 @@ class XmlElement extends XmlContent
         return !empty($this->_children);
     }
 
-    /* End XmlParser Methods
+    /* End PhpWikiXmlParser Methods
      */
 
     function getTag()
@@ -461,7 +487,7 @@ class XmlElement extends XmlContent
 
 class RawXml
 {
-    function RawXml($xml_text)
+    function __construct($xml_text)
     {
         $this->_xml = $xml_text;
     }
@@ -498,7 +524,7 @@ class FormattedText
     public $_fs;
     public $_args;
 
-    function FormattedText($fs /* , ... */)
+    function __construct($fs /* , ... */)
     {
         if ($fs !== false) {
             $this->_init(func_get_args());
@@ -670,11 +696,3 @@ function fmt($fs /* , ... */)
     $s->_init($args);
     return $s;
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

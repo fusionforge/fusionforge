@@ -1,5 +1,5 @@
-Date: Mon, 29 Jun 2015 12:04:28 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Mon, 28 Dec 2020 19:46:14 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FImages;
   flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
@@ -17,7 +17,7 @@ First, image files need to be uploaded in the wiki. For that purpose, you will u
 
 Once the image is uploaded, the easiest way to insert it is to use the toolbar.
 
-Click on the {{/themes/default/images/ed_image.png}} icon and you will be shown a list
+Click on the {{/themes/default/images/ed_image.png|Insert Image or Video}} icon and you will be shown a list
 of available images.
 
 Select an image and click //Insert//. The image will be inserted without options or alternative text.
@@ -92,18 +92,17 @@ You can also use "external" images by providing a URL.
 
 In that case, you simply put the URL between double brackets or double curly brackets:
 {{{
-[[http://phpwiki.svn.sourceforge.net/viewvc/phpwiki/trunk/themes/default/images/poweredby_phpwiki_51x31.png]]
+[[http://phpwiki.demo.free.fr/themes/default/images/poweredby_phpwiki_51x31.png]]
 }}}
 or
 {{{
-{{http://phpwiki.svn.sourceforge.net/viewvc/phpwiki/trunk/themes/default/images/poweredby_phpwiki_51x31.png}}
+{{http://phpwiki.demo.free.fr/themes/default/images/poweredby_phpwiki_51x31.png}}
 }}}
 will give:
 
-[[http://phpwiki.svn.sourceforge.net/viewvc/phpwiki/trunk/themes/default/images/poweredby_phpwiki_51x31.png]]
+[[http://phpwiki.demo.free.fr/themes/default/images/poweredby_phpwiki_51x31.png]]
 
 == See Also ==
-* [[Help:Adobe Flash]]
 * [[Help:VideoPlugin]]
 * [[Help:Wikicreole]]
 

@@ -1,27 +1,27 @@
-Date: Mon, 29 Jun 2015 12:04:22 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Thu, 24 Dec 2020 18:24:26 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=Aiuto%2FMagicPhpWikiURLs;
-  flags=PAGE_LOCKED;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
   charset=UTF-8
 Content-Transfer-Encoding: binary
 
-== About phpwiki: URLs
+== About //phpwiki:// URLs ==
 
 A special type of URL is available for making links to perform
-administrative and other special functions in PhpWiki.  Here is a
+administrative and other special functions in ~PhpWiki.  Here is a
 brief description of how they work.
 
-The basic syntax of a phpwiki: URL is
-  **phpwiki:**''pagename''**?**''query-args''
+The basic syntax of a //phpwiki:// URL is
 
-If ''pagename'' is omitted it defaults to the current page.
+**phpwiki:**//pagename//**?**//query-args//
 
-''Query-args'' should be a set of parameters in standard
-HTTP GET format.
+If //pagename// is omitted it defaults to the current page.
 
-The "action=''x''" parameter should almost always be given.  It can be one of
-**browse**, **info**, **diff**, **search**, **edit**,
+//Query-args// should be a set of parameters in standard HTTP GET format.
+
+The "action=//x//" parameter should almost always be given.  It can be one of
+**browse**, **diff**, **edit**, **viewsource**,
 **zip**, **dumpserial**, **loadserial**,
 **remove**, **lock**, **unlock**,
 **login**, **logout**, **setprefs** or **save**.
@@ -29,63 +29,80 @@ The default action is **browse**.
 
 Some of the actions accept other parameters.
 
-;**info**: Accepts **showpagesource**.
-;**search**: Accepts **searchterm**, and **searchtype**.
-;**edit**: Accepts **version**.
-;**remove**: Accepts **verify**.
-;**save**: Accepts **editversion**, **minor_edit**, and  **content**.
-;**setprefs**: Accepts **edit_area_width**, **edit_area_height**.
+| **FullTextSearch**, **TitleSearch** | Accepts **s**=search term, and **size**=input size.
+| **edit**                            | Accepts **version**.
+| **remove**                          | Accepts **verify**.
+| **save**                            | Accepts **editversion**, **minor_edit** and  **content**.
+| **setprefs**                        | Accepts **edit_area_width** and **edit_area_height**.
 
-
-=== Writing Magic Links in Wiki Pages
+=== Writing Magic Links in Wiki Pages ===
 
 A magic link looks like:
 
-  **[[** ''text'' **|** ''phpwiki-url'' **]**
+**~[~[** //text// **|** //phpwiki-url// **]]**
 
-The "''text'' **|**" is optional but usually recommended.
-If given it will provide the label for the link.
+The "//text// **|**" is optional but usually recommended.  If given it
+will provide the label for the link.
 
-The ''phpwiki-url'' is a **phpwiki:** URL as described above.
+The //phpwiki-url// is a //phpwiki:// URL as described above.
 
-==== Some examples
+==== Some examples ====
 
-  [[ Edit the !SandBox | phpwiki:!SandBox?action=edit ]
-will generate a link which will take you directly to editing the SandBox, like so:
-[ Edit the SandBox | phpwiki:SandBox?action=edit ].
+{{{
+[[phpwiki:SandBox?action=edit|Edit the SandBox]]
+}}}
+will generate a link which will take you directly to editing the
+SandBox, like so: [[phpwiki:SandBox?action=edit|Edit the SandBox]].
 
-Other possibilites:
-* [ Diff the SandBox | phpwiki:SandBox?action=diff ],
-* [ Lock the HomePage | phpwiki:HomePage?action=lock ],
-* [ Get a Full Zip Dump | phpwiki:?action=zip&include=all ],
-* [ Page titles containing 'wiki' | phpwiki:TitleSearch?s=wiki ],
+Other possibilities:
+* [[phpwiki:SandBox?action=diff|Diff the SandBox]],
+* [[phpwiki:HomePage?action=lock|Lock the HomePage]],
+* [[phpwiki:?action=zip&include=all|Get a Full Zip Dump]],
+* Search for [[phpwiki:?action=TitleSearch&s=wiki|Page titles containing 'wiki']]
 
-=== Writing Magic Forms in Wiki Pages
+=== Writing Magic Forms in Wiki Pages ===
 
-''**Note**: Magic forms are on their way out, I think.  They are being superceded by <''''?plugin-form>s.''
+**//Note://** //The old syntax for Magic forms is no longer supported.
+They are superseded by// ##<?plugin-form>##.
 
-If one of the ''query-args'' has a value like
-  ''arg''**=**''opt-width''**(**''opt-dflt-val''**)**
-the link will be rendered as a form, rather than as an anchor.
+If the plugin is called using **<?plugin-form** instead of **<?plugin**
+and the plugin supports searching, then it will be rendered as a form.
 
-''Opt-width'', if given specifies the size of the input area, while
-''opt-dflt-val'' specifies the default value for the input.
-If ''text'' is given in the link, then a submit-button with that
-label will be included in the form, otherwise the submit button
-will be omitted.
+| //size// | If given, specifies the size of the input area.
+| //s//    | Specifies the default value for the input.
 
-Examples:
+==== Examples ====
 
-  [[ Full Search | phpwiki:FullTextSearch?s=() ]
+A search plugin invoked with **<?plugin** instead of **<?plugin-form**
+simply inserts the search results of the plugin:
+
+{{{
+<<TitleSearch s=wiki noheader=true limit=10>>
+}}}
+
+Search results for Page titles containing 'wiki':
+
+<<TitleSearch s=wiki noheader=true limit=10>>
+
+{{{
+<?plugin-form FullTextSearch ?>
+}}}
+
 gives
-[ Full Search | phpwiki:FullTextSearch?s=() ]
+
+<?plugin-form FullTextSearch ?>
 
 While
-  [[ phpwiki:TitleSearch?s=12() ]
-yields
-[ phpwiki:TitleSearch?s=12() ]
 
-Other examples:
-[ Browse Page | phpwiki:?action=browse&pagename=() ]
+{{{
+<?plugin-form TitleSearch formsize=12 ?>
+}}}
+
+yields
+
+<?plugin-form TitleSearch formsize=12 ?>
+
+<noinclude>
 ----
-PhpWikiDocumentation
+[[PhpWikiDocumentation]]
+</noinclude>

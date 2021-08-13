@@ -1,0 +1,43 @@
+Date: Mon, 30 Mar 2020 15:49:22 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
+Content-Type: application/x-phpwiki;
+  pagename=Aide%2FGreffonCommenter;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
+  charset=UTF-8
+Content-Transfer-Encoding: binary
+
+Le [[Aide:GreffonWiki|greffon]] **Commenter** (//Comment//) vous permet de cacher une partie d'une page wiki sans avoir à effacer le texte.
+Ce genre de commentaire sera seulement visible lors de la modification de la source de la page.
+
+== Utilisation ==
+
+Placez simplement le texte à commenter entre {{{<<Comment}}} et {{{>>}}} :
+
+{{{
+<<Comment
+
+== Une section cachée ==
+
+Ce texte ne sera pas visible dans la page HTML générée mais il sera encore
+visible en éditant la source.
+
+>>
+}}}
+
+== Auteur ==
+* [[mailto:gimpster@gimpster.com|Martin Geisler]]
+
+<<Comment
+
+== Logique « floue » ==
+Theorème : un chat a neuf queues.
+Démonstration :
+    Aucun chat n'a huit queues. Un chat a une queue de plus qu'aucun chat.
+    Par conséquent, un chat a neuf queues.
+
+>>
+
+<noinclude>
+----
+[[DocumentationDePhpWiki]] [[CatégorieGreffonWiki]]
+</noinclude>

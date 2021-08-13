@@ -1,8 +1,7 @@
 <?php
-
-/*
- * Copyright 2007 Reini Urban
- * Copyright 2009 Marc-Etienne Vargenau, Alcatel-Lucent
+/**
+ * Copyright © 2007 Reini Urban
+ * Copyright © 2009 Marc-Etienne Vargenau, Alcatel-Lucent
  *
  * This file is part of PhpWiki.
  *
@@ -19,6 +18,9 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
  */
 
 require_once 'lib/PageList.php';
@@ -87,7 +89,7 @@ class WikiPlugin_SemanticSearch
             ));
     }
 
-    function showForm(&$dbi, &$request, $args)
+    function showForm(&$dbi, &$request, $args, $allrelations = array())
     {
         $action = $request->getPostURL();
         $hiddenfield = HiddenInputs($request->getArgs(), '',
@@ -122,7 +124,7 @@ class WikiPlugin_SemanticSearch
             'autocomplete_matchsubstring' => 'true',
             'autocomplete_list' => 'xmlrpc:wiki.titleSearch ^[S] 4'
         ), '');
-        $relsubmit = Button('submit:semsearch[relations]', _("Relations"), false);
+        $relsubmit = Button('submit:semsearch[relations]', _("Relations"));
         // just testing some dhtml... not yet done
         $enhancements = HTML();
         $nbsp = HTML::raw('&nbsp;');
@@ -212,7 +214,7 @@ class WikiPlugin_SemanticSearch
                 'title' => _("Add an OR query")));
         if (DEBUG)
             $enhancements = HTML::span($andbutton, $nbsp, $orbutton);
-        $attsubmit = Button('submit:semsearch[attributes]', _("Attributes"), false);
+        $attsubmit = Button('submit:semsearch[attributes]', _("Attributes"));
         $instructions = HTML::span(_("Search in pages for an attribute with that numeric value."), "\n");
         if (DEBUG)
             $instructions->pushContent
@@ -292,6 +294,31 @@ class WikiPlugin_SemanticSearch
                 , "\n"
                 , fmt("See %s", WikiLink(_("Help").":"._("SemanticRelations")))));
         extract($args);
+
+        if (($case_exact == '0') || ($case_exact == 'false')) {
+            $case_exact = false;
+        } elseif (($case_exact == '1') || ($case_exact == 'true')) {
+            $case_exact = true;
+        } else {
+            return $this->error(sprintf(_("Argument '%s' must be a boolean"), "case_exact"));
+        }
+
+        if (($noform == '0') || ($noform == 'false')) {
+            $noform = false;
+        } elseif (($noform == '1') || ($noform == 'true')) {
+            $noform = true;
+        } else {
+            return $this->error(sprintf(_("Argument '%s' must be a boolean"), "noform"));
+        }
+
+        if (($noheader == '0') || ($noheader == 'false')) {
+            $noheader = false;
+        } elseif (($noheader == '1') || ($noheader == 'true')) {
+            $noheader = true;
+        } else {
+            return $this->error(sprintf(_("Argument '%s' must be a boolean"), "noheader"));
+        }
+
         // for convenience and harmony we allow GET requests also.
         if (!$request->isPost()) {
             if ($relation or $attribute) // check for good GET request
@@ -436,7 +463,7 @@ class WikiPlugin_SemanticSearch
 class _PageList_Column_SemanticSearch_relation
     extends _PageList_Column
 {
-    function _PageList_Column_SemanticSearch_relation($field, $heading, &$pagelist)
+    function __construct($field, $heading, &$pagelist)
     {
         $this->_field = $field;
         $this->_heading = $heading;
@@ -445,7 +472,7 @@ class _PageList_Column_SemanticSearch_relation
         $this->_pagelist =& $pagelist;
     }
 
-    function _getValue($page, $revision_handle)
+    function _getValue($page_handle, $revision_handle)
     {
         $link = $this->_pagelist->_links[$this->current_row];
         return WikiLink($link['linkname'], 'if_known');
@@ -455,7 +482,7 @@ class _PageList_Column_SemanticSearch_relation
 class _PageList_Column_SemanticSearch_link
     extends _PageList_Column_SemanticSearch_relation
 {
-    function _getValue($page, $revision_handle)
+    function _getValue($page_handle, $revision_handle)
     {
         $link = $this->_pagelist->_links[$this->current_row];
         if ($this->_field != 'value')
@@ -464,11 +491,3 @@ class _PageList_Column_SemanticSearch_link
             return $link['linkvalue'];
     }
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

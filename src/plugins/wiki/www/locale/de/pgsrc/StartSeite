@@ -1,16 +1,17 @@
-Date: Mon, 29 Jun 2015 12:04:27 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Sat, 26 Dec 2020 12:40:06 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=StartSeite;
   flags="";
   charset=UTF-8
 Content-Transfer-Encoding: binary
 
-* Was ist ein WikiWikiWeb? Eine kurze Beschreibung dieser Anwendung.
-* Lerne WieManWikiBenutzt und wie mann SeitenErzeugen kann.
-* Die SandKiste ist zum Spielen und zum Experimentieren.
+* Was ist ein [[Hilfe:WikiWikiWeb|WikiWikiWeb]]? Eine kurze Beschreibung dieser Anwendung.
+* Lerne [[Hilfe:WieManWikiBenutzt|WieManWikiBenutzt]] und wie mann SeitenErzeugen kann.
+* Die [[SandKiste]] ist zum Spielen und zum Experimentieren.
 * Bitte trage dich im GästeBuch ein.
-* Die letzten Änderungen und neue Seiten findet man unter NeuesteÄnderungen.
-* Eine Liste der [MeistBesucht]en Seiten.
-* [[ReleaseNotes]] (in Englisch)
-* Dieses Wiki wird verwaltet unter PhpWikiSystemverwalten.
+* Die letzten Änderungen und neue Seiten findet man unter [[NeuesteÄnderungen]].
+* Eine Liste der [[MeistBesucht]]en Seiten.
+* [[ReleaseNotes]] (in Englisch) und [[RecentReleases]].
+* Dieses Wiki wird verwaltet unter [[PhpWikiSystemverwalten]].
+* Mehr [[:PhpWikiDokumentation]] sehen.

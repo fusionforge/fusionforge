@@ -8,20 +8,18 @@ $ADODB_INCLUDED_CSV = 1;
 
 /*
 
-  V5.20dev  ??-???-2014  (c) 2000-2014 John Lim (jlim#natsoft.com). All rights reserved.
+  @version   v5.20.19  13-Dec-2020
+  @copyright (c) 2000-2013 John Lim (jlim#natsoft.com). All rights reserved.
+  @copyright (c) 2014      Damien Regad, Mark Newnham and the ADOdb community
   Released under both BSD license and Lesser GPL library license.
   Whenever there is any discrepancy between the two licenses,
   the BSD license will take precedence. See License.txt.
   Set tabs to 4 for best viewing.
 
-  Latest version is available at http://adodb.sourceforge.net
+  Latest version is available at http://adodb.org/
 
   Library for CSV serialization. This is used by the csv/proxy driver and is the
   CacheExecute() serialization format.
-
-  ==== NOTE ====
-  Format documented at http://php.weblogs.com/ADODB_CSV
-  ==============
 */
 
 	/**
@@ -266,7 +264,7 @@ $ADODB_INCLUDED_CSV = 1;
 	*/
 	function adodb_write_file($filename, $contents,$debug=false)
 	{
-	# http://www.php.net/bugs.php?id=9203 Bug that flock fails on Windows
+	# https://www.php.net/bugs.php?id=9203 Bug that flock fails on Windows
 	# So to simulate locking, we assume that rename is an atomic operation.
 	# First we delete $filename, then we create a $tempfile write to it and
 	# rename to the desired $filename. If the rename works, then we successfully
@@ -292,7 +290,7 @@ $ADODB_INCLUDED_CSV = 1;
 				// the tricky moment
 				@unlink($filename);
 				if (!@rename($tmpname,$filename)) {
-					unlink($tmpname);
+					@unlink($tmpname);
 					$ok = 0;
 				}
 				if (!$ok) {

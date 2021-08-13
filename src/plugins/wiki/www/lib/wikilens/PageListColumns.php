@@ -1,7 +1,7 @@
 <?php
-
-/*
- * Copyright 2004 Mike Cassano
+/**
+ * Copyright © 2004 Mike Cassano
+ * Copyright © 2004-2005, 2008-2014 $ThePhpWikiProgrammingTeam
  *
  * This file is part of PhpWiki.
  *
@@ -18,6 +18,9 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
  */
 
 /**
@@ -60,7 +63,7 @@ class _PageList_Column_coagreement extends _PageList_Column_custom
     function __construct($params)
     {
         $this->_pagelist =& $params[3];
-        $this->_PageList_Column($params[0], $params[1], $params[2]);
+        _PageList_Column::__construct($params[0], $params[1], $params[2]);
         $this->_selectedBuddies = $this->_pagelist->getOption('selectedBuddies');
     }
 
@@ -93,7 +96,7 @@ class _PageList_Column_minmisery extends _PageList_Column_custom
     function __construct($params)
     {
         $this->_pagelist =& $params[3];
-        $this->_PageList_Column($params[0], $params[1], $params[2]);
+        _PageList_Column::__construct($params[0], $params[1], $params[2]);
         $this->_selectedBuddies = $this->_pagelist->getOption('selectedBuddies');
     }
 
@@ -117,7 +120,7 @@ class _PageList_Column_averagerating extends _PageList_Column_custom
     function __construct($params)
     {
         $this->_pagelist =& $params[3];
-        $this->_PageList_Column($params[0], $params[1], $params[2]);
+        _PageList_Column::__construct($params[0], $params[1], $params[2]);
         $this->_selectedBuddies = $this->_pagelist->getOption('selectedBuddies');
     }
 
@@ -159,7 +162,7 @@ class _PageList_Column_ratingvalue extends _PageList_Column
                 $this->_user =& RatingsUserFactory::getUser($GLOBALS['request']->_user->_userid);
             }
         }
-        $this->_PageList_Column($params[0], $params[1], $params[2]);
+        parent::__construct($params[0], $params[1], $params[2]);
         $this->_dimension = $this->_pagelist->getOption('dimension');
         if (!$this->_dimension) $this->_dimension = 0;
     }
@@ -230,7 +233,7 @@ class _PageList_Column_ratingwidget extends _PageList_Column_custom
     function __construct($params)
     {
         $this->_pagelist =& $params[3];
-        $this->_PageList_Column($params[0], $params[1], $params[2]);
+        _PageList_Column::__construct($params[0], $params[1], $params[2]);
         $this->_dimension = $this->_pagelist->getOption('dimension');
         if (!$this->_dimension) $this->_dimension = 0;
     }
@@ -287,9 +290,8 @@ class _PageList_Column_prediction extends _PageList_Column
         $this->_active_ratings_user =& RatingsUserFactory::getUser($active_user->getId());
 
         $this->_pagelist =& $params[3];
-        $this->_PageList_Column($params[0], $params[1], $params[2]);
+        parent::__construct($params[0], $params[1], $params[2]);
         $this->_dimension = $this->_pagelist->getOption('dimension');
-        ;
         if (!$this->_dimension) $this->_dimension = 0;
         $this->_users = $this->_pagelist->getOption('users');
     }
@@ -342,7 +344,7 @@ class _PageList_Column_top3recs extends _PageList_Column_custom
         // No, I don't know exactly why, but this needs to be a reference for
         // the memoization in pearson_similarity and mean_rating to work
         $this->_active_ratings_user = new RatingsUser($active_user->getId());
-        $this->_PageList_Column($params[0], $params[1], $params[2]);
+        _PageList_Column::__construct($params[0], $params[1], $params[2]);
 
         if (!empty($params[3])) {
             $this->_pagelist =& $params[3];
@@ -374,8 +376,8 @@ class _PageList_Column_top3recs extends _PageList_Column_custom
             $numToShow = count($recs);
         }
         $html = HTML();
-        while ((list($key, $val) = each($recs)) && $counter < $numToShow) {
-            if ($val < 3) {
+        foreach ($recs as $key => $val) {
+            if (($counter >= $numToShow) || ($val < 3)) {
                 break;
             }
             if ($counter > 0) {
@@ -389,7 +391,6 @@ class _PageList_Column_top3recs extends _PageList_Column_custom
             $html->pushContent(_("None"));
         }
 
-        //return $top3list;
         return $html;
     }
 }
@@ -424,11 +425,3 @@ $WikiTheme->addPageListColumn
       => array('_PageList_Column_prediction','custom:prediction',
                 _("Prediction"), false),*/
 ));
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

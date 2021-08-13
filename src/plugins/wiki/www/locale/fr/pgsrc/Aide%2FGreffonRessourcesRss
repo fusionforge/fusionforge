@@ -1,0 +1,58 @@
+Date: Tue,  3 Sep 2019 18:01:13 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
+Content-Type: application/x-phpwiki;
+  pagename=Aide%2FGreffonRessourcesRss;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
+  charset=UTF-8
+Content-Transfer-Encoding: binary
+
+Le [[Aide:GreffonWiki|greffon]] **~RessourcesRss** (//RssFeed//) est un greffon pour afficher des ressources RSS.
+
+== Utilisation ==
+
+{{{
+<<RssFeed url=http://somesite.tld/linktofeed.rss>>
+}}}
+
+== Arguments ==
+
+{| class="bordered"
+|-
+! Argument
+! Description
+! Valeur par défaut
+|-
+| **url**
+| URL de la source RSS
+| (vide)
+|-
+| **feed**
+| Nom de la source RSS
+| (vide)
+|-
+| **description**
+| Description de la source RSS
+| (vide)
+|-
+| **maxitem**
+| Nombre maximum d'entrées (0 = illimitée)
+| 0
+|-
+| **titleonly**
+| If //true//, do not display item body (boolean)
+| false
+|}
+
+== Exemple ==
+
+~PhpWikiRss feed for [[PhpWiki:RecentChanges]]
+
+{{{
+<<RssFeed feed=PhpWikiRss description="PhpWiki RecentChanges"
+          url=http://phpwiki.demo.free.fr/index.php/RecentChanges?format=rss>>
+}}}
+
+<noinclude>
+----
+[[DocumentationDePhpWiki]] [[CatégorieGreffonWiki]]
+</noinclude>

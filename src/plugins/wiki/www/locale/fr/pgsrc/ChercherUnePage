@@ -1,18 +1,20 @@
-Date: Mon, 29 Jun 2015 12:04:23 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Tue,  3 Sep 2019 18:01:13 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=ChercherUnePage;
   flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
   charset=UTF-8
 Content-Transfer-Encoding: binary
 
-Voici quelques bons points de départ pour la navigation.
+Voici quelques bons points de départ pour naviguer.
 
-* [[Aide:CommentUtiliserUnWiki|CommentUtiliserUnWiki]] vous donne quelques informations rapides sur le marquage Wiki.
-* Les [[DernièresModifs]] sont enregistrées automatiquement.
-* DétailsTechniques sur la navigation et l'édition sur ce serveur.
+* [[Aide:CommentUtiliserUnWiki|CommentUtiliserUnWiki]] vous donne un aperçu rapide du balisage wiki.
+* Les [[DernièresModifs]] enregistrées automatiquement.
+* [[Aide:DétailsTechniques|DétailsTechniques]] sur la façon de naviguer et de modifier sur ce serveur.
 
-Voici une recherche sur les titres. Essayez quelque chose comme ''wiki'' ou ''sandwich''.
+== Title Search ==
+
+Here's a title search. Try something like ##wiki## or ##sandwich##.
 
 <<WikiFormRich action=TitleSearch method=GET nobr=1 class=wikiaction
   editbox[] name=s text=""
@@ -20,8 +22,10 @@ Voici une recherche sur les titres. Essayez quelque chose comme ''wiki'' ou ''sa
   checkbox[] name=case_exact
   pulldown[] name=regex value="auto,none,glob,posix,pcre,sql">>
 
-Utilisez ce qui suit pour une recherche en texte intégral. Ceci prend quelques secondes.
-Les résultats montreront toutes les lignes de chaque page contenant une correspondance.
+== Full Text Search ==
+
+Use the following for a full text search.
+The results will show all lines on a given page which contain a match.
 
 <<WikiFormRich action=FullTextSearch method=GET nobr=1 class=wikiaction
   editbox[] name=s text=""
@@ -29,18 +33,19 @@ Les résultats montreront toutes les lignes de chaque page contenant une corresp
   checkbox[] name=case_exact
   pulldown[] name=regex value="auto,none,glob,posix,pcre,sql">>
 
-Dans une recherche !PagesFloues les titres de toutes les pages sont examinés pour trouver
-ceux qui s'épellent ou sonnent de façon similaire (en anglais).
+== Fuzzy Search ==
 
-<?plugin-form FuzzyPages ?>
+In a fuzzy pages search the titles of all pages are examined to find
+those which are similarly spelled or similar sounding (English).
+
+<<WikiFormRich action=FuzzyPages method=GET nobr=1 class=wikiaction
+  editbox[] name=s text=""
+  submit[]
+  checkbox[] name=case_exact>>
 
 ------
-== Trucs ==
 
-* Séparez les mots par des espaces. Tous les mots doivent correspondre (c'est le ET logique)%%%
-* Pour exclure un mot, faites-le précéder d'un '-'.%%%
-Exemple : 'wiki text -php' recherche toutes les pages contenant les mots 'wiki'
-**et** 'text', mais ne contenant **pas** le mot 'php'.
+== Astuces ==
 
 * Separate words with a space. All words have to match as substrings.
 * '##OR##', grouping with parenthesis, string-quoting and some glob-style wildcard characters are also supported.
@@ -53,7 +58,7 @@ Exemple : 'wiki text -php' recherche toutes les pages contenant les mots 'wiki'
 * Use //regex=sql// to match using SQL-style wildcards '##%##' and '##_##'.
 * Use //regex=none// to match any wildcards verbatim.
 
-=== Example ===
+=== Exemple ===
 * '##wiki text -php##' looks for all pages containing the words '##wiki##' and '##text##', but not containing the word '##php##'.
 
 ----

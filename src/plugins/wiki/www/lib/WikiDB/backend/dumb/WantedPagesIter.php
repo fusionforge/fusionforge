@@ -1,14 +1,38 @@
 <?php
 /**
+ * Copyright © 2004,2007 Reini Urban
+ *
+ * This file is part of PhpWiki.
+ *
+ * PhpWiki is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * PhpWiki is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
+ */
+
+/**
  * This iterator will work with any WikiDB_backend
  * which has a working get_links(,'links_from') method.
  *
  * This is mostly here for testing, 'cause it's slow,slow,slow.
  */
+
 class WikiDB_backend_dumb_WantedPagesIter
     extends WikiDB_backend_iterator
 {
-    function __construct(&$backend, &$all_pages, $exclude = '', $sortby = '', $limit = '')
+    function __construct($backend, $all_pages, $exclude = '', $sortby = '', $limit = '')
     {
         $this->_allpages = $all_pages;
         $this->_allpages_array = $all_pages->asArray();
@@ -65,11 +89,3 @@ class WikiDB_backend_dumb_WantedPagesIter
         unset($this->_backend);
     }
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

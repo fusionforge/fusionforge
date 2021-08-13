@@ -1,7 +1,6 @@
 <?php
-
-/*
- * Copyright (C) 2003 $ThePhpWikiProgrammingTeam
+/**
+ * Copyright © 2003 $ThePhpWikiProgrammingTeam
  *
  * This file is part of PhpWiki.
  *
@@ -18,6 +17,9 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
  */
 
 /**
@@ -113,19 +115,19 @@ class WikiPlugin_PageDump
             ob_end_clean(); // clean up after hijacking $request
             //while (@ob_end_flush()); //debugging
             $filename = FilenameForPage($page);
-            Header("Content-disposition: attachment; filename=\""
+            header("Content-disposition: attachment; filename=\""
                 . $filename . "\"");
             // We generate 3 Content-Type headers! first in loadsave,
             // then here and the mimified string $mailified also has it!
             // This one is correct and overwrites the others.
-            Header("Content-Type: application/octet-stream; name=\""
+            header("Content-Type: application/octet-stream; name=\""
                 . $filename . "\"; charset=\"" . 'UTF-8'
                 . "\"");
             $request->checkValidators();
             // let $request provide last modified & etag
-            Header("Content-Id: <" . $this->MessageId . ">");
+            header("Content-Id: <" . $this->MessageId . ">");
             // be nice to http keepalive~s
-            Header("Content-Length: " . strlen($mailified));
+            header("Content-Length: " . strlen($mailified));
 
             // Here comes our prepared mime file
             echo $mailified;
@@ -291,11 +293,3 @@ class WikiPlugin_PageDump
         $mailified = implode("\n", $return);
     }
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

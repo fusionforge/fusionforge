@@ -1,5 +1,29 @@
 <?php
 /**
+ * Copyright © 2001-2002 Jeff Dairiki
+ * Copyright © 2004-2009 Reini Urban
+ *
+ * This file is part of PhpWiki.
+ *
+ * PhpWiki is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * PhpWiki is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
+ */
+
+/**
  * A text search query, converting queries to PCRE and SQL matchers.
  *
  * This represents an enhanced "Google-like" text search query:
@@ -107,7 +131,7 @@ class TextSearchQuery
         $this->_regex_modifier = ($case_exact ? '' : 'i') . 'sS';
         $this->_case_exact = $case_exact;
         if ($regex != 'pcre') {
-            $parser = new TextSearchQuery_Parser;
+            $parser = new TextSearchQuery_Parser();
             $this->_tree = $parser->parse($search_query, $case_exact, $this->_regex);
             $this->optimize(); // broken under certain circumstances: "word -word -word"
             if (defined("FULLTEXTSEARCH_STOPLIST"))
@@ -367,7 +391,7 @@ class NumericSearchQuery
      * @param $placeholders array or string  All placeholders in the query must be defined
      *     here, and will be replaced by the matcher.
      */
-    public function NumericSearchQuery($search_query, $placeholders)
+    function __construct($search_query, $placeholders)
     {
         // added some basic security checks against user input
         $this->_query = $search_query;
@@ -549,11 +573,6 @@ class NumericSearchQuery
             return false;
         $search = $this->workquery;
         $result = false;
-        //if (DEBUG & _DEBUG_VERBOSE)
-        //    trigger_error("\$result = (boolean)($search);", E_USER_NOTICE);
-        // We might have a numerical problem:
-        // php-4.2.2 eval'ed as module: "9.636e+08 > 1000" false;
-        // php-5.1.2 cgi true, 4.2.2 cgi true
         eval("\$result = (boolean)($search);");
         if ($result and is_array($p)) {
             return $this->bound();
@@ -802,7 +821,7 @@ class TextSearchQuery_node_not
     public $op = "NOT";
     public $_op = TSQ_TOK_NOT;
 
-    function TextSearchQuery_node_not($leaf)
+    function __construct($leaf)
     {
         $this->leaves = array($leaf);
     }
@@ -1141,8 +1160,7 @@ class TextSearchQuery_Parser
 
 class TextSearchQuery_Lexer
 {
-    function TextSearchQuery_Lexer($query_str, $case_exact = false,
-                                   $regex = TSQ_REGEX_AUTO)
+    function __construct($query_str, $case_exact = false, $regex = TSQ_REGEX_AUTO)
     {
         $this->tokens = $this->tokenize($query_str, $case_exact, $regex);
         $this->query_str = $query_str;
@@ -1276,11 +1294,3 @@ class TextSearchQuery_Lexer
         return $val;
     }
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

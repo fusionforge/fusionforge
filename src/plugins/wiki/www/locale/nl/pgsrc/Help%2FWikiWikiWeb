@@ -1,26 +1,32 @@
-Date: Mon, 29 Jun 2015 12:04:25 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Fri, 12 Apr 2019 10:36:59 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FWikiWikiWeb;
-  flags="";
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
   charset=UTF-8
 Content-Transfer-Encoding: binary
 
-Een WikiWikiWeb is een plaats waar iedereen kan samenwerken aan de inhoud van
+Een **~WikiWikiWeb** is een plaats waar iedereen kan samenwerken aan de inhoud van
 het web.  De bekendste en meest gebruikte Wiki is de Portland Pattern
 Repository op [[http://c2.com/cgi-bin/wiki?WikiWikiWeb]].
 
 Met name deze uitspraken vond ik relevant:
 
-//Maak het Verandertekst formulier eenvoudig en de ZoekPagina snel.//
+//Maak het [[Help:VeranderTekst|VeranderTekst]] formulier eenvoudig en de [[Help:ZoekPagina|ZoekPagina]]
+snel.//
 
 //Naast het vlug zijn, aspireert deze plaats ook de idealen van Zen in het
-algemeen, genaamd WikiSabi.  Zen vindt schoonheid in het onvolmaakte en
+algemeen, genaamd [[Help:WabiSabi|WabiSabi]].  Zen vindt schoonheid in het onvolmaakte en
 kortstondige.  Uiteindelijk is dat alles wat je nodig hebt.//
 
-Je kunt gedag zeggen op RecenteBezoekers, of lezen over HoeWikiTeGebruiken
-en hoeje PaginasToevoegen kan.
- Momenteel is er voor deze Wiki geen discussie "onderwerp", dus ga je gang,
- speel ermee en vermaak je.
+//The Universe tends toward chaos. The Universe tends toward Wiki.//
 
--- [[Steve Wainstead]]
+Je kunt gedag zeggen op [[RecenteBezoekers]], of lezen over [[Help:HoeWikiTeGebruiken|HoeWikiTeGebruiken]]
+en hoeje [[Help:PaginasToevoegen|PaginasToevoegen]] kan. Dus ga je gang, speel ermee en vermaak je!!
+
+-- [[Help:Steve Wainstead|Steve Wainstead]]
+
+<noinclude>
+----
+[[PhpWikiDocumentatie]]
+</noinclude>

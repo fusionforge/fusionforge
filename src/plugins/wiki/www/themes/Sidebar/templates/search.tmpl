@@ -3,7 +3,6 @@
       method="get" accept-charset="UTF-8" style="display:inline" class="searchform">
 <?php
 $s = $request->getArg('s') ? $request->getArg('s') : _("Search");
-$p = $WikiTheme->tooltipAccessKeyPrefix();
 if (! USE_PATH_INFO) { ?>
 <input type="hidden" name="pagename" value="<?php echo _("TitleSearch")?>" />
 <?php } ?>
@@ -14,9 +13,8 @@ if (! USE_PATH_INFO) { ?>
    onfocus="if (this.value == '<?php echo _("Search")?>') {this.value = '';}"
    onmouseout="window.status=''; return true;"
    onmouseover="window.status='<?php echo _("Quick Search")?>'; return true;"
-   accesskey="f"
    type="text" id="search"
-   title="<?php echo _("Search term(s)")  . " [$p-f]"?>" />
+   title="<?php echo _("Search term(s)") ?>" />
 <?php echo $SEARCH_AFTER ?>
 </form>
 </div>

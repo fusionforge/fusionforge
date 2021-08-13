@@ -183,7 +183,7 @@ div#column-one,
 div#f-poweredbyico,
 div#f-copyrightico,
 ul#f-list,
-div#xhtml-validator,
+div#html-validator,
 li#pt-logout,
 li#pt-login,
 div#p-logo,
@@ -245,17 +245,6 @@ a:link, a:visited {
     text-decoration: underline;
 }
 
-/*
-#content a:link:after,
-#content a:visited:after {
-   content: " ( " attr(href) " ) ";
-}*/
-
-#globalWrapper {
-    width: 100% !important;
-    min-width: 0 !important;
-}
-
 #column-content {
     margin: 0 !important;
 }
@@ -275,37 +264,4 @@ a, a.external, a.new, a.stub {
 a, a.external, a.new, a.stub {
     color: inherit ! important;
     text-decoration: inherit ! important;
-}
-
-/* Show some stuff */
-.urlexpansion {
-    display: inline ! important;
-}
-
-div.townBox {
-    position: relative;
-    float: right;
-    background: white;
-    margin-left: 1em;
-    border: 1px solid gray;
-    padding: 0.3em;
-    width: 200px;
-    overflow: hidden;
-    clear: right;
-}
-
-div.townBox dl {
-    padding: 0;
-    margin: 0 0 0.3em 0;
-    font-size: 96%;
-}
-
-div.townBox dl dt {
-    background: none;
-    margin: 0.4em 0 0 0;
-}
-
-div.townBox dl dd {
-    margin: 0.1em 0 0 1.1em;
-    background-color: #f3f3f3;
 }

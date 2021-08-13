@@ -4,7 +4,7 @@
  */
 ?>
 <!DOCTYPE html>
-<html>
+<html xml:lang="<?php echo $GLOBALS['LANG']?>" lang="<?php echo $GLOBALS['LANG']?>">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta name="robots" content="noindex, nofollow" />
@@ -13,7 +13,7 @@
 <?php echo $WikiTheme->getCSS() ?>
 <title><?php echo WIKI_NAME . ' - ' . _("Redirect")?></title>
 
-<!-- Sneaky tricks to try to get browser to "redirect" -->
+<?php // Sneaky tricks to try to get browser to "redirect" ?>
 <meta http-equiv="Refresh" content="2;url=<?php echo $REDIRECT_URL?>"/>
 <script type="text/javascript"><!--
   function redirect(url) {

@@ -1,8 +1,7 @@
 <?php
-
 /**
- * Copyright 1999, 2000, 2001, 2002 $ThePhpWikiProgrammingTeam
- * Copyright (C) 2002 Johannes Große
+ * Copyright © 1999, 2000, 2001, 2002 $ThePhpWikiProgrammingTeam
+ * Copyright © 2002 Johannes Große
  *
  * This file is part of PhpWiki.
  *
@@ -19,6 +18,9 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
  */
 
 // +---------------------------------------------------------------------+
@@ -37,9 +39,6 @@
  *----------------------------------------------------------------------*/
 // needs (la)tex, dvips, gs, netpbm, libpng
 // LaTeX2HTML ftp://ftp.dante.de/tex-archive/support/latex2html
-$texbin = '/usr/bin/tex';
-$dvipsbin = '/usr/bin/dvips';
-$pstoimgbin = '/usr/bin/pstoimg';
 
 // output mere debug messages (should be set to false in a stable
 // version)
@@ -224,7 +223,7 @@ class WikiPlugin_TexToPng extends WikiPluginCached
                 $this->dbg('Error during execution of ' . $cmd);
             }
             ;
-            while (list($key, $value) = each($errortxt)) {
+            foreach ($errortxt as $key => $value) {
                 if ($complainvisibly) {
                     $this->complain($value . "\n");
                 } else {
@@ -264,11 +263,14 @@ class WikiPlugin_TexToPng extends WikiPluginCached
 
     function TexToImg($texstr, $scale, $aalias, $transp)
     {
-        //$cacheparams = $GLOBALS['CacheParams'];
+        $texbin = '/usr/bin/tex';
+        $dvipsbin = '/usr/bin/dvips';
+        $pstoimgbin = '/usr/bin/pstoimg';
+        $cache_dir = '/tmp/cache';
         $tempfiles = $this->tempnam('TexToPng');
         $img = 0; // $size = 0;
 
-        // procuce options for pstoimg
+        // produce options for pstoimg
         $options =
             ($aalias ? '-aaliastext -color 8 ' : '-color 1 ') .
                 ($transp ? '-transparent ' : '') .
@@ -278,7 +280,7 @@ class WikiPlugin_TexToPng extends WikiPluginCached
         // rely on intelligent bool interpretation
         $ok = $tempfiles &&
             $this->createTexFile($tempfiles . '.tex', $texstr) &&
-            $this->execute('cd ' . $cacheparams['cache_dir'] . '; ' .
+            $this->execute('cd ' . $cache_dir . '; ' .
                 "$texbin " . $tempfiles . '.tex', true) &&
             $this->execute("$dvipsbin -o" . $tempfiles . '.ps ' . $tempfiles . '.dvi') &&
             $this->execute("$pstoimgbin $options"
@@ -287,7 +289,7 @@ class WikiPlugin_TexToPng extends WikiPluginCached
             file_exists($tempfiles . '.png');
 
         if ($ok) {
-            if (!($img = ImageCreateFromPNG($tempfiles . '.png'))) {
+            if (!($img = imagecreatefrompng($tempfiles . '.png'))) {
                 $this->dbg("Could not open just created image file: $tempfiles");
                 $ok = false;
             }
@@ -297,13 +299,24 @@ class WikiPlugin_TexToPng extends WikiPluginCached
 
         if (!TexToPng_debug || (TexToPng_debug && $ok)) {
             if ($tempfiles) {
-                unlink($tempfiles);
-                unlink($tempfiles . '.ps');
-                unlink($tempfiles . '.tex');
-                //unlink($tempfiles . '.aux');
-                unlink($tempfiles . '.dvi');
-                unlink($tempfiles . '.log');
-                unlink($tempfiles . '.png');
+                if (file_exists($tempfiles)) {
+                    unlink($tempfiles);
+                }
+                if (file_exists($tempfiles . '.ps')) {
+                    unlink($tempfiles . '.ps');
+                }
+                if (file_exists($tempfiles . '.tex')) {
+                    unlink($tempfiles . '.tex');
+                }
+                if (file_exists($tempfiles . '.dvi')) {
+                    unlink($tempfiles . '.dvi');
+                }
+                if (file_exists($tempfiles . '.log')) {
+                    unlink($tempfiles . '.log');
+                }
+                if (file_exists($tempfiles . '.png')) {
+                    unlink($tempfiles . '.png');
+                }
             }
         }
 
@@ -313,11 +326,3 @@ class WikiPlugin_TexToPng extends WikiPluginCached
         return false;
     } // TexToImg
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

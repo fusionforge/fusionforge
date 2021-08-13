@@ -1,6 +1,6 @@
 <?php
-/*
- * Copyright 2005 $ThePhpWikiProgrammingTeam
+/**
+ * Copyright © 2005 $ThePhpWikiProgrammingTeam
  *
  * This file is part of PhpWiki.
  *
@@ -17,6 +17,9 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
  */
 
 /** DBA Sessions
@@ -29,6 +32,7 @@
  *  the db is opened and closed for each access.
  * @author: Reini Urban.
  */
+
 class DbSession_dba
     extends DbSession
 {
@@ -37,8 +41,6 @@ class DbSession_dba
     function __construct($dbh, $table)
     {
         $this->_dbh = $dbh;
-        ini_set('session.save_handler', 'user');
-        session_module_name('user'); // new style
         session_set_save_handler(array(&$this, 'open'),
             array(&$this, 'close'),
             array(&$this, 'read'),
@@ -47,9 +49,9 @@ class DbSession_dba
             array(&$this, 'gc'));
     }
 
-    function quote($str)
+    function quote($string)
     {
-        return $str;
+        return $string;
     }
 
     function query($sql)
@@ -95,6 +97,7 @@ class DbSession_dba
     {
         $dbh = $this->_connect();
         $dbh->open();
+        return true;
     }
 
     /**
@@ -108,6 +111,7 @@ class DbSession_dba
     public function close()
     {
         $this->_disconnect();
+        return true;
     }
 
     /**
@@ -121,9 +125,9 @@ class DbSession_dba
         $dbh = $this->_connect();
         $result = $dbh->get($id);
         if (!$result) {
-            return false;
+            return '';
         }
-        list(, , $packed) = explode(':', $result, 3);
+        list(, , $packed) = explode('|', $result, 3);
         $this->_disconnect();
         if (strlen($packed) > 4000) {
             // trigger_error("Overlarge session data!", E_USER_WARNING);
@@ -164,7 +168,7 @@ class DbSession_dba
             trigger_error("Overlarge session data!", E_USER_WARNING);
             $sess_data = '';
         }
-        $dbh->set($id, $time . ':' . $ip . ':' . $sess_data);
+        $dbh->set($id, $time . '|' . $ip . '|' . $sess_data);
         $this->_disconnect();
         return true;
     }
@@ -187,12 +191,14 @@ class DbSession_dba
     {
         $dbh = $this->_connect();
         $threshold = time() - $maxlifetime;
-        for ($id = $dbh->firstkey(); $id !== false; $id = $dbh->nextkey()) {
+        for ($id = $dbh->firstkey(); $id !== false; $id = $nextid) {
             $result = $dbh->get($id);
-            list($date, ,) = explode(':', $result, 3);
+            list($date, ,) = explode('|', $result, 3);
+            $nextid = $dbh->nextkey();
             if ($date < $threshold)
                 $dbh->delete($id);
         }
+        $dbh->optimize();
         $this->_disconnect();
         return true;
     }
@@ -205,7 +211,7 @@ class DbSession_dba
         $dbh = $this->_connect();
         for ($id = $dbh->firstkey(); $id !== false; $id = $dbh->nextkey()) {
             $result = $dbh->get($id);
-            list($date, $ip, $packed) = explode(':', $result, 3);
+            list($date, $ip, $packed) = explode('|', $result, 3);
             if (!$packed) continue;
             // session_data contains the <variable name> + "|" + <packed string>
             // we need just the wiki_user object (might be array as well)
@@ -220,11 +226,3 @@ class DbSession_dba
         return $sessions;
     }
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

@@ -1,5 +1,5 @@
-Date: Mon, 29 Jun 2015 12:04:28 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Fri,  6 Aug 2021 16:19:21 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FWikiAdminUtilsPlugin;
   flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
@@ -10,13 +10,12 @@ Some special actions for [[PhpWikiAdministration]] and [[PhpWikiDebug]].
 
 == Usage ==
 {{{
-<<WikiAdminUtils action="purge-cache" >>
-<<WikiAdminUtils action="purge-bad-pagenames" >>
-<<WikiAdminUtils action="purge-empty-pages" >>
-<<WikiAdminUtils action="email-verification" >>
-<<WikiAdminUtils action="convert-cached-html" >>
-<<WikiAdminUtils action="db-check" >>
-<<WikiAdminUtils action="db-rebuild" >>
+<<WikiAdminUtils action="purge-cache">>
+<<WikiAdminUtils action="purge-bad-pagenames">>
+<<WikiAdminUtils action="purge-empty-pages">>
+<<WikiAdminUtils action="email-verification">>
+<<WikiAdminUtils action="db-check">>
+<<WikiAdminUtils action="db-rebuild">>
 }}}
 
 == Arguments ==
@@ -28,7 +27,7 @@ Some special actions for [[PhpWikiAdministration]] and [[PhpWikiDebug]].
 ! Default value
 |-
 | **action**
-| Valid action are: "purge-cache", "purge-bad-pagenames", "purge-empty-pages", "email-verification", "convert-cached-html", "db-check" and "db-rebuild"
+| Valid action are: "purge-cache", "purge-bad-pagenames", "purge-empty-pages", "email-verification", "db-check" and "db-rebuild"
 | //None//
 |-
 | **label**
@@ -39,10 +38,10 @@ Some special actions for [[PhpWikiAdministration]] and [[PhpWikiDebug]].
 == Example ==
 
 {{{
-<<WikiAdminUtils action="purge-cache" >>
+<<WikiAdminUtils action="purge-cache">>
 }}}
 
-<<WikiAdminUtils action="purge-cache" >>
+<<WikiAdminUtils action="purge-cache">>
 
 == Authors ==
 * [[Help:Jeff Dairiki|Jeff Dairiki]]

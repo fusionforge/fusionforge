@@ -1,14 +1,12 @@
-Date: Mon, 29 Jun 2015 12:04:26 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Tue,  9 Apr 2019 17:57:35 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=BackLinks;
   flags=PAGE_LOCKED;
   charset=UTF-8
 Content-Transfer-Encoding: binary
 
-所有連結到目前頁面的頁面. BackLinks 功能也回答了此問題:
-"那個頁面包含了此頁面的標題?".
+<<BackLinks include_self||=1>>
 
 ----
-
-<<BackLinks exclude||='' include_self||=1 noheader||=0 page||='' info||='' >>
+[[CategoryActionPage]]

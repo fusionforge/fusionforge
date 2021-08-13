@@ -1,8 +1,7 @@
 <?php
-
 /**
- * Copyright 1999, 2000, 2001, 2002 $ThePhpWikiProgrammingTeam
- * Copyright 2009 Marc-Etienne Vargenau, Alcatel-Lucent
+ * Copyright © 1999, 2000, 2001, 2002 $ThePhpWikiProgrammingTeam
+ * Copyright © 2009 Marc-Etienne Vargenau, Alcatel-Lucent
  *
  * This file is part of PhpWiki.
  *
@@ -19,6 +18,9 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
  */
 
 /**
@@ -63,17 +65,6 @@ class WikiPlugin_OldStyleTable
 
     function handle_plugin_args_cruft($argstr, $args)
     {
-        return;
-    }
-
-    function getWikiPageLinks($argstr, $basepage)
-    {
-        global $backlinks;
-        if (empty($backlinks)) {
-            global $request;
-            $this->run($request->_dbi, $argstr, $request, $basepage);
-        }
-        return $backlinks;
     }
 
     /**
@@ -85,10 +76,6 @@ class WikiPlugin_OldStyleTable
      */
     function run($dbi, $argstr, &$request, $basepage)
     {
-        global $backlinks;
-
-        $backlinks = array();
-
         include_once 'lib/InlineParser.php';
 
         $args = $this->getArgs($argstr, $request);
@@ -166,11 +153,3 @@ class WikiPlugin_OldStyleTable
         return $row;
     }
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

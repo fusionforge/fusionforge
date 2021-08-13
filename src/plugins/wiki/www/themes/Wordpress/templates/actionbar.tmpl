@@ -1,3 +1,4 @@
+<nav role="navigation" aria-label="<?php echo _("Actions Menu") ?>">
 <div id="actionbar">
 
 <?php
@@ -14,14 +15,14 @@
    <li><a class="wikilink" href="<?php echo WikiURL(HOME_PAGE)?>"><?php echo WIKI_NAME ?></a>
      <ul>
        <li>
-         <?php echo WikiLink(_("HomePage"), "button") ?>
+         <?php echo WikiLink(__("HomePage"), "button") ?>
        </li>
        <li>
-         <?php echo WikiLink(_("RecentChanges"), "button") ?>
+         <?php echo WikiLink(__("RecentChanges"), "button") ?>
        </li>
        <?php if (!empty($user) && $user->isAdmin()) { ?>
        <li>
-       <?php echo $SEP?><?php echo WikiLink(_("PhpWikiAdministration"), "button") ?>
+       <?php echo $SEP?><?php echo WikiLink(__("PhpWikiAdministration"), "button") ?>
        </li>
        <?php } ?>
        <?php if (!empty($user)) { ?>
@@ -53,7 +54,7 @@
         <?php } ?>
        <?php } ?>
        <?php if ($user->isAdmin() or mayAccessPage('remove', $page->getName())) { ?>
-        <li><?php echo $SEP?><?php echo Button('revert',_("Revert"), $revision->isCurrent() ? $page->GetRevisionBefore() : $revision) ?></li>
+        <li><?php echo $SEP?><?php echo Button('revert', _("Revert"), $revision->isCurrent() ? $page->GetRevisionBefore() : $revision) ?></li>
         <li><?php echo $SEP?><?php echo Button('remove') ?></li>
        <?php } ?>
      </ul>
@@ -65,13 +66,13 @@
          <?php echo $WikiTheme->getLastModifiedMessage($revision) ?></a>
        </li>
        <li>
-         <?php echo $SEP?><?php echo Button("PageHistory", _("PageHistory")) ?><?php echo $SEP?>
+         <?php echo $SEP?><?php echo Button(__("PageHistory"), _("PageHistory")) ?><?php echo $SEP?>
        </li>
-       <li> <?php echo Button("PageInfo", _("PageInfo")) ?> </li>
+       <li> <?php echo Button(__("PageInfo"), _("Page Info")) ?> </li>
          <?php if ((DEBUG and $request->getArg('action') == 'browse') || $user->isAdmin()) { ?>
          <li>
-           <?php echo $SEP?><?php echo Button("DebugInfo", _("DebugInfo")) ?> <!-- For debugging only, really -->
-           <?php echo $SEP?><?php echo Button("PageDump", _("PageDump")) ?>
+           <?php echo $SEP?><?php echo Button(__("DebugBackendInfo"), _("DebugBackendInfo")) ?> <?php // For debugging only, really ?>
+           <?php echo $SEP?><?php echo Button(__("PageDump"), _("Page Dump")) ?>
          </li>
          <?php } ?>
      </ul>
@@ -86,7 +87,7 @@
        </li>
        <li>
          <?php if ($revision) { ?>
-           <?php echo Button(_("LikePages"), _("LikePages")) ?>
+           <?php echo Button(__("LikePages"), _("LikePages")) ?>
          <?php } ?>
        </li>
      </ul>
@@ -98,3 +99,4 @@
    </li>
  </ul>
 </div>
+</nav>

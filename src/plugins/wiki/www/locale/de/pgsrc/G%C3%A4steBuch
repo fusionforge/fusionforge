@@ -1,5 +1,5 @@
-Date: Mon, 29 Jun 2015 12:04:27 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Wed, 10 Apr 2019 18:24:49 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=G%C3%A4steBuch;
   flags="";
@@ -8,6 +8,8 @@ Content-Transfer-Encoding: binary
 
 Tragen Sie sich einfach mit Namen und Datum auf dieser Seite ein!
 
-Jeff Dairiki, Arno Hollosi, Steve Wainstead, Reini Urban, und alle weiteren
-[[The PhpWiki programming team|PhpWiki Autoren]].
+Arno Hollosi, Aredridel Stauck, Jeff Dairiki, Steve Wainstead, Carsten Klapp,
+Reini Urban, Marc-Etienne Vargenau, und alle weiteren [[The PhpWiki programming team|PhpWiki Autoren]].
+
 ----
+[[PhpWikiDokumentation]]

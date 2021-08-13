@@ -1,0 +1,93 @@
+Date: Mon, 30 Mar 2020 15:49:22 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
+Content-Type: application/x-phpwiki;
+  pagename=Aide%2FGreffonCr%C3%A9erUnePage;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
+  charset=UTF-8
+Content-Transfer-Encoding: binary
+
+Le [[Aide:GreffonWiki|greffon]] **~CréerUnePage** (//CreatePage//) vous permet de créer facilement de nouvelles pages,
+éventuellement avec un contenu par défaut
+
+Il vous permet de créer une page avec un nouveau nom depuis un formulaire et éventuellement
+avec un contenu initial à partir d'un modèle.
+
+Mettez un {{{<?plugin-form CreatePage ?>}}} sur une page, affichez cette page,
+entrez le nom de la page à créer puis cliquez sur le bouton.
+
+== Utilisation ==
+
+{{{
+<?plugin-form CreatePage ?>
+<?plugin-form CreatePage template=CategoryHomePage ?>
+<?plugin-form CreatePage template=SomeTemplatePage vars="year=2004&name=None" ?>
+}}}
+
+== Arguments ==
+
+{| class="bordered"
+|-
+! Argument
+! Description
+! Valeur par défaut
+|-
+| **s**
+| Le nom de la page qui sera passé au greffon.
+| //vide//
+|-
+| **initial_content**
+| La nouvelle page sera pré-remplie avec ce contenu.
+| //vide//
+|-
+| **template**
+| La nouvelle page sera pré-remplie avec le contenu de cette page.
+| //vide//
+|-
+| **vars**
+| Variables à déployer.
+|
+|-
+| **overwrite**
+| Booléen, indique s'il faut écraser une page existante.
+|
+|}
+
+== Variable Expansion ==
+
+The content (either initial_content or template) might hold some variables, which will be
+expanded on creation. Unassigned variables will stay as %%<var>%%, assigned variables without
+matching %%<var>%% placeholder will be ignored, without any warning.
+
+A variable in a template is denoted as ##%%var%%##, which will be expanded by the
+value of ##var## given to the vars argument (in urlencoded php notation).
+
+Some special variables are automatically assigned:
+{| class="bordered"
+|-
+| %%ctime%%  || $~WikiTheme->formatDateTime(time())
+|-
+| %%author%% || $user->getId()
+|}
+
+This forms together with page templates and the [[Help:WikiFormRichPlugin]] and
+optionally the [[Help:SqlResultPlugin]] a framework to create templated pages.
+
+== Auteurs ==
+* Dan Frankowski
+* [[Help:Reini Urban|Reini Urban]]
+
+== Exemples ==
+
+{{{
+<?plugin-form CreatePage s=MaPagePersonnelle ?>
+}}}
+<?plugin-form CreatePage s=MaPagePersonnelle ?>
+
+== Voir aussi ==
+* [[Help:WikiFormRichPlugin]]
+* [[Help:SqlResultPlugin]]
+
+<noinclude>
+----
+[[DocumentationDePhpWiki]] [[CatégorieGreffonWiki]]
+</noinclude>

@@ -1,7 +1,6 @@
 <?php
-
 /*
- * Copyright 2002 $ThePhpWikiProgrammingTeam
+ * Copyright © 2002 $ThePhpWikiProgrammingTeam
  *
  * This file is part of PhpWiki.
  *
@@ -18,6 +17,9 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
  */
 
 /**
@@ -73,14 +75,15 @@ class WikiPlugin_RedirectTo
             if ($url != $href) { // URL contains tags
                 return $this->disabled(_("Illegal characters in external URL."));
             }
+            if (!IsSafeURL($url, true)) { // http or https only
+                return $this->error(fmt("Malformed URL: “%s”", $url));
+            }
             $thispage = $request->getPage();
             if (!$thispage->get('locked')) {
                 return $this->disabled(_("Redirect to an external URL is only allowed in locked pages."));
             }
         } elseif ($page) {
-            $url = WikiURL($page,
-                array('redirectfrom' => $request->getArg('pagename')),
-                'abs_path');
+            $url = WikiURL($page, array('redirectfrom' => $request->getArg('pagename')));
         } else {
             return $this->error(_("'href' or 'page' parameter missing."));
         }
@@ -95,9 +98,9 @@ class WikiPlugin_RedirectTo
 
         $redirectfrom = $request->getArg('redirectfrom');
         if ($redirectfrom !== false) {
-            if ($redirectfrom)
+            if ($redirectfrom) {
                 return $this->disabled(_("Double redirect not allowed."));
-            else {
+            } else {
                 // Got here by following the "Redirected from ..." link
                 // on a browse page.
                 return $this->disabled(_("Viewing redirecting page."));
@@ -107,11 +110,3 @@ class WikiPlugin_RedirectTo
         return $request->redirect($url);
     }
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

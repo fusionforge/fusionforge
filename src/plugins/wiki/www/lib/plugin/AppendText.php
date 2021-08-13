@@ -1,7 +1,6 @@
 <?php
-
-/*
- * Copyright 2004,2007 $ThePhpWikiProgrammingTeam
+/**
+ * Copyright © 2004,2007 $ThePhpWikiProgrammingTeam
  *
  * This file is part of PhpWiki.
  *
@@ -18,6 +17,9 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
  */
 
 /**
@@ -30,6 +32,7 @@
  *
  * Todo: multiple pages. e.g. AppendText s=~[CategoryINtime~] page=<!plugin TitleSearch intime !>
  */
+
 class WikiPlugin_AppendText
     extends WikiPlugin
 {
@@ -67,6 +70,16 @@ class WikiPlugin_AppendText
     {
 
         $args = $this->getArgs($argstr, $request);
+
+        $redirect = $args['redirect'];
+        if (($redirect == '0') || ($redirect == 'false')) {
+            $redirect = false;
+        } elseif (($redirect == '1') || ($redirect == 'true')) {
+            $redirect = true;
+        } else {
+            return $this->error(sprintf(_("Argument '%s' must be a boolean"), "redirect"));
+        }
+
         if (!$args['pages'] or !$request->isPost()) {
             return $this->work($args['page'], $args, $dbi, $request);
         } else {
@@ -143,22 +156,14 @@ class WikiPlugin_AppendText
             return $request->redirect(WikiURL($pagename, array(), 'absurl'), false);
 
             // The user asked to be redirected to the modified page
-        } elseif ($args['redirect']) {
+        } elseif ($redirect) {
             return $request->redirect(WikiURL($pagename, array(), 'absurl'), false);
 
         } else {
             $link = HTML::em(WikiLink($pagename));
-            $message->pushContent(HTML::raw(sprintf(_("Go to %s."), $link->asXml())));
+            $message->pushContent(HTML::raw(sprintf(_("Go to %s."), $link->asXML())));
         }
 
         return $message;
     }
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

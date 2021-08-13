@@ -1,5 +1,5 @@
-Date: Mon, 29 Jun 2015 12:04:23 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Thu,  4 Apr 2019 17:13:16 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=AdministrationDePhpWiki%2FD%C3%A9finirAclSimple;
   flags=PAGE_LOCKED;
@@ -8,12 +8,12 @@ Content-Transfer-Encoding: binary
 
 {| style="width: 100%; background-color: #e9fbff; border-style: solid; border-color: blue; border-width: 2px;"
 |-
-| {{(on)}} **//Liberal Access Rights//** means **//Everyone can edit//**.
+| {{(on)}} **//Droits d'accès permissifs//** signifie **//Tout le monde peut modifier//**.
 |-
-| {{(on)}} **//Restrictive Access Rights//** means **//Only logged users can see the page//**.
+| {{(on)}} **//Droits d'accès restreints//** signifie **//Seuls les utilisateurs connectés peuvent voir la page//**.
 |}
 
-For more complex Access Rights modifications, see **[[phpwiki:?action=setacl|SetAcl]]**.
+Pour des modification plus complexes des droits d'accès, voir **[[phpwiki:?action=setacl|SetAcl]]**.
 
 ----
 

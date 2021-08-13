@@ -1,7 +1,6 @@
 <?php
-
-/*
- * Copyright 2004 $ThePhpWikiProgrammingTeam
+/**
+ * Copyright © 2004 $ThePhpWikiProgrammingTeam
  *
  * This file is part of PhpWiki.
  *
@@ -18,6 +17,9 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
  */
 
 require_once 'lib/PageList.php';
@@ -31,6 +33,7 @@ require_once 'lib/PageList.php';
  *
  * @author: Dan Frankowski
  */
+
 class WikiPlugin_ListPages
     extends WikiPlugin
 {
@@ -137,24 +140,16 @@ class WikiPlugin_ListPages
 // how many back-/forwardlinks for this page
 class _PageList_Column_ListPages_count extends _PageList_Column
 {
-    function _PageList_Column_ListPages_count($field, $display, $backwards = false)
+    function __construct($field, $display, $backwards = false)
     {
         $this->_direction = $backwards;
-        return $this->_PageList_Column($field, $display, 'center');
+        parent::__construct($field, $display, 'center');
     }
 
-    function _getValue($page, $revision_handle)
+    function _getValue($page_handle, $revision_handle)
     {
-        $iter = $page->getLinks($this->_direction);
+        $iter = $page_handle->getLinks($this->_direction);
         $count = $iter->count();
         return $count;
     }
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

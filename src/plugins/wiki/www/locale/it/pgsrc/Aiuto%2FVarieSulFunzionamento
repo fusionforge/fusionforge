@@ -1,36 +1,42 @@
-Date: Mon, 29 Jun 2015 12:04:22 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Thu, 26 Mar 2020 12:01:56 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=Aiuto%2FVarieSulFunzionamento;
-  flags="";
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
   charset=UTF-8
 Content-Transfer-Encoding: binary
 
-PhpWiki è scritto in PHP, linguaggio di scripting lato-server,
-disponibile su http://www.php.net/. PHP riassume nella sua sintassi il C
-e il Perl, e funziona molto similmente a ASP, EmbPerl e JPS.
+~PhpWiki è scritto in PHP, linguaggio di scripting lato-server,
+disponibile su [[https://www.php.net/]]. PHP riassume nella sua sintassi il C
+e il Perl, e funziona molto similmente a ASP, ~EmbPerl e JPS.
 
-PhpWiki consiste in una dozzina di file PHP misti HTML. La pagina web
-che compone un WikiWikiWeb basato su PHP vive in un file DBM con delle
+~PhpWiki consiste in una dozzina di file PHP misti HTML. La pagina web
+che compone un [[Aiuto:WikiWikiWeb|WikiWikiWeb]] basato su PHP vive in un file DBM con delle
 copie di backup delle precedenti versioni contenute in un secondo file
 DBM.
 
 Ogni volta che un utente raggiunge il sito la pagina richiesta viene
-presa da DBM e renderizzata al volo. L'utente richiede solo il file
-index.php, che sceglierà gli altri file php da includere.
+presa da DBM e renderizzata al volo. L'utente richiede solo
+il file ##index.php##, che sceglierà gli altri file PHP da
+includere.
 
 Nel wiki i links alle pagine sono automaticamente linkati PhpWiki.
 Questo può essere l'aspetto più interessante di un wiki,
 l'abilità  di aggiungere pagine semplicemente linkandole. L'altro
-aspetto interessante è la possibilità di creare link
+aspetto interessante è la possibilità di creare link:
 # http://www.wcsb.org/
 # ftp://ftp.redhat.com/
 # news://news.mozilla.org/
-# http://www.slashdot.com/
+# http://slashdot.org/
 # http://theregister.co.uk/
 
 Compinato con un namespace e una semplice marcatura, un Wiki mostra
-molte delle caratteristiche di un WabiSabi
+molte delle caratteristiche di un [[Aiuto:WabiSabi|WabiSabi]].
 
-PhpWiki è sotto la GNU General Public License, che è
-possibile trovare a questo indirizzo: http://www.gnu.org/copyleft/gpl.txt.
+~PhpWiki è sotto la GNU General Public License, che è
+possibile trovare a questo indirizzo: [[http://www.gnu.org/copyleft/gpl.txt]].
+
+<noinclude>
+----
+[[PhpWikiDocumentation]]
+</noinclude>

@@ -1,21 +1,32 @@
-Date: Mon, 29 Jun 2015 12:04:26 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Fri, 22 Dec 2020 10:36:59 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=Ayuda%2FWikiWikiWeb;
-  flags="";
-  charset=UTF-8;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
+  charset=UTF-8
 Content-Transfer-Encoding: binary
 
-Un WikiWikiWeb es un sitio donde todos pueden colaborar con el contenido. El Wiki más conocido y usado es el Portland Pattern Repository en http://c2.com/cgi-bin/wiki?WikiWikiWeb.
+Un **~WikiWikiWeb** es un sitio donde todos pueden colaborar con el
+contenido. El Wiki más conocido y usado es el Portland
+Pattern Repository en [[http://c2.com/cgi-bin/wiki?WikiWikiWeb]].
 
 Alli encontré estas frases particularmente relevantes:
 
-_La clave es poder EditarElTexto de una manera sencilla y la búsqueda de BuscarPágina rápida._
+//Clave es poder [[Ayuda:EditarElTexto|EditarElTexto]] de una manera sencilla y la búsqueda de [[BuscarPágina]]
+rápida.//
 
-_Aparte de ser rápido, éste sitio también aspira a los ideales del Zen generalmente etiquetados WabiSabi. El Zen encuentra belleza en lo imperfecto y efímero. Cuando se llega a esto, es todo lo que se necesita._
+//De ser rápido, éste sitio también aspira a los ideales del Zen generalmente
+etiquetados [[Ayuda:WabiSabi|WabiSabi]]. El Zen encuentra belleza en lo imperfecto
+y efímero. Cuando se llega a esto, es todo lo que se necesita.//
 
-También se puede firmar en VisitantesRecientes, o leer acerca de ComoUsarWiki y AgregarPaginas. Actualmente este wiki no tiene "tema" de discusión así que ¡adelante, a jugar con él y a divertirse!
+//The Universe tends toward chaos. The Universe tends toward Wiki.//
 
--- [[Steve Wainstead]]
--- traducido al español por [KBrown]
+También se puede firmar en [[VisitantesRecientes]], o leer acerca de [[Ayuda:ComoUsarWiki|ComoUsarWiki]]
+y [[Ayuda:AgregarPaginas|AgregarPaginas]]. ¡Así que adelante, a jugar con él y a divertirse!
 
+-- [[Ayuda:Steve Wainstead|Steve Wainstead]]
+
+<noinclude>
+----
+[[PhpWikiDocumentation]]
+</noinclude>

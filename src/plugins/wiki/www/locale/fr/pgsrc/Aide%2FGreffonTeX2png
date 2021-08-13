@@ -1,0 +1,72 @@
+Date: Sun, 29 Mar 2020 18:53:38 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
+Content-Type: application/x-phpwiki;
+  pagename=Aide%2FGreffonTeX2png;
+  flags=PAGE_LOCKED;
+  charset=UTF-8
+Content-Transfer-Encoding: binary
+
+Le [[Aide:GreffonWiki|greffon]] **TeX2png** permet d'afficher des expressions mathématiques dans une page wiki.
+
+== Utilisation ==
+
+{{{
+<<TeX2png text="$$(a+b)^n=\sum_{k=0}^n{n\choose k}a^k b^{n-k}$$">>
+}}}
+
+donne
+
+<<TeX2png text="$$(a+b)^n=\sum_{k=0}^n{n\choose k}a^k b^{n-k}$$">>
+
+== Arguments ==
+
+L'unique argument est le texte de l'expression. Ce texte **doit** être encadré
+par un dollar simple $ pour une expression en ligne et par un dollar
+double $$ pour une expression sur une ligne séparée. Dans ce dernier cas,
+tout est centré.
+
+La syntaxe pour écrire le texte mathématique est celle
+de [[http://www.latex-project.org|LaTeX]].
+
+== Avertissements ==
+
+Ce greffon a été conçu uniquement pour faire apparaitre des expressions mathématiques dans une page de façon lisible.
+Par conséquent tout autre expression (comme du texte simple) est refusée : une expression qui n'est
+pas encadrée par des dollars n'est pas validée. Elle est remplacée à l'affichage par le texte en rouge. Il est malgré tout
+possible d'afficher du texte brut comme <<TeX2png text="$\textrm{\LaTeX}$">> en utilisant :
+
+{{{
+<<TeX2png text="$\textrm{\LaTeX}$">>
+}}}
+
+Ce [[Aide:GreffonWiki|greffon]] n'est pas adapté à la production de documents mathématiques  sophistiqués
+avec des liens, des références croisées... Pour ça, il existe d'autres outils comme
+[[http://www.latex2html.org/|LaTeX2html]].
+
+== Exemples ==
+
+Quelques lettres grecques : <<TeX2png text="$\alpha$">>, <<TeX2png text="$\beta$">>, ... et une formule <<TeX2png text="$\sum_{i=1}^n \frac1{i^2}=\frac{\pi^2}{6}$">> pour tester l'affichage en ligne.
+
+=== Exercice 1 ===
+
+Soit la fonction :
+
+<<TeX2png text="$$f(x)=(x^2-4x+3)^{1/2}$$">>
+
+# Déterminer le domaine de définition de f.
+# Déterminer un domaine sur lequel f est bijective. Déterminer la réciproque <<TeX2png text="$f^{-1}(x)$">> de f sur ce domaine.
+# Calculer la dérivée f'(x).
+
+=== Exercice 2 ===
+
+Soit la fonction suivante :
+
+<<TeX2png text="$$f(x) = \int_0^x e^{-t^2}\,dt, x\in\mathbb R$$">>
+
+# Montrer que pour tout r positif, on a <<TeX2png text="$$\frac{\pi}{2}\int_0^r t  e^{-t^2}\,dt \leq \int_0^r e^{-x^2}\,dx \int_0^r e^{-y^2}\,dy \leq \frac{\pi}{2} \int_0^{\sqrt{2} r} t e^{-t^2}\,dt$$">> **Indication** : passer en coordonnées polaires.
+# En déduire la limite de <<TeX2png text="$f(x)$">> lorsque x tend <<TeX2png text="vers $\infty$">>.
+
+<noinclude>
+----
+[[DocumentationDePhpWiki]] [[CatégorieGreffonWiki]]
+</noinclude>

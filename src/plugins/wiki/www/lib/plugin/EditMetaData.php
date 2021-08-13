@@ -1,7 +1,6 @@
 <?php
-
 /**
- * Copyright 1999,2000,2001,2002,2007 $ThePhpWikiProgrammingTeam
+ * Copyright © 1999,2000,2001,2002,2007 $ThePhpWikiProgrammingTeam
  *
  * This file is part of PhpWiki.
  *
@@ -18,6 +17,9 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
  */
 
 /**
@@ -141,7 +143,7 @@ class WikiPlugin_EditMetaData
             $instructions = _("Add or change a page-level metadata 'key=>value' pair. Note that you can remove a key by leaving the value-box empty.");
             $keyfield = HTML::input(array('name' => 'metafield'), '');
             $valfield = HTML::input(array('name' => 'metavalue'), '');
-            $button = Button('submit:metaedit', _("Submit"), false);
+            $button = Button('submit:metaedit', _("Submit"));
             $form = HTML::form(array('action' => $action,
                     'method' => 'post',
                     'accept-charset' => 'UTF-8'),
@@ -161,11 +163,3 @@ class WikiPlugin_EditMetaData
         return $html;
     }
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

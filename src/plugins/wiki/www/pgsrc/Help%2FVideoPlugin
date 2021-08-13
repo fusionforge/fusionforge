@@ -1,5 +1,5 @@
-Date: Mon, 29 Jun 2015 12:04:28 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Wed, 16 Jun 2021 19:20:34 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FVideoPlugin;
   flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
@@ -7,12 +7,12 @@ Content-Type: application/x-phpwiki;
 Content-Transfer-Encoding: binary
 
 The **~Video** [[Help:WikiPlugin|plugin]] allows to include video in a wiki page.
-Video file must be encoded in FLV format ([[WikiPedia:Flash Video|Flash Video]]) or in an HTML 5 format:
+Video file must be an HTML 5 format:
 * [[WikiPedia:Ogg|Ogg]] (##.ogg## suffix),
 * [[WikiPedia:MP4|MP4]] (##.mp4## suffix),
 * [[WikiPedia:WebM|WebM]] (##.webm## suffix).
 
-The Video plugin can also be called with the ~{~{video.flv~}~} syntax.
+The Video plugin can also be called with the ~{~{video.ogg~}~} syntax.
 
 == Arguments ==
 
@@ -41,7 +41,7 @@ Use only one of ##url## or ##file## arguments at a time.
 | 320
 |-
 | **autoplay**
-| Auto play the video when page is displayed (boolean).
+| Boolean. If true, auto play the video when page is displayed.
 | false
 |}
 
@@ -49,25 +49,25 @@ Use only one of ##url## or ##file## arguments at a time.
 
 A video:
 {{{
-<<Video url=http://a.video.server/a_video.flv>>
+<<Video url=http://a.video.server/a_video.ogg>>
 }}}
 
 Another video:
 {{{
-<<Video file=another_video.flv>>
+<<Video file=another_video.ogg>>
 }}}
 
 This is equivalent to:
 {{{
-{{another_video.flv}}
+{{another_video.ogg}}
 }}}
 
 === Big Buck Bunny ===
 
 {{{
-{{http://video.webmfiles.org/big-buck-bunny_trailer.webm}}
+{{https://wiki.yoctoproject.org/wiki/images/a/a6/Big-buck-bunny_trailer.webm}}
 }}}
-{{http://video.webmfiles.org/big-buck-bunny_trailer.webm}}
+{{https://wiki.yoctoproject.org/wiki/images/a/a6/Big-buck-bunny_trailer.webm}}
 
 == Authors ==
 
@@ -76,9 +76,7 @@ This is equivalent to:
 
 == See Also ==
 * [[Help:Images]]
-* [[Help:Adobe Flash]]
 * [[Help:Wikicreole]]
-* [[http://tools.google.com/dlpage/webmmf/|WebM Video for Internet Explorer 9+]]
 
 <noinclude>
 ----

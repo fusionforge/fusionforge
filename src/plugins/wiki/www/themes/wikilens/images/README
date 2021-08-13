@@ -3,12 +3,12 @@ The default "RateIt" images use the yellow wikilens smiley.
   Yellow is rated, blue is recommended, color-less the unselected icons.
   Size: 16x15
 
-RATEIT_IMGPREFIX "Star" 
+RATEIT_IMGPREFIX "Star"
 The traditional red star images must define the "Star" imgPrefix in the RateIt plugin.
   Red is rated, blue is recommended, color-less the unselected icons.
   Size: 12x12
 
-RATEIT_IMGPREFIX "BStar" 
+RATEIT_IMGPREFIX "BStar"
 The bigger red star images must define the "StarB" prefix in the RateIt plugin.
   Red is rated, blue is recommended, color-less the unselected icons.
   Size: 18x16

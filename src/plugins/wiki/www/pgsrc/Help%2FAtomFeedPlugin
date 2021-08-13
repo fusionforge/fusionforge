@@ -1,5 +1,5 @@
-Date: Mon, 29 Jun 2015 12:04:28 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Sat, 20 Feb 2021 11:52:37 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FAtomFeedPlugin;
   flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
@@ -39,7 +39,7 @@ The **~AtomFeed** [[Help:WikiPlugin|plugin]] displays an external Atom feed.
 | 0
 |-
 | **titleonly**
-| If //true//, only displays the title of the entry (boolean)
+| Boolean. If true, only displays the title of the entry.
 | false
 |}
 
@@ -49,7 +49,7 @@ The **~AtomFeed** [[Help:WikiPlugin|plugin]] displays an external Atom feed.
 
 {{{
 <<AtomFeed feed=PHPNews description="PHP News"
-           url=http://www.php.net/feed.atom titleonly=true maxitem=5>>
+           url=https://www.php.net/feed.atom titleonly=true maxitem=5>>
 }}}
 
 == Author ==

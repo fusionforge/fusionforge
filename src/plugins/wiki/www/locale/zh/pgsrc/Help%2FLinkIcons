@@ -1,12 +1,12 @@
-Date: Mon, 29 Jun 2015 12:04:26 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Thu, 24 Dec 2020 18:13:17 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FLinkIcons;
-  flags="";
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
   charset=UTF-8
 Content-Transfer-Encoding: binary
 
-LinkIcons 是一個 PhpWiki 可選的新特色. 當啟始以後, 圖示將被顯示在 URLs 的
+**~LinkIcons** 是一個 ~PhpWiki 可選的新特色. 當啟始以後, 圖示將被顯示在 URLs 的
 最前面以指示連結的型態.
 
 | {{/themes/default/images/http.png}}      | http link
@@ -16,34 +16,29 @@ LinkIcons 是一個 PhpWiki 可選的新特色. 當啟始以後, 圖示將被顯
 | {{/themes/default/images/mailto.png}}    | mailto link
 | {{/themes/default/images/ftp.png}}       | ftp link
 
-**注意**: 部份預設圖示使用了
-[PNG|http://www.libpng.org/pub/png/png-sitemap.htm]圖片格式的
-alpha channel 特色以便能夠平順的在任何有顏色或有背景頁面被畫出來.
-舊的瀏覽器可能無法顯示圖片.
-
-== Examples
+== Examples ==
 
 如果管理者有啟始這個特色的話,以下的範例將會只以上面的連結圖示顯示.
 
-=== InterWiki links
+=== ~InterWiki links ===
 
 * ~InterWiki link [[PhpWiki:InterWikiMap]]
 * A named ~InterWiki [[Wiki:WhyWikiWorks|read WhyWikiWorks at c2]].
 
-===URLs
+=== URLs ===
 
-* Email address [PhpWiki-talk mailing list|mailto:phpwiki-talk@lists.sourceforge.net]
-* Normal http link [[http://phpwiki.fr|PhpWiki's Home Page]]
-* Secure https link [[https://phpwiki.fr|PhpWiki's Home Page]]
-* File transfer [[ftp://ftp.sourceforge.net/]]
+* Email address [[mailto:phpwiki-talk@lists.sourceforge.net|PhpWiki-talk mailing list]]
+* Normal http link [[http://phpwiki.demo.free.fr|PhpWiki's Home Page]]
+* Secure http link [[https://phpwiki.demo.free.fr|PhpWiki's Home Page]]
+* File transfer [[ftp://ftp.sourceforge.net]]
 
-''A generic icon is shown for other less common link types.''
+//A generic icon is shown for other less common link types.//
 
 * news://nntp.news.com
 * gopher://gopher.caltech.cmu.edu
 
-LinkIcons 將在 URL 協定是 PhpWiki 允許並能連結的時候才顯示. 除非管理者加上,
-否則以下的範例無法顯示任何圖示,而 PhpWiki 也不會自動提供雙擊的連結,
+~LinkIcons 將在 URL 協定是 PhpWiki 允許並能連結的時候才顯示. 除非管理者加上,
+否則以下的範例無法顯示任何圖示,而 ~PhpWiki 也不會自動提供雙擊的連結,
 
 * bogus://oedipus.nostradamus.com
 * bolo://lgm.cheshire.org

@@ -1,21 +1,29 @@
-Date: Mon, 29 Jun 2015 12:04:26 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Fri, 12 Apr 2019 10:36:59 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=Ayuda%2FBuenEstilo;
-  flags="";
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
   charset=UTF-8
 Content-Transfer-Encoding: binary
 
-"Young writers often suppose that style is a garnish for the meat of
-prose, a sauce by which a dull dish is made palatable. Style has no such
-separate entity; it is nondetachable, unfilterable. The beginner should
-approach style warily, realizing that it is himself he is approaching, no
-other; and he should begin by turning resolutely away from all devices
-that are popularly believed to indicate style--all mannerisms, tricks,
-adornments. The approach to style is by way of plainness, simplicity,
-orderliness, sincerity."
+“Young writers often suppose that style is a garnish for the meat of
+prose, a sauce by which a dull dish is made palatable. Style has no
+such separate entity; it is nondetachable, unfilterable. The beginner
+should approach style warily, realizing that it is himself he is
+approaching, no other; and he should begin by turning resolutely away
+from all devices that are popularly believed to indicate style--all
+mannerisms, tricks, adornments. The approach to style is by way of
+plainness, simplicity, orderliness, sincerity.”
 
---Strunk y White, "Los elementos del estilo"
+--Strunk y White, “Los elementos del estilo”
 
-_And thus an American textbook, typical required reading for 10th-grade English students, unknowingly extols some virtues of WabiSabi_
+//And thus an American textbook, typical required reading for
+10th-grade English students, unknowingly extols some virtues of
+[[Ayuda:WabiSabi|Wabi Sabi]].//
+
 --scummings
+
+<noinclude>
+----
+[[PhpWikiDocumentation]]
+</noinclude>

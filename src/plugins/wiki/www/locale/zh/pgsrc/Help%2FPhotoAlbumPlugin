@@ -1,15 +1,15 @@
-Date: Mon, 29 Jun 2015 12:04:26 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Thu, 24 Dec 2020 18:13:17 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FPhotoAlbumPlugin;
-  flags="";
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
   charset=UTF-8
 Content-Transfer-Encoding: binary
 
-== Summary
 藉著顯示帶有說明以及相片檔名的文字檔以製作相簿.
 
-== Usage
+== 用法 ==
+
 {{{
 <<PhotoAlbum
          src=http://server/textfile
@@ -22,31 +22,137 @@ Content-Transfer-Encoding: binary
 >>
 }}}
 
-== Arguments
-''只有 ='src'= 參數是必要的.''
+== 引數 ==
 
-**src**:
-  一個 CSV 文字檔案,裡面每行的格式為 filename, description.
-  裡面列出的每張相片必須都與 CSV 文字檔在同個目錄下. Descriptions 可寫可不寫.
+只有 ##src## 參數是必要的.
 
-**mode**:
-  指定相片排列的方法, ='column'= 表示直放, ='row'= 表示橫放. 預設為 ='row'=.
+{| class="bordered"
+|-
+! 引數
+! Description
+! 預設
+|-
+| **src**
+|
+一個 CSV 文字檔案,裡面每行的格式為 filename, description.
+裡面列出的每張相片必須都與 CSV 文字檔在同個目錄下. Descriptions 可寫可不寫.
 
-**align**:
-  每欄的對齊方式. 預設為 ='center'=.
+If the local path points to a directory, is relative from PHPWIKI_DIR,
+and the main script is in PHPWIKI_DIR, ##url## must not be given, and
+all pictures from this directory are displayed.
+|
+|-
+| **url**
+| Defines the webpath to the srcdir directory
+|
+|-
+| **mode**
+|
+指定相片排列的方法.
+* "normal" - Normal table which shows photos full-size
+* "thumbs" - WinXP thumbnail style
+* "tiles"  - WinXP tiles style
+* "list"   - WinXP list style
+* "row"    - inline thumbnails
+* "column" - photos full-size, displayed in 1 column
+* "slide"  - slideshow mode, needs Javascript on client
+| normal
+|-
+| **numcols**
+| photos per row, columns
+| 3
+|-
+| **showdesc**
+|
+* "none"   - No descriptions next to photos
+* "name"   - Only filename shown
+* "desc"   - Only description (from textfile) shown
+* "both"   - If no description found, then filename will be used
+| both
+|-
+| **link**
+|
+true or false
 
-**desc**:
-  是否顯示文字檔中指定的 description. 預設為真.
+If true, each image will be hyperlinked to a page where the single
+photo will be shown full-size. Only works when mode != 'normal'
+| true
+|-
+| **attrib**
+| attrib arg allows multiple attributes: attrib=sort,nowrap,alt
+* "sort" sorts alphabetically,
+* "nowrap" for cells,
+* "alt" to use descs instead of filenames in image ALT-tags
+|-
+| **align**
+| 每欄的對齊方式 center, right or left
+| center
+|-
+| **desc**
+| 是否顯示文字檔中指定的 description
+| true
+|-
+| **sort**
+| 以檔案名稱排序圖片
+| 預設是以文字檔中的順序來排列
+|-
+| **bgcolor**
+| cell bgcolor
+| #eae8e8 (lightgrey)
+|-
+| **hlcolor**
+| highlight color
+| #c0c0ff (lightblue)
+|-
+| **height**, **width**
+|
+高度與寬度用來與用 [[php-function:getimagesize]] 取得的原始高度與寬度做比較,
+可以指定絕對值或百分比 (例如 "50%").
+|
+|-
+| **attrib**
+|
+attrib arg allows multiple attributes: attrib=sort,nowrap,alt
+'sort' sorts alphabetically, 'nowrap' for cells, 'alt' to use
+descs instead of filenames in image ALT-tags
+|
+|-
+| **cellwidth**
+|
+cell (auto|equal|image|75|100%)
 
-**sort**:
-  以檔案名稱排序圖片. 預設是以文字檔中的順序來排列.
+Width of cells in table. Either absolute value in pixels, HTML
+style percentage, "auto" (no special action), "equal" (where
+all columns are equally sized) or "image" (take height and
+width of the photo in that cell).
+|
+|-
+| **tablewidth**
+|
+table (75|100%)
+| false
+|-
+| **p**
+| "displaythissinglephoto.jpg" only
+| false
+|-
+| **h**
+| "highlightcolorofthisphoto.jpg" only
+| false
+|-
+| **duration**
+| in slide mode, duration in seconds
+| 6
+|-
+| **thumbswidth**
+| width of thumbnails
+| 80
+|}
 
-**height**, **width**:
-  高度與寬度用來與用 [php-function:getimagesize] 取得的原始高度與寬度做比較,
-  可以指定絕對值或百分比 (例如 "50%").
+== Examples ==
 
-== Examples
-=== Text file
+=== Text file ===
+
 正確文字檔的內容應該是:
 
 {{{
@@ -55,13 +161,24 @@ photo-02.jpg
 christmas.gif; Merry Christmas!
 }}}
 
-=== Sample Album
-<<PhotoAlbum
-         src="http://phpwiki.sourceforge.net/demo/themes/Hawaiian/images/pictures/PhotoAlbum"
->>
+=== Sample Albums ===
 
-== Plugin Author
-[Ted Vinke|mailto:teddy@jouwfeestje.com] <teddy@jouwfeestje.com>
+local dir:
+{{{
+<<PhotoAlbum src="themes/Hawaiian/images/pictures/" >>
+}}}
+or via external URL:
+{{{
+<<PhotoAlbum src="http://phpwiki.sourceforge.net/demo/themes/Hawaiian/images/pictures/PhotoAlbum.csv" >>
+}}}
+
+[[/Slides]]
+
+== Authors ==
+
+* [[mailto:teddy@jouwfeestje.com|Ted Vinke]]: original author
+* [[Help:Reini Urban|Reini Urban]]: local fs
+* Thomas Harding: slides and thumbs
 
 <noinclude>
 ----

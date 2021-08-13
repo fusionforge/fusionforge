@@ -1,7 +1,6 @@
 <?php
-
 /**
- * Copyright 1999, 2005 $ThePhpWikiProgrammingTeam
+ * Copyright © 1999, 2005 $ThePhpWikiProgrammingTeam
  *
  * This file is part of PhpWiki.
  *
@@ -18,6 +17,9 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
  */
 
 require_once 'lib/WikiDB.php';
@@ -28,6 +30,7 @@ require_once 'lib/WikiDB/backend/flatfile.php';
  * flatfile has readable (mimified) page_data files, the rest is the
  * same as in the file backend (serialized arrays).
  */
+
 class WikiDB_flatfile extends WikiDB
 {
     function __construct($dbparams)
@@ -43,11 +46,3 @@ class WikiDB_flatfile extends WikiDB
                 "Page", "/tmp"), E_USER_WARNING);
     }
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

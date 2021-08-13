@@ -1,21 +1,32 @@
-Date: Mon, 29 Jun 2015 12:04:25 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Fri, 12 Dec 2020 10:36:59 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=Hj%C3%A4lp%2FWikiWikiWeb;
-  flags="";
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
   charset=UTF-8
 Content-Transfer-Encoding: binary
 
-En ~WikiWikiWeb är en webbplats där alla kan bidra till innehållet. Den mest välkända och mest använda Wikin är Portland Pattern Repository på [[http://c2.com/cgi-bin/wiki?WikiWikiWeb]].
+En **~WikiWikiWeb** är en webbplats där alla kan bidra till innehållet.
+Den mest välkända och mest använda Wikin är Portland
+Pattern Repository på [[http://c2.com/cgi-bin/wiki?WikiWikiWeb]].
 
 Där fann jag följande relevanta uttalanden (översatta till svenska):
 
-//Meningen är att göra formuläret i RedigeraText enkelt och få [[SökEfterSida]] att söka snabbt.//
+//Meningen är att göra formuläret i [[Hjälp:RedigeraText|RedigeraText]] enkelt och få [[SökEfterSida]]
+att söka snabbt.//
 
-//Förutom att vara snabb, strävar den här webbplatsen även efter zen-idealen som generellt kallas [[WabiSabi]]. Zen finner skönhet i det imperfekta och kortlivade. När det kommer till kritan är det allt som behövs.//
+//Förutom att vara snabb, strävar den här webbplatsen även efter zen-idealen
+som generellt kallas [[WabiSabi]]. Zen finner skönhet i det imperfekta och
+kortlivade. När det kommer till kritan är det allt som behövs.//
 
-Du kan säga hej i [[Gästboken]] eller läsa om [[HurManAnvänderWiki]] och
+//The Universe tends toward chaos. The Universe tends toward Wiki.//
+
+Du kan säga hej i [[Gästboken]] eller läsa om [[Hjälp:HurManAnvänderWiki|HurManAnvänderWiki]] och
 [[LäggaTillSidor]]. Varsågod, börja diskutera, lek och ha roligt!
 
--- [[Steve Wainstead]]
+-- [[Hjälp:Steve Wainstead|Steve Wainstead]]
 
+<noinclude>
+----
+[[PhpWikiDocumentation]]
+</noinclude>

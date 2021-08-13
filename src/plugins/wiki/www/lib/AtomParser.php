@@ -1,6 +1,6 @@
 <?php
-/*
- * Copyright 2010 Sébastien Le Callonnec
+/**
+ * Copyright © 2010 Sébastien Le Callonnec
  *
  * This file is part of PhpWiki.
  *
@@ -17,6 +17,9 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
  */
 /**
  * This class is a poor-man Atom parser, it does no validation of the feed.
@@ -25,10 +28,10 @@
  *
  * @author: Sébastien Le Callonnec
  */
-require_once 'lib/XmlParser.php';
+require_once 'lib/PhpWikiXmlParser.php';
 
 class AtomParser
-    extends XmlParser
+    extends PhpWikiXmlParser
 {
     // Feed
     public $feed = array();

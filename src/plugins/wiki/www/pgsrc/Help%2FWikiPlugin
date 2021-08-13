@@ -1,5 +1,5 @@
-Date: Mon, 29 Jun 2015 12:04:28 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Sun, 29 Mar 2020 19:52:27 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FWikiPlugin;
   flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
@@ -21,13 +21,9 @@ A ~WikiPlugin allows one to easily add new types of dynamic
 content (as well as other functionality) to wiki pages within ~PhpWiki.
 In this very wiki all actions which are not entirely lowercased
 are implemented using plugins, and some lowercased convenience
-actions also.
-(rename, revert, setacl, diff, ...)
+actions also (rename, revert, setacl, diff, ...)
 
 Note that you can NOT extend the markup syntax with a plugin, as in other wiki engines.
-
-(The old-style [[Help:MagicPhpWikiURLs|MagicPhpWikiURLs]] have been replaced by plugins
-entirely.)
 
 == Example ==
 
@@ -38,20 +34,18 @@ Currently, one invokes a plugin by putting something like:
 }}}
 
 into a regular wiki-page.  That particular example produces a list
-of the first 20 existing pages in 3 columns, via the [[Help:PageList|PageList]]
-library.
+of the first 20 existing pages in 3 columns, via the [[Help:PageList|PageList]] library.
 
 <<AllPages limit=20 cols=3>>
 
 == Details ==
 
 Plugins can take certain named arguments, most do.  The values of
-these arguments can be determined four different ways.  In order of
-precedence:
+these arguments can be determined four different ways.  In order of precedence:
 
 # The plugin invocation can specify the value for an argument, like so:
   {{{
-  <?plugin BackLinks page=OtherPage ?>
+  <<BackLinks page=OtherPage>>
   }}}
 
 # The argument can be specified via an HTTP query argument.  This
@@ -59,13 +53,13 @@ precedence:
   the plugin invocation:
 
   {{{
-  <?plugin BackLinks page ?>
+  <<BackLinks page>>
   }}}
 
 # Default values specified in the plugin invocation:
 
   {{{
-  <?plugin BackLinks page||=OtherPage ?>
+  <<BackLinks page||=OtherPage>>
   }}}
 
 # The plugin must supply default values for each argument it uses.
@@ -73,8 +67,8 @@ precedence:
   {{{
     BackLinks?page=ThisPage&sortby=-mtime
   }}}
-  (The BackLinks plugin uses the current page as the default value for
-  the *page* argument.)
+  (The ~BackLinks plugin uses the current page as the default value for
+  the **page** argument.)
 
   Most plugins using the [[Help:PageList|PageList]] library inherit their
   default arguments from the ~PageList.
@@ -87,9 +81,9 @@ library. ~PageList provides automatic support for those arguments.
   info, exclude, author, owner, creator, sortby, limit, paging, cols, azhead,
   comma, commasep, ordered
 
-  For details see the [[Help:PageList|PageList]] library documentation.
+For details see the [[Help:PageList|PageList]] library documentation.
 
-*exclude* and *pages* accept a list of pages. Either as comma-separated list,
+**exclude** and **pages** accept a list of pages. Either as comma-separated list,
 supporting glob-style wildcards, or via the ##<!plugin-list pluginname ~[args~] !>##
 invocation syntax, where pluginname might be any plugin returning a [[Help:PageList|PageList]].
 

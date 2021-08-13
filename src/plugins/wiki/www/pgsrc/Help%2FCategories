@@ -1,5 +1,5 @@
-Date: Mon, 29 Jun 2015 12:04:28 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Sun, 27 Dec 2020 16:52:02 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FCategories;
   flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
@@ -47,7 +47,7 @@ To put the article **banana** in ~CategoryFruit, you have to put at the end of t
 The ~CategoryFruit page will then display your text describing the
 purpose of the category, then the list of pages in the category.
 
-The can be done very easily by using the {{/themes/default/images/ed_category.png|[C]}}
+The can be done very easily by using the {{/themes/default/images/ed_category.png|Insert Categories}}
 button of the edit toolbar when editing the page.
 
 == Category hierarchies ==

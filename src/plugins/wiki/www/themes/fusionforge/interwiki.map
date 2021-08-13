@@ -17,9 +17,9 @@ MeatBall http://www.usemod.com/cgi-bin/mb.pl?
 MetaWiki http://sunir.org/apps/meta.pl?
 MetaWikiPedia http://meta.wikipedia.com/wiki/
 MoinMoin http://moinmoin.wikiwikiweb.de/
-php-function http://www.php.net/%s
-php-lookup http://www.php.net/manual-lookup.php?pattern=
-PhpWiki http://phpwiki.fr/
+php-function https://www.php.net/%s
+php-lookup https://www.php.net/manual-lookup.php?pattern=
+PhpWiki http://phpwiki.demo.free.fr/index.php/
 PhpWikiSvn https://sourceforge.net/p/phpwiki/code/HEAD/tree/trunk/
 SourceForge http://sourceforge.net/
 TWiki http://twiki.org/cgi-bin/view/

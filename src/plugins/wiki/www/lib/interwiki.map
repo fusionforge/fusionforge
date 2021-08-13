@@ -86,9 +86,9 @@ OsFaq2 http://www.mega-tokyo.com/osfaq2/index.php/
 PPR http://c2.com/cgi/wiki?
 PangalacticOrg http://www.pangalactic.org/Wiki/
 PersonalTelco http://www.personaltelco.net/index.cgi/
-php-function http://www.php.net/%s
-php-lookup http://www.php.net/manual-lookup.php?pattern=
-PhpWiki http://phpwiki.fr/
+php-function https://www.php.net/%s
+php-lookup https://www.php.net/manual-lookup.php?pattern=
+PhpWiki http://phpwiki.demo.free.fr/index.php/
 PhpWikiSvn https://sourceforge.net/p/phpwiki/code/HEAD/tree/trunk/
 Pikie http://pikie.darktech.org/cgi/pikie?
 PlWikiPedia http://pl.wikipedia.org/wiki/
@@ -101,7 +101,7 @@ PythonWiki http://www.pythonwiki.de/
 RFC http://www.faqs.org/rfcs/rfc%s.html
 RussellFreedom http://www.russellfreedom.com/
 SVGWiki http://www.protocol7.com/svg-wiki/default.asp?
-SeaPig http://www.seapig.org/ 
+SeaPig http://www.seapig.org/
 SeattleWireless http://seattlewireless.net/?
 SenseisLibrary http://senseis.xmp.net/?
 Shakti http://cgi.algonet.se/htbin/cgiwrap/pgd/ShaktiWiki/

@@ -1,5 +1,5 @@
-Date: Mon, 29 Jun 2015 12:04:23 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Mon, 15 Apr 2019 14:46:57 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=R%C3%A9cup%C3%A9rationDeLaPage;
   flags=PAGE_LOCKED;
@@ -8,7 +8,7 @@ Content-Transfer-Encoding: binary
 
 Voir une page wiki dans le format MIME ou la télécharger comme copie
 d'une page unique. //Un cliché complet de toutes les pages est possible
-avec AdministrationDePhpWiki.//
+avec [[AdministrationDePhpWiki]].//
 
 <<PageDump>>
 ----
@@ -18,9 +18,9 @@ Entrer le nom exact de la page à récupérer :
 RechercheParTitre :
 <?plugin-form TitleSearch?>
 
-== See Also ==
+== Voir aussi ==
 * [[phpwiki:?action=viewsource|ViewSource]]
-* [[PluginManager]]
+* [[GestionnaireDesGreffons]]
 
 ----
 [[CatégoriePageDAction]]

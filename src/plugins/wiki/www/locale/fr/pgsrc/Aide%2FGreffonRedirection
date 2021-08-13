@@ -1,0 +1,53 @@
+Date: Mon, 30 Mar 2020 15:49:22 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
+Content-Type: application/x-phpwiki;
+  pagename=Aide%2FGreffonRedirection;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
+  charset=UTF-8
+Content-Transfer-Encoding: binary
+
+Le [[Aide:GreffonWiki|greffon]] **Redirection** (//~RedirectTo//) est à utiliser pour rediriger un utilisateur vers une autre
+page. En d'autres termes, ce greffon crée un //alias// pour une autre page.
+
+Quand on redirige vers une autre page du wiki, une note est ajoutée en haut de la page cible
+disant //(Redirigé de la page ~UnePageDeRedirection)//.
+
+Le redirection vers une URL externe ne fonctionne que si la page est verrouillée.
+
+== Arguments ==
+
+Utiliser seulement un des arguments à la fois.
+
+{| class="bordered"
+|-
+! Argument
+! Description
+! Valeur par défaut
+|-
+| **page**
+| Le nom de la page wiki cible de la redirection.
+| none
+|-
+| **href**
+| Une URL externe vers laquelle se rediriger. Cela ne fonctionnera qu'avec les pages verrouillées. (Si l'URL contient des caractères bizarres, vous serez probablement obligé d'utiliser des apostrophes.)
+| none
+|}
+
+== Avertissements ==
+
+L'appel du greffon Redirection doit être la première chose de la page.
+Dans la plupart des cas, il rend le reste du contenu de la page inaccessible.
+
+== Exemple ==
+
+Une page peut être rendue comme un alias pour la page d'acccueil en utilisant ce code :
+{{{
+<<RedirectTo page="PageAccueil">>
+}}}
+
+Pour voir cet exemple en action, visitez [[AliasAccueil]].
+
+<noinclude>
+----
+[[DocumentationDePhpWiki]] [[CatégorieGreffonWiki]]
+</noinclude>

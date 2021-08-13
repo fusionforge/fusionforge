@@ -1,8 +1,7 @@
 <?php
-
 /**
- * Copyright 1999,2000,2001,2002,2004 $ThePhpWikiProgrammingTeam
- * Copyright 2009 Marc-Etienne Vargenau, Alcatel-Lucent
+ * Copyright © 1999,2000,2001,2002,2004 $ThePhpWikiProgrammingTeam
+ * Copyright © 2009 Marc-Etienne Vargenau, Alcatel-Lucent
  *
  * This file is part of PhpWiki.
  *
@@ -19,6 +18,9 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
  */
 
 /**
@@ -38,6 +40,7 @@
  *
  * Updated to use new HTML(). It mostly works, but it's still a giant hackish mess.
  */
+
 class WikiPlugin_PageGroup
     extends WikiPlugin
 {
@@ -145,8 +148,8 @@ class WikiPlugin_PageGroup
 
         $go = array('previous', 'next');
         $links = HTML();
-        $links->pushcontent($label);
-        $links->pushcontent(" [ "); // an experiment
+        $links->pushContent($label);
+        $links->pushContent(" [ "); // an experiment
         $lastindex = count($c) - 1; // array is 0-based, count is 1-based!
 
         foreach ($go as $go_item) {
@@ -161,8 +164,8 @@ class WikiPlugin_PageGroup
                     // mind the French : punctuation
                     $text = fmt("%s: %s", $directions[$go_item],
                         $WikiTheme->makeLinkButton($linkpage));
-                    $links->pushcontent($text);
-                    $links->pushcontent($sep); // this works because
+                    $links->pushContent($text);
+                    $links->pushContent($sep); // this works because
                     // there are only 2 go
                     // items, previous,next
                 } else {
@@ -172,8 +175,8 @@ class WikiPlugin_PageGroup
                         $linkpage = $c[$thispage - 1];
                         $text = fmt("%s: %s", $directions[$go_item],
                             $WikiTheme->makeLinkButton($linkpage));
-                        $links->pushcontent($text);
-                        $links->pushcontent($sep); //this works
+                        $links->pushContent($text);
+                        $links->pushContent($sep); //this works
                         //because there are
                         //only 2 go items,
                         //previous,next
@@ -197,18 +200,10 @@ class WikiPlugin_PageGroup
                             $WikiTheme->makeLinkButton($linkpage));
                     }
                 }
-                $links->pushcontent($text);
+                $links->pushContent($text);
             }
         }
-        $links->pushcontent(" ] "); // an experiment
+        $links->pushContent(" ] "); // an experiment
         return $links;
     }
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

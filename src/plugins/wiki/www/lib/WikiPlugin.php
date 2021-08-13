@@ -1,4 +1,28 @@
 <?php
+/**
+ * Copyright © 2001-2003 Jeff Dairiki
+ * Copyright © 2002-2003 Carsten Klapp
+ * Copyright © 2002,2004-2005,2007-2008 Reini Urban
+ *
+ * This file is part of PhpWiki.
+ *
+ * PhpWiki is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * PhpWiki is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
+ */
 
 abstract class WikiPlugin
 {
@@ -60,7 +84,7 @@ abstract class WikiPlugin
      *
      * @param  string $argstr   The plugin argument string.
      * @param  string $basepage The pagename the plugin is invoked from.
-     * @return array  List of pagenames linked to (or false).
+     * @return array|false  List of pagenames linked to (or false).
      */
     function getWikiPageLinks($argstr, $basepage)
     {
@@ -454,7 +478,7 @@ abstract class WikiPlugin
             } else
                 if (stristr($default, ' '))
                     $default = "'$default'";
-            $arguments->pushcontent("$arg=$default", HTML::br());
+            $arguments->pushContent("$arg=$default", HTML::br());
         }
         return $arguments;
     }
@@ -467,7 +491,7 @@ class WikiPluginLoader
 
     function expandPI($pi, &$request, &$markup, $basepage = false)
     {
-        if (!($ppi = $this->parsePi($pi)))
+        if (!($ppi = $this->parsePI($pi)))
             return false;
         list($pi_name, $plugin, $plugin_args) = $ppi;
 
@@ -494,8 +518,7 @@ class WikiPluginLoader
 
                     // As an additional hack, mark the ETag weak, since,
                     // for all we know, the page might depend
-                    // on things other than the WikiDB (e.g. PhpWeather,
-                    // Calendar...)
+                    // on things other than the WikiDB (e.g. Calendar...)
 
                     $timestamp = $dbi->getTimestamp();
                     $request->appendValidators(array('dbi_timestamp' => $timestamp,
@@ -513,7 +536,7 @@ class WikiPluginLoader
 
     function getWikiPageLinks($pi, $basepage)
     {
-        if (!($ppi = $this->parsePi($pi)))
+        if (!($ppi = $this->parsePI($pi)))
             return false;
         list($pi_name, $plugin, $plugin_args) = $ppi;
         if (!is_object($plugin))
@@ -590,11 +613,3 @@ class WikiPluginLoader
         return false;
     }
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

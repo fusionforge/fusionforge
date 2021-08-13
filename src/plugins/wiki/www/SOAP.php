@@ -1,5 +1,29 @@
 <?php
 /**
+ * Copyright © 2004-2005,2007 Reini Urban
+ * Copyright © 2011-2015 Marc-Etienne Vargenau, Alcatel-Lucent
+ *
+ * This file is part of PhpWiki.
+ *
+ * PhpWiki is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * PhpWiki is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
+ */
+
+/**
  * SOAP server
  * Taken from http://www.wlug.org.nz/archive/
  * Please see http://phpwiki.sourceforge.net/phpwiki/PhpWiki.wdsl
@@ -245,7 +269,7 @@ class PhpWikiSoapServer
         $plugin_dir = 'lib/plugin';
         if (defined('PHPWIKI_DIR'))
             $plugin_dir = PHPWIKI_DIR . "/$plugin_dir";
-        $pd = new fileSet($plugin_dir, '*.php');
+        $pd = new FileSet($plugin_dir, '*.php');
         $plugins = $pd->getFiles();
         unset($pd);
         sort($plugins);
@@ -255,7 +279,7 @@ class PhpWikiSoapServer
             $w = new WikiPluginLoader();
             foreach ($plugins as $plugin) {
                 $pluginName = str_replace(".php", "", $plugin);
-                $p = $w->getPlugin($pluginName, false); // second arg?
+                $p = $w->getPlugin($pluginName);
                 // trap php files which aren't WikiPlugin~s: wikiplugin + wikiplugin_cached only
                 if (strtolower(substr(get_parent_class($p), 0, 10)) == 'wikiplugin') {
                     $RetArray[] = $pluginName;
@@ -272,7 +296,7 @@ class PhpWikiSoapServer
         require_once 'lib/WikiPlugin.php';
         $w = new WikiPluginLoader();
         $synopsis = '';
-        $p = $w->getPlugin($pluginname, false); // second arg?
+        $p = $w->getPlugin($pluginname);
         // trap php files which aren't WikiPlugin~s: wikiplugin + wikiplugin_cached only
         if (strtolower(substr(get_parent_class($p), 0, 10)) == 'wikiplugin') {
             $plugin_args = '';
@@ -296,7 +320,7 @@ class PhpWikiSoapServer
         $basepage = '';
         require_once 'lib/WikiPlugin.php';
         $w = new WikiPluginLoader();
-        $p = $w->getPlugin($pluginname, false); // second arg?
+        $p = $w->getPlugin($pluginname);
         $pagelist = $p->run($dbi, $plugin_args, $request, $basepage);
         $pages = array();
         if (is_object($pagelist) and is_a($pagelist, 'PageList')) {
@@ -375,11 +399,3 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD']=='POST') {
         echo "HTTP/1.0 500 Internal Server Error";
     }
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

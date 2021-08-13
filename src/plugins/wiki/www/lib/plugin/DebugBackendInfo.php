@@ -1,7 +1,6 @@
 <?php
-
 /**
- * Copyright 1999,2000,2001,2002,2006,2007 $ThePhpWikiProgrammingTeam
+ * Copyright © 1999,2000,2001,2002,2006,2007 $ThePhpWikiProgrammingTeam
  *
  * This file is part of PhpWiki.
  *
@@ -18,11 +17,13 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
  */
 
 require_once 'lib/Template.php';
-/**
- */
+
 class WikiPlugin_DebugBackendInfo
     extends WikiPlugin
 {
@@ -38,7 +39,7 @@ class WikiPlugin_DebugBackendInfo
     function getDefaultArguments()
     {
         return array('page' => '[pagename]',
-            'notallversions' => 0);
+                     'notallversions' => false);
     }
 
     /**
@@ -61,27 +62,34 @@ class WikiPlugin_DebugBackendInfo
             $request->_notAuthorized(WIKIAUTH_ADMIN);
             $this->disabled("! user->isAdmin");
         }
-        if (empty($page))
+        if (empty($page)) {
             return $this->error("page missing");
+        }
+        if (($notallversions == '0') || ($notallversions == 'false')) {
+            $notallversions = false;
+        } elseif (($notallversions == '1') || ($notallversions == 'true')) {
+            $notallversions = true;
+        } else {
+            return $this->error(sprintf(_("Argument '%s' must be a boolean"), "notallversions"));
+        }
 
         $backend = &$dbi->_backend;
         $this->chunk_split = true;
         $this->readonly_pagemeta = array();
         $this->hidden_pagemeta = array('_cached_html');
 
-        $html = HTML(HTML::h2(fmt("Querying backend directly for “%s”",
-            $page)));
+        $html = HTML(HTML::h2(fmt("Querying backend directly for “%s”", $page)));
 
         $table = HTML::table(array('class' => 'bordered'));
         $pagedata = $backend->get_pagedata($page);
         if (!$pagedata) {
-            // FIXME: invalid HTML
             $html->pushContent(HTML::p(fmt("No pagedata for %s", $page)));
+            return $html;
         } else {
             $this->_fixupData($pagedata);
             $table->pushContent($this->_showhash("get_pagedata('$page')", $pagedata));
         }
-        if (!$notallversions) {
+        if ($notallversions) {
             $version = $backend->get_latest_version($page);
             $vdata = $backend->get_versiondata($page, $version, true);
             $this->_fixupData($vdata);
@@ -103,13 +111,13 @@ class WikiPlugin_DebugBackendInfo
         $linkdata = $backend->get_links($page, false);
         if ($linkdata->count())
             $table->pushContent($this->_showhash("get_links('$page')", $linkdata->asArray()));
-        $relations = $backend->get_links($page, false, false, false, false, false, true);
+        $relations = $backend->get_links($page, false, false, false, false, false);
         if ($relations->count()) {
             $table->pushContent($this->_showhash("get_relations('$page')", array()));
             while ($rel = $relations->next())
                 $table->pushContent($this->_showhash(false, $rel));
         }
-        $linkdata = $backend->get_links($page, true);
+        $linkdata = $backend->get_links($page);
         if ($linkdata->count())
             $table->pushContent($this->_showhash("get_backlinks('$page')", $linkdata->asArray()));
 
@@ -205,11 +213,3 @@ class WikiPlugin_DebugBackendInfo
     }
 
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

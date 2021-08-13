@@ -28,7 +28,7 @@
 /**
  * Obtain the DB_common class so it can be extended from
  */
-require_once 'DB/common.php';
+require_once 'lib/pear/DB/common.php';
 
 /**
  * The methods PEAR DB uses to interact with PHP's pgsql extension
@@ -43,7 +43,7 @@ require_once 'DB/common.php';
  * @author     Daniel Convissor <danielc@php.net>
  * @copyright  1997-2007 The PHP Group
  * @license    http://www.php.net/license/3_0.txt  PHP License 3.0
- * @version    Release: 1.8.2
+ * @version    Release: 1.10.0
  * @link       http://pear.php.net/package/DB
  */
 class DB_pgsql extends DB_common
@@ -148,13 +148,13 @@ class DB_pgsql extends DB_common
     // {{{ constructor
 
     /**
-     * This constructor calls <kbd>$this->DB_common()</kbd>
+     * This constructor calls <kbd>parent::__construct()</kbd>
      *
      * @return void
      */
-    function DB_pgsql()
+    function __construct()
     {
-        $this->DB_common();
+        parent::__construct();
     }
 
     // }}}
@@ -325,14 +325,14 @@ class DB_pgsql extends DB_common
         $query = $this->modifyQuery($query);
         if (!$this->autocommit && $ismanip) {
             if ($this->transaction_opcount == 0) {
-                $result = @pg_exec($this->connection, 'begin;');
+                $result = @pg_query($this->connection, 'begin;');
                 if (!$result) {
                     return $this->pgsqlRaiseError();
                 }
             }
             $this->transaction_opcount++;
         }
-        $result = @pg_exec($this->connection, $query);
+        $result = @pg_query($this->connection, $query);
         if (!$result) {
             return $this->pgsqlRaiseError();
         }
@@ -598,7 +598,7 @@ class DB_pgsql extends DB_common
         if ($this->transaction_opcount > 0) {
             // (disabled) hack to shut up error messages from libpq.a
             //@fclose(@fopen("php://stderr", "w"));
-            $result = @pg_exec($this->connection, 'end;');
+            $result = @pg_query($this->connection, 'end;');
             $this->transaction_opcount = 0;
             if (!$result) {
                 return $this->pgsqlRaiseError();
@@ -618,7 +618,7 @@ class DB_pgsql extends DB_common
     function rollback()
     {
         if ($this->transaction_opcount > 0) {
-            $result = @pg_exec($this->connection, 'abort;');
+            $result = @pg_query($this->connection, 'abort;');
             $this->transaction_opcount = 0;
             if (!$result) {
                 return $this->pgsqlRaiseError();
@@ -887,7 +887,7 @@ class DB_pgsql extends DB_common
              * Probably received a table name.
              * Create a result resource identifier.
              */
-            $id = @pg_exec($this->connection, "SELECT * FROM $result LIMIT 0");
+            $id = @pg_query($this->connection, "SELECT * FROM $result LIMIT 0");
             $got_string = true;
         } elseif (isset($result->result)) {
             /*
@@ -980,7 +980,7 @@ class DB_pgsql extends DB_common
             $tableWhere = "tab.relname = '$table_name'";
         }
 
-        $result = @pg_exec($this->connection, "SELECT f.attnotnull, f.atthasdef
+        $result = @pg_query($this->connection, "SELECT f.attnotnull, f.atthasdef
                                 FROM $from
                                 WHERE tab.relname = typ.typname
                                 AND typ.typrelid = f.attrelid
@@ -991,7 +991,7 @@ class DB_pgsql extends DB_common
             $flags  = ($row[0] == 't') ? 'not_null ' : '';
 
             if ($row[1] == 't') {
-                $result = @pg_exec($this->connection, "SELECT a.adsrc
+                $result = @pg_query($this->connection, "SELECT a.adsrc
                                     FROM $from, pg_attrdef a
                                     WHERE tab.relname = typ.typname AND typ.typrelid = f.attrelid
                                     AND f.attrelid = a.adrelid AND f.attname = '$field_name'
@@ -1003,7 +1003,7 @@ class DB_pgsql extends DB_common
         } else {
             $flags = '';
         }
-        $result = @pg_exec($this->connection, "SELECT i.indisunique, i.indisprimary, i.indkey
+        $result = @pg_query($this->connection, "SELECT i.indisunique, i.indisprimary, i.indkey
                                 FROM $from, pg_index i
                                 WHERE tab.relname = typ.typname
                                 AND typ.typrelid = f.attrelid

@@ -1,7 +1,8 @@
 <?php
-/* Copyright (C) 2004,2005,2006,2007,2009,2010 $ThePhpWikiProgrammingTeam
- * Copyright (C) 2009-2010 Marc-Etienne Vargenau, Alcatel-Lucent
- * Copyright (C) 2009-2010 Roger Guignard, Alcatel-Lucent
+/**
+ * Copyright © 2004,2005,2006,2007,2009,2010 $ThePhpWikiProgrammingTeam
+ * Copyright © 2009-2010 Marc-Etienne Vargenau, Alcatel-Lucent
+ * Copyright © 2009-2010 Roger Guignard, Alcatel-Lucent
  *
  * This file is part of PhpWiki.
  *
@@ -18,6 +19,9 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
  */
 
 /**
@@ -88,7 +92,7 @@
  * 2004-04-04 rurban
  * 7) Certain themes should be able to extend the predefined list
  *    of preferences. Display/editing is done in the theme specific userprefs.tmpl,
- *    but storage must be extended to the Get/SetPreferences methods.
+ *    but storage must be extended to the get/setPreferences methods.
  *    <theme>/themeinfo.php must provide CustomUserPreferences:
  *      A list of name => _UserPreference class pairs.
  * 2010-06-07 rurban
@@ -353,10 +357,8 @@ abstract class _WikiUser
     public $_current_method;
     public $_current_index;
 
-    // constructor
-    function _WikiUser($UserName = '', $prefs = false)
+    function __construct($UserName = '', $prefs = false)
     {
-
         $this->_userid = $UserName;
         $this->_HomePagehandle = false;
         if ($UserName) {
@@ -379,7 +381,7 @@ abstract class _WikiUser
 
     abstract function getPreferences();
 
-    abstract function setPreferences($prefs, $id_only);
+    abstract function setPreferences($prefs, $id_only = false);
 
     function userExists()
     {
@@ -414,10 +416,12 @@ abstract class _WikiUser
         global $request;
 
         $versiondata = array('author' => ADMIN_USER);
-        $request->_dbi->save(_("Automatically created user homepage to be able to store UserPreferences.") .
+        $dbi =& $request->_dbi;
+        $page = $dbi->getPage(ADMIN_USER);
+        $page->save(_("Automatically created user homepage to be able to store UserPreferences.") .
                 "\n{{Template/UserPage}}",
             1, $versiondata);
-        $request->_dbi->touch();
+        $dbi->touch();
         $this->_HomePagehandle = $request->getPage($this->_userid);
     }
 
@@ -626,7 +630,6 @@ abstract class _WikiUser
 
         if (!$this->isValidName($userid))
             return _("Invalid username.");
-        ;
 
         $authlevel = $this->checkPass($passwd === false ? '' : $passwd);
 
@@ -713,71 +716,15 @@ class _AnonUser
         global $request;
 
         if (empty($this->_prefs))
-            $this->_prefs = new UserPreferences;
+            $this->_prefs = new UserPreferences();
         $UserName = $this->UserName();
 
-        // Try to read deprecated 1.3.x style cookies
-        if ($cookie = $request->cookies->get_old(WIKI_NAME)) {
-            if (!$unboxedcookie = $this->_prefs->retrieve($cookie)) {
-                trigger_error(_("Empty Preferences or format of UserPreferences cookie not recognised.")
-                        . "\n"
-                        . sprintf("%s='%s'", WIKI_NAME, $cookie)
-                        . "\n"
-                        . _("Default preferences will be used."),
-                    E_USER_NOTICE);
-            }
-            /**
-             * Only set if it matches the UserName who is
-             * signing in or if this really is an Anon login (no
-             * username). (Remember, _BogoUser and higher inherit this
-             * function too!).
-             */
-            if (!$UserName || $UserName == @$unboxedcookie['userid']) {
-                $this->_prefs->updatePrefs($unboxedcookie);
-                $UserName = @$unboxedcookie['userid'];
-                if (is_string($UserName) and (substr($UserName, 0, 2) != 's:'))
-                    $this->_userid = $UserName;
-                else
-                    $UserName = false;
-            }
-            // v1.3.8 policy: don't set PhpWiki cookies, only plaintext WIKI_ID cookies
-            if (!headers_sent())
-                $request->deleteCookieVar(WIKI_NAME);
-        }
-        // Try to read deprecated 1.3.4 style cookies
-        if (!$UserName and ($cookie = $request->cookies->get_old("WIKI_PREF2"))) {
-            if (!$unboxedcookie = $this->_prefs->retrieve($cookie)) {
-                if (!$UserName || $UserName == $unboxedcookie['userid']) {
-                    $this->_prefs->updatePrefs($unboxedcookie);
-                    $UserName = $unboxedcookie['userid'];
-                    if (is_string($UserName) and (substr($UserName, 0, 2) != 's:'))
-                        $this->_userid = $UserName;
-                    else
-                        $UserName = false;
-                }
-                if (!headers_sent())
-                    $request->deleteCookieVar("WIKI_PREF2");
-            }
-        }
         if (!$UserName) {
-            // Try reading userid from old PhpWiki cookie formats:
-            if ($cookie = $request->cookies->get_old(getCookieName())) {
-                if (is_string($cookie) and (substr($cookie, 0, 2) != 's:'))
-                    $UserName = $cookie;
-                elseif (is_array($cookie) and !empty($cookie['userid']))
-                    $UserName = $cookie['userid'];
-            }
-            if (!$UserName and !headers_sent())
+            if (!headers_sent())
                 $request->deleteCookieVar(getCookieName());
             else
                 $this->_userid = $UserName;
         }
-
-        // initializeTheme() needs at least an empty object
-        /*
-         if (empty($this->_prefs))
-            $this->_prefs = new UserPreferences;
-        */
         return $this->_prefs;
     }
 
@@ -925,7 +872,7 @@ class _PassUser
     public $_current_index;
 
     // check and prepare the auth and pref methods only once
-    function _PassUser($UserName = '', $prefs = false)
+    function __construct($UserName = '', $prefs = false)
     {
         /**
          * @var WikiRequest $request
@@ -1094,7 +1041,6 @@ class _PassUser
         $this->getAuthDbh();
         // "'\$userid"' => %s
         // variables can be old-style: '"\$userid"' or new-style: "'$userid'" or just "userid"
-        // old-style strings don't survive pear/Config/IniConfig treatment, that's why we changed it.
         $new = array();
         if (is_array($variables)) {
             //$sprintfstyle = false;
@@ -1153,23 +1099,6 @@ class _PassUser
 
     function getPreferences()
     {
-        if (!empty($this->_prefs->_method)) {
-            if ($this->_prefs->_method == 'ADODB') {
-                // FIXME: strange why this should be needed...
-                include_once 'lib/WikiUser/Db.php';
-                include_once 'lib/WikiUser/AdoDb.php';
-                return _AdoDbPassUser::getPreferences();
-            } elseif ($this->_prefs->_method == 'SQL') {
-                include_once 'lib/WikiUser/Db.php';
-                include_once 'lib/WikiUser/PearDb.php';
-                return _PearDbPassUser::getPreferences();
-            } elseif ($this->_prefs->_method == 'PDO') {
-                include_once 'lib/WikiUser/Db.php';
-                include_once 'lib/WikiUser/PdoDb.php';
-                return _PdoDbPassUser::getPreferences();
-            }
-        }
-
         // We don't necessarily have to read the cookie first. Since
         // the user has a password, the prefs stored in the homepage
         // cannot be arbitrarily altered by other Bogo users.
@@ -1194,22 +1123,6 @@ class _PassUser
          */
         global $request;
 
-        if (!empty($this->_prefs->_method)) {
-            if ($this->_prefs->_method == 'ADODB') {
-                // FIXME: strange why this should be needed...
-                include_once 'lib/WikiUser/Db.php';
-                include_once 'lib/WikiUser/AdoDb.php';
-                return _AdoDbPassUser::setPreferences($prefs, $id_only);
-            } elseif ($this->_prefs->_method == 'SQL') {
-                include_once 'lib/WikiUser/Db.php';
-                include_once 'lib/WikiUser/PearDb.php';
-                return _PearDbPassUser::setPreferences($prefs, $id_only);
-            } elseif ($this->_prefs->_method == 'PDO') {
-                include_once 'lib/WikiUser/Db.php';
-                include_once 'lib/WikiUser/PdoDb.php';
-                return _PdoDbPassUser::setPreferences($prefs, $id_only);
-            }
-        }
         if ($updated = _AnonUser::setPreferences($prefs, $id_only)) {
             // Encode only the _prefs array of the UserPreference object
             // If no DB method exists to store the prefs we must store it in the page, not in the cookies.
@@ -1296,8 +1209,6 @@ class _PassUser
      * the db password method is 'plain', which means that the DB SQL
      * statement just returns 1 or 0. To use CRYPT() or PASSWORD() and
      * don't store plain passwords in the DB.
-     *
-     * TODO: remove crypt() function check from config.php:396 ??
      */
     function _checkPass($submitted_password, $stored_password)
     {
@@ -1337,7 +1248,7 @@ class _PassUser
     /** The default method is storing the password in prefs.
      *  Child methods (DB, File) may store in external auth also, but this
      *  must be explicitly enabled.
-     *  This may be called by plugin/UserPreferences or by ->SetPreferences()
+     *  This may be called by plugin/UserPreferences or by ->setPreferences()
      */
     function changePass($submitted_password)
     {
@@ -1352,7 +1263,7 @@ class _PassUser
         if ($stored_password != $submitted_password) {
             $this->_prefs->set('passwd', $submitted_password);
             //update the storage (session, homepage, ...)
-            $this->SetPreferences($this->_prefs);
+            $this->setPreferences($this->_prefs);
             return true;
         }
         //Todo: return an error msg to the caller what failed?
@@ -1441,7 +1352,7 @@ class _AdminUser
             // Should not happen! Only ADMIN_USER should use this class.
             // return $this->_tryNextPass($submitted_password); // ???
             // TODO: safety check if really member of the ADMIN group?
-            $stored_password = $this->_pref->get('passwd');
+            $stored_password = $this->_prefs->get('passwd');
         }
         if ($this->_checkPass($submitted_password, $stored_password)) {
             $this->_level = WIKIAUTH_ADMIN;
@@ -1480,7 +1391,7 @@ class _UserPreference
 {
     public $default_value;
 
-    function _UserPreference($default_value)
+    function __construct($default_value)
     {
         $this->default_value = $default_value;
     }
@@ -1527,17 +1438,15 @@ class _UserPreference
     // default: no side-effects
     function update($value)
     {
-        ;
     }
 }
 
 class _UserPreference_numeric
     extends _UserPreference
 {
-    function _UserPreference_numeric($default, $minval = false,
-                                     $maxval = false)
+    function __construct($default, $minval = false, $maxval = false)
     {
-        $this->_UserPreference((double)$default);
+        parent::__construct((double)$default);
         $this->_minval = (double)$minval;
         $this->_maxval = (double)$maxval;
     }
@@ -1556,9 +1465,9 @@ class _UserPreference_numeric
 class _UserPreference_int
     extends _UserPreference_numeric
 {
-    function _UserPreference_int($default, $minval = false, $maxval = false)
+    function __construct($default, $minval = false, $maxval = false)
     {
-        $this->_UserPreference_numeric((int)$default, (int)$minval, (int)$maxval);
+        parent::__construct((int)$default, (int)$minval, (int)$maxval);
     }
 
     function sanify($value)
@@ -1570,9 +1479,9 @@ class _UserPreference_int
 class _UserPreference_bool
     extends _UserPreference
 {
-    function _UserPreference_bool($default = false)
+    function __construct($default = false)
     {
-        $this->_UserPreference((bool)$default);
+        parent::__construct((bool)$default);
     }
 
     function sanify($value)
@@ -1600,9 +1509,9 @@ class _UserPreference_bool
 class _UserPreference_language
     extends _UserPreference
 {
-    function _UserPreference_language($default = DEFAULT_LANGUAGE)
+    function __construct($default = DEFAULT_LANGUAGE)
     {
-        $this->_UserPreference($default);
+        parent::__construct($default);
     }
 
     // FIXME: check for valid locale
@@ -1616,7 +1525,7 @@ class _UserPreference_language
         return (string)$value;
     }
 
-    function update($newvalue)
+    function update($value)
     {
         /**
          * @var WikiRequest $request
@@ -1626,7 +1535,7 @@ class _UserPreference_language
         if (!$this->_init) {
             // invalidate etag to force fresh output
             $request->setValidators(array('%mtime' => false));
-            update_locale($newvalue ? $newvalue : $GLOBALS['LANG']);
+            update_locale($value ? $value : $GLOBALS['LANG']);
         }
     }
 }
@@ -1634,19 +1543,19 @@ class _UserPreference_language
 class _UserPreference_theme
     extends _UserPreference
 {
-    function _UserPreference_theme($default = THEME)
+    function __construct($default = THEME)
     {
-        $this->_UserPreference($default);
+        parent::__construct($default);
     }
 
     function sanify($value)
     {
-        if (!empty($value) and FindFile($this->_themefile($value)))
+        if (!empty($value) and findFile($this->_themefile($value)))
             return $value;
         return $this->default_value;
     }
 
-    function update($newvalue)
+    function update($value)
     {
         global $WikiTheme;
         /**
@@ -1657,8 +1566,8 @@ class _UserPreference_theme
         // invalidate etag to force fresh output
         if (!$this->_init)
             $request->setValidators(array('%mtime' => false));
-        if ($newvalue)
-            include_once($this->_themefile($newvalue));
+        if ($value)
+            include_once($this->_themefile($value));
         if (empty($WikiTheme))
             include_once($this->_themefile(THEME));
     }
@@ -1899,7 +1808,7 @@ function ValidateMail($email, $noconnect = false)
     }
     $Connect = @fsockopen($ConnectAddress, 25);
     if ($Connect) {
-        if (ereg("^220", $Out = fgets($Connect, 1024))) {
+        if (preg_match("/^220/", $Out = fgets($Connect, 1024))) {
             fputs($Connect, "HELO $HTTP_HOST\r\n");
             $Out = fgets($Connect, 1024);
             fputs($Connect, "MAIL FROM: <" . $email . ">\r\n");
@@ -1908,12 +1817,12 @@ function ValidateMail($email, $noconnect = false)
             $To = fgets($Connect, 1024);
             fputs($Connect, "QUIT\r\n");
             fclose($Connect);
-            if (!ereg("^250", $From)) {
+            if (!preg_match("/^250/", $From)) {
                 $result[0] = false;
                 $result[1] = "Server rejected address: " . $From;
                 return $result;
             }
-            if (!ereg("^250", $To)) {
+            if (!preg_match("/^250/", $To)) {
                 $result[0] = false;
                 $result[1] = "Server rejected address: " . $To;
                 return $result;
@@ -2223,7 +2132,8 @@ class UserPreferences
                 // fix old-style prefs
             } elseif (is_numeric($name) and is_array($packed_pref)) {
                 if (count($packed_pref) == 1) {
-                    list($name, $value) = each($packed_pref);
+                    $name = key($packed_pref);
+                    $value = current($packed_pref);
                     $prefs[$name] = $value;
                 }
             } else {
@@ -2307,11 +2217,3 @@ class UserPreferences
         return wikihash($this->_prefs);
     }
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

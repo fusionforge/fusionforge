@@ -1,15 +1,16 @@
-Date: Mon, 29 Jun 2015 12:04:27 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Thu, 20 Jun 2019 16:47:21 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=VerwaisteSeiten;
   flags=PAGE_LOCKED;
   charset=UTF-8
 Content-Transfer-Encoding: binary
 
-Verwaiste Seiten (OrphanedPages) sind solche, die nicht verlinkt,
-also nicht erreichbar sind.
-----
-<<OrphanedPages info||=hits,pagename,mtime>>
-----
-WikiPlugin
+**~VerwaisteSeiten** (//~OrphanedPages//) sind solche, die nicht verlinkt, also nicht erreichbar sind.
 
+----
+
+<<OrphanedPages info||=hits,pagename,mtime>>
+
+----
+[[KategorieAktionSeite]]

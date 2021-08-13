@@ -1,11 +1,12 @@
-Date: Mon, 29 Jun 2015 12:04:27 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Wed, 10 Apr 2019 16:39:09 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=BackLinks;
   flags=PAGE_LOCKED;
   charset=UTF-8
 Content-Transfer-Encoding: binary
 
-Der Titel der aktuellen Seite ist mit einem Suchbefehl nach allen Seiten verbunden, die einen Link auf die aktuelle Seite enthalten. Die BackLinks Funktion beantwortet also die Frage: »Wo wird der Name dieser Seite verwendet?«.
+<<BackLinks include_self||=1>>
+
 ----
-<<BackLinks exclude||='' include_self||=1 noheader||=0 page||='' info||='' >>
+[[KategorieAktionSeite]]

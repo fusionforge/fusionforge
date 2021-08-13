@@ -1,5 +1,5 @@
-Date: Mon, 29 Jun 2015 12:04:23 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Mon, 15 Apr 2019 14:46:57 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=ManuelPhpWiki;
   flags=EXTERNAL_PAGE;
@@ -10,6 +10,7 @@ Content-Transfer-Encoding: binary
 <<IncludePage page="Aide/WikiWikiWeb">>
 <<IncludePage page="Aide/Steve Wainstead">>
 <<IncludePage page="Aide/WabiSabi">>
+<<IncludePage page="Aide/WikisUtilisantPhpWiki">>
 <<IncludePage page="Aide/AjouterDesPages">>
 <<IncludePage page="Aide/ÉditerLeContenu">>
 <<IncludePage page="Aide/StyleCorrect">>
@@ -17,11 +18,11 @@ Content-Transfer-Encoding: binary
 <<IncludePage page="PagesRecherchées">>
 <<IncludePage page="Aide/InterWiki">>
 <<IncludePage page="Aide/IcônesDeLien">>
-<<IncludePage page="Aide/PluginWiki">>
+<<IncludePage page="Aide/GreffonWiki">>
 <<IncludePage page="Aide/URLMagiquesPhpWiki">>
 <<IncludePage page="Aide/DétailsTechniques">>
 <<IncludePage page="Aide/RèglesDeFormatageDesTextes">>
-<<IncludePages pages=<!plugin-list BackLinks page=CatégoriePluginWiki sortby=pagename exclude="Template/*" !> >>
+<<IncludePages pages=<!plugin-list BackLinks page=CatégorieGreffonWiki sortby=pagename exclude="Template/*" !> >>
 
 {| style="width:100%"
 |- class="align-center"

@@ -1,9 +1,9 @@
-Date: Mon, 29 Jun 2015 12:04:23 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Thu, 11 Apr 2019 16:07:57 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=VersionsR%C3%A9centes;
   flags=PAGE_LOCKED;
   charset=UTF-8
 Content-Transfer-Encoding: binary
 
-<<RssFeed url=http://sourceforge.net/export/rss2_projnews.php?group_id=6121&rss_fulltext=1 maxitem=10>>
+<<RssFeed url=https://sourceforge.net/p/phpwiki/news/feed.rss maxitem=10>>

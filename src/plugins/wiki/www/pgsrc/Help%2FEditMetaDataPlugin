@@ -1,15 +1,19 @@
-Date: Mon, 29 Jun 2015 12:04:28 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Wed, 24 Apr 2019 16:39:08 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FEditMetaDataPlugin;
   flags=PAGE_LOCKED;
   charset=UTF-8
 Content-Transfer-Encoding: binary
 
-The **~EditMetaData** [[Help:WikiPlugin|plugin]] allows you to add/edit/delete metadata key/value pairs for a given page. You must be logged in as the administrator to do this. The page's metadata contains things like the page hit count, last edit time and so on.
+The **~EditMetaData** [[Help:WikiPlugin|plugin]] allows you
+to add/edit/delete metadata key/value pairs for a given page.
+You must be logged in as the administrator to do this.
+The page's metadata contains things like the page hit count,
+last edit time and so on.
 
 {{{
-<<AppendText argument>>
+<<EditMetaData argument>>
 }}}
 
 == Argument ==

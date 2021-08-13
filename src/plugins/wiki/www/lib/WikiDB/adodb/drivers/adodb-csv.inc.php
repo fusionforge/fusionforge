@@ -1,6 +1,8 @@
 <?php
 /*
-V5.20dev  ??-???-2014  (c) 2000-2014 John Lim (jlim#natsoft.com). All rights reserved.
+@version   v5.20.19  13-Dec-2020
+@copyright (c) 2000-2013 John Lim (jlim#natsoft.com). All rights reserved.
+@copyright (c) 2014      Damien Regad, Mark Newnham and the ADOdb community
   Released under both BSD license and Lesser GPL library license.
   Whenever there is any discrepancy between the two licenses,
   the BSD license will take precedence.
@@ -36,7 +38,7 @@ class ADODB_csv extends ADOConnection {
 	var $hasTransactions = false;
 	var $_errorNo = false;
 
-	function ADODB_csv()
+	function __construct()
 	{
 	}
 
@@ -79,10 +81,12 @@ class ADODB_csv extends ADOConnection {
 
 
 	// parameters use PostgreSQL convention, not MySQL
-	function SelectLimit($sql,$nrows=-1,$offset=-1)
+	function SelectLimit($sql, $nrows = -1, $offset = -1, $inputarr = false, $secs2cache = 0)
 	{
-	global $ADODB_FETCH_MODE;
+		global $ADODB_FETCH_MODE;
 
+		$nrows = (int) $nrows;
+		$offset = (int) $offset;
 		$url = $this->_url.'?sql='.urlencode($sql)."&nrows=$nrows&fetch=".
 			(($this->fetchMode !== false)?$this->fetchMode : $ADODB_FETCH_MODE).
 			"&offset=$offset";
@@ -191,9 +195,9 @@ class ADODB_csv extends ADOConnection {
 } // class
 
 class ADORecordset_csv extends ADORecordset {
-	function ADORecordset_csv($id,$mode=false)
+	function __construct($id,$mode=false)
 	{
-		$this->ADORecordset($id,$mode);
+		parent::__construct($id,$mode);
 	}
 
 	function _close()

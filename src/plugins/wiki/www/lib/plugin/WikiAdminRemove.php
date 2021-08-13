@@ -1,8 +1,7 @@
 <?php
-
-/*
- * Copyright 2002,2004 $ThePhpWikiProgrammingTeam
- * Copyright 2008-2009 Marc-Etienne Vargenau, Alcatel-Lucent
+/**
+ * Copyright © 2002,2004 $ThePhpWikiProgrammingTeam
+ * Copyright © 2008-2009 Marc-Etienne Vargenau, Alcatel-Lucent
  *
  * This file is part of PhpWiki.
  *
@@ -19,6 +18,9 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
  */
 
 /**
@@ -38,7 +40,7 @@ class WikiPlugin_WikiAdminRemove
 {
     function getDescription()
     {
-        return _("Permanently remove all selected pages.");
+        return _("Remove selected pages").".";
     }
 
     function getDefaultArguments()
@@ -68,7 +70,7 @@ class WikiPlugin_WikiAdminRemove
             ));
     }
 
-    protected function collectPages(&$list, &$dbi, $sortby, $limit = 0)
+    protected function collectPages(&$list, &$dbi, $sortby, $limit = 0, $exclude = '')
     {
         extract($this->_args);
 
@@ -205,7 +207,7 @@ class WikiPlugin_WikiAdminRemove
             $button_label = _("Yes");
             $header->pushContent(HTML::legend(_("Confirm removal")));
             $header->pushContent(HTML::p(HTML::strong(
-                _("Are you sure you want to remove the selected files?"))));
+                _("Are you sure you want to remove the selected pages?"))));
         } else {
             $pagelist = new PageList_Selectable($args['info'], $args['exclude'],
                 array('types' =>
@@ -213,7 +215,7 @@ class WikiPlugin_WikiAdminRemove
                 => new _PageList_Column_remove('remove', _("Remove")))));
             $pagelist->addPageList($pages);
             $button_label = _("Remove selected pages");
-            $header->pushContent(HTML::legend(_("Select the files to remove")));
+            $header->pushContent(HTML::legend(_("Select the pages to remove")));
             if ($args['min_age'] > 0) {
                 $header->pushContent(
                     fmt("Also pages which have been deleted at least %s days.",
@@ -229,7 +231,8 @@ class WikiPlugin_WikiAdminRemove
         }
 
         $buttons = HTML::p(Button('submit:admin_remove[remove]', $button_label, 'wikiadmin'),
-            Button('submit:admin_remove[cancel]', _("Cancel"), 'button'));
+                           HTML::raw("&nbsp;&nbsp;"),
+                           Button('submit:admin_remove[cancel]', _("Cancel"), 'button'));
         $header->pushContent($buttons);
 
         // TODO: quick select by regex javascript?
@@ -253,11 +256,3 @@ class _PageList_Column_remove extends _PageList_Column
             $page_handle->getName());
     }
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

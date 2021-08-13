@@ -1,0 +1,60 @@
+Date: Mon, 22 Feb 2021 19:16:32 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
+Content-Type: application/x-phpwiki;
+  pagename=Help%2FPopularTagsPlugin;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
+  charset=UTF-8
+Content-Transfer-Encoding: binary
+
+The **~PopularTags** [[Help:WikiPlugin|plugin]] lists the most popular tags.
+
+== Usage ==
+
+{{{
+<<PopularTags arguments>>
+}}}
+
+== Arguments ==
+
+{| class="bordered"
+|-
+! Argument
+! Description
+! Default value
+|-
+| **pagename**
+|
+|
+|-
+| **limit**
+|
+| 10
+|-
+| **mincount**
+|
+| 5
+|-
+| **noheader**
+| Boolean. If true, header should be omitted.
+| false
+|}
+
+== Example ==
+
+{{{
+<<PopularTags>>
+}}}
+
+<<PopularTags>>
+
+== Author ==
+* [[Help:Reini Urban|Reini Urban]]
+
+== See Also ==
+* [[Help:Categories]]
+* [[Help:CategoryPagePlugin]]
+
+<noinclude>
+----
+[[PhpWikiDocumentation]] [[CategoryWikiPlugin]]
+</noinclude>

@@ -1,8 +1,8 @@
-Date: Mon, 29 Jun 2015 12:04:25 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Fri, 12 Apr 2019 10:36:59 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FWabiSabi;
-  flags="";
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
   charset=UTF-8
 Content-Transfer-Encoding: binary
 
@@ -10,21 +10,23 @@ Omdat wabi-sabi een alomvattend japans wereldbeeld of esthetisch systeem
 vertegenwoordigt, is het lastig exact te beschrijven in westerse begrippen.
 Volgens Leonard Koren is wabi-sabi het meest pakkende en karakteristieke
 kenmerk van wat wij beschouwen als traditionele japanse schoonheid en het
-"neemt ruwweg dezelfde positie in het japanse pantheon van esthetiese waarden
-in als de griekse idealen van schoonheid en perfectie in het westen."
+//“neemt ruwweg dezelfde positie in het japanse pantheon van esthetiese waarden
+in als de griekse idealen van schoonheid en perfectie in het westen.”//
 
-Wabi-sabi een schoonheid van onvolmaakte, vergankelijke en onvolledige dingen.
+//“Wabi-sabi een schoonheid van onvolmaakte, vergankelijke en onvolledige dingen.”//
 
-Het is de schoonheid van nederige en bescheiden dingen.
+//“Het is de schoonheid van nederige en bescheiden dingen.”//
 
-Het is de schoonheid van onconventionele dingen.
+//“Het is de schoonheid van onconventionele dingen.”//
+
+(quoted from “[[http://www.amazon.com/exec/obidos/tg/detail/-/1880656124/qid=1054098290/sr=1-1/ref=sr_1_1/104-9834820-5562358?v=glance&s=books|WABI-SABI: FOR ARTISTS,DESIGNERS, POETS & PHILOSOPHERS]],” 1994, Leonard Koren)
 
 De beginselen van wabi-sabi hangen samen met de beginselen van Zen Boeddhisme,
 omdat de eerste japanners die betrokken waren met wabi-sabi thee meesters,
 priesters en monniken waren die Zen bedreven.  Zen Boeddhisme is onstaan in
 India, reisde in de 6e eeuw naar China, en werd voor het eerst geintroduceerd
-in Japan rond de 12e eeuw.  Zen benadrukt "direkt, instinctief inzicht in
-bovennatuurlijke werkelijkheid boven alle verstandelijke redenering."  In de
+in Japan rond de 12e eeuw.  Zen benadrukt //“direkt, instinctief inzicht in
+bovennatuurlijke werkelijkheid boven alle verstandelijke redenering.”//  In de
 kern van wabi-sabi ligt het belang van bovennatuurlijke manieren van kijken
 naar en denken over dingen en het bestaan.
 
@@ -32,14 +34,19 @@ naar en denken over dingen en het bestaan.
 * Alle dingen zijn onvolmaakt
 * Alle dingen zijn onvolledig
 
-Materiele kenmerken van wabi-sabi:
+(also taken from WABI-SABI: FOR ARTISTS,DESIGNERS, POETS & PHILOSOPHERS, 1994, Leonard Koren):
 
-* de indruk van een natuurlijk process
-* onregelmatig
-* intiem
-* pretentieloos
-* aards
-* eenvoudig
+//Materiele kenmerken van wabi-sabi://
+* //de indruk van een natuurlijk process//
+* //onregelmatig//
+* //intiem//
+* //pretentieloos//
+* //aards//
+* //eenvoudig//
 
-Voor meer over wabi-sabi, zie
-http://www.art.unt.edu/ntieva/artcurr/japan/wabisabi.htm
+Voor meer over wabi-sabi, zie [[http://c2.com/cgi/wiki?WabiSabi]].
+
+<noinclude>
+----
+[[PhpWikiDocumentatie]]
+</noinclude>

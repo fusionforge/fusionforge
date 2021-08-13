@@ -1,13 +1,15 @@
 <?php
 /*
-version V5.20dev  ??-???-2014  (c) 2000-2014  John Lim (jlim#natsoft.com).  All rights
+@version   v5.20.19  13-Dec-2020
+@copyright (c) 2000-2013  John Lim (jlim#natsoft.com).  All rights
+@copyright (c) 2014      Damien Regad, Mark Newnham and the ADOdb community
 reserved.
   Released under both BSD license and Lesser GPL library license.
   Whenever there is any discrepancy between the two licenses,
   the BSD license will take precedence.
 Set tabs to 4 for best viewing.
 
-  Latest version is available at http://adodb.sourceforge.net
+  Latest version is available at http://adodb.org/
 
   21.02.2002 - Wade Johnson wade@wadejohnson.de
 			   Extended ODBC class for Sybase SQLAnywhere.
@@ -55,11 +57,6 @@ if (!defined('ADODB_SYBASE_SQLANYWHERE')){
  class ADODB_sqlanywhere extends ADODB_odbc {
   	var $databaseType = "sqlanywhere";
 	var $hasInsertID = true;
-
-	function ADODB_sqlanywhere()
-	{
-		$this->ADODB_odbc();
-	}
 
 	 function _insertid() {
   	   return $this->GetOne('select @@identity');
@@ -156,9 +153,9 @@ if (!defined('ADODB_SYBASE_SQLANYWHERE')){
 
   var $databaseType = "sqlanywhere";
 
- function ADORecordSet_sqlanywhere($id,$mode=false)
+ function __construct($id,$mode=false)
  {
-  $this->ADORecordSet_odbc($id,$mode);
+  parent::__construct($id,$mode);
  }
 
 

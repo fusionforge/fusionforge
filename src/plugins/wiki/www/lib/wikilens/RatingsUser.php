@@ -1,7 +1,7 @@
 <?php
-
-/* Copyright (C) 2004 Dan Frankowski
- * Copyright (C) 2010 Roger Guignard, Alcatel-Lucent
+/**
+ * Copyright © 2004 Dan Frankowski
+ * Copyright © 2010 Roger Guignard, Alcatel-Lucent
  *
  * This file is part of PhpWiki.
  *
@@ -18,6 +18,9 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
  */
 
 require_once 'lib/wikilens/RatingsDb.php';
@@ -25,6 +28,7 @@ require_once 'lib/wikilens/RatingsDb.php';
 /**
  * Get a RatingsUser instance (possibly from a cache).
  */
+
 class RatingsUserFactory
 {
     static function & getUser($userid)
@@ -56,7 +60,7 @@ class RatingsUser
     public $_mean_ratings;
     public $_pearson_sims;
 
-    function RatingsUser($userid)
+    function __construct($userid)
     {
         $this->_userid = $userid;
         $this->_ratings_loaded = false;
@@ -285,8 +289,10 @@ class RatingsUser
         $total = 0;
         $total_sim = 0;
 
-        // foreach($neighbors as $nbor)
-        // {
+        if ($neighbors == null) {
+            return 0;
+        }
+
         for ($i = 0; $i < count($neighbors); $i++) {
             // more silly PHP references...
             $nbor =& $neighbors[$i];
@@ -360,7 +366,7 @@ class RatingsUser
 /** Represent a rating. */
 class _UserRating
 {
-    function _UserRating($rater, $ratee, $dimension, $rating)
+    function __construct($rater, $ratee, $dimension, $rating)
     {
         $this->rater = (string)$rater;
         $this->ratee = (string)$ratee;
@@ -408,11 +414,3 @@ class _UserRating
         $this->dimension = (int)$dimension;
     }
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

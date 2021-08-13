@@ -1,206 +1,387 @@
-Date: Mon, 29 Jun 2015 12:04:23 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Sat, 26 Dec 2020 11:48:23 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=Aide%2FR%C3%A8glesDeFormatageDesTextes;
   flags=PAGE_LOCKED;
   charset=UTF-8
 Content-Transfer-Encoding: binary
 
-----
-! Vue d'ensemble
-RèglesDeFormatageDesTextes%%%
-*Emphase :* <tt>~_</tt> pour _italique_, <tt>~*</tt> pour *bold*,
-<tt>~_~*</tt> pour _*les deux*_, <tt>~=</tt> pour =chasse fixe=.%%%
-*Listes :* <tt>~*</tt> pour listes pointées, <tt>#</tt> pour listes numérotées,
-_Terme<b>:</b>~<nouvelle ligne> définition_ pour les listes de définitions.%%%
-*Texte pré-formaté :* enfermer le texte dans <tt>~<pre>~</pre></tt> ou
-<tt>~<verbatim>~</verbatim></tt>.%%%
-*Texte décalé :* décaler le paragraphe avec des espaces.%%%
-*Liens :* ~JoindreMotsAvecMajuscules ou utiliser des crochets pour une
-<tt>~[page]</tt> ou une URL <tt>~[~http://cool.wiki.int/]</tt>.%%%
-*Désactiver les liens :* Préfixer avec "<tt>~~</tt>":
-<tt>~~~NePasLier</tt>, nommer les liens comme <tt>~[texte | URL]</tt>.%%%
-*Divers :* "<tt>!</tt>", "<tt>!!</tt>", "<tt>!!!</tt>" pour les titres et sous-titres,
-"<tt>~%%%</tt>" ou "<tt>~<br></tt>" pour aller à la ligne,
-"<tt>~----</tt>" fait un trait horizontal.%%%
-*Balises HTML utilisables :* <b>b</b> <big>big</big> <i>i</i>
+<<CreateToc with_toclink||=1 position=right >>
+
+== Vue d'ensemble ==
+
+**Mise en valeur :** ##~/~/## pour de l'//italique//, ##~*~*## pour du **gras**, ##~*~*~/~/...~/~/~*~*## pour **//les deux//**, ##~#~### pour une ##chasse fixe##. \\
+**Listes :** ##~*## pour des listes à puce, ##~### pour des listes numérotées ; utiliser plusieurs fois ##~*## ou ##~### pour des listes imbiquées. \\
+**Titres :** "##~=~=##", "##~=~=~=##", "##~=~=~=~=##", etc. donnent des titres. \\
+**Texte préformaté :** enfermer le texte dans ##~{~{~{...~}~}~}## ou ##~<pre>~</pre>##. \\
+**Texte décalé :** décaler le paragraphe avec des espaces. \\
+**Références:** utiliser des doubles crochets pour un ##~[~[lien de page~]~]## ou une URL ##~[~[~http:~//cool.wiki.int/~]~]##. \\
+**Références:** utiliser une barre verticale ##~|## pour nommer les liens : ##~[~[lien de page~|du texte~]~]## ou ##~[~[~http:~//cool.wiki.int/~|du texte~]~]##. \\
+**Désactiver les liens:** préfixer avec "##~~##": ##~~~PasDHyperLien##. \\
+**Divers :** "##~\~\##" provoque un retour à la ligne, "##~----##" fait une ligne horizontale. \\
+**Balises HTML utilisables :** <b>b</b> <big>big</big> <i>i</i>
 <small>small</small> <tt>tt</tt> <em>em</em> <strong>strong</strong>
+<s>s</s> <strike>strike</strike>
 <abbr>abbr</abbr> <acronym>acronym</acronym> <cite>cite</cite>
 <code>code</code> <dfn>dfn</dfn> <kbd>kbd</kbd> <samp>samp</samp>
-<var>var</var> <sup>sup</sup> <sub>sub</sub>
+<var>var</var> <sup>sup</sup> <sub>sub</sub> \\
+**Plus :** [[Aide:RèglesDeFormatageDesTextes#Tables|tables]], [[Aide:RèglesDeFormatageDesTextes#Images|images]],
+[[Aide:GreffonCr%C3%A9erUneTdm|table des matières]], [[Aide:RèglesDeFormatageDesTextes#Inserting_plugins|greffons]]
 
-----
+Plus d'explications : [[Aide:RèglesDeFormatageDesTextes]]
+
+== Character Formatting ==
+
+== Mise en valeur ==
+
+* Utilisez deux slashs (##~/~/##) pour la mise en valeur (habituellement de l'//italique//)
+* Utilisez deux astérisques (##~*~*##) pour la mise en valeur forte (habituellement du **gras**)
+* Mélangez-les à volonté : **//gras italique//**
+* La //mise en valeur// peut être utilisée //plusieurs// fois dans une ligne, mais ne **peut pas** passer à la ligne :
+
+// ceci
+
+ne marche pas//
+
+=== Chasse fixe ===
+
+Le texte en chasse fixe s'obtient avec deux dièses :
+
+{{{
+Cette phrase contient ##du texte en chasse fixe ##.
+}}}
+
+Cette phrase contient ##du texte en chasse fixe ##.
+
+=== Exposant ===
+
+Le texte en exposant s'obtient avec deux chapeaux :
+
+{{{
+Le XX^^e^^ siècle.
+}}}
+
+Le XX^^e^^ siècle.
+
+=== Indice ===
+
+Le texte en indice s'obtient avec deux virgules :
+
+{{{
+L'eau est H,,2,,O.
+}}}
+
+L'eau est H,,2,,O.
+
+=== Polices ===
+
+Il n'y a pas de syntaxe pour les balises de police.
+
+=== Texte en couleur ===
+
+Est-il possible d'écrire du texte en couleur.
+
+{{{
+%color=green% texte en vert %% et retour à la normale
+}}}
+va donner:
+%%%
+%color=green% texte en vert %% et retour à la normale
+
+La façon la plus simple de le faire est d'utiliser le bouton COULEUR de la barre d'outils d'édition.
+Le texte sera en vert par défaut. Vous pouvez ensuite changer la couleur.
+
+Les couleurs autorisées sont:
+* un numéro de couleur HTML (# suivi de 3 ou 6 chiffres),
+* les noms de couleurs prédéfinis suivants:
+{| class="bordered"
+|-
+| %color=aqua% aqua %%
+| style="background-color:#565c5e" | %color=beige% beige %%
+| %color=black% black %%
+| %color=blue% blue %%
+| %color=brown% brown %%
+| %color=chocolate% chocolate %%
+| %color=cyan% cyan %%
+| %color=fuchsia% fuchsia %%
+| %color=gold% gold %%
+| %color=gray% gray %%
+|-
+| %color=green% green %%
+| style="background-color:#565c5e" | %color=ivory% ivory %%
+| %color=indigo% indigo %%
+| %color=lime% lime %%
+| %color=magenta% magenta %%
+| %color=maroon% maroon %%
+| %color=navy% navy %%
+| %color=olive% olive %%
+| %color=orange% orange %%
+| %color=pink% pink %%
+|-
+| %color=purple% purple %%
+| %color=red% red %%
+| %color=salmon% salmon %%
+| %color=silver% silver %%
+| style="background-color:#565c5e" | %color=snow% snow %%
+| %color=teal% teal %%
+| %color=turquoise% turquoise %%
+| %color=violet% violet %%
+| style="background-color:#565c5e" | %color=white% white %%
+| %color=yellow% yellow %%
+|}
+
+Remarque: vous pouvez mettre les en-têtes en couleur, mais uniquement si vous n'avez pas de table des matières. Pour l'instant, la table des matières est incompatible avec les en-têtes de couleur.
+
+=== Caractère d'échappement ===
+
+Le tilde '~~' est le //caractère d'échappement// :
+* Un seul tilde '~~' suivi de rien est rendu comme un seul tilde. => ~
+* Deux tildes '~~~~' sont rendus en un seul tilde. => ~~
+* Un seul tilde avant un lien ('~~http~:~/~/foo.bar') empêche la liaison. => ~http://foo.bar
+* Deux tildes avant un lien ('~~~~http~:~/~/foo.bar') produisent un tilde suivi de l'URL liée. => ~~http://foo.bar
+* Un tilde à l'intérieur d'une URL est supprimé, sauf s'il est formaté entre crochets.
+* Deux tildes à l'intérieur d'une URL (sans crochets) deviennent un seul tilde. => [[http://foo.bar/~user]] ou http://foo.bar/~~user
+
+=== Caractères spéciaux ===
+
+Tous les caractères HTML spéciaux non blancs sont affichés tels quels. Exceptions ci-dessous.
 
 == Paragraphes ==
 
 * N'indentez pas les paragraphes
 * Les mots reviennent à la ligne et remplissent les blancs au besoin
 * Utilisez des lignes vides comme séparateurs
-* Quatre tirets ou plus créent une règle horizontale
-* %%''''% provoque un retour à la ligne (y compris dans les titres et les listes)
-
+* Quatre tirets ou plus créent une ligne horizontale
+* "##~\~\##", "##~%%%##" ou "##~<br>##" provoquent un retour à la ligne (y compris dans les titres et les listes)
 
 == Listes ==
 
-* Un astérisque pour le premier niveau
-  * astérisque décalé pour le deuxième niveau, etc.
-* Utilisez <tt>~*</tt>, <tt>-</tt>, <tt>+</tt> ou <tt>o</tt> pour les listes à puces, <tt>#</tt> pour les listes numérotées (mélangez à volonté)
-* listes de définitions :
-  <pre>
-  Terme :
-    définition
-  </pre>
-  donne
-  Terme :
-    définition
-  comme pour la liste =<DL><DT><DD>=
-* un item peut contenir plusieurs paragraphes et autre contenu multi-lignes, il faut juste décalé les items
+=== Listes non ordonnées ===
 
+Syntaxe recommandée (Wikicréole):
+* astérisque pour le premier niveau
+* double astérisque pour le deuxième niveau, etc.
+
+Assurez-vous de **mettre un espace après l'astérisque**.
+
+Vous pouvez également utiliser un astérisque en retrait pour le deuxième niveau (mettre en retrait au moins deux espaces).
+
+=== Listes ordonnées ===
+
+Syntaxe recommandée (Wikicréole):
+* ##~### pour le premier niveau
+* double ##~### pour le deuxième niveau, etc.
+
+Assurez-vous de **mettre un espace après le dièse**.
+
+Vous pouvez également utiliser un ##~### en retrait pour le deuxième niveau (mettre en retrait au moins deux espaces).
+
+=== Listes de définitions ===
+
+{{{
+Terme:
+  définition
+}}}
+
+donne
+
+Terme:
+  définition
+
+=== Remarque ===
+
+Les éléments peuvent contenir plusieurs paragraphes et d'autres contenus à plusieurs lignes, il suffit de mettre en retrait les éléments
 
 == Titres ==
 
-* '=!=' en début de ligne produit un petit titre
-* '=!!=' en début de ligne produit un titre moyen
-* '=!!!=' en début de ligne produit un gros titre
+=== Syntaxe Wikicréole (recommandée) ===
 
+* '~=~=' au début d'une ligne fait un grand titre (h2)
+* '~=~=~=' au début d'une ligne fait un titre moyen (h3)
+* '~=~=~=~=' au début d'une ligne fait un petit titre (h4)
+* '~=~=~=~=~=' au début d'une ligne fait un titre encore plus petit (h5)
+* '~=~=~=~=~=~=' au début d'une ligne fait le plus petit titre (h6)
 
-== Texte pré-formaté ==
+=== Syntaxe Phpwiki classique ===
 
-* placer des lignes pré-formatées à l'intérieur de =~<pre>=:
-  <verbatim>
-  <pre>
-  Texte pré-formaté. Les LiensWiki marchent encore
-  </pre>
-  </verbatim>
-  donne
-  <pre>
-  Texte pré-formaté. Les LiensWiki marchent encore
-  </pre>
-* pour désactiver le lien, utiliser la marque =~<verbatim>= :
-  <pre>
-  <verbatim>
-  Texte pré-formaté. Plus de ~LienWiki
-  </verbatim>
-  </pre>
-  donne
-  <verbatim>
-  Texte pré-formaté. Plus de LienWiki
-  </verbatim>
+* '##!!!##' au début d'une ligne fait un grand titre (h2)
+* '##!!##' au début d'une ligne fait un titre moyen (h3)
+* '##!##' au début d'une ligne fait un petit titre (h4)
 
+== Texte préformaté ==
+
+Placez le texte préformaté entre trois accolades ouvrantes et trois accolades fermantes:
+
+<verbatim>
+{{{
+Texte préformaté. Les ~WikiLiens ne fonctionnent pas.
+}}}
+</verbatim>
+
+donne
+
+{{{
+Texte préformaté. Les ~WikiLiens ne fonctionnent pas.
+}}}
+
+Si vous voulez une interaction wiki, placez des lignes préformatées à l'intérieur de ##~<pre>##:
+
+{{{
+<pre>
+Texte préformaté. Les WikiLiens fonctionnent toujours.
+</pre>
+}}}
+
+donne
+
+<pre>
+Texte préformaté. Les WikiLiens fonctionnent toujours.
+</pre>
 
 == Paragraphes indentés ==
 
-* deux (ou plus) espaces pour signaler un paragraphe décalé. Les décalages peuvent s'imbriquer
+Deux espaces ou plus pour signaler un paragraphe décalé. Les décalages peuvent s'imbriquer.
 
-    Texte décalé
+    Texte décalé.
 
-      Texte encore plus décalé
+      Texte encore plus décalé.
 
-* le style email commenté est disponible :
-  <pre>
-  > texte commenté
-  </pre>
-  donne
+Le style de citation des courriels commenté est disponible :
+{{{
+> texte commenté
+}}}>
+donne
 
-  > texte commenté.
-
-
-== Emphase ==
-
-* Utilisez un underscore (<tt>~_</tt>) pour l'emphase (habituellement en _italique_)
-* Utilisez un astérisque (<tt>~*</tt>) pour l'emphase forte (habituellement en *gras*)
-* Mélangez-les à volonté : *_gras italique_*
-* L'_emphase_ peut être utilisée _plusieurs_ fois dans une ligne, mais ne peut _pas_ passer
-  à la ligne :
-
-  _ceci
-
-  ne marche pas_
+> texte commenté.
 
 == Liens ==
 
-* Les hyperliens vers d'autres pages au sein du Wiki sont créés en plaçant le nom de la
-  page entre crochets : [ceci est un hyperlien] ou en UtilisantDesMotsWiki (de préférence)
-* Les hyperliens vers des pages externes sont créés de cette façon : [http://www.wcsb.org/]
-* Vous pouvez nommer les liens en leur donnant un nom, une barre verticale (|) puis
-  l'hyperlien ou le nom de la page :
-  [page d'accueil de PhpWiki | http://phpwiki.sourceforge.net/] ---
-  [la page d'accueil | PageAccueil]
-* Vous pouvez supprimer les liens vers les références à l'ancienne ou vers les URI en
-  précédant le mot d'un '<tt>~~</tt>', e.g. ~NonLiéEnModeWiki, ~http://pas.de.lien.ici/
+* Les hyperliens vers d'autres pages au sein du wiki sont créés en plaçant le nom de la
+  page entre doubles crochets : [[ceci est un hyperlien]].
+  Des crochets simples ou des MotsWiki fonctionneront également.
+* Les hyperliens vers des pages externes sont créés de cette façon : [[http://www.wcsb.org/]]
+* Vous pouvez nommer les liens en donnant l'hyperlien ou le nom de la page, une barre verticale (|) puis le nom :
+  [[http://phpwiki.sourceforge.net/|Page d'accueil de PhpWiki]], [[PageAccueil|la page d'accueil]]
+* Vous pouvez supprimer les liens vers les URI en faisant précéder le mot d'un '##~~##', par exemple ~NonLiéEnModeWiki, ~http~://pas.de.lien.ici/
 * L'ancienne manière de lier les URL est aussi toujours supportée : précédez les URL de
-  "<tt>http:</tt>", "<tt>ftp:</tt>" ou "<tt>mailto:</tt>" pour créer automatiquement
-  des liens comme dans : http://c2.com/
-* Les URL se terminant par .png, .gif, ou .jpg sont inclus s'ils sont isolés entre
-  crochets : [http://phpwiki.svn.sourceforge.net/viewvc/phpwiki/trunk/themes/default/images/png.png]
-* les #[hyperliens] dans la page sont réalisés en plaçant le nom d'une ancre
-  et en se référant à l'andre par un lien :
-  * ancres nommés :
-    * <tt>~#~[foo]</tt> : une ancre pour le texte "foo" avec l'identifiant "foo"
-    * <tt>~#~[|foo]</tt> : une ancre vide avec l'identifiant "foo"
-    * <tt>~#~[howdy|foo]</tt> : une ancre pour le texte "howdy" avec l'identifiant "foo"
-  * les références aux ancres nommées sont fait de cette manière :%%%
-    <tt>~[~#[#hyperliens]]</tt>, <tt>~[~AutrePage#foo]</tt>,
-    <tt>~[nommé|~AutrePage#foo]</tt>.
+  "##~http:##", "##~ftp:##" ou "##~mailto:##" pour
+  créer automatiquement des liens comme dans : http://c2.com/
+* Les URL se terminant par ##.png##, ##.gif##, ou ##.jpg## sont inclus s'ils sont mis entre crochets :
+  [[http://phpwiki.demo.free.fr/themes/default/images/png.png]]
+* You can create footnotes by using ~[1], ~[2], ~[3], ... like this here #[|ftnt
+_ref_1]<sup>~[[1|#ftnt_1]~]</sup>. See footnote for counterpart.  (If the ~[ is
+in the first column, it is a footnote <em>definition</em> rather than a footnote
+ <em>reference</em> #[|ftnt_ref_1]<sup>~[[1|#ftnt_1]~]</sup>.)
+* Les #[[hyperliens]] dans la page sont réalisés en plaçant le nom d'une ancre et en se référant à l'andre par un lien :
+** Ancres nommés :
+*** ##~#~[~[foo]]## : une ancre pour le texte "foo" avec l'identifiant "foo"
+*** ##~#~[~[|foo]]## : une ancre vide avec l'identifiant "foo"
+*** ##~#~[~[howdy|foo]]##:: une ancre pour le texte "howdy" avec l'identifiant "foo"
+** Les références aux ancres nommées sont fait de cette manière :%%% <tt>~[~#[#hyperliens]]</tt>, <tt>~[~AutrePage#foo]</tt>,    <tt>~[nommé|~AutrePage#foo]</tt>.
+* Les liens sémantiques sont nommés ainsi : {{{is_a::WikiPage}}} et les attributs ainsi : {{{size:-4000}}}.
+* Un lien entre crochets commençant par ":" ne créera pas de rétrolien.
 
+= Images ==
+
+Une image en ligne est créée avec des accolades.
+Un texte alternatif peut être placé après une barre verticale. S'il n'y en a pas, une alternative textuelle vide sera créée.
+
+{{{
+{{monimage.png}}
+{{monimage.png | voici le texte alternatif de mon image}}
+[[un lien|{{monimage.png}}]] - si vous cliquez sur l'image, vous irez vers "un lien"
+[[un lien|{{monimage.png | texte alternatif}}]] - même chose avec une alternative textuelle
+[[http://example.com/|{{monimage.png}}]] - comme ci-dessus: l'image envoie vers l'URL
+[[http://example.com/|{{monimage.png|alternative textuelle}}]] - même chose avec une alternative textuelle
+}}}
 
 == Tableaux ==
 
-* les tableaux sont des listes de définitions utilisant le tuyau (<tt>|</tt>) à la place
-  de des deux points (<tt>:</tt>)
+=== Tableaux Wikicréole ===
 
-  <pre>
-  Terme 1 |
-     Définition 1 commence ici.
-     Terme 1.1 |
-        Définition 1.1
-     Terme 1.2 |
-        Définition 1.2
-     C'est une partie de la définition 1.
-  Terme 2 |
-     C'est le définition 2.
-  </pre>
+Toutes les cellules sont séparées par des barres verticales simples.
+Les espaces de début sont autorisés avant la première cellule d'une ligne et les espaces sont autorisés à la fin d'une ligne.
+La barre verticale à la fin est facultative.
 
-  Terme 1 |
-     Définition 1 commence ici.
-     Terme 1.1 |
-        Définition 1.1
-     Terme 1.2 |
-        Définition 1.2
-     C'est une partie de la définition 1.
-  Terme 2 |
-     C'est le définition 2.
+Vous pouvez incorporer des liens, du gras, de l'italique, des sauts de ligne et du nowiki dans les cellules du tableau.
 
-* les anciens styles de tableau sont possible avec le plugin OldStyleTablePlugin:
+Le signe égal qui suit directement la barre verticale définit un en-tête.
+Les en-têtes peuvent être disposés horizontalement ou verticalement.
 
+{{{
+|= En-tête Col 1 |= En-tête Col 2 |
+| Cellule 1.1    | Deux lignes \\ dans la cellule 1.2 |
+| Cellule 2.1    | Cellule 2.2 |
+}}}
+
+va donner:
+
+|= En-tête Col 1 |= En-tête Col 2 |
+| Cellule 1.1    | Deux lignes \\ dans la cellule 1.2 |
+| Cellule 2.1    | Cellule 2.2 |
+
+=== Tableaux Mediawiki ===
+
+Voir [[Aide:MediawikiTablePlugin]].
+
+=== Tables de listes de définitions ===
+
+Les tables de listes de définitions sont écrites exactement comme les listes de définitions,
+sauf que vous remplacez le deux-points de fin du terme par une barre verticale (##|##).
+{{{
+Terme 1 |
+   La définition 1 commence ici.
+   Terme 1.1 |
+      Définition 1.1
+   Terme 1.2 |
+      Définition 1.2
+   C'est une partie de la définition 1.
+Terme 2 |
+   C'est la définition 2.
+}}}
+
+donnera :
+
+Terme 1 |
+   La définition 1 commence ici.
+   Terme 1.1 |
+      Définition 1.1
+   Terme 1.2 |
+      Définition 1.2
+   C'est une partie de la définition 1.
+Terme 2 |
+   C'est la définition 2.
+
+== Ancien style de tables ==
+
+Voir : [[Aide:GreffonTableauAncienStyle]]
 
 == Langage HTML ==
 
-* certaines balises sont autorisées :
+* Certaines balises sont autorisées :
   <b>b</b>, <big>big</big>, <i>i</i>, <small>small</small>,
   <tt>tt</tt>, <em>em</em>, <strong>strong</strong>,
   <abbr>abbr</abbr>, <acronym>acronym</acronym>, <cite>cite</cite>,
   <code>code</code>, <dfn>dfn</dfn>, <kbd>kbd</kbd>,
   <samp>samp</samp>, <var>var</var>, <sup>sup</sup> and <sub>sub</sub>
 * < et > sont eux-mêmes
-* les caractères & ne fonctionneront pas
+* Les caractères & ne fonctionneront pas
 
-== Créer toute sorte de liens spéciaux ==
+== Créer toutes sortes de liens spéciaux ==
 
-* Voir [[URLMagiquesPhpWiki]] pour obtenir des détails gores sur la façon d'écrire
-  divers types de liens de maintenance du wiki.
+Voir [[URLMagiquesPhpWiki]] pour obtenir des détails gores sur la façon d'écrire
+divers types de liens de maintenance du wiki.
 
-== Insérer des plugins ==
+== Insérer des greffons ==
 
-* quelques plugins embarqués dans les pages ajoutent des possibilités au Wiki. Par exemple,
-  <verbatim>
-  <<BackLinks page=PageAccueil info=hits>>
-  </verbatim>
-  donne
-  <<BackLinks page=PageAccueil info=hits>>
+Quelques greffons embarqués dans les pages ajoutent des possibilités au Wiki. Par exemple,
+{{{
+<<BackLinks page=PageAccueil info=hits>>
+}}}
+donne
+<<BackLinks page=PageAccueil info=hits>>
 
-* pour plus d'informations sur les plugins, voir PluginWiki, et GestionPlugin pour
-  la liste des plugins.
+Pour plus d'informations sur les greffons, voir [[Aide:GreffonWiki]], et [[GestionnaireDesGreffons]] pour la liste des greffons.
 
 <noinclude>
 ----

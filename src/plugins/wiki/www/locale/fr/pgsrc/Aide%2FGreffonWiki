@@ -1,0 +1,188 @@
+Date: Sun, 16 Dec 2020 15:52:27 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
+Content-Type: application/x-phpwiki;
+  pagename=Aide%2FGreffonWiki;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
+  charset=UTF-8
+Content-Transfer-Encoding: binary
+
+A **greffon** (//plugin//) est du code PHP code qui :
+* se trouve dans ##phpwiki/lib/plugin/<nom-du-greffon>.php##
+* implémente l'interface ~WikiPlugin en étendant cette classe.
+
+Il existe déjà de nombreux greffons distribués avec ~PhpWiki. Regardez simplement
+dans le répertoire ##lib/plugin## ou voyez la liste dans [[GestionnaireDesGreffons]] ou voyez toutes les
+[[phpwiki:TitleSearch?s=Aide/Greffon*|pages Aide/Greffon*]].
+
+Pour écrire le vôtre, regardez [[Aide:GreffonBonjourLeMonde]], (~HelloWorld.php
+dans ce répertoire), qui est un exemple minimal de greffon.
+
+Un ~GreffonWiki permet d'ajouter facilement de nouveaux types de contenu dynamique
+(ainsi que d'autres fonctionnalités) aux pages wiki dans ~PhpWiki.
+Dans ce wiki toutes les actions qui ne sont pas entièrement en minuscules
+sont implémentées à l'aide de greffons et certaines actions en minuscules
+également (renommer, rétablir, setacl, diff, ...)
+
+Notez que vous ne pouvez PAS étendre la syntaxe wiki avec un greffon, comme dans d'autres moteurs wiki.
+
+== Exemple ==
+
+Habituellement, on appelle un greffon en écrivant quelque chose comme ceci :
+
+{{{
+<<AllPages limit=20 cols=3>>
+}}}
+
+dans une page wiki normale. Cet exemple particulier génère une liste des
+20 premières pages sur 3 colonnes à l'aide de la bibliothèque [[[Aide:ListeDePages|ListeDePages]].
+
+<<AllPages limit=20 cols=3>>
+
+== Détails ==
+
+Les greffons peuvent être utilisés avec une liste d'arguments. Il existe
+quatre moyens pour spécifier leur valeur. Dans l'ordre de priorité :
+
+# L'appel du greffon peut spécifier la valeur d'un argument comme ceci :
+  {{{
+  <<BackLinks page=AutrePage>>
+  }}}
+
+# L'argument peut être spécifié via l'argument d'une requête HTTP. Ceci ne
+  devrait pas se produire (ce n'est pas permis) à moins que l'argument soit
+  mentionné dans l'appel du greffon :
+
+  {{{
+  <<BackLinks page>>
+  }}}
+
+# Valeurs par défaut spécifiées dans l'appel du greffon :
+
+  {{{
+  <<BackLinks page||=AutrePage>>
+  }}}
+
+# Le greffon remplace les valeurs par défaut pour chaque argument utilisé
+  par des arguments d'URL comme ceci :
+  {{{
+    BackLinks?page=ThisPage&sortby=-mtime
+  }}}
+  (Le greffon ~RétroLiens utilise la page courante comme valeur par défaut
+  pour l'argument **page**.)
+
+  La plupart des greffons utilisant la bibliothèque [[Aide:ListeDePages|ListeDePages]] héritent leurs
+  arguments de ~ListeDePages.
+
+=== Arguments standard ===
+
+La plupart des greffons affichent une liste de pages, via la bibliothèque [[Aide:ListeDePages|ListeDePages]].
+~ListeDePages fournit un support automatique de ces arguments.
+
+  info, exclude, author, owner, creator, sortby, limit, paging, cols, azhead,
+  comma, commasep, ordered
+
+Pour plus de détails, voir la documentation de la bibliothèque [[Aide:ListeDePages|ListeDePages]].
+
+**exclude** et **pages** acceptent une liste de pages. Soit comme une liste séparée par des virgules,
+avec la possibilité de jokers, ou via la syntaxe ##<!plugin-list nomdegreffon ~[args~] !>##,
+où nomdegreffon peut être n'importe quel greffon retournant une [[Aide:ListeDePages|ListeDePages]].
+
+Comme la plupart des greffons retournent une ~ListeDePages, cette ~ListeDePages peut aussi
+servir de paramètre d'entrée pour d'autres greffons, actions ou formats.
+
+== Types de base pour les greffons ==
+
+Tous les greffons viennent de la classe ##~PluginWiki## étendant la méthode run
+qui retourne un objet arbre des objets HTML, et doivent réagir sur chaque
+arguments fournit depuis une ~WikiPage (voir les arguments plus loin) ou
+passé par l'URL (arguments GET et POST définit via '||=').
+
+Un greffon simple a jsute besoin de la méthode run(), et en option de getName,
+getDescription, getDefaultArguments. Voir le greffon
+[[Aide:GreffonBonjourLeMonde]] pour une petite introduction.
+
+  **plugin** réagit à ses arguments et à la requête et affiche
+  du code HTML arbitraire.
+
+  **plugin-form** est utilisé pour afficher une boîte input type=text box
+   comme argument par défaut **s**.
+
+  **plugin-list** is used as argument to provide a dynamic list of
+  pagenames.
+
+  {{{
+    <?plugin PluginName [args...] ?>
+  }}}
+
+  {{{
+    <?plugin-form PluginName [args...] ?>
+  }}}
+
+  {{{
+    <?plugin PluginName args=<!plugin-list pluginname [args...] !> ?>
+  }}}
+
+==== The box Method ====
+
+Themes based on the "sidebar" theme may use the box method of any
+plugin, which displays a **title**
+and a condensed **content** in a box.
+
+==== ~WikiPluginCached ====
+
+Plugins deriving from the class ~WikiPluginCached must also define
+the methods getPluginType(),
+optionally getExpire(), managesValidators(), and dependent of the
+getPluginType the methods to display the **possibly cached** result.
+
+  getImage(), getMap() or getHtml(),
+
+optionally also
+
+  getAlt(), getImageType(), embedMap(), embedImg(), embedObject()
+
+See the config.ini PLUGIN_CACHED_* settings and ~WikiPluginCached
+
+=== Action Pages ===
+
+The term **[[Help:ActionPage|ActionPage]]** refers to a page containing a plugin
+invocation with the same or translated pluginname as the pagename.
+An **action** is together with the **pagename** argument the basic
+~PhpWiki argument.
+It can both be GET or POST actions. Actions are untranslated, always
+English, pagenames can be localized.
+Basic (and old) actions are all lowercase, like edit, browse, remove, ...
+Newer actions in ~CamelCase are invoked via plugins on their
+specific action page.
+
+We decoupled actions from plugins via action pages for the following
+reasons:
+
+# Support translated action buttons and customizable action descriptions.
+# Customize standard actions by tuning the plugin invocation arguments.
+  Override or add plugin defaults.
+# Split simple plugins into multiple actions, like RecentChanges/RecentEdits,
+  MostPopular/LeastPopular, AllPages/AllPagesCreatedByMe/AllPagesLastEditedByMe/
+  AllPagesOwnedByMe which differ only in one argument.
+# Simplify the syntax for actions on another actions using a ~PageList
+  as result of an actionpage as input parameter for another action or
+  format.
+
+* Those actions which have buttons or links in the theme or are
+  referenced in the standard pgsrc pageset require their
+  (possibly localized) actionpages, otherwise the actions will not work.
+* If the localized actionpage is not found the english version is
+  used.
+* If no actionpage is found, it is recommended to do action=upgrade,
+  which imports all missing and required action pages into the database.
+
+So for a hypothetical new ~MyActionPage plugin ~MyActionPage will
+invoke the plugin and ~Help:~MyActionPagePlugin should be the description page.
+
+== Greffons existants ==
+
+Voir [[GestionnaireDesGreffons]] pour la liste actuelle. La plupart des greffons ont leur
+propre page de documentation avec le mot **Greffon** ajouté.
+
+----
+[[DocumentationDePhpWiki]]

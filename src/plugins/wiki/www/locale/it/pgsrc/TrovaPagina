@@ -1,26 +1,65 @@
-Date: Mon, 29 Jun 2015 12:04:22 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Thu, 16 Dec 2020 12:01:56 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=TrovaPagina;
-  flags=PAGE_LOCKED;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
   charset=UTF-8
 Content-Transfer-Encoding: binary
 
 Ecco alcuni buoni punti di partenza per iniziare ad usare Wiki.
 
-* ComeUsareWiki fornisce una veloce guida al linguaggio di marcatura di Wiki
-* CambiamentiRecenti sono registrati automaticamente
-* VarieSulFunzionamento di browsing e modifica sul server
+* [[Aiuto:ComeUsareWiki|ComeUsareWiki]] fornisce una veloce guida al linguaggio di marcatura di Wiki
+* [[CambiamentiRecenti]] sono registrati automaticamente
+* [[Aiuto:VarieSulFunzionamento|VarieSulFunzionamento]] di browsing e modifica sul server
 
-Questo è un titolo di ricerca. Prova qualcosa come ''wiki'' o ''sandwich''.
+== Title Search ==
 
-<?plugin-form TitleSearch?>
+Questo è un titolo di ricerca. Prova qualcosa come ##wiki## o ##sandwich##.
 
-Usa il seguente campo per una ricerca completa del testo. Verranno impiegati alcuni secondi ed i risultati saranno mostrati su tutte le linee che contengono l'occorrenza.
+<<WikiFormRich action=TitleSearch method=GET nobr=1 class=wikiaction
+  editbox[] name=s text=""
+  submit[]
+  checkbox[] name=case_exact
+  pulldown[] name=regex value="auto,none,glob,posix,pcre,sql">>
 
-<?plugin-form FullTextSearch?>
+== Full Text Search ==
+
+Usa il seguente campo per una ricerca completa del testo.
+Verranno impiegati alcuni secondi ed i risultati saranno mostrati su tutte le linee che contengono l'occorrenza.
+
+<<WikiFormRich action=FullTextSearch method=GET nobr=1 class=wikiaction
+  editbox[] name=s text=""
+  submit[]
+  checkbox[] name=case_exact
+  pulldown[] name=regex value="auto,none,glob,posix,pcre,sql">>
+
+== Fuzzy Search ==
+
+In a fuzzy pages search the titles of all pages are examined to find
+those which are similarly spelled or similar sounding (English).
+
+<<WikiFormRich action=FuzzyPages method=GET nobr=1 class=wikiaction
+  editbox[] name=s text=""
+  submit[]
+  checkbox[] name=case_exact>>
 
 ------
-Separa le parole con uno spazio. Tutte le parole devono corrispondere.
-%%%Per escludere delle parole falle precedere dal segno di '-'.
-%%%Esempio: 'wiki text -php' cerca per tutte le pagine contenenti la parola wiki **e** il testo 'text', ma **non**  quelle contenenti 'php'
+
+== Tips ==
+
+* Separa le parole con uno spazio. Tutte le parole devono corrispondere.
+* '##OR##', grouping with parenthesis, string-quoting and some glob-style wildcard characters are also supported.
+* Per escludere delle parole falle precedere dal segno di '-'.
+* Use '##^xx##' or '##xx~*##' to match words starting with '##xx##'.
+* Use '##~*xx##' or '##xx$##' to match words ending with '##xx##'.
+* Use '##^word$##' to match exact words.
+* Use //regex=auto// and '##re:##' like '##re:word.*xx##' or //regex=posix// to use Posix regular expressions. (not yet)
+* Use //regex=auto// and '##//##' like '##/^word$/##' or //regex=pcre// to match using Perl-style regular expressions.
+* Use //regex=sql// to match using SQL-style wildcards '##%##' and '##_##'.
+* Use //regex=none// to match any wildcards verbatim.
+
+=== Esempio ===
+* '##wiki text -php##' cerca per tutte le pagine contenenti la parola '##wiki##' e il testo '##text##', ma **non**  quelle contenenti '##php##'.
+
+----
+[[PhpWikiDocumentation]]

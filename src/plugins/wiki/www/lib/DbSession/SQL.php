@@ -1,6 +1,6 @@
 <?php
-/*
- * Copyright 2005 $ThePhpWikiProgrammingTeam
+/**
+ * Copyright © 2005 $ThePhpWikiProgrammingTeam
  *
  * This file is part of PhpWiki.
  *
@@ -17,6 +17,9 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
  */
 
 /**
@@ -39,8 +42,6 @@ class DbSession_SQL
         $this->_dbh = $dbh;
         $this->_table = $table;
 
-        ini_set('session.save_handler', 'user');
-        session_module_name('user'); // new style
         session_set_save_handler(array(&$this, 'open'),
             array(&$this, 'close'),
             array(&$this, 'read'),
@@ -177,26 +178,10 @@ class DbSession_SQL
             $sess_data = base64_encode($sess_data);
         $qdata = $dbh->quote($sess_data);
 
-        /* AffectedRows with sessions seems to be unstable on certain platforms.
-         * Enable the safe and slow USE_SAFE_DBSESSION then.
-         */
-        if (USE_SAFE_DBSESSION) {
-            $dbh->query("DELETE FROM $table"
-                . " WHERE sess_id=$qid");
-            $res = $dbh->query("INSERT INTO $table"
-                . " (sess_id, sess_data, sess_date, sess_ip)"
-                . " VALUES ($qid, $qdata, $time, $qip)");
-        } else {
-            $res = $dbh->query("UPDATE $table"
-                . " SET sess_data=$qdata, sess_date=$time, sess_ip=$qip"
-                . " WHERE sess_id=$qid");
-            $result = $dbh->AffectedRows();
-            if ($result === false or $result < 1) { // 0 cannot happen: time, -1 (failure) on mysql
-                $res = $dbh->query("INSERT INTO $table"
-                    . " (sess_id, sess_data, sess_date, sess_ip)"
-                    . " VALUES ($qid, $qdata, $time, $qip)");
-            }
-        }
+        $dbh->query("DELETE FROM $table WHERE sess_id=$qid");
+        $res = $dbh->query("INSERT INTO $table"
+            . " (sess_id, sess_data, sess_date, sess_ip)"
+            . " VALUES ($qid, $qdata, $time, $qip)");
         $this->_disconnect();
         return !DB::isError($res);
     }
@@ -268,11 +253,3 @@ class DbSession_SQL
         return $sessions;
     }
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

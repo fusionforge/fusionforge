@@ -6,8 +6,8 @@ xmlrpcs_emu.inc -- xmlrpcs.inc wrapper.
 08/30/01 - last modified by Dan Libby <dan@libby.com>
 
 This code provides API compatibility with Edd Dumbill's php xmlrpc
-library (http://phpxmlrpc.sourceforge.net/) but uses the xmlrpc-epi 
-engine for the actual xml processing.  It is intended to provide a 
+library (http://phpxmlrpc.sourceforge.net/) but uses the xmlrpc-epi
+engine for the actual xml processing.  It is intended to provide a
 smooth transition path for those who would like to be able to use either
 implementation.
 
@@ -26,11 +26,11 @@ Notes:
 - xmlrpc_decode, xmlrpc_encode are present in both the xmlrpc-epi
   C extension and the usefulinc implementation, and conflict.
   They have been enhanced and renamed to val_to_php, php_to_val.
-  
+
 - the xmlrpc-epi engine uses different fault codes and strings than
   the xmlrpc.inc. Application fault codes will remain unchanged
   between implementations, but system codes will likely be
-  different.  
+  different.
   See http://xmlrpc-epi.sourceforge.net/specs/rfc.fault_codes.php
 
 - Certain methods are not implemented and will typically return
@@ -50,7 +50,7 @@ Notes:
 // OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
 // IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT,
 // INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
-// NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, 
+// NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
 // DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
 // THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
@@ -126,7 +126,7 @@ class xmlrpc_server
     var $xmlrpc_server;
 
     // constructor. creates server and optionally services request.
-    function xmlrpc_server($dispMap, $serviceNow = 1)
+    function __construct($dispMap, $serviceNow = 1)
     {
         global $HTTP_RAW_POST_DATA;
         // dispMap is a despatch array of methods
@@ -274,4 +274,4 @@ function xmlrpc_debugmsg($m)
 {
     global $_xmlrpc_debuginfo;
     $_xmlrpc_debuginfo = $_xmlrpc_debuginfo . $m . "\n";
-} 
+}

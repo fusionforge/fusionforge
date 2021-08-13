@@ -1,7 +1,6 @@
 <?php
-
-/*
- * Copyright 2007 Reini Urban
+/**
+ * Copyright © 2007 Reini Urban
  *
  * This file is part of PhpWiki.
  *
@@ -18,6 +17,9 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
  */
 
 require_once 'lib/plugin/SemanticSearch.php';
@@ -80,7 +82,7 @@ class WikiPlugin_SemanticSearchAdvanced
             ));
     }
 
-    function showForm(&$dbi, &$request, $args, $allrelations)
+    function showForm(&$dbi, &$request, $args, $allrelations = array())
     {
         $action = $request->getPostURL();
         $hiddenfield = HiddenInputs($request->getArgs(), '',
@@ -93,7 +95,7 @@ class WikiPlugin_SemanticSearchAdvanced
             'autocomplete_matchsubstring' => 'false',
             'autocomplete_list' => 'xmlrpc:wiki.titleSearch ^[S] 4'
         ), '');
-        $help = Button('submit:semsearch[help]', "?", false);
+        $help = Button('submit:semsearch[help]', "?");
         $svalues = empty($allrelations) ? "" : join("','", $allrelations);
         $reldef = JavaScript("var semsearch_relations = new Array('" . $svalues . "')");
         $querybox = HTML::textarea(array('name' => 's',
@@ -146,7 +148,33 @@ class WikiPlugin_SemanticSearchAdvanced
         if (isset($this->_norelations_warning))
             $form->pushContent(HTML::div(array('class' => 'warning'),
                 _("Warning:") . $this->_norelations_warning));
+
         extract($args);
+
+        if (($case_exact == '0') || ($case_exact == 'false')) {
+            $case_exact = false;
+        } elseif (($case_exact == '1') || ($case_exact == 'true')) {
+            $case_exact = true;
+        } else {
+            return $this->error(sprintf(_("Argument '%s' must be a boolean"), "case_exact"));
+        }
+
+        if (($noform == '0') || ($noform == 'false')) {
+            $noform = false;
+        } elseif (($noform == '1') || ($noform == 'true')) {
+            $noform = true;
+        } else {
+            return $this->error(sprintf(_("Argument '%s' must be a boolean"), "noform"));
+        }
+
+        if (($noheader == '0') || ($noheader == 'false')) {
+            $noheader = false;
+        } elseif (($noheader == '1') || ($noheader == 'true')) {
+            $noheader = true;
+        } else {
+            return $this->error(sprintf(_("Argument '%s' must be a boolean"), "noheader"));
+        }
+
         // For convenience, peace and harmony we allow GET requests also.
         if (!$args['s']) // check for good GET request
             return $form; // nobody called us, so just display our form
@@ -218,11 +246,3 @@ class WikiPlugin_SemanticSearchAdvanced
         // for attributes we might use the tokenizer. All non-numerics excl. units and non-ops
     }
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

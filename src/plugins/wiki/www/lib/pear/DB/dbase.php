@@ -27,7 +27,7 @@
 /**
  * Obtain the DB_common class so it can be extended from
  */
-require_once 'DB/common.php';
+require_once 'lib/pear/DB/common.php';
 
 /**
  * The methods PEAR DB uses to interact with PHP's dbase extension
@@ -41,7 +41,7 @@ require_once 'DB/common.php';
  * @author     Daniel Convissor <danielc@php.net>
  * @copyright  1997-2007 The PHP Group
  * @license    http://www.php.net/license/3_0.txt  PHP License 3.0
- * @version    Release: 1.8.2
+ * @version    Release: 1.10.0
  * @link       http://pear.php.net/package/DB
  */
 class DB_dbase extends DB_common
@@ -140,13 +140,13 @@ class DB_dbase extends DB_common
     // {{{ constructor
 
     /**
-     * This constructor calls <kbd>$this->DB_common()</kbd>
+     * This constructor calls <kbd>parent::__construct()</kbd>
      *
      * @return void
      */
-    function DB_dbase()
+    function __construct()
     {
-        $this->DB_common();
+        parent::__construct();
     }
 
     // }}}
@@ -269,7 +269,7 @@ class DB_dbase extends DB_common
     // }}}
     // {{{ &query()
 
-    function &query($query = null)
+    function &query($query, $params = array())
     {
         // emulate result resources
         $this->res_row[(int)$this->result] = 0;

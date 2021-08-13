@@ -1,7 +1,6 @@
 <?php
-
-/*
- * Copyright (C) 2004,2007 ReiniUrban
+/**
+ * Copyright © 2004,2007 Reini Urban
  *
  * This file is part of PhpWiki.
  *
@@ -18,6 +17,9 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
  */
 
 /**
@@ -33,14 +35,15 @@
  *    Try the available auth methods (most likely Bogo) and sent this header back.
  *    header('Authorization: Basic '.base64_encode("$userid:$passwd")."\r\n";
  */
+
 class _HttpAuthUpperPassUser
     extends _PassUser
 {
-    function _HttpAuthUpperPassUser($UserName = '', $prefs = false)
+    function __construct($UserName = '', $prefs = false)
     {
         if ($prefs) $this->_prefs = $prefs;
         if (!isset($this->_prefs->_method))
-            _PassUser::_PassUser($UserName);
+            parent::__construct($UserName);
         if ($UserName)
             $this->_userid = $UserName;
         $this->_authmethod = 'HttpAuthUpper';
@@ -168,11 +171,3 @@ class _HttpAuthUpperPassUser
         return false;
     }
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

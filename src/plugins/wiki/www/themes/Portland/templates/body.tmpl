@@ -1,16 +1,19 @@
 <body <?php echo $WikiTheme->getMoreAttr('body') ?> >
-<!-- Page title and logo -->
+<header role="banner">
+<?php // Page title and logo ?>
 <h1><a class="wikilink"
        href="<?php echo WikiURL(HOME_PAGE)?>"
        ><img src="<?php echo $WikiTheme->getImageURL('logo')?>"
              alt="<?php echo fmt(_("%s: %s"), WIKI_NAME, HOME_PAGE) ?>"
              class="bottom" /></a> <?php echo $HEADER?></h1>
+</header>
+<main role="main">
 <?php echo $CONTENT ?>
+</main>
 <?php echo Template('navbar') ?>
-<!-- RELATEDPAGES were here. -->
+<?php // RELATEDPAGES were here. ?>
 
 <?php echo $GLOBALS['ErrorManager']->getPostponedErrorsAsHTML() ?>
 
-<?php if (defined('DEBUG') && DEBUG) { ?><?php echo Template('debug') ?><?php } ?>
 <?php echo Template('bottom') ?>
 </body>

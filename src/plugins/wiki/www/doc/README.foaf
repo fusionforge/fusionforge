@@ -157,7 +157,7 @@ $foaf = file_get_contents($_REQUEST['foaf']);
 require_once 'XML/FOAF/Parser.php';
 
 // Create new Parser object
-$parser = new XML_FOAF_Parser;
+$parser = new XML_FOAF_Parser();
 
 // Start of output
 echo '<h1>XML_FOAF_Parser Example</h1>';
@@ -205,10 +205,10 @@ echo "</pre>";
 # FoafMakePlugin will get some kind of user id from the database, and retrieve any stored information about the user - outputting as FOAF.
 
 !Installing PEAR / XML_FOAF
-The XML_FOAF PEAR library will not be included with phpwiki, so you have to install the PEAR 
+The XML_FOAF PEAR library will not be included with phpwiki, so you have to install the PEAR
 library by your own and be sure that the PEAR path is in the include_path.
 
-Reason: XML_FOAF is based on XML_Parser and XML_Tree, but phpwiki uses its own XML parser and XML 
+Reason: XML_FOAF is based on XML_Parser and XML_Tree, but phpwiki uses its own XML parser and XML
 tree representation, so it would be unneccesary and incompatible duplication of the same thing.
 
 See: http://pear.php.net/package/XML_FOAF

@@ -1,5 +1,5 @@
-Date: Mon, 29 Jun 2015 12:04:28 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Mon, 22 Feb 2021 19:16:32 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FPopularNearbyPlugin;
   flags=PAGE_LOCKED;
@@ -26,7 +26,7 @@ The **~PopularNearby** [[Help:WikiPlugin|plugin]] will list the most popular pag
 | empty
 |-
 | **mode**
-| nearby or incoming or outgoing
+| Nearby or incoming or outgoing
 | nearby
 |-
 | **limit**
@@ -34,7 +34,7 @@ The **~PopularNearby** [[Help:WikiPlugin|plugin]] will list the most popular pag
 | 5
 |-
 | **noheader**
-| Display header or not
+| Boolean. If true, header should be omitted.
 | false
 |}
 

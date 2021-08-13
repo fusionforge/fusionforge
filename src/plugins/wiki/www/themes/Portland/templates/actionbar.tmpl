@@ -9,9 +9,9 @@
 ?>
 <?php echo $EditB ?>
 <a href="<?php echo WikiURL($revision,array('action'=>'diff'))?>"><?php echo $WikiTheme->getLastModifiedMessage($revision) ?></a>
-    <?php echo $SEP?><?php echo Button("PageHistory", _("PageHistory")) ?>
-    <?php echo $SEP?><?php echo Button("PageInfo", _("PageInfo")) ?>
+    <?php echo $SEP?><?php echo Button(__("PageHistory"), _("PageHistory")) ?>
+    <?php echo $SEP?><?php echo Button(__("PageInfo"), _("Page Info")) ?>
 <?php if (defined('DEBUG') && DEBUG || $user->isAdmin()) { ?>
-    <?php echo $SEP?><?php echo Button("DebugInfo", _("DebugInfo")) ?> <!-- For debugging only, really -->
+    <?php echo $SEP?><?php echo Button(__("DebugBackendInfo"), _("DebugBackendInfo")) ?> <?php // For debugging only, really ?>
 <?php } ?>
 <br />

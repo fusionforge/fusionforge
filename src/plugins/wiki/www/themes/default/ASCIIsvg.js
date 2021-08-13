@@ -15,10 +15,10 @@ it under the terms of the GNU General Public License as published by
 the Free Software Foundation; either version 2 of the License, or (at
 your option) any later version.
 
-This program is distributed in the hope that it will be useful, 
+This program is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-General Public License (at http://www.gnu.org/copyleft/gpl.html) 
+General Public License (at http://www.gnu.org/copyleft/gpl.html)
 for more details.*/
 
 var checkIfSVGavailable = true;
@@ -56,7 +56,7 @@ var arcsin = Math.asin, arccos = Math.acos, arctan = Math.atan;
 var sec = function(x) { return 1/Math.cos(x) };
 var csc = function(x) { return 1/Math.sin(x) };
 var cot = function(x) { return 1/Math.tan(x) };
-var xmin, xmax, ymin, ymax, xscl, yscl, 
+var xmin, xmax, ymin, ymax, xscl, yscl,
     xgrid, ygrid, xtick, ytick, initialized;
 var isIE = document.createElementNS==null;
 var picture, svgpicture, doc, width, height, a, b, c, d, i, n, p, t, x, y;
@@ -65,7 +65,7 @@ var arccsc = function(x) { return arcsin(1/x) };
 var arccot = function(x) { return arctan(1/x) };
 var sinh = function(x) { return (Math.exp(x)-Math.exp(-x))/2 };
 var cosh = function(x) { return (Math.exp(x)+Math.exp(-x))/2 };
-var tanh = 
+var tanh =
   function(x) { return (Math.exp(x)-Math.exp(-x))/(Math.exp(x)+Math.exp(-x)) };
 var sech = function(x) { return 1/cosh(x) };
 var csch = function(x) { return 1/sinh(x) };
@@ -133,7 +133,7 @@ function isSVGavailable() {
   an.setAttribute("href",
     "http://www.chapman.edu/~jipsen/svg/svgenabledmozillafirefox.html");
   nd.appendChild(an);
-  if (navigator.appName.slice(0,8)=="Netscape") 
+  if (navigator.appName.slice(0,8)=="Netscape")
     if (window['SVGElement']) return null;
     else return nd;
   else if (navigator.appName.slice(0,9)=="Microsoft")
@@ -149,7 +149,7 @@ function isSVGavailable() {
 
 function less(x,y) { return x < y }  // used for scripts in XML files
                                      // since IE does not handle CDATA well
-function setText(st,id) { 
+function setText(st,id) {
   var node = document.getElementById(id);
   if (node!=null)
     if (node.childNodes.length!=0) node.childNodes[0].nodeValue = st;
@@ -180,7 +180,7 @@ function top_listener(evt) {
   svgpicture.setAttribute("ybase",evt.clientY);
 }
 
-function bottom_listener(evt) { 
+function bottom_listener(evt) {
   svgpicture.setAttribute("ybase",evt.clientY-height+1);
 }
 
@@ -224,7 +224,7 @@ use Firefox 1.5 preview (called Deerpark)");
     ht = picture.getAttribute("height");
     if (ht==null) ht ="";
    if (ht!="") defaultborder = 25;
-   if (ht=="" || src=="") 
+   if (ht=="" || src=="")
     if (document.getElementById("picture"+(index+1)+"input")==null) {
       if (isIE && src.indexOf("nobutton()")==-1)
         picture.parentNode.insertBefore(myCreateElementXHTML("br"),picture);
@@ -335,11 +335,11 @@ function updatePicture(obj) {
 
 function showHideCode(obj) {
   var node = obj.nextSibling;
-  while (node != null && node.nodeName != "BUTTON" && 
+  while (node != null && node.nodeName != "BUTTON" &&
     node.nodeName != "button") node = node.nextSibling;
   if (node.style.display == "none") node.style.display = "";
   else node.style.display = "none";
-  while (node != null && node.nodeName != "TEXTAREA" && 
+  while (node != null && node.nodeName != "TEXTAREA" &&
     node.nodeName != "textarea") node = node.previousSibling;
   if (node.style.display == "none") node.style.display = "";
   else node.style.display = "none";
@@ -377,9 +377,9 @@ function initPicture(x_min,x_max,y_min,y_max) {
   if (y_max!=null) ymax = y_max;
   if (xmin==null) xmin = -5;
   if (xmax==null) xmax = 5;
- if (typeof xmin != "number" || typeof xmax != "number" || xmin >= xmax) 
+ if (typeof xmin != "number" || typeof xmax != "number" || xmin >= xmax)
    alert("Picture requires at least two numbers: xmin < xmax");
- else if (y_max != null && (typeof y_min != "number" || 
+ else if (y_max != null && (typeof y_min != "number" ||
           typeof y_max != "number" || y_min >= y_max))
    alert("initPicture(xmin,xmax,ymin,ymax) requires numbers ymin < ymax");
  else {
@@ -404,8 +404,8 @@ function initPicture(x_min,x_max,y_min,y_max) {
 //  if (true ||picture.nodeName == "EMBED" || picture.nodeName == "embed") {
     if (isIE) {
       svgpicture = picture.getSVGDocument().getElementById("root");
-      while (svgpicture.childNodes.length()>5) 
-        svgpicture.removeChild(svgpicture.lastChild); 
+      while (svgpicture.childNodes.length()>5)
+        svgpicture.removeChild(svgpicture.lastChild);
       svgpicture.setAttribute("width",width);
       svgpicture.setAttribute("height",height);
       doc = picture.getSVGDocument();
@@ -493,7 +493,7 @@ function line(p,q,id) { // segment connecting points p,q (coordinates in units)
     (height-p[1]*yunitlength-origin[1])+" "+
     (q[0]*xunitlength+origin[0])+","+(height-q[1]*yunitlength-origin[1]));
   node.setAttribute("stroke-width", strokewidth);
-  if (strokedasharray!=null) 
+  if (strokedasharray!=null)
     node.setAttribute("stroke-dasharray", strokedasharray);
   node.setAttribute("stroke", stroke);
   node.setAttribute("fill", fill);
@@ -524,7 +524,7 @@ function path(plist,id,c) {
   }
   node.setAttribute("d", st);
   node.setAttribute("stroke-width", strokewidth);
-  if (strokedasharray!=null) 
+  if (strokedasharray!=null)
     node.setAttribute("stroke-dasharray", strokedasharray);
   node.setAttribute("stroke", stroke);
   node.setAttribute("fill", fill);
@@ -554,11 +554,11 @@ function circle(center,radius,id) { // coordinates in units
   node.setAttribute("fill", fill);
 }
 
-function loop(p,d,id) { 
+function loop(p,d,id) {
 // d is a direction vector e.g. [1,0] means loop starts in that direction
   if (d==null) d=[1,0];
   path([p,[p[0]+d[0],p[1]+d[1]],[p[0]-d[1],p[1]+d[0]],p],id,"C");
-  if (marker=="arrow" || marker=="arrowdot") 
+  if (marker=="arrow" || marker=="arrowdot")
     arrowhead([p[0]+Math.cos(1.4)*d[0]-Math.sin(1.4)*d[1],
                p[1]+Math.sin(1.4)*d[0]+Math.cos(1.4)*d[1]],p);
 }
@@ -718,7 +718,7 @@ function dot(center, typ, label, pos, id) {
     node.setAttribute("stroke", stroke);
     node.setAttribute("fill", (typ=="open"?"white":stroke));
   }
-  if (label!=null) 
+  if (label!=null)
     text(center,label,(pos==null?"below":pos),(id==null?id:id+"label"))
 }
 
@@ -738,7 +738,7 @@ function arrowhead(p,q) { // draw arrowhead at q (in units)
     node.setAttribute("stroke-width", markerstrokewidth);
     node.setAttribute("stroke", stroke); /*was markerstroke*/
     node.setAttribute("fill", stroke); /*was arrowfill*/
-    svgpicture.appendChild(node);    
+    svgpicture.appendChild(node);
   }
 }
 
@@ -889,7 +889,7 @@ function mathjs(st) {
       j--;
       while (j>=0 && (ch=st.charAt(j))>="a" && ch<="z" || ch>="A" && ch<="Z")
         j--;
-    } else { 
+    } else {
       return "Error: incorrect syntax in "+st+" at position "+j;
     }
     //find right argument
@@ -916,7 +916,7 @@ function mathjs(st) {
       k++;
       while (k<st.length && (ch=st.charAt(k))>="a" && ch<="z" ||
                ch>="A" && ch<="Z") k++;
-    } else { 
+    } else {
       return "Error: incorrect syntax in "+st+" at position "+k;
     }
     st = st.slice(0,j+1)+"pow("+st.slice(j+1,i)+","+st.slice(i+1,k)+")"+
@@ -949,7 +949,7 @@ function mathjs(st) {
       j--;
       while (j>=0 && (ch=st.charAt(j))>="a" && ch<="z" || ch>="A" && ch<="Z")
         j--;
-    } else { 
+    } else {
       return "Error: incorrect syntax in "+st+" at position "+j;
     }
     st = st.slice(0,j+1)+"factorial("+st.slice(j+1,i)+")"+st.slice(i+1);
@@ -961,7 +961,7 @@ function plot(fun,x_min,x_max,points,id) {
   var pth = [];
   var f = function(x) { return x }, g = fun;
   var name = null;
-  if (typeof fun=="string") 
+  if (typeof fun=="string")
     eval("g = function(x){ with(Math) return "+mathjs(fun)+" }");
   else if (typeof fun=="object") {
     eval("f = function(t){ with(Math) return "+mathjs(fun[0])+" }");
@@ -985,7 +985,7 @@ function plot(fun,x_min,x_max,points,id) {
 
 function slopefield(fun,dx,dy) {
   var g = fun;
-  if (typeof fun=="string") 
+  if (typeof fun=="string")
     eval("g = function(x,y){ with(Math) return "+mathjs(fun)+" }");
   var gxy,x,y,u,v,dz;
   if (dx==null) dx=1;
@@ -1044,7 +1044,7 @@ ASupdateCoords = [function() {updateCoords(0)},
   function() {updateCoords(8)},
   function() {updateCoords(9)}];
 
-// GO1.1 Generic onload by Brothercake 
+// GO1.1 Generic onload by Brothercake
 // http://www.brothercake.com/
 //onload function
 function generic()

@@ -1,7 +1,6 @@
 <?php
-
-/*
- * Copyright 2004 $ThePhpWikiProgrammingTeam
+/**
+ * Copyright © 2004 $ThePhpWikiProgrammingTeam
  *
  * This file is part of PhpWiki.
  *
@@ -18,21 +17,24 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
  */
 
-/** Re-implement the classic phpwiki-1.2 feature of the
+/**
+ * Re-implement the classic phpwiki-1.2 feature of the
  *  popular nearby pages, specific to the from/to links:
  *    5 best incoming links: xx, xx, xx, ...
  *    5 best outgoing links: xx, xx, xx, ...
  *    5 most popular nearby: xx, xx, xx, ...
+ *
+ * Usage:
+ * <<PopularNearby mode=incoming >>
+ * <<PopularNearby mode=outgoing >>
+ * <<PopularNearby mode=nearby >>
+ *
  */
-/* Usage:
-
-* <<PopularNearby mode=incoming >>
-* <<PopularNearby mode=outgoing >>
-* <<PopularNearby mode=nearby >>
-
-*/
 
 require_once 'lib/PageList.php';
 
@@ -50,7 +52,7 @@ class WikiPlugin_PopularNearby
             'mode' => 'nearby', // or 'incoming' or 'outgoing'
             //'exclude'  => false,  // not yet
             'limit' => 5,
-            'noheader' => 0,
+            'noheader' => false,
         );
     }
 
@@ -71,6 +73,15 @@ class WikiPlugin_PopularNearby
         }
 
         extract($args);
+
+        if (($noheader == '0') || ($noheader == 'false')) {
+            $noheader = false;
+        } elseif (($noheader == '1') || ($noheader == 'true')) {
+            $noheader = true;
+        } else {
+            return $this->error(sprintf(_("Argument '%s' must be a boolean"), "noheader"));
+        }
+
         $header = '';
         $page = $dbi->getPage($pagename);
         switch ($mode) {
@@ -151,7 +162,7 @@ class WikiPlugin_PopularNearby
     function sortByHits($links)
     {
         if (!$links) return array();
-        usort($links, 'cmp_by_hits'); // php-4.0.6 cannot use methods
+        usort($links, 'cmp_by_hits');
         reset($links);
         return $links;
     }
@@ -162,11 +173,3 @@ function cmp_by_hits($a, $b)
     if ($a['hits'] == $b['hits']) return 0;
     return $a['hits'] < $b['hits'] ? 1 : -1;
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

@@ -1,25 +1,32 @@
-Date: Mon, 29 Jun 2015 12:04:22 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Thu, 16 Dec 2020 12:45:53 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=Aiuto%2FWikiWikiWeb;
-  flags="";
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
   charset=UTF-8
 Content-Transfer-Encoding: binary
 
-Un WikiWIkiWeb è un sito dove qualsiasi persona può collaborare sul
+Un **~WikiWikiWeb** è un sito dove qualsiasi persona può collaborare sul
 contenuto. Il più usato e conosciuto Wiki è quello del Portland
-Pattern Repository che è possibile visitare su http://c2.com/cgi-bin/wiki?WikiWikiWeb.
+Pattern Repository che è possibile visitare su [[http://c2.com/cgi-bin/wiki?WikiWikiWeb]].
 
-''Il punto è quello di far si che la modifica e la ricerca delle pagine siano semplici''
+Il punto è quello di far si che la modifica e la ricerca delle pagine siano semplici:
 
-''In aggiunta ad essere veloce, questo sito si ispira anche agli ideali
+//The point is to make the [[Aiuto:ModificaIlTesto|ModificaIlTesto]] form simple and the [[TrovaPagina]]
+search fast.//
+
+//In aggiunta ad essere veloce, questo sito si ispira anche agli ideali
 Zen generalmente chiamati WabiSabi. Lo Zen è alla ricerca della
-bellezza, dell'imperfezione e dell'effimero. È tutto quello di cui hai
-bisogno''
+bellezza, dell'imperfezione e dell'effimero. È tutto quello di cui hai bisogno//
 
-Puoi dire ciao su VisitatoriRecenti, o leggere ComeUsareWiki oppure
-AggiungerePagine
-Continua, unisciti alla discussione, giocaci e divertiti!
+//The Universe tends toward chaos. The Universe tends toward Wiki.//
 
--- [[Steve Wainstead]]
+Puoi dire ciao su [[VisitatoriRecenti]], o leggere [[Aiuto:ComeUsareWiki|ComeUsareWiki]] oppure
+[[Aiuto:AggiungerePagine|AggiungerePagine]]. Continua, unisciti alla discussione, giocaci e divertiti!
 
+-- [[Aiuto:Steve Wainstead|Steve Wainstead]]
+
+<noinclude>
+----
+[[PhpWikiDocumentation]]
+</noinclude>

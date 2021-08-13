@@ -1,9 +1,8 @@
-Date: Mon, 29 Jun 2015 12:04:28 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Tue, 10 Aug 2021 18:24:57 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=PhpWikiAdministration;
   flags=PAGE_LOCKED;
-  markup=2;
   acl="view:_AUTHENTICATED,-_EVERY; list:_AUTHENTICATED,-_EVERY";
   charset=UTF-8
 Content-Transfer-Encoding: binary
@@ -31,7 +30,7 @@ Pages without individual access rights will use these default access rights.
 
 == Cleanup ==
 
-A Wiki SandBox is very easy to clean. Here you can restore it to
+A Wiki [[SandBox]] is very easy to clean. Here you can restore it to
 pristine condition by loading the default from pgsrc.
 
 **[[phpwiki:?action=loadfile&overwrite=1&source=pgsrc/SandBox|Rake the SandBox]]**
@@ -87,8 +86,7 @@ You can also use this form to load from an http: or ftp: URL.
 
 Do some verification checks and upgrade changes automatically, after having installed a
 new phpwiki engine update:
-* Upgrade new or changed page revisions from pgsrc,
-* Upgrade the database schema (mysql //page.id auto_increment//, ADD //session.sess_ip//),
+* Upgrade new or changed page revisions from pgsrc
 
 You can force overwrite or not:
 * **[[phpwiki:HomePage?action=upgrade|Upgrade]]**

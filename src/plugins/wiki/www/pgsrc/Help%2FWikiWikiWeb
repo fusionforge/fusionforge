@@ -1,5 +1,5 @@
-Date: Mon, 29 Jun 2015 12:04:28 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Mon,  8 Apr 2019 14:45:11 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FWikiWikiWeb;
   flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
@@ -8,7 +8,7 @@ Content-Transfer-Encoding: binary
 
 A **~WikiWikiWeb** is a site where everyone can collaborate on the
 content. The most well-known and widely used Wiki is the Portland
-Pattern Repository at http://c2.com/cgi-bin/wiki?WikiWikiWeb.
+Pattern Repository at [[http://c2.com/cgi-bin/wiki?WikiWikiWeb]].
 
 You and I will find these statements there particularly relevant:
 
@@ -24,7 +24,7 @@ ephemeral. When it comes down to it, that's all you need.//
 You can say hello on [[RecentVisitors]], or read about [[Help:HowToUseWiki|HowToUseWiki]] and
 [[Help:AddingPages|AddingPages]]. So go ahead and play with it and have fun!!
 
--- [[Help:Steve Wainstead|Steve Wainstead]].
+-- [[Help:Steve Wainstead|Steve Wainstead]]
 
 <noinclude>
 ----

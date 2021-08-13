@@ -1,9 +1,14 @@
-Date: Mon, 29 Jun 2015 12:04:27 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Sat, 26 Dec 2020 12:40:06 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=HochLaden;
-  flags="";
+  flags=EXTERNAL_PAGE;
   charset=UTF-8
 Content-Transfer-Encoding: binary
 
+**Upload a file which will be accessible by prefixing the filename with “Upload~:”.**
+----
 <<UpLoad>>
+
+----
+[[KategorieAktionSeite]]

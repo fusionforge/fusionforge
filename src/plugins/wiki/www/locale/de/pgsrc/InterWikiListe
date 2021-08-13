@@ -1,13 +1,13 @@
-Date: Mon, 29 Jun 2015 12:04:27 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Fri, 19 Apr 2019 17:28:11 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=InterWikiListe;
-  flags=PAGE_LOCKED;
+  pagetype=interwikimap;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE
   charset=UTF-8
 Content-Transfer-Encoding: binary
 
-Liste aller InterWiki Namen und URLs, die in diesem Wiki
-benutzt wird.  Diese Liste wird vom Text im *verbatim* Block
-unten genommen. Das funktioniert aber nur wenn diese Seite
-gesperrt ist, sonst wird die Standardliste von
-lib/interwiki.map genommen.
+Liste aller **~InterWiki** Namen und URLs, die in diesem Wiki
+benutzt wird.  Diese Liste wird vom Text im verbatim Block
+unten genommen. (Das funktioniert aber nur wenn diese Seite
+gesperrt ist.)

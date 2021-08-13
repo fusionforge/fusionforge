@@ -1,8 +1,7 @@
 <?php
-
-/*
- * Copyright 2005,2007 $ThePhpWikiProgrammingTeam
- * Copyright 2008-2011 Marc-Etienne Vargenau, Alcatel-Lucent
+/**
+ * Copyright © 2005,2007 $ThePhpWikiProgrammingTeam
+ * Copyright © 2008-2011 Marc-Etienne Vargenau, Alcatel-Lucent
  *
  * This file is part of PhpWiki.
  *
@@ -19,6 +18,9 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
  */
 
 /**
@@ -94,14 +96,7 @@ class WikiPlugin_Template
         if (!$page or !$page->name)
             return false;
 
-        global $backlinks;
-        if (empty($backlinks)) {
-            global $request;
-            $this->run($request->_dbi, $argstr, $request, $basepage);
-        }
-
-        $backlinks[] = array('linkto' => $page->name);
-        return $backlinks;
+        return array(array('linkto' => $page->name));
     }
 
     /**
@@ -277,11 +272,3 @@ class WikiPlugin_Template
         return $content;
     }
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

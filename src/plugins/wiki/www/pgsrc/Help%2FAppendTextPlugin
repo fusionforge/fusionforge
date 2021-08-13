@@ -1,5 +1,5 @@
-Date: Mon, 29 Jun 2015 12:04:28 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Sat, 20 Feb 2021 11:52:37 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FAppendTextPlugin;
   flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
@@ -42,7 +42,7 @@ usage better use the [[Help:AddCommentPlugin|AddComment]] plugin.
 |
 |-
 | **redirect**
-| Redirect to modified page
+| Boolean. If true, redirect to modified page.
 | false
 |}
 

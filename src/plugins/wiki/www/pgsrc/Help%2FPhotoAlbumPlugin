@@ -1,13 +1,12 @@
-Date: Mon, 29 Jun 2015 12:04:28 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Thu, 13 Oct 2016 15:09:28 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FPhotoAlbumPlugin;
   flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
   charset=UTF-8
 Content-Transfer-Encoding: binary
 
-The **~PhotoAlbum** [[Help:WikiPlugin|plugin]] makes an 'album' by displaying a set of photos listed in a text file
-with optional descriptions.
+The **~PhotoAlbum** [[Help:WikiPlugin|plugin]] makes an 'album' by displaying a set of photos listed in a text file with optional descriptions.
 
 == Usage ==
 
@@ -20,13 +19,12 @@ with optional descriptions.
          sort=false
          height=100%
          width=100%
-         weblocation=>false
 >>
 }}}
 
 == Arguments ==
 
-//Only the ='src'= parameter is required.//
+Only the ##src## parameter is required.
 
 {| class="bordered"
 |-
@@ -40,13 +38,13 @@ Url or local path to a CSV textfile which separates filename and
 description of each photo. Photos listed in the text file have to be in same
 directory as the file. Descriptions are optional.
 
-If the the local path points to a directory, is relative from PHPWIKI_DIR,
-and the main script is in PHPWIKI_DIR, weblocation must not be given, and
+If the local path points to a directory, is relative from PHPWIKI_DIR,
+and the main script is in PHPWIKI_DIR, ##url## must not be given, and
 all pictures from this directory are displayed.
 |
 |-
 | **url**
-| Defines the the webpath to the srcdir directory (formerly called weblocation)
+| Defines the webpath to the srcdir directory
 |
 |-
 | **mode**
@@ -56,8 +54,14 @@ Specifies how the images are arranged.
 * "thumbs" - WinXP thumbnail style
 * "tiles"  - WinXP tiles style
 * "list"   - WinXP list style
+* "row"    - inline thumbnails
+* "column" - photos full-size, displayed in 1 column
 * "slide"  - slideshow mode, needs Javascript on client
-|
+| normal
+|-
+| **numcols**
+| photos per row, columns
+| 3
 |-
 | **showdesc**
 |
@@ -65,7 +69,7 @@ Specifies how the images are arranged.
 * "name"   - Only filename shown
 * "desc"   - Only description (from textfile) shown
 * "both"   - If no description found, then filename will be used
-|
+| both
 |-
 | **link**
 |
@@ -73,7 +77,13 @@ true or false
 
 If true, each image will be hyperlinked to a page where the single
 photo will be shown full-size. Only works when mode != 'normal'
-|
+| true
+|-
+| **attrib**
+| attrib arg allows multiple attributes: attrib=sort,nowrap,alt
+* "sort" sorts alphabetically,
+* "nowrap" for cells,
+* "alt" to use descs instead of filenames in image ALT-tags
 |-
 | **align**
 | center, right or left
@@ -98,7 +108,7 @@ photo will be shown full-size. Only works when mode != 'normal'
 | **height**, **width**
 |
 Height and width are calculated compared to original metrics
-retrieved by [php-function:getimagesize] and can be absolute (50px)
+retrieved by [[php-function:getimagesize]] and can be absolute (50px)
 or a percentage (e.g. "50%").
 |
 |-
@@ -122,15 +132,23 @@ width of the photo in that cell).
 | **tablewidth**
 |
 table (75|100%)
-|
+| false
 |-
 | **p**
 | "displaythissinglephoto.jpg" only
-|
+| false
 |-
 | **h**
 | "highlightcolorofthisphoto.jpg" only
-|
+| false
+|-
+| **duration**
+| in slide mode, duration in seconds
+| 6
+|-
+| **thumbswidth**
+| width of thumbnails
+| 80
 |}
 
 == Examples ==

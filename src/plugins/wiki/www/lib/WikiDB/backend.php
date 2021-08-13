@@ -1,7 +1,6 @@
 <?php
-
-/*
- * Copyright 2004-2010 Reini Urban
+/**
+ * Copyright © 2004-2010 Reini Urban
  *
  * This file is part of PhpWiki.
  *
@@ -12,45 +11,48 @@
  *
  * PhpWiki is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
  */
 
 /*
-  Pagedata
-
-   maintained by WikiPage
-    //:latestversion
-    //:deleted (*)     (Set if latest content is empty.)
-    //:pagename (*)
-
-    hits
-    is_locked
-
-  Versiondata
-
-    %content (?should this be here?)
-    _supplanted : Time version ceased to be the current version
-
-    mtime (*)   : Time of version edit.
-    orig_mtime
-    is_minor_edit (*)
-    author      : nominal author
-    author_id   : authenticated author
-    summary
-
-    //version
-    //created (*)
-    //%superceded
-
-    //:serial
-
-     (types are scalars: strings, ints, bools)
-*/
+ * Pagedata
+ *
+ * maintained by WikiPage
+ *  //:latestversion
+ *  //:deleted (*)     (Set if latest content is empty.)
+ *  //:pagename (*)
+ *
+ *  hits
+ *  locked
+ *
+ * Versiondata
+ *
+ *  %content (?should this be here?)
+ *  _supplanted : Time version ceased to be the current version
+ *
+ *  mtime (*)   : Time of version edit.
+ *  orig_mtime
+ *  is_minor_edit (*)
+ *  author      : nominal author
+ *  author_id   : authenticated author
+ *  summary
+ *
+ *  //version
+ *  //created (*)
+ *  //%superceded
+ *
+ *  //:serial
+ *
+ *   (types are scalars: strings, ints, bools)
+ */
 
 /**
  * A WikiDB_backend handles the storage and retrieval of data for a WikiDB.
@@ -69,6 +71,7 @@
  * @access protected
  * @see WikiDB
  */
+
 abstract class WikiDB_backend
 {
     public $_sortby;
@@ -147,8 +150,7 @@ abstract class WikiDB_backend
      *  the content, the backend might still want to set the value of
      *  '%content' to the empty string if it knows there's no content.
      *
-     * @return array|bool hash The version data, or false if specified version does not
-     *    exist.
+     * @return array|bool The version data, or false if specified version does not exist.
      *
      * Some keys which might be present in the $versiondata hash are:
      * <dl>
@@ -161,6 +163,15 @@ abstract class WikiDB_backend
      * @see WikiDB_PageRevision::get
      */
     abstract function get_versiondata($pagename, $version, $want_content = false);
+
+    /**
+     * Rename page in the database.
+     *
+     * @param string $pagename Current page name
+     * @param string $to       Future page name
+     */
+
+    abstract function rename_page($pagename, $to);
 
     /**
      * Delete page from the database with backup possibility.
@@ -265,21 +276,23 @@ abstract class WikiDB_backend
     /**
      * Set links for page.
      *
-     * @param string $pagename Page name.
+     * @param string $pagename Page name
+     * @param array  $links    List of page(names) which page links to.
      *
-     * @param array $links List of page(names) which page links to.
+     * on DEBUG: delete old, deleted links from page
      */
     abstract function set_links($pagename, $links);
 
     /**
      * Find pages which link to or are linked from a page.
      *
-     * @param string    $pagename  Page name.
-     * @param bool      $reversed True to get backlinks.
-     * @param bool      $include_empty
+     * @param string    $pagename       Page name
+     * @param bool      $reversed       True to get backlinks
+     * @param bool      $include_empty  True to get empty pages
      * @param string    $sortby
      * @param string    $limit
-     * @param string    $exclude
+     * @param string    $exclude        Pages to exclude
+     * @param bool      $want_relations
      *
      * FIXME: array or iterator?
      * @return object A WikiDB_backend_iterator.
@@ -287,7 +300,8 @@ abstract class WikiDB_backend
 
     // FIXME: implement simple (but slow) link finder.
     abstract function get_links($pagename, $reversed = true, $include_empty = false,
-                                $sortby = '', $limit = '', $exclude = '');
+                                $sortby = '', $limit = '', $exclude = '',
+                                $want_relations = false);
 
     /**
      * Get all revisions of a page.
@@ -321,8 +335,8 @@ abstract class WikiDB_backend
      * @param string $exclude
      * @return object A WikiDB_backend_iterator.
      */
-    abstract public function get_all_pages($include_empty,
-                                           $sortby = '', $limit = '', $exclude = '');
+    abstract function get_all_pages($include_empty,
+                                    $sortby = '', $limit = '', $exclude = '');
 
     /**
      * Title or full text search.
@@ -491,6 +505,7 @@ abstract class WikiDB_backend
      */
     function check($args = false)
     {
+        return true;
     }
 
     /**
@@ -527,6 +542,7 @@ abstract class WikiDB_backend
             $this->set_links($pagename, $links);
             $this->unlock(array('version', 'page', 'recent', 'link', 'nonempty'));
         }
+        return true;
     }
 
     function _parse_searchwords($search)
@@ -589,16 +605,23 @@ abstract class WikiDB_backend
          */
         global $request;
 
-        if (empty($column))
+        if (empty($column)) {
             return '';
-        //support multiple comma-delimited sortby args: "+hits,+pagename"
+        }
+        // Support multiple comma-delimited sortby args: "+hits,+pagename"
         if (strstr($column, ',')) {
             $result = array();
             foreach (explode(',', $column) as $col) {
-                if (empty($this))
-                    $result[] = WikiDB_backend::sortby($col, $action);
-                else
-                    $result[] = $this->sortby($col, $action);
+                if ($col) {
+                    if (empty($this)) {
+                        $res = WikiDB_backend::sortby($col, $action);
+                    } else {
+                        $res = $this->sortby($col, $action);
+                    }
+                    if ($res) {
+                        $result[] = $res;
+                    }
+                }
             }
             return join(",", $result);
         }
@@ -769,7 +792,7 @@ abstract class WikiDB_backend_iterator
  */
 class WikiDB_backend_search
 {
-    function WikiDB_backend_search($search, &$dbh)
+    function __construct($search, &$dbh)
     {
         $this->_dbh = $dbh;
         $this->_case_exact = $search->_case_exact;
@@ -866,11 +889,3 @@ class WikiDB_backend_search_sql extends WikiDB_backend_search
         }
     }
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

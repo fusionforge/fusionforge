@@ -1,0 +1,116 @@
+Date: Sun, 29 Mar 2020 18:53:38 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
+Content-Type: application/x-phpwiki;
+  pagename=Aide%2FGreffonListeDuCalendrier;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
+  charset=UTF-8
+Content-Transfer-Encoding: binary
+
+Le [[Aide:GreffonWiki|greffon]] **~ListeDuCalendrier** (//CalendarList//) est utilisé avec le greffon [[Aide:GreffonCalendrier|Calendrier]].
+Il a été écrit pour ceux qui veulent utiliser le wiki comme un gestionnaire d'informations personnelles.
+
+Il suffit de cliquer sur une date du calendrier, d'éditer la tâche pour ce jour puis de revenir sur
+la page courante. L'évènement doit apparaître dans une liste sous le calendrier.
+
+
+== Utilisation ==
+
+{{{
+<<Calendar>>
+<<CalendarList>>
+}}}
+
+== Exemple ==
+
+//Cliquez sur n'importe quelle date et modifiez-la, puis retournez à cette page// :
+
+<<Calendar>>
+
+<<CalendarList>>
+
+== Arguments ==
+
+{| class="bordered"
+|-
+! Argument
+! Description
+! Valeur par défaut
+|-
+| **year**
+| Spécifie l'année pour le calendrier.
+| Année courante
+|-
+| **month**
+| Spécifie le mois pour le calendrier.
+| Mois courant
+|-
+| **prefix**
+| Préfixe
+| Page courante
+|-
+| **date_format**
+| Format de la date
+| %Y-%m-%d
+|-
+| **order**
+| Report sequence: “normal” or “reverse”. “reverse” displays newest dates first.
+| PLUGIN_CALENDARLIST_ORDER
+|-
+| **month_offset**
+| Month offset
+| 0
+|}
+
+=== Support ranges: next or last N days/events ===
+
+{| class="bordered"
+|-
+! Argument
+! Description
+! Valeur par défaut
+|-
+| **next_n_days**
+| next_n_days=60: Display entries for the next 60 days / 2 months.
+| PLUGIN_CALENDARLIST_NEXT_N_DAYS (empty)
+|-
+| **next_n**
+| next_n=20: Display only the next 20 entries. Ignored if next_n_days is defined.
+| PLUGIN_CALENDARLIST_NEXT_N (empty)
+|-
+| **last_n_days**
+| last_n_days=60: Display entries for the last 60 days / 2 months.
+| PLUGIN_CALENDARLIST_LAST_N_DAYS (empty)
+|-
+| **last_n**
+| last_n=20: Display only the last 20 entries. Ignored if last_n_days is defined.
+| PLUGIN_CALENDARLIST_LAST_N (empty)
+|-
+| **month_format**
+| How to display the Month.
+| %B %Y
+|-
+| **wday_format**
+| How to display the weekday, if supported by your strftime() function.
+| %a
+|-
+| **start_wday**
+| Start the week at Sunday or Monday
+| 1 for Monday
+|}
+
+== Options de configuration ==
+
+* PLUGIN_CALENDARLIST_ORDER       = normal
+* PLUGIN_CALENDARLIST_NEXT_N_DAYS = ''
+* PLUGIN_CALENDARLIST_NEXT_N      = ''
+* PLUGIN_CALENDARLIST_LAST_N_DAYS = ''
+* PLUGIN_CALENDARLIST_LAST_N      = ''
+
+== Auteurs ==
+
+Dérivé du greffon [[Aide:GreffonCalendrier|Calendrier]] de [[mailto:martin@safelogic.se|Martin Norbäck]].
+
+<noinclude>
+----
+[[DocumentationDePhpWiki]] [[CatégorieGreffonWiki]]
+</noinclude>

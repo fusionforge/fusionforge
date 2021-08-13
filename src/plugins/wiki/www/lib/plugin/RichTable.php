@@ -1,9 +1,8 @@
 <?php
-
-/*
- * Copyright (C) 2003 Sameer D. Sahasrabuddhe
- * Copyright (C) 2005 $ThePhpWikiProgrammingTeam
- * Copyright (C) 2008-2009 Marc-Etienne Vargenau, Alcatel-Lucent
+/**
+ * Copyright © 2003 Sameer D. Sahasrabuddhe
+ * Copyright © 2005 $ThePhpWikiProgrammingTeam
+ * Copyright © 2008-2009 Marc-Etienne Vargenau, Alcatel-Lucent
  *
  * This file is part of PhpWiki.
  *
@@ -20,6 +19,9 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
 */
 
 /**
@@ -40,16 +42,6 @@ class WikiPlugin_RichTable
         return array();
     }
 
-    function getWikiPageLinks($argstr, $basepage)
-    {
-        global $backlinks;
-        if (empty($backlinks)) {
-            global $request;
-            $this->run($request->_dbi, $argstr, $request, $basepage);
-        }
-        return $backlinks;
-    }
-
     /**
      * @param WikiDB $dbi
      * @param string $argstr
@@ -59,10 +51,6 @@ class WikiPlugin_RichTable
      */
     function run($dbi, $argstr, &$request, $basepage)
     {
-        global $backlinks;
-
-        $backlinks = array();
-
         include_once 'lib/BlockParser.php';
 
         $lines = preg_split('/\n/', $argstr);
@@ -123,18 +111,20 @@ class WikiPlugin_RichTable
                     $row->pushContent($cell);
                 }
                 $cell = HTML::td();
-                $line = substr($line, 1);
-                if ($line[0] == "*") {
-                    $attrs = parse_attributes(substr($line, 1));
-                    foreach ($attrs as $key => $value) {
-                        if (in_array($key, array("id", "class", "title", "style",
-                            "colspan", "rowspan", "width", "height",
-                            "bgcolor", "align", "valign"))
-                        ) {
-                            $cell->setAttr($key, $value);
+                if (strlen($line) > 1) {
+                    $line = substr($line, 1);
+                    if ($line[0] == "*") {
+                        $attrs = parse_attributes(substr($line, 1));
+                        foreach ($attrs as $key => $value) {
+                            if (in_array($key, array("id", "class", "title", "style",
+                                "colspan", "rowspan", "width", "height",
+                                "bgcolor", "align", "valign"))
+                            ) {
+                                $cell->setAttr($key, $value);
+                            }
                         }
+                        continue;
                     }
-                    continue;
                 }
             }
             if (isset($row) and isset($cell)) {
@@ -160,11 +150,3 @@ class WikiPlugin_RichTable
         return $table;
     }
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

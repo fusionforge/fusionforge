@@ -1,8 +1,8 @@
 <?php
-/*
- * Copyright 2002,2003,2005,2008-2010 $ThePhpWikiProgrammingTeam
- * Copyright 2002 Martin Geisler <gimpster@gimpster.com>
- * Copyright 2008-2009 Marc-Etienne Vargenau, Alcatel-Lucent
+/**
+ * Copyright © 2002,2003,2005,2008-2010 $ThePhpWikiProgrammingTeam
+ * Copyright © 2002 Martin Geisler <gimpster@gimpster.com>
+ * Copyright © 2008-2009 Marc-Etienne Vargenau, Alcatel-Lucent
  *
  * This file is part of PhpWiki.
  * Parts of this file were based on PHPWeather's configurator.php file.
@@ -21,6 +21,9 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
  */
 
 /**
@@ -53,7 +56,7 @@
  * subsequent requests will fail. (POST to save the INI)
  */
 
-global $HTTP_POST_VARS, $tdwidth;
+global $HTTP_POST_VARS;
 if (empty($_SERVER)) $_SERVER =& $GLOBALS['HTTP_SERVER_VARS'];
 if (empty($_GET)) $_GET =& $GLOBALS['HTTP_GET_VARS'];
 if (empty($_ENV)) $_ENV =& $GLOBALS['HTTP_ENV_VARS'];
@@ -71,10 +74,16 @@ if (strstr($_SERVER["SCRIPT_NAME"], "/php")) { // cgi got this different
         $scriptname = str_replace('configurator.php', 'index.php', $_SERVER["PHP_SELF"]);
 }
 
-$tdwidth = 700;
 $config_file = (substr(PHP_OS, 0, 3) == 'WIN') ? 'config\\config.ini' : 'config/config.ini';
 $fs_config_file = dirname(__FILE__) . (substr(PHP_OS, 0, 3) == 'WIN' ? '\\' : '/') . $config_file;
 if (isset($_POST['create'])) header('Location: ' . $configurator . '?show=_part1&create=1#create');
+
+if (!function_exists('dba_handlers')) {
+    function dba_handlers()
+    {
+        return array('none (function dba_handlers does not exist)');
+    }
+}
 
 // helpers from lib/WikiUser/HttpAuth.php
 if (!function_exists('_http_user')) {
@@ -160,13 +169,12 @@ if (file_exists($fs_config_file)) {
 
 ?>
 <!DOCTYPE html>
-<html>
+<html xml:lang="en" lang="en">
 <head>
     <meta charset="UTF-8" />
     <title>Configuration tool for PhpWiki <?php echo $config_file ?></title>
     <style type="text/css" media="screen">
         <!--
-            /* TABLE { border: thin solid black } */
         body {
             font-family: Verdana, Arial, Helvetica, sans-serif;
             font-size: 80%;
@@ -176,8 +184,13 @@ if (file_exists($fs_config_file)) {
             font-size: 120%;
         }
 
+        table {
+            border-spacing: 0;
+        }
+
         td {
             border: thin solid black;
+            padding: 4px;
         }
 
         tr {
@@ -200,7 +213,7 @@ if (file_exists($fs_config_file)) {
 
         td.instructions {
             background-color: #ffffee;
-            width: <?php echo $tdwidth ?>px;
+            width: 700px;
             color: inherit;
         }
 
@@ -213,9 +226,17 @@ if (file_exists($fs_config_file)) {
         td.unchangeable-variable-left {
             border-top: none;
             background-color: #ffffee;
+            width: 700px;
             color: inherit;
         }
 
+        .green {
+            color: green;
+        }
+
+        .red {
+            color: red;
+        }
         -->
     </style>
     <script type="text/javascript">
@@ -224,7 +245,7 @@ if (file_exists($fs_config_file)) {
                     var msg = document.getElementById(output);
                     if (accepted) {
                         if (msg && msg.innerHTML) {
-                            msg.innerHTML = "<span color=\"green\">Input accepted.</span>";
+                            msg.innerHTML = "<span class=\"green\">Input accepted.</span>";
                         }
                     } else {
                         var index;
@@ -232,7 +253,7 @@ if (file_exists($fs_config_file)) {
                             error = error.substring(0, index) + value + error.substring(index + 2);
                         }
                         if (msg) {
-                            msg.innerHTML = "<span color=\"red\">" + error + "</span>";
+                            msg.innerHTML = "<span class=\"red\">" + error + "</span>";
                         }
                     }
                     var submit;
@@ -317,12 +338,10 @@ if (file_exists($fs_config_file)) {
 </div>
 
 <?php
-define('DEBUG', 0);
-//define('DEBUG', 1);
 /**
  * The Configurator is a php script to aid in the configuration of PhpWiki.
  * Parts of this file were based on PHPWeather's configurator.php file.
- *   http://sourceforge.net/projects/phpweather/
+ *   https://sourceforge.net/projects/phpweather/
  *
  * TO CHANGE THE CONFIGURATION OF YOUR PHPWIKI, DO *NOT* MODIFY THIS FILE!
  * more instructions go here
@@ -341,19 +360,19 @@ define('DEBUG', 0);
  * - Descriptive text will be changed into comments (preceeded by ; )
  *   for the final output to config.ini.
  *
- * - Only a limited set of html is allowed: pre, dl dt dd; it will be
+ * - Only a limited set of HTML is allowed: pre, dl dt dd; it will be
  *   stripped from the final output.
  *
  * - Line breaks and spacing will be preserved for the final output.
  *
  * - Double line breaks are automatically converted to paragraphs
- *   for the html version of the descriptive text.
+ *   for the HTML version of the descriptive text.
  *
  * - Double-quotes and dollar signs in the descriptive text must be
  *   escaped: \" and \$. Instead of escaping double-quotes you can use
  *   single (') quotes for the enclosing quotes.
  *
- * - Special characters like < and > must use html entities,
+ * - Special characters like < and > must use HTML entities,
  *   they will be converted back to characters for the final output.
  */
 
@@ -377,8 +396,7 @@ $preamble = "
 
 $properties["Part Zero"] =
     new part('_part0', $SEPARATOR . "\n", "
-Part Zero: (optional)
-Latest Development and Tricky Options");
+Part Zero: Latest Development and Tricky Options");
 
 if (defined('INCLUDE_PATH'))
     $include_path = INCLUDE_PATH;
@@ -450,8 +468,14 @@ $properties["ENABLE_SPAMBLOCKLIST"] =
 $properties["NUM_SPAM_LINKS"] =
     new numeric_define_optional('NUM_SPAM_LINKS');
 
+$properties["DISABLE_UPLOAD_ONLY_ALLOWED_EXTENSIONS"] =
+    new boolean_define_commented_optional('DISABLE_UPLOAD_ONLY_ALLOWED_EXTENSIONS');
+
 $properties["GOOGLE_LINKS_NOFOLLOW"] =
     new boolean_define_commented_optional('GOOGLE_LINKS_NOFOLLOW');
+
+$properties["ENABLE_AJAX"] =
+    new boolean_define_commented_optional('ENABLE_AJAX');
 
 $properties["ENABLE_DISCUSSION_LINK"] =
     new boolean_define_commented_optional('ENABLE_DISCUSSION_LINK');
@@ -462,14 +486,23 @@ $properties["ENABLE_CAPTCHA"] =
 $properties["USE_CAPTCHA_RANDOM_WORD"] =
     new boolean_define_commented_optional('USE_CAPTCHA_RANDOM_WORD');
 
-$properties["USE_SAFE_DBSESSION"] =
-    new boolean_define_commented_optional('USE_SAFE_DBSESSION');
-
 $properties["BLOG_DEFAULT_EMPTY_PREFIX"] =
     new boolean_define_commented_optional('BLOG_DEFAULT_EMPTY_PREFIX');
 
 $properties["ENABLE_SEARCHHIGHLIGHT"] =
     new boolean_define_commented_optional('ENABLE_SEARCHHIGHLIGHT');
+
+$properties["ENABLE_MAILNOTIFY"] =
+    new boolean_define_commented_optional('ENABLE_MAILNOTIFY');
+
+$properties["ENABLE_RECENTCHANGESBOX"] =
+    new boolean_define_commented_optional('ENABLE_RECENTCHANGESBOX');
+
+$properties["ENABLE_PAGE_PUBLIC"] =
+    new boolean_define_commented_optional('ENABLE_PAGE_PUBLIC');
+
+$properties["READONLY"] =
+    new boolean_define_commented_optional('READONLY');
 
 $properties["Part One"] =
     new part('_part1', $SEPARATOR . "\n", "
@@ -520,8 +553,8 @@ $properties["Allow RawHtml Plugin only on locked pages"] =
 
 $properties["Allow RawHtml Plugin if safe HTML code"] =
     new boolean_define_commented_optional('ENABLE_RAW_HTML_SAFE', '', "
-If this is set, all unsafe html code is stripped automatically (experimental!)
-See <a href=\"http://chxo.com/scripts/safe_html-test.php\" target=\"_new\">chxo.com/scripts/safe_html-test.php</a>
+If this is set, all unsafe HTML code is stripped automatically (experimental!)
+See <a href=\"http://chxo.com/scripts/safe_html-test.php\">chxo.com/scripts/safe_html-test.php</a>
 ");
 
 $properties["Maximum Upload Size"] =
@@ -531,7 +564,13 @@ $properties["Minor Edit Timeout"] =
     new numeric_define_optional('MINOR_EDIT_TIMEOUT', MINOR_EDIT_TIMEOUT);
 
 $properties["Disabled Actions"] =
-    new array_define('DISABLED_ACTIONS', DISABLED_ACTIONS /*array()*/);
+    new array_define('DISABLED_ACTIONS', array("dumpserial", "loadfile"), "Actions listed in this array will not be allowed.  The complete list
+of actions can be found in lib/main.php with the function
+getActionDescription.
+
+purge, remove, revert, xmlrpc, soap, upload, browse, create, diff, dumphtml,
+dumpserial, edit, loadfile, lock, unlock, viewsource, zip, ziphtml, ...
+");
 
 $properties["Moderate all Pagechanges"] =
     new boolean_define_commented_optional('ENABLE_MODERATEDPAGE_ALL');
@@ -636,12 +675,12 @@ $properties["Database Type"] =
         array('dba' => "dba",
             'SQL' => "SQL PEAR",
             'ADODB' => "SQL ADODB",
-            'PDO' => "PDO (php5 only)",
+            'PDO' => "PDO",
             'file' => "flatfile")/*, "
 Select the database backend type:
 Choose dba (default) to use one of the standard UNIX dba libraries. This is the fastest.
 Choose ADODB or SQL to use an SQL database with ADODB or PEAR.
-Choose PDO on php5 to use an SQL database. (experimental, no paging yet)
+Choose PDO to use an SQL database. (experimental, no paging yet)
 flatfile is simple and slow.
 Recommended is dba or SQL: PEAR or ADODB."*/);
 
@@ -654,15 +693,15 @@ The most general form of a DSN looks like:
 </pre>
 For a MySQL database, the following should work:
 <pre>
-   mysql://user:password@host/databasename
+   mysqli://user:password@host/databasename
 </pre>
-To connect over a unix socket, use something like
+To connect over a Unix socket, use something like
 <pre>
-   mysql://user:password@unix(/path/to/socket)/databasename
+   mysqli://user:password@unix(/path/to/socket)/databasename
 </pre>
 <pre>
-  DATABASE_DSN = mysql://guest@:/var/lib/mysql/mysql.sock/phpwiki
-  DATABASE_DSN = mysql://guest@localhost/phpwiki
+  DATABASE_DSN = mysqli://guest@:/var/lib/mysql/mysql.sock/phpwiki
+  DATABASE_DSN = mysqli://guest@localhost/phpwiki
   DATABASE_DSN = pgsql://localhost/user_phpwiki
 </pre>");
 
@@ -712,7 +751,7 @@ $dsn_sqluser = $properties["SQL User"]->value();
 $dsn_sqlpass = $properties["SQL Password"]->value();
 $dsn_sqlhostorsock = $properties["SQL Database Host"]->value();
 $dsn_sqldbname = $properties["SQL Database Name"]->value();
-$dsn_sqlstring = $dsn_sqltype . "://{$dsn_sqluser}:{$dsn_sqlpass}@{$dsn_sqlhostorsock}/{$dsn_sqldbname}";
+$dsn_sqlstring = $dsn_sqltype . "://".$dsn_sqluser.":".$dsn_sqlpass."@".$dsn_sqlhostorsock."/".$dsn_sqldbname;
 
 $properties["SQL dsn"] =
     new unchangeable_define("DATABASE_DSN",
@@ -778,102 +817,6 @@ $properties["DBADMIN_PASSWD"] =
 
 $properties["USECACHE"] =
     new boolean_define_commented_optional('USECACHE');
-
-///////////////////
-
-$properties["Page Revisions"] =
-    new unchangeable_variable('_parttworevisions', "", "
-
-Section 2a: Archive Cleanup
-The next section controls how many old revisions of each page are kept in the database.
-
-There are two basic classes of revisions: major and minor. Which
-class a revision belongs in is determined by whether the author
-checked the \"this is a minor revision\" checkbox when they saved the
-page.
-
-There is, additionally, a third class of revisions: author
-revisions. The most recent non-mergable revision from each distinct
-author is and author revision.
-
-The expiry parameters for each of those three classes of revisions
-can be adjusted separately. For each class there are five
-parameters (usually, only two or three of the five are actually
-set) which control how long those revisions are kept in the
-database.
-<dl>
-   <dt>max_keep:</dt> <dd>If set, this specifies an absolute maximum for the
-            number of archived revisions of that class. This is
-            meant to be used as a safety cap when a non-zero
-            min_age is specified. It should be set relatively high,
-            and it's purpose is to prevent malicious or accidental
-            database overflow due to someone causing an
-            unreasonable number of edits in a short period of time.</dd>
-
-  <dt>min_age:</dt>  <dd>Revisions younger than this (based upon the supplanted
-            date) will be kept unless max_keep is exceeded. The age
-            should be specified in days. It should be a
-            non-negative, real number,</dd>
-
-  <dt>min_keep:</dt> <dd>At least this many revisions will be kept.</dd>
-
-  <dt>keep:</dt>     <dd>No more than this many revisions will be kept.</dd>
-
-  <dt>max_age:</dt>  <dd>No revision older than this age will be kept.</dd>
-</dl>
-Supplanted date: Revisions are timestamped at the instant that they
-cease being the current revision. Revision age is computed using
-this timestamp, not the edit time of the page.
-
-Merging: When a minor revision is deleted, if the preceding
-revision is by the same author, the minor revision is merged with
-the preceding revision before it is deleted. Essentially: this
-replaces the content (and supplanted timestamp) of the previous
-revision with the content after the merged minor edit, the rest of
-the page metadata for the preceding version (summary, mtime, ...)
-is not changed.
-");
-
-// For now the expiration parameters are statically inserted as
-// an unchangeable property. You'll have to edit the resulting
-// config file if you really want to change these from the default.
-
-$properties["Major Edits: keep minimum days"] =
-    new numeric_define('MAJOR_MIN_KEEP', MAJOR_MIN_KEEP, "
-Default: Keep for unlimited time.
-Set to 0 to enable archive cleanup");
-$properties["Minor Edits: keep minumum days"] =
-    new numeric_define('MINOR_MIN_KEEP', MINOR_MIN_KEEP, "
-Default: Keep for unlimited time.
-Set to 0 to enable archive cleanup");
-
-$properties["Major Edits: how many"] =
-    new numeric_define('MAJOR_KEEP', MAJOR_KEEP, "
-Keep up to 8 major edits");
-$properties["Major Edits: how many days"] =
-    new numeric_define('MAJOR_MAX_AGE', MAJOR_MAX_AGE, "
-keep them no longer than a month");
-
-$properties["Minor Edits: how many"] =
-    new numeric_define("MINOR_KEEP", MINOR_KEEP, "
-Keep up to 4 minor edits");
-$properties["Minor Edits: how many days"] =
-    new numeric_define("MINOR_MAX_AGE", "7", "
-keep them no longer than a week");
-
-$properties["per Author: how many"] =
-    new numeric_define("AUTHOR_KEEP", "8", "
-Keep the latest contributions of the last 8 authors,");
-$properties["per Author: how many days"] =
-    new numeric_define("AUTHOR_MAX_AGE", "365", "
-up to a year.");
-$properties["per Author: keep minumum days"] =
-    new numeric_define("AUTHOR_MIN_AGE", "7", "
-Additionally, (in the case of a particularly active page) try to
-keep the latest contributions of all authors in the last week (even if there are more than eight of them,)");
-$properties["per Author: max revisions"] =
-    new numeric_define("AUTHOR_MAX_KEEP", "20", "
-but in no case keep more than twenty unique author revisions.");
 
 /////////////////////////////////////////////////////////////////////
 
@@ -1159,6 +1102,12 @@ specify it here. Default: uid
 
 e.g.: LDAP_SEARCH_FIELD = sAMAccountName");
 
+$properties["LDAP SEARCH FILTER"] =
+    new _define_optional('LDAP_SEARCH_FILTER', "(uid=\$userid)", "
+If you want to check against special attributes, such as external partner, employee status.
+Default: undefined. This overrides LDAP_SEARCH_FIELD.
+Example (&(uid=\$userid)(employeeType=y)(myCompany=My Company*)(!(myCompany=My Company Partner*)))");
+
 $properties["LDAP OU USERS"] =
     new _define_optional('LDAP_OU_USERS', "ou=Users", "
 If you have an organizational unit for all users, define it here.
@@ -1327,7 +1276,7 @@ URL of these types will be automatically linked.
 within a named link [name|uri] one more protocol is defined: phpwiki");
 
 $properties["Inline Images"] =
-    new list_define('INLINE_IMAGES', 'png|jpg|jpeg|gif|swf');
+    new list_define('INLINE_IMAGES', 'png|jpg|jpeg|gif');
 
 $properties["WikiName Regexp"] =
     new _define('WIKI_NAME_REGEXP', "(?<![[:alnum:]])(?:[[:upper:]][[:lower:]]+){2,}(?![[:alnum:]])", "
@@ -1351,7 +1300,7 @@ $properties["Keyword Link Regexp"] =
 Search term used for automatic page classification by keyword extraction.
 
 Any links on a page to pages whose names match this search
-will be used keywords in the keywords html meta tag. This is an aid to
+will be used keywords in the keywords HTML meta tag. This is an aid to
 classification by search engines. The value of the match is
 used as the keyword.
 
@@ -1360,7 +1309,7 @@ The default behavior is to match Category* or Topic* links.");
 $properties["Author and Copyright Site Navigation Links"] =
     new _define_commented_optional('COPYRIGHTPAGE_TITLE', "GNU General Public License", "
 
-These will be inserted as &lt;link rel&gt; tags in the html header of
+These will be inserted as &lt;link rel&gt; tags in the HTML header of
 every page, for search engines and for browsers like Mozilla which
 take advantage of link rel site navigation.
 
@@ -1368,21 +1317,21 @@ If you have your own copyright and contact information pages change
 these as appropriate.");
 
 $properties["COPYRIGHTPAGE URL"] =
-    new _define_commented_optional('COPYRIGHTPAGE_URL', "http://www.gnu.org/copyleft/gpl.html#SEC1", "
+    new _define_commented_optional('COPYRIGHTPAGE_URL', "https://www.gnu.org/copyleft/gpl.html#SEC1", "
 
 Other useful alternatives to consider:
 <pre>
  COPYRIGHTPAGE_TITLE = \"GNU Free Documentation License\"
- COPYRIGHTPAGE_URL = \"http://www.gnu.org/copyleft/fdl.html\"
+ COPYRIGHTPAGE_URL = \"https://www.gnu.org/copyleft/fdl.html\"
  COPYRIGHTPAGE_TITLE = \"Creative Commons License 2.0\"
- COPYRIGHTPAGE_URL = \"http://creativecommons.org/licenses/by/2.0/\"</pre>
-See http://creativecommons.org/learn/licenses/ for variations");
+ COPYRIGHTPAGE_URL = \"https://creativecommons.org/licenses/by/2.0/\"</pre>
+See https://creativecommons.org/learn/licenses/ for variations");
 
 $properties["AUTHORPAGE_TITLE"] =
     new _define_commented_optional('AUTHORPAGE_TITLE', "The PhpWiki Programming Team", "
 Default Author Names");
 $properties["AUTHORPAGE_URL"] =
-    new _define_commented_optional('AUTHORPAGE_URL', "http://phpwiki.fr/The%20PhpWiki%20programming%20team", "
+    new _define_commented_optional('AUTHORPAGE_URL', "http://phpwiki.demo.free.fr/index.php/The%20PhpWiki%20programming%20team", "
 Default Author URL");
 
 $properties["TOC_FULL_SYNTAX"] =
@@ -1443,10 +1392,7 @@ then define 'USE_PATH_INFO' as false by uncommenting the line below.
 NB:  If you are using Apache >= 2.0.30, then you may need to to use
 the directive \"AcceptPathInfo On\" in your Apache configuration file
 (or in an appropriate <.htaccess> file) for the short urls to work:
-See http://httpd.apache.org/docs-2.0/mod/core.html#acceptpathinfo
-
-See also http://phpwiki.sourceforge.net/phpwiki/PrettyWiki for more ideas
-on prettifying your urls.
+See https://httpd.apache.org/docs-2.0/mod/core.html#acceptpathinfo
 
 Default: PhpWiki will try to divine whether use of PATH_INFO
 is supported in by your webserver/PHP configuration, and will
@@ -1487,6 +1433,10 @@ $temp = !empty($_ENV['TEMP']) ? $_ENV['TEMP'] : "/tmp";
 $properties["TEMP_DIR"] =
     new _define_optional('TEMP_DIR', $temp);
 
+$properties["Allowed Load"] =
+    new _define_commented_optional('ALLOWED_LOAD', '/tmp',
+        'List of directories from which it is allowed to load pages. Directories are separated with ":"');
+
 ///////////////////
 
 $properties["Part Seven"] =
@@ -1514,9 +1464,6 @@ $properties["HTML Dump Filename Suffix"] =
 $properties["Pagename of Recent Changes"] =
     new _define_optional('RECENT_CHANGES',
         "RecentChanges");
-
-$properties["Disable HTTP Redirects"] =
-    new boolean_define_commented_optional('DISABLE_HTTP_REDIRECT');
 
 $properties["Disable GETIMAGESIZE"] =
     new boolean_define_commented_optional('DISABLE_GETIMAGESIZE');
@@ -1551,6 +1498,8 @@ $properties["BABYCART_PATH"] =
     new _define_commented_optional('BABYCART_PATH', "/usr/local/bin/babycart");
 $properties["GOOGLE_LICENSE_KEY"] =
     new _define_commented_optional('GOOGLE_LICENSE_KEY');
+$properties["ENABLE_RATEIT"] =
+    new boolean_define_commented_optional('ENABLE_RATEIT');
 $properties["RATEIT_IMGPREFIX"] =
     new _define_commented_optional('RATEIT_IMGPREFIX'); //BStar
 $properties["GRAPHVIZ_EXE"] =
@@ -1576,8 +1525,6 @@ $properties["PLOTICUS_PREFABS"] =
     new _define_commented_optional('PLOTICUS_PREFABS'); // /usr/share/ploticus
 $properties["MY_JABBER_ID"] =
     new _define_commented_optional('MY_JABBER_ID'); //
-$properties["PHPWEATHER_BASE_DIR"] =
-    new _define_commented_optional('PHPWEATHER_BASE_DIR'); //
 
 $properties["Part Eight"] =
     new part('_part8', $SEPARATOR . "\n", "
@@ -1642,14 +1589,14 @@ text_from_dist("_MAGIC_CLOSE_FILE");
  */
 class _variable
 {
-
     var $config_item_name;
     var $default_value;
     var $description;
     var $prefix;
     var $jscheck;
+    var $values;
 
-    function _variable($config_item_name, $default_value = '', $description = '', $jscheck = '')
+    function __construct($config_item_name, $default_value = '', $description = '', $jscheck = '')
     {
         $this->config_item_name = $config_item_name;
         if (!$description)
@@ -1673,7 +1620,7 @@ class _variable
 
     function _define($config_item_name, $default_value = '', $description = '', $jscheck = '')
     {
-        $this->_variable($config_item_name, $default_value, $description, $jscheck);
+        _variable::__construct($config_item_name, $default_value, $description, $jscheck);
     }
 
     function value()
@@ -1688,17 +1635,6 @@ class _variable
     function _config_format($value)
     {
         return '';
-        /*
-        $v = $this->get_config_item_name();
-        // handle arrays: a|b --> a['b']
-        if (strpos($v, '|')) {
-            list($a, $b) = explode('|', $v);
-            $v = sprintf("%s['%s']", $a, $b);
-        }
-        if (preg_match("/[\"']/", $value))
-            $value = '"' . $value . '"';
-        return sprintf("%s = \"%s\"", $v, $value);
-        */
     }
 
     function get_config_item_name()
@@ -1734,23 +1670,22 @@ class _variable
     function get_config($posted_value)
     {
         $d = stripHtml($this->_get_description());
-        $d = str_replace("\n", "\n; ", $d) . $this->_get_config_line($posted_value) . "\n";
-        return $d;
+        return str_replace("\n", "\n; ", $d) . $this->_get_config_line($posted_value) . "\n";
     }
 
     function get_instructions($title)
     {
-        global $tdwidth;
         $i = "<h3>" . $title . "</h3>\n    " . nl2p($this->_get_description()) . "\n";
-        return "<tr>\n<td width=\"$tdwidth\" class=\"instructions\">\n" . $i . "</td>\n";
+        return "<tr>\n<td class=\"instructions\">\n" . $i . "</td>\n";
     }
 
     function get_html()
     {
         $size = strlen($this->default_value) > 45 ? 90 : 50;
         return $this->get_config_item_header() .
-            "<input type=\"text\" size=\"$50\" name=\"" . $this->get_config_item_name() . "\" value=\"" . htmlspecialchars($this->default_value) . "\" " .
-            $this->jscheck . " />" . "<p id=\"" . $this->get_config_item_id() . "\" style=\"color: green\">Input accepted.</p>";
+            "<input type=\"text\" size=\"$size\" name=\"" . $this->get_config_item_name()
+            . '" value="' . htmlspecialchars($this->default_value) . '" ' . $this->jscheck . " />"
+            . "<p id=\"" . $this->get_config_item_id() . "\" class=\"green\">Input accepted.</p>";
     }
 }
 
@@ -1762,7 +1697,6 @@ class unchangeable_variable
         return "";
     }
 
-    // function get_html() { return false; }
     function get_html()
     {
         return $this->get_config_item_header() .
@@ -1772,18 +1706,18 @@ class unchangeable_variable
 
     function _get_config_line($posted_value)
     {
+        $n = "";
         if ($this->description)
             $n = "\n";
-        return "${n}" . $this->default_value;
+        return "$n" . $this->default_value;
     }
 
     function get_instructions($title)
     {
-        global $tdwidth;
         $i = "<h3>" . $title . "</h3>\n    " . nl2p($this->_get_description()) . "\n";
         // $i .= "<em>Not editable.</em><br />\n<pre>" . $this->default_value."</pre>";
         return '<tr><td style="width:100%;" class="unchangeable-variable-top" colspan="2">' . "\n" . $i . "</td></tr>\n"
-            . '<tr style="border-top: none;"><td class="unchangeable-variable-left" width="' . $tdwidth . '">&nbsp;</td>';
+            . '<tr style="border-top: none;"><td class="unchangeable-variable-left">&nbsp;</td>';
     }
 }
 
@@ -1792,24 +1726,17 @@ class unchangeable_define
 {
     function _get_config_line($posted_value)
     {
+        $n = "";
         if ($this->description)
             $n = "\n";
         if (!$posted_value)
             $posted_value = $this->default_value;
-        return "${n}" . $this->_config_format($posted_value);
+        return "$n" . $this->_config_format($posted_value);
     }
 
     function _config_format($value)
     {
         return sprintf("%s = \"%s\"", $this->get_config_item_name(), $value);
-    }
-}
-class unchangeable_ini_set
-    extends unchangeable_variable
-{
-    function _config_format($value)
-    {
-        return "";
     }
 }
 
@@ -1819,11 +1746,16 @@ class _variable_selection
     function value()
     {
         global $HTTP_POST_VARS;
-        if (!empty($HTTP_POST_VARS[$this->config_item_name]))
+        if (!empty($HTTP_POST_VARS[$this->config_item_name])) {
             return $HTTP_POST_VARS[$this->config_item_name];
-        else {
-            list($option, $label) = each($this->default_value);
-            return $option;
+        } else {
+            if (is_array($this->default_value)) {
+                $option = key($this->default_value);
+                next($this->default_value);
+                return $option;
+            } else {
+                return '';
+            }
         }
     }
 
@@ -1859,12 +1791,13 @@ class _define
 
     function _get_config_line($posted_value)
     {
+        $n = "";
         if ($this->description)
             $n = "\n";
         if ($posted_value == '')
-            return "${n};" . $this->_config_format("");
+            return "$n;" . $this->_config_format("");
         else
-            return "${n}" . $this->_config_format($posted_value);
+            return "$n" . $this->_config_format($posted_value);
     }
 
     function get_html()
@@ -1872,8 +1805,8 @@ class _define
         $size = strlen($this->default_value) > 45 ? 90 : 50;
         return $this->get_config_item_header()
             . "<input type=\"text\" size=\"$size\" name=\"" . htmlentities($this->get_config_item_name())
-            . "\" value=\"" . htmlentities($this->default_value) . "\" {$this->jscheck} />"
-            . "<p id=\"" . $this->get_config_item_id() . "\" style=\"color: green\">Input accepted.</p>";
+            . '" value="' . htmlentities($this->default_value) . '" ' . $this->jscheck . " />"
+            . "<p id=\"" . $this->get_config_item_id() . "\" class=\"green\">Input accepted.</p>";
     }
 }
 
@@ -1882,13 +1815,15 @@ class _define_commented
 {
     function _get_config_line($posted_value)
     {
+        $n = "";
         if ($this->description)
             $n = "\n";
         if ($posted_value == $this->default_value)
-            return "${n};" . $this->_config_format($posted_value);
+            return "$n;" . $this->_config_format($posted_value);
         elseif ($posted_value == '')
-            return "${n};" . $this->_config_format(""); else
-            return "${n}" . $this->_config_format($posted_value);
+            return "$n;" . $this->_config_format("");
+        else
+            return "$n" . $this->_config_format($posted_value);
     }
 }
 
@@ -1914,26 +1849,11 @@ class _define_notempty
     {
         $s = $this->get_config_item_header()
             . "<input type=\"text\" size=\"50\" name=\"" . $this->get_config_item_name()
-            . "\" value=\"" . $this->default_value . "\" {$this->jscheck} />";
+            . '" value="' . $this->default_value . '" ' . $this->jscheck . " />";
         if (empty($this->default_value))
-            return $s . "<p id=\"" . $this->get_config_item_id() . "\" style=\"color: red\">Cannot be empty.</p>";
+            return $s . "<p id=\"" . $this->get_config_item_id() . "\" class=\"red\">Cannot be empty.</p>";
         else
-            return $s . "<p id=\"" . $this->get_config_item_id() . "\" style=\"color: green\">Input accepted.</p>";
-    }
-}
-
-class _variable_commented
-    extends _variable
-{
-    function _get_config_line($posted_value)
-    {
-        if ($this->description)
-            $n = "\n";
-        if ($posted_value == $this->default_value)
-            return "${n};" . $this->_config_format($posted_value);
-        elseif ($posted_value == '')
-            return "${n};" . $this->_config_format(""); else
-            return "${n}" . $this->_config_format($posted_value);
+            return $s . "<p id=\"" . $this->get_config_item_id() . "\" class=\"green\">Input accepted.</p>";
     }
 }
 
@@ -1941,27 +1861,27 @@ class numeric_define
     extends _define
 {
 
-    function numeric_define($config_item_name, $default_value = '', $description = '', $jscheck = '')
+    function __construct($config_item_name, $default_value = '', $description = '', $jscheck = '')
     {
-        $this->_define($config_item_name, $default_value, $description, $jscheck);
+        parent::__construct($config_item_name, $default_value, $description, $jscheck);
         if (!$jscheck)
             $this->jscheck = "onchange=\"validate_ereg('Sorry, \'%s\' is not an integer.', '^[-+]?[0-9]+$', '" . $this->get_config_item_name() . "', this);\"";
     }
 
     function _config_format($value)
     {
-        //return sprintf("define('%s', %s);", $this->get_config_item_name(), $value);
         return sprintf("%s = %s", $this->get_config_item_name(), $value);
     }
 
     function _get_config_line($posted_value)
     {
+        $n = "";
         if ($this->description)
             $n = "\n";
         if ($posted_value == '')
-            return "${n};" . $this->_config_format('0');
+            return "$n;" . $this->_config_format('0');
         else
-            return "${n}" . $this->_config_format($posted_value);
+            return "$n" . $this->_config_format($posted_value);
     }
 }
 
@@ -1975,13 +1895,15 @@ class numeric_define_commented
 {
     function _get_config_line($posted_value)
     {
+        $n = "";
         if ($this->description)
             $n = "\n";
         if ($posted_value == $this->default_value)
-            return "${n};" . $this->_config_format($posted_value);
+            return "$n;" . $this->_config_format($posted_value);
         elseif ($posted_value == '')
-            return "${n};" . $this->_config_format('0'); else
-            return "${n}" . $this->_config_format($posted_value);
+            return "$n;" . $this->_config_format('0');
+        else
+            return "$n" . $this->_config_format($posted_value);
     }
 }
 
@@ -1993,24 +1915,10 @@ class _define_selection
         return sprintf("%s = %s", $this->get_config_item_name(), $value);
     }
 
-    function _get_config_line($posted_value)
-    {
-        return _define::_get_config_line($posted_value);
-    }
-
-    function get_html()
-    {
-        return _variable_selection::get_html();
-    }
 }
 
 class _define_selection_optional
     extends _define_selection
-{
-}
-
-class _variable_selection_optional
-    extends _variable_selection
 {
 }
 
@@ -2019,24 +1927,25 @@ class _define_selection_optional_commented
 {
     function _get_config_line($posted_value)
     {
+        $n = "";
         if ($this->description)
             $n = "\n";
         if ($posted_value == $this->default_value)
-            return "${n};" . $this->_config_format($posted_value);
+            return "$n;" . $this->_config_format($posted_value);
         elseif ($posted_value == '')
-            return "${n};" . $this->_config_format(""); else
-            return "${n}" . $this->_config_format($posted_value);
+            return "$n;" . $this->_config_format("");
+        else
+            return "$n" . $this->_config_format($posted_value);
     }
 }
 
 class _define_password
     extends _define
 {
-
-    function _define_password($config_item_name, $default_value = '', $description = '', $jscheck = '')
+    function __construct($config_item_name, $default_value = '', $description = '', $jscheck = '')
     {
         if ($config_item_name == $default_value) $default_value = '';
-        $this->_define($config_item_name, $default_value, $description, $jscheck);
+        parent::__construct($config_item_name, $default_value, $description, $jscheck);
         if (!$jscheck)
             $this->jscheck = "onchange=\"validate_ereg('Sorry, \'%s\' cannot be empty.', '^.+$', '"
                 . $this->get_config_item_name() . "', this);\"";
@@ -2044,10 +1953,11 @@ class _define_password
 
     function _get_config_line($posted_value)
     {
+        $n = "";
         if ($this->description)
             $n = "\n";
         if ($posted_value == '') {
-            $p = "${n};" . $this->_config_format("");
+            $p = "$n;" . $this->_config_format("");
             $p .= "\n; If you used the passencrypt.php utility to encode the password";
             $p .= "\n; then uncomment this line:";
             $p .= "\n;ENCRYPTED_PASSWD = true";
@@ -2060,36 +1970,33 @@ class _define_password
                 16 * CRYPT_BLOWFISH);
             // generate an encrypted password
             $crypt_pass = crypt($posted_value, rand_ascii($salt_length));
-            $p = "${n}" . $this->_config_format($crypt_pass);
+            $p = "$n" . $this->_config_format($crypt_pass);
             return $p . "\nENCRYPTED_PASSWD = true";
         }
     }
 
-    function get_html()
-    {
-        return _variable_password::get_html();
-    }
 }
 
 class _define_password_optional
     extends _define_password
 {
 
-    function _define_password_optional($config_item_name, $default_value = '', $description = '', $jscheck = '')
+    function __construct($config_item_name, $default_value = '', $description = '', $jscheck = '')
     {
         if ($config_item_name == $default_value) $default_value = '';
         if (!$jscheck) $this->jscheck = " ";
-        $this->_define($config_item_name, $default_value, $description, $jscheck);
+        parent::__construct($config_item_name, $default_value, $description, $jscheck);
     }
 
     function _get_config_line($posted_value)
     {
+        $n = "";
         if ($this->description)
             $n = "\n";
         if ($posted_value == '') {
-            return "${n};" . $this->_config_format("");
+            return "$n;" . $this->_config_format("");
         } else {
-            return "${n}" . $this->_config_format($posted_value);
+            return "$n" . $this->_config_format($posted_value);
         }
     }
 
@@ -2102,24 +2009,19 @@ class _define_password_optional
             $GLOBALS['properties']["Encrypted Passwords"]->value();
         if (empty($value))
             $encrypted = false;
-        $s .= "<input type=\"" . ($encrypted ? "text" : "password") . "\" name=\"" . $this->get_config_item_name()
-            . "\" value=\"" . $value . "\" {$this->jscheck} />";
+        $s .= '<input type="' . ($encrypted ? "text" : "password") . '" name="' . $this->get_config_item_name()
+            . '" value="' . $value . '" ' . $this->jscheck . " />";
         return $s;
     }
-}
-
-class _define_password_commented_optional
-    extends _define_password_optional
-{
 }
 
 class _variable_password
     extends _variable
 {
-    function _variable_password($config_item_name, $default_value = '', $description = '', $jscheck = '')
+    function __construct($config_item_name, $default_value = '', $description = '', $jscheck = '')
     {
         if ($config_item_name == $default_value) $default_value = '';
-        $this->_define($config_item_name, $default_value, $description, $jscheck);
+        parent::__construct($config_item_name, $default_value, $description, $jscheck);
         if (!$jscheck)
             $this->jscheck = "onchange=\"validate_ereg('Sorry, \'%s\' cannot be empty.', '^.+$', '" . $this->get_config_item_name() . "', this);\"";
     }
@@ -2133,47 +2035,22 @@ class _variable_password
             $this->default_value = $new_password;
             $s .= "Created password: <strong>$new_password</strong><br />&nbsp;<br />";
         }
-        // dont re-encrypt already encrypted passwords
+        // do not re-encrypt already encrypted passwords
         $value = $this->value();
         $encrypted = !empty($GLOBALS['properties']["Encrypted Passwords"]) and
             $GLOBALS['properties']["Encrypted Passwords"]->value();
         if (empty($value))
             $encrypted = false;
-        $s .= "<input type=\"" . ($encrypted ? "text" : "password") . "\" name=\"" . $this->get_config_item_name()
-            . "\" value=\"" . $value . "\" {$this->jscheck} />"
+        $s .= '<input type="' . ($encrypted ? "text" : "password") . '" name="' . $this->get_config_item_name()
+            . '" value="' . $value . '" ' . $this->jscheck . " />"
             . "&nbsp;&nbsp;<input type=\"submit\" name=\"create\" value=\"Create Random Password\" />";
         if (empty($value))
-            $s .= "<p id=\"" . $this->get_config_item_id() . "\" style=\"color: red\">Cannot be empty.</p>";
+            $s .= "<p id=\"" . $this->get_config_item_id() . "\" class=\"red\">Cannot be empty.</p>";
         elseif (strlen($this->default_value) < 4)
-            $s .= "<p id=\"" . $this->get_config_item_id() . "\" style=\"color: red\">Must be longer than 4 chars.</p>"; else
-            $s .= "<p id=\"" . $this->get_config_item_id() . "\" style=\"color: green\">Input accepted.</p>";
+            $s .= "<p id=\"" . $this->get_config_item_id() . "\" class=\"red\">Must be longer than 4 chars.</p>";
+        else
+            $s .= "<p id=\"" . $this->get_config_item_id() . "\" class=\"green\">Input accepted.</p>";
         return $s;
-    }
-}
-
-class list_variable
-    extends _variable
-{
-    function _get_config_line($posted_value)
-    {
-        // split the phrase by any number of commas or space characters,
-        // which include " ", \r, \t, \n and \f
-        $list_values = preg_split("/[\s,]+/", $posted_value, -1, PREG_SPLIT_NO_EMPTY);
-        if ($list_values)
-            $list_values = join("|", $list_values);
-        return _variable::_get_config_line($list_values);
-    }
-
-    function get_html()
-    {
-        $list_values = explode("|", $this->default_value);
-        $rows = max(3, count($list_values) + 1);
-        $list_values = join("\n", $list_values);
-        $ta = $this->get_config_item_header();
-        $ta .= "<textarea cols=\"18\" rows=\"" . $rows . "\" name=\"" . $this->get_config_item_name() . "\" {$this->jscheck}>";
-        $ta .= $list_values . "</textarea>";
-        $ta .= "<p id=\"" . $this->get_config_item_id() . "\" style=\"color: green\">Input accepted.</p>";
-        return $ta;
     }
 }
 
@@ -2195,9 +2072,10 @@ class list_define
         if ($list_values)
             $list_values = join("\n", $list_values);
         $ta = $this->get_config_item_header();
-        $ta .= "<textarea cols=\"18\" rows=\"" . $rows . "\" name=\"" . $this->get_config_item_name() . "\" {$this->jscheck}>";
+        $ta .= '<textarea cols="18" rows="' . $rows . '" name="';
+        $ta .= $this->get_config_item_name() . '" ' . $this->jscheck . '>';
         $ta .= $list_values . "</textarea>";
-        $ta .= "<p id=\"" . $this->get_config_item_id() . "\" style=\"color: green\">Input accepted.</p>";
+        $ta .= "<p id=\"" . $this->get_config_item_id() . "\" class=\"green\">Input accepted.</p>";
         return $ta;
     }
 }
@@ -2225,15 +2103,19 @@ class array_variable
 
     function get_html()
     {
-        if (is_array($this->default_value))
+        if (is_array($this->default_value)) {
             $list_values = join("\n", $this->default_value);
-        else
+            $count = count($this->default_value);
+        } else {
             $list_values = $this->default_value;
-        $rows = max(3, count($this->default_value) + 1);
+            $count = 1;
+        }
+        $rows = max(3, $count + 1);
         $ta = $this->get_config_item_header();
-        $ta .= "<textarea cols=\"18\" rows=\"" . $rows . "\" name=\"" . $this->get_config_item_name() . "\" {$this->jscheck}>";
+        $ta .= '<textarea cols="18" rows="' . $rows . '" name="';
+        $ta .= $this->get_config_item_name() . '" ' . $this->jscheck . '>';
         $ta .= $list_values . "</textarea>";
-        $ta .= "<p id=\"" . $this->get_config_item_id() . "\" style=\"color: green\">Input accepted.</p>";
+        $ta .= "<p id=\"" . $this->get_config_item_id() . "\" class=\"green\">Input accepted.</p>";
         return $ta;
     }
 }
@@ -2268,55 +2150,34 @@ class array_define
         $list_values = join(" : \n", $this->default_value);
         $rows = max(3, count($this->default_value) + 1);
         $ta = $this->get_config_item_header();
-        $ta .= "<textarea cols=\"18\" rows=\"" . $rows . "\" name=\"" . $this->get_config_item_name() . "\" {$this->jscheck}>";
+        $ta .= '<textarea cols="18" rows="' . $rows . '" name="';
+        $ta .= $this->get_config_item_name() . '" ' . $this->jscheck . '>';
         $ta .= $list_values . "</textarea>";
-        $ta .= "<p id=\"" . $this->get_config_item_id() . "\" style=\"color: green\">Input accepted.</p>";
+        $ta .= "<p id=\"" . $this->get_config_item_id() . "\" class=\"green\">Input accepted.</p>";
         return $ta;
     }
 }
 
-/*
-class _ini_set
-extends _variable {
-    function value() {
-        global $HTTP_POST_VARS;
-        if ($v = $HTTP_POST_VARS[$this->config_item_name])
-            return $v;
-        else {
-            return ini_get($this->get_config_item_name);
-        }
-    }
-    function _config_format($value) {
-        return sprintf("ini_set('%s', '%s');", $this->get_config_item_name(), $value);
-    }
-    function _get_config_line($posted_value) {
-        if ($posted_value && ! $posted_value == $this->default_value)
-            return "\n" . $this->_config_format($posted_value);
-        else
-            return "\n;" . $this->_config_format($this->default_value);
-    }
-}
-*/
-
 class boolean_define
     extends _define
 {
-
     // adds ->values property, instead of ->default_value
-    function boolean_define($config_item_name, $values = false, $description = '', $jscheck = '')
+    function __construct($config_item_name, $values = false, $description = '', $jscheck = '')
     {
         $this->config_item_name = $config_item_name;
-        if (!$description)
+        if (!$description) {
             $description = text_from_dist($config_item_name);
+        }
         $this->description = $description;
         // TESTME: get boolean default value from config-default.ini
-        if (defined($config_item_name))
+        if (defined($config_item_name)) {
             $this->default_value = constant($config_item_name); // ignore given default value
-        elseif (is_array($values))
-            list($this->default_value, $dummy) = $values[0];
-        if (!$values)
-            $values = array('false' => "Disabled",
-                'true' => "Enabled");
+        } elseif (is_array($values)) {
+            list($this->default_value, $dummy) = $values[""];
+        }
+        if (!$values) {
+            $values = array('false' => "Disabled", 'true' => "Enabled");
+        }
         $this->values = $values;
         $this->jscheck = $jscheck;
         $this->prefix = "";
@@ -2324,9 +2185,10 @@ class boolean_define
 
     function _get_config_line($posted_value)
     {
+        $n = "";
         if ($this->description)
             $n = "\n";
-        return "${n}" . $this->_config_format($posted_value);
+        return "$n" . $this->_config_format($posted_value);
     }
 
     function _config_format($value)
@@ -2334,7 +2196,7 @@ class boolean_define
         if (strtolower(trim($value)) == 'false')
             $value = false;
         return sprintf("%s = %s", $this->get_config_item_name(),
-            (bool)$value ? 'true' : 'false');
+            $value ? 'true' : 'false');
     }
 
     //TODO: radiobuttons, no list
@@ -2342,12 +2204,12 @@ class boolean_define
     {
         $output = $this->get_config_item_header();
         $name = $this->get_config_item_name();
-        $output .= '<select name="' . $name . "\" {$this->jscheck}>\n";
+        $output .= '<select name="' . $name . '" ' . $this->jscheck . ">\n";
         $values = $this->values;
         $default_value = $this->default_value ? 'true' : 'false';
         /* There can usually only be two options, there can be
          * three options in the case of a boolean_define_commented_optional */
-        while (list($option, $label) = each($values)) {
+        foreach ($values as $option => $label) {
             if (!is_null($this->default_value) and $option === $default_value)
                 $output .= "  <option value=\"$option\" selected=\"selected\">$label</option>\n";
             else
@@ -2368,14 +2230,21 @@ class boolean_define_commented
 {
     function _get_config_line($posted_value)
     {
+        $n = "";
         if ($this->description)
             $n = "\n";
-        list($default_value, $label) = each($this->default_value);
+        if (is_array($this->default_value)) {
+            $default_value = key($this->default_value);
+            next($this->default_value);
+        } else {
+            $default_value = $this->default_value;
+        }
         if ($posted_value == $default_value)
-            return "${n};" . $this->_config_format($posted_value);
+            return "$n;" . $this->_config_format($posted_value);
         elseif ($posted_value == '')
-            return "${n};" . $this->_config_format('false'); else
-            return "${n}" . $this->_config_format($posted_value);
+            return "$n;" . $this->_config_format('false');
+        else
+            return "$n" . $this->_config_format($posted_value);
     }
 }
 
@@ -2389,7 +2258,7 @@ class part
 {
     function value()
     {
-        return;
+        return "";
     }
 
     function get_config($posted_value)
@@ -2402,7 +2271,6 @@ class part
     function get_instructions($title)
     {
         $id = preg_replace("/\W/", "", $this->config_item_name);
-        $group_name = preg_replace("/\W/", "", $title);
         $i = '<tr class="header" id="'.$id.'">'."\n";
         $i .= '<td class="part" style="width:100%;background-color:#eee;" colspan="2">'."\n";
         $i .= "<h2>" . $title . "</h2>\n    " . nl2p($this->_get_description()) . "\n";
@@ -2416,11 +2284,11 @@ class part
     }
 }
 
-// html utility functions
+// HTML utility functions
 function nl2p($text)
 {
     preg_match_all("@\s*(<pre>.*?</pre>|<dl>.*?</dl>|.*?(?=\n\n|<pre>|<dl>|$))@s",
-        $text, $m, PREG_PATTERN_ORDER);
+        $text, $m);
 
     $text = '';
     foreach ($m[1] as $par) {
@@ -2477,12 +2345,11 @@ function stripHtml($text)
     $d = str_replace("</dd>", "", $d);
     $d = str_replace("<p>", "", $d);
     $d = str_replace("</p>", "", $d);
-    //restore html entities into characters
-    // http://www.php.net/manual/en/function.htmlentities.php
+    //restore HTML entities into characters
+    // https://www.php.net/manual/en/function.htmlentities.php
     $trans = get_html_translation_table(HTML_ENTITIES);
     $trans = array_flip($trans);
-    $d = strtr($d, $trans);
-    return $d;
+    return strtr($d, $trans);
 }
 
 include_once(dirname(__FILE__) . "/lib/stdlib.php");
@@ -2509,14 +2376,6 @@ function random_good_password($minlength = 5, $maxlength = 8)
     return ($newpass);
 }
 
-// debugging
-function printArray($a)
-{
-    echo "<hr />\n<pre>\n";
-    print_r($a);
-    echo "\n</pre>\n<hr />\n";
-}
-
 // end of class definitions
 /////////////////////////////
 // begin auto generation code
@@ -2529,21 +2388,16 @@ if (!empty($HTTP_POST_VARS['action'])
 
     $timestamp = date('dS \of F, Y H:i:s');
 
-    $config = "
-; This is a local configuration file for PhpWiki.
-; It was automatically generated by the configurator script
-; on the $timestamp.
-;
-; $preamble
-";
+    $config = "; This is a local configuration file for PhpWiki.\n"
+            . "; It was automatically generated by the configurator script\n"
+            . "; on the $timestamp.\n"
+            .  $preamble;
 
     $posted = $GLOBALS['HTTP_POST_VARS'];
-    /*if (defined('DEBUG'))
-     printArray($GLOBALS['HTTP_POST_VARS']);*/
 
     foreach ($properties as $option_name => $a) {
         $posted_value = stripslashes($posted[$a->config_item_name]);
-        $config .= $properties[$option_name]->get_config($posted_value);
+        $config .= $a->get_config($posted_value);
     }
 
     $config .= $end;
@@ -2569,12 +2423,10 @@ if (!empty($HTTP_POST_VARS['action'])
         echo "<p>The configuration was written to <code><b>$config_file</b></code>.</p>\n";
         if ($new_filename) {
             echo "<p>A backup was made to <code><b>$new_filename</b></code>.</p>\n";
-        } else {
-            ; //echo "<p><strong>You must rename or copy this</strong> <code><b>$config_file</b></code> <strong>file to</strong> <code><b>config/config.ini</b></code>.</p>\n";
         }
     } else {
         echo "<p>The configuration file could <b>not</b> be written.<br />\n",
-        " You should copy the above configuration to a file, ",
+        "You should copy the above configuration to a file, ",
         "and manually save it as <code><b>config/config.ini</b></code>.</p>\n";
     }
 
@@ -2596,13 +2448,12 @@ if (!empty($HTTP_POST_VARS['action'])
     echo '
 <form action="', $configurator, '" method="post">
 <input type="hidden" name="action" value="make_config" />
-<table cellpadding="4" cellspacing="0">
+<table>
 ';
 
-    while (list($property, $obj) = each($properties)) {
+    foreach ($properties as $property => $obj) {
         echo $obj->get_instructions($property);
         if ($h = $obj->get_html()) {
-            if (defined('DEBUG') and DEBUG) $h = get_class($obj) . "<br />\n" . $h;
             echo "<td>" . $h . "</td>\n";
         }
         echo '</tr>';

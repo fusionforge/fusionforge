@@ -1,12 +1,15 @@
-Date: Mon, 29 Jun 2015 12:04:27 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Tue, 16 Apr 2019 15:27:59 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=Hilfe%2FWikiWikiWeb;
-  flags="";
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
   charset=UTF-8
 Content-Transfer-Encoding: binary
 
-Ein WikiWikiWeb ist eine Website, bei der jeder am Inhalt mitarbeiten kann. Jeder, der das Wiki liest, kann auch Seiten bearbeiten und neue Seiten erstellen. Das bekannteste und meistverwendete Wiki ist das Portland Pattern Repository unter [[http://c2.com/cgi-bin/wiki?WikiWikiWeb]].
+Ein **~WikiWikiWeb** ist eine Website, bei der jeder am Inhalt mitarbeiten kann.
+Jeder, der das Wiki liest, kann auch Seiten bearbeiten und neue Seiten erstellen.
+Das bekannteste und meistverwendete Wiki ist das Portland
+Pattern Repository unter [[http://c2.com/cgi-bin/wiki?WikiWikiWeb]].
 
 Einige Zitate:
 
@@ -18,4 +21,9 @@ Einige Zitate:
 
 Du kannst dich im [[GästeBuch]] eintragen, oder lerne WieManWikiBenutzt und wie man SeitenErzeugen kann. Hier gibts offene Diskussion. Viel Vergnügen!
 
--- [[Steve Wainstead]]
+-- [[Hilfe:Steve Wainstead|Steve Wainstead]]
+
+<noinclude>
+----
+[[PhpWikiDokumentation]]
+</noinclude>

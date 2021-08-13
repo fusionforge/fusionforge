@@ -7,7 +7,7 @@ $isActionPage = isActionPage($pagename);
 $isBrowse = $request->getArg('action') == 'browse';
 ?>
 
-  <nav id="actionbuttons">
+  <nav id="actionbuttons" role="navigation" aria-label="Actions Menu">
   <ul>
     <?php if (!string_ends_with($pagename, '/'._("Discussion"))) { ?>
     <?php $talk = new WikiPageName('Talk:'.$pagename); ?>
@@ -67,7 +67,7 @@ $isBrowse = $request->getArg('action') == 'browse';
 
       <li><?php echo Button(__("PageInfo"), _("Page Info")) ?></li>
 
-      <li><?php echo Button(array('action'=>__("BackLinks")), _("Back Links"),$page->getName()) ?></li>
+      <li><?php echo Button(array('action'=>__("BackLinks")), _("Back Links"), $page->getName()) ?></li>
 
     <?php if (defined('USE_EXTERNAL_HTML2PDF') and USE_EXTERNAL_HTML2PDF) { ?>
       <?php if ($curuserprefs->get('pdfMenuItem')) { ?>

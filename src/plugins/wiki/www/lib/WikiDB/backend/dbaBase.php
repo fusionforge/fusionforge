@@ -1,4 +1,28 @@
 <?php
+/**
+ * Copyright © 2001,2003 Jeff Dairiki
+ * Copyright © 2001-2002 Carsten Klapp
+ * Copyright © 2004-2010 Reini Urban
+ *
+ * This file is part of PhpWiki.
+ *
+ * PhpWiki is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * PhpWiki is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
+ */
 
 require_once 'lib/WikiDB/backend.php';
 
@@ -89,11 +113,15 @@ class WikiDB_backend_dbaBase
     function rebuild($args = false)
     {
         if (!empty($args['all'])) {
-            parent::rebuild();
+            $result = parent::rebuild();
+            if ($result == false) {
+                return false;
+            }
         }
         // rebuild backlink table
         $this->_linkdb->rebuild();
         $this->optimize();
+        return true;
     }
 
     function check($args = false)
@@ -186,8 +214,7 @@ class WikiDB_backend_dbaBase
      * @param int $version Which version to get
      * @param bool $want_content Do we need content?
      *
-     * @return array hash The version data, or false if specified version does not
-     *              exist.
+     * @return array|false The version data, or false if specified version does not exist
      */
     function get_versiondata($pagename, $version, $want_content = false)
     {
@@ -250,6 +277,13 @@ class WikiDB_backend_dbaBase
 
         $this->set_links($pagename, array());
     }
+
+    /**
+     * Rename page in the database.
+     *
+     * @param string $pagename Current page name
+     * @param string $to       Future page name
+     */
 
     function rename_page($pagename, $to)
     {
@@ -402,10 +436,31 @@ class WikiDB_backend_dbaBase
             array('sortby' => $sortby)); // already limited
     }
 
+    /**
+     * Set links for page.
+     *
+     * @param string $pagename Page name
+     * @param array  $links    List of page(names) which page links to.
+     */
     function set_links($pagename, $links)
     {
         $this->_linkdb->set_links($pagename, $links);
     }
+
+    /**
+     * Find pages which link to or are linked from a page.
+     *
+     * @param string    $pagename       Page name
+     * @param bool      $reversed       True to get backlinks
+     * @param bool      $include_empty  True to get empty pages
+     * @param string    $sortby
+     * @param string    $limit
+     * @param string    $exclude        Pages to exclude
+     * @param bool      $want_relations
+     *
+     * FIXME: array or iterator?
+     * @return object A WikiDB_backend_iterator.
+     */
 
     function get_links($pagename, $reversed = true, $include_empty = false,
                        $sortby = '', $limit = '', $exclude = '',
@@ -470,7 +525,7 @@ class WikiDB_backend_dbaBase
      * linkdb and check the pagematch there.
      *
      * @param object$pages      A TextSearchQuery object for the pagename filter.
-     * @param object $query     A SearchQuery object (Text or Numeric) for the linkvalues,
+     * @param object $linkvalue     A SearchQuery object (Text or Numeric) for the linkvalues,
      *                          linkto, linkfrom (=backlink), relation or attribute values.
      * @param string $linktype  One of the 4 linktypes "linkto",
      *                          "linkfrom" (=backlink), "relation" or "attribute".
@@ -480,7 +535,7 @@ class WikiDB_backend_dbaBase
      * @return object A WikiDB_backend_iterator.
      * @see WikiDB::linkSearch
      */
-    function link_search($pages, $query, $linktype,
+    function link_search($pages, $linkvalue, $linktype,
                          $relation = false, $options = array())
     {
         /**
@@ -520,14 +575,14 @@ class WikiDB_backend_dbaBase
                        Just take the defined placeholders from the query(ies)
                        if there are more attributes than query variables.
                     */
-                    if ($query->getType() != 'text'
+                    if ($linkvalue->getType() != 'text'
                         and !$relation
-                            and ((count($vars = $query->getVars()) > 1)
+                            and ((count($vars = $linkvalue->getVars()) > 1)
                                 or (count($attribs) > count($vars)))
                     ) {
                         // names must strictly match. no * allowed
-                        if (!$query->can_match($attribs)) continue;
-                        if (!($result = $query->match($attribs))) continue;
+                        if (!$linkvalue->can_match($attribs)) continue;
+                        if (!($result = $linkvalue->match($attribs))) continue;
                         foreach ($result as $r) {
                             $r['pagename'] = $pagename;
                             $links[] = $r;
@@ -536,7 +591,7 @@ class WikiDB_backend_dbaBase
                         // textsearch or simple value. no strict bind by name needed
                         foreach ($attribs as $attribute => $value) {
                             if ($relation and !$relation->match($attribute)) continue;
-                            if (!$query->match($value)) continue;
+                            if (!$linkvalue->match($value)) continue;
                             $links[] = array('pagename' => $pagename,
                                 'linkname' => $attribute,
                                 'linkvalue' => $value);
@@ -551,7 +606,7 @@ class WikiDB_backend_dbaBase
                     foreach ($_links as $link) { // linkto => page, linkrelation => page
                         if (!isset($link['relation']) or !$link['relation']) continue;
                         if ($relation and !$relation->match($link['relation'])) continue;
-                        if (!$query->match($link['linkto'])) continue;
+                        if (!$linkvalue->match($link['linkto'])) continue;
                         $links[] = array('pagename' => $pagename,
                             'linkname' => $link['relation'],
                             'linkvalue' => $link['linkto']);
@@ -561,7 +616,7 @@ class WikiDB_backend_dbaBase
                     foreach ($_links as $link) { // linkto => page
                         if (is_array($link))
                             $link = $link['linkto'];
-                        if (!$query->match($link)) continue;
+                        if (!$linkvalue->match($link)) continue;
                         $links[] = array('pagename' => $pagename,
                             'linkname' => '',
                             'linkvalue' => $link);
@@ -696,13 +751,13 @@ class WikiDB_backend_dbaBase_pageiter
     extends WikiDB_backend_iterator
 {
     // fixed for linkrelations
-    function __construct(&$backend, &$pages, $options = array())
+    function __construct($backend, $pages, $options = array())
     {
         $this->_backend = $backend;
         $this->_options = $options;
         if ($pages) {
             if (!empty($options['sortby'])) {
-                $sortby = WikiDB_backend::sortby($options['sortby'], 'db',
+                $sortby = $backend->sortby($options['sortby'], 'db',
                     array('pagename', 'mtime'));
                 // check for which column to sortby
                 if ($sortby and !strstr($sortby, "hits ")) {
@@ -753,7 +808,7 @@ class WikiDB_backend_dbaBase_pageiter
 
 class WikiDB_backend_dbaBase_linktable
 {
-    function WikiDB_backend_dbaBase_linktable(&$dba)
+    function __construct(&$dba)
     {
         $this->_db = &$dba;
     }
@@ -934,13 +989,11 @@ class WikiDB_backend_dbaBase_linktable
     function _has_link($which, $page, $link)
     {
         $links = $this->_get_links($which, $page);
-        // since links are always sorted, break if >
-        // TODO: binary search
+        // NOTE: only backlinks are sorted, so need to do linear search
         foreach ($links as $l) {
-            if ($l['linkto'] == $link)
+            $linkto = is_array($l) ? $l['linkto'] : $l;
+            if ($linkto == $link)
                 return true;
-            if ($l['linkto'] > $link)
-                return false;
         }
         return false;
     }
@@ -960,11 +1013,3 @@ class WikiDB_backend_dbaBase_linktable
             $this->_db->set($key, false);
     }
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

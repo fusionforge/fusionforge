@@ -1,7 +1,6 @@
 <?php
-
-/*
- * Copyright (C) 2004 $ThePhpWikiProgrammingTeam
+/**
+ * Copyright © 2004 $ThePhpWikiProgrammingTeam
  *
  * This file is part of PhpWiki.
  *
@@ -18,6 +17,9 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
  */
 
 /**
@@ -25,6 +27,7 @@
  * Check HTTP_REFERER
  *
  */
+
 include_once 'lib/PageList.php';
 
 class WikiPlugin_RecentReferrers extends WikiPlugin
@@ -58,6 +61,16 @@ class WikiPlugin_RecentReferrers extends WikiPlugin
             return HTML::div(array('class' => "error"), _("Error: no ACCESS_LOG"));
         }
         $args = $this->getArgs($argstr, $request);
+
+        $noheader = $args['noheader'];
+        if (($noheader == '0') || ($noheader == 'false')) {
+            $noheader = false;
+        } elseif (($noheader == '1') || ($noheader == 'true')) {
+            $noheader = true;
+        } else {
+            return $this->error(sprintf(_("Argument '%s' must be a boolean"), "noheader"));
+        }
+
         $table = HTML::table(array('class' => 'pagelist'));
         if (!$args['noheader'] and !empty($args['caption']))
             $table->pushContent(HTML::caption(array('style' => 'caption-side:top'), $args['caption']));
@@ -80,11 +93,3 @@ class WikiPlugin_RecentReferrers extends WikiPlugin
         return HTML::raw('');
     }
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

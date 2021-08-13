@@ -1,9 +1,11 @@
-<!-- Add your Disclaimer here -->
+<footer role="contentinfo">
+<?php // Add your Disclaimer here ?>
 <?php if (!$WikiTheme->DUMP_MODE) { ?>
 <?php echo empty($WARNINGS) ? '' : $WARNINGS ?>
 <?php echo $GLOBALS['ErrorManager']->getPostponedErrorsAsHTML() ?>
 <?php if (defined('DEBUG') and DEBUG & 1) { ?><?php echo Template('debug') ?><?php } ?>
 <?php } ?>
+</footer>
 <script type="text/javascript" src="<?php echo DATA_PATH ?>/themes/default/highlight.js/highlight.pack.js"></script>
 <script>
     hljs.tabReplace = '    ';

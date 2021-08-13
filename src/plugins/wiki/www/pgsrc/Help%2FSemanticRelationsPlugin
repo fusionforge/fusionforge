@@ -1,5 +1,5 @@
-Date: Mon, 29 Jun 2015 12:04:28 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Tue, 23 Feb 2021 09:16:17 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FSemanticRelationsPlugin;
   flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
@@ -34,18 +34,17 @@ Display the list of relations and attributes on this page.
 | All
 |-
 | **units**
-|
+| Not yet implemented.
 |
 |-
 | **noheader**
-|
+| Boolean. If true, header should be omitted.
 | false
 |-
 | **nohelp**
-|
+| Boolean. If true, do not display help.
 | false
 |}
-
 
 == Example ==
 
@@ -59,6 +58,8 @@ Display the list of relations and attributes on this page.
 * [[Help:Reini Urban|Reini Urban]]
 
 == See Also ==
+* [[SemanticRelations]], [[ListRelations]], [[SemanticSearch]]
+* [[Help:SemanticSearchPlugin|SemanticSearchPlugin]]
 
 <noinclude>
 ----

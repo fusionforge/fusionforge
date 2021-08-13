@@ -1,4 +1,4 @@
-_I hate [WikiSpam|http://en.wikipedia.org/wiki/Wikispam]!_
+//I hate [[http://en.wikipedia.org/wiki/Wikispam|WikiSpam]]!//
 
 Being technically minded and based in the Asia time zone while my
 co-authors are mainly in Europe and some in the US, it became my
@@ -18,13 +18,14 @@ This is the recipe that I used. There are many variations that will work
 just as well or even better for you. Note that for most of the actions,
 you need to be logged into the wiki as an administrator.
 
-!!!1 - Generic security setup.
+== 1 - Generic security setup. ==
+
 For the configuration that I describe above, the following parameters
 should be set in config/config.ini (and are further documented there).
 This requires that you have read and write access to the filestore on the
 webserver.
 ----
-<pre>
+{{{
 ; allow ACL based permissions on pages - the default
 ;ENABLE_PAGEPERM = true
 
@@ -83,46 +84,35 @@ prefs="$pref_blob",userid="$userid""
 ENABLE_RAW_HTML = false
 ENABLE_RAW_HTML_LOCKEDONLY = false
 ENABLE_RAW_HTML_SAFE = false
-</pre>
+}}}
 ----
 
-!!!2 - User Group management
+== 2 - User Group management ==
 Create group pages in the wiki.
-*First, in page CategoryGroup, add the name of the group in the bulleted
-list.  This may either be a WikiWord or enclosed in "~[" and "~]" and
-there must be nothing else on the line. For example, while editing
-CategoryGroup, add
-<pre>* ~[Writers]
-* ~UserManagement
-</pre>
-  and save. I will use these two groups as examples.
+* First, in page CategoryGroup, add the name of the group in the bulleted list.  This may either be a WikiWord or enclosed in "~[~[" and "~]~ ]" and there must be nothing else on the line. For example, while editing CategoryGroup, add
+{{{
+* [[Writers]]
+* UserManagement
+}}}
+and save. I will use these two groups as examples.
 
-* Create the two group pages by clicking on the links in the CategoryGroup
-page and add the list of users as a bulleted list (as above).
-  - In the Writers group, list the users that are allowed to edit and
-create pages.
-  - In the UserManagement group, list the users that may authorise new
-users (or remove existing users).
-  - A user may be a member of both groups and new users may be added at
-any time.
+* Create the two group pages by clicking on the links in the CategoryGroup page and add the list of users as a bulleted list (as above).
+** In the Writers group, list the users that are allowed to edit and create pages.
+** In the UserManagement group, list the users that may authorise new users (or remove existing users).
+** A user may be a member of both groups and new users may be added at any time.
 * Lock all three pages CategoryGroup, Writers and UserManagement.
-* Unlock all three pages. _I am not certain that these last two steps are
-necessary but various comments around the documentation indicate that it
-is and, anyway, it did no harm._
+* Unlock all three pages. // I am not certain that these last two steps are necessary but various comments around the documentation indicate that it is and, anyway, it did no harm.//
 
-!!!3 - change the default page permissions.
+== 3 - change the default page permissions. ==
 
 Create a page named . to hold these default permissions. _Yes, named "."._
 
 The recommended way to do this is to
 * go your HomePage
-* remove "HomePage" from the url and replace with the parameters
-  "?pagename=.&action=create"
-* enter some text like "This page holds the default ACLs for all pages"
-  and save
+* remove "HomePage" from the url and replace with the parameters  "?pagename=.&action=create"
+* enter some text like "This page holds the default ACLs for all pages"  and save
 * go your HomePage
-* remove "HomePage" from the url and replace with the parameters
-  "?pagename=.&action=setacl"
+* remove "HomePage" from the url and replace with the parameters  "?pagename=.&action=setacl"
 * change the ACLs for EDIT and for CREATE to
   - +Administrators
   - +Owner
@@ -130,8 +120,7 @@ The recommended way to do this is to
   - -Authenticated Users
   - -Signed Users
   - -Bogo Users
-* _Where + means the ACL allows that kind of access and x means the ACL
-  does not allow that kind of access._
+* _Where + means the ACL allows that kind of access and x means the ACL does not allow that kind of access._
 * change the ACLs for CHANGE and REMOVE to
   - +Administrators
   - +Owner
@@ -139,13 +128,15 @@ The recommended way to do this is to
   - -Signed Users
   - -Bogo Users
 
-!3a Alternative method to create page "." and set the ACLs correctly.
+=== 3a Alternative method to create page "." and set the ACLs correctly.===
+
 I found some problems in the SetACL user interface (that I have not yet looked
 into / fixed), so I used an alternative mechanism to set the ACLs.
 * export a Zip Dump (via the PhpWikiAdministration page)
 * extract one of the files from this zip - initially, it might look like
 ----
-<pre>Subject: ~AppendText
+{{{
+Subject: ~AppendText
 From: foo@bar (~PhpWiki)
 To: foo@bar (~PhpWiki)
 Date: Wed, 5 Jan 2005 17:09:46 +0800
@@ -158,17 +149,17 @@ Content-Type: application/x-phpwiki;
   lastmodified=1104916186;
   created=1104916186;
   author_id=The%20PhpWiki%20programming%20team;
-  markup=2;
   charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-~<?plugin ~AppendText ?>
-</pre>
+<<~AppendText>>
+}}}
 ----
 * rename and edit this file (I called it "dot" but this does not matter).
 The contents should look something like
 ----
-<pre>Subject: .
+{{{
+Subject: .
 From: foo@bar (~PhpWiki)
 To: foo@bar (~PhpWiki)
 Date: Mon, 17 Jan 2005 15:54:59 +0800
@@ -181,7 +172,6 @@ Content-Type: application/x-phpwiki;
   lastmodified=1105949000;
   created=1105949000;
   author_id=Admin;
-  markup=2;
   acl="view:_EVERY;
 edit:_ADMIN,_OWNER,Writers,-_SIGNED-_BOGOUSER,-_AUTHENTICATED;
 create:_ADMIN,_OWNER,Writers,-_SIGNED,-_BOGOUSER,-_AUTHENTICATED;
@@ -191,38 +181,22 @@ change:_ADMIN,_OWNER,-_SIGNED,-_BOGOUSER,-_AUTHENTICATED; dump:_EVERY";
 Content-Transfer-Encoding: quoted-printable
 
 This page holds the default permissions for all pages
-</pre>
+}}}
 ----
 * The author and author_id should be the name of the administrator account.
-* The important line is the one starting "  acl=". This lists the
-groups/login types allowed to perform various actions on a page.
-  - Names starting with an _ and all in capitals ("_ADMIN","_OWNER" etc.)
-are built-in PhpWiki groups.
-  - A - in front of the name means that that group is not allowed perform
-an action, so "edit:-_AUTHENTICATED" means that a user that has logged
-in is not allowed edit a page (unless they are also a member of another
-group that is allowed).
-* The example acl= line above implements the policy that I described near
-the start of this page.
-* Load the file back into the database through the PhpWikiAdministration
-page.
+* The important line is the one starting "  acl=". This lists the groups/login types allowed to perform various actions on a page.
+** Names starting with an _ and all in capitals ("_ADMIN","_OWNER" etc.) are built-in PhpWiki groups.
+** A - in front of the name means that that group is not allowed perform an action, so "edit:-_AUTHENTICATED" means that a user that has logged in is not allowed edit a page (unless they are also a member of another group that is allowed).
+* The example acl= line above implements the policy that I described near the start of this page.
+* Load the file back into the database through the PhpWikiAdministration page.
 * Check the permissions are what you need in PhpWikiAdministration/SetAcl
-- this can be done on any page, not just on the "." page. _Use the setacl
-button to see the permissions on a page._
-
-* If you have to alter the ACL, I suggest that you bump the values for
-version, lastmodified and created before reloading (I found problems
-removing groups in the UI, so use the dump page, manual edit and reload
-page mechanism documented above).
-
-* Set any additional/specific restrictions on an individual page by page
-basis.
-* In particular, to have a limited list of users that can manage adding
-and removing users from the Writers group, you should
-  - on pages Writers, UserManagement, CategoryGroup and CategoryCategory
-  - add UserManagement to edit and create permissions
-  - remove Writers from edit and create permissions
-
+** this can be done on any page, not just on the "." page. //Use the setacl button to see the permissions on a page.//
+* If you have to alter the ACL, I suggest that you bump the values for version, lastmodified and created before reloading (I found problems removing groups in the UI, so use the dump page, manual edit and reload page mechanism documented above).
+* Set any additional/specific restrictions on an individual page by page basis.
+* In particular, to have a limited list of users that can manage adding and removing users from the Writers group, you should
+** on pages Writers, UserManagement, CategoryGroup and CategoryCategory
+** add UserManagement to edit and create permissions
+** remove Writers from edit and create permissions
 * Test the permissions work as expected.
 
---PhpWiki:CharlesCorrigan
+-- PhpWiki:CharlesCorrigan

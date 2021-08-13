@@ -1,5 +1,5 @@
-Date: Mon, 29 Jun 2015 12:04:28 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Thu,  4 Apr 2019 15:43:02 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FRichTablePlugin;
   flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
@@ -64,7 +64,7 @@ style="font-family: Verdana, Arial, Helvetica, sans-serif"
 HomePage
 -
 |* colspan=2
-[http://phpwiki.svn.sourceforge.net/viewvc/phpwiki/trunk/themes/default/images/png.png]
+[http://phpwiki.demo.free.fr/themes/default/images/png.png]
 |* rowspan=2
 This cell actually has a plugin invocation inside it!
 <?plugin
@@ -99,7 +99,7 @@ The above table is rendered from:
 HomePage
 -
 |* colspan=2
-[http://phpwiki.svn.sourceforge.net/viewvc/phpwiki/trunk/themes/default/images/png.png]
+[http://phpwiki.demo.free.fr/themes/default/images/png.png]
 |* rowspan=2
 This cell actually has a plugin invocation inside it!
 <?plugin
@@ -124,8 +124,13 @@ This cell uses the row color
 >>
 }}}
 
-== Known Bugs ==
+== Known Problems ==
 * The plugin can't nest itself. Thus nested tables are currently not possible. See [[Help:MediawikiTablePlugin|Mediawiki tables]] to have nested tables.
+
+== See Also ==
+* [[Help:MediawikiTablePlugin]]
+* [[Help:OldStyleTablePlugin]]
+* [[Help:WikicreoleTablePlugin]]
 
 == Author ==
 * [[http://www.it.iitb.ac.in/~sameerds/phpwiki/index.php/RichTablePlugin|Sameer D. Sahasrabuddhe]]

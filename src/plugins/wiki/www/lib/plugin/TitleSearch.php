@@ -1,8 +1,7 @@
 <?php
-
 /**
- * Copyright 1999,2000,2001,2002,2004,2005,2010 $ThePhpWikiProgrammingTeam
- * Copyright 2009 Marc-Etienne Vargenau, Alcatel-Lucent
+ * Copyright © 1999,2000,2001,2002,2004,2005,2010 $ThePhpWikiProgrammingTeam
+ * Copyright © 2009 Marc-Etienne Vargenau, Alcatel-Lucent
  *
  * This file is part of PhpWiki.
  *
@@ -19,6 +18,9 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
  */
 
 require_once 'lib/TextSearchQuery.php';
@@ -37,6 +39,7 @@ require_once 'lib/PageList.php';
  * regex=auto tries to detect simple glob-style wildcards and expressions,
  * like xx*, *xx, ^xx, xx$, ^word$.
  */
+
 class WikiPlugin_TitleSearch
     extends WikiPlugin
 {
@@ -77,6 +80,33 @@ class WikiPlugin_TitleSearch
     function run($dbi, $argstr, &$request, $basepage)
     {
         $args = $this->getArgs($argstr, $request);
+
+        $auto_redirect = $args['auto_redirect'];
+        if (($auto_redirect == '0') || ($auto_redirect == 'false')) {
+            $auto_redirect = false;
+        } elseif (($auto_redirect == '1') || ($auto_redirect == 'true')) {
+            $auto_redirect = true;
+        } else {
+            return $this->error(sprintf(_("Argument '%s' must be a boolean"), "auto_redirect"));
+        }
+
+        $noheader = $args['noheader'];
+        if (($noheader == '0') || ($noheader == 'false')) {
+            $noheader = false;
+        } elseif (($noheader == '1') || ($noheader == 'true')) {
+            $noheader = true;
+        } else {
+            return $this->error(sprintf(_("Argument '%s' must be a boolean"), "noheader"));
+        }
+
+        $case_exact = $args['case_exact'];
+        if (($case_exact == '0') || ($case_exact == 'false')) {
+            $case_exact = false;
+        } elseif (($case_exact == '1') || ($case_exact == 'true')) {
+            $case_exact = true;
+        } else {
+            return $this->error(sprintf(_("Argument '%s' must be a boolean"), "case_exact"));
+        }
 
         if (isset($args['limit']) && !is_limit($args['limit'])) {
             return HTML::p(array('class' => "error"),
@@ -123,11 +153,3 @@ class WikiPlugin_TitleSearch
         return $pagelist;
     }
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

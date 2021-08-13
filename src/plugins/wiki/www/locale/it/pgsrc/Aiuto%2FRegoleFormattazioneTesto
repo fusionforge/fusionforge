@@ -1,84 +1,390 @@
-Date: Mon, 29 Jun 2015 12:04:22 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Sat, 26 Dec 2020 11:48:23 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=Aiuto%2FRegoleFormattazioneTesto;
   flags=PAGE_LOCKED;
   charset=UTF-8
 Content-Transfer-Encoding: binary
 
-! Sinossi
-RegoleFormattazioneTesto%%%
-**Enfasi:** '****' per ''corsivo'', _''''_ per **grassetto**, '****'_''''_ per ''**entrambi**''.%%%
-**Liste:** * per liste puntate, # per liste numerate, ''**;** term **:** definition'' per liste di definizioni.
-%%%**Collegamenti:** !UnisciParoleConInizialiInMaiuscolo o usa le parentesi quadre per un [[collegamento ad una pagina] o un URL [[!http://cool.wiki.int/].
-%%%**Footnotes:** Use [[1],[[2],[[3],...
-%%%**Preventing linking:** Prefix with "!": !!DoNotHyperlink, name links like [[[[text | URL] (double up on the "[").
-%%%**Varie:** "!", "!!", "!!!" definisce le intestazioni, "%''''%%" va a capo, "-''''---" crea una linea orizzontale.
+<<CreateToc with_toclink||=1 position=right >>
 
-----
-! Paragrafi
+== Sinossi ==
+
+**Enfasi:** ##~/~/## per //corsivo//, ##~*~*## per **grassetto**, ##~*~*~/~/...~/~/~*~*## per //**entrambi**//, ##~#~### for ##fixed width##. \\
+**Liste:** ##~*## per liste puntate, ##~### per liste numerate; use multiple ##~*## or ##~### for nested lists. \\
+**Intestazioni:** "##~=~=##", "##~=~=~=##", "##~=~=~=~=##", etc. definisce le intestazioni. \\
+**Preformatted text:** Enclose text in ##~{~{~{...~}~}~}## or ##~<pre>~</pre>##. \\
+**Indented text:** Indent the paragraph with whitespaces. \\
+**References:** use double square brackets for a ##~[~[page link~]~]## or URL ##~[~[~http:~//cool.wiki.int/~]~]##. \\
+**References:** use pipe ##~|## to name the links: ##~[~[page link~|some text~]~]## or ##~[~[~http:~//cool.wiki.int/~|some text~]~]##. \\
+**Preventing linking:** Prefix with "##~~##": ##~~~DoNotHyperlink##. \\
+**Varie:** "##~\~\##" va a capo, "##~----##" crea una linea orizzontale. \\
+**Allowed HTML tags:** <b>b</b> <big>big</big> <i>i</i>
+<small>small</small> <tt>tt</tt> <em>em</em> <strong>strong</strong>
+<s>s</s> <strike>strike</strike>
+<abbr>abbr</abbr> <acronym>acronym</acronym> <cite>cite</cite>
+<code>code</code> <dfn>dfn</dfn> <kbd>kbd</kbd> <samp>samp</samp>
+<var>var</var> <sup>sup</sup> <sub>sub</sub> \\
+**More:** [[Help:TextFormattingRules#Tables|tables]], [[Help:TextFormattingRules#Images|images]],
+[[Help:CreateTocPlugin|table of contents]], [[Help:TextFormattingRules#Inserting_plugins|plugins]]
+
+More explanations: [[Help:TextFormattingRules]]
+
+== Character Formatting ==
+
+=== Enfasi ===
+
+* Usa doppi barra obliqua (##~/~/##) per dare enfasi (solitamente //italico//)
+* Usa doppioasterisco (**) per dare molta enfasi (solitamente **grassetto**)
+* Mescolali a piacere: **//grassetto corsivo//**
+* //Enfasi// può essere usata //più volte// dentro una linea, ma **non può** superare i limiti della linea:
+
+//questo
+
+non funzionerà//
+
+=== Monospace ===
+
+Monospace text is made using two hashes:
+
+{{{
+This sentence contains ##monospace text##.
+}}}
+
+This sentence contains ##monospace text##.
+
+=== Superscript ===
+
+Superscript text is made using two carets:
+
+{{{
+The XX^^th^^ century.
+}}}
+
+The XX^^th^^ century.
+
+=== Subscript ===
+
+Subscript text is made using two commas:
+
+{{{
+Water is H,,2,,O.
+}}}
+
+Water is H,,2,,O.
+
+=== Fonts ===
+
+There's no syntax for font tags.
+
+=== Color Text ===
+
+It is possible to write text in color.
+
+{{{
+%color=green% green text %% and back to normal
+}}}
+will give:
+%%%
+%color=green% green text %% and back to normal
+
+The easiest way to do it is to use the COLOR button in the Edit Toolbar.
+The text will be in green by default. You can then change the color.
+
+Allowed colors are:
+* an HTML color number (# followed by 3 or 6 digits),
+* the following predefined color names:
+{| class="bordered"
+|-
+| %color=aqua% aqua %%
+| style="background-color:#565c5e" | %color=beige% beige %%
+| %color=black% black %%
+| %color=blue% blue %%
+| %color=brown% brown %%
+| %color=chocolate% chocolate %%
+| %color=cyan% cyan %%
+| %color=fuchsia% fuchsia %%
+| %color=gold% gold %%
+| %color=gray% gray %%
+|-
+| %color=green% green %%
+| style="background-color:#565c5e" | %color=ivory% ivory %%
+| %color=indigo% indigo %%
+| %color=lime% lime %%
+| %color=magenta% magenta %%
+| %color=maroon% maroon %%
+| %color=navy% navy %%
+| %color=olive% olive %%
+| %color=orange% orange %%
+| %color=pink% pink %%
+|-
+| %color=purple% purple %%
+| %color=red% red %%
+| %color=salmon% salmon %%
+| %color=silver% silver %%
+| style="background-color:#565c5e" | %color=snow% snow %%
+| %color=teal% teal %%
+| %color=turquoise% turquoise %%
+| %color=violet% violet %%
+| style="background-color:#565c5e" | %color=white% white %%
+| %color=yellow% yellow %%
+|}
+
+Note: you can put the headers in color, but only if you do not have a table of content. For now, the table of content is incompatible with color headers.
+
+=== Escape Character ===
+
+The tilde '~~' is the //Escape Character//:
+* A single tilde '~~' followed by nothing gets rendered as a single tilde. => ~
+* Two tilde '~~~~' get rendered as a single tilde. => ~~
+* A single tilde before a link ('~~http~:~/~/foo.bar') prevents linking.  => ~http://foo.bar
+* Two tildes before a link ('~~~~http~:~/~/foo.bar') produce a tilde followed by the hyperlinked URL.  => ~~http://foo.bar
+* A tilde inside an URL gets removed, unless it's formatted inside square brackets.
+* Two tildes inside an URL (without brackets) become a single tilde.  => [[http://foo.bar/~user]] or http://foo.bar/~~user
+
+=== Special Characters ===
+
+All special non-whitespace HTML characters are displayed as-is. Exceptions below.
+
+== Paragrafi ==
 
 * Non identare i paragrafi
 * I word wrap vengono messi a seconda delle necessità
 * Usa le linee bianche come separatori
 * Quattro o più trattini indicano una linea orizzontale
-* %%''''% produce un ritorno a capo (nelle intestazioni e nelle liste anche)
+* "##~\~\##", "##~%%%##" o "##~<br>##" produce un ritorno a capo (nelle intestazioni e nelle liste anche)
 
+== Liste ==
 
-! Liste
+=== Unordered lists ===
 
-* asterisco per il primo livello.
-** asterisco-asterisco per il secondo livello etc, etc
-* Usa * per le liste puntate o # per quelle numerate, mischiale come vuoi
-* semicolon-term-colon-definition for definition lists:
-;term here:definition here, as in the <DL><DT><DD> list
-* Una linea per ogni elemento
-* Spazi all'inizio del testo cambiano la visualizzazione in monospace.
+Recommended syntax (Wikicreole):
+* asterisk for first level
+* double asterisk for second level, etc.
 
-! Intestazione
+Be sure to **put a space after the asterisk**.
 
-* '!' all'inizio produce una picccola intestazione
-* '!!' all'inizio produce una media intestazione
-* '!!!' all'inizio produce una grossa intestazione
+You can also use indented asterisk for second level (indent at least two spaces).
 
+=== Ordered lists ===
 
-! Fonts
+Recommended syntax (Wikicreole):
+* ##~### for first level
+* double ##~### for second level, etc.
 
-* Identa con uno o più spazi per usare i font monospace:
+Be sure to **put a space after the hash sign**.
 
- Questo è monospace
-Questo no
+You can also use indented ##~### for second level (indent at least two spaces).
 
-!Paragrafi identati
-''(Quotature)''
+=== Definition lists ===
 
-* il punto e virgola e i due punti funzionano come <BLOCKQUOTE>
+{{{
+Term:
+  definition
+}}}
 
-;: questo è un blocco di testo identato
+gives
 
-! Enfasi
+Term:
+  definition
 
-* Usa doppi apici singoli ('') per dare enfasi (solitamente ''italico'')
-* Usa doppio underscores (**) per dare molta enfasi (solitamente **grassetto**)
-* Mescolali a piacere: **''grassetto corsivo''**
-* ''Enfasi'' può essere usata ''più volte'' dentro una linea, ma ''non può'' superare i limiti della linea:
+=== Remark ===
 
-''questo
-non funzionerà''
+Items may contain multiple paragraphs and other multi-lined content, just indent the items
 
-! Links (o collegamenti)
-* I collegamenti alle altre pagine all'interno del Wiki sono fatti usando un nome circondato da parentesi quadre: [questo è un link] oppure UsandoLeWikiWords (metodo preferito)
-* I collegamento alle pagine esterne sono fatti in questo modo: [http://www.wcsb.org]
-* Puoi anche dare un nome al collegamento fornendo una barra o pipe (|) all'inizio del link, ad esempio: [La pagina di PhpWiki | http://phpwiki.sourceforge.net/] - [La pagina princiale | PaginaPrincipale]
-* Puoi eliminare i link in vecchi stile facendo precedere un URI da un punto esclamativo, come ad esempio !NotEUnWikiName, oppure !http://non.e.linkato
-* [1], [2], [3], [4] refer to remote references. Click EditLinks on the edit form to enter URLs. These differ from the newer linking scheme; references are unique to a page.
-* In ogni caso il vecchio modo di fare collegamenti è ancora supportato, quindi si potranno usare "http:", "ftp:", o "mailto:" per creare automaticamente link, come in http://c2.com
-* Gli URL che finiscono in .png, .gif o .jpg sono racchiuse da parentesi quadre e permettono di inserire un'immagine, as esempio: [http://phpwiki.svn.sourceforge.net/viewvc/phpwiki/trunk/themes/default/images/png.png]
+== Intestazione ==
 
+=== Wikicreole syntax (recommended) ===
 
-! Linguaggio di marcatura HTML
+* '~=~=' at the start of a line makes a large heading (h2)
+* '~=~=~=' at the start of a line makes a medium heading (h3)
+* '~=~=~=~=' at the start of a line makes a small heading (h4)
+* '~=~=~=~=~=' at the start of a line makes a smaller heading (h5)
+* '~=~=~=~=~=~=' at the start of a line makes a tiny heading (h6)
 
-* Non preoccupartene
+=== Classic Phpwiki syntax ===
+
+* '##!!!##' all'inizio produce una grossa intestazione (h2)
+* '##!!##' all'inizio produce una media intestazione (h3)
+* '##!##' all'inizio produce una picccola intestazione (h4)
+
+== Preformatted text ==
+
+Place the preformatted text between three opening curly brackets and three closing curly brackets:
+
+<verbatim>
+{{{
+Preformatted text. ~WikiLinks do not work.
+}}}
+</verbatim>
+
+gives
+
+{{{
+Preformatted text. WikiLinks do not work.
+}}}
+
+If you want Wiki interaction, place preformatted lines inside ##~<pre>##:
+
+{{{
+<pre>
+Preformatted text. WikiLinks still work.
+</pre>
+}}}
+
+gives
+
+<pre>
+Preformatted text. WikiLinks still work.
+</pre>
+
+== Indented Paragraphs ==
+
+Two or more whitespaces signal indented text. Indents may be nested.
+
+    This is an indented block of text.
+
+      This block is even more indented.
+
+E-mail style block-quoting is supported as well:
+{{{
+> This is block-quoted text.
+}}}
+renders as
+
+> This is block-quoted text.
+
+== Links (o collegamenti) ==
+
+* I collegamenti alle altre pagine all'interno del Wiki sono fatti usando
+  un nome circondato da parentesi quadre: [[questo è un link]].
+  Single brackets or WikiWords will also work.
+* I collegamento alle pagine esterne sono fatti in questo modo: [[http://www.wcsb.org/]]
+* Puoi anche dare un nome al collegamento fornendo il collegamento ipertestuale o il nome della pagina, una barra verticale o pipe (##|##) e quindi il nome:
+  [[http://phpwiki.sourceforge.net/|La pagina princiale di Phpwiki]], [[PaginaPrincipale|La pagina princiale]]
+* Puoi eliminare i link in vecchi stile facendo precedere un URI da un '##~~##', come ad esempio ~NotEUnWikiName, ~http~://non.e.linkato/
+* n ogni caso il vecchio modo di fare collegamenti è ancora supportato, quindi si potranno usare
+* I "##~http:##", "##~ftp:##", o "##~mailto:##" per
+  creare automaticamente link, come in: http://c2.com/
+* Gli URL che finiscono in ##.png##, ##.gif##, o ##.jpg## sono racchiuse da parentesi quadre e permettono di inserire un'immagine, as esempio:
+  [[http://phpwiki.demo.free.fr/themes/default/images/png.png]]
+* You can create footnotes by using ~[1], ~[2], ~[3], ... like this here #[|ftnt
+_ref_1]<sup>~[[1|#ftnt_1]~]</sup>. See footnote for counterpart.  (If the ~[ is
+in the first column, it is a footnote <em>definition</em> rather than a footnote
+ <em>reference</em> #[|ftnt_ref_1]<sup>~[[1|#ftnt_1]~]</sup>.)
+* In-page #[[hyperlinks]] are made by placing a named anchor and referring to the anchor in a hyperlink:
+** Named anchors:
+*** ##~#~[~[foo]]##: An anchor around the text "foo" with id "foo".
+*** ##~#~[~[|foo]]##: An empty anchor with id "foo".
+*** ##~#~[~[howdy|foo]]##: An anchor around the text "howdy" with id "foo".
+** References to name anchors are made thusly:\\##~[~[~#hyperlinks]]##, ##~[~[~OtherPage#foo]]##, ##~[~[~OtherPage#foo|named]]##.
+* Semantic links are named links like: {{{is_a::WikiPage}}} and attributes like {{{size:-4000}}}.
+* A pagelink within square brackets starting with ":" is not backlinked.
+
+== Images ==
+
+An inline image is created with curly brackets.
+An alternate text can be put after a pipe. If there is none, an empty alternate text will be created.
+
+{{{
+{{myimage.png}}
+{{myimage.png|this is the alt text for my image}}
+[[some link|{{myimage.png}}]] - if you click on the image, will goto "some link"
+[[some link|{{myimage.png|alt text}}]] - same with alternative
+[[http://example.com/|{{myimage.png}}]] - same as above: picture links to url
+[[http://example.com/|{{myimage.png|alt text}}]] - same with alternative
+}}}
+
+== Tables ==
+
+=== Wikicreole tables ===
+
+All cells are separated by single pipes.
+Leading spaces are permitted before the first cell of a row and trailing spaces are permitted at the end of a line.
+The ending pipe is optional.
+
+You can embed links, bold, italics, line breaks, and nowiki in table cells.
+
+Equal sign directly following pipe defines a header.
+Headers can be arranged horizontally or vertically.
+
+{{{
+|=Heading Col 1 |=Heading Col 2         |
+|Cell 1.1       |Two lines\\in Cell 1.2 |
+|Cell 2.1       |Cell 2.2               |
+}}}
+
+will give:
+
+|=Heading Col 1 |=Heading Col 2         |
+|Cell 1.1       |Two lines\\in Cell 1.2 |
+|Cell 2.1       |Cell 2.2               |
+
+=== Mediawiki tables ===
+
+See [[Help:MediawikiTablePlugin]].
+
+=== Definition list style tables ===
+
+Definition list style tables are written just like definition lists,
+except that you replace the trailing colon on the term with a "pipe" (##|##).
+
+{{{
+Term 1 |
+   Definition 1 begins here.
+   Term 1.1 |
+      Definition 1.1
+   Term 1.2 |
+      Definition 1.2
+   This is part of definition 1.
+Term 2 |
+   Here's definition 2.
+}}}
+
+will give:
+
+Term 1 |
+   Definition 1 begins here.
+   Term 1.1 |
+      Definition 1.1
+   Term 1.2 |
+      Definition 1.2
+   This is part of definition 1.
+Term 2 |
+   Here's definition 2.
+
+== Old-style tables ==
+
+See: [[Help:OldStyleTablePlugin]]
+
+== Linguaggio di marcatura HTML ==
+
+* Some in-line markup is allowed through the use of HTML tags:
+  <b>b</b>, <big>big</big>, <i>i</i>, <small>small</small>,
+  <tt>tt</tt>, <em>em</em>, <strong>strong</strong>,
+  <abbr>abbr</abbr>, <acronym>acronym</acronym>, <cite>cite</cite>,
+  <code>code</code>, <dfn>dfn</dfn>, <kbd>kbd</kbd>,
+  <samp>samp</samp>, <var>var</var>, <sup>sup</sup> and <sub>sub</sub>
 * < e > sono loro stessi
 * I caratteri di & commerciale non funzioneranno
-* Se devi veramente usare l'html puoi provare a chiedere al tuo amministratore del Wiki se può abilitare la funzionalità. Inizia ogni linea con una barra (|). Nota questa funzionalità è disabilitata di default
+
+== Creating various kinds of special links ==
+
+See [[Help:MagicPhpWikiURLs]] for gory details on how to write various kind
+of wiki maintenance and other special links.
+
+== Inserting plugins ==
+
+Several plugins permit embedding additional functionality to Wiki pages. For example,
+{{{
+<<BackLinks page=HomePage info=hits>>
+}}}
+gives
+<<BackLinks page=HomePage info=hits>>
+
+For more information on plugins see [[Help:WikiPlugin]], and [[PluginManager]] for a list of all plugins.
+
+<noinclude>
+----
+[[PhpWikiDocumentation]]
+</noinclude>

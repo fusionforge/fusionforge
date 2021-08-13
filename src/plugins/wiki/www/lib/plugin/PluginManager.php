@@ -1,8 +1,7 @@
 <?php
-
 /**
- * Copyright 1999, 2000, 2001, 2002 $ThePhpWikiProgrammingTeam
- * Copyright 2008-2009 Marc-Etienne Vargenau, Alcatel-Lucent
+ * Copyright © 1999, 2000, 2001, 2002 $ThePhpWikiProgrammingTeam
+ * Copyright © 2008-2009 Marc-Etienne Vargenau, Alcatel-Lucent
  *
  * This file is part of PhpWiki.
  *
@@ -19,6 +18,9 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
  */
 
 // Set this to true if you don't want regular users to view this page.
@@ -90,7 +92,7 @@ class WikiPlugin_PluginManager
         $plugin_dir = 'lib/plugin';
         if (defined('PHPWIKI_DIR'))
             $plugin_dir = PHPWIKI_DIR . "/$plugin_dir";
-        $pd = new fileSet($plugin_dir, '*.php');
+        $pd = new FileSet($plugin_dir, '*.php');
         $plugins = $pd->getFiles();
         unset($pd);
         sort($plugins);
@@ -107,8 +109,8 @@ class WikiPlugin_PluginManager
                 continue;
             }
             // instantiate a plugin
-            $temppluginclass = '<' . "? plugin $pluginName ?>"; // hackish
-            $p = $w->getPlugin($pluginName, false); // second arg?
+            $temppluginclass = '<' . "? plugin $pluginName ?" . '>'; // hackish
+            $p = $w->getPlugin($pluginName);
             // trap php files which aren't WikiPlugin~s
             if (!strtolower(substr(get_parent_class($p), 0, 10)) == 'wikiplugin') {
                 // Security: Hide names of extraneous files within
@@ -155,7 +157,7 @@ class WikiPlugin_PluginManager
             }
 
             if (defined('FUSIONFORGE') && FUSIONFORGE) {
-                $pluginDocPageNamelink = WikiLink($pluginDocPageName, 'known');
+                $pluginDocPageNamelink = WikiLink($pluginDocPageName);
             }
 
             // highlight alternate rows
@@ -185,11 +187,3 @@ class WikiPlugin_PluginManager
         $table->pushContent($tbody);
     }
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

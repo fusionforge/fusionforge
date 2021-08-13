@@ -1,0 +1,149 @@
+Date: Mon, 16 Dec 2020 15:49:22 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
+Content-Type: application/x-phpwiki;
+  pagename=Aide%2FGreffonCr%C3%A9erUneTdm;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
+  charset=UTF-8
+Content-Transfer-Encoding: binary
+
+Le [[Aide:GreffonWiki|greffon]] **~CréerUneTdm** (//CreateToc//) vous permet de créer automatiquement une **table des matières** dynamique de tous les en-têtes (titres et sous-titres).
+
+Les en-têtes peuvent être en syntaxe classique Phpwiki ou en syntaxe Wikicreole/Mediawiki (voir ci-dessous).
+
+La table des matières peut être insérée facilement en cliquant sur le boutton TOC dans la barre d'outils.
+
+== Utilisation ==
+{{{
+<<CreateToc arguments>>
+}}}
+
+== Arguments ==
+
+{| class="bordered"
+|-
+! Argument
+! Description
+! Valeur par défaut
+|-
+| **extracollapse**
+| Fournit un bouton pour cacher/afficher la table des matières.
+| true
+|-
+| **firstlevelstyle**
+| Style du premier niveau de numérotation: //number//, //letter// ou //roman//.
+| number
+|-
+| **headers**
+| Quels en-têtes inclure. Voir ci-dessous.
+| 1,2,3,4,5
+|-
+| **indentstr**
+| Chaîne utilisée pour l'indentation.
+| &nbsp;&nbsp;
+|-
+| **jshide**
+| Booléen si la table doit être initialement cachée puis affichée par un clic.
+| false
+|-
+| **liststyle**
+| Style de la liste : //dl// ou //ol// ou //ul//. Utiliser //ol// est équivalent à //with_counter=1//.
+| dl
+|-
+| **noheader**
+| Booléen indiquant si le titre « Table des matières » doit être omis.
+| false
+|-
+| **notoc**
+| Booléen indiquant si la table des matières doit être affichée (les en-têtes sont numérotés).
+| false
+|-
+| **pagename**
+| Table pour quelle page ?
+| page courante
+|-
+| **position**
+| Où afficher la table des matières : //full//, //left// ou //right//.
+| full
+|-
+| **version**
+| Version de la page
+| Version la plus récente
+|-
+| **width**
+| Largeur de la table des matières (si la position est //left// ou //right//)
+| 200px
+|-
+| **with_counter**
+| Booléen si des préfixes hérarchiques doivent être ajoutés.
+| false
+|-
+| **with_toclink**
+| Booléen si les en-têtes doivent être liés à la table.
+| false
+|}
+
+=== Headers ===
+
+Syntaxe : une liste de niveaux, séparés par une virgule. !!!,!!,! sont aussi autorisés
+
+{| class="bordered"
+|-
+! Niveau
+! Syntaxe Phpwiki
+! Syntaxe Wikicreole/Mediawiki
+! Rendu HTML
+|-
+| 1 || ~!~!~! || ~=~= || h2
+|-
+| 2 || ~!~! || ~=~=~= || h3
+|-
+| 3 || ~! || ~=~=~=~= || h4
+|-
+| 4 || //Aucun// || ~=~=~=~=~= || h5
+|-
+| 5 || //Aucun// || ~=~=~=~=~=~= || h6
+|}
+
+== Exemples ==
+
+=== Valeurs par défaut ===
+{{{
+<<CreateToc>>
+}}}
+
+=== Seulement deux niveaux d'en-tête ===
+{{{
+<<CreateToc headers=1,2>>
+}}}
+
+=== Table des metières avec numérotation hiérarchique ===
+{{{
+<<CreateToc with_counter=1>>
+}}}
+
+=== Pas de table des matières, mais les en-têtes sont numérotés ===
+{{{
+<<CreateToc notoc=1>>
+}}}
+
+=== Table des matières avec numérotation hiérarchique, premier niveau en chiffres romains ===
+{{{
+<<CreateToc with_counter=1 firstlevelstyle=roman>>
+}}}
+
+== Voir aussi ==
+* [[Aide:RèglesDeFormatageDesTextes]]
+
+== Problèmes connus ==
+
+* Si vous incluez des pages à l'aide des greffons [[Help:TemplatePlugin|Template]] ou [[Aide:GreffonInclureUnePage|InclureUnePage]], la table des matières ne contiendra pas les en-têtes des pages incluses.
+* La table des matières sera incorrecte si un en-tête contient :
+** un appel de [[Help:TemplatePlugin|Template]] via ~{~{ ~}~},
+** une image,
+** ou un ~~.
+* Si vous prévisualisez la page, la table des matières sera incorrecte si vous avez modifié des en-têtes. La table des matières sera celle de la dernière révision enregistrée.
+
+<noinclude>
+----
+[[DocumentationDePhpWiki]] [[CatégorieGreffonWiki]]
+</noinclude>

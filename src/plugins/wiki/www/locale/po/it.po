@@ -5,9 +5,9 @@
 # Several guessed fixes by Reini Urban for 1.3.11
 msgid ""
 msgstr ""
-"Project-Id-Version: PhpWiki 1.5.4\n"
+"Project-Id-Version: PhpWiki 1.6.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-06-29 16:41+0200\n"
+"POT-Creation-Date: 2021-08-11 18:36+0200\n"
 "PO-Revision-Date: 2005-02-12 16:23+0100\n"
 "Last-Translator: Antonio Bonifati ant[(at)]monitor.deis.unical.it\n"
 "Language-Team: \n"
@@ -19,7 +19,7 @@ msgstr ""
 msgid "CategoryGroup"
 msgstr "CategoriaGruppo"
 
-msgid "Your PHP version is too old. You must have at least PHP 5.3."
+msgid "Your PHP version is too old. You must have at least PHP 5.3.3."
 msgstr ""
 
 msgid "BAD semantic relation link"
@@ -135,7 +135,7 @@ msgid "LinkDatabase"
 msgstr ""
 
 msgid "RecentChanges"
-msgstr "ModificheRecenti"
+msgstr "CambiamentiRecenti"
 
 #, php-format
 msgid "Unsupported argument: %s=%s"
@@ -150,7 +150,7 @@ msgid "(Redirected from %s)"
 msgstr ""
 
 msgid "SandBox"
-msgstr ""
+msgstr "ScatolaDiSabbia"
 
 msgid "Your version"
 msgstr "La versione corrente"
@@ -373,6 +373,9 @@ msgstr ""
 msgid "Sample table"
 msgstr ""
 
+msgid "Convert tab to table"
+msgstr ""
+
 msgid "Enumeration"
 msgstr ""
 
@@ -415,17 +418,16 @@ msgstr "Inserto Static Mascherina"
 msgid "Insert Image or Video"
 msgstr ""
 
-#, fuzzy
-msgid "Preview the current content [alt-p]"
-msgstr "Mostra il versione corrente"
+msgid "Preview the current content"
+msgstr "Mostra in anteprima il contenuto corrente"
 
-msgid "Save the current content as wikipage [alt-s]"
+msgid "Save the current content as wikipage"
 msgstr ""
 
 msgid "Changes"
 msgstr ""
 
-msgid "Preview the current changes as diff [alt-c]"
+msgid "Preview the current changes as diff"
 msgstr ""
 
 msgid "Upload"
@@ -481,6 +483,10 @@ msgid "Page name too long"
 msgstr ""
 
 #, php-format
+msgid "Page name “%s” cannot end with a slash."
+msgstr ""
+
+#, php-format
 msgid "Illegal character “%s” in page name."
 msgstr ""
 
@@ -527,6 +533,9 @@ msgstr ""
 msgid "You must specify a directory to dump to"
 msgstr ""
 
+msgid "Dumping Pages"
+msgstr ""
+
 #, php-format
 msgid "Cannot create directory “%s”"
 msgstr ""
@@ -536,13 +545,14 @@ msgid "Created directory “%s” for the page dump..."
 msgstr ""
 
 #, php-format
+msgid "Cannot use directory “%s”, it is not writable"
+msgstr ""
+
+#, php-format
 msgid "Using directory “%s”"
 msgstr ""
 
-msgid "Dumping Pages"
-msgstr ""
-
-msgid "Skipped."
+msgid "Skipped"
 msgstr ""
 
 #, php-format
@@ -558,7 +568,7 @@ msgid "%s bytes written"
 msgstr ""
 
 msgid "PhpWikiAdministration"
-msgstr ""
+msgstr "AmministrazioneDiPhpWiki"
 
 #, php-format
 msgid "... copied to %s"
@@ -641,6 +651,10 @@ msgstr ""
 msgid "Revert cancelled"
 msgstr ""
 
+#, php-format
+msgid "Are you sure to revert %s to version %d?"
+msgstr ""
+
 msgid "Yes"
 msgstr "Si"
 
@@ -677,11 +691,19 @@ msgid "Skipping"
 msgstr ""
 
 #, php-format
+msgid "Not existing source. Unable to load: %s"
+msgstr ""
+
+#, php-format
 msgid "Empty or not existing source. Unable to load: %s"
 msgstr ""
 
 #, php-format
 msgid "Bad file type: %s"
+msgstr ""
+
+#, php-format
+msgid "Not in allowed list. Unable to load: %s"
 msgstr ""
 
 #, php-format
@@ -919,6 +941,10 @@ msgstr ""
 msgid "%s: Bad action"
 msgstr ""
 
+#, php-format
+msgid "Illegal chars %s removed"
+msgstr ""
+
 msgid "PageDump"
 msgstr ""
 
@@ -1143,6 +1169,10 @@ msgstr ""
 msgid "A required argument “%s” is missing."
 msgstr ""
 
+#, php-format
+msgid "Argument '%s' must be a boolean"
+msgstr ""
+
 msgid "Click to hide the comments"
 msgstr ""
 
@@ -1300,7 +1330,6 @@ msgstr ""
 msgid "Atom Aggregator Plugin."
 msgstr ""
 
-#, php-format
 msgid ""
 "List all page revisions edited by one user with diff links, or show a "
 "PageHistory-like list of a single page for only one user."
@@ -1437,23 +1466,6 @@ msgstr ""
 msgid "Cannot create page with empty name!"
 msgstr ""
 
-msgid "CreatePage failed"
-msgstr "CategoriaPagina"
-
-#, php-format
-msgid "Do you really want to create the page “%s”?"
-msgstr ""
-
-msgid "The new page you want to create will be a subpage."
-msgstr ""
-
-msgid "Subpages cannot be created unless the parent page exists."
-msgstr ""
-
-msgid ""
-"Subpages with ending space are not allowed as directory name on Windows."
-msgstr ""
-
 #, php-format
 msgid "%s already exists"
 msgstr ""
@@ -1478,7 +1490,10 @@ msgstr ""
 msgid "%s: no such revision %d."
 msgstr ""
 
-msgid "Click to display to TOC"
+msgid "Click to display the TOC"
+msgstr ""
+
+msgid "Click to hide the TOC"
 msgstr ""
 
 msgid "Display current time and date."
@@ -1512,7 +1527,6 @@ msgstr ""
 msgid "<not displayed>"
 msgstr ""
 
-#, php-format
 msgid "Show Group Information."
 msgstr ""
 
@@ -1668,6 +1682,12 @@ msgid ""
 "Display a marker with further infos (when clicking) on given coordinates."
 msgstr ""
 
+msgid "Longitude must be a number."
+msgstr ""
+
+msgid "Latitude must be a number."
+msgstr ""
+
 #, php-format
 msgid "Invalid argument %s"
 msgstr ""
@@ -1721,6 +1741,9 @@ msgstr "Convertito"
 msgid "Only files with extension HTML are allowed"
 msgstr ""
 
+msgid "Error: file must be encoded in UTF-8"
+msgstr ""
+
 msgid "Copy the output below and paste it into your Wiki page."
 msgstr ""
 
@@ -1760,6 +1783,9 @@ msgid "Display Dynamic Category Tree."
 msgstr ""
 
 msgid "Perform searches on InterWiki sites listed in InterWikiMap."
+msgstr ""
+
+msgid "Sorry, this plugin is currently out of order."
 msgstr ""
 
 msgid "Wiki Name"
@@ -2140,7 +2166,7 @@ msgid ""
 "Display a set of photos listed in a text file with optional descriptions."
 msgstr ""
 
-msgid "Bad url in src: remove all of <, >, \""
+msgid "Bad URL in src"
 msgstr ""
 
 msgid "File extension for csv file has to be '.csv'"
@@ -2162,29 +2188,6 @@ msgstr ""
 
 #, php-format
 msgid "Invalid color: %s"
-msgstr ""
-
-msgid "Provide weather reports from the Internet."
-msgstr ""
-
-msgid "You have to define PHPWEATHER_BASE_DIR before use. (config/config.ini)"
-msgstr ""
-
-#, php-format
-msgid "The ICAO “%s” wasn't recognized."
-msgstr ""
-
-#, php-format
-msgid "%s does not know about the language “%s”, using “en” instead."
-msgstr ""
-
-msgid "Submit country"
-msgstr ""
-
-msgid "Change country"
-msgstr ""
-
-msgid "Submit location"
 msgstr ""
 
 msgid "Ploticus image creation."
@@ -2558,6 +2561,10 @@ msgstr ""
 msgid "Illegal characters in external URL."
 msgstr ""
 
+#, php-format
+msgid "Malformed URL: “%s”"
+msgstr ""
+
 msgid "Redirect to an external URL is only allowed in locked pages."
 msgstr ""
 
@@ -2666,9 +2673,8 @@ msgstr ""
 msgid "Search in pages for a relation with that value (a pagename)."
 msgstr ""
 
-#, fuzzy
 msgid "Pagefilter"
-msgstr "StoricoPagina"
+msgstr ""
 
 msgid "Filter by this attribute name. With autocompletion."
 msgstr ""
@@ -2757,7 +2763,10 @@ msgstr ""
 msgid "Retrieving from external url %s wiki.getRecentChanges(%s)..."
 msgstr ""
 
-msgid " skipped"
+msgid "skipped"
+msgstr ""
+
+msgid "locally deleted or moved"
 msgstr ""
 
 msgid "same date"
@@ -2785,9 +2794,6 @@ msgstr ""
 msgid "Postponed %s for %s."
 msgstr ""
 
-msgid "skipped"
-msgstr ""
-
 msgid "same content"
 msgstr ""
 
@@ -2807,25 +2813,6 @@ msgid "cached pagedata:"
 msgstr ""
 
 msgid "cached versiondata:"
-msgstr ""
-
-#, php-format
-msgid "Keep up to %d major edits, but keep them no longer than %d days."
-msgstr ""
-
-#, php-format
-msgid " Keep up to %d minor edits, but keep them no longer than %d days."
-msgstr ""
-
-#, php-format
-msgid " Keep the latest contributions of the last %d authors up to %d days."
-msgstr ""
-
-#, php-format
-msgid ""
-" Additionally, try to keep the latest contributions of all authors in the "
-"last %d days (even if there are more than %d of them,) but in no case keep "
-"more than %d unique author revisions."
 msgstr ""
 
 #, php-format
@@ -2931,9 +2918,6 @@ msgstr ""
 msgid "Harddisc usage"
 msgstr ""
 
-msgid "Expiry parameters"
-msgstr ""
-
 msgid "Wikiname regexp"
 msgstr ""
 
@@ -2966,7 +2950,26 @@ msgstr ""
 msgid "TeX imagepath not writable."
 msgstr ""
 
+#, php-format
+msgid "Not a mathematical expression: “%s”"
+msgstr ""
+
+#, php-format
+msgid "Cannot run %1s plugin, “%2s” does not exist"
+msgstr ""
+
+#, php-format
+msgid "“%s” must be a directory"
+msgstr ""
+
+#, php-format
+msgid "“%s” must be a writable"
+msgstr ""
+
 msgid "Sorry, this version of PHP cannot create PNG image files."
+msgstr ""
+
+msgid "See"
 msgstr ""
 
 msgid "Convert text into a PNG image using GD."
@@ -3017,17 +3020,13 @@ msgid "Recursive inclusion of url %s"
 msgstr ""
 
 #, php-format
-msgid "See: %s"
-msgstr ""
-
-#, php-format
 msgid "Transcluded from %s"
 msgstr "Inserire dalla %s"
 
 msgid "Define a translation for a specified text."
 msgstr ""
 
-msgid "This internal action page cannot viewed."
+msgid "This internal action page cannot be viewed."
 msgstr ""
 
 msgid "You can only use it via the WikiTranslation plugin."
@@ -3130,7 +3129,9 @@ msgstr ""
 msgid "File successfully uploaded."
 msgstr ""
 
-msgid "Note: some forbidden characters in filename have been replaced by dash."
+msgid ""
+"Note: filename was sanified: spaces from beginning and end removed, multiple "
+"spaces replaced by one, forbidden characters replaced by dash."
 msgstr ""
 
 #, php-format
@@ -3213,7 +3214,7 @@ msgstr ""
 msgid "Rate"
 msgstr ""
 
-msgid "Display video in Flash or HTML5."
+msgid "Display video in HTML5."
 msgstr ""
 
 msgid "Both 'url' or 'file' parameters missing."
@@ -3223,6 +3224,9 @@ msgid "Choose only one of 'url' or 'file' parameters."
 msgstr ""
 
 msgid "Your browser does not understand the HTML 5 video tag."
+msgstr ""
+
+msgid "Unknown video format"
 msgstr ""
 
 msgid ""
@@ -3314,7 +3318,7 @@ msgstr "<sconosciuto>"
 msgid "%d minutes"
 msgstr ""
 
-msgid "Change owner of selected pages."
+msgid "Change owner of selected pages"
 msgstr ""
 
 #, php-format
@@ -3368,7 +3372,7 @@ msgstr ""
 msgid "Select the pages where to delete access rights"
 msgstr ""
 
-msgid "Permanently purge all selected pages."
+msgid "Permanently purge selected pages"
 msgstr ""
 
 #, php-format
@@ -3392,16 +3396,13 @@ msgstr ""
 msgid "Confirm purge"
 msgstr ""
 
-msgid "Are you sure you want to permanently purge the following files?"
+msgid "Are you sure you want to permanently purge the following pages?"
 msgstr ""
 
-msgid "Permanently purge selected pages"
+msgid "Select the pages to purge"
 msgstr ""
 
-msgid "Select the files to purge"
-msgstr ""
-
-msgid "Permanently remove all selected pages."
+msgid "Remove selected pages"
 msgstr ""
 
 #, php-format
@@ -3423,18 +3424,15 @@ msgid "No pages removed."
 msgstr ""
 
 msgid "Remove"
-msgstr "Cancella"
+msgstr "Rimuovi"
 
 msgid "Confirm removal"
 msgstr ""
 
-msgid "Are you sure you want to remove the selected files?"
+msgid "Are you sure you want to remove the selected pages?"
 msgstr ""
 
-msgid "Remove selected pages"
-msgstr ""
-
-msgid "Select the files to remove"
+msgid "Select the pages to remove"
 msgstr ""
 
 #, php-format
@@ -3445,8 +3443,8 @@ msgstr ""
 msgid "Pages which have been deleted at least %s days are already checked."
 msgstr ""
 
-msgid "Rename selected pages."
-msgstr "Rinominare pagine selezionate."
+msgid "Rename selected pages"
+msgstr ""
 
 msgid "Rename to"
 msgstr ""
@@ -3457,13 +3455,14 @@ msgstr ""
 msgid "Rename Page"
 msgstr ""
 
-msgid "Rename selected pages"
-msgstr ""
-
 msgid "Select the pages to rename:"
 msgstr ""
 
 msgid "Cannot rename. New page name too long."
+msgstr ""
+
+#, php-format
+msgid "Page name “%s” cannot begin with a slash."
 msgstr ""
 
 #, php-format
@@ -3529,7 +3528,7 @@ msgstr ""
 msgid "Replace"
 msgstr ""
 
-msgid "Are you sure you want to replace text in the selected files?"
+msgid "Are you sure you want to replace text in the selected pages?"
 msgstr ""
 
 #, php-format
@@ -3590,7 +3589,7 @@ msgstr ""
 
 msgid ""
 "Are you sure you want to permanently change access rights to the selected "
-"files?"
+"pages?"
 msgstr ""
 
 msgid "Change Access Rights"
@@ -3669,16 +3668,13 @@ msgstr ""
 msgid "Purge all empty, unreferenced Pages"
 msgstr ""
 
-msgid "E-mail address confirmation"
+msgid "E-mail Verification"
 msgstr ""
 
-msgid "Convert cached_html"
+msgid "Check Wiki Database"
 msgstr ""
 
-msgid "DB Check"
-msgstr ""
-
-msgid "Db Rebuild"
+msgid "Rebuild Wiki Database"
 msgstr ""
 
 msgid "Markup cache purged!"
@@ -3710,11 +3706,16 @@ msgid ""
 "edit them."
 msgstr ""
 
-msgid "No old _cached_html pagedata found."
+msgid "Database check was successful."
 msgstr ""
 
-#, php-format
-msgid "Converted successfully %d pages"
+msgid "Database check failed."
+msgstr ""
+
+msgid "Database rebuild was successful."
+msgstr ""
+
+msgid "Database rebuild failed."
 msgstr ""
 
 msgid "E-mail"
@@ -3802,10 +3803,10 @@ msgid "AddCommentPlugin"
 msgstr ""
 
 msgid "AddingPages"
-msgstr ""
+msgstr "AggiungerePagine"
 
 msgid "AllPages"
-msgstr ""
+msgstr "TutteLePagine"
 
 msgid "AllPagesCreatedByMe"
 msgstr ""
@@ -3831,17 +3832,11 @@ msgstr ""
 msgid "AtomFeed"
 msgstr ""
 
-msgid "DebugAuthInfo"
-msgstr ""
-
 msgid "AuthorHistory"
 msgstr ""
 
 msgid "AuthorHistoryPlugin"
 msgstr ""
-
-msgid "DebugBackendInfo"
-msgstr "DebugBackendInfo"
 
 msgid "BackLinks"
 msgstr ""
@@ -3897,8 +3892,17 @@ msgstr ""
 msgid "DeadEndPages"
 msgstr ""
 
-msgid "DebugInfo"
-msgstr "InfoDebug"
+msgid "DebugAuthInfo"
+msgstr ""
+
+msgid "DebugBackendInfo"
+msgstr ""
+
+msgid "DebugGroupInfo"
+msgstr "DebugGroupInfo"
+
+msgid "DebugRetransform"
+msgstr "DebugRetransform"
 
 msgid "Diff"
 msgstr "Differenze"
@@ -3950,9 +3954,6 @@ msgstr "Vai"
 
 msgid "GraphViz"
 msgstr ""
-
-msgid "DebugGroupInfo"
-msgstr "DebugGroupInfo"
 
 msgid "HelloWorld"
 msgstr ""
@@ -4015,7 +4016,7 @@ msgid "MediawikiTable"
 msgstr ""
 
 msgid "MoreAboutMechanics"
-msgstr ""
+msgstr "VarieSulFunzionamento"
 
 msgid "MostPopular"
 msgstr "PiùPopolari"
@@ -4057,12 +4058,6 @@ msgid "PhpHighlight"
 msgstr ""
 
 msgid "PhpHighlightPlugin"
-msgstr ""
-
-msgid "PhpWeather"
-msgstr ""
-
-msgid "PhpWeatherPlugin"
 msgstr ""
 
 msgid "PhpWiki"
@@ -4126,10 +4121,7 @@ msgid "RedirectToPlugin"
 msgstr ""
 
 msgid "ReleaseNotes"
-msgstr ""
-
-msgid "DebugRetransform"
-msgstr "DebugRetransform"
+msgstr "NoteDiRilascio"
 
 msgid "RichTable"
 msgstr ""
@@ -4328,7 +4320,7 @@ msgid "Remove cancelled"
 msgstr ""
 
 msgid "Remove Page"
-msgstr "Cancella la Pagina"
+msgstr "Rimuovi la Pagina"
 
 #, php-format
 msgid "You are about to remove “%s”!"
@@ -4368,10 +4360,13 @@ msgid ""
 "ADODB or PDO."
 msgstr ""
 
-msgid "Bad URL -- remove all of <, >, \""
+msgid "Bad URL"
 msgstr ""
 
-msgid "Bad URL for image -- remove all of <, >, \""
+msgid "Remove all of <, >, \""
+msgstr ""
+
+msgid "Bad URL for image"
 msgstr ""
 
 #, php-format
@@ -4402,10 +4397,6 @@ msgid "White space converted to single space"
 msgstr ""
 
 msgid "Control characters not allowed"
-msgstr ""
-
-#, php-format
-msgid "Illegal chars %s removed"
 msgstr ""
 
 msgid "Revision Not Found"
@@ -4449,26 +4440,22 @@ msgstr ""
 msgid "... (first %s words)"
 msgstr ""
 
-#, php-format
-msgid "%4d  %s\n"
-msgstr "%4d  %s\n"
-
 msgid "(A|An|And|But|By|For|From|In|Is|It|Of|On|Or|The|To|With)"
 msgstr ""
 
 msgid "HomePage"
 msgstr "PaginaPrincipale"
 
-msgid "always skip the HomePage."
+msgid "always skip the HomePage"
 msgstr ""
 
-msgid "newer than the existing page."
+msgid "newer than the existing page"
 msgstr ""
 
-msgid "older than the existing page."
+msgid "older than the existing page"
 msgstr ""
 
-msgid "unknown format."
+msgid "unknown format"
 msgstr ""
 
 #, php-format
@@ -4486,116 +4473,13 @@ msgstr ""
 msgid "Check for necessary theme %s updates"
 msgstr ""
 
-msgid "rename to Help: pages"
-msgstr ""
-
 #, php-format
-msgid "%s already checked in theme pgsrc."
+msgid "%s already checked in theme pgsrc"
 msgstr ""
 
 #, php-format
 msgid "rename %s to %s"
 msgstr "cambia titolo %s a %s"
-
-msgid "MISSING"
-msgstr ""
-
-msgid "CREATED"
-msgstr ""
-
-msgid "database"
-msgstr ""
-
-msgid "db version: we want "
-msgstr ""
-
-msgid "db version: we have "
-msgstr ""
-
-msgid "Backend type: "
-msgstr ""
-
-#, php-format
-msgid "Check for table %s"
-msgstr ""
-
-msgid "You need to upgrade to schema/psql-initialize.sql manually!"
-msgstr ""
-
-msgid "Check for new session.sess_ip column"
-msgstr ""
-
-msgid "SKIP"
-msgstr ""
-
-msgid "ADDING"
-msgstr ""
-
-msgid "Check for mysql session.sess_id sanity"
-msgstr ""
-
-msgid "fixed"
-msgstr ""
-
-msgid "Check for mysql LOCK TABLE privilege"
-msgstr ""
-
-#, php-format
-msgid "version <em>%s</em> not affected"
-msgstr ""
-
-msgid "Check for mysql page.id auto_increment flag"
-msgstr ""
-
-msgid "Check for mysql 4.1.x/5.0.0 binary search on Windows problem"
-msgstr ""
-
-#, php-format
-msgid "version <em>%s</em>"
-msgstr "versione <em>%s</em>"
-
-msgid "not affected"
-msgstr ""
-
-msgid "FIXED"
-msgstr ""
-
-msgid "Check for ACCESS_LOG_SQL passwords in POST requests"
-msgstr ""
-
-msgid "Check for ACCESS_LOG_SQL remote_host varchar(50)"
-msgstr ""
-
-msgid "FIXING"
-msgstr ""
-
-msgid ""
-"Upgrade requires database privileges to CREATE and ALTER the phpwiki "
-"database."
-msgstr ""
-
-msgid ""
-"And on Windows at least the privilege to SELECT FROM mysql, and possibly "
-"UPDATE mysql"
-msgstr ""
-
-msgid "DB admin user:"
-msgstr ""
-
-msgid "DB admin password:"
-msgstr ""
-
-msgid "Check for extra page.cached_html column"
-msgstr ""
-
-msgid "CONVERTING"
-msgstr ""
-
-msgid "Check for relation field in link table"
-msgstr ""
-
-msgid "Rebuild entire database to upgrade relation links"
-msgstr ""
 
 #, php-format
 msgid "%s not found in %s"
@@ -4622,8 +4506,8 @@ msgstr ""
 msgid "fix BLOG_EMPTY_DEFAULT_PREFIX into BLOG_DEFAULT_EMPTY_PREFIX"
 msgstr ""
 
-msgid "fixed with"
-msgstr "Modifica"
+msgid "FIXED"
+msgstr ""
 
 msgid "Upgrade disabled: user != isAdmin"
 msgstr ""
@@ -4939,12 +4823,6 @@ msgstr "Password o nome utente errati."
 msgid "Insufficient permissions."
 msgstr "Permessi insufficienti."
 
-msgid "Empty Preferences or format of UserPreferences cookie not recognised."
-msgstr ""
-
-msgid "Default preferences will be used."
-msgstr ""
-
 msgid "The length of the password is shorter than the system policy allows."
 msgstr ""
 
@@ -4955,6 +4833,9 @@ msgid ""
 msgstr ""
 
 msgid "Please set ENCRYPTED_PASSWD to true in config/config.ini."
+msgstr ""
+
+msgid "E-mail address confirmation"
 msgstr ""
 
 #, php-format
@@ -5017,12 +4898,6 @@ msgstr ""
 msgid "Home"
 msgstr "Principale"
 
-msgid "About"
-msgstr ""
-
-msgid "HowTo"
-msgstr ""
-
 msgid "Info"
 msgstr ""
 
@@ -5048,11 +4923,17 @@ msgstr ""
 msgid "Diff previous Author"
 msgstr ""
 
+msgid "Main Menu"
+msgstr ""
+
 msgid "Navigation"
 msgstr ""
 
 msgid "Admin"
 msgstr ""
+
+msgid "Preferences"
+msgstr "Preferenze"
 
 msgid "Blog"
 msgstr ""
@@ -5086,6 +4967,12 @@ msgstr "(diff)"
 msgid "Edit Old Revision"
 msgstr ""
 
+msgid "Page Info"
+msgstr "Info Pagina"
+
+msgid "Page Dump"
+msgstr ""
+
 msgid "PurgeHtmlCache"
 msgstr "RimuoviDallaCacheHtml"
 
@@ -5114,24 +5001,12 @@ msgstr ""
 msgid "This is a minor change."
 msgstr ""
 
-msgid "GoodStyle"
-msgstr "BuonStile"
-
 #, php-format
 msgid "See %s tips for editing."
 msgstr "Vedere %s consigli per le modifiche."
 
-msgid "Help/TextFormattingRules"
-msgstr "Aiuto/RegoleFormattazioneTesto"
-
-msgid "Synopsis"
-msgstr "Sommario"
-
 msgid "HowToUseWiki"
-msgstr ""
-
-msgid "Preferences"
-msgstr "Preferenze"
+msgstr "ComeUsareWiki"
 
 msgid "Today"
 msgstr "Oggi"
@@ -5141,6 +5016,9 @@ msgid "You are signed in as %s"
 msgstr "Utente corrente: %s"
 
 msgid "Enter your UserId to sign in"
+msgstr ""
+
+msgid "Actions Menu"
 msgstr ""
 
 msgid "Revert"
@@ -5254,6 +5132,12 @@ msgstr ""
 msgid "Page Type"
 msgstr "Tipo della Pagina"
 
+msgid "System is locked as read-only for maintenance"
+msgstr ""
+
+msgid "Database is locked as read-only for maintenance"
+msgstr ""
+
 #, php-format
 msgid ""
 "You may sign in using any [[Help:AddingPages|WikiWord]] as a user id. (Any "
@@ -5269,7 +5153,7 @@ msgstr ""
 msgid "New users may use an empty password."
 msgstr ""
 
-msgid "UserId:"
+msgid "UserId"
 msgstr ""
 
 msgid "or"
@@ -5382,9 +5266,6 @@ msgstr ""
 #, php-format
 msgid "User preferences for user %s"
 msgstr "Preferenze per l'utente %s"
-
-msgid "UserId"
-msgstr ""
 
 msgid "Auth Level"
 msgstr ""
@@ -5547,9 +5428,6 @@ msgstr "Storico"
 msgid "Last Difference"
 msgstr ""
 
-msgid "Page Info"
-msgstr "Info Pagina"
-
 msgid "Back Links"
 msgstr "Collegamenti Relativi"
 
@@ -5560,9 +5438,6 @@ msgid "Access Rights"
 msgstr ""
 
 msgid "Purge"
-msgstr ""
-
-msgid "Error:"
 msgstr ""
 
 msgid "This revision of the page does not exist."
@@ -5644,29 +5519,26 @@ msgstr ""
 msgid "Watch"
 msgstr ""
 
+msgid "Special Actions Menu"
+msgstr ""
+
 msgid "Special Actions"
 msgstr ""
 
-msgid "Page info"
-msgstr "Info Pagina"
-
 msgid "Author history"
-msgstr ""
-
-msgid "Page dump"
 msgstr ""
 
 msgid "Purge HTML cache"
 msgstr "RimuoviDallaCacheHtml"
 
-msgid "Copyrights"
-msgstr ""
-
-msgid "GeneralDisclaimer"
+msgid "About"
 msgstr ""
 
 #, php-format
 msgid "Statistics about %s."
+msgstr ""
+
+msgid "Navigation Menu"
 msgstr ""
 
 msgid "Recent changes"
@@ -5689,6 +5561,9 @@ msgstr "Trova Pagina"
 
 msgid "Search:"
 msgstr "Ricerca:"
+
+msgid "Toolbox Menu"
+msgstr ""
 
 msgid "Toolbox"
 msgstr ""
@@ -5717,13 +5592,13 @@ msgstr ""
 msgid "My Preferences"
 msgstr ""
 
-msgid "MyRecentChanges"
-msgstr ""
-
 msgid "My Changes"
 msgstr ""
 
 msgid "Logout"
+msgstr ""
+
+msgid "Favorite Categories Menu"
 msgstr ""
 
 msgid "Favorite Categories"
@@ -5741,9 +5616,6 @@ msgid ""
 "I'm just doing minor edits. Please divert the usual logging to %s instead."
 msgstr ""
 
-msgid "TermsOfUse"
-msgstr ""
-
 msgid "View Page"
 msgstr ""
 
@@ -5759,7 +5631,13 @@ msgstr ""
 msgid "Add/Remove this to/from the list of pages you're monitoring for changes"
 msgstr ""
 
+msgid "Main Categories Menu"
+msgstr ""
+
 msgid "Main Categories"
+msgstr ""
+
+msgid "Recent Changes Menu"
 msgstr ""
 
 msgid "Search term(s)"
@@ -5771,85 +5649,29 @@ msgstr ""
 msgid "Sidebar"
 msgstr ""
 
+msgid "News"
+msgstr ""
+
 msgid "Tutorial"
 msgstr ""
 
 msgid "Edit this page"
 msgstr ""
 
-msgid "Invalid User"
-msgstr ""
+#~ msgid "fixed with"
+#~ msgstr "Modifica"
 
-msgid "User not active"
-msgstr ""
+#~ msgid "version <em>%s</em>"
+#~ msgstr "versione <em>%s</em>"
 
-msgid "No TYPE specified"
-msgstr ""
+#~ msgid "GoodStyle"
+#~ msgstr "BuonStile"
 
-msgid "No ID specified"
-msgstr ""
+#~ msgid "Page info"
+#~ msgstr "Info Pagina"
 
-#, php-format
-msgid "First activate the %s plugin through the Project's Admin Interface"
-msgstr ""
-
-msgid "You are not a member of this project"
-msgstr ""
-
-msgid "Configuration saved."
-msgstr ""
-
-msgid "You are not a project Admin"
-msgstr ""
-
-msgid "Configuration for your project's wiki"
-msgstr ""
-
-msgid "Wiki Configuration"
-msgstr ""
-
-msgid "Parameter"
-msgstr ""
-
-msgid "Save Configuration"
-msgstr ""
-
-msgid "List of active wikis in Forge"
-msgstr ""
-
-#, fuzzy
-msgid "Project Name"
-msgstr "Nome della Pagina"
-
-#, fuzzy
-msgid "Registered"
-msgstr "ieri"
-
-#, fuzzy
-msgid "Unix Name"
-msgstr "Wiki Nome"
-
-msgid "Is Public?"
-msgstr ""
-
-#, fuzzy
-msgid "External?"
-msgstr "Esterni"
-
-msgid "Members"
-msgstr ""
-
-msgid "Upgrade"
-msgstr ""
-
-#~ msgid "H"
-#~ msgstr "A"
-
-#~ msgid "W"
-#~ msgstr "L"
-
-#~ msgid "Columns: %s."
-#~ msgstr "Caratteri: %s."
+#~ msgid "Synopsis"
+#~ msgstr "Sommario"
 
 #~ msgid "LiveSearch"
 #~ msgstr "RicercaLive"
@@ -5867,9 +5689,6 @@ msgstr ""
 
 #~ msgid "Version %s"
 #~ msgstr "Versione %s"
-
-#~ msgid "Pagename(s): "
-#~ msgstr "Nome della Pagina(s)"
 
 #~ msgid "from %s"
 #~ msgstr "dalla %s"

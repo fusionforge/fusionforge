@@ -1,0 +1,83 @@
+Date: Mon, 30 Mar 2020 15:49:22 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
+Content-Type: application/x-phpwiki;
+  pagename=Aide%2FGreffonRechercheExterne;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
+  charset=UTF-8
+Content-Transfer-Encoding: binary
+
+Le [[Aide:GreffonWiki|greffon]] **~RechercheExterne** (//ExternalSearch//) crée un formulaire pour interroger les ~InterWikis ou autres sites Internet.
+
+== Utilisation ==
+
+{{{
+<<ExternalSearch
+         url="InterWiki ou URL"
+         name="texte du bouton"
+>>
+}}}
+
+== Arguments ==
+
+{| class="bordered"
+|-
+! Argument
+! Description
+! Valeur par défaut
+|-
+| **url**
+| Spécifie un wiki depuis la [[CarteInterWiki]] ou une URL. N'importe quel
+texte saisi par l'utilisateur sera ajouté à l'url de recherche. La
+chaîne '##**%s**##' peut être utilisée pour insérer une requête de
+recherche dans l'URL plutôt que de l'ajouter.
+|
+|-
+| **name**
+| Texte à afficher dans le bouton de validation.
+| Pour les sites ~InterWiki, c'est le nom wiki par défaut. Pour les autres url, c'est le texte "External Search" par défaut.
+|-
+| **formsize**
+| Spécifie la taille de la zone de saisie.
+| 30 caractères
+|-
+| **debug**
+| Ne redirige pas réellement vers le site externe mais affiche juste l'URL vers lequel il devrait l'être.
+|
+|}
+
+== Exemples ==
+
+{{{
+  url="http://sunir.org/apps/meta.pl?"       name="Metawiki Search"
+  url="http://www.usemod.com/cgi-bin/mb.pl?" name="MeatBall Search"
+  url=php-lookup
+  url=php-function
+  url=PhpWiki
+}}}
+
+Effectue une recherche en texte intégral sur les wiki multiples :
+<<ExternalSearch url="http://sunir.org/apps/meta.pl?" name="Recherche Metawiki">>
+
+Effectue une recherche en texte intégral sur [[MeatBall:SiteSearch|MeatBall]] wiki:
+<<ExternalSearch url="http://www.usemod.com/cgi-bin/mb.pl?" name="Recherche MeatBall">>
+
+Recherche sur le site web PHP pour une fonction :
+<<ExternalSearch url=php-lookup>>
+
+Entre le nom d'une fonction PHP pour voir la page de documentation :
+<<ExternalSearch url=php-function>>
+
+Entre n'importe quel nom de page sur ~PhpWiki pour arriver sur cette page :
+<<ExternalSearch url=PhpWiki>>
+
+== Voir aussi ==
+* [[Help:TitleSearchPlugin]]
+* [[Help:FullTextSearchPlugin]]
+* [[Help:InterWikiSearchPlugin]]
+* [[Help:LinkSearchPlugin]]
+* [[Help:SemanticSearchPlugin]]
+
+<noinclude>
+----
+[[DocumentationDePhpWiki]] [[CatégorieGreffonWiki]]
+</noinclude>

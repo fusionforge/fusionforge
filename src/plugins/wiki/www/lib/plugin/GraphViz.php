@@ -1,7 +1,6 @@
 <?php
-
-/*
- * Copyright 2004 $ThePhpWikiProgrammingTeam
+/**
+ * Copyright © 2004 $ThePhpWikiProgrammingTeam
  *
  * This file is part of PhpWiki.
  *
@@ -18,6 +17,9 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
  */
 
 /**
@@ -28,7 +30,7 @@
  *
  * Note:
  * - We support only images supported by GD so far (PNG most likely).
- *   EPS, PS, SWF, SVG or SVGZ and imagemaps need to be tested.
+ *   EPS, PS, SVG or SVGZ and imagemaps need to be tested.
  *
  * TODO:
  * - neato binary ?
@@ -41,30 +43,17 @@ if (PHP_OS == "Darwin") { // Mac OS X
     // Name of the Truetypefont - at least LucidaSansRegular.ttf is always present on OS X
     if (!defined('VISUALWIKIFONT'))
         define('VISUALWIKIFONT', 'LucidaSansRegular');
-    // The default font paths do not find your fonts, set the path here:
-    $fontpath = "/System/Library/Frameworks/JavaVM.framework/Versions/1.3.1/Home/lib/fonts/";
-    //$fontpath = "/usr/X11R6/lib/X11/fonts/TTF/";
 } elseif (isWindows()) {
     if (!defined("GRAPHVIZ_EXE"))
         define('GRAPHVIZ_EXE', 'dot.exe');
     if (!defined('VISUALWIKIFONT'))
         define('VISUALWIKIFONT', 'Arial');
-} elseif ($_SERVER["SERVER_NAME"] == 'phpwiki.sourceforge.net') { // sf.net hack
-    if (!defined("GRAPHVIZ_EXE"))
-        define('GRAPHVIZ_EXE', '/home/groups/p/ph/phpwiki/bin/dot');
-    if (!defined('VISUALWIKIFONT'))
-        define('VISUALWIKIFONT', 'luximr');
 } else { // other os
     if (!defined("GRAPHVIZ_EXE"))
         define('GRAPHVIZ_EXE', '/usr/bin/dot');
     // Name of the Truetypefont - Helvetica is probably easier to read
     if (!defined('VISUALWIKIFONT'))
         define('VISUALWIKIFONT', 'Helvetica');
-    //define('VISUALWIKIFONT', 'Times');
-    //define('VISUALWIKIFONT', 'Arial');
-    // The default font paths do not find your fonts, set the path here:
-    //$fontpath = "/usr/X11R6/lib/X11/fonts/TTF/";
-    //$fontpath = "/usr/share/fonts/default/TrueType/";
 }
 
 require_once 'lib/WikiPluginCached.php';
@@ -72,7 +61,6 @@ require_once 'lib/WikiPluginCached.php';
 class WikiPlugin_GraphViz
     extends WikiPluginCached
 {
-
     public $_args;
     public $source;
     public $_mapfile;
@@ -95,13 +83,11 @@ class WikiPlugin_GraphViz
         $device = strtolower($this->_args['imgtype']);
         if (in_array($device, $this->mapTypes()))
             return PLUGIN_CACHED_MAP;
-        if (in_array($device, array('svg', 'swf', 'svgz', 'eps', 'ps'))) {
+        if (in_array($device, array('svg', 'svgz', 'eps', 'ps'))) {
             switch ($this->_args['imgtype']) {
                 case 'svg':
                 case 'svgz':
                     return PLUGIN_CACHED_STATIC | PLUGIN_CACHED_SVG_PNG;
-                case 'swf':
-                    return PLUGIN_CACHED_STATIC | PLUGIN_CACHED_SWF;
                 default:
                     return PLUGIN_CACHED_STATIC | PLUGIN_CACHED_HTML;
             }
@@ -166,7 +152,7 @@ class WikiPlugin_GraphViz
      * This gives an alternative text description of
      * the image.
      */
-    function getAlt($dbi, $argstr, $request)
+    function getAlt($dbi, $argarray, $request)
     {
         return (!empty($this->_args['alt'])) ? $this->_args['alt']
             : $this->getDescription();
@@ -383,7 +369,7 @@ class WikiPlugin_GraphViz
         $source = $this->processSource($argarray);
         if (empty($source)) {
             $this->complain("No dot graph given");
-            return array(false, $this->GetError());
+            return array(false, $this->getError());
         }
         //$ok = $ok and $this->createDotFile($tempfiles.'.dot', $argarray);
 
@@ -455,8 +441,8 @@ class WikiPlugin_GraphViz
                 . (file_exists("$tempfiles.map") ? filesize("$tempfiles.map") : 'missing'));
             $this->complain("\ncmd-line: $cmdline1");
             $this->complain("\ncmd-line: $cmdline2");
-            //trigger_error($this->GetError(), E_USER_WARNING);
-            return array(false, $this->GetError());
+            //trigger_error($this->getError(), E_USER_WARNING);
+            return array(false, $this->getError());
         }
 
         // clean up tempfiles
@@ -469,15 +455,7 @@ class WikiPlugin_GraphViz
         if ($ok)
             return array($img, $map);
         else
-            return array(false, $this->GetError());
+            return array(false, $this->getError());
     }
 
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

@@ -1,5 +1,5 @@
-Date: Mon, 29 Jun 2015 12:04:28 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Tue, 23 Feb 2021 14:45:30 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FTitleSearchPlugin;
   flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
@@ -28,31 +28,31 @@ plus the following ones:
 ! Default value
 |-
 | **s**
-| string to search
+| String to search
 | //none//
 |-
 | **auto_redirect**
-| if true and only one page is found, this page is displayed immediately
+| Boolean. If true and only one page is found, this page is displayed immediately
 | false
 |-
 | **noheader**
-|
+| Boolean. If true, header should be omitted.
 | false
 |-
 | **exclude**
-|
+| Comma-separated list of pages to exclude
 | false
 |-
 | **info**
-|
+| Info to display in the table
 | false
 |-
 | **case_exact**
-|
+| Boolean. If true, search with case exact.
 | false
 |-
 | **regex**
-|
+| Type of regular expression used for searching
 | auto
 |-
 | **format**
@@ -75,6 +75,8 @@ plus the following ones:
 * [[Help:FullTextSearchPlugin]]
 * [[Help:ExternalSearchPlugin]]
 * [[Help:InterWikiSearchPlugin]]
+* [[Help:LinkSearchPlugin]]
+* [[Help:SemanticSearchPlugin]]
 
 <noinclude>
 ----

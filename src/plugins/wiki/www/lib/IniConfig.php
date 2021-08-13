@@ -1,20 +1,7 @@
 <?php
-
 /**
- * A configurator intended to read its config from a PHP-style INI file,
- * instead of a PHP file.
- *
- * Pass a filename to the IniConfig() function and it will read all its
- * definitions from there, all by itself, and proceed to do a mass-define
- * of all valid PHPWiki config items.  In this way, we can hopefully be
- * totally backwards-compatible with the old index.php method, while still
- * providing a much tastier on-going experience.
- *
- * @author: Joby Walker, Reini Urban, Matthew Palmer
- */
-/*
- * Copyright 2004,2005,2006,2007 $ThePhpWikiProgrammingTeam
- * Copyright 2008-2010 Marc-Etienne Vargenau, Alcatel-Lucent
+ * Copyright © 2004,2005,2006,2007 $ThePhpWikiProgrammingTeam
+ * Copyright © 2008-2010 Marc-Etienne Vargenau, Alcatel-Lucent
  *
  * This file is part of PhpWiki.
  *
@@ -31,6 +18,22 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
+ */
+
+/**
+ * A configurator intended to read its config from a PHP-style INI file,
+ * instead of a PHP file.
+ *
+ * Pass a filename to the IniConfig() function and it will read all its
+ * definitions from there, all by itself, and proceed to do a mass-define
+ * of all valid PHPWiki config items.  In this way, we can hopefully be
+ * totally backwards-compatible with the old index.php method, while still
+ * providing a much tastier on-going experience.
+ *
+ * @author: Joby Walker, Reini Urban, Matthew Palmer
  */
 
 /**
@@ -47,7 +50,7 @@
  *   (namespace pollution). (FusionForge, phpnuke, postnuke, phpBB2, carolina, ...)
  *   Use one global $phpwiki object instead which holds the cfg vars, constants
  *   and all other globals.
- *     (global $FieldSeparator, $WikiNameRegexp, $KeywordLinkRegexp;
+ *     (global $WikiNameRegexp, $KeywordLinkRegexp;
  *      global $DisabledActions, $DBParams, $LANG, $AllActionPages)
  *
  * - Resurrect the larger "config object" code (in config/) so it'll aid the
@@ -117,7 +120,7 @@ function IniConfig($file)
 
     // Optionally check config/config.php dump for faster startup
     $dump = substr($file, 0, -3) . "php";
-    if (isWindows($dump)) $dump = str_replace("/", "\\", $dump);
+    if (isWindows()) $dump = str_replace("/", "\\", $dump);
     if (file_exists($dump) and is_readable($dump) and filesize($dump) > 0 and sort_file_mtime($dump, $file) < 0) {
         @include($dump) or die("Error including " . $dump);
         if (function_exists('wiki_configrestore') and (wiki_configrestore() === 'noerr')) {
@@ -197,7 +200,6 @@ function IniConfig($file)
         'AUTH_USER_FILE_STORABLE', 'ALLOW_HTTP_AUTH_LOGIN',
         'ALLOW_USER_LOGIN', 'ALLOW_LDAP_LOGIN', 'ALLOW_IMAP_LOGIN',
         'WARN_NONPUBLIC_INTERWIKIMAP', 'USE_PATH_INFO',
-        'DISABLE_HTTP_REDIRECT',
         'PLUGIN_CACHED_USECACHE', 'PLUGIN_CACHED_FORCE_SYNCMAP',
         'BLOG_DEFAULT_EMPTY_PREFIX', 'DATABASE_PERSISTENT',
         'FUSIONFORGE',
@@ -340,27 +342,6 @@ function IniConfig($file)
     }
     unset($item);
     unset($k);
-
-    // Expiry stuff
-    global $ExpireParams;
-    foreach (array('major', 'minor', 'author') as $major) {
-        foreach (array('max_age', 'min_age', 'min_keep', 'keep', 'max_keep') as $max) {
-            $item = strtoupper($major) . '_' . strtoupper($max);
-            if (defined($item))
-                $val = constant($item);
-            elseif (array_key_exists($item, $rs))
-                $val = $rs[$item];
-            elseif (array_key_exists($item, $rsdef))
-                $val = $rsdef[$item];
-            if (!isset($ExpireParams[$major]))
-                $ExpireParams[$major] = array();
-            $ExpireParams[$major][$max] = $val;
-            unset($rs[$item]);
-        }
-    }
-    unset($item);
-    unset($major);
-    unset($max);
 
     // User authentication
     if (!isset($GLOBALS['USER_AUTH_ORDER'])) {
@@ -512,16 +493,16 @@ function IniConfig($file)
                 $GLOBALS['INCLUDE_PATH'] = $rs['INCLUDE_PATH'];
             }
             $rs['PLUGIN_CACHED_CACHE_DIR'] = TEMP_DIR . '/cache';
-            if (!FindFile($rs['PLUGIN_CACHED_CACHE_DIR'], 1)) { // [29ms]
-                FindFile(TEMP_DIR, false, 1); // TEMP must exist!
+            if (!findFile($rs['PLUGIN_CACHED_CACHE_DIR'], 1)) { // [29ms]
+                findFile(TEMP_DIR, false, 1); // TEMP must exist!
                 mkdir($rs['PLUGIN_CACHED_CACHE_DIR'], 0777);
             }
             // will throw an error if not exists.
-            define('PLUGIN_CACHED_CACHE_DIR', FindFile($rs['PLUGIN_CACHED_CACHE_DIR'], false, 1));
+            define('PLUGIN_CACHED_CACHE_DIR', findFile($rs['PLUGIN_CACHED_CACHE_DIR'], false, 1));
         } else {
             define('PLUGIN_CACHED_CACHE_DIR', $rs['PLUGIN_CACHED_CACHE_DIR']);
             // will throw an error if not exists.
-            FindFile(PLUGIN_CACHED_CACHE_DIR);
+            findFile(PLUGIN_CACHED_CACHE_DIR);
         }
     }
 
@@ -553,13 +534,10 @@ function IniConfig($file)
 // moved from lib/config.php [1ms]
 function fixup_static_configs($file)
 {
-    global $FieldSeparator, $AllActionPages;
+    global $AllActionPages;
     global $DBParams;
     // init FileFinder to add proper include paths
-    FindFile("lib/interwiki.map", true);
-
-    // $FieldSeparator = "\xFF"; // this byte should never appear in utf-8
-    $FieldSeparator = "\xFF";
+    findFile("lib/interwiki.map", true);
 
     // All pages containing plugins of the same name as the filename
     $ActionPages = explode(':',
@@ -583,7 +561,7 @@ function fixup_static_configs($file)
     // The FUSIONFORGE theme omits them
     if (!(defined('FUSIONFORGE') && FUSIONFORGE)) {
         // Add some some action pages
-        $ActionPages[] = 'DebugInfo';
+        $ActionPages[] = 'DebugBackendInfo';
         $ActionPages[] = 'SpellCheck'; // SpellCheck does not work
         $ActionPages[] = 'EditMetaData';
         $ActionPages[] = 'InterWikiSearch';
@@ -620,6 +598,7 @@ function fixup_static_configs($file)
     $AllAllowedPlugins[] = 'GooglePlugin';
     $AllAllowedPlugins[] = 'GoTo';
     $AllAllowedPlugins[] = 'HelloWorld';
+    $AllAllowedPlugins[] = 'HtmlConverter';
     $AllAllowedPlugins[] = 'IncludePage';
     $AllAllowedPlugins[] = 'IncludePages';
     $AllAllowedPlugins[] = 'IncludeSiteMap';
@@ -677,10 +656,8 @@ function fixup_static_configs($file)
         $AllAllowedPlugins[] = 'CategoryPage';
         $AllAllowedPlugins[] = 'FoafViewer';
         $AllAllowedPlugins[] = 'GraphViz';
-        $AllAllowedPlugins[] = 'HtmlConverter';
         $AllAllowedPlugins[] = 'JabberPresence';
         $AllAllowedPlugins[] = 'ListPages';
-        $AllAllowedPlugins[] = 'PhpWeather';
         $AllAllowedPlugins[] = 'Ploticus';
         $AllAllowedPlugins[] = 'PopularNearby';
         $AllAllowedPlugins[] = 'PreferenceApp';
@@ -735,14 +712,14 @@ function fixup_static_configs($file)
 
     // If user has not defined PHPWIKI_DIR, and we need it
     if (!defined('PHPWIKI_DIR') and !file_exists("themes/default")) {
-        $themes_dir = FindFile("themes");
+        $themes_dir = findFile("themes");
         define('PHPWIKI_DIR', dirname($themes_dir));
     }
 
     // If user has not defined DATA_PATH, we want to use relative URLs.
     if (!defined('DATA_PATH')) {
         // fix similar to the one suggested by jkalmbach for
-        // installations in the webrootdir, like "http://phpwiki.fr/HomePage"
+        // installations in the webrootdir, like "http://phpwiki.demo.free.fr/index.php/HomePage"
         if (!defined('SCRIPT_NAME'))
             define('SCRIPT_NAME', deduce_script_name());
         $temp = dirname(SCRIPT_NAME);
@@ -884,7 +861,7 @@ function fixup_dynamic_configs()
             // 1. If the script is not index.php but something like "de", on a different path
             //    then bindtextdomain() fails, but after chdir to the correct path it will work okay.
             // 2. But the weird error "Undefined variable: bindtextdomain" is generated then.
-            $bindtextdomain_path = FindFile("locale", false, true);
+            $bindtextdomain_path = findFile("locale", false, true);
             if (isWindows())
                 $bindtextdomain_path = str_replace("/", "\\", $bindtextdomain_path);
             $bindtextdomain_real = @bindtextdomain("phpwiki", $bindtextdomain_path);
@@ -962,7 +939,7 @@ function fixup_dynamic_configs()
                     define('USE_PATH_INFO', false);
                     break;
                 default:
-                    define('USE_PATH_INFO', ereg('\.(php3?|cgi)$', SCRIPT_NAME));
+                    define('USE_PATH_INFO', preg_match('/\.(php3?|cgi)$/', SCRIPT_NAME));
                     break;
             }
         }
@@ -1061,11 +1038,3 @@ function __($text)
 {
     return $text;
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

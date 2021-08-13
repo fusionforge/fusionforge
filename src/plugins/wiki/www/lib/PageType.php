@@ -1,7 +1,6 @@
 <?php
-
-/*
- * Copyright 1999,2000,2001,2002,2003,2004,2005,2006 $ThePhpWikiProgrammingTeam
+/**
+ * Copyright © 1999,2000,2001,2002,2003,2004,2005,2006 $ThePhpWikiProgrammingTeam
  *
  * This file is part of PhpWiki.
  *
@@ -18,6 +17,9 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
  */
 
 require_once 'lib/CachedMarkup.php';
@@ -212,8 +214,8 @@ class PageType_interwikimap extends PageType
             $url = getUploadFilePath();
             // calculate to a relative local path to /uploads for PDF images.
             $doc_root = $request->get("DOCUMENT_ROOT");
-            $ldir = NormalizeLocalFileName($url);
-            $wikiroot = NormalizeLocalFileName('');
+            $ldir = normalizeLocalFileName($url);
+            $wikiroot = normalizeLocalFileName('');
             if (isWindows()) {
                 $ldir = strtolower($ldir);
                 $doc_root = strtolower($doc_root);
@@ -222,7 +224,7 @@ class PageType_interwikimap extends PageType
             if (string_starts_with($ldir, $doc_root)) {
                 $link_prefix = substr($url, strlen($doc_root));
             } elseif (string_starts_with($ldir, $wikiroot)) {
-                $link_prefix = NormalizeWebFileName(substr($url, strlen($wikiroot)));
+                $link_prefix = normalizeWebFileName(substr($url, strlen($wikiroot)));
             }
         }
 
@@ -546,11 +548,3 @@ class PageFormatter_MediaWiki extends PageFormatter
             $this->_transform($text));
     }
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

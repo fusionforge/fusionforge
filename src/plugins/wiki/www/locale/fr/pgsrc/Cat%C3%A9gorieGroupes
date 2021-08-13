@@ -1,16 +1,14 @@
-Date: Mon, 29 Jun 2015 12:04:23 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Mon, 30 Mar 2020 15:49:22 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=Cat%C3%A9gorieGroupes;
   flags="";
   charset=UTF-8
 Content-Transfer-Encoding: binary
 
-Tous les liens de cette page seront utilisés pour trouver les
-groupes d'utilisateurs pour la méthode de gestion des groupes
-par WIKIPAGE. Les pages de groupe d'utilisateurs doivent contenir
-une liste de noms d'utilisateurs et ensuite, par souci de cohésion,
-un lien vers cette page tous les quatre items.
+Tous les liens de cette page seront utilisés pour trouver les groupes d'utilisateurs pour la
+méthode de gestion des groupes par WIKIPAGE. Les pages de groupe d'utilisateurs doivent contenir une liste
+de noms d'utilisateurs et ensuite, par souci de cohérence, un lien vers cette page précédé par quatre tirets.
 
 ----
 [[CatégorieCatégorie]]

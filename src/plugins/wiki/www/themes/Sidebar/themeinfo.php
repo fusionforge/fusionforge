@@ -1,4 +1,28 @@
 <?php
+/**
+ * Copyright © 2002 Carsten Klapp
+ * Copyright © 2004-2005,2007,2009-2010 Reini Urban
+ *
+ * This file is part of PhpWiki.
+ *
+ * PhpWiki is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * PhpWiki is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
+ */
+
 // Avoid direct call to this file.
 // PHPWIKI_VERSION is defined in lib/prepend.php
 if (!defined('PHPWIKI_VERSION')) {
@@ -35,7 +59,7 @@ class WikiTheme_Sidebar extends WikiTheme_MonoBook
 
     function __construct($theme_name = 'Sidebar')
     {
-        $this->WikiTheme($theme_name);
+        parent::__construct($theme_name);
     }
 
     /* Display up/down button with persistent state */
@@ -61,7 +85,6 @@ class WikiTheme_Sidebar extends WikiTheme_MonoBook
     /* Callback when a new user creates or edits a page */
     function CbNewUserEdit(&$request, $userid)
     {
-        $userid = strtoupper($userid);
         $content = "{{Template/UserPage}}";
         $dbi =& $request->_dbi;
         $page = $dbi->getPage($userid);
@@ -120,7 +143,7 @@ class WikiTheme_Sidebar extends WikiTheme_MonoBook
 
         $this->setDefaultCSS(_("Sidebar"), array('' => 'sidebar.css',
             'print' => 'phpwiki-printer.css'));
-        $this->addAlternateCSS(_("Printer"), 'phpwiki-printer.css', 'print, screen');
+        $this->addAlternateCSS(_("Printer"), 'phpwiki-printer.css');
         $this->addAlternateCSS(_("Modern"), 'phpwiki-modern.css');
 
         /**
@@ -170,18 +193,18 @@ class WikiTheme_Sidebar extends WikiTheme_MonoBook
          * You may adjust the formats used for formatting dates and times
          * below.  (These examples give the default formats.)
          * Formats are given as format strings to PHP strftime() function See
-         * http://www.php.net/manual/en/function.strftime.php for details.
+         * https://www.php.net/manual/en/function.strftime.php for details.
          * Do not include the server's zone (%Z), times are converted to the
          * user's time zone.
          */
-        //$this->setDateFormat("%B %d, %Y");
+        //$this->setDateFormat("%d %B %Y");
 
         /**
          * Custom UserPreferences:
          * A list of name => _UserPreference class pairs.
          * Rationale: Certain themes should be able to extend the predefined list
          * of preferences. Display/editing is done in the theme specific userprefs.tmpl
-         * but storage/sanification/update/... must be extended to the Get/SetPreferences methods.
+         * but storage/sanification/update/... must be extended to the get/setPreferences methods.
          * See themes/wikilens/themeinfo.php
          */
         //$this->customUserPreference();
@@ -204,17 +227,9 @@ if (ENABLE_RATEIT) {
     require_once 'lib/wikilens/CustomPrefs.php';
     require_once 'lib/wikilens/PageListColumns.php';
     //require_once("lib/plugin/RateIt.php");
-    $plugin = new WikiPlugin_RateIt;
+    $plugin = new WikiPlugin_RateIt();
     // add parent to current theme to find the RateIt images
     // $WikiTheme->addParent('wikilens', 'noinit');
     $WikiTheme->_parents[] = new WikiTheme('wikilens', 'noinit');
     $plugin->head();
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

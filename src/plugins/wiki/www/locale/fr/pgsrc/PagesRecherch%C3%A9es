@@ -1,5 +1,5 @@
-Date: Mon, 29 Jun 2015 12:04:23 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Fri, 12 Apr 2019 15:36:06 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=PagesRecherch%C3%A9es;
   flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
@@ -13,8 +13,7 @@ si triviales qu'elles ne méritent pas d'être créées.
 
 Le mieux n'est pas forcément de créer ces pages. Il est souvent préférable
 de changer les références pour ne plus avoir de ~WikiNoms. Lorsque c'est
-possible, vous pouvez juste changer la casse ou insérer le caractère
-d'échappement ~~.
+possible, vous pouvez juste changer la casse ou insérer le caractère d'échappement ~~.
 
 ----
 

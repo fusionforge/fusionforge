@@ -1,12 +1,12 @@
-Date: Mon, 29 Jun 2015 12:04:22 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Thu, 26 Mar 2020 12:01:56 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=Aiuto;
   flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
   charset=UTF-8
 Content-Transfer-Encoding: binary
 
-The following **Help pages** are available.
+Sono disponibili le seguenti **pagine di aiuto**.
 
 <<ListSubpages cols||=3 sortby||=pagename noheader||=1 limit=1000 >>
 

@@ -1,5 +1,5 @@
-Date: Mon, 29 Jun 2015 12:04:28 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Fri,  5 Apr 2019 10:48:21 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FRedirectToPlugin;
   flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
@@ -10,7 +10,7 @@ The **~RedirectTo** [[Help:WikiPlugin|plugin]] can be used to redirect a user to
 In other words it makes a page an //alias// for another page.
 
 When redirecting to another wiki page, a note is added to the top of the target
-page saying  //(Redirected from SomeRedirectingPage)//.
+page saying //(Redirected from SomeRedirectingPage)//.
 
 Redirection to external URLs will only work on locked pages.
 

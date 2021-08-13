@@ -1,14 +1,12 @@
-Date: Mon, 29 Jun 2015 12:04:27 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Wed, 10 Apr 2019 16:39:09 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=Neueste%C3%84nderungen;
-  flags=PAGE_LOCKED;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
   charset=UTF-8
 Content-Transfer-Encoding: binary
 
-Eine Liste der kürzlich veränderter oder neuer Seiten wird hier
-erzeugt. (GeringfügigeÄnderungen zeigt alle geringfügige- und
-Hauptänderungen).
+<<RecentChanges days||=7 daylist=1,3,7,30,90,0 show_deleted||=1>>
 
---------
-<<RecentChanges days||=7 daylist=1,3,7,30,90,0 >>
+----
+[[KategorieAktionSeite]]

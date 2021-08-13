@@ -1,0 +1,86 @@
+Date: Tue,  3 Sep 2019 18:01:13 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
+Content-Type: application/x-phpwiki;
+  pagename=Aide%2FGreffonWikiBlog;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
+  charset=UTF-8
+Content-Transfer-Encoding: binary
+
+Un blog (ou weblog ou carnet Web ou blogue ou weblogue) est un type de publication
+Web dynamique par articles qui s'affichent sur une page Web. Ces articles sont
+archivés au fur et à mesure. Chaque article peut-être modifié à souhait voire supprimé
+par son auteur après sa publication. Un système de commentaires est effectif
+sur chaque blog et permet d'apporter des compléments d'information ou des réactions
+après chaque article (ou billet).
+
+GreffonWikiBlog est un greffon simple qui permet les entrées dans le style blog sur
+une page. Essayez quelques entrées puis jeter un coup d'oeil sur les [[DernièresModifs]]
+pour vous faire une idée de la façon dont ça fonctionne.
+
+== Arguments ==
+
+{| class="bordered"
+|-
+! Argument
+! Description
+! Valeur par défaut
+|-
+| **page**
+| page which is blogged to
+| Current page
+|-
+| **order**
+|
+* 'normal' - place in chronological order
+* 'reverse' - place in reverse chronological order
+| normal
+|-
+| **mode**
+|
+* 'show' - only show old blogs
+* 'add' - only show entry box for new blog
+* 'show,add' - show old blogs then entry box
+* 'add,show' - show entry box followed by old blogs
+| show,add
+|}
+
+== Usage ==
+
+Add {{{<<WikiBlog>>}}} at your ~PersonalPage and BlogArchives and
+BlogJournal will find the Blog entries automatically.
+
+Now it is also the base class for all attachable pagetypes:
+"wikiblog", "comment" and "wikiforum"
+
+== Hints/comments ==
+
+To have the blog show up on a separate page:
+
+On ~TopPage, use {{{<<WikiBlog mode=add>>}}}
+Create ~TopPage/Blog with this page as actionpage:
+{{{<<WikiBlog pagename=TopPage mode=show>>}}}
+
+To have the main ADMIN_USER Blog appear under Blog and not under WikiBlog/Blog
+or ~UserName/Blog as for other users blogs,
+define BLOG_DEFAULT_EMPTY_PREFIX=true
+use the page Blog as basepage
+and user="" (as default for ADMIN or current user) and pagename="Blog"
+in the various blog plugins (BlogArchives, BlogJournal)
+
+== Exemple ==
+
+<<WikiBlog>>
+
+== Auteurs ==
+* Michael Van Dam, major refactor by [[Help:Jeff Dairiki|Jeff Dairiki]] (as ~AddComment)
+* Changed as baseclass to ~AddComment and ~WikiForum and ~EditToolbar integration by [[Help:Reini Urban|Reini Urban]].
+
+
+== Voir aussi ==
+* [[Help:BlogJournalPlugin]]
+* [[Help:BlogArchivesPlugin]]
+
+<noinclude>
+----
+[[DocumentationDePhpWiki]] [[CatégorieGreffonWiki]]
+</noinclude>

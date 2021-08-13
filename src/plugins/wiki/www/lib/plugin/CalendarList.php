@@ -1,7 +1,6 @@
 <?php
-
 /**
- * * Copyright 1999-2002,2005-2007 $ThePhpWikiProgrammingTeam
+ * Copyright © 1999-2002,2005-2007 $ThePhpWikiProgrammingTeam
  *
  * This file is part of PhpWiki.
  *
@@ -18,6 +17,9 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
  */
 
 // if not defined in config.ini
@@ -46,6 +48,7 @@ if (!defined('PLUGIN_CALENDARLIST_LAST_N'))
  * The behaviour before 2007 with last/next_n_days was to start now.
  *
  */
+
 class WikiPlugin_CalendarList
     extends WikiPlugin
 {
@@ -196,7 +199,7 @@ class WikiPlugin_CalendarList
             $end = $base + ($args['next_n_days'] * 24 * 3600.0);
         } elseif ($args['last_n']) {
             // get date for next nth event
-            $end = $this->_count_events($dbi, $args['next_n'], 1);
+            $end = $this->_count_events($dbi, $args['next_n']);
         } else {
             // trick to get last day of requested month
             $end = mktime(0, 0, -1, // h, m, s
@@ -227,11 +230,3 @@ class WikiPlugin_CalendarList
         return $cal;
     }
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

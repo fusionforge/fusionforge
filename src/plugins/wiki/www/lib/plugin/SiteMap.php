@@ -1,7 +1,6 @@
 <?php
-
 /**
- * Copyright 1999,2000,2001,2002,2004 $ThePhpWikiProgrammingTeam
+ * Copyright © 1999,2000,2001,2002,2004 $ThePhpWikiProgrammingTeam
  *
  * This file is part of PhpWiki.
  *
@@ -18,6 +17,9 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
  */
 
 /**
@@ -61,8 +63,8 @@ class WikiPlugin_SiteMap
     function getDefaultArguments()
     {
         return array('exclude' => '',
-            'include_self' => 0,
-            'noheader' => 0,
+            'include_self' => false,
+            'noheader' => false,
             'page' => '[pagename]',
             'description' => $this->getDescription(),
             'reclimit' => 4,
@@ -199,11 +201,11 @@ class WikiPlugin_SiteMap
             if (!is_string($includepages))
                 $includepages = ' '; // avoid plugin loader problems
             $loader = new WikiPluginLoader();
-            $plugin = $loader->getPlugin(!empty($dtree) ? 'DynamicIncludePage' : 'IncludePage', false);
+            $plugin = $loader->getPlugin(!empty($dtree) ? 'DynamicIncludePage' : 'IncludePage');
             $nothing = '';
         }
 
-        while (list($key, $link) = each($pagearr)) {
+        foreach ($pagearr as $key => $link) {
             if (!empty($includepages)) {
                 $a = substr_count($key, '*');
                 $indenter = str_pad($nothing, $a);
@@ -223,11 +225,3 @@ class WikiPlugin_SiteMap
         }
     }
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

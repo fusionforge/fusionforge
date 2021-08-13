@@ -1,0 +1,58 @@
+Date: Fri,  6 Aug 2021 16:19:21 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
+Content-Type: application/x-phpwiki;
+  pagename=PhpWikiDebug;
+  flags=PAGE_LOCKED;
+  acl="view:_AUTHENTICATED; edit:_AUTHENTICATED; create:_AUTHENTICATED,_BOGOUSER; list:_AUTHENTICATED; remove:_ADMIN,_OWNER; change:_ADMIN,_OWNER; dump:_EVERY";
+  charset=UTF-8
+Content-Transfer-Encoding: binary
+
+**//注意://** //此頁面上的大部分動作需要管理者權限.//
+
+<<CreateToc jshide||=0 with_toclink||=1 position=right with_counter=1 >>
+
+在這兒的大部分東西都是為了除錯而存在 (at least, that is the hope.)
+
+在正常情況下,你不需要使用這些,不過他們應該也不會造成任何損害.
+
+== 清理標記快取 Purge Markup Cache ==
+
+(如果你的 wiki 已經設置,) 每個頁面的最新版本的轉換內容(幾乎是 HTML)都被
+快取了. 這會避免再剖析 wiki-text ,而使得頁面輸出的速度加快一些.
+
+點擊這個按鈕將會清除所有快取的轉換內容. (每個頁面內容在下次有人想看這些頁面時
+進行轉換並重新放到快取裡面去.)
+
+<<WikiAdminUtils action=purge-cache>>
+
+=== 清理 WikiDB 裡的非法檔案名稱 Clean Wiki Database of Illegal Filenames ==
+
+頁面名稱以子頁面分隔子(通常是 ##/## )開始的,是不被允許的. 有時候是錯誤
+的 plugin 或某些事情而導致.
+
+這個按鈕將會刪除任何有非法頁面名稱的頁面.
+
+<<WikiAdminUtils action=purge-bad-pagenames>>
+
+== Clean Wiki Database of empty and unreferenced pages ==
+
+**Warning!** This button will delete every empty and unreferenced page, without any possibility to restore them again.
+This will disable the possibility to revert or get back any deleted page.
+
+<<WikiAdminUtils action=purge-empty-pages>>
+
+== Check Wiki Database ==
+
+This button will check the Wiki page database for consistency. This can last several minutes.
+
+<<WikiAdminUtils action=db-check>>
+
+== Rebuild Wiki Database ==
+
+This will retransform all pages and rebuild the Wiki database on consistency errors or parser updates.
+This can last several minutes, eat a lot of memory and possibly times out!!
+
+<<WikiAdminUtils action=db-rebuild>>
+
+----
+[[CategoryActionPage]]

@@ -1,13 +1,17 @@
-Date: Mon, 29 Jun 2015 12:04:26 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Tue,  9 Apr 2019 11:19:11 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=RecentEdits;
-  flags=PAGE_LOCKED;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
   charset=UTF-8
 Content-Transfer-Encoding: binary
 
 此 wiki 中最近被編輯過的頁面列表. 所有次要變更都被顯示而不只是最新的一筆.
-(參閱 RecentChanges 取得最近不包含次要變更的列表).
 
---------
-<<RecentChanges days||=3 show_all||=1 show_minor=1 daylist=1,3,7,30,90,0 >>
+//參閱 [[RecentChanges]] 取得最近不包含次要變更的列表.//
+
+----
+<<RecentChanges days||=7 show_all||=1 show_minor||=1 daylist=1,3,7,30,90,0>>
+
+----
+[[CategoryActionPage]]

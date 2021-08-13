@@ -1,6 +1,6 @@
 <?php
-/*
- * Copyright 2005 $ThePhpWikiProgrammingTeam
+/**
+ * Copyright © 2005 $ThePhpWikiProgrammingTeam
  *
  * This file is part of PhpWiki.
  *
@@ -17,6 +17,9 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
  */
 
 /**
@@ -24,6 +27,7 @@
  *
  * @author: Reini Urban
  */
+
 class DbSession_ADODB
     extends DbSession
 {
@@ -34,8 +38,6 @@ class DbSession_ADODB
         $this->_dbh = $dbh;
         $this->_table = $table;
 
-        ini_set('session.save_handler', 'user');
-        session_module_name('user'); // new style
         session_set_save_handler(array(&$this, 'open'),
             array(&$this, 'close'),
             array(&$this, 'read'),
@@ -51,7 +53,7 @@ class DbSession_ADODB
         $dbh = &$this->_dbh;
         if (!$dbh or !is_resource($dbh->_connectionID)) {
             if (!$parsed) $parsed = parseDSN($request->_dbi->getParam('dsn'));
-            $this->_dbh =& ADONewConnection($parsed['phptype']); // Probably only MySql works just now
+            $this->_dbh = ADONewConnection($parsed['phptype']); // Probably only MySql works just now
             $this->_dbh->Connect($parsed['hostspec'], $parsed['username'],
                 $parsed['password'], $parsed['database']);
             $dbh = &$this->_dbh;
@@ -170,26 +172,10 @@ class DbSession_ADODB
             $sess_data = base64_encode($sess_data);
         $qdata = $dbh->qstr($sess_data);
 
-        /* AffectedRows with sessions seems to be instable on certain platforms.
-         * Enable the safe and slow USE_SAFE_DBSESSION then.
-         */
-        if (USE_SAFE_DBSESSION) {
-            $dbh->Execute("DELETE FROM $table"
-                . " WHERE sess_id=$qid");
-            $rs = $dbh->Execute("INSERT INTO $table"
+        $dbh->execute("DELETE FROM $table WHERE sess_id=$qid");
+        $rs = $dbh->execute("INSERT INTO $table"
                 . " (sess_id, sess_data, sess_date, sess_ip)"
                 . " VALUES ($qid, $qdata, $time, $qip)");
-        } else {
-            $rs = $dbh->Execute("UPDATE $table"
-                . " SET sess_data=$qdata, sess_date=$time, sess_ip=$qip"
-                . " WHERE sess_id=$qid");
-            $result = $dbh->Affected_Rows();
-            if ($result === false or $result < 1) { // false or int > 0
-                $rs = $dbh->Execute("INSERT INTO $table"
-                    . " (sess_id, sess_data, sess_date, sess_ip)"
-                    . " VALUES ($qid, $qdata, $time, $qip)");
-            }
-        }
         $result = !$rs->EOF;
         if ($result) $rs->free();
         $this->_disconnect();
@@ -268,11 +254,3 @@ class DbSession_ADODB
         return $sessions;
     }
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

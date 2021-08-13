@@ -1,7 +1,6 @@
 <?php
-
 /**
- * Copyright 1999,2000,2001,2002,2004,2005 $ThePhpWikiProgrammingTeam
+ * Copyright © 1999,2000,2001,2002,2004,2005 $ThePhpWikiProgrammingTeam
  *
  * This file is part of PhpWiki.
  *
@@ -18,6 +17,9 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
  */
 
 require_once 'lib/PageList.php';
@@ -27,6 +29,7 @@ require_once 'lib/PageList.php';
  * to be able to have the action pages:
  *   AllPagesCreatedByMe, AllPagesOwnedByMe, AllPagesLastAuthoredByMe
  */
+
 class WikiPlugin_AllPages
     extends WikiPlugin
 {
@@ -49,7 +52,7 @@ class WikiPlugin_AllPages
     }
 
     // info arg allows multiple columns
-    // info=mtime,hits,summary,version,author,locked,minor,markup or all
+    // info=mtime,hits,summary,version,author,locked,minor or all
     // exclude arg allows multiple pagenames exclude=HomePage,RecentChanges
     // sortby: [+|-] pagename|mtime|hits
 
@@ -64,6 +67,33 @@ class WikiPlugin_AllPages
     {
         $args = $this->getArgs($argstr, $request);
 
+        $include_empty = $args['include_empty'];
+        if (($include_empty == '0') || ($include_empty == 'false')) {
+            $include_empty = false;
+        } elseif (($include_empty == '1') || ($include_empty == 'true')) {
+            $include_empty = true;
+        } else {
+            return $this->error(sprintf(_("Argument '%s' must be a boolean"), "include_empty"));
+        }
+
+        $noheader = $args['noheader'];
+        if (($noheader == '0') || ($noheader == 'false')) {
+            $noheader = false;
+        } elseif (($noheader == '1') || ($noheader == 'true')) {
+            $noheader = true;
+        } else {
+            return $this->error(sprintf(_("Argument '%s' must be a boolean"), "noheader"));
+        }
+
+        $userpages = $args['userpages'];
+        if (($userpages == '0') || ($userpages == 'false')) {
+            $userpages = false;
+        } elseif (($userpages == '1') || ($userpages == 'true')) {
+            $userpages = true;
+        } else {
+            return $this->error(sprintf(_("Argument '%s' must be a boolean"), "userpages"));
+        }
+
         if (isset($args['limit']) && !is_limit($args['limit'])) {
             return HTML::p(array('class' => "error"),
                            _("Illegal “limit” argument: must be an integer or two integers separated by comma"));
@@ -77,12 +107,12 @@ class WikiPlugin_AllPages
         // Todo: extend given _GET args
         $caption = _("All pages in this wiki (%d total):");
 
-        if (!empty($args['userpages'])) {
-            $pages = PageList::allUserPages($args['include_empty'], $args['sortby'], '');
+        if ($userpages) {
+            $pages = PageList::allUserPages($include_empty, $args['sortby']);
             $caption = _("List of user-created pages (%d total):");
             $args['count'] = count($pages);
         } elseif (!empty($args['owner'])) {
-            $pages = PageList::allPagesByOwner($args['owner'], $args['include_empty'], $args['sortby'], '');
+            $pages = PageList::allPagesByOwner($args['owner'], $include_empty, $args['sortby']);
             $args['count'] = count($pages);
             $caption = fmt("List of pages owned by %s (%d total):",
                 WikiLink($args['owner'] == '[]'
@@ -90,7 +120,7 @@ class WikiPlugin_AllPages
                         : $args['owner'],
                     'if_known'), $args['count']);
         } elseif (!empty($args['author'])) {
-            $pages = PageList::allPagesByAuthor($args['author'], $args['include_empty'], $args['sortby'], '');
+            $pages = PageList::allPagesByAuthor($args['author'], $include_empty, $args['sortby']);
             $args['count'] = count($pages);
             $caption = fmt("List of pages last edited by %s (%d total):",
                 WikiLink($args['author'] == '[]'
@@ -98,7 +128,7 @@ class WikiPlugin_AllPages
                         : $args['author'],
                     'if_known'), $args['count']);
         } elseif (!empty($args['creator'])) {
-            $pages = PageList::allPagesByCreator($args['creator'], $args['include_empty'], $args['sortby'], '');
+            $pages = PageList::allPagesByCreator($args['creator'], $include_empty, $args['sortby']);
             $args['count'] = count($pages);
             $caption = fmt("List of pages created by %s (%d total):",
                 WikiLink($args['creator'] == '[]'
@@ -108,32 +138,25 @@ class WikiPlugin_AllPages
         } elseif ($pages) {
             $args['count'] = count($pages);
         } else {
-            if (!$request->getArg('count'))
-                $args['count'] = $dbi->numPages($args['include_empty'], $args['exclude']);
-            else
+            if (!$request->getArg('count')) {
+                $args['count'] = $dbi->numPages($include_empty, $args['exclude']);
+            } else {
                 $args['count'] = $request->getArg('count');
+            }
         }
         if (empty($args['count']) and !empty($pages)) {
             $args['count'] = count($pages);
         }
         $pagelist = new PageList($args['info'], $args['exclude'], $args);
-        if (!$args['noheader']) {
+        if (!$noheader) {
             $pagelist->setCaption($caption);
         }
 
-        if ($pages !== false)
+        if ($pages !== false) {
             $pagelist->addPageList($pages);
-        else
-            $pagelist->addPages($dbi->getAllPages($args['include_empty'], $args['sortby'],
-                $args['limit']));
+        } else {
+            $pagelist->addPages($dbi->getAllPages($include_empty, $args['sortby'], $args['limit']));
+        }
         return $pagelist;
     }
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

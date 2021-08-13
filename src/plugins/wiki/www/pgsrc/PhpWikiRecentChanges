@@ -1,5 +1,5 @@
-Date: Mon, 29 Jun 2015 12:04:28 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Sun, 31 Mar 2019 19:53:22 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=PhpWikiRecentChanges;
   flags="";
@@ -7,7 +7,7 @@ Content-Type: application/x-phpwiki;
 Content-Transfer-Encoding: binary
 
 <<RssFeed feed=PhpWikiRecentChanges description="PhpWiki RecentChanges"
-          url=http://phpwiki.fr/RecentChanges?format=rss>>
+          url=http://phpwiki.demo.free.fr/index.php/RecentChanges?format=rss>>
 
 ----
 [[PhpWikiDocumentation]]

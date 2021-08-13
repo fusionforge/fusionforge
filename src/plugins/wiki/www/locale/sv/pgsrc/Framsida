@@ -1,5 +1,5 @@
-Date: Mon, 29 Jun 2015 12:04:25 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Tue,  9 Apr 2019 11:19:11 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=Framsida;
   flags="";
@@ -12,4 +12,6 @@ Content-Transfer-Encoding: binary
 * Signera gärna ditt namn i [[Gästboken]].
 * Se [[SenasteÄndringar]] för nya sidor och de senaste ändringarna.
 * Kolla vilken sida som är [[MestPopulär]].
-* Läs [[ReleaseNotes]] (på engelska).
+* Läs [[ReleaseNotes]] (på engelska) och [[RecentReleases]].
+* Administer this wiki via [[PhpWikiAdministration]].
+* See more [[:PhpWikiDocumentation]].

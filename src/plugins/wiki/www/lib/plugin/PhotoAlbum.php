@@ -1,8 +1,7 @@
 <?php
-
-/*
- * Copyright 2003,2004,2005,2007 $ThePhpWikiProgrammingTeam
- * Copyright 2009 Marc-Etienne Vargenau, Alcatel-Lucent
+/**
+ * Copyright © 2003,2004,2005,2007 $ThePhpWikiProgrammingTeam
+ * Copyright © 2009 Marc-Etienne Vargenau, Alcatel-Lucent
  *
  * This file is part of PhpWiki.
  *
@@ -19,6 +18,9 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
  */
 
 /**
@@ -53,7 +55,7 @@
  *     semi-colon on each line. Listed files must be in same directory as textfile
  *     itself, so don't use relative paths inside textfile.
  *
- * "url": defines the the webpath to the srcdir directory (formerly called weblocation)
+ * "url": defines the webpath to the srcdir directory
  */
 
 /**
@@ -205,8 +207,8 @@ class WikiPlugin_PhotoAlbum
 
         // set some fixed properties for each $mode
         if ($mode == 'thumbs' || $mode == 'tiles') {
-            $attributes = array_merge($attributes, "alt");
-            $attributes = array_merge($attributes, "nowrap");
+            $attributes = array_merge($attributes, array('alt' => ''));
+            $attributes = array_merge($attributes, array('nowrap' => 'nowrap'));
             $cellwidth = 'auto'; // else cell won't nowrap
             if ($width == 'auto') $width = 70;
         } elseif ($mode == 'list') {
@@ -218,7 +220,7 @@ class WikiPlugin_PhotoAlbum
             $cell_width = 0;
             $numcols = count($photos);
             $keep = $photos;
-            while (list($key, $value) = each($photos)) {
+            foreach ($photos as $key => $value) {
                 list($x, $y, $s, $t) = @getimagesize($value['src']);
                 if ($height != 'auto') $y = $this->newSize($y, $height);
                 if ($width != 'auto') $y = round($y * $this->newSize($x, $width) / $x);
@@ -249,7 +251,7 @@ function display_slides() {
 }
 display_slides();"));
 
-        while (list($key, $value) = each($photos)) {
+        foreach ($photos as $key => $value) {
             if ($p && basename($value["name"]) != "$p") {
                 continue;
             }
@@ -287,8 +289,7 @@ display_slides();"));
             if (!$size and !empty($value["src"])) {
                 $size = @getimagesize($value["src"]);
                 if (!$size) {
-                    trigger_error("Unable to getimagesize(" . $value["name"] . ")",
-                        E_USER_NOTICE);
+                    trigger_error("Unable to getimagesize(" . $value["name"] . ")");
                 }
             }
             $newwidth = $this->newSize($size[0], $width);
@@ -321,7 +322,7 @@ display_slides();"));
                 } else {
                     $newcellwidth = $cellwidth;
                 }
-                $cell = array_merge($cell, array("width" => $newcellwidth));
+                $cell = array_merge($cell, array("style" => 'width: '.$newcellwidth));
             }
             if (in_array("nowrap", $attributes)) {
                 $cell = array_merge($cell, array("nowrap" => "nowrap"));
@@ -491,17 +492,17 @@ display_slides();"));
                 $p
             ) {
                 if ($mode == 'row')
-                    $html->pushcontent(HTML::div($row));
+                    $html->pushContent(HTML::div($row));
                 else
-                    $html->pushcontent(HTML::tr($row));
-                $row->setContent('');
+                    $html->pushContent(HTML::tr($row));
+                $row = HTML();
             }
         }
 
         //create main table
         $table_attributes = array(
             "class" => "photoalbum",
-            "width" => $tablewidth ? $tablewidth : "100%");
+            "style" => $tablewidth ? "width: ".$tablewidth : "width: 100%");
 
         if (!empty($tableheight))
             $table_attributes = array_merge($table_attributes,
@@ -509,7 +510,7 @@ display_slides();"));
         if ($mode != 'row')
             $html = HTML::table($table_attributes, $html);
         // align all
-        return HTML::div(array("align" => $align), $html);
+        return HTML::div(array("class" => "align-".$align), $html);
     }
 
     /**
@@ -544,7 +545,7 @@ display_slides();"));
     }*/
         //FIXME!
         if (!IsSafeURL($src)) {
-            return $this->error(_("Bad url in src: remove all of <, >, \""));
+            return $this->error(_("Bad URL in src"));
         }
         $photos[] = array("name" => $src, //album_location."/$src".album_default_extension,
             "desc" => "");
@@ -558,7 +559,7 @@ display_slides();"));
      * @param  string $src    path to dir or textfile (local or remote)
      * @param  array  $photos
      * @param string $webpath
-     * @return string Error when bad url or file couldn't be opened
+     * @return string Error when bad URL or file couldn't be opened
      */
     function fromFile($src, &$photos, $webpath = '')
     {
@@ -572,7 +573,7 @@ display_slides();"));
             return $this->error(_("File extension for csv file has to be '.csv'"));
         }
         if (!IsSafeURL($src)) {
-            return $this->error(_("Bad url in src: remove all of <, >, \""));
+            return $this->error(_("Bad URL in src"));
         }
         if (preg_match('/^(http|ftp|https):\/\//i', $src)) {
             $contents = url_get_contents($src);
@@ -590,7 +591,7 @@ display_slides();"));
             //all images
             $list = array();
             foreach (array('jpeg', 'jpg', 'png', 'gif') as $ext) {
-                $fileset = new fileSet($src, "*.$ext");
+                $fileset = new FileSet($src, "*.$ext");
                 $list = array_merge($list, $fileset->getFiles());
             }
             // convert dirname($src) (local fs path) to web path
@@ -652,7 +653,7 @@ display_slides();"));
         } elseif ($web_location == 1) {
             //TODO: check if the file is an image
             $contents = preg_split('/\n/', $contents);
-            while (list($key, $value) = each($contents)) {
+            foreach ($contents as $key => $value) {
                 $data = preg_split('/\;/', $value);
                 if (count($data) == 0 || empty($data[0])
                     || preg_match('/^#/', $data[0])
@@ -669,11 +670,3 @@ display_slides();"));
         return '';
     }
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

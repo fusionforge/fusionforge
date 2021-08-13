@@ -1,12 +1,12 @@
-Date: Mon, 29 Jun 2015 12:04:27 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Wed, 10 Apr 2019 16:39:09 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=ZufallsSeite;
-  flags=PAGE_LOCKED;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
   charset=UTF-8
 Content-Transfer-Encoding: binary
 
-Die Anzahl der zufälligen ausgesuchten Seiten ist eine Zahl von 1
-bis 20.
+<<RandomPage numpages=1 redirect=1>>
+
 ----
-<<RandomPage pages||=10 info||=''>>
+[[KategorieAktionSeite]]

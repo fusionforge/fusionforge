@@ -1,4 +1,28 @@
 <?php
+/**
+ * Copyright © 2001-2003 Jeff Dairiki
+ * Copyright © 2001-2003 Carsten Klapp
+ * Copyright © 2002,2004-2005,2007,2010 Reini Urban
+ *
+ * This file is part of PhpWiki.
+ *
+ * PhpWiki is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * PhpWiki is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
+ */
 
 require_once(dirname(__FILE__) . '/stdlib.php');
 
@@ -33,7 +57,7 @@ class FileFinder
      * @param bool $missing_okay
      * @return string The filename (including path), if found, otherwise false.
      */
-    function findFile($file, $missing_okay = false)
+    public function findFile($file, $missing_okay = false)
     {
         if ($this->_is_abs($file)) {
             if (file_exists($file))
@@ -50,9 +74,9 @@ class FileFinder
      * This might not work on Windows95 or FAT volumes. (not tested)
      *
      * @param string $path
-     * @return mixed|string
+     * @return array|string
      */
-    function slashifyPath($path)
+    public function slashifyPath($path)
     {
         return $this->forcePathSlashes($path, $this->_pathsep);
     }
@@ -62,9 +86,9 @@ class FileFinder
      *
      * @param string $path
      * @param string $sep
-     * @return mixed|string
+     * @return array|string
      */
-    function forcePathSlashes($path, $sep = '/')
+    public function forcePathSlashes($path, $sep = '/')
     {
         if (is_array($path)) {
             $result = array();
@@ -89,31 +113,7 @@ class FileFinder
         }
     }
 
-    /**
-     * Try to include file.
-     *
-     * If file is found in the path, then the files directory is added
-     * to PHP's include_path (if it's not already there.) Then the
-     * file is include_once()'d.
-     *
-     * @param string $file File to include.
-     * @return bool True if file was successfully included.
-     */
-    function includeOnce($file)
-    {
-        if (($ret = @include_once($file)))
-            return $ret;
-
-        if (!$this->_is_abs($file)) {
-            if (($dir = $this->_search_path($file)) && is_file($dir . $this->_pathsep . $file)) {
-                $this->_append_to_include_path($dir);
-                return include_once($file);
-            }
-        }
-        return $this->_not_found($file);
-    }
-
-    function _isOtherPathsep()
+    private function _isOtherPathsep()
     {
         return $this->_pathsep != '/';
     }
@@ -296,7 +296,7 @@ class FileFinder
             array_splice($this->_path, $i, 1);
         }
         array_unshift($this->_path, $dir);
-        $GLOBALS['INCLUDE_PATH'] = implode($this->_path, $this->_get_ini_separator());
+        $GLOBALS['INCLUDE_PATH'] = implode($this->_get_ini_separator(), $this->_path);
         @ini_set('include_path', $GLOBALS['INCLUDE_PATH']);
     }
 
@@ -338,46 +338,6 @@ class FileFinder
         }
 
         return "C";
-    }
-}
-
-/**
- * A class for finding PEAR code.
- *
- * This is a subclass of FileFinder which searches a standard list of
- * directories where PEAR code is likely to be installed.
- *
- * Example usage:
- *
- * <pre>
- *   $pearFinder = new PearFileFinder;
- *   $pearFinder->includeOnce('DB.php');
- * </pre>
- *
- * The above code will look for 'DB.php', if found, the directory in
- * which it was found will be added to PHP's include_path, and the
- * file will be included. (If the file is not found, and E_USER_ERROR
- * will be thrown.)
- */
-class PearFileFinder
-    extends FileFinder
-{
-    /**
-     * @param $path array Where to look for PEAR library code.
-     * A good set of defaults is provided, so you can probably leave
-     * this parameter blank.
-     */
-    function __construct($path = array())
-    {
-        parent::__construct(array_merge(
-            $path,
-            array('/usr/share/php',
-                '/usr/lib/php',
-                '/usr/local/share/php',
-                '/usr/local/lib/php',
-                '/System/Library/PHP',
-                '/Apache/pear' // Windows
-            )));
     }
 }
 
@@ -456,11 +416,11 @@ class LocalizedButtonFinder
 }
 
 // Search PHP's include_path to find file or directory.
-function FindFile($file, $missing_okay = false, $slashify = false)
+function findFile($file, $missing_okay = false, $slashify = false)
 {
     static $finder;
     if (!isset($finder)) {
-        $finder = new FileFinder;
+        $finder = new FileFinder();
         // remove "/lib" from dirname(__FILE__)
         $wikidir = preg_replace('/.lib$/', '', dirname(__FILE__));
         // let the system favor its local pear?
@@ -478,19 +438,19 @@ function FindFile($file, $missing_okay = false, $slashify = false)
 
 // Search PHP's include_path to find file or directory.
 // Searches for "locale/$LANG/$file", then for "$file".
-function FindLocalizedFile($file, $missing_okay = false, $re_init = false)
+function findLocalizedFile($file, $missing_okay = false, $re_init = false)
 {
     static $finder;
     if ($re_init or !isset($finder))
-        $finder = new LocalizedFileFinder;
+        $finder = new LocalizedFileFinder();
     return $finder->findFile($file, $missing_okay);
 }
 
-function FindLocalizedButtonFile($file, $missing_okay = false, $re_init = false)
+function findLocalizedButtonFile($file, $missing_okay = false, $re_init = false)
 {
     static $buttonfinder;
     if ($re_init or !isset($buttonfinder))
-        $buttonfinder = new LocalizedButtonFinder;
+        $buttonfinder = new LocalizedButtonFinder();
     return $buttonfinder->findFile($file, $missing_okay);
 }
 
@@ -501,13 +461,13 @@ function FindLocalizedButtonFile($file, $missing_okay = false, $re_init = false)
  *   require_once 'lib/file.php' loading style.
  * Doesn't expand "~" or symlinks yet. truename would be perfect.
  *
- * NormalizeLocalFileName("lib/config.php") => /home/user/phpwiki/lib/config.php
+ * normalizeLocalFileName("lib/config.php") => /home/user/phpwiki/lib/config.php
  */
-function NormalizeLocalFileName($file)
+function normalizeLocalFileName($file)
 {
     static $finder;
     if (!isset($finder)) {
-        $finder = new FileFinder;
+        $finder = new FileFinder();
     }
     // remove "/lib" from dirname(__FILE__)
     if ($finder->_is_abs($file))
@@ -525,11 +485,11 @@ function NormalizeLocalFileName($file)
 /**
  * Prefixes with DATA_PATH and slashify
  */
-function NormalizeWebFileName($file)
+function normalizeWebFileName($file)
 {
     static $finder;
     if (!isset($finder)) {
-        $finder = new FileFinder;
+        $finder = new FileFinder();
     }
     if (defined("DATA_PATH")) {
         $wikipath = DATA_PATH;
@@ -547,9 +507,7 @@ function isWindows()
 {
     static $win;
     if (isset($win)) return $win;
-    //return preg_match('/^Windows/', php_uname());
-    $win = (substr(PHP_OS, 0, 3) == 'WIN');
-    return $win;
+    return (substr(PHP_OS, 0, 3) == 'WIN');
 }
 
 function isWindows95()
@@ -565,18 +523,10 @@ function isWindowsNT()
     static $winnt;
     if (isset($winnt)) return $winnt;
     // FIXME: Do this using PHP_OS instead of php_uname().
-    // $winnt = (PHP_OS == "WINNT"); // example from http://www.php.net/manual/en/ref.readline.php
+    // $winnt = (PHP_OS == "WINNT"); // example from https://www.php.net/manual/en/ref.readline.php
     if (function_usable('php_uname'))
         $winnt = preg_match('/^Windows NT/', php_uname());
     else
         $winnt = false; // FIXME: punt.
     return $winnt;
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

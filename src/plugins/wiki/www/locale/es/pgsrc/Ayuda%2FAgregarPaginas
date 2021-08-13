@@ -1,19 +1,41 @@
-Date: Mon, 29 Jun 2015 12:04:26 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Fri, 22 Dec 2020 10:36:59 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=Ayuda%2FAgregarPaginas;
-  flags="";
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
   charset=UTF-8
 Content-Transfer-Encoding: binary
 
-Para añadir una nueva página a Wiki, todo lo que tiene que hacer es empezar con un titulo significativo, capitalizar todas las palabras como EsteEsUnTituloCapitalizado. Wiki lo reconoce automáticamente como un hipervínculo.
+Para añadir una nueva página a Wiki, todo lo que tiene que hacer es empezar con un
+titulo significativo y colóquelo entre {{{[[corchetes dobles]]}}}.
 
-Entonces se debe pulsar el ? al final de su hipervínculo, y el Wiki le dará una ventana para hacer la nueva página.
+Entonces se debe pulsar el ? al final de su hipervínculo,
+y el Wiki le dará una ventana para hacer la nueva página.
 
-Si desea añadir al Wiki, documentos con formato muy complejo, es mejor que ponga una URL hacia el documento antes que añadir aqui el texto del documento, como:
+The page name can contain any character, except:
+* angle brackets (<>),
+* square brackets ([]),
+* curly brackets ({}),
+* double quotes ("),
+* pipe (|),
+* and hash sign (#) that is used for anchors.
 
- Página web del proyecto PhpWiki: http://phpwiki.sourceforge.net/
+Si desea añadir al Wiki, documentos con formato muy complejo,
+es mejor que ponga una URL hacia el documento antes que añadir aqui el texto
+del documento, como:
+{{{
+[[http://phpwiki.sourceforge.net/|PhpWiki project homepage]]
+}}}
+[[http://phpwiki.sourceforge.net/|PhpWiki project homepage]]
 
-El Wiki no soporta HTML tags (ver ReglasDeFormatoDeTexto).  <tags>son renderizados solo como texto.</tags> el Wiki está hecho para ser lo mas simple posible y así promover su uso.
+El Wiki no soporta HTML tags (ver [[Ayuda:ReglasDeFormatoDeTexto|ReglasDeFormatoDeTexto]]).
+<tags>son renderizados solo como texto.</tags> el Wiki está hecho para
+ser lo mas simple posible y así promover su uso.
 
-Tenga en cuenta que existe la posibilidad de que el administrador del sistema pueda activar código HTML embebido, pero esto tiene riesgos de seguridad.
+Tenga en cuenta que existe la posibilidad de que el administrador del sistema
+pueda activar código HTML embebido, pero esto tiene riesgos de seguridad.
+
+<noinclude>
+----
+[[PhpWikiDocumentation]]
+</noinclude>

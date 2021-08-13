@@ -1,8 +1,8 @@
-Date: Mon, 29 Jun 2015 12:04:26 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Mon,  8 Apr 2019 18:49:20 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=WantedPages;
-  flags="";
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
   charset=UTF-8
 Content-Transfer-Encoding: binary
 
@@ -16,3 +16,6 @@ Content-Transfer-Encoding: binary
 ----
 
 <<WantedPages>>
+
+----
+[[CategoryActionPage]]

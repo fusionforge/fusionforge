@@ -1,5 +1,5 @@
-Date: Mon, 29 Jun 2015 12:04:28 +0000
-Mime-Version: 1.0 (Produced by PhpWiki 1.5.4)
+Date: Mon, 28 Dec 2020 19:46:14 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
 Content-Type: application/x-phpwiki;
   pagename=Help%2FPloticusPlugin;
   flags=PAGE_LOCKED;
@@ -7,7 +7,7 @@ Content-Type: application/x-phpwiki;
 Content-Transfer-Encoding: binary
 
 The **Ploticus** [[Help:WikiPlugin|plugin]] passes all its arguments to the Ploticus
-binary and displays the result as PNG, GIF, EPS, SVG, SVGZ or SWF.
+binary and displays the result as PNG, GIF, EPS, SVG or SVGZ.
 Ploticus is a free, GPL, non-interactive software package
 for producing plots, charts, and graphics from data.
 See http://ploticus.sourceforge.net/doc/welcome.html
@@ -45,7 +45,7 @@ Ploticus has its own sql support within #getproc data, but this would expose sec
 ! Default value
 |-
 | **device**
-| gif, png, jpeg, svg, svgz, eps, swf. Any -T parameter supported by Ploticus.
+| gif, png, jpeg, svg, svgz, eps. Any -T parameter supported by Ploticus.
 | png
 |-
 | **data**

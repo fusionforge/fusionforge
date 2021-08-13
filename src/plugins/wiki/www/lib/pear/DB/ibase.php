@@ -30,7 +30,7 @@
 /**
  * Obtain the DB_common class so it can be extended from
  */
-require_once 'DB/common.php';
+require_once 'lib/pear/DB/common.php';
 
 /**
  * The methods PEAR DB uses to interact with PHP's interbase extension
@@ -49,7 +49,7 @@ require_once 'DB/common.php';
  * @author     Daniel Convissor <danielc@php.net>
  * @copyright  1997-2007 The PHP Group
  * @license    http://www.php.net/license/3_0.txt  PHP License 3.0
- * @version    Release: 1.8.2
+ * @version    Release: 1.10.0
  * @link       http://pear.php.net/package/DB
  * @since      Class became stable in Release 1.7.0
  */
@@ -180,13 +180,13 @@ class DB_ibase extends DB_common
     // {{{ constructor
 
     /**
-     * This constructor calls <kbd>$this->DB_common()</kbd>
+     * This constructor calls <kbd>parent::__construct()</kbd>
      *
      * @return void
      */
-    function DB_ibase()
+    function __construct()
     {
-        $this->DB_common();
+        parent::__construct();
     }
 
     // }}}

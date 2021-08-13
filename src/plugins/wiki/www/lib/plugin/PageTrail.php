@@ -1,7 +1,6 @@
 <?php
-
 /**
- * Copyright 1999,2000,2001,2002,2005 $ThePhpWikiProgrammingTeam
+ * Copyright © 1999,2000,2001,2002,2005 $ThePhpWikiProgrammingTeam
  *
  * This file is part of PhpWiki.
  *
@@ -18,6 +17,9 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
  */
 
 /**
@@ -83,7 +85,7 @@ class WikiPlugin_PageTrail
 
         $numberlinks = min(count($Pages), $numberlinks);
         if (!$invisible and $numberlinks) {
-            $html = HTML::div(array('class' => 'pagetrail'));
+            $html = HTML::span(array('class' => 'pagetrail'));
             $html->pushContent(WikiLink($Pages[$numberlinks - 1], 'auto'));
             for ($i = $numberlinks - 2; $i >= 0; $i--) {
                 if (!empty($Pages[$i]))
@@ -96,11 +98,3 @@ class WikiPlugin_PageTrail
         }
     }
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

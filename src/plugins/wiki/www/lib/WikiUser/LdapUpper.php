@@ -1,7 +1,6 @@
 <?php
-
-/*
- * Copyright (C) 2007,2009 Reini Urban
+/**
+ * Copyright © 2007,2009 Reini Urban
  *
  * This file is part of PhpWiki.
  *
@@ -18,6 +17,9 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
  */
 include_once 'lib/WikiUser/LDAP.php';
 
@@ -54,11 +56,3 @@ class _LdapUpperPassUser
         return parent::userExists();
     }
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

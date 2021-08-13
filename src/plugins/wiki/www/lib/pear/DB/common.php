@@ -27,7 +27,7 @@
 /**
  * Obtain the PEAR class so it can be extended from
  */
-require_once 'PEAR.php';
+require_once 'lib/pear/PEAR.php';
 
 /**
  * DB_common is the base class from which each database driver class extends
@@ -42,7 +42,7 @@ require_once 'PEAR.php';
  * @author     Daniel Convissor <danielc@php.net>
  * @copyright  1997-2007 The PHP Group
  * @license    http://www.php.net/license/3_0.txt  PHP License 3.0
- * @version    Release: 1.8.2
+ * @version    Release: 1.10.0
  * @link       http://pear.php.net/package/DB
  */
 class DB_common extends PEAR
@@ -145,7 +145,7 @@ class DB_common extends PEAR
      *
      * @return void
      */
-    function DB_common()
+    function __construct()
     {
         $this->PEAR('DB_Error');
     }
@@ -262,7 +262,7 @@ class DB_common extends PEAR
     function quoteString($string)
     {
         $string = $this->quoteSmart($string);
-        if ($string{0} == "'") {
+        if ($string[0] == "'") {
             return substr($string, 1, -1);
         }
         return $string;
@@ -885,6 +885,9 @@ class DB_common extends PEAR
     function autoExecute($table, $fields_values, $mode = DB_AUTOQUERY_INSERT,
                          $where = false)
     {
+        if ($where) {
+            $where = strtr($where, array('?' => '\?', '!' => '\!', '&' => '\&',));
+        }
         $sth = $this->autoPrepare($table, array_keys($fields_values), $mode,
                                   $where);
         if (DB::isError($sth)) {
@@ -1202,7 +1205,8 @@ class DB_common extends PEAR
      */
     function &query($query, $params = array())
     {
-        if (sizeof($params) > 0) {
+        $params = (array)$params;
+        if (count($params)) {
             $sth = $this->prepare($query);
             if (DB::isError($sth)) {
                 return $sth;
@@ -1341,7 +1345,8 @@ class DB_common extends PEAR
             }
         }
         // modifyLimitQuery() would be nice here, but it causes BC issues
-        if (sizeof($params) > 0) {
+        $params = (array)$params;
+        if (count($params)) {
             $sth = $this->prepare($query);
             if (DB::isError($sth)) {
                 return $sth;
@@ -1649,7 +1654,8 @@ class DB_common extends PEAR
             }
         }
 
-        if (sizeof($params) > 0) {
+        $params = (array)$params;
+        if (count($params)) {
             $sth = $this->prepare($query);
 
             if (DB::isError($sth)) {

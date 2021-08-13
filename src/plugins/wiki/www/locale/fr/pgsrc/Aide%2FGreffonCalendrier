@@ -1,0 +1,108 @@
+Date: Mon, 30 Mar 2020 15:49:22 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
+Content-Type: application/x-phpwiki;
+  pagename=Aide%2FGreffonCalendrier;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
+  charset=UTF-8
+Content-Transfer-Encoding: binary
+
+Le [[Aide:GreffonWiki|greffon]] **Calendrier** (//Calendar//) peut être utilisé pour générer un calendrier mensuel
+au sein d'une page du wiki. C'est pratique pour des wiki personnels.
+
+Les dates individuelles dans le calendrier sont liées à des pages wiki spécialement nommées.
+Le nom d'une « page du jour » est formé par défaut en ajoutant la
+date au nom de la page sur laquelle apparaît le calendrier.
+
+== Utilisation ==
+
+{{{
+<<Calendar>>
+}}}
+
+vous donnera :
+<<Calendar>>
+
+== Arguments ==
+
+{| class="bordered"
+|-
+! Argument
+! Description
+! Default value
+|-
+| colspan="3" class="align-center" | **Sélection du mois**
+|-
+| **year**
+| Spécifie l'année du calendrier
+| Année actuelle
+|-
+| **month**
+| Spécifie le mois du calendrier.
+| Mois actuel
+|-
+| **month_offset**
+| Ajouté au //mois//. Peut être utilisé pour inclure l'équivalent de plusieurs mois sur une seule page du wiki.
+| 0
+|-
+| colspan="3" class="align-center" | **“Day Page” Names**
+|-
+| **date_format**
+| [[php-function:strftime|Strftime]] format de la chaîne utilisée pour générer le nom des pages pour les "pages du jour".
+| La valeur par défaut est ##%Y-%m-%d##.
+|-
+| **prefix**
+| Préfixe pour la date (formatée par //date_format//) pour générer les noms des "pages du jour".
+| La valeur par défaut est ##~[pagename]/##.
+|-
+| colspan="3" class="align-center" | **Apparence**
+|-
+| **month_format**
+| [[php-function:strftime|strftime]] format de la chaîne utilisée pour générer le titre du calendrier.
+| (Valeur par défaut: ##%B %Y##.)
+|-
+| **wday_format**
+| [[php-function:strftime|Strftime]] format de la chaîne utilisée pour générer le nom des jours de la semaine au-dessus du calendrier.
+|
+|-
+| **start_wday**
+| Le premier jour de la semaine. Il doit être spécifié par un entier de zéro (dimanche) à six (samedi) inclus.
+|
+|}
+
+= Exemples ==
+
+{{{
+<<Calendar month_offset=+1>>
+}}}
+
+donnera :
+<<Calendar month_offset=+1>>
+
+{{{
+<<Calendar start_wday=0>>
+}}}
+
+donnera :
+<<Calendar start_wday=0>>
+
+== Voir aussi ==
+
+* [[Aide:GreffonListeDuCalendrier]]
+
+Often used together like this:
+
+{{{
+<<Calendar>>
+<<CalendarList>>
+}}}
+
+== Auteurs ==
+
+Cette fonctionnalité a été inspirée par [[http://manila.userland.com/|Manila]],
+et a été tout d'abord implémentée par Gary Benson. Elle fut par la suite implémentée
+sous forme de [[Aide:GreffonWiki|greffon]] par [[Aide:Jeff Dairiki|Jeff Dairiki]].
+
+<noinclude>
+----
+[[DocumentationDePhpWiki]] [[CatégorieGreffonWiki]]
+</noinclude>

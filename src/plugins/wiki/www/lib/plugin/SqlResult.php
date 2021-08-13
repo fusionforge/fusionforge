@@ -1,7 +1,6 @@
 <?php
-
-/*
- * Copyright 2004 $ThePhpWikiProgrammingTeam
+/**
+ * Copyright © 2004 $ThePhpWikiProgrammingTeam
  *
  * This file is part of PhpWiki.
  *
@@ -18,6 +17,9 @@
  * You should have received a copy of the GNU General Public License along
  * with PhpWiki; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ *
  */
 
 /**
@@ -53,7 +55,7 @@
  *     ORDER BY m.date DESC
  *   >>
  *
- * @author: ReiniUrban
+ * @author: Reini Urban
  */
 
 require_once 'lib/PageList.php';
@@ -83,7 +85,7 @@ class WikiPlugin_SqlResult
 
     function getDsn($alias)
     {
-        $ini = parse_ini_file(FindFile("config/SqlResult.ini"));
+        $ini = parse_ini_file(findFile("config/SqlResult.ini"));
         return $ini[$alias];
     }
 
@@ -212,20 +214,6 @@ class WikiPlugin_SqlResult
                 HTML::tbody($html),
                 HTML::tfoot($paging));
         }
-        if (0 and DEBUG) { // test deferred error/warning/notice collapsing
-            trigger_error("test notice", E_USER_NOTICE);
-            trigger_error("test warning", E_USER_WARNING);
-        }
-
         return $html;
     }
-
 }
-
-// Local Variables:
-// mode: php
-// tab-width: 8
-// c-basic-offset: 4
-// c-hanging-comment-ender-p: nil
-// indent-tabs-mode: nil
-// End:

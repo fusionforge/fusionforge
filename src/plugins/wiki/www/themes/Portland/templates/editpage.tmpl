@@ -11,23 +11,22 @@
             <?php echo _("Saving this page will overwrite the current version.")?></strong></p>
     <?php } ?>
   </td>
-  <td class="align-right">
+</tr>
+</table>
+<div id="editarea"><?php echo $EDIT_TEXTAREA?></div>
+<br />
+<?php echo _("Summary")._(":") ?> <?php echo $SUMMARY_INPUT ?>
+<br />
     <?php echo $PREVIEW_B ?>
     <?php if ($SAVE_B) { ?>
       <?php echo $SEP?><?php echo $SAVE_B ?>
     <?php } ?>
-  </td>
-</tr>
-</table>
-<a id="editarea"><?php echo $EDIT_TEXTAREA?></a>
-<br />
-<?php echo _("Summary")._(":") ?> <?php echo $SUMMARY_INPUT ?>
 <br />
 <?php echo fmt("Author will be logged as %s.", HTML::em($user->getId())) ?>
 <br />
 <?php echo $MINOR_EDIT_CB ?>
 <?php echo fmt("I'm just doing minor edits. Please divert the usual logging to %s instead.",
-        WikiLink(_("RecentEdits"))) ?>
+        WikiLink(__("RecentEdits"))) ?>
 <br />
 <?php if (isset($PREVIEW_CONTENT)) { ?>
   <hr />
@@ -37,9 +36,9 @@
 <?php } ?>
 
 <div class="wiki-edithelp">
-<!-- FIXME: do we need this at all?  If so, it could probably be moved to TextFormattingRules -->
-<p><?php echo fmt("See %s tips for editing.", WikiLink(_("Help")."/"._("GoodStyle"))) ?></p>
-<?plugin IncludePage page=_("Help/TextFormattingRules") section=_("Synopsis") quiet=1?>
+<?php // FIXME: do we need this at all?  If so, it could probably be moved to TextFormattingRules ?>
+<p><?php echo fmt("See %s tips for editing.", WikiLink(__("Help")."/".__("GoodStyle"))) ?></p>
+<<IncludePage page=_("Help/TextFormattingRules") section=_("Synopsis") quiet=1>>
 </div>
 <?php echo $HIDDEN_INPUTS?>
 </form>

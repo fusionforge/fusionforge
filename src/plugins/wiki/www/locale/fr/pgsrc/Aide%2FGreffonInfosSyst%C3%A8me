@@ -1,0 +1,28 @@
+Date: Thu, 23 May 2019 18:18:07 +0000
+Mime-Version: 1.0 (Produced by PhpWiki 1.6.0)
+Content-Type: application/x-phpwiki;
+  pagename=Aide%2FGreffonInfosSyst%C3%A8me;
+  flags=PAGE_LOCKED%2CEXTERNAL_PAGE;
+  charset=UTF-8
+Content-Transfer-Encoding: binary
+
+Le [[Aide:GreffonWiki|greffon]] **~InfosSystème** (//SystemInfo//) donne l'accès à des informations de bas niveau concernant PhpWiki relativement au système sur lequel il est installé.
+
+== Utilisation ==
+
+{{{
+         <<SystemInfo all>>
+      ou <<SystemInfo pagestats cachestats discspace hitstats>>
+      ou <<SystemInfo version>>
+      ou <<SystemInfo current_theme>>
+      ou <<SystemInfo PHPWIKI_DIR>>
+}}}
+
+== Exemple ==
+
+<<SystemInfo all>>
+
+<noinclude>
+----
+[[DocumentationDePhpWiki]] [[CatégorieGreffonWiki]]
+</noinclude>

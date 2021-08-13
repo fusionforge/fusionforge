@@ -1,36 +1,36 @@
-InstallWikiPluginCached       
+InstallWikiPluginCached
 
 !!!Requirements
 
-I don't know, tested it with the followings: 
+I don't know, tested it with the followings:
 * WikiPluginCached needs
 ** PhpWiki >= 1.3.3
 ** Pear Cache >= 1.0
 ** GD >= 1.6
 * TexToPng needs
 ** TeX 3.14159
-** GNU Ghostscript 6.51 
+** GNU Ghostscript 6.51
 ** LaTex2HTML Version 99.2beta8 (1.43)
 ** Perl >= 5.6.1 built for i586-linux
 * VisualWiki needs
 ** graphviz 1.8.x (http://www.graphviz.org/)
 
 !!!Installation
-phpwiki comes with its own copy of PEAR::Cache. 
+phpwiki comes with its own copy of PEAR::Cache.
 You have to configure the PLUGINCACHED Pear/Cache Settings in config/config.ini
 
 *  set PLUGIN_CACHED_CACHE_DIR to a directory accessible by your apache user.
- 
+
 !!!Example Calls from Wiki
 !! TexToPng
 This produces a little help screen:
- < ?plugin TexToPng ?> 
- 
+ < ?plugin TexToPng ?>
+
 A simple formula:
- < ?plugin TexToPng tex="$x^2$" ?> 
- 
-Let's show off 
- < ?plugin TexToPng tex="$$/int^/infty_{-/infty} dx {1 /over /sqrt {x^2+1}}$$" subslash="on" ?> 
+ < ?plugin TexToPng tex="$x^2$" ?>
+
+Let's show off
+ < ?plugin TexToPng tex="$$/int^/infty_{-/infty} dx {1 /over /sqrt {x^2+1}}$$" subslash="on" ?>
 
 ----
 
@@ -55,7 +55,7 @@ WikiPluginCached 0.8
   the image creating scripts (dot and pstoimg), so they rely on
   CreateImageFronPNG(...)
 * RecentChangesCached produces a strange RSS-link for the RSS-image
-  when it has to store a new html snippet in the cache immediately 
+  when it has to store a new html snippet in the cache immediately
   after an edit/save cycle.
 
 

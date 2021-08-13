@@ -1,12 +1,15 @@
 <body <?php echo $WikiTheme->getMoreAttr('body') ?> >
 
-<!-- Page title -->
+<header role="banner">
+<?php // Page title ?>
 <h1 id="header"><?php echo $HEADER ?></h1>
-
-<!-- Page title and logo -->
+</header>
+<main role="main">
+<?php // Page title and logo ?>
 <?php echo $CONTENT ?>
+</main>
 <?php echo Template('navbar') ?>
-<!-- RELATEDPAGES were here. -->
+<?php // RELATEDPAGES were here. ?>
 
 <?php echo $GLOBALS['ErrorManager']->getPostponedErrorsAsHTML() ?>
 
