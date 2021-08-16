@@ -1614,13 +1614,11 @@ function html_trove_limit_navigation_box($php_self, $querytotalcount, $trove_bro
 			$html_limit .= html_e('strong', array(), $ahrefcontent);
 		} else {
 			$getChar = '?';
-		    if (strpos($php_self, $getChar)) {
-		        $getChar = '&';
-		    }
-		    $html_limit .=
-		    util_make_link($php_self.$getChar.'page='.$i, $ahrefcontent);
-		}
-		
+			if (strpos($php_self, $getChar)) {
+				$getChar = '&';
+			}
+			$html_limit .=
+			util_make_link($php_self.$getChar.'page='.$i, $ahrefcontent);
 		}
 		$html_limit .= ' ';
 	}
