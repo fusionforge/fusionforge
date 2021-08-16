@@ -468,7 +468,7 @@ class FRSPackage extends FFError {
 		}
 		db_commit();
 		$this->createReleaseFilesAsZip($this->getNewestReleaseID());
-		$this->sendNotice();
+		$this->sendNotice(false);
 		return true;
 	}
 

@@ -56,6 +56,11 @@ echo $HTML->multiTableRow(array(), $cells);
 $cells = array();
 $cells[][] = html_e('strong', array(), _('Release Date')._(':'));
 $cells[][] = html_e('input', array('type' => 'text', 'name' => 'release_date', 'value' => date('Y-m-d H:i'), 'size' => 16, 'maxlength' => 16));
+echo $HTML->multiTableRow(array(), $cells);
+$cells = array();
+$cells[][] = html_e('strong', array(), _('Status')._(':'));
+$cells[][] = frs_show_status_popup('status_id',1)."&nbsp;" . _("NOTE: Release notification will only be send if status is active.");
+echo $HTML->multiTableRow(array(), $cells);
 $cells = array();
 $cells[][] = html_e('strong', array(), _('File Name')._(':'));
 $content = $HTML->information(sprintf(_('You can probably not upload files larger than about %.2f MiB in size.'), human_readable_bytes(util_get_maxuploadfilesize()))).
