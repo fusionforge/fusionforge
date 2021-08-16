@@ -71,8 +71,8 @@ class Stats extends FFError {
 	}
 
 	/**
-	* Returns a _name, group_name, and items - the count of
-	* the messages posted on that group's forumsresultset containing unix_group
+	* Returns a resultset containing unix_group_name, group_name, and items - the count of
+	* the messages posted on that group's forums
 	*
 	* @return resource a resultset of unix_group_name, group_name, items
 	*/
