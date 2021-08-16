@@ -105,28 +105,27 @@ class Theme_Funky_Guy extends Layout {
 		// Back to top button
 		echo html_ao('script', array('type' => 'text/javascript'));
 		echo '
-        $(document).ready(function(){
-          //Check to see if the window is top if not then display button
-          $(window).scroll(function(){
-          // Show button after 200px
-          var showAfter = 200;
-          if ($(this).scrollTop() > showAfter ) { 
-            $("#backToTop").fadeIn(800);
-          } else { 
-            $("#backToTop").fadeOut(800);
-          }
-         });
+			jQuery(document).ready(function() {
+				//Check to see if the window is top if not then display button
+				jQuery(window).scroll(function(){
+					// Show button after 200px
+					var showAfter = 200;
+					if (jQuery(this).scrollTop() > showAfter ) { 
+						jQuery("#backToTop").fadeIn(800);
+					} else { 
+						jQuery("#backToTop").fadeOut(800);
+					}
+				});
          
-         //Click event to scroll to top
-         $("#backToTop").click(function(){
-          $("html, body").animate({scrollTop : 0},800);
-          return false;
-         });
+				//Click event to scroll to top
+				jQuery("#backToTop").click(function(){
+					jQuery("html, body").animate({scrollTop : 0},800);
+					return false;
+				});
 
-        });
-        ';
+			});
+		';
 		echo html_ac(html_ap() -1); // </script>
-		
 	}
 
 	function hamburgerButton() {
@@ -258,23 +257,23 @@ class Theme_Funky_Guy extends Layout {
 		// Loader
 		echo html_ao('script');
 		echo '
-        var loader = document.getElementById("loader");
-        function loadSubmit(event) {
-            loader.style.top = "0";
-            loader.classList.add("loading");
-        }
-        function unloadSubmit() {
-            loader.style.top = "-100%";
-            loader.classList.remove("loading");
-        }
-        loader.addEventListener("mouseup", unloadSubmit);
-        var max = document.getElementsByTagName("FORM").length;
-        if(max > 0){
-            for (let i = 0 ; i < max ; i++){
-                document.forms[i].addEventListener("submit", loadSubmit);
-            }
-        }
-        ';
+			var loader = document.getElementById("loader");
+			function loadSubmit(event) {
+				loader.style.top = "0";
+				loader.classList.add("loading");
+			}
+			function unloadSubmit() {
+				loader.style.top = "-100%";
+				loader.classList.remove("loading");
+			}
+			loader.addEventListener("mouseup", unloadSubmit);
+			var max = document.getElementsByTagName("FORM").length;
+			if(max > 0){
+				for (let i = 0 ; i < max ; i++){
+					document.forms[i].addEventListener("submit", loadSubmit);
+				}
+			}
+		';
 		echo html_ac(html_ap() -1); // </script>
 
 		echo '</html>' . "\n";
