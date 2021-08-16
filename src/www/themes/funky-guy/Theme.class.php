@@ -96,11 +96,37 @@ class Theme_Funky_Guy extends Layout {
 				);'."\n";
 		}
 		echo html_ac(html_ap() -1);
+		// Hamburger button
 		echo html_ao('script', array('type' => 'text/javascript'));
 		echo 'function checkMenu(){
 			document.getElementById("hamburgerButton").checked = true;
 			}';
-		echo html_ac(html_ap() -1);
+		echo html_ac(html_ap() -1); // </script>
+		// Back to top button
+		echo html_ao('script', array('type' => 'text/javascript'));
+		echo '
+        $(document).ready(function(){
+          //Check to see if the window is top if not then display button
+          $(window).scroll(function(){
+          // Show button after 200px
+          var showAfter = 200;
+          if ($(this).scrollTop() > showAfter ) { 
+            $("#backToTop").fadeIn(800);
+          } else { 
+            $("#backToTop").fadeOut(800);
+          }
+         });
+         
+         //Click event to scroll to top
+         $("#backToTop").click(function(){
+          $("html, body").animate({scrollTop : 0},800);
+          return false;
+         });
+
+        });
+        ';
+		echo html_ac(html_ap() -1); // </script>
+		
 	}
 
 	function hamburgerButton() {
@@ -124,7 +150,9 @@ class Theme_Funky_Guy extends Layout {
 		} else {
 			$params['title'] = $params['title'] . " - ".forge_get_config('forge_name');
 		}
-
+		echo html_ao('a', array('href' => '#', 'id' => 'backToTop'));
+		echo "&#8679; TOP &#8679;"; // Upwards arrow character
+		echo html_ac(html_ap() -1); // </a>
 		echo html_ao('header', array('role' => 'banner'));
 		echo html_ao('nav', array('role' => 'navigation'));
 
@@ -227,21 +255,27 @@ class Theme_Funky_Guy extends Layout {
 		echo html_ao('div', array('id' => 'loader'));
         echo html_ao('div');
 		echo html_ac(html_ap() -2); // </div>
+		// Loader
 		echo html_ao('script');
 		echo '
-            var loader = document.getElementById("loader");
-            function loadSubmit(event) {
-                loader.style.top = "0";
-                loader.classList.add("loading");
+        var loader = document.getElementById("loader");
+        function loadSubmit(event) {
+            loader.style.top = "0";
+            loader.classList.add("loading");
+        }
+        function unloadSubmit() {
+            loader.style.top = "-100%";
+            loader.classList.remove("loading");
+        }
+        loader.addEventListener("mouseup", unloadSubmit);
+        var max = document.getElementsByTagName("FORM").length;
+        if(max > 0){
+            for (let i = 0 ; i < max ; i++){
+                document.forms[i].addEventListener("submit", loadSubmit);
             }
-            var max = document.getElementsByTagName("FORM").length;
-            if( max > 0 ){
-                for (let i = 0 ; i < max ; i++){
-                    document.forms[i].addEventListener("submit", loadSubmit);
-                }
-            }
+        }
         ';
-        echo html_ac(html_ap() -1);
+		echo html_ac(html_ap() -1); // </script>
 
 		echo '</html>' . "\n";
 	}

@@ -216,17 +216,42 @@ header option {
 	background:#31394c;
 }
 
+/* =backToTop */
+#backToTop {
+  	position: fixed;
+  	background-color:#dfdfdf99;
+  	border: 1px solid #abc;
+  	bottom: 4.5em;
+  	color: #21293C;
+	font-size: .8em;
+	font-weight: bold;
+	right: calc(50% - 5em);
+	width: 10em;
+	padding: .5em 0;
+	border-radius: 1em;
+	text-align: center;
+	z-index: 19;
+	cursor: pointer;
+	text-decoration: none;
+	transition: background-color 0.8s ease;
+	display: none;
+}
+#backToTop:hover,#backToTop:active {
+	background-color: #fff;
+	border-color:#789;
+	cursor: pointer;
+	transition: background-color 0.8s ease;
+}
+
 #searchBox input[type=text] {
-	height: 1.8em;
-	padding: .1em 26px .1em .4em;
-	border-radius: .3em;
-	border: 1px solid #789;
-	display: inline;
-	width: 9em;
-	font-size: inherit;
-	color: #fff;
-	background: #31394c;
-	box-shadow: none;
+    padding: .1em 26px .1em .4em;
+    border-radius: .3em;
+    border: 1px solid #789;
+    display: inline;
+    font-size: inherit;
+    color: #fff;
+    background: #31394c;
+    box-shadow: none;
 }
 
 #searchBox input[type=submit] {
@@ -429,7 +454,7 @@ a.topTabSelected:hover {
 	border: 1px solid #c2c3c4;
 	border-radius: 6px;
 	padding:4px 8px 12px 8px;
-	margin-bottom: 0;
+	margin-bottom: 1em;
 	box-shadow: 1px 1px 4px #c2c3c4;
 }
 
@@ -645,7 +670,7 @@ table.listing tbody tr:nth-child(odd),
 	border-top-left-radius: 6px;
 	border-top-right-radius: 6px;
 	display: inline-block;
-	padding: 4px 8px;
+	padding: 6px 8px 1px 8px;
 }
 .submenu a:hover {
 	color: #ff9;
@@ -682,12 +707,13 @@ footer img {
 #loader {
 	display: flex;
 	background: #0006;
-	position: absolute;
+	position: fixed;
 	top: -100%;
 	left: 0;
 	width: 100%;
 	height: 100%;
 	opacity: 0;
+	z-index: 99;
 }
 .loading  {
 	opacity: 1 !important;
@@ -703,6 +729,9 @@ footer img {
 	animation: spin 2s linear infinite;
 	margin: auto;
 	z-index: 20;
+}
+#backbuttonstate {
+	display: none;
 }
 
 /* Safari */
@@ -882,7 +911,7 @@ input, select {
 	background-color: #e10;
 	border: none;
 	color: white;
-	text-shadow: 0 0 1px #300;
+	text-shadow: 0 0 1px #960;
 	padding: .2em .4em;
 }
 
