@@ -156,19 +156,7 @@ abstract class BaseRole extends FFError {
 						     'pm_admin' => 1,
 						     'new_pm' => 7,
 						     'members' => 1,
-				),
-			// all other (present) roles
-			'other' => array( 'project_read' => 1,
-						     'frs_admin' => 1,
-						     'new_frs' => 1,
-						     'docman' => 3,
-						     'new_forum' => 3,
-						     'tracker_admin' => 1,
-						     'new_tracker' => 11,
-						     'pm_admin' => 1,
-						     'new_pm' => 7,
-						     'members' => 1,
-				),
+				)
 			);
 	}
 
@@ -365,7 +353,7 @@ abstract class BaseRole extends FFError {
 		$result = array();
 		$group_id = $project->getID();
 
-		$sections = array ('project_read', 'project_admin', 'scm', 'docman', 'tracker_admin', 'new_tracker', 'members');
+		$sections = array ('project_read', 'project_admin', 'members', 'scm', 'docman', 'tracker_admin', 'new_tracker');
 		foreach ($sections as $section) {
 			$result[$section][$group_id] = $this->getVal ($section, $group_id);
 		}
@@ -487,13 +475,6 @@ abstract class BaseRole extends FFError {
 	 */
 	function getSetting($section, $reference) {
 		$value = $this->getSettingRaw($section, $reference);
-		if ($value == NULL) {
-			if (isset($this->defaults['other'][$section])) {
-				$value = $this->defaults['other'][$section];
-			} else {
-				$value = 0;
-			}
-		}
 
 		switch ($section) {
 		case 'forge_admin':
@@ -1395,8 +1376,3 @@ function sortRoleList (&$list, $relative_to = NULL, $criterion='composite') {
 
 	return usort ($list, array ($cmp, 'Compare'));
 }
-
-// Local Variables:
-// mode: php
-// c-file-style: "bsd"
-// End:
