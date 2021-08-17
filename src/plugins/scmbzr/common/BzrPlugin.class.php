@@ -289,10 +289,6 @@ over it to the project's administrator.");
 			$year = $params ['year'] ;
 			$month = $params ['month'] ;
 			$day = $params ['day'] ;
-			$month_string = sprintf( "%04d%02d", $year, $month );
-			$start_time = gmmktime( 0, 0, 0, $month, $day, $year);
-
-			$date = sprintf ("%04d-%02d-%02d", $year, $month, $day);
 
                         $updates = 0 ;
                         $adds = 0 ;
@@ -311,6 +307,7 @@ over it to the project's administrator.");
 				return false ;
 			}
 
+			$month_string = sprintf( "%04d%02d", $year, $month );
 			$pipe = popen("bzr log file://$repo/$branch --long --verbose 2> /dev/null", 'r');
 
 			// cleaning stats_cvs_* table for the current day
@@ -344,6 +341,7 @@ over it to the project's administrator.");
 			$curupdates = 0 ;
 			$curcommits = 0 ;
 			$curdeletes = 0 ;
+			$date = sprintf ("%04d-%02d-%02d", $year, $month, $day);
                         while (! feof ($pipe) &&
                                $line = rtrim (fgets ($pipe))) {
 				if ($line == $sep) {

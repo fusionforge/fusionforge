@@ -579,7 +579,6 @@ Offer DAV or SSH access.");
 			$year = $params['year'];
 			$month = $params['month'];
 			$day = $params['day'];
-			$start_time = gmmktime(0, 0, 0, $month, $day, $year);
 			$repolist = $this->getRepositories($project);
 			foreach ($repolist as $repo_name) {
 				$this->gatherStatsRepo($project, $repo_name, $year, $month, $day);

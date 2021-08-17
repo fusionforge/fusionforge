@@ -91,7 +91,7 @@ function getLog($Input) {
 	$Logging = false;
 	$Log = '';
 	for ( $i=0; $i < $ii ; $i++ ) {
-		if ($Logging==true) {
+		if ($Logging) {
 			$Log .= $Lines[$i]."\n";
 		}
 		if ($Lines[$i] == 'Log Message:') {
