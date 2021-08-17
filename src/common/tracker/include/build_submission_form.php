@@ -77,7 +77,7 @@ function artifact_submission_form($ath, $group, $summary='', $details='', $assig
 	if (forge_check_perm ('tracker', $ath->getID(), 'manager')) {
 		$content = html_e('strong', array(), _('Assigned to')._(':')).html_e('br');
 		if (in_array('assigned_to', $fieldInFormula)) {
-			$content .= $ath->technicianBox('assigned_to', $assigned_to, true, 'none', -1, '', false, array('class'=>'in-formula'));
+			$content .= $ath->technicianBox('assigned_to', $assigned_to, true, _('Nobody'), -1, '', false, array('class'=>'in-formula'));
 		} else {
 			$content .= $ath->technicianBox('assigned_to', $assigned_to);
 		}
