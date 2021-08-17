@@ -78,19 +78,7 @@ FusionForge, for instance where Kerberos is used.");
 
 	function session_login_valid($params) {
 		$user = user_get_object_by_name($params['loginname']);
-		if ($user) {
-			if ($this->isSufficient()) {
-				$params['results'][$this->name] = FORGE_AUTH_AUTHORITATIVE_ACCEPT;
-			} else {
-				$params['results'][$this->name] = FORGE_AUTH_NOT_AUTHORITATIVE;
-			}
-		} else {
-			if ($this->isRequired()) {
-				$params['results'][$this->name] = FORGE_AUTH_AUTHORITATIVE_REJECT;
-			} else {
-				$params['results'][$this->name] = FORGE_AUTH_NOT_AUTHORITATIVE;
-			}
-		}
+		$this->setAuthStateResult($params, $user);
 		return true;
 	}
 
@@ -112,21 +100,8 @@ FusionForge, for instance where Kerberos is used.");
 			$user = user_get_object_by_name($username);
 		}
 
-		// TODO : shouldn't this part be factorized as it seems quite common for many plugins ?
-		if ($user) {
-			if ($this->isSufficient()) {
-				$this->saved_user = $user;
-				$params['results'][$this->name] = FORGE_AUTH_AUTHORITATIVE_ACCEPT;
-			} else {
-				$params['results'][$this->name] = FORGE_AUTH_NOT_AUTHORITATIVE;
-			}
-		} else {
-			if ($this->isRequired()) {
-				$params['results'][$this->name] = FORGE_AUTH_AUTHORITATIVE_REJECT;
-			} else {
-				$params['results'][$this->name] = FORGE_AUTH_NOT_AUTHORITATIVE;
-			}
-		}
+		$this->saved_user = $user;
+		$this->setAuthStateResult($params, $user);
 	}
 
 	/**

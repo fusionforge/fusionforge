@@ -113,20 +113,8 @@ class AuthOpenIDPlugin extends ForgeAuthPlugin {
 			}
 		}
 
-		if ($user) {
-			if ($this->isSufficient()) {
-				$this->saved_user = $user;
-				$params['results'][$this->name] = FORGE_AUTH_AUTHORITATIVE_ACCEPT;
-			} else {
-				$params['results'][$this->name] = FORGE_AUTH_NOT_AUTHORITATIVE;
-			}
-		} else {
-			if ($this->isRequired()) {
-				$params['results'][$this->name] = FORGE_AUTH_AUTHORITATIVE_REJECT;
-			} else {
-				$params['results'][$this->name] = FORGE_AUTH_NOT_AUTHORITATIVE;
-			}
-		}
+		$this->saved_user = $user;
+		$this->setAuthStateResult($params, $user);
 	}
 
 	/**
