@@ -54,7 +54,8 @@ class ArtifactHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 			_('Id'),
 			_('Summary'),
 			_('Submitted by'),
-			_('Open Date')
+			_('Open Date'),
+			_('Status')
 		);
 	}
 
@@ -77,7 +78,8 @@ class ArtifactHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 				. html_image('ic/tracker20g.png')
 				. ' '.$row['summary'].'</a></td>'
 				. '<td>'.$row['realname']."</td>"
-				. '<td>'.relative_date($row['open_date']).'</td></tr>';
+				. '<td>'.relative_date($row['open_date']).'</td>'
+				. '<td>'._($row['status_name']).'</td></tr>';
 			$i++;
 		}
 		return $return;

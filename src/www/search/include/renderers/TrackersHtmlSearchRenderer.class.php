@@ -46,7 +46,8 @@ class TrackersHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 			_('#'),
 			_('Summary'),
 			_('Submitted by'),
-			_('Date')
+			_('Date'),
+			_('Status'),
 		);
 	}
 
@@ -77,7 +78,9 @@ class TrackersHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 						.'<td>'.util_make_link('/tracker/a_follow.php/'.$row['artifact_id'], $HTML->getFollowPic().' '.$row['summary'])
 						.'</td>'
 						.'<td style="width: 15%">'.$row['realname'].'</td>'
-						.'<td style="width: 15%">'.relative_date($row['open_date']).'</td></tr>';
+						.'<td style="width: 15%">'.relative_date($row['open_date']).'</td>'
+						.'<td style="width: 15%">'._($row['status_name']).'</td>'
+						.'</tr>';
 			$rowColor++;
 		}
 		return $return;
