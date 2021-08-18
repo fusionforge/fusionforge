@@ -64,7 +64,7 @@ class FrsSearchQuery extends SearchQuery {
 	 * @return	array	query+params array
 	 */
 	function getQuery() {
-		$qpa = db_construct_qpa(false, 'SELECT ts_headline(frs_package.name, q) AS package_name, ts_headline(frs_release.name, q) as release_name, frs_release.release_date, frs_release.release_id, users.realname, frs_release.package_id FROM frs_file, frs_release, users, frs_package, to_tsquery($1) AS q, frs_release_idx r, frs_file_idx f WHERE frs_release.released_by = users.user_id AND r.release_id = frs_release.release_id AND f.file_id = frs_file.file_id AND frs_package.package_id = frs_release.package_id AND frs_file.release_id=frs_release.release_id AND frs_package.group_id=$2 ',
+		$qpa = db_construct_qpa(false, 'SELECT ts_headline(frs_package.name, q) AS package_name, ts_headline(frs_release.name, q) as release_name, frs_release.release_date, frs_release.release_id, frs_status.name as status_name, users.realname, frs_release.package_id FROM frs_file, frs_release LEFT OUTER JOIN frs_status USING(status_id), users, frs_package, to_tsquery($1) AS q, frs_release_idx r, frs_file_idx f WHERE frs_release.released_by = users.user_id AND r.release_id = frs_release.release_id AND f.file_id = frs_file.file_id AND frs_package.package_id = frs_release.package_id AND frs_file.release_id=frs_release.release_id AND frs_package.group_id=$2 ',
 						 array($this->getFTIwords(), $this->groupId));
 		if ($this->sections != SEARCH__ALL_SECTIONS) {
 			$qpa = db_construct_qpa($qpa, 'AND frs_package.package_id = ANY ($1) ',

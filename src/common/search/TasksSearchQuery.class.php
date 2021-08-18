@@ -67,7 +67,7 @@ class TasksSearchQuery extends SearchQuery {
 		$words = $this->getFTIwords();
 
 		if (count($this->phrases)) {
-			$qpa = db_construct_qpa(false, 'SELECT x.* FROM (SELECT project_task.project_task_id, project_task.group_project_id, project_task.summary, project_task.percent_complete, project_task.start_date, project_task.end_date, users.realname, project_group_list.project_name, project_task.summary||$1||project_task.details||$1||coalesce(ff_string_agg(project_messages.body), $1) as full_string_agg, project_task_idx.vectors FROM project_task LEFT OUTER JOIN project_messages USING (project_task_id), users, project_group_list, project_task_idx WHERE users.user_id = project_task.created_by AND project_task.group_project_id = project_group_list.group_project_id AND project_group_list.group_id = $2 ',
+			$qpa = db_construct_qpa(false, 'SELECT x.* FROM (SELECT project_task.project_task_id, project_task.group_project_id, project_task.summary, project_task.percent_complete, project_task.start_date, project_task.end_date, status_name, users.realname, project_group_list.project_name, project_task.summary||$1||project_task.details||$1||coalesce(ff_string_agg(project_messages.body), $1) as full_string_agg, project_task_idx.vectors FROM project_task LEFT OUTER JOIN project_messages USING (project_task_id) LEFT OUTER JOIN project_status USING(status_id), users, project_group_list, project_task_idx WHERE users.user_id = project_task.created_by AND project_task.group_project_id = project_group_list.group_project_id AND project_group_list.group_id = $2 ',
 							array($this->field_separator, $this->groupId));
 
 			if ($this->sections != SEARCH__ALL_SECTIONS) {
@@ -81,7 +81,7 @@ class TasksSearchQuery extends SearchQuery {
 			$qpa = db_construct_qpa($qpa, ' ORDER BY ts_rank(vectors, to_tsquery($1)) DESC',
 						array($words));
 		} else {
-			$qpa = db_construct_qpa(false, 'SELECT project_task.project_task_id, project_task.group_project_id, project_task.summary, project_task.percent_complete, project_task.start_date, project_task.end_date, users.realname, project_group_list.project_name, project_task_idx.vectors FROM project_task, users, project_group_list, project_task_idx WHERE users.user_id = project_task.created_by AND project_task.group_project_id = project_group_list.group_project_id AND project_group_list.group_id = $1 ',
+			$qpa = db_construct_qpa(false, 'SELECT project_task.project_task_id, project_task.group_project_id, project_task.summary, project_task.percent_complete, project_task.start_date, project_task.end_date, status_name, users.realname, project_group_list.project_name, project_task_idx.vectors FROM project_task LEFT OUTER JOIN project_status USING(status_id), users, project_group_list, project_task_idx WHERE users.user_id = project_task.created_by AND project_task.group_project_id = project_group_list.group_project_id AND project_group_list.group_id = $1 ',
 							array($this->groupId));
 
 			if ($this->sections != SEARCH__ALL_SECTIONS) {

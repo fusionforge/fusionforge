@@ -45,6 +45,7 @@ class FrsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 			_('Release Name'),
 			_('Submitted by'),
 			_('Post Date'),
+			_('Status'),
 		);
 	}
 
@@ -73,7 +74,9 @@ class FrsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 				. '<td style="width: 5%">&nbsp;</td>'
 				. '<td>'.util_make_link ('/frs/?view=shownotes&group_id='.$group_id.'&release_id='.$row['release_id'],$row['release_name']).'</td>'
 				. '<td style="width: 15%">'.$row['realname'].'</td>'
-				. '<td style="width: 15%">'.relative_date($row['release_date']).'</td></tr>';
+				. '<td style="width: 15%">'.relative_date($row['release_date']).'</td>'
+				. '<td style="width: 15%">'._($row['status_name']).'</td>'
+				. ' </tr>';
 			$rowColor ++;
 		}
 		return $return;

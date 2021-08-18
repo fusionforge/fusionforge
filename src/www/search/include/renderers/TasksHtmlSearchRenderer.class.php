@@ -47,7 +47,8 @@ class TasksHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 			_('Start Date'),
 			_('End Date'),
 			_('Created by'),
-			_('Completed')
+			_('Completed'),
+			_('Status'),
 		);
 	}
 
@@ -81,7 +82,9 @@ class TasksHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 						. ' <td style="width: 15%">'.relative_date($row['start_date']).'</td>'
 						. ' <td style="width: 15%">'.relative_date($row['end_date']).'</td>'
 						. ' <td style="width: 15%">'.$row['realname'].'</td>'
-						. ' <td style="width: 8%">'.$row['percent_complete'].' %</td></tr>';
+						. ' <td style="width: 8%">'.$row['percent_complete'].' %</td>'
+						. ' <td style="width: 15%">'._($row['status_name']).'</td>'
+						. ' </tr>';
 			$rowColor ++;
 		}
 		return $return;
