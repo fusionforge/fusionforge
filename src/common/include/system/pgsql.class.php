@@ -56,10 +56,6 @@ class pgsql extends System {
 	 */
 	var $GID_ADD_SCMRW = 50000;
 
-	function __construct() {
-		parent::__construct();
-	}
-
 	/**
 	 * sysUseUnixName() - Check if user/group used the unix_name
 	 *

@@ -118,7 +118,6 @@ class FusionForgeConfig {
 				}
 			}
 		}
-		return ;
 	}
 
 	function mark_as_bool ($section, $var) {

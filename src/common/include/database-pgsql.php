@@ -110,9 +110,9 @@ function db_connect() {
 	define('SYS_DB_TROVE', $gfconn2);
 	define('SYS_DB_SEARCH', $gfconn2);
 
-	$res = db_query_params ('SELECT set_config($1, $2, false)',
-				array('default_text_search_config',
-                      forge_get_config('fti_config')));
+	db_query_params('SELECT set_config($1, $2, false)',
+			array('default_text_search_config',
+			forge_get_config('fti_config')));
 
 	// Register top-level "finally" handler to abort current
 	// transaction in case of error
@@ -123,10 +123,10 @@ function db_connect() {
  * db_connect_if_needed - Set up the DB connection if it's unset
  */
 function db_connect_if_needed() {
-        global $gfconn;
-        if (!isset ($gfconn)) {
-                db_connect();
-        }
+	global $gfconn;
+	if (!isset ($gfconn)) {
+		db_connect();
+	}
 }
 
 /**
@@ -135,11 +135,11 @@ function db_connect_if_needed() {
 function db_reconnect() {
 	global $gfconn;
 	$gfconn = pg_pconnect(pg_connectstring(forge_get_config('database_name'),
-	                                       forge_get_config('database_user'),
-	                                       forge_get_config('database_password'),
-	                                       forge_get_config('database_host'),
-	                                       forge_get_config('database_port')),
-	                      PGSQL_CONNECT_FORCE_NEW);
+						forge_get_config('database_user'),
+						forge_get_config('database_password'),
+						forge_get_config('database_host'),
+						forge_get_config('database_port')),
+						PGSQL_CONNECT_FORCE_NEW);
 	return ($gfconn !== FALSE);
 }
 
@@ -779,8 +779,7 @@ function db_int_array_to_any_clause($arr) {
 			$arr2[] = $cur;
 		}
 	}
-	$res = '{'.implode(',', $arr2).'}';
-	return $res;
+	return '{'.implode(',', $arr2).'}';
 }
 
 function db_string_array_to_any_clause($arr) {
@@ -788,8 +787,7 @@ function db_string_array_to_any_clause($arr) {
 	foreach ($arr as $cur) {
 		$arr2[] = pg_escape_string($cur);
 	}
-	$res = '{"'.implode('","', $arr2).'"}';
-	return $res;
+	return '{"'.implode('","', $arr2).'"}';
 }
 
 /**

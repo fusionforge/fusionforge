@@ -30,10 +30,6 @@ class NSSPGSQL extends System {
 	 */
 	var $UID_ADD = 20000;
 
-	function __construct() {
-		parent::__construct();
-	}
-
 	/**
  	 * sysCreateUser() - Create a user
  	 *

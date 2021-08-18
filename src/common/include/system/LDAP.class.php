@@ -25,9 +25,6 @@ require_once $gfcommon.'include/account.php';
 require_once $gfcommon.'include/system/UNIX.class.php';
 
 class LDAP extends UNIX {
-	function __construct() {
-		parent::__construct();
-	}
 
 	/*
  	 * Auxilary functions

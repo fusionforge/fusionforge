@@ -23,9 +23,6 @@
 require_once $gfcommon.'include/FFError.class.php';
 
 class System extends FFError {
-	function __construct() {
-		parent::__construct();
-	}
 
 	/**
 	 * sysUseUnixName() - Check if user/group used the unix_name

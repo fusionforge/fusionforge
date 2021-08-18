@@ -178,12 +178,11 @@ function account_groupnamevalid($name) {
  * @return	string	A random character
  *
  */
-function genchr(){
+function genchr() {
 	do {
 		$num = util_randnum(46, 122);
 	} while ( ( $num > 57 && $num < 65 ) || ( $num > 90 && $num < 97 ) );
-	$char = chr($num);
-	return $char;
+	return chr($num);
 }
 
 /**
