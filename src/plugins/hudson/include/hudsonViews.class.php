@@ -258,8 +258,6 @@ class hudsonViews extends Views {
 
 	function _display_jobs_table($group_id) {
 		global $HTML;
-		$request =& HTTPRequest::instance();
-		$group_id = $request->get('group_id');
 		$user = session_get_user();
 		$job_dao = new PluginHudsonJobDao(CodendiDataAccess::instance());
 		$dar = $job_dao->searchByGroupID($group_id);
@@ -281,7 +279,7 @@ class hudsonViews extends Views {
 			if ($project->usesService('cvs')) {
 				echo '  <th class="boxtitle">'._("CVS trigger").'</th>';
 			}
-			if ($user->isMember($request->get('group_id'), 'A')) {
+			if ($user->isMember($group_id, 'A')) {
 				echo '  <th class="boxtitle">'._("Actions").'</th>';
 			}
 			echo ' </tr>';
@@ -337,7 +335,7 @@ class hudsonViews extends Views {
 					echo '  <td colspan="'.$nb_columns.'">'.$HTML->error_msg($e->getMessage()).'</td>';
 				}
 
-				if ($user->isMember($request->get('group_id'), 'A')) {
+				if ($user->isMember($group_id, 'A')) {
 					echo '  <td>';
 					// edit job
 					echo '   <span class="job_action">';
@@ -363,7 +361,7 @@ class hudsonViews extends Views {
 		} else {
 			echo '<p>'._('No Hudson jobs associated with this project.');
 			echo "\n";
-			if ($user->isMember($request->get('group_id'), 'A')) {
+			if ($user->isMember($group_id, 'A')) {
 				echo _('To add a job, select the link just below.');
 			}
 			echo '</p>';
