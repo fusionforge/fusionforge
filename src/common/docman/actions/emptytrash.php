@@ -31,7 +31,7 @@ global $feedback;
 global $error_msg;
 global $warning_msg;
 
-$redirecturl = '/docman/?group_id='.$group_id;
+$redirecturl = DOCMAN_BASEURL.$group_id;
 
 // plugin projects-hierarchy handler
 if ($childgroup_id) {

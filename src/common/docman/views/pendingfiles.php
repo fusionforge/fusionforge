@@ -110,11 +110,10 @@ jQuery(document).ready(function() {
 				}
 			}
 			$cells[][] = $d->getDownload();
-			$editfileaction = '/docman/?action=editfile&fromview=listfile&dirid='.$d->getDocGroupID();
+			$editfileaction = DOCMAN_BASEURL.'&action=editfile&fromview=listfile&dirid='.$d->getDocGroupID();
 			if ($childgroup_id) {
 				$editfileaction .= '&childgroup_id='.$childgroup_id;
 			}
-			$editfileaction .= '&group_id='.$group_id;
 			$cells[][] = util_make_link('#', $HTML->getEditFilePic($edittitle, 'editdocument'), array('onclick' => 'javascript:controllerListPending.toggleEditFileView({action:\''.util_make_uri($editfileaction).'\', lockIntervalDelay: 60000, childGroupId: '.util_ifsetor($childgroup_id, 0).' ,id:'.$d->getID().', groupId:'.$d->Group->getID().', docgroupId:'.$d->getDocGroupID().', statusId:'.$d->getStateID().', statusDict:'.$dm->getStatusNameList('json').', docgroupDict:'.$dm->getDocGroupList($nested_groups, 'json').', title:\''.addslashes($d->getName()).'\', filename:\''.addslashes($d->getFileName()).'\', description:\''.addslashes($d->getDescription()).'\', isURL:\''.$d->isURL().'\', isText:\''.$d->isText().'\', useCreateOnline:'.$d->Group->useCreateOnline().', docManURL:\''.util_make_uri("docman").'\'})', 'title' => _('Edit this document')), true).
 					util_make_link('#', html_image('docman/validate.png', 22, 22, array('alt' => _('Activate in this folder'))), array('onclick' => 'window.location.href=\''.util_make_uri($redirecturl.'&action=validatefile&fileid='.$d->getID()).'\'', 'title' => _('Activate in this folder')), true);
 			echo $HTML->multiTableRow(array(), $cells);

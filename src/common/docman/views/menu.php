@@ -36,7 +36,7 @@ global $warning_msg;
 
 if (!forge_check_perm('docman', $group_id, 'read')) {
 	$warning_msg = _('Document Manager Access Denied');
-	session_redirect('/docman/?group_id='.$group_id);
+	session_redirect(DOCMAN_BASEURL .$group_id);
 }
 
 $dm = new DocumentManager($g);
@@ -47,33 +47,33 @@ $menu_links = array();
 $menu_attr = array();
 
 $menu_text[] = _('View Documents');
-$menu_links[] = '/docman/?group_id='.$group_id;
+$menu_links[] = DOCMAN_BASEURL.$group_id;
 $menu_attr[] = array('title' => _('View documents and folders in 2 panels. Left a folder tree, right a list of files of selected folder.'), 'id' => 'listFileDocmanMenu');
 
 if (forge_check_perm('docman', $group_id, 'submit')) {
 	$menu_text[] = _('Add new item');
-	$menu_links[] = '/docman/?group_id='.$group_id.'&view=additem';
+	$menu_links[] = DOCMAN_BASEURL.$group_id.'&view=additem';
 	$menu_attr[] = array('title' => _('Add a new item such as file, create directory, inject a ZIP at root level.'), 'id' => 'addItemDocmanMenu');
 }
 
 if ($g->useDocmanSearch()) {
 	$menu_text[] = _('Search');
-	$menu_links[] = '/docman/?group_id='.$group_id.'&view=search';
+	$menu_links[] = DOCMAN_BASEURL.$group_id.'&view=search';
 	$menu_attr[] = array('title' => _('Search documents in this project using keywords.'), 'id' => 'searchDocmanMenu');
 }
 
 if (forge_check_perm('docman', $group_id, 'approve') && !$dm->isTrashEmpty()) {
 	$menu_text[] = _('Trash');
-	$menu_links[] = '/docman/?group_id='.$group_id.'&view=listtrashfile';
+	$menu_links[] = DOCMAN_BASEURL.$group_id.'&view=listtrashfile';
 	$menu_attr[] = array('title' => _('Recover or delete permanently files with deleted status.'), 'id' => 'trashDocmanMenu');
 }
 
 if (forge_check_perm('docman', $group_id, 'admin')) {
 	$menu_text[] = _('Reporting');
-	$menu_links[] = '/docman/?group_id='.$group_id.'&view=reporting';
+	$menu_links[] = DOCMAN_BASEURL.$group_id.'&view=reporting';
 	$menu_attr[] = array('title' => _('Docman module reporting.'), 'id' => 'reportDocmanMenu');
 	$menu_text[] = _('Administration');
-	$menu_links[] = '/docman/?group_id='.$group_id.'&view=admin';
+	$menu_links[] = DOCMAN_BASEURL.$group_id.'&view=admin';
 	$menu_attr[] = array('title' => _('Docman module administration.'), 'id' => 'adminDocmanMenu');
 }
 

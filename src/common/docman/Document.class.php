@@ -143,34 +143,34 @@ class Document extends FFObject {
 	 * @return	bool	success.
 	 */
 	function create($filename, $filetype, $data, $doc_group, $title, $description, $stateid = 0, $vcomment = '', $importData = array()) {
-		if (strlen($title) < DOCMAN__TITLE_MIN_SIZE) {
-			$this->setError(sprintf(_('Title Must Be At Least %d Characters'), DOCMAN__TITLE_MIN_SIZE));
+		if (strlen($title) < DOCMAN_TITLE_MIN_SIZE) {
+			$this->setError(sprintf(_('Title Must Be At Least %d Characters'), DOCMAN_TITLE_MIN_SIZE));
 			return false;
 		}
-		if (strlen($description) < DOCMAN__DESCRIPTION_MIN_SIZE) {
-			$this->setError(sprintf(_('Document Description Must Be At Least %d Characters'), DOCMAN__DESCRIPTION_MIN_SIZE));
-			return false;
-		}
-
-		if (strlen($title) > DOCMAN__TITLE_MAX_SIZE) {
-			$this->setError(sprintf(_('Title Must Be Max %d Characters'), DOCMAN__TITLE_MAX_SIZE));
+		if (strlen($description) < DOCMAN_DESCRIPTION_MIN_SIZE) {
+			$this->setError(sprintf(_('Document Description Must Be At Least %d Characters'), DOCMAN_DESCRIPTION_MIN_SIZE));
 			return false;
 		}
 
-		if (strlen($description) > DOCMAN__DESCRIPTION_MAX_SIZE) {
-			$this->setError(sprintf(_('Document Description Must Be Max %d Characters'), DOCMAN__DESCRIPTION_MAX_SIZE));
+		if (strlen($title) > DOCMAN_TITLE_MAX_SIZE) {
+			$this->setError(sprintf(_('Title Must Be Max %d Characters'), DOCMAN_TITLE_MAX_SIZE));
 			return false;
 		}
 
-		if (strlen($description) > DOCMAN__COMMENT_MAX_SIZE) {
-			$this->setError(sprintf(_('Document Comment Must Be Max %d Characters'), DOCMAN__COMMENT_MAX_SIZE));
+		if (strlen($description) > DOCMAN_DESCRIPTION_MAX_SIZE) {
+			$this->setError(sprintf(_('Document Description Must Be Max %d Characters'), DOCMAN_DESCRIPTION_MAX_SIZE));
+			return false;
+		}
+
+		if (strlen($description) > DOCMAN_COMMENT_MAX_SIZE) {
+			$this->setError(sprintf(_('Document Comment Must Be Max %d Characters'), DOCMAN_COMMENT_MAX_SIZE));
 			return false;
 		}
 
 		if (isset($importData['user'])) {
 			$user_id = $importData['user'];
 		} else {
-			$user_id = ((session_loggedin()) ? user_getid() : DOCMAN__INFAMOUS_USER_ID);
+			$user_id = ((session_loggedin()) ? user_getid() : DOCMAN_INFAMOUS_USER_ID);
 		}
 
 		$perm =& $this->Group->getPermission();
@@ -868,28 +868,28 @@ class Document extends FFObject {
 			}
 		}
 
-		if (strlen($title) < DOCMAN__TITLE_MIN_SIZE) {
-			$this->setError(sprintf(_('Title Must Be At Least %d Characters'), DOCMAN__TITLE_MIN_SIZE));
+		if (strlen($title) < DOCMAN_TITLE_MIN_SIZE) {
+			$this->setError(sprintf(_('Title Must Be At Least %d Characters'), DOCMAN_TITLE_MIN_SIZE));
 			return false;
 		}
 
-		if (strlen($description) < DOCMAN__DESCRIPTION_MIN_SIZE) {
-			$this->setError(sprintf(_('Document Description Must Be At Least %d Characters'), DOCMAN__DESCRIPTION_MIN_SIZE));
+		if (strlen($description) < DOCMAN_DESCRIPTION_MIN_SIZE) {
+			$this->setError(sprintf(_('Document Description Must Be At Least %d Characters'), DOCMAN_DESCRIPTION_MIN_SIZE));
 			return false;
 		}
 
-		if (strlen($title) > DOCMAN__TITLE_MAX_SIZE) {
-			$this->setError(sprintf(_('Title Must Be Max %d Characters'), DOCMAN__TITLE_MAX_SIZE));
+		if (strlen($title) > DOCMAN_TITLE_MAX_SIZE) {
+			$this->setError(sprintf(_('Title Must Be Max %d Characters'), DOCMAN_TITLE_MAX_SIZE));
 			return false;
 		}
 
-		if (strlen($description) > DOCMAN__DESCRIPTION_MAX_SIZE) {
-			$this->setError(sprintf(_('Document Description Must Be Max %d Characters'), DOCMAN__DESCRIPTION_MAX_SIZE));
+		if (strlen($description) > DOCMAN_DESCRIPTION_MAX_SIZE) {
+			$this->setError(sprintf(_('Document Description Must Be Max %d Characters'), DOCMAN_DESCRIPTION_MAX_SIZE));
 			return false;
 		}
 
-		if (strlen($description) > DOCMAN__COMMENT_MAX_SIZE) {
-			$this->setError(sprintf(_('Document Comment Must Be Max %d Characters'), DOCMAN__COMMENT_MAX_SIZE));
+		if (strlen($description) > DOCMAN_COMMENT_MAX_SIZE) {
+			$this->setError(sprintf(_('Document Comment Must Be Max %d Characters'), DOCMAN_COMMENT_MAX_SIZE));
 			return false;
 		}
 

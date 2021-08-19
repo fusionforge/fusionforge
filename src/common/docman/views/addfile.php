@@ -7,7 +7,7 @@
  * Copyright 2010-2011, Franck Villaume - Capgemini
  * Copyright 2011, Roland Mas
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
- * Copyright 2012-2016, Franck Villaume - TrivialDev
+ * Copyright 2012-2016,2021, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -38,8 +38,8 @@ global $error_msg;
 global $childgroup_id;
 global $stateidArr;
 
-$actionurl = '/docman/?group_id='.$group_id.'&action=addfile&dirid='.$dirid;
-$redirecturl = '/docman/?group_id='.$group_id.'&view=listfile&dirid='.$dirid;
+$actionurl = DOCMAN_BASEURL.$group_id.'&action=addfile&dirid='.$dirid;
+$redirecturl = DOCMAN_BASEURL.$group_id.'&view=listfile&dirid='.$dirid;
 // plugin projects-hierarchy support
 if (isset($childgroup_id) && $childgroup_id) {
 	$g = group_get_object($childgroup_id);
@@ -83,11 +83,11 @@ if ($dgf->getNested($stateidArr) == NULL) {
 
 	if ($dg->isError()) {
 		$error_msg = $dg->getErrorMessage();
-		session_redirect('/docman/?group_id='.$group_id);
+		session_redirect(DOCMAN_BASEURL.$group_id);
 	}
 
 	if ($dg->create(_('Uncategorized Submissions'))) {
-		session_redirect('/docman/?group_id='.$group_id.'&view=additem');
+		session_redirect(DOCMAN_BASEURL.$group_id.'&view=additem');
 	}
 
 	echo $HTML->warning_msg(_('You MUST first create at least one folder to store your document.'));
@@ -97,15 +97,15 @@ if ($dgf->getNested($stateidArr) == NULL) {
 	echo $HTML->listTableTop(array(), array(), 'infotable');
 	$cells = array();
 	$cells[][] = _('Document Title').utils_requiredField();
-	$cells[][] = html_e('input', array('pattern' => '.{5,}', 'placeholder' => _('Document Title').' '.sprintf(_('(at least %s characters)'), DOCMAN__TITLE_MIN_SIZE), 'title' => _('Document Title')._(': ')._('Refers to the relatively brief title of the document (e.g. How to use the download server).'), 'type' => 'text', 'name' => 'title', 'size' => 40, 'maxlength' => DOCMAN__TITLE_MAX_SIZE, 'required' => 'required'));
+	$cells[][] = html_e('input', array('pattern' => '.{5,}', 'placeholder' => _('Document Title').' '.sprintf(_('(at least %s characters)'), DOCMAN_TITLE_MIN_SIZE), 'title' => _('Document Title')._(': ')._('Refers to the relatively brief title of the document (e.g. How to use the download server).'), 'type' => 'text', 'name' => 'title', 'size' => 40, 'maxlength' => DOCMAN_TITLE_MAX_SIZE, 'required' => 'required'));
 	echo $HTML->multiTableRow(array(), $cells);
 	$cells = array();
 	$cells[][] = _('Description') .utils_requiredField();
-	$cells[][] = html_e('textarea', array('minlength' => 10, 'placeholder' => _('Description').' '.sprintf(_('(at least %s characters)'), DOCMAN__DESCRIPTION_MIN_SIZE), 'title' => util_gen_cross_ref_hints(), 'name' => 'description', 'rows' => 5, 'cols' => 50, 'maxlength' => DOCMAN__DESCRIPTION_MAX_SIZE, 'required' => 'required'), '', false);
+	$cells[][] = html_e('textarea', array('minlength' => 10, 'placeholder' => _('Description').' '.sprintf(_('(at least %s characters)'), DOCMAN_DESCRIPTION_MIN_SIZE), 'title' => util_gen_cross_ref_hints(), 'name' => 'description', 'rows' => 5, 'cols' => 50, 'maxlength' => DOCMAN_DESCRIPTION_MAX_SIZE, 'required' => 'required'), '', false);
 	echo $HTML->multiTableRow(array(), $cells);
 	$cells = array();
 	$cells[][] = _('Comment');
-	$cells[][] = html_e('textarea', array('placeholder' => _('Add free comment'), 'name' => 'vcomment', 'rows' => 5, 'cols' => 50, 'maxlength' => DOCMAN__COMMENT_MAX_SIZE), '', false);
+	$cells[][] = html_e('textarea', array('placeholder' => _('Add free comment'), 'name' => 'vcomment', 'rows' => 5, 'cols' => 50, 'maxlength' => DOCMAN_COMMENT_MAX_SIZE), '', false);
 	echo $HTML->multiTableRow(array(), $cells);
 	$cells = array();
 	$cells[][] = _('Type of Document') .utils_requiredField();

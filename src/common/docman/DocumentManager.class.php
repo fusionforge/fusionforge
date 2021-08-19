@@ -27,6 +27,7 @@ require_once $gfcommon.'include/FFError.class.php';
 require_once $gfcommon.'include/User.class.php';
 require_once $gfcommon.'docman/DocumentGroup.class.php';
 require_once $gfcommon.'docman/DocumentFactory.class.php';
+require_once $gfcommon.'docman/include/constants.php';
 
 class DocumentManager extends FFError {
 
@@ -191,9 +192,9 @@ class DocumentManager extends FFError {
 				}
 				// support projects-hierarchy plugin
 				if ($this->Group->getID() != $g->getID()) {
-					$link = '/docman/?group_id='.$g->getID().'&view='.$linkmenu.'&dirid='.$localDg->getID().'&childgroup_id='.$this->Group->getID();
+					$link = DOCMAN_BASEURL.$g->getID().'&view='.$linkmenu.'&dirid='.$localDg->getID().'&childgroup_id='.$this->Group->getID();
 				} else {
-					$link = '/docman/?group_id='.$this->Group->getID().'&view='.$linkmenu.'&dirid='.$localDg->getID();
+					$link = DOCMAN_BASEURL.$this->Group->getID().'&view='.$linkmenu.'&dirid='.$localDg->getID();
 				}
 				$nbDocsLabel = '';
 				$nbDocs = $localDg->getNumberOfDocuments($stateId);

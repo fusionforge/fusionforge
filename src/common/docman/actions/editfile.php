@@ -33,7 +33,7 @@ global $feedback;
 global $error_msg;
 global $warning_msg;
 
-$urlparam = '/docman/?group_id='.$group_id;
+$urlparam = DOCMAN_BASEURL.$group_id;
 
 if ($childgroup_id) {
 	$g = group_get_object($childgroup_id);

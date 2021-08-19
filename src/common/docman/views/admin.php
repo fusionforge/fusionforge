@@ -6,7 +6,7 @@
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
  * Copyright 2010-2011, Franck Villaume - Capgemini
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
- * Copyright 2014-2015, Franck Villaume - TrivialDev
+ * Copyright 2014-2015,2021, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -34,7 +34,7 @@ global $HTML;
 
 if ( !forge_check_perm('docman', $group_id, 'admin')) {
 	$warning_msg = _('Document Manager Access Denied');
-	session_redirect('/docman/?group_id='.$group_id);
+	session_redirect(DOCMAN_BASEURL.$group_id);
 }
 
 echo html_ao('div', array('id' => 'principalAdminDiv', 'class' => 'docmanDivIncluded'));
@@ -56,7 +56,7 @@ if (extension_loaded('zip')) {
 	echo $HTML->closeForm();
 }
 
-echo $HTML->openForm(array('id' => 'createonline', 'name' => 'createonline', 'method' => 'post', 'action' => '/docman/?group_id='.$group_id.'&action=updatecreateonline'));
+echo $HTML->openForm(array('id' => 'createonline', 'name' => 'createonline', 'method' => 'post', 'action' => DOCMAN_BASEURL.$group_id.'&action=updatecreateonline'));
 echo html_ao('ul');
 $createOnlineStatus = '1';
 $labelCreateOnline = _('Enable Create Online Documents');
@@ -68,7 +68,7 @@ echo html_e('li', array(), html_e('input', array('name' => 'status', 'type' => '
 echo html_ac(html_ap() -1);
 echo $HTML->closeForm();
 
-echo $HTML->openForm(array('id' => 'searchengine', 'name' => 'searchengine', 'method' => 'post', 'action' => '/docman/?group_id='.$group_id.'&action=updateenginesearch'));
+echo $HTML->openForm(array('id' => 'searchengine', 'name' => 'searchengine', 'method' => 'post', 'action' => DOCMAN_BASEURL.$group_id.'&action=updateenginesearch'));
 echo html_ao('ul');
 $searchEngineStatus = '1';
 $labelSearchEngine = _('Enable Search Engine');
@@ -81,7 +81,7 @@ echo html_ac(html_ap() -1);
 echo $HTML->closeForm();
 
 if ($g->useDocmanSearch()) {
-	echo $HTML->openForm(array('id' => 'reindexword', 'name' => 'reindexword', 'method' => 'post', 'action' => '/docman/?group_id='.$group_id.'&action=forcereindexenginesearch'));
+	echo $HTML->openForm(array('id' => 'reindexword', 'name' => 'reindexword', 'method' => 'post', 'action' => DOCMAN_BASEURL.$group_id.'&action=forcereindexenginesearch'));
 	echo html_ao('ul');
 	echo html_e('li', array(), html_e('input', array('name' => 'status', 'type' => 'hidden', 'value' => '1')).html_e('input', array('id' => 'submitreindexword', 'type' => 'button', 'value' => _('Force reindexation search engine'), 'onclick' => 'javascript:doIt("reindexword")')), false);
 	echo html_ac(html_ap() -1);
@@ -89,7 +89,7 @@ if ($g->useDocmanSearch()) {
 }
 
 if (forge_get_config('use_webdav')) {
-	echo $HTML->openForm(array('id' => 'webdavinterface', 'name' => 'webdavinterface', 'method' => 'post', 'action' => '/docman/?group_id='.$group_id.'&action=updatewebdavinterface'));
+	echo $HTML->openForm(array('id' => 'webdavinterface', 'name' => 'webdavinterface', 'method' => 'post', 'action' => DOCMAN_BASEURL.$group_id.'&action=updatewebdavinterface'));
 	echo html_ao('ul');
 	$webdavStatus = '1';
 	$labelWebdavInterface = _('Enable Webdav Interface');

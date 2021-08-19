@@ -34,7 +34,7 @@ global $dirid; // id of doc_group
 global $HTML; // Layout object
 global $warning_msg;
 
-$redirect_url = '/docman/?group_id='.$group_id;
+$redirect_url = DOCMAN_BASEURL.$group_id;
 if (!forge_check_perm('docman', $group_id, 'read')) {
 	$warning_msg = _('Document Manager Access Denied');
 	session_redirect($redirect_url);
@@ -87,7 +87,7 @@ jQuery(document).ready(function() {
 //]]>
 <?php
 echo html_ac(html_ap() - 1);
-echo $HTML->openForm(array('method' => 'post', 'action' => '/docman/?group_id='.$group_id.'&view=search'));
+echo $HTML->openForm(array('method' => 'post', 'action' => DOCMAN_BASEURL.$group_id.'&view=search'));
 echo html_e('div', array('id' => 'docman_search_query_words'),
 		html_e('span', array('id' => 'docman_search_query_label'), _('Query').utils_requiredField()._(': ')).
 html_e('input', array('type' => 'text', 'name' => 'textsearch', 'id' => 'textsearch', 'size' => 48, 'value' => stripslashes(htmlspecialchars($searchString)), 'required' => 'required', 'placeholder' => _('Searched words'))).

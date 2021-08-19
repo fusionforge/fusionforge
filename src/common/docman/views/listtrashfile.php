@@ -6,7 +6,7 @@
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
  * Copyright 2010-2011, Franck Villaume - Capgemini
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
- * Copyright 2011-2017, Franck Villaume - TrivialDev
+ * Copyright 2011-2017,2021, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -38,7 +38,7 @@ global $start; // use to set the offset
 
 $linkmenu = 'listtrashfile';
 $childgroup_id = getIntFromRequest('childgroup_id');
-$baseredirecturl = '/docman/?group_id='.$group_id;
+$baseredirecturl = DOCMAN_BASEURL.$group_id;
 $redirecturl = $baseredirecturl.'&view='.$linkmenu.'&dirid='.$dirid;
 
 echo html_ao('div', array('id' => 'leftdiv'));
@@ -97,7 +97,7 @@ if (is_array($d_arr) && count($d_arr) > 0) {
 
 echo html_ao('div', array('id' => 'rightdiv'));
 echo html_ao('div', array('style' => 'padding:5px'));
-echo $HTML->openForm(array('id' => 'emptytrash', 'name' => 'emptytrash', 'method' => 'post', 'action' => '/docman/?group_id='.$group_id.'&action=emptytrash'));
+echo $HTML->openForm(array('id' => 'emptytrash', 'name' => 'emptytrash', 'method' => 'post', 'action' => DOCMAN_BASEURL.$group_id.'&action=emptytrash'));
 echo html_e('input', array('id' => 'submitemptytrash', 'type' => 'submit', 'value' => _('Delete permanently all documents and folders with deleted status.')));
 echo $HTML->closeForm();
 echo html_ac(html_ap() - 1);
@@ -132,7 +132,7 @@ echo html_ac(html_ap() - 1);
 if ($DocGroupName) {
 	$headerPath = '';
 	if ($childgroup_id) {
-		$headerPath .= _('Subproject')._(': ').util_make_link('/docman/?group_id='.$g->getID(), $g->getPublicName()).'::';
+		$headerPath .= _('Subproject')._(': ').util_make_link(DOCMAN_BASEURL.$g->getID(), $g->getPublicName()).'::';
 	}
 	$headerPath .= html_e('i', array(), preg_replace('/\/\//','/', $dgpath.'/'.$DocGroupName), false).'&nbsp;';
 	echo html_e('h2', array('class' => 'docman_h2'), $headerPath, false);
@@ -194,11 +194,10 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 			}
 		}
 		$newdgf = new DocumentGroupFactory($d->Group);
-		$editfileaction = '/docman/?action=editfile&fromview=listfile&dirid='.$d->getDocGroupID();
+		$editfileaction = DOCMAN_BASEURL.$GLOBALS['group_id'].'&action=editfile&fromview=listfile&dirid='.$d->getDocGroupID();
 		if (isset($GLOBALS['childgroup_id']) && $GLOBALS['childgroup_id']) {
 			$editfileaction .= '&childgroup_id='.$GLOBALS['childgroup_id'];
 		}
-		$editfileaction .= '&group_id='.$GLOBALS['group_id'];
 		$nextcell = '';
 		$nextcell .= util_make_link($redirecturl.'&action=delfile&fileid='.$d->getID(), $HTML->getRemovePic(_('Delete permanently this document.'), 'delfile'));
 		$nextcell .= util_make_link('#', $HTML->getEditFilePic(_('Edit this document'), 'editdocument'), array('onclick' => 'javascript:controllerListFile.toggleEditFileView({action:\''.util_make_uri($editfileaction).'\', lockIntervalDelay: 60000, childGroupId: '.util_ifsetor($childgroup_id, 0).' ,id:'.$d->getID().', groupId:'.$d->Group->getID().', docgroupId:'.$d->getDocGroupID().', statusId:'.$d->getStateID().', statusDict:'.$dm->getStatusNameList('json','2').', docgroupDict:'.$dm->getDocGroupList($newdgf->getNested(array(1, 5)), 'json').', isText:\''.$d->isText().'\', useCreateOnline:'.$d->Group->useCreateOnline().', docManURL:\''.util_make_uri("docman").'\'})', 'title' => _('Edit this document')), true);

@@ -2,7 +2,7 @@
 /**
  * FusionForge Documentation Manager
  *
- * Copyright 2012,2016, Franck Villaume - TrivialDev
+ * Copyright 2012,2016,2021, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -33,7 +33,7 @@ global $warning_msg;
 
 $sysdebug_enable = false;
 
-$urlparam = '/docman/?group_id='.$group_id;
+$urlparam = DOCMAN_BASEURL.$group_id;
 if ($childgroup_id) {
 	$g = group_get_object($childgroup_id);
 	$urlparam .= '&childgroup_id='.$childgroup_id;

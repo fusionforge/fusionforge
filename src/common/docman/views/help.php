@@ -36,7 +36,7 @@ if ($childgroup_id) {
 
 if (!forge_check_perm('docman', $g->getID(), 'read')) {
 	$warning_msg = _('Document Manager Access Denied');
-	session_redirect('/docman/?group_id='.$group_id);
+	session_redirect(DOCMAN_BASEURL.$group_id);
 }
 
 echo html_ao('div', array('class' => 'docmanDivIncluded'));

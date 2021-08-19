@@ -39,7 +39,7 @@ global $start; // use to set the offset
 global $childgroup_id;
 
 $linkmenu = 'listfile';
-$baseredirecturl = '/docman/?group_id='.$group_id;
+$baseredirecturl = DOCMAN_BASEURL.$group_id;
 $redirecturl = $baseredirecturl.'&view='.$linkmenu.'&dirid='.$dirid;
 
 echo html_ao('div', array('id' => 'leftdiv'));
@@ -182,7 +182,7 @@ echo html_ac(html_ap() - 1);
 if ($DocGroupName) {
 	$headerPath = '';
 	if ($childgroup_id) {
-		$headerPath .= _('Subproject')._(': ').util_make_link('/docman/?group_id='.$g->getID(), $g->getPublicName()).'::';
+		$headerPath .= _('Subproject')._(': ').util_make_link(DOCMAN_BASEURL.$g->getID(), $g->getPublicName()).'::';
 	}
 	$headerPath .= html_e('i', array(), preg_replace('/\/\//','/', $dgpath.'/'.$DocGroupName), false);
 	echo html_e('h2', array('class' => 'docman_h2'), $headerPath, false);
@@ -325,14 +325,12 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 
 		if (forge_check_perm('docman', $g->getID(), 'approve')) {
 			$nextcell = '';
-			$editfileaction = '/docman/?action=editfile&fromview=listfile&dirid='.$d->getDocGroupID();
-			$notifyaction = '/docman/?action=notifyusers&fromview=listfile&dirid='.$d->getDocGroupID();
+			$editfileaction = DOCMAN_BASEURL.$group_id.'&action=editfile&fromview=listfile&dirid='.$d->getDocGroupID();
+			$notifyaction = DOCMAN_BASEURL.$group_id.'&action=notifyusers&fromview=listfile&dirid='.$d->getDocGroupID();
 			if ($childgroup_id) {
 				$editfileaction .= '&childgroup_id='.$childgroup_id;
 				$notifyaction .= '&childgroup_id='.$childgroup_id;
 			}
-			$editfileaction .= '&group_id='.$group_id;
-			$notifyaction .= '&group_id='.$group_id;
 			if (!$d->getLocked() && !$d->getReserved()) {
 				$nextcell .= util_make_link($redirecturl.'&action=trashfile&fileid='.$d->getID(), $HTML->getDeletePic(_('Move this document to trash'), 'delfile'));
 

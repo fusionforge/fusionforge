@@ -53,7 +53,7 @@ global $warning_msg;
 
 if ( !forge_check_perm('docman', $group_id, 'admin')) {
 	$warning_msg = _('Document Manager Access Denied');
-	session_redirect('/docman/?group_id='.$group_id);
+	session_redirect(DOCMAN_BASEURL.$group_id);
 }
 
 $start = getIntFromRequest('start');
@@ -89,7 +89,7 @@ if ($report->isError()) {
 	echo $HTML->error_msg($report->getErrorMessage());
 } else {
 	echo html_ao('div', array('id' => 'div_form_reporting'));
-	echo $HTML->openForm(array('action' => '/docman/?group_id='.$group_id.'&view=reporting', 'method' => 'post', 'class' => 'align-center'));
+	echo $HTML->openForm(array('action' => DOCMAN_BASEURL.$group_id.'&view=reporting', 'method' => 'post', 'class' => 'align-center'));
 	echo html_e('strong', array(), _('Start Date')._(':'), false);
 	echo report_months_box($report, 'start', $start);
 	echo html_e('strong', array(), _('End Date')._(':'), false);

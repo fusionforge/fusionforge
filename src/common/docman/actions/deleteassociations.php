@@ -32,7 +32,7 @@ global $error_msg;
 global $warning_msg;
 
 $dirid = getIntFromRequest('dirid');
-$baseurl = '/docman/?group_id='.$group_id.'&dirid='.$dirid;
+$baseurl = DOCMAN_BASEURL.$group_id.'&dirid='.$dirid;
 // plugin projects-hierarchy handler
 if ($childgroup_id) {
 	$g = group_get_object($childgroup_id);

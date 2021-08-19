@@ -3,7 +3,7 @@
  * FusionForge Documentation Manager
  *
  * Copyright 2010-2011, Franck Villaume - Capgemini
- * Copyright 2014,2015-2017, Franck Villaume - TrivialDev
+ * Copyright 2014,2015-2017,2021, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -31,7 +31,7 @@ global $error_msg;
 global $warning_msg;
 global $dirid;
 
-$return_url = '/docman/?group_id='.$group_id.'&dirid='.$dirid;
+$return_url = DOCMAN_BASEURL.$group_id.'&dirid='.$dirid;
 
 if (!forge_check_perm('docman', $group_id, 'approve')) {
 	$warning_msg = _('Document Manager Action Denied.');

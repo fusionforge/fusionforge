@@ -52,7 +52,7 @@ if (!$doc_group) {
 	$doc_group = $dirid;
 }
 
-$baseurl = '/docman/?group_id='.$group_id;
+$baseurl = DOCMAN_BASEURL.$group_id;
 $redirecturl = $baseurl.'&dirid='.$doc_group;
 
 // plugin projects-hierarchy handler

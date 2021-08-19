@@ -3,7 +3,7 @@
  * FusionForge Documentation Manager
  *
  * Copyright 2010-2011, Franck Villaume - Capgemini
- * Copyright 2012-2015, Franck Villaume - TrivialDev
+ * Copyright 2012-2015,2021, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -29,7 +29,7 @@ global $group_id; // id of group
 global $LUSER; // User object
 global $childgroup_id; // id of child group if any
 
-$redirecturl = '/docman/?group_id='.$group_id.'&dirid='.$dirid;
+$redirecturl = DOCMAN_BASEURL.$group_id.'&dirid='.$dirid;
 
 // plugin projects-hierarchy handler
 if ($childgroup_id) {

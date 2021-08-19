@@ -3,7 +3,7 @@
  * FusionForge Documentation Manager
  *
  * Copyright 2010-2011, Franck Villaume - Capgemini
- * Copyright 2014, Franck Villaume - TrivialDev
+ * Copyright 2014,2021, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -32,7 +32,7 @@ global $warning_msg;
 
 if (!forge_check_perm('docman', $group_id, 'admin')) {
 	$warning_msg = _('Document Manager Action Denied.');
-	session_redirect('/docman/?group_id='.$group_id);
+	session_redirect(DOCMAN_BASEURL.$group_id);
 }
 
 if ($_POST['status']) {
@@ -46,7 +46,7 @@ if ($_POST['status']) {
 if (!$g->setDocmanWebdav($status)) {
 	$feedback = '';
 	$warning_msg = $g->getErrorMessage();
-	session_redirect('/docman/?group_id='.$group_id.'&view=admin');
+	session_redirect(DOCMAN_BASEURL.$group_id.'&view=admin');
 }
 
-session_redirect('/docman/?group_id='.$group_id.'&view=admin');
+session_redirect(DOCMAN_BASEURL.$group_id.'&view=admin');

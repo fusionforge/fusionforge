@@ -31,7 +31,7 @@ global $dirid; // id of doc_group
 global $group_id; // id of group
 global $childgroup_id; // plugin projects hierarchy handler
 
-$urlredirect = '/docman/?group_id='.$group_id.'&dirid='.$dirid;
+$urlredirect = DOCMAN_BASEURL.$group_id.'&dirid='.$dirid;
 
 // plugin projects-hierarchy handler
 if ($childgroup_id) {

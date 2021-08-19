@@ -2,7 +2,7 @@
 /**
  * FusionForge Documentation Manager
  *
- * Copyright 2016-2017, Franck Villaume - TrivialDev
+ * Copyright 2016-2017,2021, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -269,7 +269,7 @@ class DocumentReview extends FFError {
 		$return .= $HTML->multiTableRow(array(), $cells);
 		$cells = array();
 		$cells[][] = _('Conclusion Comment')._(':');
-		$cells[][] = html_e('textarea', array('id' => 'review-completedcomment', 'name' => 'review-completedcomment', 'style' => 'width: 100%; box-sizing: border-box;', 'rows' => 3, 'required' => 'required', 'pattern' => '.{10,}', 'placeholder' => _('Final comment').' '.sprintf(_('(at least %s characters)'), DOCMAN__REVIEW_DESCRIPTION_MIN_SIZE), 'maxlength' => DOCMAN__REVIEW_DESCRIPTION_MAX_SIZE), '', false);
+		$cells[][] = html_e('textarea', array('id' => 'review-completedcomment', 'name' => 'review-completedcomment', 'style' => 'width: 100%; box-sizing: border-box;', 'rows' => 3, 'required' => 'required', 'pattern' => '.{10,}', 'placeholder' => _('Final comment').' '.sprintf(_('(at least %s characters)'), DOCMAN_REVIEW_DESCRIPTION_MIN_SIZE), 'maxlength' => DOCMAN_REVIEW_DESCRIPTION_MAX_SIZE), '', false);
 		$return .= $HTML->multiTableRow(array(), $cells);
 		$return .= $HTML->listTableBottom();
 		$return .= html_ac(html_ap() -1);
@@ -295,11 +295,11 @@ class DocumentReview extends FFError {
 			$return .= $HTML->listTableTop(array(), array(), 'full');
 			$cells = array();
 			$cells[] = array(_('Title').utils_requiredField()._(':'), 'style' => 'width: 30%;');
-			$cells[][] = html_e('input', array('type' => 'text', 'id' => 'review-title', 'name' => 'review-title', 'style' => 'width: 100%; box-sizing: border-box;', 'required' => 'required', 'pattern' => '.{5,}', 'placeholder' => _('Title').' '.sprintf(_('(at least %s characters)'), DOCMAN__REVIEW_TITLE_MIN_SIZE), 'maxlength' => DOCMAN__REVIEW_TITLE_MAX_SIZE));
+			$cells[][] = html_e('input', array('type' => 'text', 'id' => 'review-title', 'name' => 'review-title', 'style' => 'width: 100%; box-sizing: border-box;', 'required' => 'required', 'pattern' => '.{5,}', 'placeholder' => _('Title').' '.sprintf(_('(at least %s characters)'), DOCMAN_REVIEW_TITLE_MIN_SIZE), 'maxlength' => DOCMAN_REVIEW_TITLE_MAX_SIZE));
 			$return .= $HTML->multiTableRow(array(), $cells);
 			$cells = array();
 			$cells[][] = _('Description').utils_requiredField()._(':');
-			$cells[][] = html_e('textarea', array('id' => 'review-description', 'name' => 'review-description', 'style' => 'width: 100%; box-sizing: border-box;', 'rows' => 3, 'required' => 'required', 'pattern' => '.{10,}', 'placeholder' => _('Description').' '.sprintf(_('(at least %s characters)'), DOCMAN__REVIEW_DESCRIPTION_MIN_SIZE), 'maxlength' => DOCMAN__REVIEW_DESCRIPTION_MAX_SIZE), '', false);
+			$cells[][] = html_e('textarea', array('id' => 'review-description', 'name' => 'review-description', 'style' => 'width: 100%; box-sizing: border-box;', 'rows' => 3, 'required' => 'required', 'pattern' => '.{10,}', 'placeholder' => _('Description').' '.sprintf(_('(at least %s characters)'), DOCMAN_REVIEW_DESCRIPTION_MIN_SIZE), 'maxlength' => DOCMAN_REVIEW_DESCRIPTION_MAX_SIZE), '', false);
 			$return .= $HTML->multiTableRow(array(), $cells);
 			$cells = array();
 			$cells[][] = _('Select Version to review').utils_requiredField()._(':');
@@ -319,7 +319,7 @@ class DocumentReview extends FFError {
 			$return .= $HTML->multiTableRow(array('id' => 'tr-optional-reviewers'), $cells);
 			$cells = array();
 			$cells[][] = _('Notification comment')._(':');
-			$cells[][] = html_e('textarea', array('id' => 'review-notificationcomment', 'name' => 'review-notificationcomment', 'style' => 'width: 100%; box-sizing: border-box;', 'rows' => 3, 'pattern' => '.{10,}', 'placeholder' => _('Add a specific comment for the mail notification here'), 'maxlength' => DOCMAN__REVIEW_DESCRIPTION_MAX_SIZE), '', false);
+			$cells[][] = html_e('textarea', array('id' => 'review-notificationcomment', 'name' => 'review-notificationcomment', 'style' => 'width: 100%; box-sizing: border-box;', 'rows' => 3, 'pattern' => '.{10,}', 'placeholder' => _('Add a specific comment for the mail notification here'), 'maxlength' => DOCMAN_REVIEW_DESCRIPTION_MAX_SIZE), '', false);
 			$return .= $HTML->multiTableRow(array('id' => 'review-notificationcomment-row'), $cells);
 			$cells = array();
 			$return .= $HTML->listTableBottom();
@@ -346,7 +346,7 @@ class DocumentReview extends FFError {
 		$return = $HTML->listTableTop();
 		$cells = array();
 		$cells[] = array(_('Comment').utils_requiredField()._(':'), 'style' => 'width: 30%;');
-		$cells[][] = html_e('textarea', array('id' => 'review-comment', 'name' => 'review-comment', 'style' => 'width: 100%; box-sizing: border-box;', 'rows' => 3, 'required' => 'required', 'pattern' => '.{10,}', 'placeholder' => _('Add your comment').' '.sprintf(_('(at least %s characters)'), DOCMAN__REVIEW_DESCRIPTION_MIN_SIZE), 'maxlength' => DOCMAN__REVIEW_DESCRIPTION_MAX_SIZE), '', false);
+		$cells[][] = html_e('textarea', array('id' => 'review-comment', 'name' => 'review-comment', 'style' => 'width: 100%; box-sizing: border-box;', 'rows' => 3, 'required' => 'required', 'pattern' => '.{10,}', 'placeholder' => _('Add your comment').' '.sprintf(_('(at least %s characters)'), DOCMAN_REVIEW_DESCRIPTION_MIN_SIZE), 'maxlength' => DOCMAN_REVIEW_DESCRIPTION_MAX_SIZE), '', false);
 		$return .= $HTML->multiTableRow(array(), $cells);
 		$cells = array();
 		$cells[][] = _('Review done')._(':');
@@ -413,12 +413,12 @@ class DocumentReview extends FFError {
 			$this->setError(_('Missing Version ID to create review'));
 			return false;
 		}
-		if (strlen($reviewtitle) < DOCMAN__REVIEW_TITLE_MIN_SIZE || strlen($reviewtitle) > DOCMAN__REVIEW_TITLE_MAX_SIZE) {
-			$this->setError(sprintf(_('Review Title must be %d characters minimum and %d characters maximum'), DOCMAN__REVIEW_TITLE_MIN_SIZE, DOCMAN__REVIEW_TITLE_MAX_SIZE));
+		if (strlen($reviewtitle) < DOCMAN_REVIEW_TITLE_MIN_SIZE || strlen($reviewtitle) > DOCMAN_REVIEW_TITLE_MAX_SIZE) {
+			$this->setError(sprintf(_('Review Title must be %d characters minimum and %d characters maximum'), DOCMAN_REVIEW_TITLE_MIN_SIZE, DOCMAN_REVIEW_TITLE_MAX_SIZE));
 			return false;
 		}
-		if (strlen($reviewdescription) < DOCMAN__REVIEW_DESCRIPTION_MIN_SIZE || strlen($reviewdescription) > DOCMAN__REVIEW_DESCRIPTION_MAX_SIZE) {
-			$this->setError(sprintf(_('Review Description must be %d characters minimum and %d characters maximum'), DOCMAN__REVIEW_DESCRIPTION_MIN_SIZE, DOCMAN__REVIEW_DESCRIPTION_MAX_SIZE));
+		if (strlen($reviewdescription) < DOCMAN_REVIEW_DESCRIPTION_MIN_SIZE || strlen($reviewdescription) > DOCMAN_REVIEW_DESCRIPTION_MAX_SIZE) {
+			$this->setError(sprintf(_('Review Description must be %d characters minimum and %d characters maximum'), DOCMAN_REVIEW_DESCRIPTION_MIN_SIZE, DOCMAN_REVIEW_DESCRIPTION_MAX_SIZE));
 			return false;
 		}
 		if (!isset($importData['enddate']) && $reviewenddate < $now) {
@@ -437,7 +437,7 @@ class DocumentReview extends FFError {
 		if (isset($importData['user'])) {
 			$user_id = $importData['user'];
 		} else {
-			$user_id = ((session_loggedin()) ? user_getid() : DOCMAN__INFAMOUS_USER_ID);
+			$user_id = ((session_loggedin()) ? user_getid() : DOCMAN_INFAMOUS_USER_ID);
 		}
 		if (isset($importData['startdate'])) {
 			$now = $importData['startdate'];
@@ -592,12 +592,12 @@ class DocumentReview extends FFError {
 			$this->setError(_('Missing Version ID to create review'));
 			return false;
 		}
-		if (strlen($reviewtitle) < DOCMAN__REVIEW_TITLE_MIN_SIZE || strlen($reviewtitle) > DOCMAN__REVIEW_TITLE_MAX_SIZE) {
-			$this->setError(sprintf(_('Review Title must be %d characters minimum and %d characters maximum'), DOCMAN__REVIEW_TITLE_MIN_SIZE, DOCMAN__REVIEW_TITLE_MAX_SIZE));
+		if (strlen($reviewtitle) < DOCMAN_REVIEW_TITLE_MIN_SIZE || strlen($reviewtitle) > DOCMAN_REVIEW_TITLE_MAX_SIZE) {
+			$this->setError(sprintf(_('Review Title must be %d characters minimum and %d characters maximum'), DOCMAN_REVIEW_TITLE_MIN_SIZE, DOCMAN_REVIEW_TITLE_MAX_SIZE));
 			return false;
 		}
-		if (strlen($reviewdescription) < DOCMAN__REVIEW_DESCRIPTION_MIN_SIZE || strlen($reviewdescription) > DOCMAN__REVIEW_DESCRIPTION_MAX_SIZE) {
-			$this->setError(sprintf(_('Review Description must be %d characters minimum and %d characters maximum'), DOCMAN__REVIEW_DESCRIPTION_MIN_SIZE, DOCMAN__REVIEW_DESCRIPTION_MAX_SIZE));
+		if (strlen($reviewdescription) < DOCMAN_REVIEW_DESCRIPTION_MIN_SIZE || strlen($reviewdescription) > DOCMAN_REVIEW_DESCRIPTION_MAX_SIZE) {
+			$this->setError(sprintf(_('Review Description must be %d characters minimum and %d characters maximum'), DOCMAN_REVIEW_DESCRIPTION_MIN_SIZE, DOCMAN_REVIEW_DESCRIPTION_MAX_SIZE));
 			return false;
 		}
 		if ($reviewenddate < time()) {

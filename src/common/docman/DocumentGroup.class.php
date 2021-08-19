@@ -28,6 +28,7 @@
 
 require_once $gfcommon.'include/FFError.class.php';
 require_once $gfcommon.'include/MonitorElement.class.php';
+require_once $gfcommon.'docman/include/constants.php';
 
 $DOCUMENTGROUP_OBJ = array();
 
@@ -701,11 +702,10 @@ class DocumentGroup extends FFError {
 				} else {
 					$view = 'listfile';
 				}
-				$browselink = '/docman/?view='.$view.'&dirid='.$this->getID();
+				$browselink = DOCMAN_BASEURL.$this->Group->getID().'&view='.$view.'&dirid='.$this->getID();
 				if (isset($GLOBALS['childgroup_id']) && $GLOBALS['childgroup_id']) {
 					$browselink .= '&childgroup_id='.$GLOBALS['childgroup_id'];
 				}
-				$browselink .= '&group_id='.$this->Group->getID();
 				$returnPath .= '/'.util_make_link($browselink, $this->getName(), array('title' => _('Browse this folder')));
 			} else {
 				$returnPath .= '/'.$this->getName();
@@ -818,7 +818,7 @@ class DocumentGroup extends FFError {
 			}
 			$body .= "\n\n-------------------------------------------------------\n".
 				_('For more info, visit:').
-				"\n\n" . util_make_url('/docman/?group_id='.$this->Group->getID().'&view=listfile&dirid='.$this->getID());
+				"\n\n" . util_make_url(DOCMAN_BASEURL.$this->Group->getID().'&view=listfile&dirid='.$this->getID());
 
 			$BCCarray = explode(',',$BCC);
 			foreach ($BCCarray as $dest_email) {

@@ -37,7 +37,7 @@ global $childgroup_id;
 
 if (!forge_check_perm('docman', $group_id, 'read')) {
 	$warning_msg= _('Document Manager Access Denied');
-	session_redirect('/docman/?group_id='.$group_id);
+	session_redirect(DOCMAN_BASEURL.$group_id);
 }
 
 echo html_ao('div', array('id' => 'documenttree'));
@@ -63,7 +63,7 @@ if (isset($projectIDsArray) && is_array($projectIDsArray)) {
 		if ($groupObject->usesDocman() && $projectsHierarchy->getDocmanStatus($groupObject->getID())
 			&& forge_check_perm('docman', $groupObject->getID(), 'read')) {
 			echo html_e('hr');
-			echo html_e('h5', array(), _('Child project')._(': ').util_make_link('/docman/?group_id='.$groupObject->getID(),$groupObject->getPublicName(), array('title'=>_('Browse document manager for this project.'))), false);
+			echo html_e('h5', array(), _('Child project')._(': ').util_make_link(DOCMAN_BASEURL.$groupObject->getID(), $groupObject->getPublicName(), array('title'=>_('Browse document manager for this project.'))), false);
 			$dmc = new DocumentManager($groupObject);
 			echo html_ao('ul', array('id' => $groupObject->getUnixName().'-tree'));
 			$dmc->getHTMLTree($dirid, $linkmenu);

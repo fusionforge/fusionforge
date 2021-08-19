@@ -29,7 +29,7 @@ global $warning_msg;
 
 if (!forge_check_perm('docman', $group_id, 'read')) {
 	$warning_msg = _('Document Manager Access Denied');
-	session_redirect('/docman/?group_id='.$group_id);
+	session_redirect(DOCMAN_BASEURL.$group_id);
 }
 
 $view = getStringFromRequest('view', 'listfile');

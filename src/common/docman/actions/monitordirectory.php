@@ -3,7 +3,7 @@
  * FusionForge Documentation Manager
  *
  * Copyright 2010-2011, Franck Villaume - Capgemini
- * Copyright 2012,2014, Franck Villaume - TrivialDev
+ * Copyright 2012,2014,2021, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -27,9 +27,11 @@
 global $dirid; //id of doc_group
 global $group_id; // id of group
 
+$urlredirect = DOCMAN_BASEURL.$group_id.'&dirid='.$dirid;
+
 if (!forge_check_perm('docman', $group_id, 'read')) {
 	$warning_msg = _('Document Manager Action Denied.');
-	session_redirect('/docman/?group_id='.$group_id.'&dirid='.$dirid);
+	session_redirect($urlredirect);
 }
 
 $directoryid = getStringFromRequest('directoryid');
@@ -37,7 +39,7 @@ $option = getStringFromRequest('option');
 $dg = documentgroup_get_object($directoryid, $group_id);
 if (!$dg || $dg->isError()) {
 	$error_msg = _('Docman Error: unable to get folder object');
-	session_redirect('/docman/?group_id='.$group_id);
+	session_redirect(DOCMAN_BASEURL.$group_id);
 }
 
 switch ($option) {
@@ -45,11 +47,11 @@ switch ($option) {
 		if (!empty($directoryid)) {
 			if ($dg->isError() || !$dg->addMonitoredBy(user_getid())) {
 				$error_msg = $dg->getErrorMessage();
-				session_redirect('/docman/?group_id='.$group_id.'&dirid='.$dirid);
+				session_redirect($urlredirect);
 			}
 		} else {
 			$warning_msg = _('No action to perform');
-			session_redirect('/docman/?group_id='.$group_id.'&dirid='.$dirid);
+			session_redirect($urlredirect);
 		}
 		$feedback = _('Folder').' '.$dg->getName()._(': ')._('Monitoring Started');
 		break;
@@ -58,11 +60,11 @@ switch ($option) {
 		if (!empty($directoryid)) {
 			if ($dg->isError() || !$dg->removeMonitoredBy(user_getid())) {
 				$error_msg = $dg->getErrorMessage();
-				session_redirect('/docman/?group_id='.$group_id.'&dirid='.$dirid);
+				session_redirect($urlredirect);
 			}
 		} else {
 			$warning_msg = _('No action to perform');
-			session_redirect('/docman/?group_id='.$group_id.'&dirid='.$dirid);
+			session_redirect($urlredirect);
 		}
 		$feedback = _('Folder').' '.$dg->getName()._(': ')._('Monitoring Stopped');
 		break;
@@ -72,4 +74,4 @@ switch ($option) {
 	}
 }
 
-session_redirect('/docman/?group_id='.$group_id.'&dirid='.$dirid);
+session_redirect($urlredirect);

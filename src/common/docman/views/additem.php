@@ -3,7 +3,7 @@
  * FusionForge Documentation Manager
  *
  * Copyright 2010-2011, Franck Villaume - Capgemini
- * Copyright 2012-2016, Franck Villaume - TrivialDev
+ * Copyright 2012-2016,2021, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -32,7 +32,7 @@ global $gfcommon;
 
 if (!forge_check_perm('docman', $group_id, 'submit')) {
 	$warning_msg = _('Document Manager Access Denied');
-	session_redirect('/docman/?group_id='.$group_id);
+	session_redirect(DOCMAN_BASEURL.$group_id);
 }
 
 $stateidArr = array(1);
@@ -81,7 +81,7 @@ if (forge_check_perm('docman', $group_id, 'approve')) {
 	if ($dgf->getNested($stateidArr) == NULL) {
 		echo $HTML->warning_msg(_('You MUST first create at least one folder to upload your archive.'));
 	} else {
-		echo $HTML->openForm(array('id' => 'injectzip', 'name' => 'injectzip', 'method' => 'post', 'action' => '/docman/?group_id='.$group_id.'&action=injectzip&dirid='.$dirid, 'enctype' => 'multipart/form-data'));
+		echo $HTML->openForm(array('id' => 'injectzip', 'name' => 'injectzip', 'method' => 'post', 'action' => DOCMAN_BASEURL.$group_id.'&action=injectzip&dirid='.$dirid, 'enctype' => 'multipart/form-data'));
 		if (forge_get_config('use_manual_uploads')) {
 			echo html_e('input', array('type' => 'radio', 'id' => 'buttonFileZip', 'name' => 'type', 'value' => 'httpupload', 'checked' => 'checked', 'required' => 'required')).html_e('span', array(), _('File'), false);
 			echo html_e('input', array('type' => 'radio', 'id' => 'buttonManualUploadZip', 'name' => 'type', 'value' => 'manualupload', 'required' => 'required')).html_e('span', array(), _('Already-uploaded file'), false);

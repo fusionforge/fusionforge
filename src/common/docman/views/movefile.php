@@ -32,7 +32,7 @@ global $HTML; // Layout object
 global $warning_msg;
 global $childgroup_id;
 
-$actionurl = '/docman/?group_id='.$group_id.'&dirid='.$dirid.'&action=movefile';
+$actionurl = DOCMAN_BASEURL.$group_id.'&dirid='.$dirid.'&action=movefile';
 // plugin projects-hierarchy support
 if ($childgroup_id) {
 	$g = group_get_object($childgroup_id);
@@ -41,7 +41,7 @@ if ($childgroup_id) {
 
 if (!forge_check_perm('docman', $g->getID(), 'approve')) {
 	$warning_msg = _('Document Manager Access Denied');
-	session_redirect('/docman/?group_id='.$group_id);
+	session_redirect(DOCMAN_BASEURL.$group_id);
 }
 
 echo html_ao('div', array('class' => 'docmanDivIncluded'));

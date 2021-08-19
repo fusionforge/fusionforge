@@ -3,7 +3,7 @@
  * FusionForge Documentation Manager
  *
  * Copyright 2010-2011, Franck Villaume - Capgemini
- * Copyright 2012,2014, Franck Villaume - TrivialDev
+ * Copyright 2012,2014,2021, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -32,7 +32,7 @@ $sysdebug_enable = false;
 
 if (!forge_check_perm('docman', $group_id, 'approve')) {
 	$warning_msg = _('Document Manager Action Denied.');
-	session_redirect('/docman/?group_id='.$group_id.'&dirid='.$dirid);
+	session_redirect(DOCMAN_BASEURL.$group_id.'&dirid='.$dirid);
 }
 
 $itemid = getIntFromRequest('itemid');
@@ -55,13 +55,13 @@ switch ($type) {
 	}
 	default: {
 		$error_msg = _('Lock failed')._(': ')._('Missing Type');
-		session_redirect('/docman/?group_id='.$group_id.'&dirid='.$dirid);
+		session_redirect(DOCMAN_BASEURL.$group_id.'&dirid='.$dirid);
 	}
 }
 
 if ($objectType->isError()) {
 	$error_msg  = $objectType->getErrorMessage();
-	session_redirect('/docman/?group_id='.$group_id.'&dirid='.$dirid);
+	session_redirect(DOCMAN_BASEURL.$group_id.'&dirid='.$dirid);
 }
 
 if ($lock === 0) {

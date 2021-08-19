@@ -3,7 +3,7 @@
  * FusionForge Documentation Manager
  *
  * Copyright 2010-2011, Franck Villaume - Capgemini
- * Copyright 2014, Franck Villaume - TrivialDev
+ * Copyright 2014,2021, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -30,7 +30,7 @@ global $group_id; // id of group
 
 if (!forge_check_perm('docman', $group_id, 'admin')) {
 	$warning_msg = _('Document Manager Action Denied.');
-	session_redirect('/docman/?group_id='.$group_id.'&dirid='.$dirid);
+	session_redirect(DOCMAN_BASEURL.$group_id.'&dirid='.$dirid);
 }
 
 $arr_fileid = explode(',', getStringFromRequest('fileid'));
@@ -40,8 +40,8 @@ foreach ($arr_fileid as $fileid) {
 	$feedback .= $d->getFileName().' ';
 	if ($d->isError() || !$d->setReservedBy('0')) {
 		$error_msg = $d->getErrorMessage();
-		session_redirect('/docman/?group_id='.$group_id.'&dirid='.$dirid);
+		session_redirect(DOCMAN_BASEURL.$group_id.'&dirid='.$dirid);
 	}
 }
 $feedback .= _('reservation enforced successfully.');
-session_redirect('/docman/?group_id='.$group_id.'&dirid='.$dirid);
+session_redirect(DOCMAN_BASEURL.$group_id.'&dirid='.$dirid);

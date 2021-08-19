@@ -3,7 +3,7 @@
  * FusionForge Documentation Manager
  *
  * Copyright 2010-2011, Franck Villaume - Capgemini
- * Copyright 2013-2015, Franck Villaume - TrivialDev
+ * Copyright 2013-2015,2021, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -31,9 +31,11 @@ global $feedback;
 global $error_msg;
 global $warning_msg;
 
+$redirecturl = DOCMAN_BASEURL.$group_id.'&dirid='.$dirid;
+
 if (!forge_check_perm('docman', $group_id, 'approve')) {
 	$warning_msg = _('Document Manager Action Denied.');
-	session_redirect('/docman/?group_id='.$group_id.'&dirid='.$dirid);
+	session_redirect($redirecturl);
 }
 
 $arr_fileid = explode(',', getStringFromRequest('fileid'));
@@ -44,8 +46,8 @@ foreach ($arr_fileid as $fileid) {
 	if ($d->isError() || !$d->setReservedBy('1', user_getid())) {
 		$feedback = '';
 		$error_msg = $d->getErrorMessage();
-		session_redirect('/docman/?group_id='.$group_id.'&dirid='.$dirid);
+		session_redirect($redirecturl);
 	}
 }
 $feedback .= _('reserved successfully.');
-session_redirect('/docman/?group_id='.$group_id.'&dirid='.$dirid);
+session_redirect($redirecturl);

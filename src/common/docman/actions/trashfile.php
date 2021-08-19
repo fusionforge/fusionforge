@@ -5,7 +5,7 @@
  * Copyright 2000, Quentin Cregan/Sourceforge
  * Copyright 2002-2003, Tim Perdue/GForge, LLC
  * Copyright 2010-2011, Franck Villaume - Capgemini
- * Copyright 2014-2015, Franck Villaume - TrivialDev
+ * Copyright 2014-2015,2021, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -33,7 +33,7 @@ global $warning_msg;
 global $feedback;
 global $error_msg;
 
-$redirecturl = '/docman/?group_id='.$group_id.'&dirid='.$dirid;
+$redirecturl = DOCMAN_BASEURL.$group_id.'&dirid='.$dirid;
 
 // plugin projects-hierarchy handler
 $childgroup_id = getIntFromRequest('childgroup_id');
