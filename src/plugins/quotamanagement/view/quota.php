@@ -158,12 +158,12 @@ $res_db = db_query_params('SELECT user_id, user_name, realname, unix_status FROM
 			array());
 if (db_numrows($res_db) > 0) {
 	while($e = db_fetch_array($res_db)) {
-		if ($e["unix_status"] != "N") {
-			$users["$e[user_id]"]["user_id"] = $e["user_id"];
-			$users["$e[user_id]"]["user_name"] = "$e[user_name]";
-			$users["$e[user_id]"]["realname"] = "$e[realname]";
-			$users["$e[user_id]"]["unix_status"] = "$e[unix_status]";
-			$users["$e[user_id]"]["disk_size"] = 0;
+		if ($e['unix_status'] == 'A') {
+			$users["$e[user_id]"]['user_id'] = $e['user_id'];
+			$users["$e[user_id]"]['user_name'] = "$e[user_name]";
+			$users["$e[user_id]"]['realname'] = "$e[realname]";
+			$users["$e[user_id]"]['unix_status'] = "$e[unix_status]";
+			$users["$e[user_id]"]['disk_size'] = 0;
 		}
 	}
 }

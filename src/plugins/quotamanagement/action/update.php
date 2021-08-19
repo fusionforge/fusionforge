@@ -34,17 +34,16 @@ if ( !forge_check_global_perm('forge_admin')) {
 
 require_once $gfcommon.'include/SysTasksQ.class.php';
 
-$_quota_block_size = trim(shell_exec('echo $BLOCK_SIZE')) + 0;
+$_quota_block_size = intval(trim(shell_exec('echo $BLOCK_SIZE')));
 if ($_quota_block_size == 0) {
 	$_quota_block_size = 1024;
 }
 
 $type = getStringFromRequest('type');
-
-$qs = $_POST["qs"] * $_quota_block_size;
-$qh = $_POST["qh"] * $_quota_block_size;
-$qds = $_POST["qds"] * 1024;
-$qdh = $_POST["qdh"] * 1024;
+$qs = getIntFromRequest('qs', 0) * $_quota_block_size;
+$qh = getIntFromRequest('qh', 0) * $_quota_block_size;
+$qds = getIntFromRequest('qds', 0) * $_quota_block_size;
+$qdh = getIntFromRequest('qdh', 0) * $_quota_block_size;
 
 if ($qs > $qh || $qds > $qdh) {
 	$error_msg = _('Input error: Hard quota must be greater than soft quota');

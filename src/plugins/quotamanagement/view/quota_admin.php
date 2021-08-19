@@ -57,17 +57,15 @@ $res_db = db_query_params('SELECT plugin_quotamanagement.*, groups.group_name, g
 			array());
 if (db_numrows($res_db) > 0) {
 	while($e = db_fetch_array($res_db)) {
-		$qh = $e["quota_hard"] / $_quota_block_size;
-		$qs = $e["quota_soft"] / $_quota_block_size;
-		$quotas["$e[group_id]"]["group_id"] = $e["group_id"];
-		$quotas["$e[group_id]"]["name"] = $e["group_name"];
-		$quotas["$e[group_id]"]["unix_name"] = $e["unix_group_name"];
-		$quotas["$e[group_id]"]["database_size"] = 0;
-		$quotas["$e[group_id]"]["disk_size"] = 0;
-		$quotas["$e[group_id]"]["quota_hard"] = $qh;
-		$quotas["$e[group_id]"]["quota_soft"] = $qs;
-		$quotas["$e[group_id]"]["quota_db_hard"] = $e["quota_db_hard"];
-		$quotas["$e[group_id]"]["quota_db_soft"] = $e["quota_db_soft"];
+		$quotas["$e[group_id]"]['group_id'] = $e['group_id'];
+		$quotas["$e[group_id]"]['name'] = $e['group_name'];
+		$quotas["$e[group_id]"]['unix_name'] = $e['unix_group_name'];
+		$quotas["$e[group_id]"]['database_size'] = 0;
+		$quotas["$e[group_id]"]['disk_size'] = 0;
+		$quotas["$e[group_id]"]['quota_hard'] = $e['quota_hard'] / $_quota_block_size;
+		$quotas["$e[group_id]"]['quota_soft'] = $e['quota_soft'] / $_quota_block_size;
+		$quotas["$e[group_id]"]['quota_db_hard'] = $e['quota_db_hard'] / $_quota_block_size;
+		$quotas["$e[group_id]"]['quota_db_soft'] = $e['quota_db_soft'] / $_quota_block_size;
 	}
 }
 
@@ -80,13 +78,13 @@ foreach ($quotas as $q) {
 	$cells[][] = $q['group_id'];
 	$cells[][] = util_make_link('/plugins/'.$quotamanagement->name.'/?group_id='.$q['group_id'].'&type=projectadmin', $q['unix_name']);
 	$cells[][] = $q['name'];
-	$cells[] = array($HTML->html_input('qds', '', '', 'numeric', $q['quota_db_soft'], array('class' => 'align-right', 'form' => 'q'.$group_id, 'min' => 0)));
-	$cells[] = array($HTML->html_input('qdh', '', '', 'numeric', $q['quota_db_hard'], array('class' => 'align-right', 'form' => 'q'.$group_id, 'min' => 0)));
-	$cells[] = array($HTML->html_input('qs', '', '', 'numeric', $q['quota_soft'], array('class' => 'align-right', 'form' => 'q'.$group_id, 'min' => 0)));
-	$cells[] = array($HTML->html_input('qh', '', '', 'numeric', $q['quota_hard'], array('class' => 'align-right', 'form' => 'q'.$group_id, 'min' => 0)));
-	$cells[] = array($HTML->openForm(array('action' => '/plugins/'.$quotamanagement->name.'/?type=globaladmin&action=update', 'method' => 'post', 'id' => 'q'.$group_id))
-			.$HTML->html_input('submit', '', '', 'submit', _('Modify'), array('form' => 'q'.$group_id))
-			.$HTML->html_input('group_id', '', '', 'hidden', $q['group_id'], array('form' => 'q'.$group_id))
+	$cells[] = array($HTML->html_input('qds', '', '', 'numeric', $q['quota_db_soft'], array('class' => 'align-right', 'form' => 'q'.$q['group_id'], 'min' => 0)));
+	$cells[] = array($HTML->html_input('qdh', '', '', 'numeric', $q['quota_db_hard'], array('class' => 'align-right', 'form' => 'q'.$q['group_id'], 'min' => 0)));
+	$cells[] = array($HTML->html_input('qs', '', '', 'numeric', $q['quota_soft'], array('class' => 'align-right', 'form' => 'q'.$q['group_id'], 'min' => 0)));
+	$cells[] = array($HTML->html_input('qh', '', '', 'numeric', $q['quota_hard'], array('class' => 'align-right', 'form' => 'q'.$q['group_id'], 'min' => 0)));
+	$cells[] = array($HTML->openForm(array('action' => '/plugins/'.$quotamanagement->name.'/?type=globaladmin&action=update', 'method' => 'post', 'id' => 'q'.$q['group_id']))
+			.$HTML->html_input('submit', '', '', 'submit', _('Modify'), array('form' => 'q'.$q['group_id']))
+			.$HTML->html_input('group_id', '', '', 'hidden', $q['group_id'], array('form' => 'q'.$q['group_id']))
 			.$HTML->closeForm());
 	echo $HTML->multiTableRow(array(), $cells);
 }
