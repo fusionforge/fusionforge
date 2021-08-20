@@ -150,8 +150,8 @@ if (db_numrows($res_db) > 0) {
 	$quota_soft = $e["quota_soft"];
 	$quota_hard = round(($_quota_block_size * $quota_hard) / (1024*1024), 0);
 	$quota_soft = round(($_quota_block_size * $quota_soft) / (1024*1024), 0);
-	$quota_db_hard = $e["quota_db_hard"];
-	$quota_db_soft = $e["quota_db_soft"];
+	$quota_db_hard = $e["quota_db_hard"] / $_quota_block_size;
+	$quota_db_soft = $e["quota_db_soft"] / $_quota_block_size;
 }
 
 if (forge_get_config('use_shell')) {
@@ -259,7 +259,7 @@ foreach ($quotas_disk as $index => $q) {
 $bgcolorstyle = '';
 $msg1 = '';
 $qs = $quota_soft * 1024 * 1024;
-if (($sizetot+0) > ($qs+0) && ($qs+0) > 0) {
+if ($sizetot > $qs && $qs > 0) {
 	$bgcolorstyle = 'background-color:#FFDCDC; color:white;';
 	$msg1 = _('Quota exceeded');
 }
