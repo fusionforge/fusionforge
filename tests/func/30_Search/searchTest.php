@@ -270,7 +270,7 @@ class Search extends FForge_SeleniumTestCase
 		$this->clickAndWait("submit");
 
 		$this->clickAndWait("link=Task1 the brain");
-		$this->type("details", 'This is the needle for tasks');
+		$this->type("followup", 'This is the needle for tasks');
 		$this->clickAndWait("submit");
 
 		$this->gotoProject('ProjectA');
