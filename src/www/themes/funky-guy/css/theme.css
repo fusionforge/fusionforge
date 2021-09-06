@@ -710,12 +710,13 @@ table.listing tbody tr:nth-child(odd),
 	font-size: 1em !important;
 	padding: .2em .8em 0 .8em !important;
 	margin: .1em !important;
-	width: .7em !important;
 	text-align: center !important;
-	line-height: 1.2em !important;
 	text-shadow: 1px 1px #ccc6;
 	transition-property: background-color, text-shadow;
 	transition-duration: 0.3s;
+}
+.abc strong, .abc a {
+		width: .7em !important;
 }
 .abc strong {
 	color: #444 !important;
