@@ -501,6 +501,18 @@ a.topTabSelected:hover {
 	box-shadow: 1px 1px 4px #b2b3b4;
 }
 
+.ui-widget.ui-widget-content {
+	border: none !important;
+}
+.ui-widget-content {
+	border: none !important;
+	background: none !important;
+	background-color: #222d !important;
+	box-shadow: 0 0 1px #fff9 !important;
+	color: #fff !important;
+	font-family: sans-serif!important;	
+}
+
 .widget_titlebar_handle {
     border-bottom: 2px solid #cfcfcf;
 }
