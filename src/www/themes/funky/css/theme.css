@@ -680,7 +680,21 @@ table.listing tbody tr:nth-child(odd),
 	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#f7f7f7), to(white));
 }
 
-
+/*
+	abc
+*/
+.abc {
+	display: flex !important;
+	flex-wrap: wrap !important;
+}
+.abc strong, .abc a, .abc input[type=submit] {
+	font-size: 1em !important;
+	padding: .2em .8em 0 .8em !important;
+	margin: .1em !important;
+	width: .7em !important;
+	text-align: center !important;
+	line-height: 1.2em !important;
+}
 
 /* =ft (footer)
 ----------------------------------------------- */
