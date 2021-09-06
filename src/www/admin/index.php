@@ -48,9 +48,11 @@ $forge = FusionForge::getInstance();
 $lielements[] = array('content' => sprintf(_('Active site users: <strong>%d</strong>'), $forge->getNumberOfActiveUsers()));
 $lielements[] = array('content' => util_make_link('/admin/userlist.php', _('Display Full User List/Edit Users')));
 $localcontent = _('Display Users Beginning with')._(': ');
+$localcontent .= html_ao('div', array('class' => 'abc'));
 for ($i = 0; $i < count($abc_array); $i++) {
-	$localcontent .= util_make_link('/admin/userlist.php?user_name_search='.$abc_array[$i], $abc_array[$i]).'|';
+	$localcontent .= util_make_link('/admin/userlist.php?user_name_search='.$abc_array[$i], $abc_array[$i]);
 }
+$localcontent .= html_ac(html_ap() -1); // </div> .abc
 $localcontent .= html_e('br');
 $localcontent .= $HTML->openForm(array('name' => 'usersrch', 'action' => '/admin/search.php', 'method' => 'post'));
 $localcontent .= _('Search <em>(userid, username, realname, email)</em>');
@@ -134,9 +136,11 @@ echo html_ac(html_ap() - 1);
 	<li><?php echo util_make_link('/admin/grouplist.php', _('Display Full Project List/Edit Projects')); ?></li>
 
 	<li><?php echo _('Display Projects Beginning with:').' ';
+	echo html_ao('div', array('class' => 'abc'));
 	for ($i=0; $i < count($abc_array); $i++) {
-		echo util_make_link('/admin/grouplist.php?group_name_search='.$abc_array[$i], $abc_array[$i]).'|';
+		echo util_make_link('/admin/grouplist.php?group_name_search='.$abc_array[$i], $abc_array[$i]);
 	}
+	echo html_ac(html_ap() -1); // </div> .abc
 	echo html_e('br');
 	echo $HTML->openForm(array('name'=> 'gpsrch', 'action' => '/admin/search.php', 'method' => 'post'));
 		echo _('Search <em>(groupid, project Unix name, project full name)</em>'); ?>:

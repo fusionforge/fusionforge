@@ -69,13 +69,16 @@ echo '<p>';
 echo _('Choose the <strong>First Letter</strong> of the name of the person you wish to report on.');
 echo '</p>';
 
+echo html_ao('div', array('class' => 'abc'));
 for ($i=0; $i<count($abc_array); $i++) {
 	if ($sw == $abc_array[$i]) {
-		echo '<strong>'.$abc_array[$i].'</strong>&nbsp;';
+	    echo html_e('strong', array(), $abc_array[$i]);
 	} else {
-		echo util_make_link('/reporting/usertime.php?sw='.$abc_array[$i].'&amp;typ='.$typ, $abc_array[$i]).'&nbsp;';
+		echo util_make_link('/reporting/usertime.php?sw='.$abc_array[$i].'&amp;typ='.$typ, $abc_array[$i]);
 	}
 }
+echo html_ac(html_ap() -1); // </div> .abc
+
 
 if ($sw) {
 

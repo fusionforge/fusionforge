@@ -68,6 +68,7 @@ report_header(_('User Activity'));
 $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z');
 echo html_e('p', array(), _('Choose the <strong>First Letter</strong> of the name of the person you wish to report on.'));
 
+echo html_ao('div', array('class' => 'abc'));
 for ($i = 0; $i < count($abc_array); $i++) {
 	if ($sw == $abc_array[$i]) {
 		echo html_e('strong', array(), $abc_array[$i]);
@@ -75,6 +76,7 @@ for ($i = 0; $i < count($abc_array); $i++) {
 		echo util_make_link('/reporting/useract.php?sw='.$abc_array[$i], $abc_array[$i]);
 	}
 }
+echo html_ac(html_ap() -1); // </div> .abc
 
 if ($sw) {
 	echo $HTML->openForm(array('action' => getStringFromServer('PHP_SELF'), 'method' => 'get'));
