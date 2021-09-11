@@ -31,13 +31,11 @@ require_once dirname(dirname(__FILE__)) . '/../../src/common/include/escapingUti
  * @copyright 2009 Alain Peyrat. All rights reserved.
  * @license   GPL License
  */
-class Utils_Tests extends PHPUnit\Framework\TestCase
-{
+class Utils_Tests extends PHPUnit\Framework\TestCase {
 	/**
 	 * test the validate_email function.
 	 */
-	public function testEmail()
-	{
+	public function testEmail() {
 		$this->assertTrue(validate_email('al@fx.fr'), 'al@fx.fr is a valid email address');
 
 		$this->assertFalse(validate_email('al @fx.fr'), 'al @fx.fr is not a valid email address');
@@ -48,8 +46,7 @@ class Utils_Tests extends PHPUnit\Framework\TestCase
 	/**
 	 * test the validate_hostname function.
 	 */
-	public function testHostname()
-	{
+	public function testHostname() {
 		$this->assertTrue(valid_hostname('myhost.com'), 'myhost.com is a valid hostname.');
 
 		$this->assertTrue(valid_hostname('myhost.com.'), 'myhost.com. is a valid hostname.');
@@ -62,8 +59,7 @@ class Utils_Tests extends PHPUnit\Framework\TestCase
 	/**
 	 * test the util_check_url function.
 	 */
-	public function testUtilCheckUrl()
-	{
+	public function testUtilCheckUrl() {
 		$this->assertTrue(util_check_url('http://fusionforge.org/'), 'http://fusionforge.org/ is a valid URL.');
 
 		$this->assertTrue(util_check_url('https://fusionforge.org/'), 'https://fusionforge.org/ is a valid URL.');
@@ -78,8 +74,7 @@ class Utils_Tests extends PHPUnit\Framework\TestCase
 	/**
 	 * test the util_strip_accents() function.
 	 */
-	public function testStripAccents()
-	{
+	public function testStripAccents() {
 		$this->assertEquals('aleiat', util_strip_accents('aléiât'));
 
 		$this->assertEquals('aaeeeii', util_strip_accents('ààéééïï'));
@@ -90,8 +85,7 @@ class Utils_Tests extends PHPUnit\Framework\TestCase
 	/**
 	 * test the util_make_links() function.
 	 */
-	public function testUtilMakeLinks()
-	{
+	public function testUtilMakeLinks() {
 		$this->assertEquals(
 			'a <a href="http://fusionforge.org/" target="_blank">http://fusionforge.org/</a> b',
 			util_make_links('a http://fusionforge.org/ b')
@@ -111,8 +105,7 @@ class Utils_Tests extends PHPUnit\Framework\TestCase
 	/**
 	 * test the human_readable_bytes() function.
 	 */
-	public function testHumanReadableBytes()
-	{
+	public function testHumanReadableBytes() {
 		$this->assertEquals('0', human_readable_bytes(0));
 		$this->assertEquals('12 bytes', human_readable_bytes(12));
 		$this->assertEquals('-12 bytes', human_readable_bytes(-12));
@@ -129,8 +122,7 @@ class Utils_Tests extends PHPUnit\Framework\TestCase
 		$this->assertEquals('1 TB', human_readable_bytes(1000000000000, true));
 	}
 
-	public function testGetFilteredStringFromRequest()
-	{
+	public function testGetFilteredStringFromRequest() {
 		$_REQUEST=array('arg' => 'good');
 		$this->assertEquals('good', getFilteredStringFromRequest('arg', '/^[a-z]+$/', 'default'));
 
@@ -141,8 +133,7 @@ class Utils_Tests extends PHPUnit\Framework\TestCase
 		$this->assertEquals('default', getFilteredStringFromRequest('arg', '/^[a-z]+$/', 'default'));
 	}
 
-	public function testUtilIsHtml()
-	{
+	public function testUtilIsHtml() {
 		$this->assertFalse(util_is_html(''));
 		$this->assertFalse(util_is_html('This is a text.'));
 		$this->assertTrue(util_is_html('This is <strong>html</strong>'));

@@ -25,10 +25,8 @@ require_once dirname(__FILE__) . '/../../../src/common/include/account.php';
 require_once dirname(__FILE__) . '/../../../src/common/include/utils.php';
 require_once dirname(__FILE__) . '/../../../src/common/include/config.php';
 
-class Account_Tests extends PHPUnit\Framework\TestCase
-{
-	public function test_account_gensalt()
-	{
+class Account_Tests extends PHPUnit\Framework\TestCase {
+	public function test_account_gensalt() {
 		// default to md5crypt
 		forge_define_config_item('unix_cipher', 'core', '');
 		$salt = account_gensalt();

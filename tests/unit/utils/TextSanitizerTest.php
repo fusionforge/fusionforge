@@ -31,20 +31,17 @@ require_once dirname(__FILE__) . '/../../../src/common/include/TextSanitizer.cla
  * @copyright 2009 Alain Peyrat. All rights reserved.
  * @license   GPL License
  */
-class TextSanitizerTests extends PHPUnit\Framework\TestCase
-{
+class TextSanitizerTests extends PHPUnit\Framework\TestCase {
 	protected $s;
 
-	function setUp()
-	{
+	function setUp():void {
 		$this->s = new TextSanitizer();
 	}
 
 	/**
 	 * test purify on good code.
 	 */
-	public function testPurifyOnValidHtmlCode()
-	{
+	public function testPurifyOnValidHtmlCode() {
 		$this->assertEquals('<h1>A valid message</h1>', $this->s->purify('<h1>A valid message</h1>'));
 		$this->assertEquals('<h1>A <b>valid</b> message</h1>', $this->s->purify('<h1>A <B>valid</B> message</h1>'));
 	}
@@ -52,8 +49,7 @@ class TextSanitizerTests extends PHPUnit\Framework\TestCase
 	/**
 	 * test purify on repairing damaged code.
 	 */
-	public function testPurifyOnInvalidHtmlCode()
-	{
+	public function testPurifyOnInvalidHtmlCode() {
 		$this->assertEquals('<h1>Missing ending tag</h1>', $this->s->purify('<h1>Missing ending tag'));
 		$this->assertEquals('Invalid  tag', $this->s->purify('Invalid <toto> tag'));
 	}
@@ -61,16 +57,14 @@ class TextSanitizerTests extends PHPUnit\Framework\TestCase
 	/**
 	 * test purify on malicious code.
 	 */
-	public function testPurifyOnMaliciousHtmlCode()
-	{
+	public function testPurifyOnMaliciousHtmlCode() {
 		$this->assertEquals('Hacker ', $this->s->purify('Hacker <script>hello</script>'));
 	}
 
 	/**
 	 * test purify on other html piece of code.
 	 */
-	public function testPurifyOnMiscCode()
-	{
+	public function testPurifyOnMiscCode() {
 		$in  = "</div>\n<div>&gt; rep &gt; rep</div>\n<div>";
 		$out = "\n<div>&gt; rep &gt; rep</div>\n";
 		$this->assertEquals($out, $this->s->purify($in));
@@ -79,8 +73,7 @@ class TextSanitizerTests extends PHPUnit\Framework\TestCase
 	/**
 	 * test purify on other html piece of code.
 	 */
-	public function testPurifyOnMiscCode2()
-	{
+	public function testPurifyOnMiscCode2() {
 		$text = '<b>ceci</b> <i>est</i> <u>une</u> <font color="#cc0000">reponse</font>';
 		$this->assertEquals($text, $this->s->purify($text));
 	}

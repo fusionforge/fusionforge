@@ -30,13 +30,11 @@ require_once dirname(__FILE__) . '/../../../src/common/include/database-pgsql.ph
  * @copyright 2009 Alain Peyrat. All rights reserved.
  * @license   GPL License
  */
-class Database_Utils_Tests extends PHPUnit\Framework\TestCase
-{
+class Database_Utils_Tests extends PHPUnit\Framework\TestCase {
 	/**
 	 * test the validate_hostname function.
 	 */
-	public function testConstructQPA()
-	{
+	public function testConstructQPA() {
 		$qpa = db_construct_qpa() ;
 		$this->assertEquals('', $qpa[0]) ;
 
@@ -62,7 +60,6 @@ class Database_Utils_Tests extends PHPUnit\Framework\TestCase
 
 		$this->assertEquals(array ('nrst', 'auie@foobar', 'bépo', 'jldv', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12), $qpa[1]) ;
 		$this->assertEquals(16, $qpa[2]) ;
-
 	}
 }
 

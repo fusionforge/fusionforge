@@ -28,13 +28,11 @@ require_once dirname(__FILE__) . '/../../../src/common/include/config.php';
  * @copyright 2009 Roland Mas
  * @license   GPL License
  */
-class Config_Tests extends PHPUnit\Framework\TestCase
-{
+class Config_Tests extends PHPUnit\Framework\TestCase {
 	/**
 	 * test basic config getting
 	 */
-	public function testBasicConfig()
-	{
+	public function testBasicConfig() {
 		forge_define_config_item ('forge_name', 'core', 'default') ;
 		forge_define_config_item ('user_registration_restricted', 'core', true) ;
 		forge_set_config_item_bool ('user_registration_restricted', 'core') ;
@@ -67,9 +65,8 @@ class Config_Tests extends PHPUnit\Framework\TestCase
 	/**
 	 * test mock config system
 	 */
-	public function testMockConfig()
-	{
-		MockConfig::insinuate () ;
+	public function testMockConfig() {
+		MockConfig::insinuate ();
 		forge_define_config_item ('forge_name', 'core', 'default') ;
 
 		$this->assertEquals('core/forge_name', forge_get_config ('forge_name'));

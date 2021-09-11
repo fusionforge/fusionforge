@@ -34,20 +34,18 @@ class HtmlPurifier_Tests extends PHPUnit\Framework\TestCase
 	/**
 	 * Test that include of lib doesn't fail, otherwise give some hint on missing package
 	 */
-	public function testHtmlPurifier()
-	{
-	  try {
-	    // cannot test this as fails hard
-	    //require_once('HTMLPurifier.auto.php');
-	    // so include instead :
-	    include 'HTMLPurifier.auto.php';
-	  }
+	public function testHtmlPurifier() {
+		try {
+		// cannot test this as fails hard
+		//require_once('HTMLPurifier.auto.php');
+		// so include instead :
+			include 'HTMLPurifier.auto.php';
+		}
 
-	  catch (PHPUnit\Framework\Error $expected) {
-	    $this->fail('You probably need to install htmlpurifier : '.$expected->getMessage());
-            return;
-	  }
-	  $this->assertEquals(0,0);
+		catch (PHPUnit\Framework\Error $expected) {
+			$this->fail('You probably need to install htmlpurifier : '.$expected->getMessage());
+			return;
+		}
+		$this->assertEquals(0,0);
 	}
-
 }
