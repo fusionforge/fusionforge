@@ -1,6 +1,25 @@
 <?php
+/**
+ * Copyright FusionForge Team
+ *
+ * This file is part of FusionForge.
+ *
+ * FusionForge is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published
+ * by the Free Software Foundation; either version 2 of the License,
+ * or (at your option) any later version.
+ *
+ * FusionForge is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ */
 
-require_once 'PHPUnit/Framework/TestCase.php';
+@include_once '/usr/local/share/php/vendor/autoload.php';
 
 /**
  * Syntax test class.
@@ -10,13 +29,11 @@ require_once 'PHPUnit/Framework/TestCase.php';
  * @copyright 2009 Roland Mas
  * @license   http://www.opensource.org/licenses/gpl-license.php  GPL License
  */
-class Deprecations_Tests extends PHPUnit\Framework\TestCase
-{
+class Deprecations_Tests extends PHPUnit\Framework\TestCase {
 	/**
 	 * Check that no code uses db_query() or db_mquery()
 	 */
-	public function testdb_query()
-	{
+	public function testdb_query() {
 		$root = dirname(dirname(dirname(dirname(__FILE__))));
 		$output = `cd $root; find src tests -name '*.php' -type f | \
 		    xargs pcregrep -l '\bdb_m?query\b' | grep -v \
@@ -32,8 +49,7 @@ class Deprecations_Tests extends PHPUnit\Framework\TestCase
 	/**
 	 * Check that no code uses configuration items from global variables
 	 */
-	public function testconfig_vars()
-	{
+	public function testconfig_vars() {
 		$vars = array ('sys_name',
 			       'sys_user_reg_restricted',
 			       'sys_require_accept_conditions',
@@ -131,7 +147,7 @@ class Deprecations_Tests extends PHPUnit\Framework\TestCase
 			       'sys_var_path',
 			       'sys_etc_path',
 			       'sys_show_contact_info'
-			) ;
+			);
 
 		$pattern = implode ('|', $vars) ;
 
@@ -148,8 +164,7 @@ class Deprecations_Tests extends PHPUnit\Framework\TestCase
 	/**
 	 * Check that no code uses session_require()
 	 */
-	public function testsession_require()
-	{
+	public function testsession_require() {
 		$root = dirname(dirname(dirname(dirname(__FILE__))));
 		$output = `cd $root ; find src tests -name '*.php' -type f | \
 		    xargs pcregrep -l '\bsession_require[^_]' | grep -v \
@@ -159,8 +174,3 @@ class Deprecations_Tests extends PHPUnit\Framework\TestCase
 	}
 
 }
-
-// Local Variables:
-// mode: php
-// c-file-style: "bsd"
-// End:
