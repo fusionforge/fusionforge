@@ -24,7 +24,7 @@
  * of said person’s immediate fault when using the work as intended.
  */
 
-require_once('PHPUnit/Framework/TestCase.php');
+@include_once '/usr/local/share/php/vendor/autoload.php';
 
 class Minijson_Tests extends PHPUnit\Framework\TestCase {
 	public function testMiniJson() {
