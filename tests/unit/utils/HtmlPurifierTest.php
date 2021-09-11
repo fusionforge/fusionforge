@@ -29,7 +29,7 @@
  * @copyright 2009 Olivier Berger & Institut TELECOM
  * @license   GPL License
  */
-class HtmlPurifier_Tests extends PHPUnit\Framework\TestCase
+class HtmlPurifierTest extends PHPUnit\Framework\TestCase
 {
 	/**
 	 * Test that include of lib doesn't fail, otherwise give some hint on missing package

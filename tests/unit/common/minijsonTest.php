@@ -26,7 +26,7 @@
 
 @include_once '/usr/local/share/php/vendor/autoload.php';
 
-class Minijson_Tests extends PHPUnit\Framework\TestCase {
+class minijsonTest extends PHPUnit\Framework\TestCase {
 	public function testMiniJson() {
 		$s = error_reporting(-1);
 		require_once(dirname(__FILE__) . '/../../../src/common/include/minijson.php');

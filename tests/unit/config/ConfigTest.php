@@ -28,7 +28,7 @@ require_once dirname(__FILE__) . '/../../../src/common/include/config.php';
  * @copyright 2009 Roland Mas
  * @license   GPL License
  */
-class Config_Tests extends PHPUnit\Framework\TestCase {
+class ConfigTest extends PHPUnit\Framework\TestCase {
 	/**
 	 * test basic config getting
 	 */
