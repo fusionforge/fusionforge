@@ -24,7 +24,7 @@
 @include_once 'PHP/Token/Stream/Autoload.php';
 @include_once 'Text/Template/Autoload.php';
 
-class AllTests {
+class code_and_unit_tests {
 	public static function main() {
 		PHPUnit\TextUI\TestRunner::run(self::suite());
 	}
