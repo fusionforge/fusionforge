@@ -29,7 +29,7 @@
  * @copyright 2009 Roland Mas
  * @license   http://www.opensource.org/licenses/gpl-license.php  GPL License
  */
-class Deprecations_Tests extends PHPUnit\Framework\TestCase {
+class DeprecationsTest extends PHPUnit\Framework\TestCase {
 	/**
 	 * Check that no code uses db_query() or db_mquery()
 	 */

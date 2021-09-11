@@ -29,7 +29,7 @@
  * @copyright 2009 Alain Peyrat. All rights reserved.
  * @license   http://www.opensource.org/licenses/gpl-license.php  GPL License
  */
-class Syntax_Tests extends PHPUnit\Framework\TestCase {
+class SyntaxTest extends PHPUnit\Framework\TestCase {
 	/**
 	 * First, make sure pcregrep is installed
 	 */
