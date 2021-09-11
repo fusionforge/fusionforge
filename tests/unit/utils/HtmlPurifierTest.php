@@ -19,7 +19,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-require_once 'PHPUnit/Framework/TestCase.php';
+@include_once '/usr/local/share/php/vendor/autoload.php';
 
 /**
  * Simple test to check that htmlpurifier is installed
