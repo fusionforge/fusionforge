@@ -144,7 +144,7 @@ if ($group_id && $atid) {
 		}
 	}
 
-	if (is_array($hook_params['result'][$action])) {
+	if (isset($hook_params['result']) && is_array($hook_params['result'][$action])) {
 
 		include $hook_params['result'][$action]['page'];
 
