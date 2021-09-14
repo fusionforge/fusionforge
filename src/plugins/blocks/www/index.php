@@ -238,7 +238,7 @@ if ($type == 'admin') {
 	}
 
 	foreach ($blocks as $b => $help) {
-		if (!$activate[$b]) {
+		if (!isset($activate[$b])) {
 			$activate[$b] = 0;
 		}
 		if ((!isset($status[$b]) && $activate[$b]) ||
