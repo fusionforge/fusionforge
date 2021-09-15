@@ -145,7 +145,7 @@ function build_rpm {
     yum install -y php-cli  # rpm/gen_spec.sh
     
     # Build package
-    cd /usr/src/fusionforge/src/
+    cd $(dirname $0)/../src/
     base_version=$(make version)
     snapshot=$(date +%Y%m%d%H%M)
     version=$base_version+$snapshot
@@ -158,10 +158,11 @@ function build_rpm {
     rpmbuild ../build/SPECS/fusionforge.spec --define "_topdir $(pwd)/../build" -ba
     
     (cd ../build/RPMS/ && createrepo .)
-    cat <<-EOF > /etc/yum.repos.d/local.repo
+    repopath=$(readlink  ../build/RPMS/)
+    cat <<-EOF | sed 's,@PATH@,$repopath,g' > /etc/yum.repos.d/local.repo
 	[local]
 	name=local
-	baseurl=file:///usr/src/fusionforge/build/RPMS/
+	baseurl=file://@PATH@
 	enabled=1
 	gpgcheck=0
 	EOF
