@@ -27,12 +27,12 @@ set -e
 # that there's nothing to factour out, so they are in separate functions.
 
 function build_deb {
-    export DEBIAN_FRONTEND=noninteractive
-
-    # Install build dependencies
-    apt-get -y install mini-dinstall dput devscripts fakeroot
-    apt-get -y install build-essential \
-	$(grep Build-Depends /usr/src/fusionforge/src/debian/control.in | sed -e 's/Build-Depends: //' -e 's/(.*)//')
+	export DEBIAN_FRONTEND=noninteractive
+	srcdir=$(dirname $0)
+	# Install build dependencies
+	apt-get -y install mini-dinstall dput devscripts fakeroot
+	apt-get -y install build-essential \
+		$(grep Build-Depends ${srcdir}/src/debian/control.in | sed -e 's/Build-Depends: //' -e 's/(.*)//')
     if grep -q ^8 /etc/debian_version; then
 	apt-get -y install php5-cli  # debian/gen_control.sh
     else
@@ -40,10 +40,10 @@ function build_deb {
     fi
 
     # Populate a local Debian packages repository for APT managed with mini-dinstall
-    #rm -rf /usr/src/debian-repository
+    rm -rf /usr/src/debian-repository
     mkdir -p /usr/src/debian-repository
 
-    cat >/root/.mini-dinstall.conf <<-EOF
+    cat >/root/.mini-dinstall.conf <<-EOF | sed 's,@PATH@,$srcdir,g'
 	[DEFAULT]
 	archivedir = /usr/src/debian-repository
 	archive_style = flat
@@ -52,7 +52,7 @@ function build_deb {
 	verify_sigs = 0
 	
 	generate_release = 1
-	release_signscript = /usr/src/fusionforge/autoinstall/mini-dinstall-sign.sh
+	release_signscript = @PATH@/autoinstall/mini-dinstall-sign.sh
 	
 	max_retry_time = 3600
 	mail_on_success = false
@@ -198,13 +198,13 @@ function build_suse_rpm {
 }
 
 if [ -e /etc/debian_version ]; then
-    build_deb
+	build_deb
 elif [ -e /etc/redhat-release ]; then
-    build_rpm
+	build_rpm
 elif [[ ! -z `cat /etc/os-release | grep 'SUSE'` ]]; then
-    build_suse_rpm
+	build_suse_rpm
 else
-    echo "Automated package building is not supported for this distribution."
-    echo "See https://fusionforge.org/plugins/mediawiki/wiki/fusionforge/index.php/Installing/FromSource"
-    echo "for instructions"
+	echo "Automated package building is not supported for this distribution."
+	echo "See https://fusionforge.org/plugins/mediawiki/wiki/fusionforge/index.php/Installing/FromSource"
+	echo "for instructions"
 fi
