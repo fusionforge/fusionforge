@@ -34,8 +34,8 @@ if (!preg_match(',^/anonscm/,', $_SERVER['REQUEST_URI'])) {
 	$ch = curl_init();
 	curl_setopt($ch, CURLOPT_URL, util_make_url().'/account/check_forwarded_session.php');
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-	curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, forge_get_config('use_ssl_verification'));
+	curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, forge_get_config('use_ssl_verification'));
 	curl_setopt($ch, CURLOPT_COOKIE, $_SERVER['HTTP_COOKIE']);
 	curl_setopt($ch, CURLOPT_USERAGENT, $_SERVER['HTTP_USER_AGENT']);
 	curl_setopt($ch, CURLOPT_HTTPHEADER, array('X-Forwarded-For: '.$_SERVER['HTTP_X_FORWARDED_FOR']));

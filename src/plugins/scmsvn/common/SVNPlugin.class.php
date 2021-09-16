@@ -757,8 +757,8 @@ some control over it to the project's administrator.");
 			$ch = curl_init();
 			curl_setopt($ch, CURLOPT_URL, $script_url);
 			curl_setopt($ch, CURLOPT_WRITEFUNCTION, 'curl2xml');
-			curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-			curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+			curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, forge_get_config('use_ssl_verification'));
+			curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, forge_get_config('use_ssl_verification'));
 			curl_setopt($ch, CURLOPT_COOKIE, @$_SERVER['HTTP_COOKIE']);  // for session validation
 			curl_setopt($ch, CURLOPT_USERAGENT, $_SERVER['HTTP_USER_AGENT']);  // for session validation
 			curl_setopt($ch, CURLOPT_HTTPHEADER,
@@ -848,8 +848,8 @@ some control over it to the project's administrator.");
 			$ch = curl_init();
 			curl_setopt($ch, CURLOPT_URL, $script_url);
 			curl_setopt($ch, CURLOPT_WRITEFUNCTION, 'curl2xml');
-			curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-			curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+			curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, forge_get_config('use_ssl_verification'));
+			curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, forge_get_config('use_ssl_verification'));
 			curl_setopt($ch, CURLOPT_COOKIE, $_SERVER['HTTP_COOKIE']);  // for session validation
 			curl_setopt($ch, CURLOPT_USERAGENT, $_SERVER['HTTP_USER_AGENT']);  // for session validation
 			curl_setopt($ch, CURLOPT_HTTPHEADER,
