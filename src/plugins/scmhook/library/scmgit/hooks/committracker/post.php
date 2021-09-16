@@ -143,19 +143,14 @@ foreach ($changed as $onefile) {
 	$actrev = $newrev - 1;
 	if ($newrev==0) {
 		$exit = 1;
-		$prev = 1;
 	}
 	while ( (!$exit) && ($actrev != 0 ) ) {
 		$changed2 = trim(`git log -n 1 --format=%b --name-only -p $newrev`);
 		$changed2 = explode("\n", $changed2);
 		if ( in_array($onefile,$changed2) ) {
-			$prev = $actrev;
 			$exit = 1;
 		}
 		$actrev = $actrev - 1 ;
-	}
-	if ($actrev == 0) {
-		$prev = 1;
 	}
 
 	$files[] = array(
