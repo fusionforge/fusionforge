@@ -796,6 +796,10 @@ if ($art_arr && $art_cnt > 0) {
 		echo build_priority_select_box ('priority', '100', true);
 		echo '</td>';
 		echo '<td>';
+		if (forge_check_perm ('tracker', $ath->getID(), 'manager')) {
+			echo '<strong>'._('Submitted by')._(':').'</strong><br />';
+			echo $ath->technicianBox ('submitted_by', '100.1', true, _('Nobody'), '100.1', _('No Change'));
+		}
 		echo '</td>';
 		echo '</tr>';
 

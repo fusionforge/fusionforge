@@ -108,7 +108,12 @@ echo $HTML->listTableTop(array(), array(), 'full');
 	<tr>
 		<td>
 			<strong><?php echo _('Submitted by')._(':'); ?></strong><br />
-			<?php echo $ah->getSubmittedRealName();
+			<?php
+			if (forge_check_perm ('tracker', $ath->getID(), 'manager')) {
+				echo $ath->technicianBox('submitted_by', $ah->getSubmittedBy());
+			} else {
+				echo $ah->getSubmittedRealName();
+			}
 			if($ah->getSubmittedBy() != 100) {
 				$submittedUnixName = $ah->getSubmittedUnixName();
 				$submittedBy = $ah->getSubmittedBy();

@@ -67,6 +67,7 @@ switch (getStringFromRequest('func')) {
 		$artifact_group_id = getIntFromRequest('artifact_group_id');
 		$summary = getStringFromRequest('summary');
 		$details = getStringFromRequest('details');
+		$submitted_by = getIntFromRequest('submitted_by');
 		$assigned_to = getIntFromRequest('assigned_to', 100);
 		$priority = getIntFromRequest('priority', 3);
 		$extra_fields = getStringFromRequest('extra_fields');
@@ -94,7 +95,11 @@ switch (getStringFromRequest('func')) {
 			$details = "Anonymous message posted by $user_email\n\n".$details;
 		}
 
-		if (!$ah->create($summary,$details,$assigned_to,$priority,$extra_fields)) {
+		$import_data = array();
+		if (!empty($submitted_by))
+			$import_data['user'] = $submitted_by;
+
+		if (!$ah->create($summary,$details,$assigned_to,$priority,$extra_fields,$import_data)) {
 			$error_msg = $ah->getErrorMessage();
 			form_release_key(getStringFromRequest('form_key'));
 			if (forge_get_config('use_tracker_widget_display')) {
@@ -160,6 +165,7 @@ switch (getStringFromRequest('func')) {
 		$status_id = getIntFromRequest('status_id');
 		$artifact_group_id = getIntFromRequest('artifact_group_id');
 		$resolution_id = getIntFromRequest('resolution_id');
+		$submitted_by = getStringFromRequest('submitted_by');
 		$assigned_to = getStringFromRequest('assigned_to');
 		$canned_response = getIntFromRequest("canned_response");
 		$extra_fields = getArrayFromRequest('extra_fields');
@@ -180,6 +186,11 @@ switch (getStringFromRequest('func')) {
 				$_summary = '';
 				$_priority=(($priority != 100) ? $priority : $ah->getPriority());
 				$_status_id=(($status_id != 100) ? $status_id : $ah->getStatusID());
+
+				$import_data = array();
+				if (!empty($submitted_by) && $submitted_by != '100.1')
+					$import_data['user'] = $submitted_by;
+
 				//yikes, we want the ability to mass-update to "un-assigned", which is the ID=100, which
 				//conflicts with the "no change" ID! Sorry for messy use of 100.1
 				$_assigned_to=(($assigned_to != '100.1') ? $assigned_to : $ah->getAssignedTo());
@@ -219,7 +230,7 @@ switch (getStringFromRequest('func')) {
 					}
 				}
 
-				if (!$ah->update($_priority,$_status_id,$_assigned_to,$_summary,$canned_response,'',$artifact_type_id,$ef)) {
+				if (!$ah->update($_priority,$_status_id,$_assigned_to,$_summary,$canned_response,'',$artifact_type_id,$ef,'',$import_data)) {
 					$error_msg .= $ah->getStringID()._(': ').$ah->getErrorMessage().'<br />';
 				}
 			}
@@ -239,6 +250,7 @@ switch (getStringFromRequest('func')) {
 		$status_id = getIntFromRequest('status_id');
 		$artifact_group_id = getIntFromRequest('artifact_group_id');
 		$resolution_id = getIntFromRequest('resolution_id');
+		$submitted_by = getStringFromRequest('submitted_by');
 		$assigned_to = getStringFromRequest('assigned_to');
 		$summary = getStringFromRequest('summary');
 		$canned_response = getStringFromRequest('tracker-canned_response');
@@ -287,10 +299,15 @@ switch (getStringFromRequest('func')) {
 			*/
 			if (forge_check_perm ('tracker', $ath->getID(), 'tech')
 					|| forge_check_perm ('tracker', $ath->getID(), 'manager')) {
+
+				$import_data = array();
+				if (!empty($submitted_by))
+					$import_data['user'] = $submitted_by;
+
 				//admin and techs can do everything
 				//techs will have certain fields overridden inside the update() function call
 				if (!$ah->update($priority,$status_id,
-					$assigned_to,$summary,$canned_response,$details,$new_artifact_type_id,$extra_fields, $description)) {
+					$assigned_to,$summary,$canned_response,$details,$new_artifact_type_id,$extra_fields,$description,$import_data)) {
 					form_release_key(getStringFromRequest('form_key'));
 					$error_msg .= _('Tracker Item')._(': ').$ah->getErrorMessage();
 					$ah->clearError();
