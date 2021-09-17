@@ -203,13 +203,14 @@ div[role='search'] {
 header select {
 	cursor: pointer;
 	height: 1.9em;
-	padding: .2em 1.2em .2em .4em;
+	padding: 0 1.2em 0 .4em;
 	border-radius: .3em;
 	border: 1px solid #789;
 	color: #fff;
 	background: #51596c url("../images/header/select_down.png") center right no-repeat;
 	appearance: none;
 	box-shadow: none;
+	height: 24px;
 }
 
 header option {
@@ -219,16 +220,17 @@ header option {
 /* =backToTop */
 #backToTop {
   	position: fixed;
-  	background-color:#dfdfdf99;
-  	border: 1px solid #abc;
-  	bottom: 4.5em;
+  	background-color:#efefef;
+  	background-image:url("../images/backToTop.png");
+  	border: 1px solid #ccc;
   	color: #21293C;
 	font-size: .8em;
 	font-weight: bold;
-	right: calc(50% - 5em);
-	width: 10em;
-	padding: .5em 0;
-	border-radius: 1em;
+    bottom: 66px;
+    right: 2px;
+    height: 32px;
+    width: 32px;
+	border-radius: 4px;
 	text-align: center;
 	z-index: 19;
 	cursor: pointer;
@@ -238,13 +240,12 @@ header option {
 }
 #backToTop:hover,#backToTop:active {
 	background-color: #fff;
-	border-color:#789;
 	cursor: pointer;
 	transition: background-color 0.8s ease;
 }
 
 #searchBox input[type=text] {
-    padding: .1em 26px .1em .4em;
+    padding: 0 26px 0 .4em;
     border-radius: .3em;
     border: 1px solid #789;
     display: inline;
@@ -252,6 +253,7 @@ header option {
     color: #fff;
     background: #31394c;
     box-shadow: none;
+    height: 22px;
 }
 
 #searchBox input[type=submit] {
@@ -681,6 +683,39 @@ table.listing tbody tr:nth-child(odd),
 	margin-left: 5px;
 	border-bottom: none;
 	margin-right: 10px;
+}
+
+/*
+	abc
+*/
+.abc {
+	display: flex !important;
+	flex-wrap: wrap !important;
+}
+.abc strong, .abc a, .abc input[type=submit] {
+	border:1px solid #9996 !important;
+	border-radius: 2px !important;
+	font-size: 1em !important;
+	padding: .2em .8em 0 .8em !important;
+	margin: .1em !important;
+	text-align: center !important;
+	text-shadow: 1px 1px #ccc6;
+	transition-property: background-color, text-shadow;
+	transition-duration: 0.3s;
+}
+.abc strong, .abc a {
+		width: .7em !important;
+}
+.abc strong {
+	color: #444 !important;
+}
+.abc a, .abc input[type=submit] {
+	background: #ccc6 !important;
+	color: #36c !important;
+}
+.abc a:hover, .abc input[type=submit]:hover {
+	background: #fff6 !important;
+	color: #38f !important;
 }
 
 

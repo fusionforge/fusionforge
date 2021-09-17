@@ -149,8 +149,8 @@ class Theme_Funky_Guy extends Layout {
 		} else {
 			$params['title'] = $params['title'] . " - ".forge_get_config('forge_name');
 		}
-		echo html_ao('a', array('href' => '#', 'id' => 'backToTop'));
-		echo "&#8679; TOP &#8679;"; // Upwards arrow character
+		$titleBackToTop = _('Back to top');
+		echo html_ao('a', array('href' => '#', 'id' => 'backToTop', 'title' => $titleBackToTop));
 		echo html_ac(html_ap() -1); // </a>
 		echo html_ao('header', array('role' => 'banner'));
 		echo html_ao('nav', array('role' => 'navigation'));

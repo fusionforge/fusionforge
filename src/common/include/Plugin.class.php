@@ -262,7 +262,7 @@ class Plugin extends FFError {
 			$flag = strtolower('use_'.$this->name);
 			echo "<tr>\n";
 			echo "<td>\n";
-			echo ' <input type="checkbox" name="'.$flag.'" value="1" ';
+			echo ' <input id="'.$flag.'" type="checkbox" name="'.$flag.'" value="1" ';
 			// checked or unchecked?
 			if ($group->usesPlugin($this->name)) {
 				echo 'checked="checked"';
@@ -270,9 +270,9 @@ class Plugin extends FFError {
 			echo ' />';
 			echo "</td>\n";
 			echo '<td title="'.$this->pkg_desc.'">';
-			echo "<strong>";
+			echo "<label for='".$flag."'><strong>";
 			printf(_("Use %s"), $this->text);
-			echo "</strong>";
+			echo "</strong></label>";
 			echo " ";
 			echo html_image($imgStatus, 16, 16, array('alt'=>$title, 'title'=>$title));
 			echo "</td>\n";
@@ -315,13 +315,15 @@ class Plugin extends FFError {
 		if ($display) {
 			$flag = strtolower('use_'.$this->name);
 			echo '<div>';
-			echo ' <input type="checkbox" name="'.$flag.'" value="1" ';
+			echo ' <input id="'.$flag.'" type="checkbox" name="'.$flag.'" value="1" ';
 			// checked or unchecked?
 			if ($user->usesPlugin($this->name)) {
 				echo 'checked="checked"';
 			}
 			echo " />\n";
+			echo "<label for='".$flag."'><strong>";
 			printf(_("Use %s"), $this->text);
+			echo "</strong></label>";
 			echo html_image($imgStatus, 16, 16, array('alt'=>$title, 'title'=>$title));
 			echo '</div>';
 		}
