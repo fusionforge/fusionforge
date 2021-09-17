@@ -77,11 +77,11 @@ echo '<p>' . _('Choose the <strong>First Letter</strong> of the name of the pers
 
 echo html_ao('div', array('class' => 'abc'));
 for ($i=0; $i<count($abc_array); $i++) {
-    if ($sw == $abc_array[$i]) {
-        echo html_e('strong', array(), $abc_array[$i]);
-    } else {
-        echo '<input type="submit" name="sw" value="'.$abc_array[$i].'" />';
-    }
+	if ($sw == $abc_array[$i]) {
+		echo html_e('strong', array(), $abc_array[$i]);
+	} else {
+		echo '<input type="submit" name="sw" value="'.$abc_array[$i].'" />';
+	}
 }
 echo html_ac(html_ap() -1); // </div> .abc
 

@@ -172,7 +172,7 @@ echo html_ac(html_ap() - 1);
 	$plugins_site_admin_project_html = '';
 	plugin_hook_by_reference("site_admin_project_maintenance_hook", $params);
 	if ($params['result']) {
-			$plugins_site_admin_project_html = $params['result'];
+		$plugins_site_admin_project_html = $params['result'];
 	}
 	if ($plugins_site_admin_project_html) {
 		echo '<h3>'.  _('Plugins Project Maintenance') .'</h3>';
