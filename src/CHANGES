@@ -4,6 +4,7 @@ FusionForge 6.1.1:
 * Bin: fix forge help pages [#929] (Ralf Habacker)
 * Install System: add support for OpenSuSE Leap 15.x [#930] (Ralf Habacker)
 * Search Engine: fix PHP notice in SearchManager.class.php [#908] (TrivialDev)
+* Plugin Authhttpd: fix wrong hook call [#947] (Ralf Habacker)
 * Plugin Scmhook: fix scmhook commitEmail for scmhg broken [#903] (TrivialDev)
 * Plugin Scmhook: fix scmhook commitTracker [#911] (Florian Bruneau)
 * Plugin Scmsvn: fix <reponame>_scmsvn_paths.txt support [#906] (TrivialDev)
