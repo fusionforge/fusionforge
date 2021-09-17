@@ -106,8 +106,8 @@ install_selenium() {
 
 	# Install GeckoDriver
 	GECKODRIVERMAJOR=0
-	GECKODRIVERMINOR=29
-	GECKODRIVERMICRO=1
+	GECKODRIVERMINOR=30
+	GECKODRIVERMICRO=0
 	GECKODRIVERURL=https://github.com/mozilla/geckodriver/releases/download/v$GECKODRIVERMAJOR.$GECKODRIVERMINOR.$GECKODRIVERMICRO/geckodriver-v$GECKODRIVERMAJOR.$GECKODRIVERMINOR.$GECKODRIVERMICRO-linux64.tar.gz
 	mkdir -p /usr/share/geckodriver/
 	rm -f /usr/share/geckodriver/geckodriver
