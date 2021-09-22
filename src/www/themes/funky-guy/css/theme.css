@@ -168,6 +168,13 @@ header logo {
 	padding: .4em 0 0 .5em;
 }
 
+header logo img {
+  transition: transform .7s ease-in-out;
+}
+header logo img:hover {
+  transform: rotate(360deg);
+}
+
 header a, header a:visited {
 	color: #eee;
 	font-size: .9em;

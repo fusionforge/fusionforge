@@ -7,6 +7,7 @@
  * Copyright 2011, Franck Villaume - Capgemini
  * Copyright 2011-2017, Franck Villaume - TrivialDev
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
+ * Copyright 2021, Guy Morin - DGFiP
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -167,7 +168,7 @@ class Theme_Funky_Guy extends Layout {
 
 		echo $this->hamburgerButton();
 		echo html_ao('logo');
-		echo util_make_link('/', html_image('header/header-logo.png', null, null, array('alt'=>'FusionForge Home', 'height'=>'40')));
+		echo util_make_link('/', html_image('header/header-logo.svg', null, null, array('alt'=>'FusionForge Home', 'height'=>'40')));
 		echo html_ac(html_ap() -1); // </logo>
 		echo $this->searchBox();
 
