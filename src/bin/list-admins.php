@@ -3,6 +3,7 @@
 /**
  * Copyright 2012, Thorsten Glaser
  * Copyright 2012, Roland Mas
+ * Copyright 2021, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -23,5 +24,8 @@
 require (dirname(__FILE__).'/../common/include/env.inc.php');
 require_once $gfcommon."include/pre.php";
 $admins = RBACEngine::getInstance()->getUsersByAllowedAction("forge_admin", -1);
-$anames = array_map(create_function("\$x", "return \$x->getUnixName();"), $admins);
+$anames = array();
+foreach ($admins as $admin) {
+	$anames[] = $admin->getUnixName();
+}
 sort($anames); echo join(" ", $anames) . "\n";
