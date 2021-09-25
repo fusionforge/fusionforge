@@ -107,8 +107,8 @@ if (count($argv) != 5) {
 	usage("post.php");
 }
 
-$oldrev    = $argv[1];
-$newrev    = $argv[2];
+$oldrev    = intval($argv[1]);
+$newrev    = intval($argv[2]);
 $refname   = $argv[3];
 $repo_path = substr_replace($argv[4],'',-6);
 
