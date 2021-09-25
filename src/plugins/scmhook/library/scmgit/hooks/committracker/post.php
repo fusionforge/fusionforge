@@ -6,7 +6,7 @@
  * Portions Copyright 2004 (c) Roland Mas <99.roland.mas @nospam@ aist.enst.fr>
  * The rest Copyright 2004 (c) Francisco Gimeno <kikov @nospam@ kikov.org>
  * Copyright 2011, Franck Villaume - Capgemini
- * Copyright 2013, Franck Villaume - TrivialDev
+ * Copyright 2013,2021, Franck Villaume - TrivialDev
  * Copyright 2014, Benoit Debaenst - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -107,8 +107,8 @@ if (count($argv) != 5) {
 	usage("post.php");
 }
 
-$oldrev    = intval($argv[1]);
-$newrev    = intval($argv[2]);
+$oldrev    = $argv[1];
+$newrev    = $argv[2];
 $refname   = $argv[3];
 $repo_path = substr_replace($argv[4],'',-6);
 
@@ -140,17 +140,12 @@ $changed = explode("\n", $changed);
 foreach ($changed as $onefile) {
 	//we must see when it was last changed, and that's previous revision
 	$exit=0;
-	$actrev = $newrev - 1;
-	if ($newrev==0) {
-		$exit = 1;
-	}
-	while ( (!$exit) && ($actrev != 0 ) ) {
+	while (!$exit) {
 		$changed2 = trim(`git log -n 1 --format=%b --name-only -p $newrev`);
 		$changed2 = explode("\n", $changed2);
-		if ( in_array($onefile,$changed2) ) {
+		if (in_array($onefile, $changed2)) {
 			$exit = 1;
 		}
-		$actrev = $actrev - 1 ;
 	}
 
 	$files[] = array(
@@ -160,15 +155,14 @@ foreach ($changed as $onefile) {
 		);
 }
 
-
 // Our POSTer in Fusionforge
 $SubmitUrl = util_make_url('/plugins/scmhook/committracker/newcommitgit.php');
 
 $tasks_involved = getInvolvedTasks($log);
 $artifacts_involved = getInvolvedArtifacts($log);
 
-if ((!is_array($tasks_involved) || count($tasks_involved) < 1) &&
-	(!is_array($artifacts_involved) || count($artifacts_involved) < 1)) {
+if ((!is_array($tasks_involved) || empty($tasks_involved)) &&
+	(!is_array($artifacts_involved) || empty($artifacts_involved))) {
 	// No artifacts nor tasks in the commit log
 	exit(0);
 }
