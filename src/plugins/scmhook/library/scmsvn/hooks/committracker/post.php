@@ -41,8 +41,7 @@ require_once $gfcommon.'include/pre.php';
  *
  * @return  boot    Returns true if check passed.
  */
-function getInvolvedArtifacts($Log)
-{
+function getInvolvedArtifacts($Log) {
 	preg_match_all('/[[]#[\d]+[]]/', $Log,  $Matches );
 	foreach($Matches as $Match) {
 		$Result = preg_replace ('/[[]#([\d]+)[]]/', '\1', $Match);
@@ -58,8 +57,7 @@ function getInvolvedArtifacts($Log)
  *
  * @return  boot    Returns true if check passed.
  */
-function getInvolvedTasks($Log)
-{
+function getInvolvedTasks($Log) {
 	preg_match_all ('/[[]T[\d]+[]]/', $Log,  $Matches );
 	foreach($Matches as $Match) {
 		$Result = preg_replace ('/[[]T([\d]+)[]]/', '\1', $Match);
@@ -107,7 +105,6 @@ if ((!is_array($tasks_involved) || count($tasks_involved) < 1) &&
 }
 
 foreach ($changed as $onefile) {
-
 	// Get revision history for each file into an array and search for
 	// current and previous revision in memory to eliminate looping
 	// all revisions for each file
@@ -131,7 +128,6 @@ foreach ($changed as $onefile) {
 			'actual' => $revision
 		);
 }
-
 
 // Our POSTer in Fusionforge
 $SubmitUrl = util_make_url('/plugins/scmhook/committracker/newcommit.php');
