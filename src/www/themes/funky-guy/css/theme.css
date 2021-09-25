@@ -385,7 +385,7 @@ header nav label,
 
 .innertabs .tabGenerator .tg-middle span {
 	height: 100%;
-	padding: .2em .4em .3em .4em;
+	padding: .3em .2em .2em .2em;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -393,7 +393,7 @@ header nav label,
 	background: #707d97;
 	color: #fff;
 	font-weight:bold;
-	line-height: none;
+	line-height: 1em;
 	overflow:hidden;
 	text-overflow:ellipsis;
 	white-space:normal;
@@ -1070,6 +1070,10 @@ div[role="search"] {
 
 #hamburgermenudiv .tabGenerator span{
 	display: block;
+}
+
+#title-home-page img {
+	width:80%;	
 }
 
 }
