@@ -283,7 +283,7 @@ header option {
 #userlinksdiv li {
 	display: inline;
 	margin: 0;
-	padding-left: 1em;
+	padding: 0 .5em;
 }
 
 /* =quicknav */

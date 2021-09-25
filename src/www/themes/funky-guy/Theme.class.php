@@ -174,17 +174,21 @@ class Theme_Funky_Guy extends Layout {
 
 		$items = $this->navigation->getUserLinks();
 		for ($j = 0; $j < count($items['titles']); $j++) {
-			$links[] = html_ao('li')
-				.util_make_link($items['urls'][$j], $items['titles'][$j], array('class' => 'userlink'), true)
-				.html_ac(html_ap() -1);
+			$links[] = util_make_link($items['urls'][$j], $items['titles'][$j], array('class' => 'userlink'), true);
 		}
 		$params['links'] = &$links;
 		plugin_hook('headermenu', $params);
 		$template = isset($params['template']) ? $params['template'] : null;
 
+		$linksList = array();
+		foreach($links as $val){
+		    $linksList[] = html_ao('li')
+		      .$val
+		      .html_ac(html_ap() -1);
+		}
 		echo html_ao('div', array('id' => 'userlinksdiv'));
 		echo html_ao('ul');
-		echo implode($template, $links);
+		echo implode($template, $linksList);
 		echo html_ac(html_ap() -1); // </ul>
 		echo html_ac(html_ap() -1); // </div> #userlinkdiv
 
@@ -197,7 +201,7 @@ class Theme_Funky_Guy extends Layout {
 		echo html_ac(html_ap() -1); // </div> #hamburgermenudiv
 		echo html_ao('div', array('id' => 'userlinkshamburgerdiv'));
 		echo html_ao('ul');
-		echo implode($template, array_reverse($links));
+		echo implode($template, array_reverse($linksList));
 		echo html_ac(html_ap() -1); // </ul>
 		echo html_ac(html_ap() -1); // </div> #userlinkhamburgerdiv
 		echo html_ac(html_ap() -1); // </div> #menudiv
