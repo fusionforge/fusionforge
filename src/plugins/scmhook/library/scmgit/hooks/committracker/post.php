@@ -136,6 +136,16 @@ if (isset($git_tracker_debug) && $git_tracker_debug == 1) {
 	fclose($file);
 }
 
+
+$tasks_involved = getInvolvedTasks($log);
+$artifacts_involved = getInvolvedArtifacts($log);
+
+if ((!is_array($tasks_involved) || empty($tasks_involved)) &&
+	(!is_array($artifacts_involved) || empty($artifacts_involved))) {
+	// No artifacts nor tasks in the commit log
+	exit(0);
+}
+
 $changed = explode("\n", $changed);
 foreach ($changed as $onefile) {
 	//we must see when it was last changed, and that's previous revision
@@ -157,15 +167,6 @@ foreach ($changed as $onefile) {
 
 // Our POSTer in Fusionforge
 $SubmitUrl = util_make_url('/plugins/scmhook/committracker/newcommitgit.php');
-
-$tasks_involved = getInvolvedTasks($log);
-$artifacts_involved = getInvolvedArtifacts($log);
-
-if ((!is_array($tasks_involved) || empty($tasks_involved)) &&
-	(!is_array($artifacts_involved) || empty($artifacts_involved))) {
-	// No artifacts nor tasks in the commit log
-	exit(0);
-}
 
 $i = 0;
 foreach ($files as $onefile) {
