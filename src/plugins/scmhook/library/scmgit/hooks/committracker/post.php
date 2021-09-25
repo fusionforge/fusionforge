@@ -136,7 +136,6 @@ if (isset($git_tracker_debug) && $git_tracker_debug == 1) {
 	fclose($file);
 }
 
-
 $tasks_involved = getInvolvedTasks($log);
 $artifacts_involved = getInvolvedArtifacts($log);
 
