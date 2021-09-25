@@ -238,7 +238,6 @@ AND project_group_list.group_id=$2',
 	return $return;
 }
 
-
 if (isset($Configs) && is_array($Configs)) {
 	foreach ($Configs as $Config) {
 		$Result = parseConfig($Config);
@@ -247,8 +246,7 @@ if (isset($Configs) && is_array($Configs)) {
 		}
 
 		if (!is_null($Config['ArtifactNumbers'])) {
-			foreach ($Config['ArtifactNumbers'] as $Num)
-			{
+			foreach ($Config['ArtifactNumbers'] as $Num) {
 				$AddResult = addArtifactLog($Config, $Result['group_id'], $Num);
 				if (isset($AddResult['Error'])) {
 					exit_error('Adding ArtifactNumber',$AddResult['Error']);
@@ -257,8 +255,7 @@ if (isset($Configs) && is_array($Configs)) {
 		}
 
 		if (!is_null($Config['TaskNumbers'])) {
-			foreach ($Config['TaskNumbers'] as $Num)
-			{
+			foreach ($Config['TaskNumbers'] as $Num) {
 				$AddResult = addTaskLog($Config, $Result['group_id'], $Num);
 				if (isset($AddResult['Error'])) {
 					exit_error('Adding TaskNumber',$AddResult['Error']);
@@ -269,8 +266,3 @@ if (isset($Configs) && is_array($Configs)) {
 }
 
 exit (0);
-
-// Local Variables:
-// mode: php
-// c-file-style: "bsd"
-// End:
