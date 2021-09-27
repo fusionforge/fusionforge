@@ -53,4 +53,25 @@ if (forge_get_config('use_ftp')) {
 	}
 }
 
+if (forge_get_config('use_scm')) {
+	$pm = plugin_manager_get_object();
+	$plugins = $pm->getPlugins();
+	foreach ($activegroups as $activegroup) {
+		if ($activegroup->usesSCM()) {
+			$dirsize = 0;
+			//compute for all SCM plugins available.
+			foreach ($plugins as $pluginname) {
+				$pluginObject = plugin_get_object($pluginname);
+				if (isset($pluginObject->provides) && $pluginObject->provides['scm']) {
+					$repos_path = forge_get_config('repos_path', $pluginname);
+					if (is_dir($repos_path).'/'.$group->getUnixName()) {
+						$dirsize += get_dir_size($repos_path);
+					}
+				}
+			}
+			$quotamanagement->setDirSize($activegroup->getID(), 'scm', $dirsize);
+		}
+	}
+}
+
 plugin_hook('quota_compute', array($activegroups));

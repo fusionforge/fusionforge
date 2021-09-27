@@ -91,6 +91,11 @@ to monitor disk and database usage per user, project.");
 			case 'ftp':
 				$res = db_query_params('UPDATE plugin_quotamanagement SET ftp_usage = $1 WHERE group_id = $2', array($dirsize, $group_id));
 				break;
+			case 'scm':
+				$res = db_query_params('UPDATE plugin_quotamanagement SET scm_usage = $1 WHERE group_id = $2', array($dirsize, $group_id));
+				break;
+			default:
+				break;
 		}
 	}
 
@@ -240,6 +245,13 @@ to monitor disk and database usage per user, project.");
 					AND project_task.project_task_id = project_messages.project_task_id
 					AND group_id = $1',
 			array($group_id));
+	}
+	
+	function getSCMSizeForProject($group_id) {
+		if (!isset($this->data_array['scm_usage'])) {
+			$this->getDataArray($group_id);
+		}
+		return $this->data_array['scm_usage'];
 	}
 }
 
