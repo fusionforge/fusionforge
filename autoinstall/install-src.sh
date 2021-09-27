@@ -53,7 +53,7 @@ if [ -e /etc/debian_version ]; then
 			libmarkdown-php \
 			vsftpd \
 			fonts-dejavu-core mediawiki
-	else
+	elif grep -q ^10 /etc/debian_version; then
 		apt-get install -y make gettext php-cli php-pgsql php-htmlpurifier php-http php-soap php-pear ca-certificates \
 			libapache2-mpm-itk libapache2-mod-svn \
 			libapache2-mod-php \
@@ -75,6 +75,16 @@ if [ -e /etc/debian_version ]; then
 		dpkg -i php-text-captcha_${ptcver}_all.deb
 		rm -f php-text-captcha_${ptcver}_all.deb
 		popd
+	else
+		apt-get install -y make gettext php-cli php-pgsql php-htmlpurifier php-http php-soap php-pear php-text-captcha ca-certificates \
+			libapache2-mpm-itk libapache2-mod-svn \
+			libapache2-mod-php \
+			apache2 postgresql postgresql-contrib libnss-pgsql2 unscd \
+			cvs subversion libcgi-pm-perl git mercurial bzr xinetd mksh \
+			unoconv poppler-utils dpkg-dev \
+			libmarkdown-php \
+			vsftpd \
+			fonts-dejavu-core mediawiki
 	fi
 	if ! pear list Text_CAPTCHA ; then
 	    pear install Text_CAPTCHA
