@@ -149,6 +149,10 @@ foreach ($quotas as $p) {
 		$size = $quotamanagement->getHomeSize($group_id);
 		$quotas["$group_id"]["disk_size_1"] += $size;
 	}
+	if (forge_get_config('use_scm')) {
+		// scm dir disk space
+		$quotas["$group_id"]["disk_size_scm"] = $quotamanagement->getSCMSizeForProject($group_id);
+	}
 }
 
 // users disk space size
