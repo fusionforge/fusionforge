@@ -25,82 +25,81 @@ require_once $gfcommon.'reporting/Report.class.php';
 
 class ReportUserAct extends Report {
 
-var $res;
+	var $res;
 
-function __construct($span,$user_id,$start=0,$end=0) {
-	parent::__construct();
+	function __construct($span,$user_id,$start=0,$end=0) {
+		parent::__construct();
 
-	if (!$start) {
-		$start=mktime(0,0,0,date('m'),1,date('Y'));
+		if (!$start) {
+			$start=mktime(0,0,0,date('m'),1,date('Y'));
+		}
+		if (!$end) {
+			$end=time();
+		} else {
+			$end--;
+		}
+
+		if (!$user_id) {
+			$this->setError('No User_id');
+			return false;
+		}
+		if (!$span || $span == REPORT_TYPE_MONTHLY) {
+			$res = db_query_params ('SELECT * FROM rep_user_act_monthly WHERE user_id=$1 AND month BETWEEN $2 AND $3 ORDER BY month ASC',
+						array ($user_id,
+						$start,
+						$end)) ;
+		} elseif ($span == REPORT_TYPE_WEEKLY) {
+			$res = db_query_params ('SELECT * FROM rep_user_act_weekly WHERE user_id=$1 AND week BETWEEN $2 AND $3 ORDER BY week ASC',
+						array ($user_id,
+						$start,
+						$end)) ;
+		} elseif ($span == REPORT_TYPE_DAILY) {
+			$res = db_query_params ('SELECT * FROM rep_user_act_daily WHERE user_id=$1 AND day BETWEEN $2 AND $3 ORDER BY day ASC',
+						array ($user_id,
+						$start,
+						$end)) ;
+		}
+
+		$this->start_date=$start;
+		$this->end_date=$end;
+
+		if (!$res || db_error()) {
+			$this->setError('ReportUserAct: '.db_error());
+			return false;
+		}
+		$this->setSpan($span);
+		$this->setDates($res,1);
+		$this->res=$res;
+		return true;
 	}
-	if (!$end) {
-		$end=time();
-	} else {
-		$end--;
+
+	function &getTrackerOpened() {
+		return util_result_column_to_array($this->res,2);
 	}
 
-	if (!$user_id) {
-		$this->setError('No User_id');
-		return false;
-	}
-	if (!$span || $span == REPORT_TYPE_MONTHLY) {
-		$res = db_query_params ('SELECT * FROM rep_user_act_monthly WHERE user_id=$1 AND month BETWEEN $2 AND $3 ORDER BY month ASC',
-					array ($user_id,
-					       $start,
-					       $end)) ;
-	} elseif ($span == REPORT_TYPE_WEEKLY) {
-		$res = db_query_params ('SELECT * FROM rep_user_act_weekly WHERE user_id=$1 AND week BETWEEN $2 AND $3 ORDER BY week ASC',
-					array ($user_id,
-					       $start,
-					       $end)) ;
-	} elseif ($span == REPORT_TYPE_DAILY) {
-		$res = db_query_params ('SELECT * FROM rep_user_act_daily WHERE user_id=$1 AND day BETWEEN $2 AND $3 ORDER BY day ASC',
-					array ($user_id,
-					       $start,
-					       $end)) ;
+	function &getTrackerClosed() {
+		return util_result_column_to_array($this->res,3);
 	}
 
-	$this->start_date=$start;
-	$this->end_date=$end;
-
-	if (!$res || db_error()) {
-		$this->setError('ReportUserAct: '.db_error());
-		return false;
+	function &getForum() {
+		return util_result_column_to_array($this->res,4);
 	}
-	$this->setSpan($span);
-	$this->setDates($res,1);
-	$this->res=$res;
-	return true;
-}
 
-function &getTrackerOpened() {
-	return util_result_column_to_array($this->res,2);
-}
+	function &getDocs() {
+		return util_result_column_to_array($this->res,5);
+	}
 
-function &getTrackerClosed() {
-	return util_result_column_to_array($this->res,3);
-}
+	function &getCVSCommits() {
+		return util_result_column_to_array($this->res,6);
+	}
 
-function &getForum() {
-	return util_result_column_to_array($this->res,4);
-}
+	function &getTaskOpened() {
+		return util_result_column_to_array($this->res,7);
+	}
 
-function &getDocs() {
-	return util_result_column_to_array($this->res,5);
-}
-
-function &getCVSCommits() {
-	return util_result_column_to_array($this->res,6);
-}
-
-function &getTaskOpened() {
-	return util_result_column_to_array($this->res,7);
-}
-
-function &getTaskClosed() {
-	return util_result_column_to_array($this->res,8);
-}
-
+	function &getTaskClosed() {
+		return util_result_column_to_array($this->res,8);
+	}
 }
 
 // Local Variables:

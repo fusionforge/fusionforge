@@ -47,14 +47,14 @@ require_once $gfcommon.'reporting/Report.class.php';
 
 class ReportDownloads extends Report {
 
-	function __construct($group_id,$package_id,$start=0,$end=0) {
+	function __construct($group_id, $package_id, $start = 0, $end = 0) {
 		parent::__construct();
 
 		if (!$start) {
-			$start=mktime(0,0,0,date('m'),1,date('Y'));
+			$start=mktime(0, 0, 0, date('m'), 1, date('Y'));
 		}
 		if (!$end) {
-			$end=time();
+			$end = time();
 		} else {
 			$end--;
 		}
@@ -69,8 +69,8 @@ class ReportDownloads extends Report {
 		}
 
 		if (!$package_id) {
-			$res = db_query_params ('SELECT package_id FROM frs_package WHERE frs_package.group_id = $1',
-						array ($group_id)) ;
+			$res = db_query_params('SELECT package_id FROM frs_package WHERE frs_package.group_id = $1',
+						array($group_id)) ;
 			$package_id = db_result($res, 0, 'package_id');
 		}
 		if (!$package_id) {
@@ -78,13 +78,13 @@ class ReportDownloads extends Report {
 			return false;
 		}
 
-		$res = db_query_params ('SELECT frs_package.name, frs_release.name,
+		$res = db_query_params('SELECT frs_package.name, frs_release.name,
 						frs_file.filename, users.realname,
 						frs_dlstats_file.month || lpad(frs_dlstats_file.day::text,2,0::text),
-					users.user_name, users.user_id
-				FROM frs_dlstats_file, frs_file, frs_release,
-					frs_package, users
-				WHERE frs_dlstats_file.user_id = users.user_id
+						users.user_name, users.user_id
+					FROM frs_dlstats_file, frs_file, frs_release,
+						frs_package, users
+					WHERE frs_dlstats_file.user_id = users.user_id
 					AND frs_dlstats_file.file_id = frs_file.file_id
 					AND frs_file.release_id = frs_release.release_id
 					AND frs_release.package_id = frs_package.package_id
@@ -92,8 +92,8 @@ class ReportDownloads extends Report {
 					AND frs_release.package_id = $2
 					AND frs_dlstats_file.month >= $3
 					AND frs_dlstats_file.month <= $4
-				ORDER BY frs_dlstats_file.month DESC,
-					frs_dlstats_file.day DESC',
+					ORDER BY frs_dlstats_file.month DESC,
+						frs_dlstats_file.day DESC',
 					array ($group_id,
 					       $package_id,
 					       $start_m,
@@ -107,11 +107,11 @@ class ReportDownloads extends Report {
 			return false;
 		}
 
-		$rows=db_numrows($res);
+		$rows = db_numrows($res);
 		$arr = array();
-		$i=0;
+		$i = 0;
 		if ($rows > 0) {
-			while ($row = db_fetch_array ($res)) {
+			while ($row = db_fetch_array($res)) {
 				$arr[$i++] = $row;
 			}
 		}

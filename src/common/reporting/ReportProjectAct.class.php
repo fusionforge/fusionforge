@@ -26,90 +26,89 @@ require_once $gfcommon.'reporting/Report.class.php';
 
 class ReportProjectAct extends Report {
 
-var $res;
+	var $res;
 
-function __construct($span,$group_id,$start=0,$end=0) {
-	parent::__construct();
+	function __construct($span, $group_id, $start = 0, $end = 0) {
+		parent::__construct();
 
-	if (!$start) {
-		$start=mktime(0,0,0,date('m'),1,date('Y'));
+		if (!$start) {
+			$start = mktime(0,0,0,date('m'),1,date('Y'));
+		}
+		if (!$end) {
+			$end = time();
+		} else {
+			$end--;
+		}
+
+		if (!$group_id) {
+			$this->setError('No group_id');
+			return false;
+		}
+		if (!$span || $span == REPORT_TYPE_MONTHLY) {
+			$res = db_query_params('SELECT * FROM rep_group_act_monthly WHERE group_id=$1 AND month BETWEEN $2 AND $3 ORDER BY month',
+						array ($group_id,
+						$start,
+						$end));
+		} elseif ($span == REPORT_TYPE_WEEKLY) {
+			$res = db_query_params('SELECT * FROM rep_group_act_weekly WHERE group_id=$1 AND week BETWEEN $2 AND $3 ORDER BY week',
+						array ($group_id,
+						$start,
+						$end));
+		} elseif ($span == REPORT_TYPE_DAILY) {
+			$res = db_query_params('SELECT * FROM rep_group_act_daily WHERE group_id=$1 AND day BETWEEN $2 AND $3 ORDER BY day',
+						array ($group_id,
+						$start,
+						$end));
+		}
+
+		$this->start_date = $start;
+		$this->end_date = $end;
+
+		if (!$res || db_error()) {
+			$this->setError('ReportProjectAct: '.db_error());
+			return false;
+		}
+		$this->setSpan($span);
+		$this->setDates($res, 1);
+		$this->res = $res;
+		return true;
 	}
-	if (!$end) {
-		$end=time();
-	} else {
-		$end--;
+
+	function &getTrackerOpened() {
+		return util_result_column_to_array($this->res,2);
 	}
 
-	if (!$group_id) {
-		$this->setError('No group_id');
-		return false;
-	}
-	if (!$span || $span == REPORT_TYPE_MONTHLY) {
-		$res = db_query_params ('SELECT * FROM rep_group_act_monthly WHERE group_id=$1 AND month BETWEEN $2 AND $3 ORDER BY month',
-					array ($group_id,
-					       $start,
-					       $end)) ;
-	} elseif ($span == REPORT_TYPE_WEEKLY) {
-		$res = db_query_params ('SELECT * FROM rep_group_act_weekly WHERE group_id=$1 AND week BETWEEN $2 AND $3 ORDER BY week',
-					array ($group_id,
-					       $start,
-					       $end)) ;
-	} elseif ($span == REPORT_TYPE_DAILY) {
-		$res = db_query_params ('SELECT * FROM rep_group_act_daily WHERE group_id=$1 AND day BETWEEN $2 AND $3 ORDER BY day',
-					array ($group_id,
-					       $start,
-					       $end)) ;
+	function &getTrackerClosed() {
+		return util_result_column_to_array($this->res,3);
 	}
 
-	$this->start_date=$start;
-	$this->end_date=$end;
-
-	if (!$res || db_error()) {
-		$this->setError('ReportProjectAct: '.db_error());
-		return false;
+	function &getForum() {
+		return util_result_column_to_array($this->res,4);
 	}
-	$this->setSpan($span);
-	$this->setDates($res,1);
-	$this->res=$res;
-	return true;
-}
 
-function &getTrackerOpened() {
-	return util_result_column_to_array($this->res,2);
-}
+	function &getDocs() {
+		return util_result_column_to_array($this->res,5);
+	}
 
-function &getTrackerClosed() {
-	return util_result_column_to_array($this->res,3);
-}
+	function &getDownloads() {
+		return util_result_column_to_array($this->res,6);
+	}
 
-function &getForum() {
-	return util_result_column_to_array($this->res,4);
-}
+	function &getCVSCommits() {
+		return util_result_column_to_array($this->res,7);
+	}
 
-function &getDocs() {
-	return util_result_column_to_array($this->res,5);
-}
+	function &getTaskOpened() {
+		return util_result_column_to_array($this->res,8);
+	}
 
-function &getDownloads() {
-	return util_result_column_to_array($this->res,6);
-}
+	function &getTaskClosed() {
+		return util_result_column_to_array($this->res,9);
+	}
 
-function &getCVSCommits() {
-	return util_result_column_to_array($this->res,7);
-}
-
-function &getTaskOpened() {
-	return util_result_column_to_array($this->res,8);
-}
-
-function &getTaskClosed() {
-	return util_result_column_to_array($this->res,9);
-}
-
-function &getPageViews() {
-	return util_result_column_to_array($this->res,10);
-}
-
+	function &getPageViews() {
+		return util_result_column_to_array($this->res,10);
+	}
 }
 
 // Local Variables:

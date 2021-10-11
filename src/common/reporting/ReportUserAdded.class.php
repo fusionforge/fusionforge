@@ -25,45 +25,41 @@ require_once $gfcommon.'reporting/Report.class.php';
 
 class ReportUserAdded extends Report {
 
-function __construct($span,$start=0,$end=0) {
-	parent::__construct();
+	function __construct($span, $start = 0, $end = 0) {
+		parent::__construct();
 
-	if (!$start) {
-		$start=mktime(0,0,0,date('m'),1,date('Y'));
+		if (!$start) {
+			$start = mktime(0, 0, 0, date('m'), 1, date('Y'));
+		}
+		if (!$end) {
+			$end = time();
+		} else {
+			$end--;
+		}
+
+		if (!$span || $span == REPORT_TYPE_MONTHLY) {
+			$res = db_query_params('SELECT * FROM rep_users_added_monthly WHERE month BETWEEN $1 AND $2 ORDER BY month ASC',
+						array($start, $end));
+		} elseif ($span == REPORT_TYPE_WEEKLY) {
+			$res = db_query_params('SELECT * FROM rep_users_added_weekly WHERE week BETWEEN $1 AND $2 ORDER BY week ASC',
+						array($start, $end));
+		} elseif ($span == REPORT_TYPE_DAILY) {
+			$res = db_query_params('SELECT * FROM rep_users_added_daily WHERE day BETWEEN $1 AND $2 ORDER BY day ASC',
+						array($start, $end));
+		}
+
+		$this->start_date = $start;
+		$this->end_date = $end;
+
+		if (!$res || db_error()) {
+			$this->setError('ReportUserAdded: '.db_error());
+			return false;
+		}
+		$this->setSpan($span);
+		$this->setDates($res,0);
+		$this->setData($res,1);
+		return true;
 	}
-	if (!$end) {
-		$end=time();
-	} else {
-		$end--;
-	}
-
-	if (!$span || $span == REPORT_TYPE_MONTHLY) {
-		$res = db_query_params ('SELECT * FROM rep_users_added_monthly WHERE month BETWEEN $1 AND $2 ORDER BY month ASC',
-					array ($start,
-					       $end)) ;
-	} elseif ($span == REPORT_TYPE_WEEKLY) {
-		$res = db_query_params ('SELECT * FROM rep_users_added_weekly WHERE week BETWEEN $1 AND $2 ORDER BY week ASC',
-					array ($start,
-					       $end)) ;
-	} elseif ($span == REPORT_TYPE_DAILY) {
-		$res = db_query_params ('SELECT * FROM rep_users_added_daily WHERE day BETWEEN $1 AND $2 ORDER BY day ASC',
-					array ($start,
-					       $end)) ;
-	}
-
-	$this->start_date=$start;
-	$this->end_date=$end;
-
-	if (!$res || db_error()) {
-		$this->setError('ReportUserAdded: '.db_error());
-		return false;
-	}
-	$this->setSpan($span);
-	$this->setDates($res,0);
-	$this->setData($res,1);
-	return true;
-}
-
 }
 
 // Local Variables:

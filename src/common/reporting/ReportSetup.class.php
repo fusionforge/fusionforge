@@ -25,10 +25,6 @@ require_once $gfcommon.'reporting/Report.class.php';
 
 class ReportSetup extends Report {
 
-	function __construct() {
-		parent::__construct();
-	}
-
 	function initialSetup() {
 		$this->createTables();
 		if (!$this->initialData()) {
