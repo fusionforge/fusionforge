@@ -913,8 +913,7 @@ function util_make_url($path = '', $prefix = '') {
  * @return	string
  */
 function util_find_relative_referer($url) {
-	$relative_url = str_replace(util_make_base_url().normalized_urlprefix(), '', $url);
-	return $relative_url;
+	return str_replace(util_make_base_url().normalized_urlprefix(), '', $url);
 }
 
 /**
