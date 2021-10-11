@@ -1355,8 +1355,7 @@ class RoleComparator {
 		} elseif ($ap != NULL && $bp == NULL) {
 			return 1;
 		} elseif ($ap == NULL && $bp == NULL) {
-			$tmp = strcoll ($a->getName(), $b->getName());
-			return $tmp;
+			return strcoll($a->getName(), $b->getName());
 		} else {
 			$projcmp = new ProjectComparator();
 			$projcmp->criterion = 'name';
@@ -1373,6 +1372,5 @@ function sortRoleList (&$list, $relative_to = NULL, $criterion='composite') {
 	$cmp = new RoleComparator();
 	$cmp->criterion = $criterion;
 	$cmp->reference_project = $relative_to;
-
-	return usort ($list, array ($cmp, 'Compare'));
+	return usort($list, array ($cmp, 'Compare'));
 }

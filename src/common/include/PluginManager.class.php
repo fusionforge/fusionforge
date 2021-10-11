@@ -320,7 +320,7 @@ function &plugin_manager_get_object() {
  */
 function &plugin_get_object($pluginname) {
 	global $PLUGINMANAGER_OBJ;
-	$result=$PLUGINMANAGER_OBJ->Getpluginobject($pluginname);
+	$result = $PLUGINMANAGER_OBJ->Getpluginobject($pluginname);
 	return $result;
 }
 

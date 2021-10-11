@@ -145,8 +145,7 @@ class Widget_MySurveys extends Widget {
 		$textsArray[] = _('answered [A]');
 		$textsArray[] = _('not yet answered [N]');
 		$textsArray[] = _('any status [AN]');
-		$prefs = _('Display surveys:').html_build_select_box_from_arrays($optionsArray, $textsArray, "show", $this->_survey_show);
-		return $prefs;
+		return _('Display surveys:').html_build_select_box_from_arrays($optionsArray, $textsArray, "show", $this->_survey_show);
 	}
 
 	function updatePreferences() {

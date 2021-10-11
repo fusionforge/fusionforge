@@ -220,10 +220,8 @@ class MailParser extends FFError {
 		}
 
 		/* Return what we have */
-		$ret_arr = array("charset"=>$charset, "text" => $string);
-		return $ret_arr;
+		return array("charset"=>$charset, "text" => $string);
 	}
-
 }
 
 // Local Variables:
