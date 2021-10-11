@@ -96,9 +96,9 @@ switch (getStringFromRequest('func')) {
 		}
 
 		$import_data = array();
-		if (!empty($submitted_by))
+		if (!empty($submitted_by)) {
 			$import_data['user'] = $submitted_by;
-
+		}
 		if (!$ah->create($summary,$details,$assigned_to,$priority,$extra_fields,$import_data)) {
 			$error_msg = $ah->getErrorMessage();
 			form_release_key(getStringFromRequest('form_key'));
@@ -188,9 +188,9 @@ switch (getStringFromRequest('func')) {
 				$_status_id=(($status_id != 100) ? $status_id : $ah->getStatusID());
 
 				$import_data = array();
-				if (!empty($submitted_by) && $submitted_by != '100.1')
+				if (!empty($submitted_by) && $submitted_by != '100.1') {
 					$import_data['user'] = $submitted_by;
-
+				}
 				//yikes, we want the ability to mass-update to "un-assigned", which is the ID=100, which
 				//conflicts with the "no change" ID! Sorry for messy use of 100.1
 				$_assigned_to=(($assigned_to != '100.1') ? $assigned_to : $ah->getAssignedTo());
@@ -301,9 +301,9 @@ switch (getStringFromRequest('func')) {
 					|| forge_check_perm ('tracker', $ath->getID(), 'manager')) {
 
 				$import_data = array();
-				if (!empty($submitted_by))
+				if (!empty($submitted_by)) {
 					$import_data['user'] = $submitted_by;
-
+				}
 				//admin and techs can do everything
 				//techs will have certain fields overridden inside the update() function call
 				if (!$ah->update($priority,$status_id,
