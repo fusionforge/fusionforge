@@ -217,10 +217,10 @@ EOF
 
 function suse_backport_from_fedora_rpm {
 	if  [ ! -e "libnss-pgsql.done" ]; then
-		zypper in xmlto
-		zypper in rpm-build
-		zypper in postgresql-devel
-		zypper in wget patch
+		zypper --non-interactive in xmlto
+		zypper --non-interactive in rpm-build
+		zypper --non-interactive in postgresql-devel
+		zypper --non-interactive in wget patch
 		pkg=libnss-pgsql-1.5.0-0.24.beta.fc33.src.rpm
 		if ! test -f "$pkg"; then
 			wget https://ftp-stud.hs-esslingen.de/pub/fedora/linux/releases/33/Everything/source/tree/Packages/l/$pkg
@@ -264,6 +264,6 @@ function suse_install_rpms {
 		fi
 	done
 	if [ -n "$instmods" ] ; then
-		zypper --gpg-auto-import-keys install -y $instmods
+		zypper --gpg-auto-import-keys --non-interactive install $instmods
 	fi
 }
