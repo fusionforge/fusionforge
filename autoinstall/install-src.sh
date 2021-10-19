@@ -128,12 +128,15 @@ fi
 	make
 	make install-base install-shell install-scm \
 		install-plugin-scmcvs install-plugin-scmsvn install-plugin-scmgit install-plugin-scmhg \
-		install-plugin-blocks install-plugin-moinmoin \
+		install-plugin-blocks \
 		install-plugin-taskboard install-plugin-message \
 		install-plugin-repositoryapi \
 		install-plugin-mediawiki
 	if [ -e /etc/centos-release ] || grep -q ^8 /etc/debian_version; then
 		make install-plugin-scmbzr
+	fi
+	if ! grep -q ^11 /etc/debian_version; then
+		make install-plugin-moinmoin
 	fi
 	if [ -e /etc/centos-release -o -e /etc/debian-release ]; then
 		make install-plugin-phptextcaptcha
