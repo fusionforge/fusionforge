@@ -48,7 +48,7 @@ abstract class SCMPlugin extends Plugin {
 	function CallHook($hookname, &$params) {
 		switch ($hookname) {
 			case 'group_plugin_use': {
-				if ($params['val'] == true) {
+				if ($params['val'] === true) {
 					$systasksq = new SysTasksQ();
 					$systasksq->add(SYSTASK_CORE, 'SCM_REPO', $params['group_id']);
 				}
