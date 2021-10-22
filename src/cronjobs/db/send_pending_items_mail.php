@@ -36,20 +36,20 @@ require_once $gfcommon.'include/pre.php';
 require $gfcommon.'include/cron_utils.php';
 
 
-$options=$GLOBALS['argv'];
-if ($options!=FALSE){
-	$option=$options[1];
-	if (($option=='pm')|| ($option=='all')){
+$options = $GLOBALS['argv'];
+if ($options){
+	$option = $options[1];
+	if (($option == 'pm') || ($option == 'all')) {
 		echo "running pm";
 		send_pending_pm_items_mail();
 	}
-	if (($option=='tracker')|| ($option=='all')){
+	if (($option == 'tracker') || ($option == 'all')) {
 		echo "\nrunning tracker";
 		send_pending_tracker_items_mail();
 	}
 }
 
-function send_pending_pm_items_mail(){
+function send_pending_pm_items_mail() {
 	$time = time();
 
 	/* first we check the tasks from the project_manager */

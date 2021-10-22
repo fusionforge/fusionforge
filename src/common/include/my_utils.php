@@ -48,10 +48,10 @@ function my_hide_url($svc, $db_item_id, $item_id, $count, $hide) {
 	}
 
 	// Make sure they are both 0 if never set before
-	if ($old_count == false) {
+	if (!$old_count) {
 		$old_count = 0;
 	}
-	if ($old_hide == false) {
+	if (!$old_hide) {
 		$old_hide = 0;
 	}
 	if ($item_id == $db_item_id) {
@@ -95,13 +95,11 @@ function my_hide($svc, $db_item_id, $item_id, $hide) {
 	if ($old_pref_value) {
 		list($old_hide, $old_count) = explode('|', $old_pref_value);
 	}
-	if (!isset($old_hide)) {
-		$old_hide = false;
-	}
-	// Make sure they are both 0 if never set before
-	if ($old_hide == false) {
+	// Make sure $old_hide is 0 if never set before
+	if (!isset($old_hide) || !$old_hide) {
 		$old_hide = 0;
 	}
+
 	if ($item_id == $db_item_id) {
 		if (!isset($hide)) {
 			$hide = $old_hide;

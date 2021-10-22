@@ -241,7 +241,7 @@ AND project_group_list.group_id=$2',
 if (isset($Configs) && is_array($Configs)) {
 	foreach ($Configs as $Config) {
 		$Result = parseConfig($Config);
-		if ($Result['check'] == false) {
+		if (!$Result['check']) {
 			exit_error('Check_error:' . $Result['error']);
 		}
 

@@ -108,7 +108,7 @@ function startElement($parser, $name, $attrib) {
 	global $linktypedependenton;
 
 	$tag_aux = $name;
-	if ($tasks == true){
+	if ($tasks){
 		//ID TASK
 		if ($name == "TASK") {
 /*			$task_id = $attrib["ID"];
@@ -117,7 +117,7 @@ function startElement($parser, $name, $attrib) {
 			$parent_project_id = $attrib["PARENT_PROJECT_ID"];
 			$isnew = $attrib["ISNEW"];
 */
-			if ($fdependenton == true){
+			if ($fdependenton){
 				$iddependenton = $attrib["ID"];
 				$projectiddependenton = $attrib["PROJECTID"];
 				$linktypedependenton= $attrib["LINKTYPE"];
@@ -185,12 +185,12 @@ function endElement($parser, $name) {
 	global $adependenton;
 	global $result;
 
-	if ($name == "TASK" && $principal_tag=="upload" && ($fdependenton == false)){
+	if ($name == "TASK" && $principal_tag=="upload" && ($fdependenton === false)){
 		$task_count++;
 		$atasks["resources"] = $resourcename;
 		$resourcename = array();
 	}
-	if ($name == "TASK" && $principal_tag=="upload" &&($fdependenton == false)) {
+	if ($name == "TASK" && $principal_tag=="upload" &&($fdependenton === false)) {
 		$result["tasks"][] = $atasks;
 		$atasks=array();
 	}
@@ -290,7 +290,7 @@ function characterDataHandler ($parser, $data) {
 					break;
 				}
 				case $tag_aux == "TASK": {
-					if ($fdependenton == true) {
+					if ($fdependenton) {
 						$adependenton[] = array("task_id"=>$iddependenton,"msproj_id"=>$projectiddependenton,"link_type"=>$linktypedependenton,"task_name"=>$data);
 					} else {
 						$atasks = Array();
@@ -382,15 +382,15 @@ xml_parser_free($xml_parser);
 switch ($result["REQUEST"]) {
 	//MSPLogin
 	case $result["REQUEST"] == "GetSubprojects": {
-		$gforgeresult = MSPLogin($result["loginid"],$result["password"]);
+		$fforgeresult = MSPLogin($result["loginid"],$result["password"]);
 		print('<?xml version="1.0"?>');
 		print('<xml>');
-		if ($gforgeresult["success"] == true) {
+		if ($fforgeresult["success"] === true) {
 			print('<response handle="result">');
 			print('<session_id>');
-			print($gforgeresult["session_hash"]);
+			print($fforgeresult["session_hash"]);
 			print('</session_id>');
-			$subprojects = $gforgeresult["subprojects"];
+			$subprojects = $fforgeresult["subprojects"];
 			print('<subprojects>');
 			if (count($subprojects) > 0 ) {
 				foreach($subprojects as $k => $v) {
@@ -400,7 +400,7 @@ switch ($result["REQUEST"]) {
 			print('</subprojects>');
 		} else {
 			print('<response handle="error">');
-			print('<error><description>'.$gforgeresult["errormessage"].'</description></error>');
+			print('<error><description>'.$fforgeresult["errormessage"].'</description></error>');
 		}
 		print('</response>');
 		print('</xml>');
@@ -409,12 +409,12 @@ switch ($result["REQUEST"]) {
 	//MSPDownload
 	case $result["REQUEST"] == "download": {
 		if ((trim($result["ACTION"]) == "GetLatestVersion") || (trim($result["ACTION"]) == "Checkout")) {
-			$gforgeresult =& MSPDownload($result["session_id"],$result["subproject"][0]["id"]);
+			$fforgeresult =& MSPDownload($result["session_id"],$result["subproject"][0]["id"]);
 			$return = ('<?xml version="1.0"?>');
 			$return .= ('<xml>');
-			if ($gforgeresult["success"] == true) {
+			if ($fforgeresult["success"] === true) {
 				$return .= ('<response handle="result">');
-				$tasks =& $gforgeresult["tasks"];
+				$tasks =& $fforgeresult["tasks"];
 				$return .= ('<sync_time>'.date('Y-m-d H:i:s').'</sync_time>');
 				$return .= ('<tasks>');
 				for ($tc=0; $tc<count($tasks); $tc++) {
@@ -461,7 +461,7 @@ switch ($result["REQUEST"]) {
 				print $return;
 			} else {
 				print($return.'<response handle="error">');
-				print('<error><description>'.$gforgeresult["errormessage"].'</description></error>');
+				print('<error><description>'.$fforgeresult["errormessage"].'</description></error>');
 			}
 			print('</response>');
 			print('</xml>');
@@ -471,13 +471,13 @@ switch ($result["REQUEST"]) {
 	//MSPCheckin
 	case $result["REQUEST"] == "upload": {
 		if (trim($result["ACTION"]) == "Checkin") {
-			$gforgeresult = MSPCheckin($result["session_id"],$result["subproject"][0]["id"],$result["tasks"]);
+			$fforgeresult = MSPCheckin($result["session_id"],$result["subproject"][0]["id"],$result["tasks"]);
 			print('<?xml version="1.0"?>');
 			print('<xml>');
-			if (!isset($gforgeresult["success"]) || ($gforgeresult["success"] == false)) {
-				if ($gforgeresult["errormessage"] == "Invalid Resource Name") {
+			if (!isset($fforgeresult["success"]) || ($fforgeresult["success"] === false)) {
+				if ($fforgeresult["errormessage"] == "Invalid Resource Name") {
 					print('<response handle="mapuser">');
-					$resourcenames = $gforgeresult["resourcename"];
+					$resourcenames = $fforgeresult["resourcename"];
 					print('<resourcenames>');
 					if (count($resourcenames) > 0 ) {
 						foreach($resourcenames as $k => $resourcename) {
@@ -486,7 +486,7 @@ switch ($result["REQUEST"]) {
 					}
 					print('</resourcenames>');
 					print('<usernames>');
-					$usernames = $gforgeresult["usernames"];
+					$usernames = $fforgeresult["usernames"];
 					if (count($usernames) > 0 ) {
 						foreach($usernames as $k => $username) {
 							print('<user id ="'.$k.'">'.$username.'</user>');
@@ -496,7 +496,7 @@ switch ($result["REQUEST"]) {
 				} else {
 					print('<response handle="error">');
 					print('<error>');
-					print('<description>'.$gforgeresult["errormessage"].'</description>');
+					print('<description>'.$fforgeresult["errormessage"].'</description>');
 					print('</error>');
 				}
 				print('</response>');
@@ -518,14 +518,14 @@ switch ($result["REQUEST"]) {
 //GetProjects
 case $result["REQUEST"] == "GetProjects": {
 	//Call GetProjects
-	$gforgeresult = MSPGetProjects($result["session_id"]);
+	$fforgeresult = MSPGetProjects($result["session_id"]);
 	print('<?xml version="1.0"?>');
 	print('<xml>');
-	if ($gforgeresult) {
+	if ($fforgeresult) {
 		print('<response handle="result">');
 		print('<projects>');
-		for ($c=0;$c<count($gforgeresult);$c++) {
-			$cgroup=$gforgeresult[$c];
+		for ($c=0;$c<count($fforgeresult);$c++) {
+			$cgroup=$fforgeresult[$c];
 			print('<project id ="'.$cgroup->getID().'">'.$cgroup->getPublicName().'</project>');
 		}
 		print('</projects>');
@@ -541,23 +541,23 @@ case $result["REQUEST"] == "GetProjects": {
 }
 
 case $result["REQUEST"] == "CreateProject": {
-	if($result["ispublic"]==1 || $result["ispublic"]==true) {
-		$result["ispublic"]=1;
+	if($result["ispublic"] == 1 || $result["ispublic"] === true) {
+		$result["ispublic"] = 1;
 	} else {
-		$result["ispublic"]=0;
+		$result["ispublic"] = 0;
 	}
-	$gforgeresult = MSPCreateProject($result["GROUPID"],$result["session_id"],$result["name"],$result["ispublic"],$result["description"]);
+	$fforgeresult = MSPCreateProject($result["GROUPID"],$result["session_id"],$result["name"],$result["ispublic"],$result["description"]);
 	print('<?xml version="1.0"?>');
 	print('<xml>');
-	if (!is_object($gforgeresult) && $gforgeresult['code'] == "error") {
+	if (!is_object($fforgeresult) && $fforgeresult['code'] == "error") {
 		print('<response handle="error">');
 		print('<error>');
-		print('<description>'.$gforgeresult['description'].'</description>');
+		print('<description>'.$fforgeresult['description'].'</description>');
 		print('</error>');
 	} else {
 		print('<response handle="result">');
 		print('<Group_ID>'.$result["GROUPID"].'</Group_ID>');
-		print('<Group_Project_ID>'.$gforgeresult->getID().'</Group_Project_ID>');
+		print('<Group_Project_ID>'.$fforgeresult->getID().'</Group_Project_ID>');
 	}
 	print('</response>');
 	print('</xml>');

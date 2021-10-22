@@ -201,7 +201,7 @@ over it to the project's administrator.");
 
 		if (!$repo_exists) {
 			$tmp_repo = util_mkdtemp('.bzr', $project_name);
-			if ($tmp_repo == false) {
+			if ($tmp_repo === false) {
 				return false;
 			}
 

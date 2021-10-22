@@ -999,7 +999,7 @@ function util_display_user($username, $user_id = 0, $text = '', $size = 'xs') {
 				break;
 			}
 		}
-		if ($seen == false) {
+		if (!$seen) {
 			return '';
 		}
 	}
@@ -1152,7 +1152,7 @@ function util_path_info_last_numeric_component() {
 		if ($x == '/') {
 			$rv = 0;
 			$ok = true;
-		} elseif ($ok == false) {
+		} elseif (!$ok) {
 			/* need reset using slash */
 		} elseif ((ord($x) >= 48) && (ord($x) <= 57)) {
 			$rv = $rv * 10 + ord($x) - 48;
@@ -1507,7 +1507,7 @@ function util_create_file_with_contents($path, $contents) {
 		return false;
 	}
 	$handle = fopen($path, "x+");
-	if ($handle == false) {
+	if (!$handle) {
 		return false;
 	}
 	fwrite($handle, $contents);

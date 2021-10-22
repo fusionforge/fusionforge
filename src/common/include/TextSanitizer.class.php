@@ -279,10 +279,10 @@ class TextSanitizer extends FFError {
 		$summary = '';
 		for ($l = 0; $l < $nb_max; $l++) {
 			$summary .= '<br />';
-			if ($truncate == true && $nb_max < $nb_line && $l == $nb_max - 1) {
+			if ($truncate === true && $nb_max < $nb_line && $l == $nb_max - 1) {
 				$nb_char = $nb_char * ($nb_line - $nb_max + 1);
 			}
-			$summary .= util_make_links((($truncate == true && strlen($arr[$l]) > $nb_char)?
+			$summary .= util_make_links((($truncate === true && strlen($arr[$l]) > $nb_char)?
 				preg_replace('/[^\s]*$/', ' <b>...</b>', substr($arr[$l], 0, $nb_char), 1) :
 				$arr[$l]));
 		}
