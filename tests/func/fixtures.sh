@@ -2,6 +2,22 @@
 # Reinitialize the system to base or fixture'd state (database, SCM
 # repos, plugins data...) to pass new tests
 
+# This file is part of FusionForge.
+#
+# FusionForge is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published
+# by the Free Software Foundation; either version 2 of the License,
+# or (at your option) any later version.
+#
+# FusionForge is distributed in the hope that it will be useful, but
+# WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License along
+# with this program; if not, write to the Free Software Foundation, Inc.,
+# 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+
 is_db_up () {
     # 'service postgresql status' is not reliable enough
     # Also postgresql processes and control tools have too many names, esp. across distos
@@ -10,8 +26,6 @@ is_db_up () {
 }
 
 is_db_down () {
-    pgdir=/var/lib/postgresql
-    if [ -e /etc/redhat-release ]; then pgdir=/var/lib/pgsql; fi
     ! (echo "SELECT COUNT(*) FROM users;" | su - postgres -c "psql $database" > /dev/null 2>&1 \
 	|| find $pgdir -type f -name *.pid -size -10c | grep -q .)
 }
@@ -99,8 +113,8 @@ else
     fixture='base'
 fi
 
-pgdir=/var/lib/postgresql
-if [ -e /etc/redhat-release ]; then pgdir=/var/lib/pgsql; fi
+pgdir=/var/lib/pgsql
+if [ -e /etc/debian_version ]; then pgdir=/var/lib/postgresql; fi
 if [ ! -d $pgdir ]; then
     echo "Database dir not found"
     exit 1
