@@ -1658,7 +1658,6 @@ class FFUser extends FFError {
 	/* Codendi Glue */
 	function isMember($g, $type = 0){
 		if (is_int ($g) || is_string($g)) {
-			$group = group_get_object($g) ;
 			$group_id = $g ;
 		} else {
 			$group = $g ;
@@ -1666,31 +1665,31 @@ class FFUser extends FFError {
 		}
 
 		switch ($type) {
-		case 0:
-		default:
-			foreach ($this->getGroups() as $p) {
-				if ($p->getID() == $group_id) {
-					return true ;
+			case 'P2':
+				//pm admin
+				return forge_check_perm_for_user($this, 'pm_admin', $group_id);
+				break;
+			case 'F2':
+				//forum admin
+				return forge_check_perm_for_user($this, 'forum_admin', $group_id);
+				break;
+			case 'A':
+				//admin for this group
+				return forge_check_perm_for_user($this, 'project_admin', $group_id);
+				break;
+			case 'D1':
+				//document editor
+				return forge_check_perm_for_user($this, 'docman', $group_id, 'admin');
+				break;
+			case 0:
+			default:
+				foreach ($this->getGroups() as $p) {
+					if ($p->getID() == $group_id) {
+						return true ;
+					}
 				}
-			}
-			return false ;
-			break;
-		case 'P2':
-			//pm admin
-			return forge_check_perm_for_user($this, 'pm_admin', $group_id);
-			break;
-		case 'F2':
-			//forum admin
-			return forge_check_perm_for_user($this, 'forum_admin', $group_id);
-			break;
-		case 'A':
-			//admin for this group
-			return forge_check_perm_for_user($this, 'project_admin', $group_id);
-			break;
-		case 'D1':
-			//document editor
-			return forge_check_perm_for_user($this, 'docman', $group_id, 'admin');
-			break;
+				return false ;
+				break;
 		}
 	}
 
@@ -1912,16 +1911,6 @@ class UserComparator {
 
 	function Compare($a, $b) {
 		switch ($this->criterion) {
-			case 'name':
-			case 'realname':
-			default:
-				$name_compare = strcoll($a->getRealName(), $b->getRealName());
-				if ($name_compare != 0) {
-					return $name_compare;
-				}
-				/* If several users share a same real name */
-				return strcoll($a->getUnixName(), $b->getUnixName());
-				break;
 			case 'unixname':
 			case 'user_name':
 				return strcmp($a->getUnixName(), $b->getUnixName());
@@ -1951,6 +1940,16 @@ class UserComparator {
 					return 0;
 				}
 				return ($a_add_date < $b_add_date)? -1 : 1;
+				break;
+			case 'name':
+			case 'realname':
+			default:
+				$name_compare = strcoll($a->getRealName(), $b->getRealName());
+				if ($name_compare != 0) {
+					return $name_compare;
+				}
+				/* If several users share a same real name */
+				return strcoll($a->getUnixName(), $b->getUnixName());
 				break;
 		}
 	}

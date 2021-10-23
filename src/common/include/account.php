@@ -211,14 +211,14 @@ function account_gensalt(){
 			$salt_prefix = '$5$rounds=5000$';
 			$salt_size = 16;
 			break;
-		default:
-		case 'SHA512':
-			$salt_prefix = '$6$rounds=5000$';
-			$salt_size = 16;
-			break;
 		case 'Blowfish':
 			$salt_prefix = '$2y$10$';
 			$salt_size = 22;
+			break;
+		case 'SHA512':
+		default:
+			$salt_prefix = '$6$rounds=5000$';
+			$salt_size = 16;
 			break;
 	}
 

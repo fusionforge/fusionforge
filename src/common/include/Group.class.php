@@ -3400,23 +3400,23 @@ class ProjectComparator {
 
 	function Compare ($a, $b) {
 		switch ($this->criterion) {
-		case 'name':
-		default:
-			$namecmp = strcoll ($a->getPublicName(), $b->getPublicName());
-			if ($namecmp != 0) {
-				return $namecmp;
-			}
-			/* If several projects share a same public name */
-			return strcoll ($a->getUnixName(), $b->getUnixName());
-		case 'unixname':
-			return strcmp ($a->getUnixName(), $b->getUnixName());
-		case 'id':
-			$aid = $a->getID();
-			$bid = $b->getID();
-			if ($aid == $bid) {
-				return 0;
-			}
-			return ($aid < $bid) ? -1 : 1;
+			case 'unixname':
+				return strcmp ($a->getUnixName(), $b->getUnixName());
+			case 'id':
+				$aid = $a->getID();
+				$bid = $b->getID();
+				if ($aid == $bid) {
+					return 0;
+				}
+				return ($aid < $bid) ? -1 : 1;
+			case 'name':
+			default:
+				$namecmp = strcoll ($a->getPublicName(), $b->getPublicName());
+				if ($namecmp != 0) {
+					return $namecmp;
+				}
+				/* If several projects share a same public name */
+				return strcoll ($a->getUnixName(), $b->getUnixName());
 		}
 	}
 }
