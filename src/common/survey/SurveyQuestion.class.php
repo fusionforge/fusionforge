@@ -210,7 +210,10 @@ class SurveyQuestion extends FFError {
 	 * @return	int	The question_id
 	 */
 	function getID() {
-		return $this->data_array['question_id'];
+		if (isset($this->data_array['question_id'])) {
+			return $this->data_array['question_id'];
+		}
+		return 0;
 	}
 
 	/**

@@ -303,7 +303,10 @@ class Survey extends FFError {
 	 * @return	int	The question_id
 	 */
 	function getID() {
-		return $this->data_array['survey_id'];
+		if (isset($this->data_array['survey_id'])) {
+			return $this->data_array['survey_id'];
+		}
+		return 0;
 	}
 
 	/**
@@ -330,7 +333,10 @@ class Survey extends FFError {
 	 * @return	string	the question
 	 */
 	function getQuestionString() {
-		return $this->data_array['survey_questions'];
+		if (isset($this->data_array['survey_questions'])) {
+			return $this->data_array['survey_questions'];
+		}
+		return '';
 	}
 
 	/**
