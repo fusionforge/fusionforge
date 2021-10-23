@@ -460,7 +460,7 @@ control over it to the project's administrator.");
 		if (!is_dir($main_repo) || (!is_file("$main_repo/HEAD") &&
 		    !is_dir("$main_repo/objects") && !is_dir("$main_repo/refs"))) {
 			$tmp_repo = util_mkdtemp('.git', $project_name);
-			if ($tmp_repo === false) {
+			if ($tmp_repo == false) {
 				return false;
 			}
 			$result = '';

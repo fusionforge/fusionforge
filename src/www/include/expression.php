@@ -384,7 +384,7 @@ class Expression {
 	// evaluate postfix notation
 	function pfx($tokens, $vars = array()) {
 		$binaryOperator = array ('+', '-', '*', '/', '^', '<', '>', '<=', '>=', '==', '&&', '||', '!=', '=~', '%');
-		if ($tokens === false) {
+		if ($tokens == false) {
 			return false;
 		}
 		$stack = new ExpressionStack ();

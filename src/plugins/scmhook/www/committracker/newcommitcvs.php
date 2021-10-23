@@ -184,7 +184,7 @@ function addTaskLog($Config, $GroupId, $Num) {
 if (isset($Configs) && is_array($Configs)) {
 	foreach ($Configs as $Config) {
 		$Result = parseConfig($Config);
-		if (!$Result['check']) {
+		if ($Result['check'] == false) {
 			exit_error('Check_error', $Result['error']);
 		}
 		// ArtifactNumbers

@@ -44,7 +44,7 @@ while ($task = db_fetch_array($res)) {
 	$group_id = $task['group_id'];
 	$user_name = $task['user_name'];
 	// Run as the requesting user to avoid symlinks attacks
-	if (!util_sudo_effective_user($user_name, 'install_hooks', array($group_id))) {
+	if (util_sudo_effective_user($user_name, 'install_hooks', array($group_id)) == false) {
 		cron_debug("ERROR scmhook: couldn't run install_hooks as user $user_name");
 	}
 }

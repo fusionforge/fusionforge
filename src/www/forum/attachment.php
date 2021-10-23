@@ -126,14 +126,14 @@ if ($edit == "yes") {
 			if ($attachid) {
 				//update existing one
 				$attachok = $am->attach($attach,$group_id,$attachid,$msg_id);
-				if ($attachok) {
+				if ($attachok!=false) {
 					$fm->fetchData($msg_id);
 					$fm->sendAttachNotice($attachok);
 				}
 			} else {
 				//add new one
 				$attachok = $am->attach($attach,$group_id,false,$msg_id);
-				if ($attachok) {
+				if ($attachok!=false) {
 					$fm->fetchData($msg_id);
 					$fm->sendAttachNotice($attachok);
 				}
