@@ -1528,8 +1528,8 @@ class Group extends FFError {
 	 * @param	bool	$val		the new state
 	 * @return	string	database result
 	 */
-	function setPluginUse($pluginname, $val = true) {
-		if ($val === $this->usesPlugin($pluginname)) {
+	function setPluginUse($pluginname, $val=true) {
+		if ($val == $this->usesPlugin($pluginname)) {
 			// State is already good, returning
 			return true;
 		}
