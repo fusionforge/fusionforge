@@ -84,7 +84,7 @@ class AdvancedSearchHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	 * writeHeader - write the header of the output
 	 */
 	function writeHeader() {
-		site_project_header(array('title' => _('Advanced search'), 'group' => $this->groupId, 'toptab' => 'none'));
+	    site_project_header(array('title' => _('Advanced search'), 'group' => $this->groupId, 'toptab' => 'none'));
 		$sectionarray = $this->getSectionArray();
 		$this->handleTransferInformation($sectionarray);
 
@@ -335,12 +335,17 @@ class AdvancedSearchHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 
 	function getAdvancedSearchBox($sectionsArray, $group_id, $words, $isExact) {
 		global $HTML;
+		$group = group_get_object($this->groupId);
+		if (!$group || !is_object($group) || $group->isError()) {
+		    exit_no_group();
+		}
 		$res = '';
 		// display the searchmask
 		$res .= $HTML->openForm(array('class' => 'ff', 'name' => 'advancedsearch', 'action' => getStringFromServer('PHP_SELF'), 'method' => 'post'));
 		$res .= '<input class="ff" type="hidden" name="search" value="1"/>
 			<input class="ff" type="hidden" name="group_id" value="'.$group_id.'"/>
 			<div align="center">
+            <caption>' . ucfirst(sprintf(_('on project %s'), $group->getPublicName())) . '</caption>
 			<table id="advsearchinput">
 				<tr class="ff">
 				<td class="ff" colspan ="2">
@@ -400,7 +405,7 @@ EOS;
 			<table id="advsearch">
 				<tr class="tablecontent">
 					<td colspan="3" class="align-center">
-						<input type="checkbox" class="checkthemall" />'._('Search All').'
+						<input type="checkbox" id="checkthemall" class="checkthemall" /><label for="checkthemall">'._('Search All').'</label>
 					</td>
 				</tr>
 				<tr class="top tablecontent">
