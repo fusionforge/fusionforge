@@ -48,8 +48,6 @@ FusionForge, for instance where Kerberos is used.");
 		$this->declareConfigVars();
 	}
 
-	private static $init = false;
-
 	/**
 	 * Display a form to input credentials
 	 * @param	array	$params

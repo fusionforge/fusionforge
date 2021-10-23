@@ -118,8 +118,6 @@ class CmController extends Zend_Rest_Controller {
 								)
 	);
 
-	private $rest_controller;
-
 	/**
 	 * Initilizes the Zend REST controler
 	 */
