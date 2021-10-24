@@ -91,7 +91,7 @@ function rebuild_one_rpm {
 		yumdownloader $enablefedsrc --source $src
 
 		if [ -n "$DEPS" ]; then
-		yum install -y $DEPS
+			yum install -y $DEPS
 		fi
 
 		for i in $src-*.src.rpm ; do
@@ -109,14 +109,14 @@ function rebuild_one_rpm {
 		mv -f "$i" "$i.done"
 		done
 		if [ -n "$REMOVEDEPS" ] ; then
-		: yum remove -y $REMOVEDEPS
+			yum remove -y $REMOVEDEPS
 		fi
 
 		for i in $target $others ; do
-		yum remove -y $i
+			yum remove -y $i
 		done
 		for i in $target $others ; do
-		yum install -y ~/rpmbuild/RPMS/*/$i-[0-9]*.*.rpm || rpm -i ~/rpmbuild/RPMS/*/$i-[0-9]*.*.rpm
+			yum install -y ~/rpmbuild/RPMS/*/$i-[0-9]*.*.rpm || rpm -i ~/rpmbuild/RPMS/*/$i-[0-9]*.*.rpm
 		done
 	else
 		yum install -y $target $others
