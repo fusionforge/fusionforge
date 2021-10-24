@@ -202,7 +202,7 @@ EOF
 
 		yum install -y yum-utils  # yumdownloader
 		if [ ! -e /usr/bin/rpmbuild ] ; then
-		yum install -y rpm-build
+			yum install -y rpm-build
 		fi
 	fi
 
