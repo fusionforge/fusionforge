@@ -91,7 +91,7 @@ with content-negotiation (application/rdf+xml).");
 
 				// First, let's deal with the account
 				$account_res = ARC2::getResource($conf);
-				$account_uri = util_make_url_u($username, $user_obj->getID());
+				$account_uri = util_make_url_u($username);
 				$account_uri = rtrim($account_uri,'/');
 				$person_uri = $account_uri . '#person';
 

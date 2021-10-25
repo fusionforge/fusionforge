@@ -66,7 +66,7 @@ $i=0;
 foreach ($members as $user) {
 	$cells = array();
 	// RDFa
-	$member_uri = util_make_url_u($user->getUnixName(), $user->getID());
+	$member_uri = util_make_url_u($user->getUnixName());
 	$content = html_e('span', array('rev' => 'sioc:has_member', 'resource' => $usergroup_stdzd_uri), '', false);
 	$content .= html_e('span', array('property' => 'sioc:name', 'content' => $user->getUnixName()), '', false);
 	if (RBACEngine::getInstance()->isActionAllowedForUser($user, 'project_admin', $project->getID())) {

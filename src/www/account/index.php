@@ -262,7 +262,7 @@ if (forge_get_config('use_ratings')) {
 		$htmlAttrs['checked'] = 'checked';
 	}
 	echo html_e('p', array(), html_e('input', $htmlAttrs).
-				html_e('label', array('for' => 'use_ratings'), sprintf(_('Participate in peer ratings. <em>(Allows you to rate other users using several criteria as well as to be rated by others. More information is available on your <a href="%s">user page</a> if you have chosen to participate in ratings.)</em>'), util_make_url_u($u->getUnixName(), $u->getID()))));
+				html_e('label', array('for' => 'use_ratings'), sprintf(_('Participate in peer ratings. <em>(Allows you to rate other users using several criteria as well as to be rated by others. More information is available on your <a href="%s">user page</a> if you have chosen to participate in ratings.)</em>'), util_make_url_u($u->getUnixName()))));
 }
 
 $htmlAttrs = array('id' => 'use_tooltips', 'type' => 'checkbox', 'name' => 'use_tooltips', 'value' => 1);

@@ -357,7 +357,7 @@ projects on /projects URLs with content-negotiation
 		$members = $project->getUsers() ;
 		$contributors_uris = array();
 		foreach ($admins as $u) {
-			$contributor_uri = util_make_url_u ($u->getUnixName(),$u->getID());
+			$contributor_uri = util_make_url_u($u->getUnixName());
 			$contributor_uri = rtrim($contributor_uri, '/');
 			$contributor_uri = $contributor_uri . '#person';
 			if (! in_array($contributor_uri, $contributors_uris) ) {
@@ -365,7 +365,7 @@ projects on /projects URLs with content-negotiation
 			}
 		}
 		foreach ($members as $u) {
-			$contributor_uri = util_make_url_u ($u->getUnixName(),$u->getID());
+			$contributor_uri = util_make_url_u($u->getUnixName());
 			$contributor_uri = rtrim($contributor_uri, '/');
 			$contributor_uri = $contributor_uri . '#person';
 			if (! in_array($contributor_uri, $contributors_uris) ) {

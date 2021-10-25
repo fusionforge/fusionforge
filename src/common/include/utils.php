@@ -968,7 +968,7 @@ function util_make_link($path, $text, $extra_params = false, $absolute = false) 
  * @return	string
  */
 function util_make_link_u($username, $user_id, $text) {
-	return util_make_link(util_make_url_u($username, $user_id), $text, false, true);
+	return util_make_link(util_make_url_u($username), $text, false, true);
 }
 
 /**
@@ -1028,10 +1028,9 @@ function util_display_user($username, $user_id = 0, $text = '', $size = 'xs') {
  * util_make_url_u - Create URL for user's profile page
  *
  * @param	string	$username
- * @param	int	$user_id
  * @return	string URL
  */
-function util_make_url_u($username, $user_id) {
+function util_make_url_u($username) {
 	return util_make_uri('/users/'.$username.'/');
 }
 

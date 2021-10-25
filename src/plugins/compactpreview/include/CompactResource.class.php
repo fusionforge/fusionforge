@@ -93,9 +93,9 @@ class UserCompactResource extends CompactResource {
 
 		$html = '';
 		// construct a link that is the base for a hover popup (see oslcTooltip.js)
-		//$url = '<a class="resourcePopupTrigger" href="'. util_make_url_u ($username, $user_id) .
+		//$url = '<a class="resourcePopupTrigger" href="'. util_make_url_u ($username) .
 		//		'" rel="user,' . $username . '">'. $username . '</a>';
-		$resource_url = util_make_url_u ($username, $user_id);
+		$resource_url = util_make_url_u ($username);
 
 		//$url = '<a class="resourcePopupTrigger" href="'. $resource_url .
 		//				'" rel="'. $resource_url .'">'. $username . '</a>';
