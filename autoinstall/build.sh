@@ -158,7 +158,7 @@ function build_rpm {
 	rpmbuild ../build/SPECS/fusionforge.spec --define "_topdir $(pwd)/../build" -ba
 
 	(cd ../build/RPMS/ && createrepo .)
-	repopath=$(readlink  -f ../../build/RPMS/)
+	repopath=$(readlink  -f ../build/RPMS/)
 	cat <<-EOF | sed 's,@PATH@,$repopath,g' > /etc/yum.repos.d/local.repo
 		[local]
 		name=local
