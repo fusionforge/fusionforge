@@ -139,32 +139,32 @@ function build_deb {
     
 
 function build_rpm {
-    # Install build dependencies
-    yum makecache
-    yum install -y make gettext tar bzip2 rpm-build  createrepo
-    yum install -y php-cli  # rpm/gen_spec.sh
-    
-    # Build package
-    cd $(dirname $0)/../src/
-    base_version=$(make version)
-    snapshot=$(date +%Y%m%d%H%M)
-    version=$base_version+$snapshot
-    rpm/gen_spec.sh $base_version $snapshot
-    make dist VERSION=$version
-    mkdir -p ../build/SOURCES/ ../build/SPECS/
-    mv fusionforge-$version.tar.bz2 ../build/SOURCES/fusionforge-$version.tar.bz2
-    chown -h root: ../build/SOURCES/fusionforge-$version.tar.bz2
-    cp fusionforge.spec ../build/SPECS/
-    rpmbuild ../build/SPECS/fusionforge.spec --define "_topdir $(pwd)/../build" -ba
-    
-    (cd ../build/RPMS/ && createrepo .)
-    repopath=$(readlink  ../build/RPMS/)
-    cat <<-EOF | sed 's,@PATH@,$repopath,g' > /etc/yum.repos.d/local.repo
-	[local]
-	name=local
-	baseurl=file://@PATH@
-	enabled=1
-	gpgcheck=0
+	# Install build dependencies
+	yum makecache
+	yum install -y make gettext tar bzip2 rpm-build createrepo
+	yum install -y php-cli  # rpm/gen_spec.sh
+	
+	# Build package
+	cd $(dirname $0)/../src/
+	base_version=$(make version)
+	snapshot=$(date +%Y%m%d%H%M)
+	version=$base_version+$snapshot
+	rpm/gen_spec.sh $base_version $snapshot
+	make dist VERSION=$version
+	mkdir -p ../build/SOURCES/ ../build/SPECS/
+	mv fusionforge-$version.tar.bz2 ../build/SOURCES/fusionforge-$version.tar.bz2
+	chown -h root: ../build/SOURCES/fusionforge-$version.tar.bz2
+	cp fusionforge.spec ../build/SPECS/
+	rpmbuild ../build/SPECS/fusionforge.spec --define "_topdir $(pwd)/../build" -ba
+	
+	(cd ../build/RPMS/ && createrepo .)
+	repopath=$(readlink  -f ../../build/RPMS/)
+	cat <<-EOF | sed 's,@PATH@,$repopath,g' > /etc/yum.repos.d/local.repo
+		[local]
+		name=local
+		baseurl=file://@PATH@
+		enabled=1
+		gpgcheck=0
 	EOF
 }
 
