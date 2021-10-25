@@ -159,7 +159,7 @@ function build_rpm {
 
 	(cd ../build/RPMS/ && createrepo .)
 	repopath=$(readlink  -f ../build/RPMS/)
-	cat <<-EOF | sed 's,@PATH@,$repopath,g' > /etc/yum.repos.d/local.repo
+	cat <<-EOF | sed "s,@PATH@,$repopath,g" > /etc/yum.repos.d/local.repo
 		[local]
 		name=local
 		baseurl=file://@PATH@
