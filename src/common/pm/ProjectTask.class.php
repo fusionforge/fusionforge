@@ -998,8 +998,6 @@ class ProjectTask extends FFError {
 			//
 			$status_id=1;
 			$category_id='100';
-			unset($assigned_to);
-			$assigned_to=array('100');
 			$this->ProjectGroup =& $newProjectGroup;
 			$this->addHistory ('group_project_id',$group_project_id);
 			$has_changes = true;

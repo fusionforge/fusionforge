@@ -1048,7 +1048,7 @@ some control over it to the project's administrator.");
 				}
 			}
 			foreach ($tstamps as $t => $v) {
-				$res = db_query_params("INSERT INTO scm_activities (group_id, plugin_id, repository_id, tstamp) VALUES ($1,$2,$3,$4)",
+				db_query_params("INSERT INTO scm_activities (group_id, plugin_id, repository_id, tstamp) VALUES ($1,$2,$3,$4)",
 									   array($rdata['gid'],
 											 $this->getID(),
 											 $rdata['rid'],

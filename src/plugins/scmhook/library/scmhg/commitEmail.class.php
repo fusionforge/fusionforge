@@ -92,7 +92,6 @@ class HgCommitEmail extends scmhook {
 			$prevp = false;
 			$prevr = false;
 			$users = $project->getMembers();
-			$pname = $project->getUnixName();
 			foreach ($users as $user) {
 				if (forge_check_perm_for_user($user, 'scm', $project->getID(), 'write')) {
 					if ($prevp){
