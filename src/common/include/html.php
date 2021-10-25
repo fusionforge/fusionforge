@@ -153,10 +153,9 @@ function html_abs_image($url, $width, $height, $args = array()) {
  * @param	int	$width		The width of the image
  * @param	int	$height		The height of the image
  * @param	array	$args		Any IMG tag parameters associated with this image (i.e. 'border', 'alt', etc...)
- * @param	bool	$display	DEPRECATED
  * @return	string
  */
-function html_image($src, $width = 0, $height = 0, $args = array(), $display = true) {
+function html_image($src, $width = 0, $height = 0, $args = array()) {
 	global $HTML;
 	$s = ((session_issecure()) ? forge_get_config('images_secure_url') : forge_get_config('images_url'));
 	return html_abs_image($s.$HTML->imgbaseurl.$src, $width, $height, $args);
