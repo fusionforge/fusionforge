@@ -40,8 +40,8 @@ install_listfiles()
     (
         cd %{_builddir}/t/
         find .%{_bindir}           ! -type d || true
-        find .%{_sysconfdir}       ! -type d | sed -e 's,^\.,%config(noreplace) ,'
-        find .%{_sysconfdir}/%{name} -type d | sed -e 's,^\.,%dir ,'
+        find .%{_sysconfdir}       ! -type d | sed -e 's,^\.,%config(noreplace) ,' || true
+        find .%{_sysconfdir}/%{name} -type d | sed -e 's,^\.,%dir ,' || true
         find .%{_datadir}/%{name} .%{_localstatedir}/lib/%{name} .%{_localstatedir}/log/%{name} \
             ! -type d || true
         find .%{_datadir}/%{name} .%{_localstatedir}/lib/%{name} .%{_localstatedir}/log/%{name} \
