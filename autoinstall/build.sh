@@ -143,7 +143,7 @@ function build_rpm {
 	yum makecache
 	yum install -y make gettext tar bzip2 rpm-build createrepo
 	yum install -y php-cli  # rpm/gen_spec.sh
-	
+
 	# Build package
 	cd $(dirname $0)/../src/
 	base_version=$(make version)
@@ -156,7 +156,7 @@ function build_rpm {
 	chown -h root: ../build/SOURCES/fusionforge-$version.tar.bz2
 	cp fusionforge.spec ../build/SPECS/
 	rpmbuild ../build/SPECS/fusionforge.spec --define "_topdir $(pwd)/../build" -ba
-	
+
 	(cd ../build/RPMS/ && createrepo .)
 	repopath=$(readlink  -f ../../build/RPMS/)
 	cat <<-EOF | sed 's,@PATH@,$repopath,g' > /etc/yum.repos.d/local.repo
