@@ -154,8 +154,7 @@ class GroupJoinRequest extends FFError {
 	 */
 	function fetchData($group_id, $user_id) {
 		$res = db_query_params('SELECT * FROM group_join_request WHERE user_id=$1 AND group_id=$2',
-			array($user_id,
-				$this->Group->getID()));
+			array($user_id, $group_id));
 		if (!$res || db_numrows($res) < 1) {
 			$this->setError('GroupJoinRequest::fetchData() Invalid ID '.db_error());
 			return false;
