@@ -1,6 +1,6 @@
 -- Add a table to count diary votes.
 
-CREATE TABLE diarynote_votes (
+CREATE TABLE diary_votes (
 	diary_id	integer		NOT NULL,
 	user_id		integer		NOT NULL,
 	CONSTRAINT diarynotes_votes_fk_did
@@ -26,7 +26,7 @@ CREATE TABLE group_votes (
 
 -- Add a table to count frs release votes.
 
-CREATE TABLE frsrelease_votes (
+CREATE TABLE frs_release_votes (
 	release_id	integer		NOT NULL,
 	user_id		integer		NOT NULL,
 	CONSTRAINT frsrelease_votes_fk_fid

@@ -239,7 +239,7 @@ class DiaryNote extends FFObject {
 	}
 
 	/**
-	 * hasVote - Check if a user has voted on this group item
+	 * hasVote - Check if a user has voted on this diary item
 	 *
 	 * @param	int|bool	$uid	user ID (default: current user)
 	 * @return	bool	true if a vote exists
@@ -288,8 +288,7 @@ class DiaryNote extends FFObject {
 	}
 
 	/**
-	 * canVote - check whether the current user can vote on
-	 *		items in this tracker
+	 * canVote - check whether the current user can vote on diary
 	 *
 	 * @return	bool	true if they can
 	 */
@@ -301,8 +300,7 @@ class DiaryNote extends FFObject {
 	}
 
 	/**
-	 * getVoters - get IDs of users that may vote on
-	 *		items in this tracker
+	 * getVoters - get IDs of users that may vote on diary
 	 *
 	 * @return	array	list of user IDs
 	 */

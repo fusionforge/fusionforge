@@ -3193,7 +3193,7 @@ class Group extends FFError {
 	}
 
 	/**
-	 * castVote - Vote on this tracker item or retract the vote
+	 * castVote - Vote on this project or retract the vote
 	 * @param	bool	$value	true to cast, false to retract
 	 * @return	bool	success (false sets error message)
 	 */
@@ -3278,7 +3278,7 @@ class Group extends FFError {
 
 	/**
 	 * canVote - check whether the current user can vote on
-	 *		items in this tracker
+	 *		items in this project
 	 *
 	 * @return	bool	true if they can
 	 */
@@ -3291,7 +3291,7 @@ class Group extends FFError {
 
 	/**
 	 * getVoters - get IDs of users that may vote on
-	 *		items in this tracker
+	 *		items in this project
 	 *
 	 * @return	array	list of user IDs
 	 */

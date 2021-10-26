@@ -153,6 +153,22 @@ EOS;
 					$release_title = util_make_link($t_url, $package_name.' '.$FRSPackageRelease->getName());
 					$content .= html_e('div', array('class' => 'frs_release_name_version'), $release_title.$ziplink);
 				}
+				
+				// display votes
+				$package_release_votes = $FRSPackageRelease->getVotes();
+				if ($package_release_votes[1]) {
+					$content .= html_e('span', array('id' => 'frs_release-votes'), html_e('strong', array(), _('Votes') . _(': ')).sprintf('%1$d/%2$d (%3$d%%)', $package_release_votes[0], $package_release_votes[1], $package_release_votes[2]));
+					if ($FRSPackageRelease->canVote()) {
+						if ($FRSPackageRelease->hasVote()) {
+							$key = 'pointer_down';
+							$txt = _('Retract Vote');
+						} else {
+							$key = 'pointer_up';
+							$txt = _('Cast Vote');
+						}
+						$content .= util_make_link('/frs/?group_id='.$current_groupid.'&package_id='.$package_id.'&release_id='.$package_release_id.'&action='.$key, html_image('ic/'.$key.'.png', 16, 16), array('id' => 'frsrelease-vote', 'alt' => $txt));
+					}
+				}
 
 				// display linked roadmaps if any
 				if ($g->usesTracker()) {

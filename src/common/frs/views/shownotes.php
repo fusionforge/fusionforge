@@ -50,6 +50,22 @@ if(!$frsr->getFRSPackage()->isPublic()) {
 echo html_e('h2', array(), _('File Release Notes and Changelog'));
 echo html_e('h3', array(), _('Release Name')._(': ').util_make_link('/frs/?group_id='.$group_id.'&release_id='.$release_id, $frsr->getName()));
 
+// display votes
+$package_release_votes = $frsr->getVotes();
+if ($package_release_votes[1]) {
+	echo html_e('span', array('id' => 'frs_release-votes'), html_e('strong', array(), _('Votes') . _(': ')).sprintf('%1$d/%2$d (%3$d%%)', $package_release_votes[0], $package_release_votes[1], $package_release_votes[2]));
+	if ($frsr->canVote()) {
+		if ($frsr->hasVote()) {
+			$key = 'pointer_down';
+			$txt = _('Retract Vote');
+		} else {
+			$key = 'pointer_up';
+			$txt = _('Cast Vote');
+		}
+		echo util_make_link('/frs/?group_id='.$group_id.'&package_id='.$frsr->getFRSPackage()->getID().'&release_id='.$release_id.'&action='.$key.'&view=shownotes', html_image('ic/'.$key.'.png', 16, 16), array('id' => 'frsrelease-vote', 'alt' => $txt));
+	}
+}
+
 if (forge_get_config('use_object_associations')) {
 	echo html_ao('div', array('id' => 'tabber'));
 	$elementsLi = array();
