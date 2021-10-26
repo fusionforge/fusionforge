@@ -5,7 +5,7 @@
  * Copyright 2003-2010, Roland Mas, Franck Villaume
  * Copyright 2004, GForge, LLC
  * Copyright 2010, Alain Peyrat <aljeux@free.fr>
- * Copyright 2012-2014,2016-2018, Franck Villaume - TrivialDev
+ * Copyright 2012-2014,2016-2018,2021, Franck Villaume - TrivialDev
  * Copyright 2013, French Ministry of National Education
  *
  * This file is part of FusionForge.
@@ -732,12 +732,6 @@ some control over it to the project's administrator.");
 			$start_time = $params['begin'];
 			$end_time = $params['end'];
 
-			$xml_parser = xml_parser_create();
-			xml_set_element_handler($xml_parser, "SVNPluginStartElement", "SVNPluginEndElement");
-			xml_set_character_data_handler($xml_parser, "SVNPluginCharData");
-
-			// Grab&parse commit log
-			$protocol = forge_get_config('use_ssl', 'scmsvn') ? 'https://' : 'http://';
 			if ($project->enableAnonSCM()) {
 				$server_script = '/anonscm/svnlog';
 			} else {
@@ -748,53 +742,63 @@ some control over it to the project's administrator.");
 					return false;
 				}
 			}
-			$script_url = $protocol.$this->getBoxForProject($project)
-				. $server_script
-				.'?unix_group_name='.$project->getUnixName()
-				.'&mode=date_range'
-				.'&begin='.$params['begin']
-				.'&end='.$params['end'];
-			$ch = curl_init();
-			curl_setopt($ch, CURLOPT_URL, $script_url);
-			curl_setopt($ch, CURLOPT_WRITEFUNCTION, 'curl2xml');
-			curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, forge_get_config('use_ssl_verification'));
-			curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, forge_get_config('use_ssl_verification'));
-			curl_setopt($ch, CURLOPT_COOKIE, @$_SERVER['HTTP_COOKIE']);  // for session validation
-			curl_setopt($ch, CURLOPT_USERAGENT, $_SERVER['HTTP_USER_AGENT']);  // for session validation
-			curl_setopt($ch, CURLOPT_HTTPHEADER,
-						array('X-Forwarded-For: '.$_SERVER['REMOTE_ADDR']));  // for session validation
-			$body = curl_exec($ch);
-			if ($body === false) {
-				$this->setError(curl_error($ch));
-			}
-			curl_close($ch);
 
-			// final checks
-			if (!xml_parse($xml_parser, '', true)) {
-				$this->setError('Unable to parse XML with error '
-						   . xml_error_string(xml_get_error_code($xml_parser))
-						   . ' on line ' . xml_get_current_line_number($xml_parser));
-			}
-			xml_parser_free($xml_parser);
+			$repo_list = $this->getRepositories($project);
+			$protocol = forge_get_config('use_ssl', 'scmsvn') ? 'https://' : 'http://';
+			foreach ($repo_list as $repo_name) {
+				// Grab&parse commit log
+				$script_url = $protocol.$this->getBoxForProject($project)
+					. $server_script
+					.'?unix_group_name='.$project->getUnixName()
+					.'&repo_name='.$repo_name
+					.'&mode=date_range'
+					.'&begin='.$params['begin']
+					.'&end='.$params['end'];
+				$ch = curl_init();
+				curl_setopt($ch, CURLOPT_URL, $script_url);
+				curl_setopt($ch, CURLOPT_WRITEFUNCTION, 'curl2xml');
+				curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, forge_get_config('use_ssl_verification'));
+				curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, forge_get_config('use_ssl_verification'));
+				curl_setopt($ch, CURLOPT_COOKIE, @$_SERVER['HTTP_COOKIE']);  // for session validation
+				curl_setopt($ch, CURLOPT_USERAGENT, $_SERVER['HTTP_USER_AGENT']);  // for session validation
+				curl_setopt($ch, CURLOPT_HTTPHEADER,
+							array('X-Forwarded-For: '.$_SERVER['REMOTE_ADDR']));  // for session validation
+				$body = curl_exec($ch);
+				if ($body === false) {
+					$this->setError(curl_error($ch));
+				}
+				curl_close($ch);
 
-			if ($adds > 0 || $updates > 0 || $commits > 0 || $deletes > 0) {
-				$i = 0;
-				foreach ($messages as $message) {
-					$result = array();
-					$result['section'] = 'scm';
-					$result['group_id'] = $project->getID();
-					$result['ref_id'] = 'browser.php?group_id='.$project->getID().'&scm_plugin='.$this->name;
-					$result['description'] = htmlspecialchars($message).' (r'.$revisions[$i].')';
-					$userObject = user_get_object_by_name($users[$i]);
-					if (is_a($userObject, 'FFUser')) {
-						$result['realname'] = util_display_user($userObject->getUnixName(), $userObject->getID(), $userObject->getRealName());
-					} else {
-						$result['realname'] = '';
+				$xml_parser = xml_parser_create();
+				xml_set_element_handler($xml_parser, "SVNPluginStartElement", "SVNPluginEndElement");
+				xml_set_character_data_handler($xml_parser, "SVNPluginCharData");
+				// final checks
+				if (!xml_parse($xml_parser, '', true)) {
+					$this->setError('Unable to parse XML with error '
+							. xml_error_string(xml_get_error_code($xml_parser))
+							. ' on line ' . xml_get_current_line_number($xml_parser));
+				}
+				xml_parser_free($xml_parser);
+
+				if ($adds > 0 || $updates > 0 || $commits > 0 || $deletes > 0) {
+					$i = 0;
+					foreach ($messages as $message) {
+						$result = array();
+						$result['section'] = 'scm';
+						$result['group_id'] = $project->getID();
+						$result['ref_id'] = 'browser.php?group_id='.$project->getID().'&scm_plugin='.$this->name.'&repo_name='.$repo_name;
+						$result['description'] = htmlspecialchars($message).' (repository: '.$repo_name.' r'.$revisions[$i].')';
+						$userObject = user_get_object_by_name($users[$i]);
+						if (is_a($userObject, 'FFUser')) {
+							$result['realname'] = util_display_user($userObject->getUnixName(), $userObject->getID(), $userObject->getRealName());
+						} else {
+							$result['realname'] = '';
+						}
+						$result['activity_date'] = $times[$i];
+						$result['subref_id'] = '&commit='.$revisions[$i];
+						$params['results'][] = $result;
+						$i++;
 					}
-					$result['activity_date'] = $times[$i];
-					$result['subref_id'] = '&commit='.$revisions[$i];
-					$params['results'][] = $result;
-					$i++;
 				}
 			}
 		}
@@ -822,10 +826,6 @@ some control over it to the project's administrator.");
 		$notimecheck = true;
 		$revisionsArr = array();
 		if ($project->usesPlugin($this->name) && forge_check_perm('scm', $project->getID(), 'read')) {
-			$xml_parser = xml_parser_create();
-			xml_set_element_handler($xml_parser, "SVNPluginStartElement", "SVNPluginEndElement");
-			xml_set_character_data_handler($xml_parser, "SVNPluginCharData");
-
 			// Grab&parse commit log
 			$protocol = forge_get_config('use_ssl', 'scmsvn') ? 'https://' : 'http://';
 			$u = session_get_user();
@@ -840,43 +840,50 @@ some control over it to the project's administrator.");
 			} else {
 				$params = '&mode=latest';
 			}
-			$script_url = $protocol.$this->getBoxForProject($project)
-				. $server_script
-				.'?unix_group_name='.$project->getUnixName()
-				. $params
-				.'&limit='.$nbCommits;
-			$ch = curl_init();
-			curl_setopt($ch, CURLOPT_URL, $script_url);
-			curl_setopt($ch, CURLOPT_WRITEFUNCTION, 'curl2xml');
-			curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, forge_get_config('use_ssl_verification'));
-			curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, forge_get_config('use_ssl_verification'));
-			curl_setopt($ch, CURLOPT_COOKIE, $_SERVER['HTTP_COOKIE']);  // for session validation
-			curl_setopt($ch, CURLOPT_USERAGENT, $_SERVER['HTTP_USER_AGENT']);  // for session validation
-			curl_setopt($ch, CURLOPT_HTTPHEADER,
-						array('X-Forwarded-For: '.$_SERVER['REMOTE_ADDR']));  // for session validation
-			$body = curl_exec($ch);
-			if ($body === false) {
-				$this->setError(curl_error($ch));
-			}
-			curl_close($ch);
+			$repo_list = $this->getRepositories($project);
+			$i = 0;
+			foreach ($repo_list as $repo_name) {
+				$script_url = $protocol.$this->getBoxForProject($project)
+					. $server_script
+					.'?unix_group_name='.$project->getUnixName()
+					.'&repo_name='.$repo_name
+					. $params
+					.'&limit='.$nbCommits;
+				$ch = curl_init();
+				curl_setopt($ch, CURLOPT_URL, $script_url);
+				curl_setopt($ch, CURLOPT_WRITEFUNCTION, 'curl2xml');
+				curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, forge_get_config('use_ssl_verification'));
+				curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, forge_get_config('use_ssl_verification'));
+				curl_setopt($ch, CURLOPT_COOKIE, $_SERVER['HTTP_COOKIE']);  // for session validation
+				curl_setopt($ch, CURLOPT_USERAGENT, $_SERVER['HTTP_USER_AGENT']);  // for session validation
+				curl_setopt($ch, CURLOPT_HTTPHEADER,
+							array('X-Forwarded-For: '.$_SERVER['REMOTE_ADDR']));  // for session validation
+				$body = curl_exec($ch);
+				if ($body === false) {
+					$this->setError(curl_error($ch));
+				}
+				curl_close($ch);
 
-			// final checks
-			if (!xml_parse($xml_parser, '', true)) {
-				$this->setError('Unable to parse XML with error '
+				$xml_parser = xml_parser_create();
+				xml_set_element_handler($xml_parser, "SVNPluginStartElement", "SVNPluginEndElement");
+				xml_set_character_data_handler($xml_parser, "SVNPluginCharData");
+				// final checks
+				if (!xml_parse($xml_parser, '', true)) {
+					$this->setError('Unable to parse XML with error '
 						   . xml_error_string(xml_get_error_code($xml_parser))
 						   . ' on line ' . xml_get_current_line_number($xml_parser));
-			}
-			xml_parser_free($xml_parser);
+				}
+				xml_parser_free($xml_parser);
 
-			if ($adds > 0 || $updates > 0 || $commits > 0 || $deletes > 0) {
-				$i = 0;
-				foreach ($messages as $message) {
-					$revisionsArr[$i]['pluginName'] = 'scmsvn';
-					$revisionsArr[$i]['description'] = htmlspecialchars($message);
-					$revisionsArr[$i]['commit_id'] = $revisions[$i];
-					$revisionsArr[$i]['repo_name'] = $project->getUnixName();
-					$revisionsArr[$i]['date'] = $times[$i];
-					$i++;
+				if ($adds > 0 || $updates > 0 || $commits > 0 || $deletes > 0) {
+					foreach ($messages as $message) {
+						$revisionsArr[$i]['pluginName'] = 'scmsvn';
+						$revisionsArr[$i]['description'] = htmlspecialchars($message);
+						$revisionsArr[$i]['commit_id'] = $revisions[$i];
+						$revisionsArr[$i]['repo_name'] = $repo_name;
+						$revisionsArr[$i]['date'] = $times[$i];
+						$i++;
+					}
 				}
 			}
 		}

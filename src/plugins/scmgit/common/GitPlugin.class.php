@@ -1043,7 +1043,7 @@ control over it to the project's administrator.");
 						$result = array();
 						$result['section'] = 'scm';
 						$result['group_id'] = $project->getID();
-						$result['ref_id'] = 'browser.php?group_id='.$project->getID().'&scm_plugin='.$this->name.'&commit='.$splitedLine[3];
+						$result['ref_id'] = 'browser.php?group_id='.$project->getID().'&scm_plugin='.$this->name.'&repo_name='.$repo_name.'&commit='.$splitedLine[3];
 						$result['description'] = htmlspecialchars($splitedLine[2]).' (repository: '.$repo_name.' commit: '.$splitedLine[3].')';
 						$userObject = user_get_object_by_email($splitedLine[1]);
 						if (is_a($userObject, 'FFUser')) {
