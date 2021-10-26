@@ -293,9 +293,9 @@ class Theme_Funky_Guy extends Layout {
 			$idtitle = $id.'-title';
 			$idtcont = $id.'-title-content';
 		} else {
-			$idid = rand();
-			$idtitle = rand();
-			$idtcont = rand();
+			$idid = uniqid('1');
+			$idtitle = uniqid('2');
+			$idtcont = uniqid('3');
 		}
 
 		$t_result = '';
@@ -318,7 +318,7 @@ class Theme_Funky_Guy extends Layout {
 			$id = $this->toSlug($id);
 			$idtitle = $id.'-title"';
 		} else {
-			$idtitle = rand();
+			$idtitle = uniqid('4');
 		}
 
 		return html_e('div', array('id' => $idtitle, 'class' => 'box-middle'), $title, false);
@@ -336,7 +336,7 @@ class Theme_Funky_Guy extends Layout {
 			$id = $this->toSlug($id);
 			$idcont = $id.'-content"';
 		} else {
-			$idcont = rand();
+			$idcont = uniqid('5');
 		}
 
 		return html_e('div', array('id' => $idcont, 'class' => 'box-content'), $content, false);
@@ -378,7 +378,7 @@ class Theme_Funky_Guy extends Layout {
 			$attrs['class'] = 'tg-middle';
 			$return .= html_ao('li', $attrs);
 			$attrs = array();
-			$attrs['id'] = md5($tabs_dirs[$i]).rand();
+			$attrs['id'] = uniqid($tabs_dirs[$i], true);
 			$attrs['href'] = $tabs_dirs[$i];
 			if (preg_match('/^https?:\/\//', $tabs_dirs[$i])) {
 				$attrs['target'] = '_blank';
