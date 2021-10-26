@@ -488,7 +488,6 @@ class ArtifactTypeHtml extends ArtifactType {
 				$totalPercentage += $taskinfo['percent_complete'];
 				$taskid    = $taskinfo['project_task_id'];
 				$projectid = $taskinfo['group_project_id'];
-				$groupid   = $taskinfo['group_id'];
 				if (forge_check_perm('pm', $projectid, 'read')) {
 					$summary   = util_unconvert_htmlspecialchars($taskinfo['summary']);
 					$startdate = date(_('Y-m-d H:i'), $taskinfo['start_date']);
