@@ -917,9 +917,22 @@ some control over it to the project's administrator.");
 			return false;
 		}
 		if (db_result($result, 0, 'count')) {
-			$params['error_msg'] = sprintf(_('A repository %s already exists'), $params['repo_name']);
+			$params['error_msg'] = sprintf(_('%s as repository name cannot be used'), $params['repo_name']);
 			return false;
 		}
+
+		// do to current implementation of multiple repositories in SVN : we need to check repo_name against project names and forbid it
+		$result = db_query_params('SELECT count(*) as count FROM groups WHERE unix_group_name = $1',
+					  array($params['repo_name']));
+		if (!$result) {
+			$params['error_msg'] = db_error();
+			return false;
+		}
+		if (db_result($result, 0, 'count')) {
+			$params['error_msg'] = sprintf(_('%s as repository name cannot be used'), $params['repo_name']);
+			return false;
+		}
+
 		$description = '';
 		$clone = '';
 		if (isset($params['description'])) {
