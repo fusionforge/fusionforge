@@ -50,6 +50,10 @@ if (!preg_match(',^/anonscm/,', $_SERVER['REQUEST_URI'])) {
 
 
 $unix_group_name = $_GET['unix_group_name'];
+$repo_name = $_GET['repo_name'];
+if (!$repo_name) {
+	$repoo_name = $unix_group_name;
+}
 $mode = $_GET['mode'];
 if (!preg_match('/^(date_range|latest|latest_user)$/', $mode)) {
 	die('Invalid mode');
@@ -86,7 +90,7 @@ if ($mode == 'date_range') {
 	}
 }
 
-$repo = forge_get_config('repos_path', 'scmsvn').'/'.$unix_group_name;
+$repo = forge_get_config('repos_path', 'scmsvn').'/'.$repo_name;
 if (is_dir($repo)) {
 	passthru("svn log file://$repo --xml -v $options 2> /dev/null");
 }

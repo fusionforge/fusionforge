@@ -746,7 +746,11 @@ some control over it to the project's administrator.");
 			$repo_list = $this->getRepositories($project);
 			$protocol = forge_get_config('use_ssl', 'scmsvn') ? 'https://' : 'http://';
 			foreach ($repo_list as $repo_name) {
-				// Grab&parse commit log
+				$xml_parser = xml_parser_create();
+				xml_set_element_handler($xml_parser, "SVNPluginStartElement", "SVNPluginEndElement");
+				xml_set_character_data_handler($xml_parser, "SVNPluginCharData");
+
+				// Grab & parse commit log
 				$script_url = $protocol.$this->getBoxForProject($project)
 					. $server_script
 					.'?unix_group_name='.$project->getUnixName()
@@ -769,9 +773,6 @@ some control over it to the project's administrator.");
 				}
 				curl_close($ch);
 
-				$xml_parser = xml_parser_create();
-				xml_set_element_handler($xml_parser, "SVNPluginStartElement", "SVNPluginEndElement");
-				xml_set_character_data_handler($xml_parser, "SVNPluginCharData");
 				// final checks
 				if (!xml_parse($xml_parser, '', true)) {
 					$this->setError('Unable to parse XML with error '
