@@ -26,11 +26,11 @@ require_once 'checks.php';
 twitter_CheckUser();
 list($twitter_provider, $twitter_token) = twitter_get_access_token();
 
-if($_GET['list']=="public")	{
+if ($_GET['list']=="public") {
 	$resource_url = "http://api.twitter.com/1/statuses/public_timeline.json";
-}if($_GET['list']=="user")	{
+} elseif($_GET['list']=="user") {
 	$resource_url = "http://api.twitter.com/1/statuses/user_timeline.json";
-}else 	{
+} else {
 	$resource_url = "http://api.twitter.com/1/statuses/home_timeline.json";
 }
 
