@@ -102,7 +102,7 @@ class Widget_ProjectMembers extends Widget {
 				}
 				$resultlocal = '<div rel="doap:developer">'."\n";
 				// A foaf:Person that holds an account on the forge
-				$developer_url = util_make_url_u($u->getUnixName(),$u->getID());
+				$developer_url = util_make_url_u($u->getUnixName());
 				$resultlocal .= '<div typeof="foaf:Person" about="'.
 					$developer_url.'#person' .'" >'."\n";
 				$resultlocal .= '<div rel="foaf:account">'."\n";
