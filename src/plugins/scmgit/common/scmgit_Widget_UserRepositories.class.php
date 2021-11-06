@@ -28,7 +28,7 @@ class scmgit_Widget_UserRepositories extends Widget {
 	}
 
 	function getTitle() {
-		return _('My Git cloned Repositories List');
+		return _('Git cloned Repositories List');
 	}
 
 	function getCategory() {
@@ -36,7 +36,7 @@ class scmgit_Widget_UserRepositories extends Widget {
 	}
 
 	function getDescription() {
-		return _('Get the list of URLS of your personal Git repository cloned from projects, limited to public Git Repositories or shared with visitors.');
+		return _('Get the list of URLS of personal Git repository cloned from projects, limited to public Git Repositories or shared with visitors.');
 	}
 
 	function getContent() {
