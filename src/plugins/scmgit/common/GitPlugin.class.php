@@ -954,7 +954,7 @@ control over it to the project's administrator.");
 			$params['instance'] = new scmgit_Widget_MyRepositories(WidgetLayoutManager::OWNER_TYPE_USER, user_getid());
 		} elseif ($params['widget'] == 'plugin_scmgit_user_userrepositories') {
 			require_once $gfplugins.$this->name.'/common/scmgit_Widget_UserRepositories.class.php';
-			$params['instance'] = new scmgit_Widget_UserRepositories(WidgetLayoutManager::OWNER_TYPE_USERHOME, user_getid());
+			$params['instance'] = new scmgit_Widget_UserRepositories(WidgetLayoutManager::OWNER_TYPE_USERHOME, $params['owner_id']);
 		}
 	}
 

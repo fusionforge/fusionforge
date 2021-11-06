@@ -341,7 +341,7 @@ require_once $gfcommon.'widget/Widget_UserhomeRss.class.php';
 				//$em = EventManager::instance();
 				//$em->processEvent('widget_instance', array('widget' => $widget_name, 'instance' => &$o));
 				// calls the plugin's hook to get an instance of the widget
-				plugin_hook('widget_instance', array('widget' => $widget_name, 'instance' => &$o));
+				plugin_hook('widget_instance', array('widget' => $widget_name, 'instance' => &$o, 'owner_id' => $owner_id));
 				break;
 		}
 		if (!$o || !($o instanceof Widget)) {
