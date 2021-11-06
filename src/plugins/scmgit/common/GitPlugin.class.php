@@ -934,8 +934,10 @@ control over it to the project's administrator.");
 	function widgets($params) {
 		require_once 'common/widget/WidgetLayoutManager.class.php';
 		if ($params['owner_type'] == WidgetLayoutManager::OWNER_TYPE_USER) {
+			// user mypage widgets
 			$params['fusionforge_widgets'][] = 'plugin_scmgit_user_myrepositories';
 		} else if ($params['owner_type'] == WidgetLayoutManager::OWNER_TYPE_USERHOME) {
+			// user Profile page
 			$params['fusionforge_widgets'][] = 'plugin_scmgit_user_userrepositories';
 		}
 		return true;

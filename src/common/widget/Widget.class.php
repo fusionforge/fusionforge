@@ -338,8 +338,6 @@ require_once $gfcommon.'widget/Widget_UserhomeRss.class.php';
 				$o = new Widget_UserhomeRss($owner_id);
 				break;
 			default:
-				//$em = EventManager::instance();
-				//$em->processEvent('widget_instance', array('widget' => $widget_name, 'instance' => &$o));
 				// calls the plugin's hook to get an instance of the widget
 				plugin_hook('widget_instance', array('widget' => $widget_name, 'instance' => &$o, 'owner_id' => $owner_id));
 				break;
@@ -357,6 +355,7 @@ require_once $gfcommon.'widget/Widget_UserhomeRss.class.php';
 	static function getCodendiWidgets($owner_type, $owner_id = null) {
 		switch ($owner_type) {
 			case WidgetLayoutManager::OWNER_TYPE_USER:
+				// user mypage widgets
 				$widgets = array('myadmin', 'mysurveys', 'myprojects', 'mybookmarks',
 						'mymonitoredforums', 'mymonitoredfp', 'myartifacts', 'mysystasks', 'myfollowers',
 						'mytasks', 'mylatestcommits', 'myrss', 'mymonitoreddocuments', 'myprojectslastdocuments',
@@ -370,13 +369,16 @@ require_once $gfcommon.'widget/Widget_UserhomeRss.class.php';
 						);
 				break;
 			case WidgetLayoutManager::OWNER_TYPE_HOME:
+				// forge home page
 				$widgets = array('hometagcloud', 'homeversion', 'homelatestnews', 'homestats', 'homedetailactivitymostactiveprojectweek',
 						'homelatestfilereleases', 'homerss', 'homelatestdiarynotes', 'homesponsoredheadlines', 'homehalloffame');
 				break;
 			case WidgetLayoutManager::OWNER_TYPE_TRACKER:
+				// tracker widget view
 				$widgets = array('trackercontent', 'trackercomment', 'trackerdefaultactions', 'trackergeneral', 'trackermain', 'trackersummary');
 				break;
 			case WidgetLayoutManager::OWNER_TYPE_USERHOME:
+				// user Profile page
 				$widgets = array('uhpersonalinformation', 'uhprojectinformation', 'uhpeerratings', 'uhactivity', 'uhrss');
 				break;
 			default:
@@ -386,21 +388,8 @@ require_once $gfcommon.'widget/Widget_UserhomeRss.class.php';
 
 		// add widgets of the plugins, declared through hooks
 		$plugins_widgets = array();
-		//$em =& EventManager::instance();
-		//$em->processEvent('widgets', array('codendi_widgets' => &$plugins_widgets, 'owner_type' => $owner_type));
 		plugin_hook('widgets', array('codendi_widgets' => &$plugins_widgets, 'owner_type' => $owner_type));
 		plugin_hook('widgets', array('fusionforge_widgets' => &$plugins_widgets, 'owner_type' => $owner_type));
-
-		if (is_array($plugins_widgets)) {
-			$widgets = array_merge($widgets, $plugins_widgets);
-		}
-		return $widgets;
-	}
-	/* static */ function getExternalWidgets($owner_type) {
-		$widgets = array();
-		$plugins_widgets = array();
-		$em =& EventManager::instance();
-		$em->processEvent('widgets', array('external_widgets' => &$plugins_widgets, 'owner_type' => $owner_type));
 
 		if (is_array($plugins_widgets)) {
 			$widgets = array_merge($widgets, $plugins_widgets);
