@@ -135,7 +135,7 @@ function color_gradient($colors, $nb_colors) {
 
 	$colors_start = array_map('hexdec', str_split($colors[0], 2));
 	$colors_end = array_map('hexdec', str_split($colors[1], 2));
-	$format_func = create_function('$val', 'return sprintf("%02s", $val);');
+	$format_func = function($val) {return sprintf("%02s", $val);};
 
 	$colors_comp = array();
 	for($i = 0; $i < 3; $i++) {
@@ -280,6 +280,7 @@ if (!$at_arr || count($at_arr) < 1) {
 
 			// Get all states for this artifact_type; probably useless to do it
 			if ($display_graph && $templates[$template]['display_graph']) {
+				$red_green_count = array();
 				if ($uses_custom_status) {
 					$rel_art_states_colors[$artifact_type_name] = array();
 					$arr_status = $artifact_type->getExtraFieldElements($artifact_type->getCustomStatusField());
@@ -292,7 +293,7 @@ if (!$at_arr || count($at_arr) < 1) {
 				while ($row = db_fetch_array($res)) {
 					$rel_states_colors[$row['id']] = 0;
 					if (! $uses_custom_status) {
-						@$red_green_count[$status['id']]++;
+						@$red_green_count[$row['id']]++;
 						$rel_art_states_colors[$artifact_type_name][$row['status_name']] = 0;
 					}
 				}
