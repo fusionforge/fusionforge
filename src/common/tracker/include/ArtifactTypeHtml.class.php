@@ -256,7 +256,8 @@ class ArtifactTypeHtml extends ArtifactType {
 								"<a href=\"\\1\" target=\"_blank\">\\1</a>", $value);
 				} elseif ($type == ARTIFACT_EXTRAFIELDTYPE_RELATION || $type == ARTIFACT_EXTRAFIELDTYPE_PARENT) {
 					// Convert artifact id to links.
-					$value = preg_replace_callback('/\b(\d+)\b/', create_function('$matches', 'return _artifactid2url($matches[1], \'title\');'), $value);
+					$callback = function ($matches) { return _artifactid2url($matches, 'title'); };
+					$value = preg_replace_callback('/\b(\d+)\b/', $callback, $value);
 				} elseif ($type == ARTIFACT_EXTRAFIELDTYPE_DATETIME && $value!='') {
 					$value =  date('Y-m-d H:i', $value);
 				} elseif ($type == ARTIFACT_EXTRAFIELDTYPE_EFFORT) {
@@ -1149,7 +1150,8 @@ class ArtifactTypeHtml extends ArtifactType {
 		if (isset($attrs['form'])) {
 			$attrsTxt['form'] = $attrs['form'];
 		}
-		$html_contents = preg_replace_callback('/\b(\d+)\b/', create_function('$matches', 'return _artifactid2url($matches[1], \'title\');'), $contents);
+		$callback = function ($matches) { return _artifactid2url($matches, 'title'); };
+		$html_contents = preg_replace_callback('/\b(\d+)\b/', $callback, $contents);
 		$edit_contents = $this->renderTextField ($extra_field_id, $contents, $size, $maxlength, $attrsTxt);
 		return html_e('div',array_merge(array('id'=>'edit'.$extra_field_id, 'style'=>'display: none', 'title'=>_('Tip: Enter a space-separated list of artifact ids ([#NNN] also accepted)')), $attrs), $edit_contents)
 			.html_e('div',array_merge(array('id'=>'show'.$extra_field_id, 'style'=>'display: block'), $attrs), $html_contents);
@@ -1182,7 +1184,8 @@ class ArtifactTypeHtml extends ArtifactType {
 			$attrsTxt['pattern']='^\d*$';
 		}
 		// Convert artifact id to links.
-		$html_contents = preg_replace_callback('/\b(\d+)\b/', create_function('$matches', 'return _artifactid2url($matches[1], \'title\');'), $contents);
+		$callback = function ($matches) { return _artifactid2url($matches, 'title'); };
+		$html_contents = preg_replace_callback('/\b(\d+)\b/', $callback, $contents);
 		$edit_contents = $this->renderTextField ($extra_field_id, $contents, $size, $maxlength, $attrsTxt);
 		return html_e('div',array_merge(array('id'=>'edit'.$extra_field_id, 'style'=>'display: none', 'title'=>_('Tip: Enter a space-separated list of artifact ids ([#NNN] also accepted)')), $attrs), $edit_contents)
 		.html_e('div',array_merge(array('id'=>'show'.$extra_field_id, 'style'=>'display: block'), $attrs), $html_contents);

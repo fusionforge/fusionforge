@@ -571,7 +571,8 @@ EOS;
 								//case ARTIFACT_EXTRAFIELDTYPE_ASSIGNEE:
 								case ARTIFACT_EXTRAFIELDTYPE_RELATION:
 									if ($readonly) {
-										$value = preg_replace_callback('/\b(\d+)\b/', create_function('$matches', 'return _artifactid2url($matches[1], \'title\');'), $value);
+										$callback = function ($matches) { return _artifactid2url($matches, 'title'); };
+										$value = preg_replace_callback('/\b(\d+)\b/', $callback, $value);
 										$cellContent .= $value;
 									} else {
 										// specific rewrite of cellContent
@@ -584,7 +585,8 @@ EOS;
 									break;
 								case ARTIFACT_EXTRAFIELDTYPE_PARENT:
 									if ($readonly) {
-										$value = preg_replace_callback('/\b(\d+)\b/', create_function('$matches', 'return _artifactid2url($matches[1], \'title\');'), $value);
+										$callback = function ($matches) { return _artifactid2url($matches, 'title'); };
+										$value = preg_replace_callback('/\b(\d+)\b/', $callback, $value);
 										$cellContent .= $value;
 									} else {
 										// specific rewrite of cellContent
