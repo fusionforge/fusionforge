@@ -252,6 +252,7 @@ EOF
 		# missing packages:
 		# php-pear-HTTP php-pear-Text-CAPTCHA viewvc python-pycurl moin mod_wsgi python-psycopg2 php-markdown
 		;;
+	esac
 }
 
 function suse_backport_from_fedora_rpm {
