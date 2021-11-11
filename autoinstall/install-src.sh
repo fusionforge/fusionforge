@@ -133,10 +133,10 @@ else
 			ImageMagick \
 			vsftpd \
 			dejavu-fonts-common
-		#open port 80 & 443
-		firewall-cmd --zone=public --permanent --add-service=http
-		firewall-cmd --zone=public --permanent --add-service=https
-		firewall-cmd --reload
+		#open port 80 & 443 if firewalld is running otherwise no need to adjust
+		firewall-cmd --zone=public --permanent --add-service=http || true
+		firewall-cmd --zone=public --permanent --add-service=https || true
+		firewall-cmd --reload || true
 		#enable prefork (we use itk & php7_module
 		echo 'LoadModule mpm_prefork_module modules/mod_mpm_prefork.so' > /etc/httpd/conf.modules.d/00-mpm.conf
 		;;
