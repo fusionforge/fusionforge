@@ -112,8 +112,11 @@ elif [[ ! -z `cat /etc/os-release | grep 'SUSE'` ]]; then
 else
 	yum install -y make tar
 	backports_rpm
-	yum --enablerepo=epel install -y httpd-itk
-	yum install -y gettext php-cli php-pgsql php-process php-mbstring php-pear-HTTP php-pear-Text-CAPTCHA \
+	# Fedora/RHEL/CentOS version:
+	os_version=$(rpm -q --qf "%{VERSION}" $(rpm -q --whatprovides redhat-release))
+	case $os_version in
+		7)
+		yum install -y gettext php-cli php-pgsql php-process php-mbstring php-pear-HTTP php-pear-Text-CAPTCHA \
 		httpd mod_dav_svn mod_ssl postgresql-server postgresql-contrib nscd \
 		cvs subversion viewvc python-pycurl git gitweb mercurial xinetd \
 		moin mod_wsgi python-psycopg2 \
@@ -121,6 +124,23 @@ else
 		ImageMagick php-markdown \
 		vsftpd \
 		dejavu-fonts-common
+		;;
+		8*)
+		yum install -y gettext php php-cli php-pgsql php-process php-mbstring \
+			httpd mod_dav_svn mod_ssl postgresql-server postgresql-contrib nscd \
+			cvs subversion git gitweb mercurial xinetd \
+			unoconv poppler-utils libreoffice-headless \
+			ImageMagick \
+			vsftpd \
+			dejavu-fonts-common
+		#open port 80 & 443
+		firewall-cmd --zone=public --permanent --add-service=http
+		firewall-cmd --zone=public --permanent --add-service=https
+		firewall-cmd --reload
+		#enable prefork (we use itk & php7_module
+		echo 'LoadModule mpm_prefork_module modules/mod_mpm_prefork.so' > /etc/httpd/conf.modules.d/00-mpm.conf
+		;;
+	esac
 fi
 
 (

@@ -125,17 +125,19 @@ function rebuild_one_rpm {
 
 # TODO: compile in a different job and use mockbuild?
 function backports_rpm {
-    set -ex
+	set -ex
 
-    # Fedora/RHEL/CentOS version:
-    os_version=$(rpm -q --qf "%{VERSION}" $(rpm -q --whatprovides redhat-release))
+	# Fedora/RHEL/CentOS version:
+	os_version=$(rpm -q --qf "%{VERSION}" $(rpm -q --whatprovides redhat-release))
 
-    if ! rpm -q fedora-release >/dev/null; then
-	# Enable EPEL
-	yum install -y epel-release
+	if ! rpm -q fedora-release >/dev/null; then
+		# Enable EPEL
+		yum install -y epel-release
 
-	# Prepare manual backports
-	cat <<'EOF' > /etc/yum.repos.d/fedora-source.repo
+		# Prepare manual backports
+		case $os_version in
+			7)
+			cat <<'EOF' > /etc/yum.repos.d/fedora-source.repo
 [fedora]
 name=Fedora 22
 failovermethod=priority
@@ -161,58 +163,95 @@ metalink=https://mirrors.fedoraproject.org/metalink?repo=updates-released-source
 enabled=0
 gpgcheck=0
 EOF
+			;;
+			8*)
+			cat <<'EOF' > /etc/yum.repos.d/fedora-source.repo
+[fedora]
+name=Fedora 28
+failovermethod=priority
+metalink=https://mirrors.fedoraproject.org/metalink?repo=fedora-28&arch=$basearch
+enabled=0
+gpgcheck=0
+[fedora-updates]
+name=Fedora 28 Updates
+failovermethod=priority
+metalink=https://mirrors.fedoraproject.org/metalink?repo=updates-released-f28&arch=$basearch
+enabled=0
+gpgcheck=0
+[fedora-source]
+name=Fedora 28 - Source
+failovermethod=priority
+metalink=https://mirrors.fedoraproject.org/metalink?repo=fedora-source-28&arch=$basearch
+enabled=0
+gpgcheck=0
+[fedora-updates-source]
+name=Fedora 28 Updates - Source
+failovermethod=priority
+metalink=https://mirrors.fedoraproject.org/metalink?repo=updates-released-source-f28&arch=$basearch
+enabled=0
+gpgcheck=0
+EOF
+			;;
+		esac
 
-	# Speed-up by recreating 'fastestmirror' now partial cache
-	# (/var/cache/yum/x86_64/7/timedhost.txt)
-        yum clean plugins
+		# Speed-up by recreating 'fastestmirror' now partial cache
+		# (/var/cache/yum/x86_64/7/timedhost.txt)
+		#yum clean plugins
 
-	yum install -y yum-utils  # yumdownloader
-	if [ ! -e /usr/bin/rpmbuild ] ; then
-	    yum install -y rpm-build
+		yum install -y yum-utils  # yumdownloader
+		if [ ! -e /usr/bin/rpmbuild ] ; then
+		yum install -y rpm-build
+		fi
+
 	fi
-    fi
 
-    case $os_version in
-	7)
-	    yum --enablerepo=epel -y install php-tidy
-	    # php-htmlpurifier-htmlpurifier Requires, available in EPEL6 but not EPEL7
-	    DEPS="php-pear"
-	    REMOVEDEPS=$DEPS
-	    backport_rpm_from_fedora php-channel-htmlpurifier
-	    ;;
-    esac
+	case $os_version in
+		7)
+		yum --enablerepo=epel -y install php-tidy
+		# php-htmlpurifier-htmlpurifier Requires, available in EPEL6 but not EPEL7
+		DEPS="php-pear"
+		REMOVEDEPS=$DEPS
+		backport_rpm_from_fedora php-channel-htmlpurifier
 
-    # libnss-pgsql: no available package for RHEL; though it's available in Fedora
-    # (there's also http://yum.postgresql.org/8.4/redhat/rhel-5-x86_64/)
-    DEPS="xmlto gcc postgresql-devel"
-    REMOVEDEPS=$DEPS
-    backport_rpm_from_fedora libnss-pgsql
+		# libnss-pgsql: no available package for RHEL; though it's available in Fedora
+		# (there's also http://yum.postgresql.org/8.4/redhat/rhel-5-x86_64/)
+		DEPS="xmlto gcc postgresql-devel"
+		REMOVEDEPS=$DEPS
+		backport_rpm_from_fedora libnss-pgsql
 
-    DEPS="dos2unix"
-    REMOVEDEPS=$DEPS
-    backport_rpm_from_fedora php-nusoap
+		DEPS="dos2unix"
+		REMOVEDEPS=$DEPS
+		backport_rpm_from_fedora php-nusoap
 
-    DEPS=""
-    REMOVEDEPS=$DEPS
-    backport_rpm_from_fedora php-htmlpurifier-htmlpurifier
+		DEPS=""
+		REMOVEDEPS=$DEPS
+		backport_rpm_from_fedora php-htmlpurifier-htmlpurifier
 
-    DEPS="python-devel python-setuptools"
-    REMOVEDEPS=$DEPS
-    backport_rpm_from_fedora python-simpletal
+		DEPS="python-devel python-setuptools"
+		REMOVEDEPS=$DEPS
+		backport_rpm_from_fedora python-simpletal
 
-    DEPS="python2-devel python-paste python-paste-deploy python-simplejson python-testtools python-pygments"
-    REMOVEDEPS=$DEPS
-    backport_rpm_from_fedora loggerhead
+		DEPS="python2-devel python-paste python-paste-deploy python-simplejson python-testtools python-pygments"
+		REMOVEDEPS=$DEPS
+		backport_rpm_from_fedora loggerhead
 
-    DEPS=""
-    REMOVEDEPS=$DEPS
-    backport_rpm_from_fedora mediawiki
+		DEPS=""
+		REMOVEDEPS=$DEPS
+		backport_rpm_from_fedora mediawiki
 
-    mkdir -p /usr/src/fusionforge/build/RPMS/
-    cp -r ~/rpmbuild/RPMS/* /usr/src/fusionforge/build/RPMS/
+		mkdir -p /usr/src/fusionforge/build/RPMS/
+		cp -r ~/rpmbuild/RPMS/* /usr/src/fusionforge/build/RPMS/
 
-    # TODO: postfix: rebuild from RHEL/CentOS sources with pgsql enabled,
-    # so we can test mta-postfix
+		# TODO: postfix: rebuild from RHEL/CentOS sources with pgsql enabled,
+		# so we can test mta-postfix
+
+		yum --enablerepo=epel install -y httpd-itk
+		;;
+		8*)
+		yum --enablerepo=raven-modular install -y httpd-itk
+		# missing packages:
+		# php-pear-HTTP php-pear-Text-CAPTCHA viewvc python-pycurl moin mod_wsgi python-psycopg2 php-markdown
+		;;
 }
 
 function suse_backport_from_fedora_rpm {
