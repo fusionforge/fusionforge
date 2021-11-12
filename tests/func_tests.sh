@@ -78,10 +78,6 @@ install_selenium() {
 		else
 		    apt-get -y install php-curl unzip composer psmisc rsyslog default-jre patch
 		fi
-<<<<<<< Updated upstream
-	else
-		yum -y install wget firefox java-1.8.0-openjdk
-=======
 	elif [ -e /etc/centos-release ]; then
 		yum -y install wget firefox
 		os_version=$(rpm -q --qf "%{VERSION}" $(rpm -q --whatprovides redhat-release))
@@ -93,7 +89,6 @@ install_selenium() {
 			yum -y install php-json java-11-openjdk
 			;;
 		esac
->>>>>>> Stashed changes
 		yum --enablerepo=epel install -y psmisc net-tools patch php-cli php-zip unzip
 		pushd $(mktemp -d)
 		php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
