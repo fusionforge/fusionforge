@@ -53,7 +53,8 @@ esac
 fix_httpd_itk() {
 	case $INSTALL_OS in
 		centos*)
-			if [[ `rpm -qi httpd-itk | grep Release | awk '{print $3}'` != '1.el7' ]]; then
+			os_version=$(rpm -q --qf "%{VERSION}" $(rpm -q --whatprovides redhat-release))
+			if [[ "$os_version" == "7" && `rpm -qi httpd-itk | grep Release | awk '{print $3}'` != '1.el7' ]]; then
 				echo 'WARNING: WORKAROUND for docker/lxc. Downgrade httpd-itk.'
 				echo 'TODO: check for newer version. Debian not impacted.'
 				curl https://kojipkgs.fedoraproject.org//packages/httpd-itk/2.4.7.04/1.el7/x86_64/httpd-itk-2.4.7.04-1.el7.x86_64.rpm -o /tmp/httpd-itk-2.4.7.04-1.el7.x86_64.rpm
@@ -77,8 +78,22 @@ install_selenium() {
 		else
 		    apt-get -y install php-curl unzip composer psmisc rsyslog default-jre patch
 		fi
+<<<<<<< Updated upstream
 	else
 		yum -y install wget firefox java-1.8.0-openjdk
+=======
+	elif [ -e /etc/centos-release ]; then
+		yum -y install wget firefox
+		os_version=$(rpm -q --qf "%{VERSION}" $(rpm -q --whatprovides redhat-release))
+		case $os_version in
+			7)
+			yum -y install java-1.8.0-openjdk
+			;;
+			8*)
+			yum -y install php-json java-11-openjdk
+			;;
+		esac
+>>>>>>> Stashed changes
 		yum --enablerepo=epel install -y psmisc net-tools patch php-cli php-zip unzip
 		pushd $(mktemp -d)
 		php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
@@ -87,8 +102,12 @@ install_selenium() {
 	fi
 	mkdir -p /usr/local/share/php
 	pushd /usr/local/share/php
-	composer --no-plugins --no-scripts require phpunit/phpunit
-	if grep -q ^9 /etc/debian_version >/dev/null 2>&1 || grep "7\." /etc/centos-release >/dev/null 2>&1; then
+	if grep "[[:space:]]8" /etc/centos-release >/dev/null 2>&1; then
+		composer --no-plugins --no-scripts require phpunit/phpunit:8.5
+	else
+		composer --no-plugins --no-scripts require phpunit/phpunit
+	fi
+	if grep -q ^9 /etc/debian_version >/dev/null 2>&1 || [ -e /etc/centos-release ]; then
 		composer --no-plugins --no-scripts require phpunit/phpunit-selenium
 	else
 		composer --no-plugins --no-scripts require phpunit/phpunit-selenium:dev-master
