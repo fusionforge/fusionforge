@@ -139,7 +139,7 @@ else
 		firewall-cmd --reload || true
 		#enable prefork (we use itk & php7_module
 		echo 'LoadModule mpm_prefork_module modules/mod_mpm_prefork.so' > /etc/httpd/conf.modules.d/00-mpm.conf
-		echo 'LoadModule mpm_itk_module modules/mod_mpm_itk.so' > /etc/httpd/conf.modules.0/01-mpm.conf
+		echo 'LoadModule mpm_itk_module modules/mod_mpm_itk.so' > /etc/httpd/conf.modules.d/01-mpm.conf
 		;;
 	esac
 fi
