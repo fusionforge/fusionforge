@@ -5,7 +5,7 @@ source_path=$(forge_get_config source_path)
 data_path=$(forge_get_config data_path)
 plugindir=$(forge_get_config plugins_path)/mediawiki
 
-mediawikidir=$(find /usr/share -type d -name 'mediawiki' | grep -E -v 'doc|extensions|resources|vendor')
+mediawikidir=$(find /usr/share -type d -name 'mediawiki' | grep -E -v 'doc|extensions|resources|vendor|selinux')
 # Debian: /usr/share/mediawiki/
 # CentOS7: /usr/share/mediawiki123/
 # OpenSUSE Leap 15: /usr/share/php/mediawiki/
@@ -49,19 +49,19 @@ case "$1" in
 		ln -nfs $plugindir/mediawiki-skin/FusionForge.php $mediawikidir/skins/
 		ln -nfs $plugindir/MonoBookFusionForge $mediawikidir/skins/
 	;;
-    triggered)
+	triggered)
 		case $2 in
 			/usr/share/mediawiki*) upgrade_mediawikis ;;
 		esac
 	;;
-    remove)
+	remove)
 		find $plugindir/www/ -type l -print0 | xargs -r0 rm
 		rm -f $source_path/www/themes/css/mw-headbg.jpg
 		rm -f $data_path/plugins/mediawiki/master
 		rm -f $mediawikidir/skins/FusionForge.php
 		rm -f $mediawikidir/skins/MonoBookFusionForge
 	;;
-    *)
+	*)
 		echo "Usage: $0 {configure|triggered|remove}"
 		exit 1
 esac
