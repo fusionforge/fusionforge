@@ -37,90 +37,90 @@ function backports_deb {
 }
 
 function backport_rpm_from_fedora {
-    rebuild_one_rpm --enablefedora $*
+	rebuild_one_rpm --enablefedora $*
 }
 
 function rebuild_rpm_from_centos {
-    rebuild_one_rpm --rebuild $*
+	rebuild_one_rpm --rebuild $*
 }
 
 function rebuild_one_rpm {
-    enablefedsrc=
-    enablefed=
-    if [ "$1" = "--enablefedora" ] ; then
-	if [ "$2" = "mediawiki" ] ; then
-		enablefedsrc="--enablerepo=fedora-source"
-	else
-		enablefedsrc="--enablerepo=fedora-source --enablerepo=fedora-updates-source"
-	fi
-    	shift
-    fi
-
-    rebuild=no
-    if [ "$1" = "--rebuild" ] ; then
-    	rebuild=yes
-    	shift
-    fi
-
-    src=
-    if [ "$1" = "--source-package" ] ; then
-    	src=$2
-    	shift
-    	shift
-    fi
-
-    target=$1
-    shift
-    others="$*"
-
-    src=${src:-$target}
-
-    rebuild_needed=no
-    if [ $rebuild = yes ] ; then
-	rebuild_needed=yes
-    else
-	for i in $target $others ; do
-	    if ! yum list $i >/dev/null 2>&1; then
-		rebuild_needed=yes
-		break
-	    fi
-	done
-    fi
-
-    if [ $rebuild_needed = yes ] ; then
-	yumdownloader $enablefedsrc --source $src
-
-	if [ -n "$DEPS" ]; then
-	    yum install -y $DEPS
-	fi
-
-	for i in $src-*.src.rpm ; do
-	    if [ $rebuild = yes ] || [ ! -e "$i.done" ] ; then
-		if [ $src = "mediawiki" ] ; then
-			rpm -i $src-*.src.rpm
-			cd ~/rpmbuild
-			sed -e 's/, php-pecl-jsonc//g' -i SPECS/mediawiki.spec
-			rpmbuild --define='_unpackaged_files_terminate_build 0' -ba SPECS/mediawiki.spec
-			cd -
-		else 
-			rpmbuild --rebuild $src-*.src.rpm
+	enablefedsrc=
+	enablefed=
+	if [ "$1" = "--enablefedora" ] ; then
+		if [ "$2" = "mediawiki" ] ; then
+			enablefedsrc="--enablerepo=fedora-source"
+		else
+			enablefedsrc="--enablerepo=fedora-source --enablerepo=fedora-updates-source"
 		fi
-	    fi
-	    mv -f "$i" "$i.done"
-	done
-	if [ -n "$REMOVEDEPS" ] ; then
-	    : yum remove -y $REMOVEDEPS
+		shift
 	fi
 
-	for i in $target $others ; do
-	    yum remove -y $i
-	done
-	for i in $target $others ; do
-	    yum install -y ~/rpmbuild/RPMS/*/$i-[0-9]*.*.rpm || rpm -i ~/rpmbuild/RPMS/*/$i-[0-9]*.*.rpm
-	done
-    else
-	yum install -y $target $others
-    fi
+	rebuild=no
+	if [ "$1" = "--rebuild" ] ; then
+		rebuild=yes
+		shift
+	fi
+
+	src=
+	if [ "$1" = "--source-package" ] ; then
+		src=$2
+		shift
+		shift
+	fi
+
+	target=$1
+	shift
+	others="$*"
+
+	src=${src:-$target}
+
+	rebuild_needed=no
+	if [ $rebuild = yes ] ; then
+		rebuild_needed=yes
+	else
+		for i in $target $others ; do
+		if ! yum list $i >/dev/null 2>&1; then
+			rebuild_needed=yes
+			break
+		fi
+		done
+	fi
+
+	if [ $rebuild_needed = yes ] ; then
+		yumdownloader $enablefedsrc --source $src
+
+		if [ -n "$DEPS" ]; then
+		yum install -y $DEPS
+		fi
+
+		for i in $src-*.src.rpm ; do
+		if [ $rebuild = yes ] || [ ! -e "$i.done" ] ; then
+			if [ $src = "mediawiki" ] ; then
+				rpm -i $src-*.src.rpm
+				cd ~/rpmbuild
+				sed -e 's/, php-pecl-jsonc//g' -i SPECS/mediawiki.spec
+				rpmbuild --define='_unpackaged_files_terminate_build 0' -ba SPECS/mediawiki.spec
+				cd -
+			else 
+				rpmbuild --rebuild $src-*.src.rpm
+			fi
+		fi
+		mv -f "$i" "$i.done"
+		done
+		if [ -n "$REMOVEDEPS" ] ; then
+		: yum remove -y $REMOVEDEPS
+		fi
+
+		for i in $target $others ; do
+		yum remove -y $i
+		done
+		for i in $target $others ; do
+		yum install -y ~/rpmbuild/RPMS/*/$i-[0-9]*.*.rpm || rpm -i ~/rpmbuild/RPMS/*/$i-[0-9]*.*.rpm
+		done
+	else
+		yum install -y $target $others
+	fi
 }
 
 # TODO: compile in a different job and use mockbuild?
@@ -204,7 +204,6 @@ EOF
 		if [ ! -e /usr/bin/rpmbuild ] ; then
 		yum install -y rpm-build
 		fi
-
 	fi
 
 	case $os_version in
