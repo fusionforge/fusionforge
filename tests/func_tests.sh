@@ -4,7 +4,7 @@
 #
 # Copyright (C) 2011  Olivier Berger - Institut Telecom
 # Copyright (C) 2014, 2015  Inria (Sylvain Beucler)
-# Copyright 2020, Franck Villaume - TrivialDev
+# Copyright 2020, 2021, Franck Villaume - TrivialDev
 #
 # This file is part of FusionForge. FusionForge is free software;
 # you can redistribute it and/or modify it under the terms of the
@@ -31,6 +31,8 @@ if [ -z "$1" ]; then
 	echo "  $0 deb/debian"
 	echo "  $0 src/centos"
 	echo "  $0 rpm/centos"
+	echo "  $0 src/opensuse"
+	echo "  $0 rpm/opensuse"
 	exit 1
 fi
 
@@ -45,10 +47,19 @@ case $INSTALL_METHOD in
 esac
 
 case $INSTALL_OS in
-	debian*|centos*) ;;
+	debian*|centos*|opensuse*) ;;
 	*)	echo "Unknown install OS"
 		exit 1 ;;
 esac
+
+fix_httpd_access() {
+	if grep SUSE /etc/os-release >/dev/null 2>&1; then
+		grep -q "granted" /etc/apache2/httpd.conf || sed -i -e "s/denied/granted/" /etc/apache2/httpd.conf
+		grep -q "Allow from" /etc/apache2/httpd.conf || sed -i -e "s/Deny from/Allow from/g" /etc/apache2/httpd.conf
+		grep -q "^APACHE_SERVER_FLAGS" /etc/sysconfig/apache2 | grep -q "SSL" || sed -i -e "s/^APACHE_SERVER_FLAGS=.*$/APACHE_SERVER_FLAGS=\"SSL\"/" /etc/sysconfig/apache2
+		service apache2 restart
+	fi
+}
 
 fix_httpd_itk() {
 	case $INSTALL_OS in
@@ -94,6 +105,8 @@ install_selenium() {
 		php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
 		php composer-setup.php --install-dir=/usr/local/bin --filename=composer
 		popd
+	else
+		zypper --non-interactive install MozillaFirefox wget php-composer patch unzip psmisc net-tools-deprecated
 	fi
 	mkdir -p /usr/local/share/php
 	pushd /usr/local/share/php
@@ -136,6 +149,7 @@ install_selenium() {
 		echo $(hostname -i) $(hostname -f) $(hostname)>> /etc/hosts
 	fi
 	grep -q "^$(hostname -i).*$(forge_get_config scm_host)" /etc/hosts || sed -i -e "s/^$(hostname -i).*/& $(forge_get_config scm_host)/" /etc/hosts
+	grep -q "^$(hostname -i).*$(forge_get_config lists_host)" /etc/hosts || sed -i -e "s/^$(hostname -i).*/& $(forge_get_config lists_host)/" /etc/hosts
 
 	#fix https://github.com/giorgiosironi/phpunit-selenium/issues/427
 	for i in /usr/share/*/PHPUnit/Extensions/Selenium2TestCase/Element.php /usr/local/share/php/vendor/phpunit/phpunit-selenium/PHPUnit/Extensions/Selenium2TestCase/Element.php ; do
@@ -177,7 +191,7 @@ EOF
 fixup_nss() {
 	conf=''
 	case $INSTALL_OS in
-		debian*)
+		debian*|opensuse*)
 		if ! grep -q '^export PGPASSFILE' /etc/apache2/envvars; then
 			echo 'export PGPASSFILE=' >> /etc/apache2/envvars
 		fi
@@ -193,6 +207,8 @@ fixup_nss() {
 fixup_nss
 
 fix_httpd_itk
+
+fix_httpd_access
 
 install_selenium
 
