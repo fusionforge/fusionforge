@@ -1320,7 +1320,9 @@ class FFUser extends FFError {
 	function setPreference($preference_name, $value) {
 		$preference_name = strtolower(trim($preference_name));
 		//delete pref if not value passed in
-		unset($this->user_pref);
+		if (array_key_exists($preference_name, $this->user_pref)) {
+			unset($this->user_pref["$preference_name"]);
+		}
 		if (!isset($value)) {
 			$result = db_query_params('DELETE FROM user_preferences WHERE user_id=$1 AND preference_name=$2',
 						   array($this->getID(),
@@ -1332,13 +1334,13 @@ class FFUser extends FFError {
 							  $this->getID(),
 							  $preference_name));
 			if (db_affected_rows($result) < 1) {
-				//echo db_error();
 				$result = db_query_params('INSERT INTO user_preferences (user_id,preference_name,preference_value,set_date) VALUES ($1,$2,$3,$4)',
 							   array($this->getID(),
 								  $preference_name,
 								  $value,
 								  time()));
 			}
+			$this->user_pref["$preference_name"] = $value;
 		}
 		return ((!$result || db_affected_rows($result) < 1) ? false : true);
 	}
@@ -1351,11 +1353,8 @@ class FFUser extends FFError {
 	 */
 	function getPreference($preference_name) {
 		$preference_name = strtolower(trim($preference_name));
-		/*
-			First check to see if we have already fetched the preferences
-		*/
+		// First check to see if we have already fetched the preferences
 		if (isset($this->user_pref)) {
-			//echo "\n\nPrefs were fetched already";
 			if (isset($this->user_pref["$preference_name"])) {
 				//we have fetched prefs - return part of array
 				return $this->user_pref["$preference_name"];
@@ -1368,7 +1367,6 @@ class FFUser extends FFError {
 			$result = db_query_params('SELECT preference_name,preference_value FROM user_preferences WHERE user_id=$1',
 						   array($this->getID()));
 			if (db_numrows($result) < 1) {
-				//echo "\n\nNo Prefs Found";
 				return false;
 			} else {
 				$pref = array();
