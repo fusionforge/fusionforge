@@ -476,8 +476,6 @@ function html_use_jquery() {
 }
 
 function html_use_tablesorter() {
-	// html_use_jquery();
-	// use_javascript('/scripts/jquery-tablesorter/jquery.tablesorter.js');
 	use_javascript('/js/sortable.js');
 }
 

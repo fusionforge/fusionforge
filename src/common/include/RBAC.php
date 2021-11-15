@@ -53,9 +53,6 @@ abstract class BaseRole extends FFError {
 	 */
 	var $global_settings;
 
-	// var $perms_array;
-	// var $setting_array;
-
 	public function __construct() {
 		// TODO: document these tables
 		// $gfcommon.'include/rbac_texts.php' may provide some hints...

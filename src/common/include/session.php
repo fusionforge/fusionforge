@@ -226,6 +226,7 @@ function session_login_valid($loginname, $passwd, $allowpending = 0) {
 function session_check_credentials_in_database($loginname, $passwd, $allowpending=false) {
 	return session_login_valid_dbonly($loginname, $passwd, $allowpending);
 }
+
 function session_login_valid_dbonly($loginname, $passwd, $allowpending) {
 	global $feedback, $error_msg, $userstatus;
 
@@ -254,7 +255,6 @@ function session_login_valid_dbonly($loginname, $passwd, $allowpending) {
 		}
 		// User exists, (crypt) unix_pw matches
 	}
-
 
 	// Yay.  The provided password matches both fields in the database.
 	// Let's check the status of this user

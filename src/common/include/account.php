@@ -341,7 +341,6 @@ function account_shellselects($current) {
  * @return	string	home directory path
  */
 function account_user_homedir($user) {
-	//return forge_get_config('homedir_prefix').'/'.substr($user,0,1).'/'.substr($user,0,2).'/'.$user;
 	return forge_get_config('homedir_prefix').'/'.$user;
 }
 
@@ -352,7 +351,6 @@ function account_user_homedir($user) {
  * @return	string	home directory path
  */
 function account_group_homedir($group) {
-	//return forge_get_config('groupdir_prefix').'/'.substr($group,0,1).'/'.substr($group,0,2).'/'.$group;
 	return forge_get_config('groupdir_prefix').'/'.$group;
 }
 
