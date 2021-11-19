@@ -229,7 +229,7 @@ class ForumHTML extends FFError {
 		$ret_val .= $am->PrintAttachLink($msg,$group_id,$msgforum->getID()) . '
 					<br />
 					'.
-		html_image('ic/msg.png') .
+		$HTML->getMessagePic() .
 		$bold_begin. $msg->getSubject() . $bold_end .
 		'<br />'. date(_('Y-m-d H:i'),$msg->getPostDate()) .'
 				</td>

@@ -1026,6 +1026,10 @@ abstract class Layout extends FFError {
 		return $this->getPicto('ic/file-txt.png', $title, $alt, 20, 20, $otherAttr);
 	}
 
+	function getMessagePic($title = '', $alt = '', $otherAttr = array()) {
+		return $this->getPicto('ic/msg.png', $title, $alt, 20, 20, $otherAttr);
+	}
+
 	function getPicto($url, $title, $alt, $width = 20, $height = 20, $otherAttr = array()) {
 		if ($title != '') {
 			$otherAttr['title'] = $title;
