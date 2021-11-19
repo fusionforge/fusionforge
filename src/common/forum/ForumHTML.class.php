@@ -452,7 +452,7 @@ class ForumHTML extends FFError {
 				}
 
 				$ret_val .= $ah_begin .
-					html_image('ic/msg.png').' ';
+					$HTML->getMessagePic().' ';
 				/*
 					See if this message is new or not
 				*/
