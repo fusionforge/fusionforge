@@ -293,27 +293,25 @@ class AttachManager extends FFError {
 								$this->msg_id,
 								md5($filestuff),
 								$attachment_type));
-				if ($res) {
-					if ($attachment_size) {
-						if (is_file($attachment)) {
-							$id = db_insertid($res,'forum_pending_attachment','attachmentid');
-							if (ForumPendingStorage::instance()->store($id, $attachment)) {
-								$this->messages[] = _('File uploaded');
-								db_commit();
-								return true;
-							} else {
-								ForumPendingStorage::instance()->rollback();
-								db_rollback();
-								$this->setError(ForumPendingStorage::instance()->getErrorMessage());
-								$this->messages[] = _('File not uploaded');
-								return false;
-							}
+				if ($res && $attachment_size) {
+					if (is_file($attachment)) {
+						$id = db_insertid($res,'forum_pending_attachment','attachmentid');
+						if (ForumPendingStorage::instance()->store($id, $attachment)) {
+							$this->messages[] = _('File uploaded');
+							db_commit();
+							return true;
 						} else {
-							$this->setError(_('Error Adding Attachment')._(': ')._('Not a file').' '.$attachment_name);
-							$this->messages[] = _('File not uploaded');
+							ForumPendingStorage::instance()->rollback();
 							db_rollback();
+							$this->setError(ForumPendingStorage::instance()->getErrorMessage());
+							$this->messages[] = _('File not uploaded');
 							return false;
 						}
+					} else {
+						$this->setError(_('Error Adding Attachment')._(': ')._('Not a file').' '.$attachment_name);
+						$this->messages[] = _('File not uploaded');
+						db_rollback();
+						return false;
 					}
 				}
 				db_rollback();
@@ -384,27 +382,25 @@ class AttachManager extends FFError {
 								$this->msg_id,
 								md5($filestuff),
 								$attachment_type));
-				if ($res) {
-					if ($attachment_size) {
-						if (is_file($attachment)) {
-							$id = db_insertid($res, 'forum_attachment', 'attachmentid');
-							if (ForumStorage::instance()->store($id, $attachment)) {
-								$this->messages[] = _('File uploaded');
-								db_commit();
-								return true;
-							} else {
-								ForumStorage::instance()->rollback();
-								db_rollback();
-								$this->setError(ForumStorage::instance()->getErrorMessage());
-								$this->messages[] = _('File not uploaded');
-								return false;
-							}
+				if ($res && $attachment_size) {
+					if (is_file($attachment)) {
+						$id = db_insertid($res, 'forum_attachment', 'attachmentid');
+						if (ForumStorage::instance()->store($id, $attachment)) {
+							$this->messages[] = _('File uploaded');
+							db_commit();
+							return true;
 						} else {
-							$this->setError(_('Error Adding Attachment')._(': ')._('Not a file').' '.$attachment_name);
-							$this->messages[] = _('File not uploaded');
+							ForumStorage::instance()->rollback();
 							db_rollback();
+							$this->setError(ForumStorage::instance()->getErrorMessage());
+							$this->messages[] = _('File not uploaded');
 							return false;
 						}
+					} else {
+						$this->setError(_('Error Adding Attachment')._(': ')._('Not a file').' '.$attachment_name);
+						$this->messages[] = _('File not uploaded');
+						db_rollback();
+						return false;
 					}
 				}
 				db_rollback();
