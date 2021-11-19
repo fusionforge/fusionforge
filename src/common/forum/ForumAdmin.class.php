@@ -415,8 +415,7 @@ class ForumAdmin extends FFError {
 						$thread_id = db_result($res1,0,"thread_id");
 						$is_followup_to = db_result($res1,0,"is_followup_to");
 						$posted_by = db_result($res1,0,"posted_by");
-						$has_followups = db_result($res1,0,"has_followups");
-						if ($fm->insertreleasedmsg($group_forum_id,$subject, $body,$post_date, $thread_id, $is_followup_to,$posted_by,$has_followups,time())) {
+						if ($fm->insertreleasedmsg($group_forum_id,$subject, $body,$post_date, $thread_id, $is_followup_to,$posted_by,time())) {
 							$feedback .= "($subject) " . _('Pending message released') . "<br />";
 							if (db_numrows($res2)>0) {
 								//if there's an attachment

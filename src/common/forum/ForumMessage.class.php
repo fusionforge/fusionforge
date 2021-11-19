@@ -157,12 +157,10 @@ class ForumMessage extends FFError {
 	 * @param	int	$thread_id		The thread_id of the message
 	 * @param	int	$is_followup_to		The message_id of the parent message, if any.
 	 * @param	int	$posted_by		The id of the user that is posting the message
-	 * @param	int	$has_followups		has followups?
 	 * @param	int	$most_recent_date	most recent date
 	 * @return	bool	success.
 	 */
-	function insertreleasedmsg($group_forum_id, $subject, $body, $post_date, $thread_id,
-							   $is_followup_to, $posted_by, $has_followups, $most_recent_date) {
+	function insertreleasedmsg($group_forum_id, $subject, $body, $post_date, $thread_id, $is_followup_to, $posted_by, $most_recent_date) {
 		if ($is_followup_to != 0) {
 
 			//was posted in reply to another thread
