@@ -285,21 +285,12 @@ class DocumentGroup extends FFError {
 			$uploaded_data_type = $uploaded_data['type'];
 		}
 
-		switch ($uploaded_data_type) {
-			case 'application/zip': {
-				$returned = $this->injectZip($uploaded_data);
-				break;
-			}
-			case 'application/x-rar-compressed': {
-				$returned = $this->injectRar($uploaded_data);
-				break;
-			}
-			default: {
-				$this->setError( _('Unsupported injected file')._(': ').$uploaded_data_type);
-				$returned = false;
-			}
+		if ($uploaded_data_type == 'application/zip') {
+			return $this->injectZip($uploaded_data);
 		}
-		return $returned;
+
+		$this->setError( _('Unsupported injected file')._(': ').$uploaded_data_type);
+		return false;
 	}
 
 	/**
@@ -877,16 +868,6 @@ class DocumentGroup extends FFError {
 		}
 		$this->setError(_('Unable to open ZIP file.'));
 		return false;
-	}
-
-	/**
-	 * injectRar - private method to inject a rar archive tree and files
-	 *
-	 * @param	array	$uploadedRar	uploaded rar
-	 * @return	bool	success or not
-	 */
-	private function injectRar($uploadedRar) {
-		return true;
 	}
 
 	/**
