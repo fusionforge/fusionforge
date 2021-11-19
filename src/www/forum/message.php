@@ -186,7 +186,7 @@ if ($msg_id) {
 		}
 		$ret_val .= '<tr>
 			<td>'. $ah_begin .
-			html_image('ic/msg.png').' ';
+			$HTML->getMessagePic().' ';
 		/*
 			See if this message is new or not
 			If so, highlite it in bold
@@ -225,7 +225,6 @@ if ($msg_id) {
 } else {
 	forum_header(array('title'=>_('You Must Choose a Message First')));
 	echo $HTML->error_msg(_('You Must Choose a Message First'));
-
 }
 
 forum_footer();

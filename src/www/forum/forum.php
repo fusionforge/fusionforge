@@ -288,7 +288,7 @@ if ($forum_id) {
 			/*
 				show the subject and poster
 			*/
-			$cells[][] = util_make_link('/forum/message.php?msg_id='.$msg->getID().'&group_id='.$group_id.'&reply=0', html_image('ic/msg.png').' '.$msgSubject);
+			$cells[][] = util_make_link('/forum/message.php?msg_id='.$msg->getID().'&group_id='.$group_id.'&reply=0', $HTML->getMessagePic().' '.$msgSubject);
 			$cells[][] = util_display_user($msg->getPosterName(), $msg->getPosterID(), $msg->getPosterRealName());
 			$cells[][] = relative_date($msg->getPostDate());
 			$ret_val .= $HTML->multiTableRow(array(), $cells);
