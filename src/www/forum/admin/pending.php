@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Forum Pending Messages Management Admin Page
  *
@@ -27,11 +26,7 @@
 
 require_once '../../env.inc.php';
 require_once $gfcommon.'include/pre.php';
-require_once $gfcommon.'forum/ForumHTML.class.php';
 require_once $gfcommon.'forum/ForumAdmin.class.php';
-require_once $gfcommon.'forum/Forum.class.php';
-require_once $gfcommon.'forum/ForumMessage.class.php';
-require_once $gfcommon.'forum/AttachManager.class.php'; //attachment manager
 
 $action = getStringFromRequest('action');
 $group_id = getIntFromRequest('group_id');

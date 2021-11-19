@@ -223,14 +223,13 @@ class AttachManager extends FFError {
 	 * attach - saves the file in the DB
 	 *
 	 * @param	int	$attach		The file to attach
-	 * @param	int	$group_id	The group.
 	 * @param	int	$update		Whether we are updating an existing attach (attachid to update or zero for new message (inserts using the hights msg id from forum table)
 	 * @param	int	$msg_id		msg id. if update is 0 and we pass a msg_id <> 0, then we are adding an attach for an existing msg
 	 *
 	 * @return	int	Attach id on success, false otherwise
 	 *
 	 */
-	function attach($attach, $group_id, $update = 0, $msg_id = 0) {
+	function attach($attach, $update = 0, $msg_id = 0) {
 		$attachment = trim($attach['tmp_name']);
 		$attachment_name = trim($attach['name']);
 		$attachment_size = trim($attach['size']);

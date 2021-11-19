@@ -26,6 +26,10 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
+require_once $gfcommon.'forum/Forum.class.php';
+require_once $gfcommon.'forum/ForumMessage.class.php';
+require_once $gfcommon.'forum/AttachManager.class.php';
+
 class ForumAdmin extends FFError {
 	var $group_id;
 	var $p,$g;
