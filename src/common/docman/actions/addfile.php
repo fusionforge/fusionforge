@@ -185,7 +185,8 @@ if (!$d->create($uploaded_data_name, $uploaded_data_type, $data, $doc_group, $ti
 } else {
 	if ($type == 'editor') {
 		//release the cookie for the document contents (should expire at the end of the session anyway)
-		setcookie("gforgecurrentdocdata", "", time() - 3600);
+		//TODO: it is used somewhere? no reference in the current code.
+		setcookie("fforgecurrentdocdata", "", time() - 3600);
 	}
 	if (forge_check_perm('docman', $group_id, 'approve')) {
 		$feedback = sprintf(_('Document %s submitted successfully.'), $d->getFileName());
