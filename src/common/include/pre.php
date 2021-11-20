@@ -25,11 +25,10 @@
 
 require_once $gfcommon.'include/escapingUtils.php';
 require_once $gfcommon.'include/utils.php';
+require_once $gfcommon.'include/config.php';
 
 // Declare and init variables to store messages
 util_init_messages();
-
-require_once $gfcommon.'include/config.php';
 
 // Block link prefetching (Moz prefetching, Google Web Accelerator, others)
 // http://www.google.com/webmasters/faq.html#prefetchblock
