@@ -81,17 +81,17 @@ if (session_loggedin()) {
 	}
 } elseif ($query_id) {
 	// If user is not logged, then use a cookie to store the current query.
-	if (isset($_COOKIE["GFTrackerQuery"])) {
-		$gf_tracker = unserialize($_COOKIE["GFTrackerQuery"]);
+	if (isset($_COOKIE["FFTrackerQuery"])) {
+		$gf_tracker = unserialize($_COOKIE["FFTrackerQuery"]);
 	} else {
 		$gf_tracker = array();
 	}
 	$gf_tracker[$ath->getID()] = $query_id;
 	// Send the query_id as a cookie to save it.
-	setcookie("GFTrackerQuery", serialize($gf_tracker));
-	$_COOKIE["GFTrackerQuery"] = serialize($gf_tracker);
-} elseif (isset($_COOKIE["GFTrackerQuery"])) {
-	$gf_tracker = unserialize($_COOKIE["GFTrackerQuery"]);
+	setcookie("FFTrackerQuery", serialize($gf_tracker));
+	$_COOKIE["FFTrackerQuery"] = serialize($gf_tracker);
+} elseif (isset($_COOKIE["FFTrackerQuery"])) {
+	$gf_tracker = unserialize($_COOKIE["FFTrackerQuery"]);
 	if (isset($gf_tracker[$ath->getID()])) {
 		$query_id = (int)$gf_tracker[$ath->getID()];
 	}
