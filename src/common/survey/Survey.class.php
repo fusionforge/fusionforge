@@ -453,7 +453,7 @@ class Survey extends FFError {
 		if ($arr) {
 			/* Copy questions only if it is not in question string */
 			for ($i=0; $i<count($this->all_question_array); $i++) {
-				if (array_search($this->all_question_array[$i]->getID(), $arr) == false &&
+				if (array_search($this->all_question_array[$i]->getID(), $arr) === false &&
 					$this->all_question_array[$i]->getID()!=$arr[0]) {
 					$ret[] = $this->all_question_array[$i];
 				}
@@ -533,7 +533,7 @@ class Survey extends FFError {
 			if ($arr_to_add && is_array($arr_to_add) && !empty($arr_to_add)) {
 				for ($i = 0; $i < count($arr_to_add); $i++) {
 				/* Avoid double question */
-					if ($arr_to_add[$i] && array_search($arr_to_add[$i], $arr) == false && $arr_to_add[$i]!=$arr[0]) {
+					if ($arr_to_add[$i] && array_search($arr_to_add[$i], $arr) === false && $arr_to_add[$i]!=$arr[0]) {
 						$arr[] = $arr_to_add[$i];
 					}
 				}
@@ -545,7 +545,7 @@ class Survey extends FFError {
 			$new_arr = array();
 			for ($i = 0; $i < count($arr); $i++) {
 				/* If the value is no in the delete array, copy it into new array */
-				if ($arr[$i] && array_search($arr[$i], $arr_to_del)==false && $arr_to_del[0]!=$arr[$i]) {
+				if ($arr[$i] && array_search($arr[$i], $arr_to_del) === false && $arr_to_del[0]!=$arr[$i]) {
 					$new_arr[] = $arr[$i];
 				}
 			}
@@ -578,7 +578,7 @@ class Survey extends FFError {
 		/* The question number is not in the array
 		 * We have nothing to change
 		 */
-		if ($index==false && $question_number!=$arr[0]) {
+		if ($index === false && $question_number!=$arr[0]) {
 			return $this->getQuestionString();
 		}
 
