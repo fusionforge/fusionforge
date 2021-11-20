@@ -1465,22 +1465,22 @@ function util_is_html($string) {
 function util_init_messages() {
 	global $feedback, $warning_msg, $error_msg;
 
-	if (PHP_SAPI == 'cli') {
+	if (PHP_SAPI == 'cli' || !forge_get_config('use_ssl') || !session_issecure()) {
 		$feedback = $warning_msg = $error_msg = '';
 	} else {
 		$feedback = getStringFromCookie('feedback', '');
 		if ($feedback) {
-			setcookie('feedback', '', time()-3600, '/');
+			setcookie('feedback', '', time()-3600, '/', '', forge_get_config('use_ssl'), true);
 		}
 
 		$warning_msg = getStringFromCookie('warning_msg', '');
 		if ($warning_msg) {
-			setcookie('warning_msg', '', time()-3600, '/');
+			setcookie('warning_msg', '', time()-3600, '/', '', forge_get_config('use_ssl'), true);
 		}
 
 		$error_msg = getStringFromCookie('error_msg', '');
 		if ($error_msg) {
-			setcookie('error_msg', '', time()-3600, '/');
+			setcookie('error_msg', '', time()-3600, '/', '', forge_get_config('use_ssl'), true);
 		}
 	}
 }
@@ -1488,9 +1488,9 @@ function util_init_messages() {
 function util_save_messages() {
 	global $feedback, $warning_msg, $error_msg;
 
-	setcookie('feedback', $feedback, time() + 10, '/');
-	setcookie('warning_msg', $warning_msg, time() + 10, '/');
-	setcookie('error_msg', $error_msg, time() + 10, '/');
+	setcookie('feedback', $feedback, time() + 10, '/', '', forge_get_config('use_ssl'), true);
+	setcookie('warning_msg', $warning_msg, time() + 10, '/', '', forge_get_config('use_ssl'), true);
+	setcookie('error_msg', $error_msg, time() + 10, '/', '', forge_get_config('use_ssl'), true);
 }
 
 /**
