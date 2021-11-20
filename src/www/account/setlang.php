@@ -20,6 +20,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
+//TODO: this file is NOT USED ? Option: using it to set the language interface. We need to offer the choice at the not-logged user somewhere...
 require_once '../env.inc.php';
 require_once $gfcommon.'include/pre.php';
 
