@@ -786,14 +786,12 @@ Or reply to this e-mail entering your response between the following markers:
 	 * @param	string	$post_date		The post date
 	 * @param	int	$is_followup_to		The message_id of the parent message, if any.
 	 * @param	int	$thread_id		The thread_id of the message, if known.
-	 * @param	int	$has_followups		has followups?
 	 * @param	string	$most_recent_date	The most recent date.
 	 * @return	bool success.
 	 */
-	function updatemsg($group_forum_id, $posted_by, $subject, $body,
-					   $post_date, $is_followup_to, $thread_id, $has_followups, $most_recent_date) {
+	function updatemsg($group_forum_id, $posted_by, $subject, $body, $post_date, $is_followup_to, $thread_id, $most_recent_date) {
 		if (!strlen(trim($body)) || !strlen(trim($subject))) {
-			$this->setError(_('Error: a forum message must include a message body and a subject.'));
+			$this->setError(_('Error')._(': ')._('a forum message must include a message body and a subject.'));
 			return false;
 		}
 		$subject = htmlspecialchars($subject);

@@ -259,9 +259,8 @@ if (getStringFromRequest('add_forum')) {
 		$posted_by = getStringFromRequest('posted_by');
 		$post_date = getStringFromRequest('post_date');
 		$is_followup_to = getStringFromRequest('is_followup_to');
-		$has_followups = getStringFromRequest('has_followups');
 		$most_recent_date = getStringFromRequest('most_recent_date');
-		if ($fm->updatemsg($forum_id,$posted_by,$subject,$body,$post_date,$is_followup_to,$thread_id,$has_followups,$most_recent_date)) {
+		if ($fm->updatemsg($forum_id,$posted_by,$subject,$body,$post_date,$is_followup_to,$thread_id,$most_recent_date)) {
 			$feedback .= _('Message Edited Successfully');
 		} else {
 			$error_msg = $fm->getErrorMessage();
