@@ -84,7 +84,7 @@ class SkillHtmlSearchRenderer extends HtmlSearchRenderer {
 
 			$return .= '
 			<tr>
-				<td>'.util_make_link_u ($row['user_name'],$row['user_id'],$row['realname']).'</td>
+				<td>'.util_make_link_u($row['user_name'], $row['realname']).'</td>
 				<td>'.$row['type_name'].'</td>
 				<td>'.$row['title'].'</td>
 				<td>'.$row['keywords'].'</td>

@@ -214,7 +214,7 @@ function show_highest_ranked_users() {
 			$return = '';
 			for ($i=0; $i < $rows; $i++) {
 				$return .= ($i+1).' - ('. number_format(db_result($res,$i,'metric'),4) .') '
-				. util_make_link_u (db_result($res, $i, 'user_name'), db_result($res, $i, 'user_id'),db_result($res,$i,'realname'))
+				. util_make_link_u(db_result($res, $i, 'user_name'), db_result($res,$i,'realname'))
 				.'<br />';
 			}
 		}

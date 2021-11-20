@@ -113,7 +113,7 @@ echo html_e('input', array('type' => 'hidden', 'name' => 'form_key', 'value' => 
 echo $HTML->boxTop(_('Account options'));
 echo html_e('p', array(), _('Welcome').html_e('strong', array(), $u->getRealName()));
 echo html_e('p', array(), _('Account options')._(':'));
-$elementLi[] = array('content' => util_make_link_u($u->getUnixName(), $u->getID(), html_e('strong', array(), _('View My Profile'))));
+$elementLi[] = array('content' => util_make_link_u($u->getUnixName(), html_e('strong', array(), _('View My Profile'))));
 if(forge_get_config('use_people')) {
 	$elementLi[] = array('content' => util_make_link('/people/editprofile.php', html_e('strong', array(), _('Edit My Skills Profile'))));
 }

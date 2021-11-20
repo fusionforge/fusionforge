@@ -133,7 +133,7 @@ function show_users_list($users, $filter = '', $sortorder = 'realname', $start, 
 		}
 		$cells[] = array(($u->getAddDate() ? date(_('Y-m-d H:i'), $u->getAddDate()) : '-'), 'style' => 'width:15%', 'class' => 'align-center');
 		if ($u->getStatus() != 'D') {
-			$nextcell = util_make_link_u($u->getUnixName(), $u->getID(), _('User Profile'));
+			$nextcell = util_make_link_u($u->getUnixName(), _('User Profile'));
 		} else {
 			$nextcell = '<span class="strike">'._('User Profile').'</span>';
 		}

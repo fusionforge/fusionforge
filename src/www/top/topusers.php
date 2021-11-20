@@ -36,13 +36,13 @@ $yd_month = date('Ym', $yesterday);
 $yd_day = date('d', $yesterday);
 
 $res_top = db_query_params ('SELECT user_metric.ranking,users.user_name,users.user_id,users.realname,
-		user_metric.metric,user_metric_history.ranking AS old_ranking
-	FROM users,user_metric LEFT JOIN user_metric_history
-		ON (user_metric.user_id=user_metric_history.user_id
-		    AND user_metric_history.month=$1
-		    AND user_metric_history.day=$2)
-	WHERE users.user_id=user_metric.user_id
-	ORDER BY ranking ASC',
+				user_metric.metric,user_metric_history.ranking AS old_ranking
+				FROM users,user_metric LEFT JOIN user_metric_history
+				ON (user_metric.user_id=user_metric_history.user_id
+				AND user_metric_history.month=$1
+				AND user_metric_history.day=$2)
+				WHERE users.user_id=user_metric.user_id
+				ORDER BY ranking ASC',
 			    array ($yd_month,
 				   $yd_day),
 			    $LIMIT,
@@ -71,7 +71,7 @@ echo $HTML->listTableTop($tableHeaders);
 
 while ($row_top = db_fetch_array($res_top)) {
 	print '<tr><td>&nbsp;&nbsp;'.$row_top['ranking']
-		.'</td><td>'.util_make_link_u ($row_top['user_name'],$row_top['user_id'],$row_top['user_name']).'</td>'
+		.'</td><td>'.util_make_link_u($row_top['user_name'], $row_top['user_name']).'</td>'
 		.'<td>'.$row_top['realname'].'</td>'
 		.'</td><td class="align-right">'.sprintf('%.2f', $row_top['metric'])
 		.'&nbsp;&nbsp;&nbsp;</td><td class="align-right">'.$row_top['old_ranking']

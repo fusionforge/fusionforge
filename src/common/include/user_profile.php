@@ -133,7 +133,7 @@ function user_personal_information($user, $compact = false, $title = false) {
 	if ($compact) {
 		$subcells = array();
 		$subcells[][] = '<small>'. _('URI')._(':') .'</small>';
-		$subcells[][] = '<small>'.util_make_link_u($user->getUnixName(), $user->getID(), util_make_url_u($user->getUnixName())).'</small>';
+		$subcells[][] = '<small>'.util_make_link_u($user->getUnixName(), util_make_url_u($user->getUnixName())).'</small>';
 		$subtable .= $HTML->multiTableRow(array(), $subcells);
 	}
 	$subcells = array();

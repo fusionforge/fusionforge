@@ -278,7 +278,7 @@ class ForumHTML extends FFError {
 		}
 
 		$ret_val .= $bold_begin. $msg->getSubject(). ' <a href="'.$url.'">[ '._("Reply").' ]</a>'. $bold_end;
-		$ret_val .= '<br/>'._('By')._(': ').util_make_link_u ($msg->getPosterName(),$msg->getPosterID(),$msg->getPosterRealName());
+		$ret_val .= '<br/>'._('By')._(': ').util_make_link_u($msg->getPosterName(), $msg->getPosterRealName());
 		$ret_val .= ' on '.date('Y-m-d H:i',$msg->getPostDate());
 		$ret_val .= '</td><td class="tablecontent align-right">';
 		$ret_val .= '<a href="'.$url.'">[forum:'.$msg->getID().']</a><br/>';

@@ -140,7 +140,7 @@ echo $HTML->listTableTop($title_arr);
 // list members
 foreach ($group->getUsers() as $member) {
 	$cells = array();
-	$link = util_make_link_u ($member->getUnixName(), $member->getID(), $member->getRealName()) ;
+	$link = util_make_link_u($member->getUnixName(), $member->getRealName()) ;
 	if (RBACEngine::getInstance()->isActionAllowedForUser($member,'project_admin',$group->getID())) {
 		$cells[][] = html_e('strong', array(), $link);
 	} else {

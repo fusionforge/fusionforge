@@ -101,7 +101,7 @@ echo $HTML->listTableTop(array(), array(), 'full'); ?>
 				$submittedUnixName = $ah->getSubmittedUnixName();
 				$submittedBy = $ah->getSubmittedBy();
 				?>
-				(<samp><?php echo util_make_link_u ($submittedUnixName,$submittedBy,$submittedUnixName); ?></samp>)
+				(<samp><?php echo util_make_link_u($submittedUnixName, $submittedUnixName); ?></samp>)
 			<?php } ?>
 			</td>
 			<td>

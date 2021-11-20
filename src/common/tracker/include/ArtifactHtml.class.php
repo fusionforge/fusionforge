@@ -121,7 +121,7 @@ function hide_edit_button(id) {
 				if(db_result($result, $i, 'user_id') == 100) {
 					$return .= db_result($result, $i, 'realname');
 				} else {
-					$return .= util_make_link_u(db_result($result, $i, 'user_name'), db_result($result, $i, 'user_id'), db_result($result, $i, 'realname'));
+					$return .= util_make_link_u(db_result($result, $i, 'user_name'), db_result($result, $i, 'realname'));
 				}
 				$return .= '</span>';
 

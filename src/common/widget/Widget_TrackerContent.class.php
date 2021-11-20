@@ -630,7 +630,7 @@ EOS;
 											$value = _('None');
 										} else {
 											$user = user_get_object($value);
-											$value = $user->getRealName().' ('.html_e('samp', array(), util_make_link_u($user->getUnixname(),$value,$user->getUnixname())).')';
+											$value = $user->getRealName().' ('.html_e('samp', array(), util_make_link_u($user->getUnixname(), $user->getUnixname())).')';
 										}
 										$cellContent .= $value;
 									} else {

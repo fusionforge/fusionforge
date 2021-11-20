@@ -963,11 +963,10 @@ function util_make_link($path, $text, $extra_params = false, $absolute = false) 
  * util_make_link_u - Create an HTML link to a user's profile page
  *
  * @param	string	$username
- * @param	int	$user_id
- * @param	string	$text
+" * @param	string	$text
  * @return	string
  */
-function util_make_link_u($username, $user_id, $text) {
+function util_make_link_u($username, $text) {
 	return util_make_link(util_make_url_u($username), $text, false, true);
 }
 
@@ -1017,7 +1016,7 @@ function util_display_user($username, $user_id = 0, $text = '', $size = 'xs') {
 	$params = array('user_id' => $user_id, 'size' => $size, 'content' => '');
 	plugin_hook_by_reference('user_logo', $params);
 
-	$url = util_make_link_u($username, $user_id, $text);
+	$url = util_make_link_u($username, $text);
 	if ($params['content']) {
 		return html_e('div', array('class' => 'box'), $params['content'].'&nbsp;'.$url);
 	}

@@ -63,7 +63,7 @@ class Widget_HomeLatestFileReleases extends Widget {
 				$cells = array();
 				$cells[][] = _('Module')._(': ').$result['module_name'];
 				$cells[][] = _('Version')._(': ').$result['release_version'];
-				$cells[][] = _('Released by')._(': ').util_make_link_u($result['user_name'], $result['user_id'], $result['user_name']);
+				$cells[][] = _('Released by')._(': ').util_make_link_u($result['user_name'], $result['user_name']);
 				$cells[][] = date(_('Y-m-d H:i'), $result['release_date']);
 				$content .= $HTML->multiTableRow(array(), $cells);
 				$cells = array();

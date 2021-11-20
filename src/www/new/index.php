@@ -90,7 +90,7 @@ if (!$res_new || db_numrows($res_new) < 1) {
 					util_make_link_g ($row_new['unix_group_name'],$row_new['group_id'],'<strong>'.$row_new['group_name'].'</strong>').'
 					</td>
 					<td nowrap="nowrap"><em>'._('Released by')._(': ').
-					util_make_link_u ($row_new['user_name'],$row_new['user_id'],$row_new['user_name']).'</em>
+					util_make_link_u($row_new['user_name'], $row_new['user_name']).'</em>
 					</td>
 				</tr>
 				<tr>

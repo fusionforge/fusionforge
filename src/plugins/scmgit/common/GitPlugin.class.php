@@ -132,11 +132,10 @@ control over it to the project's administrator.");
 						$rows));
 			$htmlRepo = '';
 			for ($i=0; $i<$rows; $i++) {
-				$user_id = db_result($result, $i, 'user_id');
 				$user_name = db_result($result, $i, 'user_name');
 				$real_name = db_result($result, $i, 'realname');
 				$htmlRepo .= html_e('kbd', array(), 'git clone '.$protocol.'://'.$this->getBoxForProject($project).'/anonscm/git/'.$project->getUnixName().'/users/'.$user_name.'.git')
-					. ' ('.util_make_link_u($user_name, $user_id, $real_name).')'
+					. ' ('.util_make_link_u($user_name, $real_name).')'
 					. html_e('br');
 			}
 			$b .= html_e('p', array(), $htmlRepo);
