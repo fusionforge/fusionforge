@@ -99,8 +99,8 @@ class RoadmapFactory extends FFError {
 	}
 
 	public function getRoadmapByID($roadmap_id, $enable_only=false) {
-		$roadmaps = $this->getRoadmaps($enable_only);
-		foreach ($roadmaps as $roadmap) {
+		$roadmaps_Arr = $this->getRoadmaps($enable_only);
+		foreach ($roadmaps_Arr as $roadmap) {
 			if($roadmap->isError()) {
 				$this->setError($roadmap->getErrorMessage());
 			} else {
@@ -114,8 +114,8 @@ class RoadmapFactory extends FFError {
 	}
 
 	public function getRoadmapByName($name, $enable_only=false) {
-		$roadmaps = $this->getRoadmaps($enable_only);
-		foreach ($roadmaps as $roadmap) {
+		$roadmaps_Arr = $this->getRoadmaps($enable_only);
+		foreach ($roadmaps_Arr as $roadmap) {
 			if($roadmap->isError()) {
 				$this->setError($roadmap->getErrorMessage());
 			} else {
@@ -129,8 +129,8 @@ class RoadmapFactory extends FFError {
 	}
 
 	public function getDefault() {
-		$roadmaps = $this->getRoadmaps();
-		foreach ($roadmaps as $roadmap) {
+		$roadmaps_Arr = $this->getRoadmaps();
+		foreach ($roadmaps_Arr as $roadmap) {
 			if($roadmap->isError()) {
 				$this->setError($roadmap->getErrorMessage());
 			} else {

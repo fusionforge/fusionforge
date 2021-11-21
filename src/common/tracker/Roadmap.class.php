@@ -310,12 +310,12 @@ class Roadmap extends FFError {
 		}
 
 		$artifact_type_list = $this->getList();
-		$release_order = $this->getReleaseOrder();
+		$release_order_arr = $this->getReleaseOrder();
 
 		$releases = array();
 
-		if (is_array($release_order)) {
-			foreach ($release_order as $release_value) {
+		if (is_array($release_order_arr)) {
+			foreach ($release_order_arr as $release_value) {
 				$releases[$release_value] = false;
 			}
 		}

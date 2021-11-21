@@ -644,7 +644,7 @@ class ArtifactType extends FFError {
 			$filter = '';
 		}
 		if (!isset($this->extra_fields[$filter]) || !$use_cache) {
-			$extra_fields = array();
+			$extra_fieldsArr = array();
 			if (count($types)) {
 				$res = db_query_params('SELECT *
 							FROM artifact_extra_field_list
@@ -662,16 +662,16 @@ class ArtifactType extends FFError {
 							array($this->getID()));
 			}
 			while ($arr = db_fetch_array($res)) {
-				$extra_fields[$arr['extra_field_id']] = $arr;
+				$extra_fieldsArr[$arr['extra_field_id']] = $arr;
 			}
 		}
 		if (!isset($this->extra_fields[$filter])) {
-			$this->extra_fields[$filter] = $extra_fields;
+			$this->extra_fields[$filter] = $extra_fieldsArr;
 		}
 		if ($use_cache) {
-			$extra_fields = $this->extra_fields[$filter];
+			$extra_fieldsArr = $this->extra_fields[$filter];
 		}
-		return $extra_fields;
+		return $extra_fieldsArr;
 	}
 
 	/**
@@ -683,9 +683,9 @@ class ArtifactType extends FFError {
 	 * @return	array	arrays of data;
 	 */
 	function getExtraFieldsDefaultValue($types = array(), $get_is_disabled = false, $get_is_hidden_on_submit = true) {
-		$extra_fields = $this->getExtraFields($types, $get_is_disabled, $get_is_hidden_on_submit);
+		$extra_fieldsArr = $this->getExtraFields($types, $get_is_disabled, $get_is_hidden_on_submit);
 		$efDefaultValue = array();
-		foreach ($extra_fields as $efID=>$efArr) {
+		foreach ($extra_fieldsArr as $efID=>$efArr) {
 			$ef = new ArtifactExtraField($this, $efID);
 			$defaultValue = $ef->getDefaultValues();
 			if (!is_null($defaultValue)) {
@@ -709,13 +709,13 @@ class ArtifactType extends FFError {
 	 */
 	function getExtraFieldsInFormula($types = array(), $get_is_disabled = false, $get_is_hidden_on_submit = true) {
 		$return = array();
-		$extra_fields = $this->getExtraFields($types, $get_is_disabled, $get_is_hidden_on_submit);
+		$extra_fieldsArr = $this->getExtraFields($types, $get_is_disabled, $get_is_hidden_on_submit);
 		$res = db_query_params('SELECT string_agg(formula,chr(10)) FROM artifact_extra_field_formula NATURAL INNER JOIN artifact_extra_field_list WHERE is_disabled=0 AND group_artifact_id=$1',
 				array ($this->getID()));
 		if (db_numrows($res) > 0) {
 			$row = db_fetch_array($res);
 			if (preg_match_all("/([a-z]\w*)/m", $row[0], $matches)) {
-				foreach ($extra_fields as $extra_field) {
+				foreach ($extra_fieldsArr as $extra_field) {
 					if (in_array($extra_field['alias'],$matches[0])) {
 						$return[]=$extra_field['extra_field_id'];
 					}
@@ -762,7 +762,6 @@ class ArtifactType extends FFError {
 	 */
 	function getExtraFieldsWithFormula($types = array(), $get_is_disabled = false, $get_is_hidden_on_submit = true) {
 		$return = array();
-		$extra_fields = $this->getExtraFields($types, $get_is_disabled, $get_is_hidden_on_submit);
 		$res = db_query_params('SELECT extra_field_id FROM artifact_extra_field_formula NATURAL INNER JOIN artifact_extra_field_list WHERE is_disabled=0 AND group_artifact_id=$1',
 				array ($this->getID()));
 		while ($arr = db_fetch_array($res)) {
@@ -1479,9 +1478,9 @@ class ArtifactType extends FFError {
 
 		$this->voters = array();
 		if (($engine = RBACEngine::getInstance())
-			&& ($voters = $engine->getUsersByAllowedAction('tracker', $this->getID(), 'vote'))
-			&& (count($voters) > 0)) {
-			foreach ($voters as $voter) {
+			&& ($lvoters = $engine->getUsersByAllowedAction('tracker', $this->getID(), 'vote'))
+			&& (count($lvoters) > 0)) {
+			foreach ($lvoters as $voter) {
 				$voter_id = $voter->getID();
 				$this->voters[$voter_id] = $voter_id;
 			}

@@ -3253,16 +3253,16 @@ class Group extends FFError {
 			return $this->votes;
 		}
 
-		$voters = $this->getVoters();
-		unset($voters[0]);	/* just in case */
-		unset($voters[100]);	/* need users */
-		if (($numvoters = count($voters)) < 1) {
+		$lvoters = $this->getVoters();
+		unset($lvoters[0]);	/* just in case */
+		unset($lvoters[100]);	/* need users */
+		if (($numvoters = count($lvoters)) < 1) {
 			$this->votes = array(0, 0, 0);
 			return $this->votes;
 		}
 
 		$res = db_query_params('SELECT COUNT(*) AS count FROM group_votes WHERE group_id = $1 AND user_id = ANY($2)',
-					array($this->getID(), db_int_array_to_any_clause($voters)));
+					array($this->getID(), db_int_array_to_any_clause($lvoters)));
 		$db_count = db_fetch_array($res);
 		$numvotes = $db_count['count'];
 
@@ -3302,9 +3302,9 @@ class Group extends FFError {
 
 		$this->voters = array();
 		if (($engine = RBACEngine::getInstance())
-			&& ($voters = $engine->getUsersByAllowedAction('project_read', $this->getID()))
-			&& (count($voters) > 0)) {
-			foreach ($voters as $voter) {
+			&& ($lvoters = $engine->getUsersByAllowedAction('project_read', $this->getID()))
+			&& (count($lvoters) > 0)) {
+			foreach ($lvoters as $voter) {
 				$voter_id = $voter->getID();
 				$this->voters[$voter_id] = $voter_id;
 			}

@@ -110,7 +110,7 @@ class ReportTrackerAct extends Report {
 	}
 
 	function getAverageTime($atid,$start,$end) {
-		$res = db_query_params ('SELECT avg((close_date-open_date)/(24*60*60)) AS avgtime
+		$dbres = db_query_params ('SELECT avg((close_date-open_date)/(24*60*60)) AS avgtime
 			FROM artifact
 			WHERE group_artifact_id=$1
 			AND close_date > 0
@@ -118,11 +118,11 @@ class ReportTrackerAct extends Report {
 					array ($atid,
 					$start,
 					$end));
-		return db_result($res,0,0);
+		return db_result($dbres,0,0);
 	}
 
 	function getOpenCount($atid,$start,$end) {
-		$res = db_query_params ('SELECT count(*)
+		$dbres = db_query_params ('SELECT count(*)
 			FROM artifact
 			WHERE
 			group_artifact_id=$1
@@ -130,11 +130,11 @@ class ReportTrackerAct extends Report {
 					array ($atid,
 					$start,
 					$end));
-		return db_result($res,0,0);
+		return db_result($dbres,0,0);
 	}
 
 	function getStillOpenCount($atid,$end) {
-		$res = db_query_params ('SELECT count(*)
+		$dbres = db_query_params ('SELECT count(*)
 			FROM artifact
 			WHERE
 			group_artifact_id=$1
@@ -143,7 +143,7 @@ class ReportTrackerAct extends Report {
 					array ($atid,
 					$end, // Yes, really.
 					$end)) ;
-		return db_result($res,0,0);
+		return db_result($dbres,0,0);
 	}
 
 	function getPerAssignee($atid, $start, $end) {

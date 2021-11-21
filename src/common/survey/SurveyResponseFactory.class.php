@@ -97,8 +97,8 @@ class SurveyResponseFactory extends FFError {
 	 * @return	object	The Group object.
 	 */
 	function &getGroup() {
-		$Survey = $this->getSurvey();
-		return $Survey->Group;
+		$lsurvey = $this->getSurvey();
+		return $lsurvey->Group;
 	}
 
 	/**

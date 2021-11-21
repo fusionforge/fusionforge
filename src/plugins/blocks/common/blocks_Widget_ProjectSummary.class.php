@@ -78,22 +78,22 @@ class blocks_Widget_ProjectSummary extends Widget {
 	function updatePreferences() {
 		$done = false;
 		if (existInRequest('content_id')) {
-			$title = htmlspecialchars(getStringFromRequest('title', ''));
+			$newtitle = htmlspecialchars(getStringFromRequest('title', ''));
 
 			if(existInRequest('body')) {
-				$content = getStringFromRequest('body');
+				$newcontent = getStringFromRequest('body');
 				if (getStringFromRequest('_body_content_type') == 'html') {
-					$content = TextSanitizer::purify($content);
+					$newcontent = TextSanitizer::purify($newcontent);
 				} else {
-					$content = htmlspecialchars($content);
+					$newcontent = htmlspecialchars($newcontent);
 				}
 			} else {
-				$content = '';
+				$newcontent = '';
 			}
 
-			if ($content) {
+			if ($newcontent) {
 				$sql = "UPDATE plugin_blocks SET title=$1, content=$2 WHERE group_id =$3 AND id = $4";
-				db_query_params($sql,array($title,$content,$this->group_id, getIntFromRequest('content_id')));
+				db_query_params($sql,array($newtitle, $newcontent, $this->group_id, getIntFromRequest('content_id')));
 				$done = true;
 			}
 		}
@@ -110,11 +110,11 @@ class blocks_Widget_ProjectSummary extends Widget {
 	}
 
 	function create() {
-		$title = getStringFromRequest('title');
-		$content = getStringFromRequest('body');
+		$otitle = getStringFromRequest('title');
+		$ocontent = getStringFromRequest('body');
 		$res = db_query_params('INSERT INTO plugin_blocks (group_id, name, status, title, content)
 					VALUES ($1, $2, 1, $3, $4)',
-					array($this->owner_id, 'summary_block?', $title, $content));
+					array($this->owner_id, 'summary_block?', $otitle, $ocontent));
 		$content_id = db_insertid($res, 'plugin_blocks', 'id');
 		db_query_params('UPDATE plugin_blocks SET name=$1 WHERE id=$2',
 				array('summary_block'.$content_id, $content_id));

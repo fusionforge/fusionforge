@@ -36,14 +36,13 @@ class ForumAdmin extends FFError {
 
 	function __construct($group_id) {
 		parent::__construct();
-		$this->group_id = $group_id;
 		if ($group_id) {
-			$this->group_id = $group_id;
 			$this->g = group_get_object($group_id);
-			$this->p =& $this->g->getPermission();
 			if (!$this->g->usesForum()) {
 				$this->setError(sprintf(_('%s does not use the Forum tool.'), $this->g->getPublicName()));
 			}
+			$this->group_id = $group_id;
+			$this->p =& $this->g->getPermission();
 		}
 	}
 
@@ -255,13 +254,13 @@ class ForumAdmin extends FFError {
 		}
 		if ($action=="view_pending") {
 			//show the pending messages, awaiting moderation
-			$group_id = $this->group_id;
+			$project_id = $this->group_id;
 			$forum_id = getStringFromRequest("forum_id");
 			if ($this->isGroupAdmin()) {
 				$this->PrintAdminOptions();
 			}
 			$res = db_query_params('SELECT fgl.forum_name, fgl.group_forum_id FROM forum_group_list fgl, forum_pending_messages fpm WHERE fgl.group_id=$1 AND fpm.group_forum_id = fgl.group_forum_id GROUP BY fgl.forum_name, fgl.group_forum_id',
-						array ($group_id));
+						array ($project_id));
 			if (!$res) {
 				echo db_error();
 				return '';
@@ -335,7 +334,7 @@ class ForumAdmin extends FFError {
 				echo "
 				<tr>
 					<td>$onemsg[forum_name]</td>
-					<td><a href=\"#\" onclick=\"window.open('pendingmsgdetail.php?msg_id=$onemsg[msg_id]&amp;forum_id=$onemsg[group_forum_id]&amp;group_id=$group_id','PendingMessageDetail','width=800,height=600,status=no,resizable=yes');\">$onemsg[subject]</a></td>
+					<td><a href=\"#\" onclick=\"window.open('pendingmsgdetail.php?msg_id=$onemsg[msg_id]&amp;forum_id=$onemsg[group_forum_id]&amp;group_id=$project_id','PendingMessageDetail','width=800,height=600,status=no,resizable=yes');\">$onemsg[subject]</a></td>
 					<td><div class=\"align-right\">" . html_build_select_box_from_assoc($options,"doaction[]",1) . "</div></td>
 				</tr>";
 			}

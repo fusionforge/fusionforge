@@ -1719,8 +1719,8 @@ class Artifact extends FFObject {
 			$at = $this->getArtifactType();
 			$ef = $at->getExtraFields();
 
-			$parent = $this->getParent();
-			$parentArtifact = artifact_get_object($parent);
+			$parentid = $this->getParent();
+			$parentArtifact = artifact_get_object($parentid);
 			$parentExtra_fields = $parentArtifact->getExtraFieldData();
 			$parentAt = $parentArtifact->getArtifactType();
 
@@ -1791,7 +1791,7 @@ class Artifact extends FFObject {
 			$at = $this->getArtifactType();
 			$ef = $at->getExtraFields();
 
-			$children = $this->getChildren();
+			$childrenArray = $this->getChildren();
 
 			foreach ($extra_fields as $key=>$value) {
 				$aggregation_rule = $ef[$key]['aggregation_rule'];
@@ -1814,7 +1814,7 @@ class Artifact extends FFObject {
 								$effortSum= new Effort(0, $baseUnit);
 								break;
 						}
-						foreach ($children as $child) {
+						foreach ($childrenArray as $child) {
 							$childArtifact = artifact_get_object($child['artifact_id']);
 							$childExtra_fields = $childArtifact->getExtraFieldData();
 							if ($at->getID() == $child['group_artifact_id']) {
@@ -2466,13 +2466,11 @@ class ArtifactComparator {
 			$aa=$a->getExtraFieldDataText();
 			$ba=$b->getExtraFieldDataText();
 			if(!isset($this->criterion) || empty($this->criterion)) {
-				$criterion = 1;
-			} else {
-				$criterion = $this->criterion;
+				$this->criterion = 1;
 			}
-			$af=$aa[$criterion]['value'];
-			$bf=$ba[$criterion]['value'];
-			switch ($aa[$criterion]['type']) {
+			$af=$aa[$this->criterion]['value'];
+			$bf=$ba[$this->criterion]['value'];
+			switch ($aa[$this->criterion]['type']) {
 				case ARTIFACT_EXTRAFIELDTYPE_EFFORT:
 					$namecmp = intval($af)-intval($bf);
 					break;

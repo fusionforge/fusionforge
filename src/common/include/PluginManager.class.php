@@ -86,8 +86,8 @@ class PluginManager extends FFError {
 	 * @return	bool	true if installed
 	 */
 	function PluginIsInstalled($pluginname) {
-		$plugins_data = $this->getPlugins();
-		foreach ($plugins_data as $p_name) {
+		$plugins_names = $this->getPlugins();
+		foreach ($plugins_names as $p_name) {
 			if ($p_name == $pluginname) {
 				return true;
 			}
@@ -103,8 +103,8 @@ class PluginManager extends FFError {
 	 */
 	function isPluginAvailable($plugin) {
 		$pluginname = $plugin->GetName();
-		$plugins_data = $this->getPlugins();
-		foreach ($plugins_data as $p_name) {
+		$plugins_names = $this->getPlugins();
+		foreach ($plugins_names as $p_name) {
 			if ($p_name == $pluginname) {
 				return true;
 			}
@@ -177,8 +177,8 @@ class PluginManager extends FFError {
 	 *
 	 */
 	function LoadPlugins() {
-		$plugins_data = $this->getPlugins();
-		foreach ($plugins_data as $p_id => $p_name) {
+		$plugins_names = $this->getPlugins();
+		foreach ($plugins_names as $p_id => $p_name) {
 			if (!$this->LoadPlugin($p_name)) {
 				// we can't find the plugin so we remove it from the array
 				unset($this->plugins_data[$p_id]);

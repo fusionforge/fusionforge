@@ -83,13 +83,13 @@ class CVSCommitTracker extends scmhook {
 	/**
 	 * It display a table with commit related to this tracker or task_extra_detail
 	 *
-	 * @param	string	$Query Query to be executed to get the commit entries.
-	 * @param	int		$group_id Group_id of the actual Group_id
+	 * @param	string	$Query		Query to be executed to get the commit entries.
+	 * @param	int	$group_id	Group_id of the actual Group_id
 	 *
 	 */
 	function getCommitEntries($DBResult, $group_id) {
 		global $HTML;
-		$group = group_get_object($group_id);
+		$groupObj = group_get_object($group_id);
 		$Rows= db_numrows($DBResult);
 		$return = '';
 
@@ -102,10 +102,10 @@ class CVSCommitTracker extends scmhook {
 
 			while ($Row = db_fetch_array($DBResult)) {
 				$cells = array();
-				$cells[][] = $this->getFileLink($group->getUnixName(), $Row['file'],$Row['actual_version']);
+				$cells[][] = $this->getFileLink($groupObj->getUnixName(), $Row['file'],$Row['actual_version']);
 				$cells[][] = date(_('Y-m-d'), $Row['cvs_date']);
-				$cells[][] = $this->getDiffLink($group->getUnixName(), $Row['file'], $Row['prev_version'], $Row['actual_version']);
-				$cells[][] = $this->getActualVersionLink($group->getUnixName(), $Row['file'], $Row['actual_version']);
+				$cells[][] = $this->getDiffLink($groupObj->getUnixName(), $Row['file'], $Row['prev_version'], $Row['actual_version']);
+				$cells[][] = $this->getActualVersionLink($groupObj->getUnixName(), $Row['file'], $Row['actual_version']);
 				$cells[][] = htmlspecialchars($Row['log_text']);
 				$commituser = user_get_object_by_name($Row['author']);
 				$cells[][] = util_display_user($commituser->getUnixName(), $commituser->getId(), $commituser->getRealname());

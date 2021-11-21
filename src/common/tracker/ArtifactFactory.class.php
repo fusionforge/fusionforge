@@ -521,7 +521,7 @@ class ArtifactFactory extends FFError {
 	 * @return	array		The array of Artifact objects.
 	 */
 	function getArtifactsByReleases($extra_field_id, $releases) {
-		$artifacts = array();
+		$artifactArr = array();
 
 		$sql = 'SELECT DISTINCT a.*
 		FROM artifact_extra_field_data aefd, artifact_extra_field_elements aefe, artifact_vw a
@@ -542,11 +542,11 @@ class ArtifactFactory extends FFError {
 		$result = db_query_params($sql, $query_params);
 		if ($result && db_numrows($result)) {
 			while ($arr = db_fetch_array($result)) {
-				$artifacts[] = new Artifact($this->ArtifactType, $arr);
+				$artifactArr[] = new Artifact($this->ArtifactType, $arr);
 			}
 		}
 
-		return $artifacts;
+		return $artifactArr;
 	}
 
 }

@@ -388,9 +388,9 @@ class FRSFile extends FFError {
 		// Sanity checks
 		if ($release_id) {
 			// Check that the new FRSRelease id exists
-			if ($FRSRelease = frsrelease_get_object($release_id)) {
+			if ($FRSR = frsrelease_get_object($release_id)) {
 				// Check that the new FRSRelease id belongs to the group of this FRSFile
-				if ($FRSRelease->FRSPackage->Group->getID() != $this->FRSRelease->FRSPackage->Group->getID()) {
+				if ($FRSR->FRSPackage->Group->getID() != $this->FRSRelease->FRSPackage->Group->getID()) {
 					$this->setError(_('Invalid Project'));
 					return false;
 				}

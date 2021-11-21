@@ -98,7 +98,7 @@ class SvnCommitTracker extends scmhook {
 	*/
 	function getCommitEntries($DBResult, $group_id) {
 		global $HTML;
-		$group = group_get_object($group_id);
+		$groupObj = group_get_object($group_id);
 		$Rows= db_numrows($DBResult);
 		$return = '';
 
@@ -112,10 +112,10 @@ class SvnCommitTracker extends scmhook {
 			for ($i=0; $i<$Rows; $i++) {
 				$Row = db_fetch_array($DBResult);
 				$cells = array();
-				$cells[][] = $this->getFileLink($group->getUnixName(), $Row['file'], $Row['actual_version']);
+				$cells[][] = $this->getFileLink($groupObj->getUnixName(), $Row['file'], $Row['actual_version']);
 				$cells[][] = date(_('Y-m-d'), $Row['svn_date']);
-				$cells[][] = $this->getDiffLink($group->getUnixName(), $Row['file'], $Row['prev_version'], $Row['actual_version']);
-				$cells[][] = $this->getActualVersionLink($group->getUnixName(), $Row['file'], $Row['actual_version']);
+				$cells[][] = $this->getDiffLink($groupObj->getUnixName(), $Row['file'], $Row['prev_version'], $Row['actual_version']);
+				$cells[][] = $this->getActualVersionLink($groupObj->getUnixName(), $Row['file'], $Row['actual_version']);
 				$cells[][] = htmlspecialchars($Row['log_text']);
 				$commituser = user_get_object_by_name($Row['author']);
 				$cells[][] = util_display_user($commituser->getUnixName(), $commituser->getId(), $commituser->getRealname());

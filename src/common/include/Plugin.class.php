@@ -174,8 +174,7 @@ class Plugin extends FFError {
 	}
 
 	function installCode() {
-		$name = $this->name;
-		$path = forge_get_config('plugins_path') . '/' . $name;
+		$path = forge_get_config('plugins_path') . '/' . $this->name;
 		$installdir = $this->getInstallDir();
 
 		// Create a symbolic links to plugins/<plugin>/www (if directory exists).
@@ -192,44 +191,42 @@ class Plugin extends FFError {
 		}
 
 		// Create a symbolic links to plugins/<plugin>/etc/plugins/<plugin> (if directory exists).
-		if (is_dir($path . '/etc/plugins/' . $name)) {
+		if (is_dir($path . '/etc/plugins/' . $this->name)) {
 			// The apache group or user should have write perms in /etc/fusionforge/plugins folder...
-			if (!is_link(forge_get_config('config_path'). '/plugins/'.$name) && !is_dir(forge_get_config('config_path'). '/plugins/'.$name)) {
-				$code = symlink($path . '/etc/plugins/' . $name, forge_get_config('config_path'). '/plugins/'.$name);
+			if (!is_link(forge_get_config('config_path'). '/plugins/'.$this->name) && !is_dir(forge_get_config('config_path'). '/plugins/'.$this->name)) {
+				$code = symlink($path . '/etc/plugins/' . $this->name, forge_get_config('config_path'). '/plugins/'.$this->name);
 				if (!$code) {
-					$this->setError('['.forge_get_config('config_path'). '/plugins/'.$name.'->'.$path . '/etc/plugins/' . $name . ']'.'<br />'.
-					sprintf(_('Config file could not be linked to %s. Check the write permissions for apache in /etc/fusionforge/plugins or create the link manually.'), forge_get_config('config_path').'/plugins/'.$name));
+					$this->setError('['.forge_get_config('config_path'). '/plugins/'.$this->name.'->'.$path . '/etc/plugins/' . $this->name . ']'.'<br />'.
+					sprintf(_('Config file could not be linked to %s. Check the write permissions for apache in /etc/fusionforge/plugins or create the link manually.'), forge_get_config('config_path').'/plugins/'.$this->name));
 				}
 			}
 		}
 	}
 
 	function installConfig() {
-		$name = $this->name;
-		$path = forge_get_config('plugins_path') . '/' . $name;
+		$path = forge_get_config('plugins_path') . '/' . $this->name;
 
 		// Create a symbolic links to plugins/<plugin>/etc/plugins/<plugin> (if directory exists).
-		if (is_dir($path . '/etc/plugins/' . $name)) {
+		if (is_dir($path . '/etc/plugins/' . $this->name)) {
 			// The apache group or user should have write perms in /etc/fusionforge/plugins folder...
-			if (!is_link(forge_get_config('config_path'). '/plugins/'.$name) && !is_dir(forge_get_config('config_path'). '/plugins/'.$name)) {
-				$code = symlink($path . '/etc/plugins/' . $name, forge_get_config('config_path'). '/plugins/'.$name);
+			if (!is_link(forge_get_config('config_path'). '/plugins/'.$this->name) && !is_dir(forge_get_config('config_path'). '/plugins/'.$this->name)) {
+				$code = symlink($path . '/etc/plugins/' . $this->name, forge_get_config('config_path'). '/plugins/'.$this->name);
 				if (!$code) {
-					$this->setError('['.forge_get_config('config_path'). '/plugins/'.$name.'->'.$path . '/etc/plugins/' . $name . ']'.'<br />'.
-					sprintf(_('Config file could not be linked to %s. Check the write permissions for apache in /etc/fusionforge/plugins or create the link manually.'), forge_get_config('config_path').'/plugins/'.$name));
+					$this->setError('['.forge_get_config('config_path'). '/plugins/'.$this->name.'->'.$path . '/etc/plugins/' . $this->name . ']'.'<br />'.
+					sprintf(_('Config file could not be linked to %s. Check the write permissions for apache in /etc/fusionforge/plugins or create the link manually.'), forge_get_config('config_path').'/plugins/'.$this->name));
 				}
 			}
 		}
 	}
 
 	function installDatabase() {
-		$name = $this->name;
-		$path = forge_get_config('plugins_path') . '/' . $name . '/db';
+		$path = forge_get_config('plugins_path') . '/' . $this->name . '/db';
 
 		require_once $GLOBALS['gfcommon'].'include/DatabaseInstaller.class.php';
-		$di = new DatabaseInstaller($name, $path);
+		$di = new DatabaseInstaller($this->name, $path);
 
 		// Search for database tables, if present then upgrade.
-		$tablename = str_replace('-', '_', $name);
+		$tablename = str_replace('-', '_', $this->name);
 		$res=db_query_params ('SELECT COUNT(*) FROM pg_class WHERE (relname=$1 OR relname like $2) AND relkind=$3',
 			array ('plugin_'.$tablename, 'plugin_'.$tablename.'_%', 'r'));
 		$count = db_result($res,0,0);

@@ -87,7 +87,6 @@ class ProjectTaskFactory extends FFError {
 	 *
 	 */
 	function setup($offset,$order,$max_rows,$set,$_assigned_to,$_status,$_category_id,$_view='',$_sort_order = NULL) {
-//echo "<br />offset: $offset| order: $order|max_rows: $max_rows|_assigned_to: $_assigned_to|_status: $_status|_category_id: $_category_id +";
 		if ((!$offset) || ($offset < 0)) {
 			$this->offset=0;
 		} else {
@@ -173,12 +172,12 @@ class ProjectTaskFactory extends FFError {
 		}
 		$qpa = db_construct_qpa();
 		if ($this->sort_order) {
-			$order = "ORDER BY $this->order $this->sort_order" ;
+			$orderby = "ORDER BY $this->order $this->sort_order" ;
 		} else {
 			if ($this->order=='priority') {
-				$order = 'ORDER BY priority DESC' ;
+				$orderby = 'ORDER BY priority DESC' ;
 			} else {
-				$order = "ORDER BY $this->order ASC" ;
+				$orderby = "ORDER BY $this->order ASC" ;
 			}
 		}
 		if ($this->assigned_to) {
@@ -206,7 +205,7 @@ class ProjectTaskFactory extends FFError {
 			$qpa = db_construct_qpa($qpa, ' AND project_task_vw.category_id = $1 ', array($this->category));
 		}
 
-		$qpa = db_construct_qpa($qpa, $order);
+		$qpa = db_construct_qpa($qpa, $orderby);
 		$result = db_query_qpa($qpa, $this->max_rows, $this->offset);
 
 		if (db_error()) {
