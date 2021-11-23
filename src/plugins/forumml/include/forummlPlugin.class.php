@@ -173,17 +173,14 @@ class ForumMLPlugin extends Plugin {
 	}
 
 	function cssFile($params) {
-		$request =& HTTPRequest::instance();
-		if (strpos($_SERVER['REQUEST_URI'], $this->getPluginPath()) === 0) {
+		if (strpos($_SERVER['REQUEST_URI'], $this->getInstallDir()) === 0) {
 			echo '<link rel="stylesheet" type="text/css" href="'.$this->getThemePath().'/css/style.css" />'."\n";
 		}
 	}
 
 	function jsFile($params) {
-		//$request =& HTTPRequest::instance();
-		if (strpos($_SERVER['REQUEST_URI'], $this->getPluginPath()) === 0) {
-			//echo '<link rel="stylesheet" type="text/css" href="'.$this->getThemePath().'/css/style.css" />'."\n";
-			echo '<script type="text/javascript" src="'.$this->getPluginPath().'/scripts/forumml.js"></script>'."\n";
+		if (strpos($_SERVER['REQUEST_URI'], $this->getInstallDir()) === 0) {
+			echo '<script type="text/javascript" src="'.$this->getInstallDir().'/scripts/forumml.js"></script>'."\n";
 		}
 	}
 

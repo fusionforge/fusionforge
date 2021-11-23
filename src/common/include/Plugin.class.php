@@ -96,20 +96,6 @@ class Plugin extends FFError {
 	}
 
 	/**
-	 * Added for Codendi compatibility
-	 * getPluginPath() - get installation dir for the plugin.
-	 *
-	 * @return	string	the directory where the plugin should be linked.
-	 */
-	function getPluginPath() {
-		if (isset($this->installdir) && $this->installdir) {
-			return $this->installdir;
-		} else {
-			return 'plugins/'.$this->name;
-		}
-	}
-
-	/**
 	 * CallHook() - call a particular hook.
 	 *
 	 * @param	string	$hookname	the "handle" of the hook.
