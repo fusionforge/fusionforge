@@ -902,15 +902,6 @@ class Group extends FFError {
 	}
 
 	/**
-	 * getRegisterPurpose - the text description of the purpose of this project.
-	 *
-	 * @return	string	The description.
-	 */
-	function getRegisterPurpose() {
-		return $this->data_array['register_purpose'];
-	}
-
-	/**
 	 * getDescription - the text description of this project.
 	 *
 	 * @return	string	The description.

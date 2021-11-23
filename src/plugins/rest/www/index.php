@@ -100,7 +100,7 @@ class Rest {
 			'status' => $project->getStatus(),
 			'unix_group_name' => $project->getUnixName(),
 			'short_description' => $project->getDescription(),
-			'register_purpose' => $project->getRegisterPurpose(),
+			'register_purpose' => $project->getRegistrationPurpose(),
 			'unix_box' => $project->getUnixBox(),
 			'scm_box' => $project->getSCMBox(),
 			'register_time' => date('c', $project->getStartDate()),
