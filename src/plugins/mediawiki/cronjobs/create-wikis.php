@@ -78,8 +78,8 @@ while ( $row = db_fetch_array($project_res) ) {
 			$err =  "Error: Schema Creation Failed: " .
 				db_error();
 			cron_debug($err);
-			cron_entry(23,$err);
 			db_rollback();
+			cron_entry(23,$err);
 			exit;
 		}
 
@@ -88,8 +88,8 @@ while ( $row = db_fetch_array($project_res) ) {
 		if (!file_exists($table_file)) {
 			$err =  "Error: Couldn't find Mediawiki Database Creation File $table_file!";
 			cron_debug($err);
-			cron_entry(23,$err);
 			db_rollback();
+			cron_entry(23,$err);
 			exit;
 		}
 
@@ -98,19 +98,18 @@ while ( $row = db_fetch_array($project_res) ) {
 			$err =  "Error: DB Query Failed: " .
 				db_error();
 			cron_debug($err);
-			cron_entry(23,$err);
 			db_rollback();
+			cron_entry(23,$err);
 			exit;
 		}
 
-		$creation_query = file_get_contents($table_file);
 		$res = db_query_from_file($table_file);
 		if (!$res) {
 			$err =  "Error: Mediawiki Database Creation Failed: " .
 				db_error();
 			cron_debug($err);
-			cron_entry(23,$err);
 			db_rollback();
+			cron_entry(23,$err);
 			exit;
 		}
 
@@ -119,8 +118,8 @@ while ( $row = db_fetch_array($project_res) ) {
 			$err =  "Error: DB Query Failed: " .
 				db_error();
 			cron_debug($err);
-			cron_entry(23,$err);
 			db_rollback();
+			cron_entry(23,$err);
 			exit;
 		}
 
