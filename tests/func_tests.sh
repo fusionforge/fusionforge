@@ -97,7 +97,7 @@ install_selenium() {
 			yum -y install java-1.8.0-openjdk
 			;;
 			8*)
-			yum -y install php-json java-11-openjdk
+			yum -y install php-json php-xml java-11-openjdk
 			;;
 		esac
 		yum --enablerepo=epel install -y psmisc net-tools patch php-cli php-zip unzip
