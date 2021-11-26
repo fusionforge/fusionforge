@@ -40,7 +40,7 @@ html {
 }
 
 body {
-	font-size:12px;
+	font-size:.85em;
 	font-family: Helvetica, Helv, swiss, sans-serif;
 	color:rgb(68,68,68);
 	background-color:white;
@@ -209,7 +209,8 @@ div[role='search'] {
 
 header select {
 	cursor: pointer;
-	padding: 0 1.2em 0 .4em;
+	height: 1.9em;
+	padding: 0 1.2em .2em .4em;
 	border-radius: .3em;
 	border: 1px solid #789;
 	color: #fff;
@@ -758,7 +759,7 @@ footer img {
 }
 .loading  {
 	opacity: 1 !important;
-	transition: opacity ease-in 1s;
+	transition: opacity ease-in 2s;
 }
 #loader div {
 	border: 8px solid #fff;
@@ -836,7 +837,7 @@ span.active, span.deleted, span.pending, span.suspended {
 p.information {
 	background-color: #bdd0f2;
 	border: 1px solid #3a5fa5;
-	padding: 7px;
+	padding: 7px 7px 4px 7px;
 	border-radius: 6px;
 	text-shadow: 1px 1px #bcf;
 	text-align: left;
@@ -949,11 +950,14 @@ input, select {
 }
 
 .important {
-	background-color: #e10;
+	background-color: #c33;
 	border: none;
 	color: white;
 	text-shadow: 0 0 1px #960;
-	padding: .2em .4em;
+	padding: .4em .8em .1em .8em;
+}
+.requiredfield {
+    color: #c33;
 }
 
 /* Buttons */
@@ -965,6 +969,9 @@ input, select {
 	text-shadow:1px 1px #eee;
 	transition-property: background-color, text-shadow;
 	transition-duration: 0.3s;
+}
+.ui-button{
+	padding:.6em 1em .3em 1em !important;
 }
 .ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus, .ui-button:hover, .ui-button:focus {
 	border: 1px solid #505d77;
