@@ -7,7 +7,7 @@
  * Copyright (C) 2010 Alcatel-Lucent
  * Copyright 2010-2011, Franck Villaume - Capgemini
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
- * Copyright 2012-2017, Franck Villaume - TrivialDev
+ * Copyright 2012-2017,2021, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -374,8 +374,8 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 		if (session_loggedin()) {
 			echo util_make_link('#', html_image('docman/reserve-document.png', 22, 22, array('alt' => _('Reserve'))), array('onclick' => 'window.location.href=\''.util_make_uri($redirecturl.'&action=reservefile&fileid=\'+controllerListFile.buildUrlByCheckbox("active")'), 'title' => _('Reserve for later edition')), true);
 			echo util_make_link('#', html_image('docman/release-document.png', 22, 22, array('alt' => _('Release reservation'))) , array('onclick' => 'window.location.href=\''.util_make_uri($redirecturl.'&action=releasefile&fileid=\'+controllerListFile.buildUrlByCheckbox("active")'), 'title' => _('Release reservation')), true);
-			echo util_make_link('#', $HTML->getStartMonitoringPic(_('Start monitoring'), ''), array('onclick' => 'window.location.href=\''.util_make_uri($redirecturl.'&action=monitorfile&option=add&fileid=\'+controllerListFile.buildUrlByCheckbox("active")')), true);
-			echo util_make_link('#', $HTML->getStopMonitoringPic(_('Stop monitoring'), ''), array('onclick' => 'window.location.href=\''.util_make_uri($redirecturl.'&action=monitorfile&option=remove&fileid=\'+controllerListFile.buildUrlByCheckbox("active")')), true);
+			echo util_make_link('#', $HTML->getStartMonitoringPic(_('Start monitoring'), ''), array('onclick' => 'window.location.href=\''.util_make_uri($redirecturl.'&action=monitorfile&option=start&fileid=\'+controllerListFile.buildUrlByCheckbox("active")')), true);
+			echo util_make_link('#', $HTML->getStopMonitoringPic(_('Stop monitoring'), ''), array('onclick' => 'window.location.href=\''.util_make_uri($redirecturl.'&action=monitorfile&option=stop&fileid=\'+controllerListFile.buildUrlByCheckbox("active")')), true);
 			echo util_make_link('#', html_image('docman/move-document.png', 22, 22, array('alt' => _('Move files to another folder'))), array('onclick' => 'javascript:controllerListFile.toggleMoveFileView({})', 'title' => _('Move files to another folder')), true);
 		}
 	}
