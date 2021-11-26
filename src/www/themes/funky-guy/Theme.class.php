@@ -215,7 +215,7 @@ class Theme_Funky_Guy extends Layout {
 		echo html_ac(html_ap() -1); // </div> #tabGenerator
 		echo html_ac(html_ap() -1); // </div> #innertabs
 		echo html_ac(html_ap() -1); // </nav>
-		echo html_ac(html_ap() -2); // </header>
+		echo html_ac(html_ap() -1); // </header>
 
 		echo util_make_link('#', null, array('id' => 'content', 'name' => 'content'));
 
@@ -280,8 +280,7 @@ class Theme_Funky_Guy extends Layout {
 			}
 		';
 		echo html_ac(html_ap() -1); // </script>
-
-		echo '</html>' . "\n";
+		echo '</body></html>' . "\n";
 	}
 
 	/**
