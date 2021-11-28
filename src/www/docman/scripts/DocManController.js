@@ -4,7 +4,7 @@
  * Copyright 2010, Antoine Mercadal - Capgemini
  * Copyright 2010-2011, Franck Villaume - Capgemini
  * Copyright 2011, Alain Peyrat
- * Copyright 2011-2017, Franck Villaume - TrivialDev
+ * Copyright 2011-2017,2021, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -26,7 +26,7 @@
 /*! ListFileController
  * @param groupId the current FusionForge groupID
  */
-DocManListFileController = function(params)
+var DocManListFileController = function(params)
 {
 	this.lockInterval	= [];
 	this.listfileparams	= params;
@@ -38,19 +38,19 @@ DocManListFileController = function(params)
 	this.initModelNotifyWindow();
 };
 
-DocManAddItemController = function(params)
+var DocManAddItemController = function(params)
 {
 	this.additemparams	= params;
 	this.bindControls();
 };
 
-DocManAddFileController = function(params)
+var DocManAddFileController = function(params)
 {
 	this.addfileparams	= params;
 	this.bindControls();
 };
 
-DocManSearchController = function(params)
+var DocManSearchController = function(params)
 {
 	this.searchparams	= params;
 	this.bindControls();
@@ -78,6 +78,7 @@ DocManListFileController.prototype =
 	resizableDiv: function() {
 		var splitterPosition = '30%';
 		var mainwidth = jQuery('#maindiv').innerWidth();
+		var mainheight;
 		if (jQuery.Storage.get('splitterStyle') !== undefined) {
 			var storedSplitterPosition = jQuery.Storage.get('splitterStyle').replace(/px;?/g, '').replace(/left: /g, '');
 			splitterPosition = Math.round(storedSplitterPosition * 100 / mainwidth )+'%';
@@ -86,6 +87,7 @@ DocManListFileController.prototype =
 			(this.listfileparams.divLeft.outerHeight() > this.listfileparams.divRight.outerHeight()) ? mainheight = this.listfileparams.divLeft.outerHeight() : mainheight = this.listfileparams.divRight.outerHeight();
 		} else {
 			var fixwidth = -40;
+			var useRightHeight;
 			if (jQuery('#editFile').length >= 1) {
 				fixwidth += jQuery('#editFile').outerHeight() - jQuery('[aria-describedby="editFile"]').outerHeight();
 			}
@@ -100,7 +102,9 @@ DocManListFileController.prototype =
 				});
 			totalRightHeight -= fixwidth;
 			(this.listfileparams.divRight.outerHeight() - fixwidth < 0) ? useRightHeight = this.listfileparams.divRight.outerHeight() : useRightHeight = this.listfileparams.divRight.outerHeight() - fixwidth;
-			(useRightHeight < totalRightHeight) ? useRightHeight = totalRightHeight : useRightHeight ;
+			if (useRightHeight < totalRightHeight) {
+				useRightHeight = totalRightHeight;
+			}
 			(this.listfileparams.divLeft.outerHeight() + 30 > this.listfileparams.divRight.outerHeight()) ? mainheight = this.listfileparams.divLeft.outerHeight() + 30 : mainheight = useRightHeight;
 		}
 		jQuery('#views').height(mainheight)
@@ -287,6 +291,8 @@ DocManListFileController.prototype =
 	 */
 	toggleEditDirectoryView: function() {
 		this.listfileparams.nocache = new Date().getTime();
+		var computeHeight;
+		var currentLeftHeight;
 		if (!this.listfileparams.divEditDirectory.is(":visible")) {
 			jQuery.getJSON(this.listfileparams.docManURL + '/?group_id='+this.listfileparams.groupId+'&action=lock&json=1&type=dir&itemid='+this.listfileparams.docgroupId+'&childgroup_id='+this.listfileparams.childGroupId+'&rqd='+this.listfileparams.nocache, jQuery.proxy(function(data){
 				if (typeof data.html != 'undefined') {
@@ -321,7 +327,7 @@ DocManListFileController.prototype =
 					}
 				}
 			}, this)).fail(function(jqXHR, textStatus, errorThrown) {
-					error_msg = jQuery('<p class="error">'+textStatus+': Unable to contact server.</p>');
+					let error_msg = jQuery('<p class="error">'+textStatus+': Unable to contact server.</p>');
 					jQuery('#maindiv').prepend(error_msg);
 				});
 		} else {
@@ -425,9 +431,9 @@ DocManListFileController.prototype =
 		jQuery('#editfile-userstatusreview').empty();
 		jQuery('#editfile-completedreview').empty();
 		jQuery('#editfile-commentreview').empty();
-                for (var i = 0; i < this.docparams.docgroupDict.length; i++) {
+                for (let i = 0; i < this.docparams.docgroupDict.length; i++) {
                         jQuery('#doc_group').append(jQuery('<option>').text(this.docparams.docgroupDict[i][1]).attr('value', this.docparams.docgroupDict[i][0]));
-                };
+                }
 		jQuery('#doc_group option[value='+this.docparams.docgroupId+']').attr('selected', 'selected');
 		jQuery('#stateid').empty();
 		jQuery.each(this.docparams.statusDict, function(key, value) {
@@ -451,13 +457,14 @@ DocManListFileController.prototype =
 					jQuery('#sortable_doc_version_table > tbody').children().remove();
 					jQuery('#sortable_doc_version_table > tbody').css('max-height', '400px').css('overflow-y', 'auto').css('display', 'block');
 					jQuery('#sortable_doc_version_table > thead > tr').css('display', 'block');
-					eachdocparams = this.docparams;
-					jQuery.each(data, function (i, val) {
+					let eachdocparams = this.docparams;
+					jQuery.each(data, function (x, val) {
 						//_('ID (x)'), _('Filename'), _('Title'), _('Description'), _('Comment'), _('Author'), _('Last Time'), _('Size'), _('Actions'));
-						currenttdcontent = '';
+						let currenttdcontent = '';
 						if (val.current_version == 1) {
 							currenttdcontent += ' (x)';
 						}
+						let filenametdcontent;
 						if (eachdocparams.statusId != 2) {
 							filenametdcontent = jQuery('<a>'+val.filename+'</a>');
 							if (val.filetype == 'URL') {
@@ -469,9 +476,9 @@ DocManListFileController.prototype =
 						} else {
 							filenametdcontent = jQuery('<span>'+val.filename+'</span>');
 						}
-						versionactiontdcontent = '';
-						versionActionsArrayLength = val.versionactions.length;
-						for (var i = 0; i < versionActionsArrayLength; i++) {
+						let versionactiontdcontent = '';
+						let versionActionsArrayLength = val.versionactions.length;
+						for (let i = 0; i < versionActionsArrayLength; i++) {
 							versionactiontdcontent += val.versionactions[i];
 						}
 						// please sync with the editfile.php widths if you change it here.
@@ -820,7 +827,7 @@ DocManListFileController.prototype =
 			this.listfileparams.divMoveFile.show();
 			jQuery('#movefileinput').val(function() {
 					var CheckedBoxes = new Array();
-					for (var h = 0; h < jQuery('input:checked').length; h++) {
+					for (let h = 0; h < jQuery('input:checked').length; h++) {
 						if (typeof(jQuery('input:checked')[h].className) != 'undefined' && jQuery('input:checked')[h].className.match('checkeddocidactive')) {
 							CheckedBoxes.push(jQuery('input:checked')[h].value);
 						}
@@ -870,9 +877,9 @@ DocManListFileController.prototype =
 	 */
 	buildUrlByCheckbox: function(id) {
 		var CheckedBoxes = new Array();
-		for (var h = 0; h < jQuery('input:checked').length; h++) {
-			if (typeof(jQuery('input:checked')[h].className) != 'undefined' && jQuery('input:checked')[h].className.match('checkeddocid'+id)) {
-				CheckedBoxes.push(jQuery('input:checked')[h].value);
+		for (let h of jQuery('input:checked')) {
+			if (typeof(h.className) != 'undefined' && h.className.match('checkeddocid'+id)) {
+				CheckedBoxes.push(h.value);
 			}
 		}
 		return CheckedBoxes;
@@ -898,8 +905,8 @@ DocManListFileController.prototype =
 			jQuery('#massaction'+id).hide();
 			jQuery('#movefile').hide();
 		}
-		for (var h = 0; h < jQuery('input:checked').length; h++) {
-			if (typeof(jQuery('input:checked')[h].className) != 'undefined' && jQuery('input:checked')[h].className.match('checkeddocid'+id)) {
+		for (let h of jQuery('input:checked')) {
+			if (typeof(h.className) != 'undefined' && h.className.match('checkeddocid'+id)) {
 				jQuery('#massaction'+id).show();
 				break;
 			}
