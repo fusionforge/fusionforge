@@ -1,7 +1,7 @@
 /**
  * headerMenu Plugin Js Controller
  *
- * Copyright 2012-2014,2016, Franck Villaume - TrivialDev
+ * Copyright 2012-2014,2016,2021, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -20,19 +20,19 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-EditHeaderMenuController = function(params) {
+var EditHeaderMenuController = function(params) {
 	this.params = params;
 	this.bindControls();
 	this.initializeView();
 };
 
-HeaderMenuController = function(params) {
+var HeaderMenuController = function(params) {
 	this.params = params;
 	this.bindControls();
 	this.initializeView();
 };
 
-GroupMenuController = function(params) {
+var GroupMenuController = function(params) {
 	this.params = params;
 	this.bindControls();
 	this.initializeView();
