@@ -426,9 +426,9 @@ class FRSFile extends FFError {
 				$this->FRSRelease->getFileName().'/'.
 				$this->data_array['filename'];
 			$new_file_location = forge_get_config('upload_dir').'/'.
-				$FRSRelease->FRSPackage->Group->getUnixName().'/'.
-				$FRSRelease->FRSPackage->getFileName().'/'.
-				$FRSRelease->getFileName().'/'.
+				$FRSR->FRSPackage->Group->getUnixName().'/'.
+				$FRSR->FRSPackage->getFileName().'/'.
+				$FRSR->getFileName().'/'.
 				$this->data_array['filename'];
 			if (file_exists($new_file_location)) {
 				$this->setError(_('That filename already exists in this project space'));
@@ -446,8 +446,8 @@ class FRSFile extends FFError {
 			}
 
 			// regenerate ZIP
-			if (!$FRSRelease->FRSPackage->createReleaseFilesAsZip($FRSRelease->getID())) {
-				$this->setError($FRSRelease->FRSPackage->getErrorMessage());
+			if (!$FRSR->FRSPackage->createReleaseFilesAsZip($FRSR->getID())) {
+				$this->setError($FRSR->FRSPackage->getErrorMessage());
 				return false;
 			}
 		}
