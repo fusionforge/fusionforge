@@ -25,7 +25,6 @@
  */
 
 jQuery(document).ready(function(){
-
 	// Show button and hide help text on load
 	jQuery('#slide_button').show();
 	jQuery('#slide_text').hide();
@@ -39,4 +38,3 @@ jQuery(document).ready(function(){
 	jQuery('#fieldset1').coolfieldset();
 	jQuery('#fieldset1_closed').coolfieldset({collapsed:true});
 });
-
