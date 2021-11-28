@@ -1,7 +1,7 @@
 /**
  * FusionForge FRS
  *
- * Copyright 2014,2016, Franck Villaume - TrivialDev
+ * Copyright 2014,2016,2021, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -20,7 +20,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-FRSController = function() {};
+var FRSController = function() {};
 
 FRSController.prototype =
 {
@@ -120,9 +120,9 @@ FRSController.prototype =
 	 */
 	buildUrlByCheckbox: function(id) {
 		var CheckedBoxes = new Array();
-		for (var h = 0; h < jQuery('input:checked').length; h++) {
-			if (typeof(jQuery('input:checked')[h].className) != 'undefined' && jQuery('input:checked')[h].className.match('checkedrelid'+id)) {
-				CheckedBoxes.push(jQuery('input:checked')[h].value);
+		for (let h of jQuery('input:checked')) {
+			if (typeof(h.className) != 'undefined' && h.className.match('checkedrelid'+id)) {
+				CheckedBoxes.push(h.value);
 			}
 		}
 		return CheckedBoxes;
@@ -147,8 +147,8 @@ FRSController.prototype =
 			jQuery('#checkall'+id).prop('checked', false);
 			jQuery('#massaction'+id).hide();
 		}
-		for (var h = 0; h < jQuery('input:checked').length; h++) {
-			if (typeof(jQuery('input:checked')[h].className) != 'undefined' && jQuery('input:checked')[h].className.match('checkedrelid'+id)) {
+		for (let h of jQuery('input:checked')) {
+			if (typeof(h.className) != 'undefined' && h.className.match('checkedrelid'+id)) {
 				jQuery('#massaction'+id).show();
 			}
 		}

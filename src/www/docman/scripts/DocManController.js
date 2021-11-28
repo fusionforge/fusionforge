@@ -360,6 +360,8 @@ DocManListFileController.prototype =
 	 */
 	toggleAddItemView: function() {
 		this.listfileparams.nocache = new Date().getTime();
+		var computeHeight;
+		var currentLeftHeight;
 		if (!this.listfileparams.divAddItem.is(":visible")) {
 			jQuery.getJSON(this.listfileparams.docManURL + '/?group_id='+this.listfileparams.groupId+'&action=lock&json=1&type=dir&itemid='+this.listfileparams.docgroupId+'&childgroup_id='+this.listfileparams.childGroupId+'&rqd='+this.listfileparams.nocache, jQuery.proxy(function(data){
 				if (typeof data.html != 'undefined') {
@@ -391,7 +393,7 @@ DocManListFileController.prototype =
 					}
 				}
 			}, this)).fail(function(jqXHR, textStatus, errorThrown) {
-					error_msg = jQuery('<p class="error">'+textStatus+': Unable to contact server.</p>');
+					let error_msg = jQuery('<p class="error">'+textStatus+': Unable to contact server.</p>');
 					jQuery('#maindiv').prepend(error_msg);
 				});
 		} else {
@@ -431,8 +433,8 @@ DocManListFileController.prototype =
 		jQuery('#editfile-userstatusreview').empty();
 		jQuery('#editfile-completedreview').empty();
 		jQuery('#editfile-commentreview').empty();
-                for (let i = 0; i < this.docparams.docgroupDict.length; i++) {
-                        jQuery('#doc_group').append(jQuery('<option>').text(this.docparams.docgroupDict[i][1]).attr('value', this.docparams.docgroupDict[i][0]));
+                for (let dictentry of this.docparams.docgroupDict) {
+                        jQuery('#doc_group').append(jQuery('<option>').text(dictentry[1]).attr('value', dictentry[0]));
                 }
 		jQuery('#doc_group option[value='+this.docparams.docgroupId+']').attr('selected', 'selected');
 		jQuery('#stateid').empty();
@@ -827,9 +829,9 @@ DocManListFileController.prototype =
 			this.listfileparams.divMoveFile.show();
 			jQuery('#movefileinput').val(function() {
 					var CheckedBoxes = new Array();
-					for (let h = 0; h < jQuery('input:checked').length; h++) {
-						if (typeof(jQuery('input:checked')[h].className) != 'undefined' && jQuery('input:checked')[h].className.match('checkeddocidactive')) {
-							CheckedBoxes.push(jQuery('input:checked')[h].value);
+					for (let h of jQuery('input:checked')) {
+						if (typeof(h.className) != 'undefined' && h.className.match('checkeddocidactive')) {
+							CheckedBoxes.push(h.value);
 						}
 					}
 					return CheckedBoxes;
