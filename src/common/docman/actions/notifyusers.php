@@ -56,8 +56,8 @@ if ($d->isError()) {
 	session_redirect($urlparam);
 }
 
-$userIDs = getArrayFromRequest('notify-userids', array());
-if (count($userIDS) <= 0) {
+$userIDs = getArrayFromRequest('userids', array());
+if (empty($userIDs)) {
 	$warning_msg = _('No users selected for notification.');
 	session_redirect($urlparam);
 }
