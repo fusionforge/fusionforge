@@ -356,8 +356,8 @@ class Roadmap extends FFError {
 		}
 
 		// Remove release values of the release_order field (from 'roadmap' db table) that are no longer used
-		if (is_array($release_order)) {
-			foreach ($release_order as $release_value) {
+		if (is_array($release_order_arr)) {
+			foreach ($release_order_arr as $release_value) {
 				if ($releases[$release_value] === false) {
 					unset($releases[$release_value]);
 				}
