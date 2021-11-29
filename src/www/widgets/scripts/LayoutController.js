@@ -21,7 +21,7 @@
  * along with Fusionforge. If not, see <http://www.gnu.org/licenses/>.
  */
 
-LayoutBuilderController = function(params)
+var LayoutBuilderController = function(params)
 {
 	this.params		= params;
 	this.bindControls();

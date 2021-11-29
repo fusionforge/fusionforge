@@ -21,7 +21,7 @@
  * along with Fusionforge. If not, see <http://www.gnu.org/licenses/>.
  */
 
-WidgetBuilderController = function(params)
+var WidgetBuilderController = function(params)
 {
 	this.params		= params;
 	this.bindControls();
@@ -38,7 +38,7 @@ WidgetBuilderController.prototype =
 					alert('You must keep at least one column in your layout.');
 				} else if (tr.find('.layout-manager-column').length == 1) {
 					if (tr.find('.wb_extrafield')) {
-						divef = tr.find('.wb_extrafield');
+						let divef = tr.find('.wb_extrafield');
 						divef.find('.ef-widget-remove').hide();
 						divef.appendTo(jQuery('#td'+divef.attr('id')));
 						divef.draggable({
@@ -50,7 +50,7 @@ WidgetBuilderController.prototype =
 					tr.parents('table').first().remove();
 				} else {
 					if (jQuery(e).parent().find('.wb_extrafield')) {
-						divef = jQuery(e).parent().find('.wb_extrafield');
+						let divef = jQuery(e).parent().find('.wb_extrafield');
 						divef.find('.ef-widget-remove').hide();
 						divef.appendTo(jQuery('#td'+divef.attr('id')));
 						divef.draggable({
@@ -69,7 +69,7 @@ WidgetBuilderController.prototype =
 		jQuery(e).mouseenter(function(){jQuery(this).addClass('layout-manager-column-add_hover')})
 			.mouseleave(function(){jQuery(this).removeClass('layout-manager-column-add_hover')});
 		jQuery(e).bind('click', this.params, function(f){
-				sectionTitle = 'Section Title:';
+				var sectionTitle = 'Section Title:';
 				if (typeof(f.data) != 'undefined') {
 					sectionTitle = f.data.labelTitle;
 				}

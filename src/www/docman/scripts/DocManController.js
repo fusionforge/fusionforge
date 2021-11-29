@@ -489,7 +489,7 @@ DocManListFileController.prototype =
 						});
 				}
 			}, this)).fail(function(jqXHR, textStatus, errorThrown) {
-					error_msg = jQuery('<p class="error">'+textStatus+': Unable to contact server.</p>');
+					let error_msg = jQuery('<p class="error">'+textStatus+': Unable to contact server.</p>');
 					jQuery('#editFile').prepend(error_msg);
 				});
 
