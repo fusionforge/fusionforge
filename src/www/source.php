@@ -54,7 +54,7 @@ if (!file_exists($fname) || @is_dir($fname)) {
 
 $HTML->header(array('title'=>sprintf(_('Source of %s'), $file)));
 
-show_source($fname);
+highlight_file($fname);
 
 $HTML->footer();
 
