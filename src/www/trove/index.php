@@ -185,7 +185,7 @@ if ($querytotalcount > $TROVE_BROWSELIMIT) {
 		if ($page == $i) {
 			$html_limit .= "<strong>$displayed_i</strong>" ;
 		} else {
-			$html_limit .= url_make_link ("/softwaremap/trove_list.php?form_cat=$form_cat&page=$i",
+			$html_limit .= util_make_link("/softwaremap/trove_list.php?form_cat=$form_cat&page=$i",
 						      $displayed_i) ;
 		}
 		$html_limit .= ' ';
