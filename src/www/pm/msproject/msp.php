@@ -215,7 +215,7 @@ function &MSPGetProjects($session_hash) {
 		$array['errormessage']='Could Not Continue Session';
 	}
 	$projects = array () ;
-	foreach (user_get_session()->getGroups() as $p) {
+	foreach (session_get_user()->getGroups() as $p) {
 		if (forge_check_perm ('pm_admin', $p->getID())) {
 			$projects[] = $p ;
 		}
