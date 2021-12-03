@@ -216,7 +216,7 @@ class TroveCategory extends FFError {
 	}
 
 	function getProjects($offset) {
-		$qpa = db_constract_qpa () ;
+		$qpa = db_construct_qpa () ;
 		$qpa = db_construct_qpa($qpa, 'SELECT * FROM trove_agg') ;
 
 		for($i = 0, $count = sizeof($this->filter); $i < $count; $i++) {
