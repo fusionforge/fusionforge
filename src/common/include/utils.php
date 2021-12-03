@@ -389,12 +389,6 @@ function util_make_links($data = '') {
 		}
 	}
 	if ($withPattern) {
-/*
-		while(preg_match('/<a [^>]*>[^<]*<\/a>/i', $data, $part)) {
-			$mem[] = $part[0];
-			$data = preg_replace('/<a [^>]*>[^<]*<\/a>/i', $randPattern, $data, 1);
-		}
-*/
 		$mem = array();
 		while (preg_match('/<a [^>]*>.*<\/a>/siU', $data, $part)) {
 			$mem[] = $part[0];
@@ -420,16 +414,16 @@ function util_make_links($data = '') {
 	foreach ($lines as $line) {
 		// Do not scan lines if they already have hyperlinks.
 		// Avoid problem with text written with an WYSIWYG HTML editor.
-		if (eregi('<a ([^>]*)>.*</a>', $line, $linePart)) {
-			if (eregi('href="[^"]*"', $linePart[1])) {
+		if (preg_match('/<a ([^>]*)>.*<\/a>/i', $line, $linePart)) {
+			if (preg_match('/href="[^"]*"/i', $linePart[1])) {
 				$newText .= $line;
 				continue;
 			}
 		}
 
 		// Skip </img> tag also
-		if (eregi('<img ([^>]*)/>', $line, $linePart)) {
-			if (eregi('href="[^"]*"', $linePart[1])) {
+		if (preg_match('/<img ([^>]*)\/>/i', $line, $linePart)) {
+			if (preg_match('/href="[^"]*"/', $linePart[1])) {
 				$newText .= $line;
 				continue;
 			}
