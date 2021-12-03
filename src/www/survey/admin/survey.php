@@ -47,7 +47,7 @@ if (!$g || !is_object($g) || $g->isError()) {
 }
 
 $is_admin_page='y';
-$sh = new  SurveyHtml();
+$sh = new  SurveyHTML();
 $s = new Survey($g, $survey_id);
 
 if (!session_loggedin() || !forge_check_perm('project_admin', $group_id)) {

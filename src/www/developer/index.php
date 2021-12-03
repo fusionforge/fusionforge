@@ -43,7 +43,7 @@ $user = user_get_object($diary_user);
 if (!$user || !is_object($user) || !$user->isActive()) {
 	exit_no_user();
 }
-$diaryNoteFactoryObject = new diaryNoteFactory(user_get_object($diary_user));
+$diaryNoteFactoryObject = new DiaryNoteFactory(user_get_object($diary_user));
 
 if (!$diaryNoteFactoryObject) {
 	exit_error( _('Entry Not Found'), 'home');

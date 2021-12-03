@@ -34,7 +34,7 @@ if (!$group_id) {
 
 /* Show header */
 $title = _('Survey Privacy');
-$sh = new SurveyHtml();
+$sh = new SurveyHTML();
 $sh->header(array('title'=>$title));
 
 echo '<p>';
