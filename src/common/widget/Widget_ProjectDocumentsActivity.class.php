@@ -53,7 +53,7 @@ class Widget_ProjectDocumentsActivity extends Widget {
 
 	function updatePreferences() {
 		$cancel = getStringFromRequest('cancel');
-		if (strlent($cancel) > 0) {
+		if (strlen($cancel) > 0) {
 			$show = getStringFromRequest('show');
 			switch($show) {
 				case 'F':
