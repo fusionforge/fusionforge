@@ -369,23 +369,3 @@ class ArtifactWorkflow extends FFError {
 	}
 
 }
-
-/*
- * Update the required information in the workflow when a new role is created.
- * In this case, for all the defined events, add the role as allowed.
- */
-function workflow_add_new_role ($role_id, $group) {
-
-	$res = db_query_params ('INSERT INTO artifact_workflow_roles
-			SELECT event_id, $1 as role_id
-					FROM artifact_workflow_event, artifact_group_list
-					WHERE artifact_workflow_event.group_artifact_id=artifact_group_list.group_artifact_id
-					AND artifact_group_list.group_id=$2',
-			array($role_id,
-				$group->getID()));
-	if (!$res) {
-		$this->setError('Unable to register new role in workflows: '.db_error());
-		return false;
-	}
-	return true;
-}
