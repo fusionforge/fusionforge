@@ -49,15 +49,15 @@ class TroveCategory extends FFError {
 	var $filter;
 
 	/**
-	 * @param	bool|int			$categoryId		The trove_cat_id.
-	 * @param	array	$dataArray		The associative array of data.
+	 * @param	bool|int	$categoryId	The trove_cat_id.
+	 * @param	array		$dataArray	The associative array of data.
 	 */
 	function __construct($categoryId = false, $dataArray = array()) {
 		if ($categoryId) {
 			$this->categoryId = $categoryId;
 			if (!$dataArray || !is_array($dataArray)) {
 				if (!$this->fetchData($categoryId)) {
-					$this->setError(_('Invalid Trove Category'),
+					$this->setError(_('Invalid Trove Category')._(':').
 							_('That Trove category does not exist').' '.db_error('SYS_DB_TROVE')
 					);
 				}
@@ -65,7 +65,7 @@ class TroveCategory extends FFError {
 				$this->dataArray =& $dataArray;
 			}
 		} else {
-			$this->setError(_('Error'), _('That Trove category does not exist'));
+			$this->setError(_('Error')._(':')._('That Trove category does not exist'));
 		}
 	}
 
@@ -91,7 +91,7 @@ class TroveCategory extends FFError {
 		$fullName = trim($fullName);
 		$description = trim($description);
 		if(empty($shortName) || empty($fullName)) {
-			$this->setError(_('Error'), _('Empty strings'));
+			$this->setError(_('Error')._(':'). _('Empty strings'));
 			return false;
 		} else {
 			db_begin();
@@ -103,7 +103,7 @@ class TroveCategory extends FFError {
 				WHERE trove_cat_id=$5",
 				array(htmlspecialchars($shortName), htmlspecialchars($fullName), htmlspecialchars($description), date('Ymd',time())."01", $this->categoryId));
 			if(!$result || db_affected_rows($result) != 1) {
-				$this->setError(_('Error'), _('Cannot update'));
+				$this->setError(_('Error')._(':'). _('Cannot update'));
 				db_rollback();
 				return false;
 			} else {
@@ -144,7 +144,7 @@ class TroveCategory extends FFError {
 	function &getLabels() {
 		if(!isset($this->labels)) {
 			$this->labels = array();
-			$res = db_query_params("SELECT  trove_category_labels.*, supported_languages.name AS language_name FROM trove_category_labels, supported_languages
+			$res = db_query_params("SELECT trove_category_labels.*, supported_languages.name AS language_name FROM trove_category_labels, supported_languages
 																WHERE category_id=$1 AND supported_languages.language_id=trove_category_labels.language_id",
 																array($this->categoryId));
 
@@ -180,7 +180,7 @@ class TroveCategory extends FFError {
 				array($this->categoryId), -1, 0, 'SYS_DB_TROVE');
 
 			if(!$result) {
-				$this->setError();
+				$this->setError(db_error());
 				return false;
 			} else {
 				while ($array = db_fetch_array($result)) {
