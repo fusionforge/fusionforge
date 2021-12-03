@@ -52,7 +52,7 @@ if (!$g || !is_object($g) || $g->isError()) {
 	exit_no_group();
 }
 
-$sh = new  SurveyHtml();
+$sh = new  SurveyHTML();
 
 html_use_jqueryjqplotpluginCanvas();
 html_use_jqueryjqplotpluginPie();

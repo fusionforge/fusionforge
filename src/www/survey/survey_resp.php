@@ -39,7 +39,7 @@ if (!$g || !is_object($g) || $g->isError()) {
 	exit_no_group();
 }
 
-$sh = new SurveyHtml();
+$sh = new SurveyHTML();
 $title = _('Survey Complete');
 $sh->header(array('title'=>$title));
 

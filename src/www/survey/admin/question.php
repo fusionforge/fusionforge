@@ -50,7 +50,7 @@ if (!$g || !is_object($g) || $g->isError()) {
 }
 
 $is_admin_page='y';
-$sh = new SurveyHtml();
+$sh = new SurveyHTML();
 
 $title = $question_id ? _('Edit a Question') : _('Add a Question');
 $sh->header(array('title'=>$title, 'modal'=>1));

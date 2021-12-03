@@ -53,7 +53,7 @@ if (!$g || !is_object($g) || $g->isError()) {
 	exit_no_group();
 }
 
-$sh = new SurveyHtml();
+$sh = new SurveyHTML();
 
 if (!session_loggedin() || !forge_check_perm('project_admin', $group_id)) {
 	echo $HTML->error_msg(_('Permission denied.'));

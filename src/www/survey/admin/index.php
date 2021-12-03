@@ -31,7 +31,7 @@ require_once $gfwww.'survey/include/SurveyHTML.class.php';
 $is_admin_page='y';
 $group_id = getIntFromRequest('group_id');
 $survey_id = getIntFromRequest('survey_id');
-$sh = new  SurveyHtml();
+$sh = new  SurveyHTML();
 $sh->header(array('title'=>_('Surveys Administration')));
 
 if (!$group_id) {

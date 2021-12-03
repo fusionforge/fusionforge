@@ -47,7 +47,7 @@ if (!session_loggedin()) {
 	exit_not_logged_in();
 }
 
-$sh = new SurveyHtml();
+$sh = new SurveyHTML();
 $s = new Survey($g, $survey_id);
 
 $title = _('Vote for Survey') . _(': ') . $s->getTitle();
