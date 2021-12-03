@@ -665,7 +665,7 @@ class SurveyHTML extends FFError {
 					foreach ($words as $word) {
 						// if we have a stupidly strange word with lots of letters, we'll make a new line for it and split it
 						if ((strlen($word)>100) && ((strlen($word)+$linelength)>100)) {
-							$chunks = $this->str_split($word,50);
+							$chunks = str_split($word,50);
 							foreach ($chunks as $chunk) {
 								$ret .= $chunk;
 								$ret .= "<br />";
