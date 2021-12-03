@@ -23,10 +23,10 @@
 
 require_once 'TroveCategory.class.php';
 
-class TroveCategoryFactory {
+class TroveCategoryFactory extends FFError  {
 
 	/**
-	 *	getRootCategories - get an array of root TroveCategory objects
+	 * getRootCategories - get an array of root TroveCategory objects
 	 *
 	 * @return	array	The array of TroveCategory objects.
 	 */
@@ -40,7 +40,7 @@ class TroveCategoryFactory {
 		", array());
 
 		if(!$result) {
-			$this->setError();
+			$this->setError(db_error());
 			return false;
 		} else {
 			$rootCategories = array();
@@ -59,7 +59,7 @@ class TroveCategoryFactory {
 			ORDER BY fullname
 		", array(db_int_array_to_any_clause($ids)));
 		if(!$result) {
-			$this->setError();
+			$this->setError(db_error());
 			return false;
 		} else {
 			$categories = array();
