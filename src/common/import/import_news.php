@@ -24,7 +24,7 @@ class News{
 
 	function addToDB($news, $fid){
 		db_begin();
-		$uid = user_get_object_by_mail($this->hashrn[$news['poster_name']])->getID();
+		$uid = user_get_object_by_email($this->hashrn[$news['poster_name']])->getID();
 		$sql="INSERT INTO news_bytes (group_id,submitted_by,is_approved,post_date,forum_id,summary,details) ".
 					" VALUES ($1, $2, $3, $4, $5, $6, $7)";
 		$result=db_query_params($sql,

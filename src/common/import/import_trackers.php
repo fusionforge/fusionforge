@@ -290,7 +290,7 @@ function createArtifacts($at, $data, $hashrn, $hashlogin) {
 			$assigned_to = 100;
 		} else {
 			$m = $hashrn[$artifact['assigned_to']];
-			$assigned_to = user_get_object_by_mail($m)->getID();
+			$assigned_to = user_get_object_by_email($m)->getID();
 //new dBug(array($m,$assigned_to));
 		}
 

@@ -170,14 +170,14 @@ class Tasks {
 						if ($realname == 'None') {
 							$assigned[]=100;
 						} else {
-							$assigned[] = user_get_object_by_mail($this->hashrn[$realname])->getID(); // this should be done once instead of for each artifact, TODO
+							$assigned[] = user_get_object_by_email($this->hashrn[$realname])->getID(); // this should be done once instead of for each artifact, TODO
 						}
 					}
 				} else {
 					if ($a['assigned_to[]']=='None') {
 						$assigned[]=100;
 					} else {
-						$assigned[] = user_get_object_by_mail($this->hashrn[$a['assigned_to[]']])->getID();
+						$assigned[] = user_get_object_by_email($this->hashrn[$a['assigned_to[]']])->getID();
 					}
 				}
 				$uid = user_get_object_by_name($a['submitter'])->getID();
