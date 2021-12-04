@@ -54,10 +54,11 @@ function &taskboard_get_object($taskboard_id, $data = false) {
  * Initialize a task board
  */
 function &taskboard_init($group_id) {
+	$Group = group_get_object($group_id);
 	db_begin();
 	$res = db_query_params('INSERT INTO plugin_taskboard(group_id) VALUES($1)', array($group_id));
 	if (!$res) {
-		$this->setError(db_error());
+		$Group->setError(db_error());
 		db_rollback();
 		return false;
 	}
@@ -66,7 +67,6 @@ function &taskboard_init($group_id) {
 		db_rollback();
 		return false;
 	}
-	$Group = group_get_object($group_id);
 	if (!$Group) {
 		db_rollback();
 		return false;

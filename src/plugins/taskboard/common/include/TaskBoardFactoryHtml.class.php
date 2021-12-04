@@ -21,7 +21,7 @@
 
 require_once $gfplugins.'taskboard/common/TaskBoardFactory.class.php';
 
-class TaskBoardFactoryHtml extends TaskBoardFactory {
+class TaskBoardFactoryHtml extends TaskboardFactory {
 	function header($params=array()) {
 		global $HTML;
 
