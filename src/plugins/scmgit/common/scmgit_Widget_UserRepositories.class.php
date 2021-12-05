@@ -51,7 +51,7 @@ class scmgit_Widget_UserRepositories extends Widget {
 			$returnhtml = null;
 			foreach ($GitRepositories as $GitRepository) {
 				$project = group_get_object($GitRepository);
-				$scmgitPluginObject = PluginManager::instance()->GetPluginObject('scmgit')
+				$scmgitPluginObject = PluginManager::instance()->GetPluginObject('scmgit');
 				if (forge_check_perm('scm', $project->getID(), 'read')) {
 					$cells = array();
 					$cells[][] = '<kbd>git clone git+ssh://'.$user->getUnixName().'@' . $scmgitPluginObject->getBoxForProject($project).$ssh_port.forge_get_config('repos_path', 'scmgit') .'/'. $project->getUnixName() .'/users/'. $user->getUnixName() .'.git</kbd>';
