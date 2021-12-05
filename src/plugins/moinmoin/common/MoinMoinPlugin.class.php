@@ -155,7 +155,7 @@ _("This plugin allows each project to embed MoinMoinWiki under a tab.");
 				break ;
 			}
 		} elseif ($hookname == 'clone_project_from_template') {
-			$systasksq = new SystasksQ();
+			$systasksq = new SysTasksQ();
 			$systasksq->add($this->getID(), 'MOINMOIN_CREATE_WIKI', $group_id);
 		} elseif ($hookname == 'crossrefurl') {
 			$project = group_get_object($group_id);
@@ -174,7 +174,7 @@ _("This plugin allows each project to embed MoinMoinWiki under a tab.");
 				return false;
 			}
 			if (getIntFromRequest('use_moinmoin') == 1) {
-				$systasksq = new SystasksQ();
+				$systasksq = new SysTasksQ();
 				$group_id = $params['group'];
 				$systasksq->add($this->getID(), 'MOINMOIN_CREATE_WIKI', $group_id);
 			}
