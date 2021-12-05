@@ -26,8 +26,6 @@
 require_once 'mailman/include/MailmanList.class.php';
 require_once 'mailman/include/MailmanListFactory.class.php';
 
-global $HTML;
-
 function sendCreationMail($userEmail,&$list) {
 	$message = sprintf(_('A mailing list will be created on %s in few minutes and you are the list administrator.'), forge_get_config ('forge_name'))
 
@@ -90,7 +88,7 @@ function table_end()
 	echo '</table>';
 }
 function display_list($currentList) {
-	global $class;
+	global $class, $HTML;
 	$plugin_manager =& PluginManager::instance();
 	$p =& $plugin_manager->getPluginByName('mailman');
 	$request =& HTTPRequest::instance();
