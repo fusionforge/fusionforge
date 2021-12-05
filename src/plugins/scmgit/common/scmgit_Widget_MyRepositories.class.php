@@ -52,8 +52,9 @@ class scmgit_Widget_MyRepositories extends Widget {
 			$returnhtml = $HTML->listTableTop();
 			foreach ($GitRepositories as $GitRepository) {
 				$project = group_get_object($GitRepository);
+				$scmgitPluginObject = PluginManager::instance()->GetPluginObject('scmgit')
 				$cells = array();
-				$cells[][] = '<kbd>git clone git+ssh://'.$user->getUnixName().'@'.$this->getBoxForProject($project).$ssh_port.forge_get_config('repos_path', 'scmgit').'/'.$project->getUnixName() .'/users/'. $user->getUnixName() .'.git</kbd>';
+				$cells[][] = '<kbd>git clone git+ssh://'.$user->getUnixName().'@'.$scmgitPluginObject->getBoxForProject($project).$ssh_port.forge_get_config('repos_path', 'scmgit').'/'.$project->getUnixName() .'/users/'. $user->getUnixName() .'.git</kbd>';
 				$cells[][] = util_make_link('/scm/browser.php?group_id='.$project->getID().'&user_id='.$user->getID().'&scm_plugin=scmgit', _('Browse Git Repository'));
 				$returnhtml .= $HTML->multiTableRow(array(), $cells);
 			}
