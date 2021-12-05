@@ -709,7 +709,7 @@ _('Use Mantis Bugtracker as another ticket management tool.');
 		require_once $gfcommon.'/widget/WidgetLayoutManager.class.php';
 		if ($params['widget'] == 'plugin_mantisbt_project_latestissues') {
 			require_once $gfplugins.$this->name.'/common/mantisbt_Widget_ProjectLastIssues.class.php';
-			$params['instance'] = new mantisbt_Widget_ProjectLastIssues($this);
+			$params['instance'] = new mantisBT_Widget_ProjectLastIssues($this);
 		}
 	}
 }
