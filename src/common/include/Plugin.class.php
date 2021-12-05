@@ -32,6 +32,7 @@
 
 class Plugin extends FFError {
 	var $name;
+	var $text;
 	var $hooks;
 	var $id = NULL;
 	var $pkg_desc = 'No description available.';
