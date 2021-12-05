@@ -50,7 +50,7 @@ if ($qs > $qh || $qds > $qdh) {
 } else {
 	db_query_params('UPDATE plugin_quotamanagement SET quota_soft = $1, quota_hard = $2, quota_db_soft = $3, quota_db_hard = $4 WHERE group_id = $5',
 			array($qs, $qh, $qds, $qdh, $group_id));
-	$systasksq = new SystasksQ();
+	$systasksq = new SysTasksQ();
 	$systasksq->add($quotamanagement->getID(), 'QUOTAMANAGEMENT_SET_QUOTA', $group_id);
 	$feedback = _('Quota updated successfully');
 }

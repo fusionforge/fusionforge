@@ -182,7 +182,7 @@ project independently.");
 		if (!$res) {
 			return false;
 		}
-		$systasksq = new SystasksQ();
+		$systasksq = new SysTasksQ();
 		$systasksq->add($this->getID(), 'SCMHOOK_UPDATE', $group_id, user_getid());
 
 		return true;
@@ -364,7 +364,7 @@ project independently.");
 					$hooks = $hooks_by_type[$hooktype];
 					foreach ($hooks as $hook) {
 						$attr = array('type' => 'checkbox', 'name' => 'repository['.$repository.'][]', 'value' => $hook->getLabel().'_'.$hook->getClassname());
-						if ((!empty($hook->onlyGlobalAdmin) && !Permission::isGlobalAdmin()) || !$hook->isAvailable()) {
+						if ((!empty($hook->onlyGlobalAdmin) && !Permission::isSuperUser()) || !$hook->isAvailable()) {
 							$attr = array_merge($attr, array('disabled' => 'disabled'));
 							if (!$hook->isAvailable()) {
 								$attr = array_merge($attr, array('title' => $hook->getDisabledMessage()));
@@ -432,7 +432,7 @@ project independently.");
 				$cells[][] = $repository.html_e('input', array('type' => 'hidden', 'name' => 'repository['.$repository.'][]'));
 				foreach ($hooksServePushPullBundle as $hookServePushPullBundle) {
 					$attr = array('type' => 'checkbox', 'name' => 'repository['.$repository.'][]', 'value' => $hookServePushPullBundle->getLabel().'_'.$hookServePushPullBundle->getClassname());
-					if ((!empty($hookServePushPullBundle->onlyGlobalAdmin) && !Permission::isGlobalAdmin()) || !$hookServePushPullBundle->isAvailable()) {
+					if ((!empty($hookServePushPullBundle->onlyGlobalAdmin) && !Permission::isSuperUser()) || !$hookServePushPullBundle->isAvailable()) {
 						$attr = array_merge($attr, array('disabled' => 'disabled'));
 						if (!$hookServePushPullBundle->isAvailable()) {
 							$attr = array_merge($attr, array('title' => $hookServePushPullBundle->getDisabledMessage()));
@@ -499,7 +499,7 @@ project independently.");
 				$cells[][] = $repository.html_e('input', array('type' => 'hidden', 'name' => 'repository['.$repository.'][]'));
 				foreach ($hooksPostReceive as $hookPostReceive) {
 					$attr = array('type' => 'checkbox', 'name' => 'repository['.$repository.'][]', 'value' => $hookPostReceive->getLabel().'_'.$hookPostReceive->getClassname());
-					if ((!empty($hookPostReceive->onlyGlobalAdmin) && !Permission::isGlobalAdmin()) || !$hookPostReceive->isAvailable()) {
+					if ((!empty($hookPostReceive->onlyGlobalAdmin) && !Permission::isSuperUser()) || !$hookPostReceive->isAvailable()) {
 						$attr = array_merge($attr, array('disabled' => 'disabled'));
 						if (!$hookPostReceive->isAvailable()) {
 							$attr = array_merge($attr, array('title' => $hookPostReceive->getDisabledMessage()));
@@ -566,7 +566,7 @@ project independently.");
 				$cells[][] = $repository.html_e('input', array('type' => 'hidden', 'name' => 'repository['.$repository.'][]'));
 				foreach ($hooksPostCommit as $hookPostCommit) {
 					$attr = array('type' => 'checkbox', 'name' => 'repository['.$repository.'][]', 'value' => $hookPostCommit->getLabel().'_'.$hookPostCommit->getClassname());
-					if ((!empty($hookPostCommit->onlyGlobalAdmin) && !Permission::isGlobalAdmin()) || !$hookPostCommit->isAvailable()) {
+					if ((!empty($hookPostCommit->onlyGlobalAdmin) && !Permission::isSuperUser()) || !$hookPostCommit->isAvailable()) {
 						$attr = array_merge($attr, array('disabled' => 'disabled'));
 						if (!$hookPostCommit->isAvailable()) {
 							$attr = array_merge($attr, array('title' => $hookPostCommit->getDisabledMessage()));
