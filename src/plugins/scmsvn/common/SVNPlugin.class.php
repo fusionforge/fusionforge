@@ -39,6 +39,10 @@ forge_set_config_item_bool('use_ssl', 'scmsvn');
 forge_define_config_item('ssh_port', 'core', 22);
 
 class SVNPlugin extends SCMPlugin {
+
+	var $svn_root_dav;
+	var $svn_root_fs;
+
 	function __construct() {
 		parent::__construct();
 		$this->name = 'scmsvn';
@@ -986,6 +990,7 @@ some control over it to the project's administrator.");
 				continue;
 			}
 			$urls = array();
+			$project = group_get_object($arr['group_id']);
 			if (forge_get_config('use_dav', 'scmsvn')) {
 				$urls[] = $protocol.'://'.$this->getBoxForProject($project).'/anonscm/svn/'.$arr['unix_group_name'];
 			}
