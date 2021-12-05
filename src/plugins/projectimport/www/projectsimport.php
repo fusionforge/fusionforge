@@ -94,7 +94,7 @@ class ProjectsImportPage extends FileManagerPage {
 	 */
 	function display_main() {
 
-		global $feedback;
+		global $feedback, $HTML;
 
 		// Do the work, first !
 		$html = $this->do_work();
