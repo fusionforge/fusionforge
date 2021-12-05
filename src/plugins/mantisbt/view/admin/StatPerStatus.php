@@ -59,9 +59,9 @@ if (!isset($errorPage)){
 		echo '<tr>';
 
 		if ($stat->project_level > 1){
-			echo sprintf('<td>%s >> <a class="DataLink" href="?type=group&group_id=%s&pluginname=%s">%s</a></td>',$indentation,group_get_objectid_by_publicname($stat->project_name), $mantisbt->name, $stat->project_name);
+			echo sprintf('<td>%s >> <a class="DataLink" href="?type=group&group_id=%s&pluginname=%s">%s</a></td>',$indentation,group_get_object_by_publicname($stat->project_name)->getID(), $mantisbt->name, $stat->project_name);
 		}else{
-			echo sprintf('<td><a class="DataLink" href="?type=group&group_id=%s&pluginname=%s">%s</a></td>',group_get_objectid_by_publicname($stat->project_name), $mantisbt->name, $stat->project_name);
+			echo sprintf('<td><a class="DataLink" href="?type=group&group_id=%s&pluginname=%s">%s</a></td>',group_get_object_by_publicname($stat->project_name)->getID(), $mantisbt->name, $stat->project_name);
 		}
 		echo		'<td>'.$stat->open.'</td>';
 		echo		'<td>'.$stat->resolved.'</td>';
