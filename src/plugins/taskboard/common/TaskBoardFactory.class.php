@@ -52,8 +52,7 @@ class TaskboardFactory extends FFError {
 			return;
 		}
 		if (!$skip_check && !$Group->usesTracker()) {
-			$this->setError(sprintf(_('%s does not use the Tracker tool'),
-			    $Group->getPublicName()));
+			$this->setError(sprintf(_('%s does not use the Tracker tool'), $Group->getPublicName()));
 			return;
 		}
 		$this->Group =& $Group;
@@ -102,7 +101,7 @@ class TaskboardFactory extends FFError {
 		$ids = $this->getAllTaskboardIds() ;
 
 		foreach ($ids as $id) {
-			$taskboard = new Taskboard($this->Group, $id);
+			$taskboard = new TaskBoard($this->Group, $id);
 			if($taskboard->isError()) {
 				$this->setError($taskboard->getErrorMessage());
 			} else {
