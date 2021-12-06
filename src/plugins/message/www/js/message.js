@@ -1,6 +1,7 @@
 /**
  * FusionForge 
  * Copyright 2012, Alain Peyrat
+ * Copyright 2021, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -49,8 +50,8 @@ jQuery.cookie = function(name, value, options) {
 		var cookieValue = null;
 		if (document.cookie && document.cookie != '') {
 			var cookies = document.cookie.split(';');
-			for (var i = 0; i < cookies.length; i++) {
-				var cookie = jQuery.trim(cookies[i]);
+			for (let acookie of cookies) {
+				var cookie = jQuery.trim(acookie);
 				// Does this cookie string begin with the name we want?
 				if (cookie.substring(0, name.length + 1) == (name + '=')) {
 					cookieValue = decodeURIComponent(cookie.substring(name.length + 1));

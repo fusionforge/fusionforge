@@ -3,7 +3,7 @@
  *
  * Previous Copyright to FusionForge Team
  * Copyright 2016, Stéphane-Eymeric Bredthauer - TrivialDev
- * Copyright 2016-2017, Franck Villaume - TrivialDev
+ * Copyright 2016-2017,2021, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -96,8 +96,8 @@ function loadTaskboard( group_id ) {
 				e.preventDefault();
 			});
 
-			for(var i=0 ; i<aUserStories.length ; i++) {
-				drawUserStory( aUserStories[i] );
+			for(let aUserStory of aUserStories) {
+				drawUserStory( aUserStory );
 			};
 
 			drawBoardProgress();
@@ -148,18 +148,18 @@ function drawBoardProgress() {
 	for( var j=start; j<aPhases.length; j++) {
 		aPhases[j].progressTasks = 0;
 		aPhases[j].progressCost = 0;
-		for( var i=0; i<aUserStories.length; i++ ) {
-			for( var t=0; t<aUserStories[i].tasks.length; t++ ) {
-				if( taskInPhase( aUserStories[i].tasks[t], aPhases[j].id ) ) {
+		for( let aUserStory of aUserStories ) {
+			for ( let aUserStoryTask of aUserStory.tasks) {
+				if( taskInPhase( aUserStoryTask, aPhases[j].id ) ) {
 					aPhases[j].progressTasks ++;
 					totalTasks ++;
 
-					if( aUserStories[i].tasks[t].estimated_dev_effort ) {
-						totalCostEstimated += parseFloat( aUserStories[i].tasks[t].estimated_dev_effort );
+					if( aUserStoryTask.estimated_dev_effort ) {
+						totalCostEstimated += parseFloat( aUserStoryTask.estimated_dev_effort );
 					}
 
-					if( aUserStories[i].tasks[t].remaining_dev_effort ) {
-						totalCostRemaining += parseFloat( aUserStories[i].tasks[t].remaining_dev_effort );
+					if( aUserStoryTask.remaining_dev_effort ) {
+						totalCostRemaining += parseFloat( aUserStoryTask.remaining_dev_effort );
 					}
 
 					lastPhaseWithTasks = j;
@@ -285,9 +285,9 @@ function setPhase( nUserStoryId, nTaskId, nTargetPhaseId ) {
 	var l_oTargetPhase;
 	var l_nSourcePhaseId;
 
-	for( var i=0; i<aPhases.length ; i++ ) {
-		if( aPhases[i].id == nTargetPhaseId ) {
-			l_oTargetPhase = aPhases[i];
+	for( let aPhase of aPhases ) {
+		if( aPhase.id == nTargetPhaseId ) {
+			l_oTargetPhase = aPhase;
 		}
 	}
 
@@ -350,8 +350,8 @@ function setPhase( nUserStoryId, nTaskId, nTargetPhaseId ) {
 }
 
 function initUserStories() {
-	for( var i=0; i<aUserStories.length; i++ ) {
-		initUserStory( aUserStories[i] );
+	for( let aUserStory of aUserStories ) {
+		initUserStory( aUserStory );
 	}
 	jQuery( ".agile-toolbar-minimize" ).click( function() {
 		if( $(this).hasClass('minimized') ) {
@@ -364,14 +364,14 @@ function initUserStories() {
 }
 
 function initUserStory( oUserStory ) {
-	for( var i=0; i<aPhases.length ; i++ ) {
-		if( aPhases[i].id != 'user-stories') {
-			var sPhaseId = "#" + aPhases[i].id + "-" + oUserStory.id;
+	for( let aPhase of aPhases ) {
+		if( aPhase.id != 'user-stories') {
+			var sPhaseId = "#" + aPhase.id + "-" + oUserStory.id;
 
 			//make phase droppable
 			if( gIsTechnician ) {
 				jQuery( sPhaseId )
-					.data('phase_id', aPhases[i].id)
+					.data('phase_id', aPhase.id)
 					.droppable( {
 						accept: '.agile-sticker-task-' + oUserStory.id,
 						hoverClass: 'agile-phase-hovered',
@@ -379,8 +379,8 @@ function initUserStory( oUserStory ) {
 					} );
 			}
 
-			if( aPhases[i].background ) {
-				jQuery("#" + aPhases[i].id + "-" + oUserStory.id).css('background-color', aPhases[i].background );
+			if( aPhase.background ) {
+				jQuery("#" + aPhase.id + "-" + oUserStory.id).css('background-color', aPhase.background );
 			}
 		}
 	}
@@ -390,20 +390,20 @@ function initUserStory( oUserStory ) {
 
 function drawUserStory( oUserStory ) {
 
-	for( var i=0; i<aPhases.length ; i++ ) {
-		if( aPhases[i].id != 'user-stories') {
-			var sPhaseId = "#" + aPhases[i].id + "-" + oUserStory.id;
+	for( let aPhase of aPhases ) {
+		if( aPhase.id != 'user-stories') {
+			var sPhaseId = "#" + aPhase.id + "-" + oUserStory.id;
 			jQuery( sPhaseId ).html(
-					drawTasks( oUserStory, aPhases[i].id )
+					drawTasks( oUserStory, aPhase.id )
 			);
 		}
 	}
 
 	// only technician can move tasks
 	if( gIsTechnician ) {
-		for(var j=0 ; j<oUserStory.tasks.length ; j++) {
-			jQuery('#task-' + oUserStory.tasks[j].id)
-				.data('task_id', oUserStory.tasks[j].id)
+		for( let oUserStoryTask of oUserStory.tasks) {
+			jQuery('#task-' + oUserStoryTask.id)
+				.data('task_id', oUserStoryTask.id)
 				.data('user_story_id', oUserStory.id)
 				.draggable( {
 					containment: '#agile-board',
@@ -422,27 +422,26 @@ function drawUserStory( oUserStory ) {
 function drawTasks( oUserStory, sPhaseId ) {
 	var l_sHtml = '' ;
 
-	for( var i=0; i<oUserStory.tasks.length; i++ ) {
-		tsk = oUserStory.tasks[i];
-		if( taskInPhase( tsk, sPhaseId ) ) {
+	for( let oUserStoryTask of oUserStory.tasks ) {
+		if( taskInPhase( oUserStoryTask, sPhaseId ) ) {
 			l_sHtml += '<div class="agile-sticker-container">';
-			l_sHtml += '<div class="agile-sticker agile-sticker-task agile-sticker-task-' + tsk.user_story + '" id="task-' + tsk.id + '" >';
-			l_sHtml += '<div class="agile-sticker-header" style="background-color: ' + tsk.background + ';">';
-			l_sHtml += '<a href="' + tsk.url  +  '" target="_blank">[#' + tsk.id + ']</a>';
+			l_sHtml += '<div class="agile-sticker agile-sticker-task agile-sticker-task-' + oUserStoryTask.user_story + '" id="task-' + oUserStoryTask.id + '" >';
+			l_sHtml += '<div class="agile-sticker-header" style="background-color: ' + oUserStoryTask.background + ';">';
+			l_sHtml += '<a href="' + oUserStoryTask.url  +  '" target="_blank">[#' + oUserStoryTask.id + ']</a>';
 			l_sHtml += '<div class="agile-toolbar-minimize minimized"></div>\n';
 			l_sHtml += "</div>\n";
 			l_sHtml += '<div class="agile-sticker-body">';
-			l_sHtml += '<div class="agile-sticker-name">' + tsk.title +'</div>';
-			l_sHtml += '<div class="agile-sticker-description">' + tsk.description +'</div>';
+			l_sHtml += '<div class="agile-sticker-name">' + oUserStoryTask.title +'</div>';
+			l_sHtml += '<div class="agile-sticker-description">' + oUserStoryTask.description +'</div>';
 			l_sHtml += '</div>';
 			l_sHtml += '<div class="agile-sticker-footer">';
-			if( tsk.assigned_to != "Nobody" ) {
-				l_sHtml += '<div class="agile-sticker-assignee">Assigned: ' + tsk.assigned_to + '</div>';
+			if( oUserStoryTask.assigned_to != "Nobody" ) {
+				l_sHtml += '<div class="agile-sticker-assignee">Assigned: ' + oUserStoryTask.assigned_to + '</div>';
 			} else {
 				l_sHtml += '<div class="agile-sticker-assignee">Unassigned</div>';
 			}
-			if( tsk.estimated_dev_effort ) {
-				l_sHtml += '<div class="agile-sticker-effort">' + tsk.remaining_dev_effort + '/' + tsk.estimated_dev_effort + '</div>';
+			if( oUserStoryTask.estimated_dev_effort ) {
+				l_sHtml += '<div class="agile-sticker-effort">' + oUserStoryTask.remaining_dev_effort + '/' + oUserStoryTask.estimated_dev_effort + '</div>';
 			}
 			l_sHtml += '</div>';
 			l_sHtml += "</div></div>\n";
@@ -516,10 +515,10 @@ function taskInPhase( tsk, phase ) {
 		return true;
 	}
 
-	for( var i=0; i<aPhases.length; i++) {
-		if( aPhases[i].id == phase && aPhases[i].resolutions ) {
-			for( var j=0; j<aPhases[i].resolutions.length; j++) {
-				if( tsk.resolution == aPhases[i].resolutions[j] ) {
+	for( let aPhase of aPhases) {
+		if( aPhase.id == phase && aPhase.resolutions ) {
+			for( var j=0; j<aPhase.resolutions.length; j++) {
+				if( tsk.resolution == aPhase.resolutions[j] ) {
 					return true;
 				}
 			}
