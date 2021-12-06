@@ -32,12 +32,22 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
+require dirname(__FILE__).'/../../common/include/env.inc.php';
 require_once $gfcommon.'include/pre.php';
 require $gfcommon.'include/cron_utils.php';
 
+$usage = 'usage:'."\n".
+ '            ./send_pending_items_mail.php all'."\n".
+ '              sends mails both for tracker and pm items'."\n".
+ ''."\n".
+ '            ./send_pending_items_mail.php tracker'."\n".
+ '              sends mail for tracker items'."\n".
+ ''."\n".
+ '            ./send_pending_items_mail.php pm'."\n".
+ '              sends mail for pm items'."\n";
 
-$options=$GLOBALS['argv'];
-if ($options!=FALSE){
+$options = $GLOBALS['argv'];
+if (count($options) > 1){
 	$option=$options[1];
 	if (($option=='pm')|| ($option=='all')){
 		echo "running pm";
@@ -47,6 +57,8 @@ if ($options!=FALSE){
 		echo "\nrunning tracker";
 		send_pending_tracker_items_mail();
 	}
+} else {
+	echo $usage;
 }
 
 function send_pending_pm_items_mail(){
