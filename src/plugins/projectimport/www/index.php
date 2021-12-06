@@ -64,7 +64,7 @@ class ProjectImportPage extends FileManagerPage {
 	protected $form_header_already_displayed;
 
 
-	function ProjectImportPage($HTML) {
+	function __construct($HTML) {
 		global $group_id;
 		$this->form_header_already_displayed = false;
 		$this->importer = False;

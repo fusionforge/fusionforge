@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Utility classes to manage uploaded files
  *
@@ -237,7 +236,7 @@ class AbstractFilesDirectory extends FFError {
  *
  */
 class SiteAdminFilesDirectory extends AbstractFilesDirectory {
-	public function SiteAdminFilesDirectory($HTML) {
+	public function __construct($HTML) {
 
 		$storage_base = forge_get_config('storage_base', 'projectimport');
 
@@ -261,7 +260,7 @@ class ProjectFilesDirectory extends AbstractFilesDirectory {
 	 * @param HTML generator $HTML
 	 * @param integer $group_id
 	 */
-	public function ProjectFilesDirectory($HTML, $group_id) {
+	public function __construct($HTML, $group_id) {
 
 		// store the project files inside a group unix name's subdir
 		$group = group_get_object($group_id);
@@ -308,7 +307,7 @@ class FileManagerPage {
 	 * @param HTML generator $HTML
 	 * @param AbstractFilesDirectory $storage (optional)
 	 */
-	function FileManagerPage($HTML, $storage=False) {
+	function __construct($HTML, $storage=False) {
 		$this->html_generator = $HTML;
 		$this->message = '';
 

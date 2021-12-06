@@ -46,7 +46,7 @@ class ImportedProject {
 	protected $is_public;
 	protected $built_from_template;
 
-	function ImportedProject($res) {
+	function __construct($res) {
 		$this->res = $res;
 
 		$this->unix_name = $this->res->getPropValue('doap:name');
@@ -140,7 +140,7 @@ class ImportedProjectRole {
 	protected $project;
 	protected $users;
 
-	function ImportedProjectRole(& $project, $res) {
+	function __construct(& $project, $res) {
 		$this->project = $project;
 		$this->name = $res->getPropValue('sioc:name');
 		$this->users = $res->getPropValues('sioc:function_of');
@@ -167,7 +167,7 @@ class ImportedUser {
 	protected $email;
 
 	//protected $initial_role;
-	function ImportedUser($res) {
+	function __construct($res) {
 		$this->res = $res;
 
 		$this->unix_name = $this->res->getPropValue('foaf:accountName');
@@ -279,7 +279,7 @@ class ProjectImporter {
 	 * TODO Enter description here ...
 	 * @param unknown_type $group_id
 	 */
-	function ProjectImporter($the_group_id = FALSE) {
+	function __construct($the_group_id = FALSE) {
 		global $group_id;
 		if (! $the_group_id) {
 			$the_group_id = $group_id;

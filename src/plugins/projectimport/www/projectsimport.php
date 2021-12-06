@@ -63,7 +63,7 @@ class ProjectsImportPage extends FileManagerPage {
 
 	protected $form_header_already_displayed;
 
-	function ProjectsImportPage($HTML) {
+	function __construct($HTML) {
 		$this->form_header_already_displayed = false;
 
 		$this->importer = ProjectImporter::getInstance();
