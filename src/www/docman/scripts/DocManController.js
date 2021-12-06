@@ -84,7 +84,11 @@ DocManListFileController.prototype =
 			splitterPosition = Math.round(storedSplitterPosition * 100 / mainwidth )+'%';
 		}
 		if (this.listfileparams.page == 'trashfile') {
-			(this.listfileparams.divLeft.outerHeight() > this.listfileparams.divRight.outerHeight()) ? mainheight = this.listfileparams.divLeft.outerHeight() : mainheight = this.listfileparams.divRight.outerHeight();
+			if (this.listfileparams.divLeft.outerHeight() > this.listfileparams.divRight.outerHeight()) {
+				mainheight = this.listfileparams.divLeft.outerHeight();
+			} else {
+				mainheight = this.listfileparams.divRight.outerHeight();
+			}
 		} else {
 			var fixwidth = -40;
 			var useRightHeight;
@@ -101,11 +105,19 @@ DocManListFileController.prototype =
 					}
 				});
 			totalRightHeight -= fixwidth;
-			(this.listfileparams.divRight.outerHeight() - fixwidth < 0) ? useRightHeight = this.listfileparams.divRight.outerHeight() : useRightHeight = this.listfileparams.divRight.outerHeight() - fixwidth;
+			if (this.listfileparams.divRight.outerHeight() - fixwidth < 0) {
+				useRightHeight = this.listfileparams.divRight.outerHeight();
+			} else {
+				useRightHeight = this.listfileparams.divRight.outerHeight() - fixwidth;
+			}
 			if (useRightHeight < totalRightHeight) {
 				useRightHeight = totalRightHeight;
 			}
-			(this.listfileparams.divLeft.outerHeight() + 30 > this.listfileparams.divRight.outerHeight()) ? mainheight = this.listfileparams.divLeft.outerHeight() + 30 : mainheight = useRightHeight;
+			if (this.listfileparams.divLeft.outerHeight() + 30 > this.listfileparams.divRight.outerHeight()) {
+				mainheight = this.listfileparams.divLeft.outerHeight() + 30;
+			} else {
+				mainheight = useRightHeight;
+			}
 		}
 		jQuery('#views').height(mainheight)
 				.split({orientation:'vertical', limit:100, position: splitterPosition});
