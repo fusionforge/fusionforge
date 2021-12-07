@@ -177,7 +177,7 @@ class HtmlSearchRenderer extends SearchRenderer {
 	 * @return string text with keywords highlighted
 	 */
 	function highlightTargetWords($text) {
-		return preg_replace('/<b>/','<b class="selected">', $text);
+		return preg_replace('/<strong>/','<strong class="selected">', $text);
 	}
 
 	/**

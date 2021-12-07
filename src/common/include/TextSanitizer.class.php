@@ -283,7 +283,7 @@ class TextSanitizer extends FFError {
 				$nb_char = $nb_char * ($nb_line - $nb_max + 1);
 			}
 			$summary .= util_make_links((($truncate == true && strlen($arr[$l]) > $nb_char)?
-				preg_replace('/[^\s]*$/', ' <b>...</b>', substr($arr[$l], 0, $nb_char), 1) :
+				preg_replace('/[^\s]*$/', ' <strong>...</strong>', substr($arr[$l], 0, $nb_char), 1) :
 				$arr[$l]));
 		}
 

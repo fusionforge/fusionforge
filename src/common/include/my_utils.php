@@ -128,7 +128,7 @@ function my_format_as_flag($assigned_to, $submitted_by, $multi_assigned_to=null)
 		$AS_flag .= 'S';
 	}
 	if ($AS_flag) {
-		$AS_flag = '[<b>'.$AS_flag.'</b>]';
+		$AS_flag = '['.html_e('strong', array(), $AS_flag).']';
 	}
 	return $AS_flag;
 }
@@ -143,11 +143,11 @@ function my_format_as_flag2($assignee, $submitter) {
 		$AS_flag .= 'S';
 	}
 	if ($AS_flag != '') {
-		$AS_flag = '[<b>'.$AS_flag.'</b>]';
+		$AS_flag = '['.html_e('strong', array(), $AS_flag).']';
 	}
 	return $AS_flag;
 }
 
 function my_item_count($total, $new) {
-	return '['.$total.($new ? ", <b>".sprintf(ngettext('%d new item', '%d new items', $new), $new)."</b>]" : ']');
+	return '['.$total.($new ? ", ".html_e('strong', array(), sprintf(ngettext('%d new item', '%d new items', $new), $new))."]" : ']');
 }

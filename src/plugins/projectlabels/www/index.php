@@ -214,7 +214,7 @@ echo _('You can create new labels with the form below.') ?></p>
 <input type="text" required="required" size="15" maxlength="32" name="label_name" value="<?php echo _('potm') ; ?>"/> <br/>
 		  <?php echo _('Displayed text (or HTML) for the label')._(': ') ; ?><br/>
 <textarea tabindex='1' accesskey="," name="label_text" rows='5'
-		  cols='80'><p><b><?php echo _('Project of the month!') ; ?></b></p>
+		  cols='80'><p><?php echo html_e('strong', array(), _('Project of the month!')) ; ?></p>
 </textarea><br/>
 <input type="submit" value="<?php echo _('Add label') ?>" />
 </p>

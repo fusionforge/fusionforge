@@ -1386,7 +1386,7 @@ class ArtifactTypeHtml extends ArtifactType {
 				if ($remaining >= 0) {
 					$value = gmdate("G\h i", $remaining);
 				} else {
-					$value = '<b>-' . gmdate("G\h i", -$remaining) . "</b>";
+					$value = html_e('strong', array(), '-' . gmdate("G\h i", -$remaining));
 				}
 
 				if (!$timer_is_running) {
@@ -1418,7 +1418,7 @@ class ArtifactTypeHtml extends ArtifactType {
 				if ($remaining >= 0) {
 					$value = gmdate("G\h i", $remaining);
 				} else {
-					$value = '<b>-' . gmdate("G\h i", -$remaining) . "</b>";
+					$value = html_e('strong', array(), '-' . gmdate("G\h i", -$remaining));
 				}
 				if ($artifact->getStatusID() == 2) {
 					if ($remaining >= 0) {

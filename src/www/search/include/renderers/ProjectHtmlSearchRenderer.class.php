@@ -84,8 +84,8 @@ class ProjectHtmlSearchRenderer extends HtmlSearchRenderer {
 		$project_name = $result['unix_group_name'];
 		$project_id = $result['group_id'];
 
-		$project_name = str_replace('<b>', '', $project_name);
-		$project_name = str_replace('</b>', '', $project_name);
+		$project_name = str_replace('<strong>', '', $project_name);
+		$project_name = str_replace('</strong>', '', $project_name);
 
 		if (forge_check_perm('project_read', $project_id)) {
 			header('Location: '.util_make_url_g($project_name,$project_id));
