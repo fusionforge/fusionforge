@@ -77,7 +77,7 @@ class Widget_MyMonitoredDocuments extends Widget {
 					$count_new = max(0, $count_diff);
 					$cells = array();
 					$cells[] = array($hide_url.util_make_link('/docman/?group_id='.$distinctMonitorGroupId, $groupObject->getPublicName()).'&nbsp;&nbsp;&nbsp;&nbsp;'.
-							'['.$monitorElementIds.($count_new ? ', '.html_e('b', array(), sprintf(_('%s new'), $count_new)).']' : ']'), 'colspan' => 2);
+							'['.$monitorElementIds.($count_new ? ', '.html_e('strong', array(), sprintf(_('%s new'), $count_new)).']' : ']'), 'colspan' => 2);
 					$html_hdr = $HTML->multiTableRow(array('class' => 'boxitem'), $cells);
 					$html = '';
 					if (!$hide_now) {

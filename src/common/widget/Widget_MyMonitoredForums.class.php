@@ -81,7 +81,7 @@ class Widget_MyMonitoredForums extends Widget {
 						list($hide_now, $count_diff, $hide_url) = my_hide_url('forum', $validDistinctMonitorGroupId, $hide_item_id, count($validMonitoredForumIds), $hide_forum);
 						$count_new = max(0, $count_diff);
 						$cells = array();
-						$cells[] = array($hide_url.util_make_link('/forum/?group_id='.$validDistinctMonitorGroupId, $groupObject->getPublicName()).'    ['.count($validMonitoredForumIds).($count_new ? ', '.html_e('b', array(), sprintf(_('%s new'), $count_new)).']' : ']'), 'colspan' => 2);
+						$cells[] = array($hide_url.util_make_link('/forum/?group_id='.$validDistinctMonitorGroupId, $groupObject->getPublicName()).'    ['.count($validMonitoredForumIds).($count_new ? ', '.html_e('strong', array(), sprintf(_('%s new'), $count_new)).']' : ']'), 'colspan' => 2);
 						$html_hdr = $HTML->multiTableRow(array('class' => 'boxitem'), $cells);
 						$html = '';
 						if (!$hide_now) {

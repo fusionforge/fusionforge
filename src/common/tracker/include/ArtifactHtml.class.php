@@ -186,7 +186,7 @@ function hide_edit_button(id) {
 					if (db_result($result, $i, 'old_value')) {
 						$return .= date(_('Y-m-d H:i'),db_result($result, $i, 'old_value'));
 					} else {
-						$return .= '<i>'._('None').'</i>';
+						$return .= html_e('em', array(), _('None'));
 					}
 				} else {
 
@@ -237,7 +237,7 @@ function hide_edit_button(id) {
 						$arg['class'] = 'artifact_closed';
 					}
 					$return .= '<br/>&nbsp;&nbsp;&nbsp;';
-					$return .= util_make_link($url, $text, $arg).' '.util_make_link($url, $arr['summary']).' <i>('._('Relation')._(': ').$arr['field_name'].')</i>';
+					$return .= util_make_link($url, $text, $arg).' '.util_make_link($url, $arr['summary']).' '.html_e('em', array(), '('._('Relation')._(': ').$arr['field_name'].')');
 				}
 			}
 			$return .= '</td>

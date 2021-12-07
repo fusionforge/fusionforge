@@ -486,7 +486,7 @@ if (!$at_arr || count($at_arr) < 1) {
 						$data = $rel_states[$release_value][$state];
 						$percent = round($data['count'] / $total_rel_states[$release_value] * 100);
 						$graph  .= '<td style="background: '.$color.'; width: '.$percent.'%;">&#160;</td>';
-						$legend .= '<td style="white-space: nowrap; width: '.$percent.'%;"><i>'.$data['name'].': '.$data['count'].' ('.$percent.'%)</i></td>';
+						$legend .= '<td style="white-space: nowrap; width: '.$percent.'%;">'.html_e('em', array(), $data['name']._(': ').$data['count'].' ('.$percent.'%)').'</td>';
 					}
 				}
 			}
@@ -531,7 +531,7 @@ if (!$at_arr || count($at_arr) < 1) {
 								$percent = round($data['count'] / $total_rel_art_states[$release_value][$artifact_type_name] * 100);
 								$total += $data['count'];
 								$graph  .= '<td style="background: '.$color.'; width: '.$percent.'%;">&#160;</td>';
-								$legend .= '<td style="white-space: nowrap; width: '.$percent.'%;"><i>'.$data['name'].': '.$data['count'].' ('.$percent.'%)</i></td>';
+								$legend .= '<td style="white-space: nowrap; width: '.$percent.'%;">'.html_e('em', array(), $data['name']._(': ').$data['count'].' ('.$percent.'%)').'</td>';
 							}
 						}
 						// Display unknown statuses if exists

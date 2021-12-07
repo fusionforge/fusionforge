@@ -35,7 +35,7 @@ function show_globalsearch_stats_boxes() {
 	$return .= globalsearch_box();
 	$return .= $HTML->boxMiddle(_("Top associated forges"));
 	$return .= show_top_n_assocsites(5);
-	$return .= "<div align=\"center\">"._('Total projects in associated forges')._(': ').html_e('b', array(), stats_get_total_projects_assoc_sites()). "</div>";
+	$return .= "<div align=\"center\">"._('Total projects in associated forges')._(': ').html_e('strong', array(), stats_get_total_projects_assoc_sites()). "</div>";
 	$return .= $HTML->boxBottom();
 	return $return;
 }

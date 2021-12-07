@@ -213,9 +213,9 @@ control over it to the project's administrator.");
 				$htmlRepo = '';
 				foreach ($repo_list as $repo_name) {
 					if (forge_get_config('use_shell_limited')) {
-						$htmlRepo .= html_e('kbd', array(), 'git clone '.html_e('i', array(), _('developername'), true, false).'@'.$this->getBoxForProject($project).$ssh_port.':'.$project->getUnixName().'/'.$repo_name.'.git').html_e('br');
+						$htmlRepo .= html_e('kbd', array(), 'git clone '.html_e('em', array(), _('developername'), true, false).'@'.$this->getBoxForProject($project).$ssh_port.':'.$project->getUnixName().'/'.$repo_name.'.git').html_e('br');
 					} else {
-						$htmlRepo .= html_e('kbd', array(), 'git clone git+ssh://'.html_e('i', array(), _('developername'), true, false).'@'.$this->getBoxForProject($project).$ssh_port.forge_get_config('repos_path', 'scmgit').'/'.$project->getUnixName().'/'.$repo_name.'.git').html_e('br');
+						$htmlRepo .= html_e('kbd', array(), 'git clone git+ssh://'.html_e('em', array(), _('developername'), true, false).'@'.$this->getBoxForProject($project).$ssh_port.forge_get_config('repos_path', 'scmgit').'/'.$project->getUnixName().'/'.$repo_name.'.git').html_e('br');
 					}
 				}
 				$b .= html_e('p', array(), $htmlRepo);
@@ -231,7 +231,7 @@ control over it to the project's administrator.");
 					' '. _('Enter your site password when prompted.'));
 				$htmlRepo = '';
 				foreach ($repo_list as $repo_name) {
-					$htmlRepo .= '<kbd>git clone '.$protocol.'://<i>'._('developername').'</i>@'.$this->getBoxForProject($project).'/authscm/<i>'._('developername').'</i>/git/'.$project->getUnixName() .'/'. $repo_name .'.git</kbd><br />';
+					$htmlRepo .= '<kbd>git clone '.$protocol.'://'.html_e('em', array(), _('developername')).'@'.$this->getBoxForProject($project).'/authscm/'.html_e('em', array(), _('developername')).'/git/'.$project->getUnixName() .'/'. $repo_name .'.git</kbd><br />';
 				}
 				$b .= html_e('p', array(), $htmlRepo);
 				$b .= '</div>';

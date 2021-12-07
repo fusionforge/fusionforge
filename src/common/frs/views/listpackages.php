@@ -186,7 +186,7 @@ EOS;
 								$rnum++;
 							}
 						}
-						$content .= html_e('span', array(), html_e('b', array(), _('Linked Roadmaps')._(': ')).$urls, false);
+						$content .= html_e('span', array(), html_e('strong', array(), _('Linked Roadmaps')._(': ')).$urls, false);
 					}
 				}
 

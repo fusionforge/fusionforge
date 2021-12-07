@@ -84,7 +84,7 @@ if (!$user || !is_object($user) || $user->isError() || !$user->isActive()) {
 		}
 	} else { // default HTML view
 		//now show the user page
-		$title = '<i>'.$username.'</i> '._('Profile');
+		$title = html_e('em', array(), $username).' '._('Profile');
 		if (forge_get_config('use_diary') && session_loggedin() && ($user->getID() != user_getid())) {
 			if ($user->isMonitoredBy(user_getid())) {
 				$action = 'deletemonitoring';

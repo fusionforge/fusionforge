@@ -131,7 +131,7 @@ while ($row_grp = db_fetch_array($res_grp)) {
 
 	?>
 	<hr />
-	<h2><?php echo _('Pending')._(': ').'<i>'. $row_grp['group_name'] . '</i>'; ?></h2>
+	<h2><?php echo _('Pending')._(': ').html_e('em', array(), $row_grp['group_name']); ?></h2>
 
 	<h3><?php  echo _('Pre-approval modifications :'); ?></h3>
 

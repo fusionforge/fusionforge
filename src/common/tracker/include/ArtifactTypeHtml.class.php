@@ -350,14 +350,14 @@ class ArtifactTypeHtml extends ArtifactType {
 					$str = $this->renderIntegerField($efarr[$i]['extra_field_id'], $selected[$efarr[$i]['extra_field_id']], $efarr[$i]['attribute1'], $efarr[$i]['attribute2'], $attrs);
 				}
 				if ($mode == 'QUERY') {
-					$post_name =  ' <i>'._('(%% for wildcards)').'</i>&nbsp;&nbsp;&nbsp;';
+					$post_name =  ' '.html_e('em', array(), _('(%% for wildcards)')).'&nbsp;&nbsp;&nbsp;';
 				}
 
 			} elseif ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_TEXTAREA) {
 
 				$str = $this->renderTextArea($efarr[$i]['extra_field_id'], $selected[$efarr[$i]['extra_field_id']], $efarr[$i]['attribute1'], $efarr[$i]['attribute2'], $attrs);
 				if ($mode == 'QUERY') {
-					$post_name =  ' <i>'._('(%% for wildcards)').'</i>';
+					$post_name =  ' '.html_e('em', array(), _('(%% for wildcards)'));
 				}
 
 			} elseif ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_MULTISELECT) {
@@ -437,7 +437,7 @@ class ArtifactTypeHtml extends ArtifactType {
 				$str = $this->renderMultiReleaseField($efarr[$i]['extra_field_id'], $selected[$efarr[$i]['extra_field_id']], $efarr[$i]['show100'], $efarr[$i]['show100label'], $show_any, $text_any,false, $attrs);
 			} elseif ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_DATERANGE) {
 				if ($mode == 'QUERY') {
-					$post_name =  ' <i>'._('(YYYY-MM-DD YYYY-MM-DD Format)').'</i>';
+					$post_name =  ' '.html_e('em', array(), _('(YYYY-MM-DD YYYY-MM-DD Format)'));
 				}
 				$str = $this->renderDateRange($efarr[$i]['extra_field_id'], $selected[$efarr[$i]['extra_field_id']], $attrs);
 			} elseif ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_EFFORT) {

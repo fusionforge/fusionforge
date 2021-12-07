@@ -120,7 +120,7 @@ if (!$ac || !is_object($ac)) {
 		echo html_ac(html_ap() - 1);
 
 		echo html_ao('p');
-		echo html_e('label', array('for'=>'show100label'), html_e('b', array(), _('Label for the none value')).html_e('br'));
+		echo html_e('label', array('for'=>'show100label'), html_e('strong', array(), _('Label for the none value')).html_e('br'));
 		echo html_e('input', array('type'=>'text', 'name'=>'show100label', 'value'=>$ac->getShow100label(), 'size'=>'30'));
 		echo html_ac(html_ap() - 1);
 	} else {

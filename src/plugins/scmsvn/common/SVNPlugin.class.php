@@ -255,9 +255,9 @@ some control over it to the project's administrator.");
 					$modules = $this->topModule($project, $repo_name);
 					foreach ($modules as $module) {
 						if (forge_get_config('use_shell_limited')) {
-							$b .= html_e('kbd', array(), 'svn '.$ssh_port.'checkout svn+ssh://<i>'._('developername').'</i>@'.$this->getBoxForProject($project).'/'.$repo_name.$module).html_e('br');
+							$b .= html_e('kbd', array(), 'svn '.$ssh_port.'checkout svn+ssh://'.html_e('em', array(), _('developername')).'@'.$this->getBoxForProject($project).'/'.$repo_name.$module).html_e('br');
 						} else {
-							$b .= html_e('kbd', array(), 'svn '.$ssh_port.'checkout svn+ssh://<i>'._('developername').'</i>@'.$this->getBoxForProject($project).$this->svn_root_fs .'/'.$repo_name.$module).html_e('br');
+							$b .= html_e('kbd', array(), 'svn '.$ssh_port.'checkout svn+ssh://'.html_e('em', array(), _('developername')).'@'.$this->getBoxForProject($project).$this->svn_root_fs .'/'.$repo_name.$module).html_e('br');
 						}
 					}
 				}
@@ -273,7 +273,7 @@ some control over it to the project's administrator.");
 				foreach ($repo_list as $repo_name) {
 					$modules = $this->topModule($project, $repo_name);
 					foreach ($modules as $module) {
-						$b .= html_e('kbd', array(), 'svn checkout --username <i>'._('developername').'</i> http'.((forge_get_config('use_ssl', 'scmsvn')) ? 's' : '').'://'.$this->getBoxForProject($project).'/authscm/<i>'._('developername').'</i>/svn/'.$repo_name.$module).html_e('br');
+						$b .= html_e('kbd', array(), 'svn checkout --username '.html_e('em', array(), _('developername')).' http'.((forge_get_config('use_ssl', 'scmsvn')) ? 's' : '').'://'.$this->getBoxForProject($project).'/authscm/'.html_e('em', array(), _('developername')).'/svn/'.$repo_name.$module).html_e('br');
 					}
 				}
 				$b .= '</div>';

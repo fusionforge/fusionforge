@@ -184,7 +184,7 @@ if ($DocGroupName) {
 	if ($childgroup_id) {
 		$headerPath .= _('Subproject')._(': ').util_make_link(DOCMAN_BASEURL.$g->getID(), $g->getPublicName()).'::';
 	}
-	$headerPath .= html_e('i', array(), preg_replace('/\/\//','/', $dgpath.'/'.$DocGroupName), false);
+	$headerPath .= html_e('em', array(), preg_replace('/\/\//','/', $dgpath.'/'.$DocGroupName), false);
 	echo html_e('h2', array('class' => 'docman_h2'), $headerPath, false);
 	$max = ($nbDocs > ($start + $paging)) ? ($start + $paging) : $nbDocs;
 	echo $HTML->paging_top($start, $paging, $nbDocs, $max, $redirecturl, array('style' => 'display:inline-block'));

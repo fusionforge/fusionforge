@@ -199,7 +199,7 @@ if ($type == 'admin') {
 		$match = '';
 		if (preg_match('/(.*) index$/', $b, $match)) {
 			$cells = array();
-			$cells[] = array(html_e('b', array(), $blocks_text[$match[1]]), 'colspan' => 4);
+			$cells[] = array(html_e('strong', array(), $blocks_text[$match[1]]), 'colspan' => 4);
 			echo $HTML->multiTableRow(array(), $cells);
 		}
 		$cells = array();

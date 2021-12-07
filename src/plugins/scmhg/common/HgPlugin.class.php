@@ -142,7 +142,7 @@ Offer DAV or SSH access.");
 				$htmlRepo = '';
 				$protocol = forge_get_config('use_ssl', 'scmhg') ? 'https' : 'http';
 				foreach ($repo_list as $repo_name) {
-					$htmlRepo .= html_e('kbd', array(), 'hg clone '.$protocol.'://<i>'.$d.'</i>@'.$this->getBoxForProject($project).'/authscm/'.$d.'/hg/'. $project->getUnixName().'/'.$repo_name).html_e('br');
+					$htmlRepo .= html_e('kbd', array(), 'hg clone '.$protocol.'://'.html_e('em', array(), $d).'@'.$this->getBoxForProject($project).'/authscm/'.$d.'/hg/'. $project->getUnixName().'/'.$repo_name).html_e('br');
 				}
 				$b .= html_e('p', array(), $htmlRepo);
 				$b .= '</div>';
@@ -161,9 +161,9 @@ Offer DAV or SSH access.");
 					// Warning : the ssh uri MUST be this form : ssh://username@scmbox//path/reponame
 					//           HAVE YOU SEEN THE // starting the path ? Keep in mind the double /
 					if (forge_get_config('use_shell_limited')) {
-						$htmlRepo .= html_e('kbd', array(), 'hg clone ssh://'.html_e('i', array(), _('developername'), true, false).'@'.$this->getBoxForProject($project).$ssh_port.'/hg/'.$project->getUnixName().'/'.$repo_name).html_e('br');
+						$htmlRepo .= html_e('kbd', array(), 'hg clone ssh://'.html_e('strong', array(), _('developername'), true, false).'@'.$this->getBoxForProject($project).$ssh_port.'/hg/'.$project->getUnixName().'/'.$repo_name).html_e('br');
 					} else {
-						$htmlRepo .= html_e('kbd', array(), 'hg clone ssh://'.html_e('i', array(), _('developername'), true, false).'@'.$this->getBoxForProject($project).$ssh_port.'/'.forge_get_config('repos_path', 'scmhg').'/'.$project->getUnixName().'/'.$repo_name).html_e('br');
+						$htmlRepo .= html_e('kbd', array(), 'hg clone ssh://'.html_e('strong', array(), _('developername'), true, false).'@'.$this->getBoxForProject($project).$ssh_port.'/'.forge_get_config('repos_path', 'scmhg').'/'.$project->getUnixName().'/'.$repo_name).html_e('br');
 					}
 				}
 				$b .= html_e('p', array(), $htmlRepo);
@@ -179,7 +179,7 @@ Offer DAV or SSH access.");
 					' '. _('Enter your site password when prompted.'));
 				$htmlRepo = '';
 				foreach ($repo_list as $repo_name) {
-					$htmlRepo .= html_e('kbd', array(), 'hg clone '.$protocol.'://'.html_e('i', array(), _('developername'), true, false).'@'.$this->getBoxForProject($project).'/authscm/'.html_e('i', array(), _('developername'), true, false).'/hg/'.$project->getUnixName().'/'.$repo_name).html_e('br');
+					$htmlRepo .= html_e('kbd', array(), 'hg clone '.$protocol.'://'.html_e('strong', array(), _('developername'), true, false).'@'.$this->getBoxForProject($project).'/authscm/'.html_e('strong', array(), _('developername'), true, false).'/hg/'.$project->getUnixName().'/'.$repo_name).html_e('br');
 				}
 				$b .= html_e('p', array(), $htmlRepo);
 				$b .= '</div>';
