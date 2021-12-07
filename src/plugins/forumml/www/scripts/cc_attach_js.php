@@ -42,7 +42,7 @@ function addHeader(cc,file,header_type)
 
   newdiv.setAttribute("id",divIdName);
   if (header_type == 1) {
-	newdiv.innerHTML += "<table><tr><td width='65' align='right'><b><i><?php echo _('Cc:') ?> </i></b></td><td align=center width=350><input name='ccs["
+	newdiv.innerHTML += "<table><tr><td width='65' align='right'><b><em><?php echo _('Cc:') ?> </em></b></td><td align=center width=350><input name='ccs["
 					+num
 					+"]' type='text' value='"
 					+cc
@@ -50,7 +50,7 @@ function addHeader(cc,file,header_type)
 					+divIdName
 					+"\')\"><?php echo $HTML->getDeletePic('', ''); ?></a></td></tr></table>";
   } else {
-	newdiv.innerHTML += "<table><tr><td width='65' align='right'><b><i><?php echo _('Attach:') ?> </i></b></td><td align=center width=350><input name='files["
+	newdiv.innerHTML += "<table><tr><td width='65' align='right'><b><em><?php echo _('Attach:') ?> </em></b></td><td align=center width=350><input name='files["
 					+num
 					+"]'' type='file' value='"
 					+file

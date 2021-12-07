@@ -95,7 +95,7 @@ jQuery(function(){
 		});
 
 		// if remote URL, do some OSLC compact-preview fetching
-		jQuery('#resourcePopupContent').html('<i>...loading compact preview...</i>');
+		jQuery('#resourcePopupContent').html('<em>...loading compact preview...</em>');
 
 		// Fetch the OSLC compact preview representation of the resource
 		//url: '/'+ resource +'/' + resourceId + '/',

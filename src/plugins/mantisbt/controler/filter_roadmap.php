@@ -57,9 +57,9 @@ if (!isset($errorPage)) {
 			}
 			echo '>'.$version->name;
 			if ($version->released) {
-				echo '(<i>'._('Release').'</i>)';
+				echo '('.html_e('em', array(), _('Release')).')';
 			} else {
-				echo '(<i>'._('Milestone').'</i>)';
+				echo '('.html_e('em', array(), _('Milestone')).')';
 			}
 			echo '</option>';
 		}
@@ -89,9 +89,9 @@ if (!isset($errorPage)) {
 					}
 					echo '>'.$version->name;
 					if ( $version->released ) {
-					echo '(<i>'._('Release').'</i>)';
+					echo '('.html_e('em', array(), _('Release')).')';
 					} else {
-					echo '(<i>'._('Milestone').'</i>)';
+					echo '('.html_e('em', array(), _('Milestone')).')';
 					}
 					echo '</option>';
 				}

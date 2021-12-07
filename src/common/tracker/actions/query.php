@@ -333,10 +333,10 @@ if (forge_check_perm ('tracker', $ath->getID(), 'manager')) {
 		if ($default_query == $aq->getName()) {
 			$note = '';
 		} else {
-			$note= '<br/><i>'.sprintf(_('Note: The default project query is currently “%s”.'), $default_query).'</i>';
+			$note= '<br/>'.html_e('em', array(), sprintf(_('Note: The default project query is currently “%s”.'), $default_query));
 		}
 	} else {
-		$note= '<br/><i>'._('Note: There is no default project query defined.').'</i>';
+		$note= '<br/>'.html_e('em', array(), _('Note: There is no default project query defined.'));
 	}
 	echo '<tr>'."\n";
 	echo '<td colspan="2">'."\n";
@@ -397,16 +397,16 @@ if (forge_check_perm ('tracker', $ath->getID(), 'manager')) {
 	}
 	array_multisort($order_name_arr, $order_arr);
 
-	$tips = '<i>'._('(%% for wildcards)').'</i>';
+	$tips = html_e('em', array(), _('(%% for wildcards)'));
 
 echo '
 	<tr>
 		<td colspan="2" style="white-space: nowrap;">'.
-		'<p><strong>'._('Last Modified Date range')._(':').'</strong> <i>(YYYY-MM-DD YYYY-MM-DD Format)</i><br />
+		'<p><strong>'._('Last Modified Date range')._(':').'</strong> '.html_e('em', array(), '(YYYY-MM-DD YYYY-MM-DD Format)').'<br />
 		<input type="text" name="_moddaterange" size="21" maxlength="21" value="'. htmlspecialchars($_moddaterange) .'" /></p>
-		<p><strong>'._('Open Date range')._(':').'</strong> <i>(YYYY-MM-DD YYYY-MM-DD Format)</i><br />
+		<p><strong>'._('Open Date range')._(':').'</strong> '.html_e('em', array(), '(YYYY-MM-DD YYYY-MM-DD Format)').'<br />
 		<input type="text" name="_opendaterange" size="21" maxlength="21" value="'. htmlspecialchars($_opendaterange) .'" /></p>
-		<p><strong>'._('Close Date range')._(':').'</strong> <i>(YYYY-MM-DD YYYY-MM-DD Format)</i><br />
+		<p><strong>'._('Close Date range')._(':').'</strong> '.html_e('em', array(), '(YYYY-MM-DD YYYY-MM-DD Format)').'<br />
 		<input type="text" name="_closedaterange" size="21" maxlength="21" value="'. htmlspecialchars($_closedaterange) .'" /></p>
 		</td>
 	</tr>

@@ -216,7 +216,7 @@ function plugin_forumml_show_all_threads($p,$list_id,$list_name,$offset) {
 
 			print "<a href='message.php?group_id=".$request->get('group_id')."&topic=".$msg['id_message']."&list=".$request->get('list')."'>
 				".$hp->purify($subject, CODENDI_PURIFIER_CONVERT_HTML)."
-				</a> <b><i>(".$count.")</i></b>
+				</a> <b>".html_e('em', array(), '('.$count.')')."</b>
 				</td>".
 				"<td class='info'>".strftime("%a, %e %h %G  %R",$msg['lastup'])."</td>".
 				"<td class='info'>".strftime("%a, %e %h %G  %R",strtotime($msg['date']))."</td>

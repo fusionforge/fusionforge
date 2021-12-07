@@ -150,7 +150,7 @@ _("This plugin adds support for user and project compact-preview
 			<table>
 
 				<tr>
-					<td colspan="2"><i>'. $title .'</i></td>
+					<td colspan="2">'.html_e('em', array(), $title) .'</td>
 				</tr>
 				<tr>
 					'/* <td rowspan="8"><img src="/plugins/compactpreview/images/userTooltip/oslc.png" />

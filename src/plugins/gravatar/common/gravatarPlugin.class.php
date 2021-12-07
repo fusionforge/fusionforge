@@ -78,7 +78,7 @@ FusionForge user to have its gravatar icon displayed.");
 			$class = 'img-shadow-'.$size;
 			$code = '<div class="'.$class.'">'.html_abs_image($url, 0, 0, array('class' => 'gravatar')).'</div>';
 			if ($size == 'l' && (user_getid() == $user_id)) {
-				$code .= '<div class="align-center"><i><a href="http://www.gravatar.com/">'._('Change face').'</a></i></div>';
+				$code .= '<div class="align-center">'.html_e('em', array(), '<a href="http://www.gravatar.com/">'._('Change face').'</a>').'</div>';
 			}
 			return $code;
 		}

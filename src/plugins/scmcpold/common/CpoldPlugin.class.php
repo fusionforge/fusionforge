@@ -94,7 +94,7 @@ class CpoldPlugin extends SCMPlugin {
 			$b .= ' ';
 			$b .= _('Enter your site password when prompted.');
 			$b .= '</p>';
-			$b .= '<p><kbd>scp -r <i>'._('developername').'</i>@' . $this->getBoxForProject($project) . ':'. forge_get_config('repos_path', 'scmcpold') .'/'. $project->getUnixName().'/ .</kbd></p>' ;
+			$b .= '<p><kbd>scp -r '.html_e('em', array(), _('developername')).'@' . $this->getBoxForProject($project) . ':'. forge_get_config('repos_path', 'scmcpold') .'/'. $project->getUnixName().'/ .</kbd></p>' ;
 		}
 		return $b ;
 	}

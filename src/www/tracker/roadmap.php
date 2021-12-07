@@ -538,7 +538,7 @@ if (!$at_arr || count($at_arr) < 1) {
 						if ($total != $total_rel_art_states[$release_value][$artifact_type_name]) {
 							$percent = round((1 - $total / $total_rel_art_states[$release_value][$artifact_type_name]) * 100);
 							$graph  .= '<td style="background: #aaaaaa; width: '.$percent.'%;">&#160;</td>';
-							$legend .= '<td style="white-space: nowrap; width: '.$percent.'%;"><i>'._('Unknown').': '.($total_rel_art_states[$release_value][$artifact_type_name] - $total).' ('.$percent.'%)</i></td>';
+							$legend .= '<td style="white-space: nowrap; width: '.$percent.'%;">'.html_e('em', array(), _('Unknown').': '.($total_rel_art_states[$release_value][$artifact_type_name] - $total).' ('.$percent.'%)').'</td>';
 						}
 					}
 
