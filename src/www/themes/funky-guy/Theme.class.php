@@ -135,9 +135,9 @@ class Theme_Funky_Guy extends Layout {
 				<rect y="15" width="50" height="7"></rect>
 				<rect y="30" width="50" height="7"></rect>
 			      </svg>';
-		echo html_ao('label', array('for' => 'hamburgerButton'));
-		echo $hamburgerIcon;
-		echo html_ac(html_ap() -1); // </label>
+		return html_ao('label', array('for' => 'hamburgerButton')).
+			$hamburgerIcon.
+			html_ac(html_ap() -1); // </label>
 	}
 
 	function bodyHeader($params) {
