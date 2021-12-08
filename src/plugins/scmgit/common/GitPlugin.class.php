@@ -228,10 +228,11 @@ control over it to the project's administrator.");
 					ngettext('Only project developers can access the Git repository via this method.',
 						'Only project developers can access the Git repositories via this method.',
 						count($repo_list)).
-					' '. _('Enter your site password when prompted.'));
+					' '. _('Enter your site password when prompted.').
+					' '. _('Substitute <em>developername</em> with the proper value.'));
 				$htmlRepo = '';
 				foreach ($repo_list as $repo_name) {
-					$htmlRepo .= '<kbd>git clone '.$protocol.'://'.html_e('em', array(), _('developername')).'@'.$this->getBoxForProject($project).'/authscm/'.html_e('em', array(), _('developername')).'/git/'.$project->getUnixName() .'/'. $repo_name .'.git</kbd><br />';
+					$htmlRepo .= '<kbd>git clone '.$protocol.'://'.html_e('em', array(), _('developername'), true, false).'@'.$this->getBoxForProject($project).'/authscm/'.html_e('em', array(), _('developername'), true, false).'/git/'.$project->getUnixName() .'/'. $repo_name .'.git</kbd><br />';
 				}
 				$b .= html_e('p', array(), $htmlRepo);
 				$b .= '</div>';

@@ -3,7 +3,7 @@
  * FusionForge Bazaar plugin
  *
  * Copyright 2009, Roland Mas
- * Copyright 2013-2014,2017, Franck Villaume - TrivialDev
+ * Copyright 2013-2014,2017,2021, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge.
  *
@@ -128,7 +128,7 @@ over it to the project's administrator.");
 			$b .= ' ';
 			$b .= _('Enter your site password when prompted.');
 			$b .= '</p>';
-			$b .= '<p><kbd>bzr checkout bzr+ssh://'.html_e('em', array(), _('developername')).'@' . $this->getBoxForProject($project) . forge_get_config('repos_path', 'scmbzr') .'/'. $project->getUnixName().'/'._('branchname').'</kbd></p>' ;
+			$b .= '<p><kbd>bzr checkout bzr+ssh://'.html_e('em', array(), _('developername'), true, false).'@' . $this->getBoxForProject($project) . forge_get_config('repos_path', 'scmbzr') .'/'. $project->getUnixName().'/'._('branchname').'</kbd></p>' ;
 		}
 		return $b ;
 	}

@@ -4,7 +4,7 @@
  *
  * Copyright 2009, Roland Mas
  * Copyright 2012, Denise Patzker
- * Copyright 2012-2014,2017-2019, Franck Villaume - TrivialDev
+ * Copyright 2012-2014,2017-2019,2021, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge.
  *
@@ -142,7 +142,7 @@ Offer DAV or SSH access.");
 				$htmlRepo = '';
 				$protocol = forge_get_config('use_ssl', 'scmhg') ? 'https' : 'http';
 				foreach ($repo_list as $repo_name) {
-					$htmlRepo .= html_e('kbd', array(), 'hg clone '.$protocol.'://'.html_e('em', array(), $d).'@'.$this->getBoxForProject($project).'/authscm/'.$d.'/hg/'. $project->getUnixName().'/'.$repo_name).html_e('br');
+					$htmlRepo .= html_e('kbd', array(), 'hg clone '.$protocol.'://'.$d.'@'.$this->getBoxForProject($project).'/authscm/'.$d.'/hg/'. $project->getUnixName().'/'.$repo_name).html_e('br');
 				}
 				$b .= html_e('p', array(), $htmlRepo);
 				$b .= '</div>';
@@ -155,15 +155,16 @@ Offer DAV or SSH access.");
 						'Only project developers can access the Hg repositories via this method.',
 						count($repo_list)).
 					' '. _('SSH must be installed on your client machine.').
+					' '. _('Additionally, a public ssh key must be available in the FusionForge settings of the respective user.').
 					' '. _('Substitute <em>developername</em> with the proper value.'));
 				$htmlRepo = '';
 				foreach ($repo_list as $repo_name) {
 					// Warning : the ssh uri MUST be this form : ssh://username@scmbox//path/reponame
 					//           HAVE YOU SEEN THE // starting the path ? Keep in mind the double /
 					if (forge_get_config('use_shell_limited')) {
-						$htmlRepo .= html_e('kbd', array(), 'hg clone ssh://'.html_e('strong', array(), _('developername'), true, false).'@'.$this->getBoxForProject($project).$ssh_port.'/hg/'.$project->getUnixName().'/'.$repo_name).html_e('br');
+						$htmlRepo .= html_e('kbd', array(), 'hg clone ssh://'.html_e('em', array(), _('developername'), true, false).'@'.$this->getBoxForProject($project).$ssh_port.'/hg/'.$project->getUnixName().'/'.$repo_name).html_e('br');
 					} else {
-						$htmlRepo .= html_e('kbd', array(), 'hg clone ssh://'.html_e('strong', array(), _('developername'), true, false).'@'.$this->getBoxForProject($project).$ssh_port.'/'.forge_get_config('repos_path', 'scmhg').'/'.$project->getUnixName().'/'.$repo_name).html_e('br');
+						$htmlRepo .= html_e('kbd', array(), 'hg clone ssh://'.html_e('em', array(), _('developername'), true, false).'@'.$this->getBoxForProject($project).$ssh_port.'/'.forge_get_config('repos_path', 'scmhg').'/'.$project->getUnixName().'/'.$repo_name).html_e('br');
 					}
 				}
 				$b .= html_e('p', array(), $htmlRepo);
@@ -176,10 +177,11 @@ Offer DAV or SSH access.");
 					ngettext('Only project developers can access the Hg repository via this method.',
 						'Only project developers can access the Hg repositories via this method.',
 						count($repo_list)).
-					' '. _('Enter your site password when prompted.'));
+					' '. _('Enter your site password when prompted.').
+					' '. _('Substitute <em>developername</em> with the proper value.'));
 				$htmlRepo = '';
 				foreach ($repo_list as $repo_name) {
-					$htmlRepo .= html_e('kbd', array(), 'hg clone '.$protocol.'://'.html_e('strong', array(), _('developername'), true, false).'@'.$this->getBoxForProject($project).'/authscm/'.html_e('strong', array(), _('developername'), true, false).'/hg/'.$project->getUnixName().'/'.$repo_name).html_e('br');
+					$htmlRepo .= html_e('kbd', array(), 'hg clone '.$protocol.'://'.html_e('em', array(), _('developername'), true, false).'@'.$this->getBoxForProject($project).'/authscm/'.html_e('em', array(), _('developername'), true, false).'/hg/'.$project->getUnixName().'/'.$repo_name).html_e('br');
 				}
 				$b .= html_e('p', array(), $htmlRepo);
 				$b .= '</div>';
