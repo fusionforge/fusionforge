@@ -194,8 +194,7 @@ class Theme_Funky_Guy extends Layout {
 
 		echo util_make_link('#', null, array('id' => 'menu', 'name' => 'menu'));
 		echo html_ao('div', array('id' => 'menudiv'));
-		echo html_ao('input', array('id' => 'hamburgerButton', 'type' => 'checkbox'));
-		echo html_ac(html_ap() -1); // </input>
+		echo html_e('input', array('id' => 'hamburgerButton', 'type' => 'checkbox'));
 		echo html_ao('div', array('id' => 'hamburgermenudiv'));
 		$this->outerTabs($params);
 		echo html_ac(html_ap() -1); // </div> #hamburgermenudiv
@@ -215,7 +214,7 @@ class Theme_Funky_Guy extends Layout {
 		echo html_ac(html_ap() -1); // </div> #tabGenerator
 		echo html_ac(html_ap() -1); // </div> #innertabs
 		echo html_ac(html_ap() -1); // </nav>
-		echo html_ac(html_ap() -1); // </header>
+		echo html_ac(html_ap() -2); // </header>
 
 		echo util_make_link('#', null, array('id' => 'content', 'name' => 'content'));
 
@@ -252,13 +251,12 @@ class Theme_Funky_Guy extends Layout {
 		echo $this->navigation->getPoweredBy();
 		echo $this->navigation->getShowSource();
 		echo html_e('div', array('style' => 'clear:both'), '', false);
-		echo html_ac(html_ap() -1);
 		plugin_hook('webanalytics_url');
-		echo html_ac(html_ap() -1);
+		echo html_ac(html_ap() -1); // </footer>
 
 		echo html_ao('div', array('id' => 'loader'));
         echo html_ao('div');
-		echo html_ac(html_ap() -2); // </div>
+        echo html_ac(html_ap() -2); // </div></div>
 		// Loader
 		echo html_ao('script');
 		echo '
@@ -280,6 +278,7 @@ class Theme_Funky_Guy extends Layout {
 			}
 		';
 		echo html_ac(html_ap() -1); // </script>
+
 		echo '</body></html>' . "\n";
 	}
 
