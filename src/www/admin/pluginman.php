@@ -214,7 +214,7 @@ foreach ($filelist as $key => $filename) {
 				// If there are too many users, replace the list with number of users
 				$nb_users = db_numrows($res);
 				if ($nb_users > 100) {
-					$users = util_make_link("/admin/userlist.php?usingplugin=$filename", '<b>'.sprintf(_("%d users"), $nb_users).'</b>');
+					$users = util_make_link("/admin/userlist.php?usingplugin=$filename", html_e('strong', array(), sprintf(_("%d users"), $nb_users)));
 				} else {
 					$users = " ";
 					for($i = 0; $i < $nb_users; $i++) {
@@ -234,7 +234,7 @@ foreach ($filelist as $key => $filename) {
 				$nb_groups = db_numrows($res);
 				// If there are too many projects, replace the list with number of projects
 				if ($nb_groups > 100) {
-					$groups = util_make_link("/admin/grouplist.php?usingplugin=$filename", '<b>'.sprintf(_("%d projects"), $nb_groups).'</b>');
+					$groups = util_make_link("/admin/grouplist.php?usingplugin=$filename", html_e('strong', array(), sprintf(_("%d projects"), $nb_groups)));
 				} else {
 					$groups = " ";
 					for($i=0;$i<$nb_groups;$i++) {

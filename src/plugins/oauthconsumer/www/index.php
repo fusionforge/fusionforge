@@ -10,12 +10,12 @@ oauthconsumer_CheckUser();
 $userid = session_get_user()->getID();
 $providers = OAuthProvider::get_all_oauthproviders();
 if(count($providers)>0)	{
-	echo '<p>'. _('This OAuth Consumer plugin allows a user to connect to different oauth enabled services.').'</p>';
-	echo '<h4>'._('Accessing resources with OAuth').'</h4>';
+	echo html_e('p', array(), _('This OAuth Consumer plugin allows a user to connect to different oauth enabled services.'));
+	echo html_e('h4', array(), _('Accessing resources with OAuth'));
 	?>
 	<form action="index.php" method="post">
-	<b><?php echo _('Providers'); ?></b>
-	<?php $f_provider_id = getStringFromPost('providers'); ?>
+	<?php echo html_e('storng', array(), _('Providers'));
+	$f_provider_id = getStringFromPost('providers'); ?>
 	<select name=providers>
 	<?php foreach ($providers as $provider) {
 		echo '<option value="'.$provider->get_id().'" ';

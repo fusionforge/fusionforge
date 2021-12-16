@@ -269,7 +269,7 @@ if ($type == 'admin') {
 	print _("Edit the block as you want. If you activate the HTML editor, you will be able to use WYSIWYG formatting (bold, colors...)");
 
 	print '<div class="align-center">';
-	print "<p><b>$blocks[$name]</b> ($name)</p>";
+	echo html_e('p', array(), html_e('strong', array(), $blocks[$name], true, false). ."($name)");
 	echo $HTML->openForm(array('action' => '/plugins/blocks/', 'method' => 'post'));
 	print "<input type=\"hidden\" name=\"id\" value=\"$id\" />\n";
 	print "<input type=\"hidden\" name=\"pluginname\" value=\"$pluginname\" />\n";
