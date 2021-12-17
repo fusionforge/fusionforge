@@ -2,7 +2,7 @@
 /**
  * FusionForge Documentation Manager
  *
- * Copyright 2016, Franck Villaume - TrivialDev
+ * Copyright 2016,2021, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -33,7 +33,7 @@ function &documentversion_get_object($ver_id, $docid, $group_id, $res = false) {
 			//the db result handle was passed in
 		} else {
 			// data_words is not retrieve. Too much memory consumption.
-			$res = db_query_params('SELECT serial_id, version, docid, current_version, title, updatedate, createdate, created_by, description, filename, filetype, filesize FROM doc_data_version WHERE version = $1 AND docid = $2',
+			$res = db_query_params('SELECT serial_id, version, docid, current_version, title, updatedate, createdate, created_by, description, filename, filetype, filesize, vcomment FROM doc_data_version WHERE version = $1 AND docid = $2',
 						array($ver_id, $docid));
 		}
 		if (!$res || db_numrows($res) < 1) {
