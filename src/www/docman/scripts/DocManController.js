@@ -520,7 +520,7 @@ DocManListFileController.prototype =
 					jQuery('#associationtab').text(data.htmltab);
 				}
 			}, this)).fail(function(jqXHR, textStatus, errorThrown) {
-					error_msg = jQuery('<p class="error">'+textStatus+': Unable to contact server.</p>');
+					let error_msg = jQuery('<p class="error">'+textStatus+': Unable to contact server.</p>');
 					jQuery('#tabbereditfile-association').prepend(error_msg);
 				});
 

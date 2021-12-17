@@ -74,8 +74,8 @@ function loadTaskboard( group_id ) {
 			showMessage(answer['message'], 'error');
 		}
 
-		aUserStories = answer['user_stories'];
-		aPhases = answer['phases'];
+		var aUserStories = answer['user_stories'];
+		var aPhases = answer['phases'];
 
 		if( aUserStories.length ) {
 			jQuery( "#agile-board" ).append(
@@ -213,7 +213,7 @@ function drawUserStories() {
 	for( var i=0; i<aUserStories.length; i++ ) {
 		var start=0;
 		var us=aUserStories[i];
-		evenOdd = 'even';
+		let evenOdd = 'even';
 		if (i % 2) {
 			evenOdd = 'odd';
 		}
@@ -452,24 +452,24 @@ function drawTasks( oUserStory, sPhaseId ) {
 }
 
 function applyTaskFilter() {
-	var sFilter = $('#task-filter')[0].value;
-	var bOnlyOnName = $('#filter-only-on-name-chk').is(':checked');
+	var sFilter = jQuery('#task-filter')[0].value;
+	var bOnlyOnName = jQuery('#filter-only-on-name-chk').is(':checked');
 
-	if ($('#task-filter')[0].checkValidity()) {
-		$('td.agile-tasks div.agile-sticker-container').each( function(nb,container) {
-			sTaskName = $(container).find('div.agile-sticker-name').text();
+	if (jQuery('#task-filter')[0].checkValidity()) {
+		jQuery('td.agile-tasks div.agile-sticker-container').each( function(nb,container) {
+			let sTaskName = jQuery(container).find('div.agile-sticker-name').text();
 			if (bOnlyOnName) {
 				if (sTaskName.match(sFilter)) {
-					$(container).removeClass('filtred');
+					jQuery(container).removeClass('filtred');
 				} else {
-					$(container).addClass('filtred');
+					jQuery(container).addClass('filtred');
 				}
 			} else {
-				$TaskDescription = $(container).find('div.agile-sticker-description').text();
-				if (sTaskName.match(sFilter) || $TaskDescription.match(sFilter)) {
-					$(container).removeClass('filtred');
+				let TaskDescription = jQuery(container).find('div.agile-sticker-description').text();
+				if (sTaskName.match(sFilter) || TaskDescription.match(sFilter)) {
+					jQuery(container).removeClass('filtred');
 				} else {
-					$(container).addClass('filtred');
+					jQuery(container).addClass('filtred');
 				}
 			}
 		});
@@ -485,29 +485,29 @@ function checkTaskFilter () {
 	try {
 		new RegExp($('#task-filter')[0].value);
 	} catch(e) {
-		$('#task-filter')[0].setCustomValidity(gMessages.invalidRegEx);
+		jQuery('#task-filter')[0].setCustomValidity(gMessages.invalidRegEx);
 		bReturn = false;
 	}
 	if (bReturn) {
-		$('#task-filter')[0].setCustomValidity("");
+		jQuery('#task-filter')[0].setCustomValidity("");
 	}
 	return bReturn
 }
 
 function hideUnlinkedTasks() {
-	$('tr.agile-user-story-0').hide();
+	jQuery('tr.agile-user-story-0').hide();
 }
 
 function showUnlinkedTasks() {
-	$('tr.agile-user-story-0').show();
+	jQuery('tr.agile-user-story-0').show();
 }
 
 function minimizeColumn(phase_id) {
-	$('table#agile-board td.agile-phase-'+phase_id).addClass('minimized');
+	jQuery('table#agile-board td.agile-phase-'+phase_id).addClass('minimized');
 }
 
 function maximizeColumn(phase_id) {
-	$('table#agile-board td.agile-phase-'+phase_id).removeClass('minimized');
+	jQuery('table#agile-board td.agile-phase-'+phase_id).removeClass('minimized');
 }
 
 function taskInPhase( tsk, phase ) {
