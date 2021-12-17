@@ -24,9 +24,9 @@
  */
 
 require_once $gfcommon.'include/escapingUtils.php';
-require_once $gfcommon.'include/session.php';
 require_once $gfcommon.'include/utils.php';
 require_once $gfcommon.'include/config.php';
+require_once $gfcommon.'include/session.php';
 
 // Declare and init variables to store messages
 util_init_messages();
