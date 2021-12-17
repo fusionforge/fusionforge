@@ -1319,8 +1319,8 @@ class FFUser extends FFError {
 	 */
 	function setPreference($preference_name, $value) {
 		$preference_name = strtolower(trim($preference_name));
-		//delete pref if not value passed in
-		if (is_array($this->pref) && array_key_exists($preference_name, $this->user_pref)) {
+		//delete user_pref if not value passed in
+		if (is_array($this->user_pref) && array_key_exists($preference_name, $this->user_pref)) {
 			unset($this->user_pref["$preference_name"]);
 		}
 		if (!isset($value)) {
