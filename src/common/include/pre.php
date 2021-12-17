@@ -5,7 +5,7 @@
  * Copyright 1999-2001, VA Linux Systems
  * Copyright 2010, Roland Mas <lolando@debian.org>
  * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
- * Copyright 2013,2018, Franck Villaume - TrivialDev
+ * Copyright 2013,2018,2021, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -24,6 +24,7 @@
  */
 
 require_once $gfcommon.'include/escapingUtils.php';
+require_once $gfcommon.'include/session.php';
 require_once $gfcommon.'include/utils.php';
 require_once $gfcommon.'include/config.php';
 
