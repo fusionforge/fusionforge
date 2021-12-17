@@ -116,7 +116,7 @@ else
 	os_version=$(rpm -q --qf "%{VERSION}" $(rpm -q --whatprovides redhat-release))
 	case $os_version in
 		7)
-		yum install -y gettext php-cli php-pgsql php-process php-mbstring php-pear-HTTP php-pear-Text-CAPTCHA \
+		yum install -y gettext php-cli php-pgsql php-process php-mbstring php-pear-HTTP php-pear-Text-CAPTCHA php-soap \
 		httpd mod_dav_svn mod_ssl postgresql-server postgresql-contrib nscd \
 		cvs subversion viewvc python-pycurl git gitweb mercurial xinetd \
 		moin mod_wsgi python-psycopg2 \
@@ -126,7 +126,7 @@ else
 		dejavu-fonts-common
 		;;
 		8*)
-		yum install -y gettext php php-cli php-pgsql php-process php-mbstring \
+		yum install -y gettext php php-cli php-pgsql php-process php-mbstring php-soap \
 			httpd mod_dav_svn mod_ssl postgresql-server postgresql-contrib nscd \
 			cvs subversion git gitweb mercurial xinetd \
 			unoconv poppler-utils libreoffice-headless \
