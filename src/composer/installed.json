@@ -1,0 +1,18 @@
+{
+    "packages": [
+        {
+            "name": "vendor/libmarkdown-php",
+            "version": "1.0.2",
+            "version_normalized": "1.0.2.0",
+            "dist": {
+                "type": "zip",
+                "url": "https://littoral.michelf.ca/code/php-markdown/php-markdown-1.0.2.zip"
+            },
+            "type": "library",
+            "installation-source": "dist",
+            "install-path": "../vendor/libmarkdown-php"
+        }
+    ],
+    "dev": true,
+    "dev-package-names": []
+}
