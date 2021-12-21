@@ -308,7 +308,11 @@ $nbh = $count? ' ('.$count.')' : '';
 		/* ]]> */</script>
 		<p>
 		<strong><?php echo _('Post Comment')._(': ') ?><?php echo notepad_button('document.forms.trackermodform.details') ?></strong><br />
-		<textarea id="tracker-comment" name="details" rows="7" style="width: 100%; box-sizing: border-box;" title="<?php echo util_html_secure(html_get_tooltip_description('comment')) ?>"></textarea></p>
+		<textarea id="tracker-comment" name="details" rows="7" style="width: 100%; box-sizing: border-box;" title="<?php echo util_html_secure(html_get_tooltip_description('comment')) ?>"></textarea>
+		<?php if (forge_get_config('tracker_parser_type') == 'markdown')
+			echo html_e('a', array('href' => forge_get_config('markdown_help_page'), 'target' => '_blank'), _('Markdown syntax help'));
+		?>
+		</p>
 		<?php echo $ah->showMessages(); ?>
 	</td></tr>
 <?php echo $HTML->listTableBottom(); ?>
