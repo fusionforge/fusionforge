@@ -98,9 +98,10 @@ if ($external_scm && !$Group->usesPlugin('scmcvs')) {
 	}
 	// pass the parameters passed to this script to the remote script in the same fashion
 	$protocol = forge_get_config('use_ssl', 'scmsvn')? 'https://' : 'http://';
+	$port = util_url_port(forge_get_config('use_ssl', 'scmsvn'));
 	$pathinfo = (isset($_SERVER['PATH_INFO']) ? $_SERVER['PATH_INFO'] : '/');
 	$pathinfo = preg_replace('/ /', '%20', $pathinfo);
-	$script_url = $protocol . $Group->getSCMBox(). $server_script
+	$script_url = $protocol . $Group->getSCMBox(). $port . $server_script
 		. $pathinfo . '?' . $_SERVER["QUERY_STRING"];
 	if ($redirect) {
 		header("Location: $script_url");

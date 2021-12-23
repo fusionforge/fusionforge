@@ -869,6 +869,26 @@ function util_url_prefix($prefix = '') {
 }
 
 /**
+ * util_url_port - Return URL port (:<number>) in case a non standard
+ *                 port is required
+ *
+ * @param	bool   $use_ssl use ssl for the url
+ * @return	string	URL port suffix
+ */
+function util_url_port($use_ssl) {
+	if ($use_ssl) {
+		if (forge_get_config('https_port') && (forge_get_config('https_port') != 443)) {
+			return ':'.forge_get_config('https_port');
+		}
+	} else {
+		if (forge_get_config('http_port') && (forge_get_config('http_port') != 80)) {
+			return ':'.forge_get_config('http_port');
+		}
+	}
+	return '';
+}
+
+/**
  * util_make_base_url - Construct the base URL http[s]://forge_name[:port]
  *
  * @param	string	$prefix (optional) : 'http' or 'https' to force it
@@ -877,15 +897,7 @@ function util_url_prefix($prefix = '') {
 function util_make_base_url($prefix = '') {
 	$url = util_url_prefix($prefix);
 	$url .= forge_get_config('web_host');
-	if (forge_get_config('use_ssl')) {
-		if (forge_get_config('https_port') && (forge_get_config('https_port') != 443)) {
-			$url .= ":".forge_get_config('https_port');
-		}
-	} else {
-		if (forge_get_config('http_port') && (forge_get_config('http_port') != 80)) {
-			$url .= ":".forge_get_config('http_port');
-		}
-	}
+	$url .= util_url_port(forge_get_config('use_ssl'));
 	return $url;
 }
 

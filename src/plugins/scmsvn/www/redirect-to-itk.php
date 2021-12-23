@@ -43,9 +43,13 @@ if (empty($auth)) {
 }
 
 if ($_SERVER['PHP_AUTH_USER'] == forge_get_config('anonsvn_login', 'scmsvn')) {
-    header('Location: http'.((forge_get_config('use_ssl', 'scmsvn')) ? 's' : '').'://' . forge_get_config('scm_host') . '/anonscm/'
-    . $_SERVER['REQUEST_URI'], true, 301);
+	header('Location: http'.((forge_get_config('use_ssl', 'scmsvn')) ? 's' : '').'://' . forge_get_config('scm_host')
+	. util_url_port(forge_get_config('use_ssl', 'scmsvn'))
+	. '/anonscm/'
+	. $_SERVER['REQUEST_URI'], true, 301);
 } else {
-	header('Location: http'.((forge_get_config('use_ssl', 'scmsvn')) ? 's' : '').'://' . forge_get_config('scm_host') . '/authscm/'
+	header('Location: http'.((forge_get_config('use_ssl', 'scmsvn')) ? 's' : '').'://' . forge_get_config('scm_host')
+	. util_url_port(forge_get_config('use_ssl', 'scmsvn'))
+	. '/authscm/'
 	. $_SERVER['PHP_AUTH_USER'] . $_SERVER['REQUEST_URI'], true, 301);
 }

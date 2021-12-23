@@ -68,7 +68,7 @@ some control over it to the project's administrator.");
 		$this->_addHook('activity');
 
 		$this->provides['svn'] = true;
-
+		$this->web_port = util_url_port(forge_get_config('use_ssl', 'scmsvn'));
 		$this->register();
 	}
 
@@ -169,7 +169,7 @@ some control over it to the project's administrator.");
 			foreach ($repo_list as $repo_name) {
 				$modules = $this->topModule($project, $repo_name);
 				foreach ($modules as $module) {
-					$b .= html_e('kbd', array(), 'svn checkout http'.((forge_get_config('use_ssl', 'scmsvn')) ? 's' : '').'://'. $this->getBoxForProject($project). '/anonscm/svn/'.$repo_name.$module).html_e('br');
+					$b .= html_e('kbd', array(), 'svn checkout http'.((forge_get_config('use_ssl', 'scmsvn')) ? 's' : '').'://'. $this->getBoxForProject($project).$this->web_port.'/anonscm/svn/'.$repo_name.$module).html_e('br');
 				}
 			}
 		}
@@ -232,7 +232,7 @@ some control over it to the project's administrator.");
 				foreach ($repo_list as $repo_name) {
 					$modules = $this->topModule($project, $repo_name);
 					foreach ($modules as $module) {
-						$b .= html_e('kbd', array(), 'svn checkout --username '.$d.' http'.((forge_get_config('use_ssl', 'scmsvn')) ? 's' : '').'://'.$this->getBoxForProject($project).'/authscm/'.$d.'/svn/'.$repo_name.$module).html_e('br');
+						$b .= html_e('kbd', array(), 'svn checkout --username '.$d.' http'.((forge_get_config('use_ssl', 'scmsvn')) ? 's' : '').'://'.$this->getBoxForProject($project).$this->web_port.'/authscm/'.$d.'/svn/'.$repo_name.$module).html_e('br');
 					}
 				}
 				$b .= '</div>';
@@ -273,7 +273,7 @@ some control over it to the project's administrator.");
 				foreach ($repo_list as $repo_name) {
 					$modules = $this->topModule($project, $repo_name);
 					foreach ($modules as $module) {
-						$b .= html_e('kbd', array(), 'svn checkout --username '.html_e('em', array(), _('developername'),true, false).' http'.((forge_get_config('use_ssl', 'scmsvn')) ? 's' : '').'://'.$this->getBoxForProject($project).'/authscm/'.html_e('em', array(), _('developername'),true, false).'/svn/'.$repo_name.$module).html_e('br');
+						$b .= html_e('kbd', array(), 'svn checkout --username '.html_e('em', array(), _('developername'),true, false).' http'.((forge_get_config('use_ssl', 'scmsvn')) ? 's' : '').'://'.$this->getBoxForProject($project).$this->web_port.'/authscm/'.html_e('em', array(), _('developername'),true, false).'/svn/'.$repo_name.$module).html_e('br');
 					}
 				}
 				$b .= '</div>';
@@ -756,6 +756,7 @@ some control over it to the project's administrator.");
 
 				// Grab & parse commit log
 				$script_url = $protocol.$this->getBoxForProject($project)
+					. $this->web_port
 					. $server_script
 					.'?unix_group_name='.$project->getUnixName()
 					.'&repo_name='.$repo_name
@@ -849,6 +850,7 @@ some control over it to the project's administrator.");
 			$i = 0;
 			foreach ($repo_list as $repo_name) {
 				$script_url = $protocol.$this->getBoxForProject($project)
+					. $this->web_port
 					. $server_script
 					.'?unix_group_name='.$project->getUnixName()
 					.'&repo_name='.$repo_name
@@ -992,14 +994,14 @@ some control over it to the project's administrator.");
 			$urls = array();
 			$project = group_get_object($arr['group_id']);
 			if (forge_get_config('use_dav', 'scmsvn')) {
-				$urls[] = $protocol.'://'.$this->getBoxForProject($project).'/anonscm/svn/'.$arr['unix_group_name'];
+				$urls[] = $protocol.'://'.$this->getBoxForProject($project).$this->web_port.'/anonscm/svn/'.$arr['unix_group_name'];
 			}
 			if (forge_get_config('use_ssh', 'scmsvn')) {
 				$urls[] = 'svn://'.$this->getBoxForProject($project).$this->svn_root_fs.'/'.$arr['unix_group_name'];
 			}
 			if (session_loggedin()) {
 				if (forge_get_config('use_dav', 'scmsvn')) {
-					$urls[] = $protocol.'://'.$this->getBoxForProject($project).'/authscm/'.$d.'/svn/'.$arr['unix_group_name'];
+					$urls[] = $protocol.'://'.$this->getBoxForProject($project).$this->web_port.'/authscm/'.$d.'/svn/'.$arr['unix_group_name'];
 				}
 				if (forge_get_config('use_ssh', 'scmsvn')) {
 					$urls[] = 'svn+ssh://'.$d.'@'.$this->getBoxForProject($project).$this->svn_root_fs .'/'. $arr['unix_group_name'];

@@ -509,7 +509,7 @@ class CoreApiService {
 			//TODO How to have access to $gfconfig variable ??
 
 			include $gfconfig.'plugins/scmsvn/config.php';
-			$scm_data->connection_string = "http".(($use_ssl) ? "s" : "")."://".$grp->getSCMBox()."/".$svn_root."/".$grp->getUnixName();
+			$scm_data->connection_string = "http".(($use_ssl) ? "s" : "")."://".$grp->getSCMBox().util_url_port($use_ssl)."/".$svn_root."/".$grp->getUnixName();
 		}
 
 		$response->scm_data= $scm_data;
