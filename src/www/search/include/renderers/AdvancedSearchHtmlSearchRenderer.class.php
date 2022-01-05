@@ -5,6 +5,7 @@
  * Copyright 2004 (c) Dominik Haas, GForge Team
  * Copyright 2013, French Ministry of National Education
  * Copyright 2014, Franck Villaume - TrivialDev
+ * Copyright 2021, Guy Morin - DGFiP
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -87,8 +88,6 @@ class AdvancedSearchHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	    site_project_header(array('title' => _('Advanced search'), 'group' => $this->groupId, 'toptab' => 'none'));
 		$sectionarray = $this->getSectionArray();
 		$this->handleTransferInformation($sectionarray);
-
-		echo $this->getAdvancedSearchBox($sectionarray, $this->groupId, $this->words, $this->isExact);
 	}
 
 	/**
@@ -97,12 +96,26 @@ class AdvancedSearchHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	 * @param bool $withpanel
 	 */
 	function writeBody($withpanel = true) {
+	    echo $this->getAdvancedSearchSubmenu();
+	    echo html_e('div', array('id' => 'results'), '', false);
 		global $HTML;
 		if (strlen($this->words) < 3) {
 			echo $HTML->error_msg(_('Error') . _(': ') . _('Search must be at least three characters'));
 		} else {
 			echo $this->getResult();
 		}
+		echo html_e('div', array('id' => 'search'), '', false);
+		echo html_e('hr', array(), '', false);
+		echo html_e('h2', array(), _('Advanced search'), false);
+	}
+	
+	/**
+	 * writeFooter - write the Footer of the output
+	 */
+	function writeFooter() {
+	    $sectionarray = $this->getSectionArray();
+	    $this->handleTransferInformation($sectionarray);
+	    echo $this->getAdvancedSearchBox($sectionarray, $this->groupId, $this->words, $this->isExact);
 	}
 
 	/**
@@ -333,6 +346,21 @@ class AdvancedSearchHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 		return $sections;
 	}
 
+	function getAdvancedSearchSubmenu(){
+	    $res = '';
+	    $res .= html_ao('ul', array('class' => 'submenu'));
+	    $res .= html_ao('li', array());
+	    $res .= html_ao('span', array());
+	    $res .= html_e('a', array('href' => '#results', 'title' => _('Results')), _('Results'), false);
+	    $res .= html_ac(html_ap() -2); // </span></li>
+	    $res .= html_ao('li', array());
+	    $res .= html_ao('span', array());
+	    $res .= html_e('a', array('href' => '#search', 'title' => _('Advanced search')), _('Advanced search'), false);
+	    $res .= html_ac(html_ap() -2); // </span></li>
+	    $res .= html_ac(html_ap() -1); // </ul>
+	    return $res;
+	}
+	
 	function getAdvancedSearchBox($sectionsArray, $group_id, $words, $isExact) {
 		global $HTML;
 		$group = group_get_object($this->groupId);

@@ -528,6 +528,7 @@ a.topTabSelected:hover {
 .widget_titlebar_title {
     color: #505d77;
     padding: 0 4px;
+    font-size: 15px;
 }
 
 .widget_titlebar_close img {
@@ -949,14 +950,14 @@ input, select {
 }
 
 .important {
-	background-color: #c33;
+	background-color: #c44;
 	border: none;
 	color: white;
 	text-shadow: 0 0 1px #960;
 	padding: .4em .8em .1em .8em;
 }
 .requiredfield {
-    color: #c33;
+    color: #c44;
 }
 
 /* Buttons */
