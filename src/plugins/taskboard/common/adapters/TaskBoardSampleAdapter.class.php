@@ -37,21 +37,21 @@ class TaskBoardSampleAdapter extends TaskBoardBasicAdapter {
 		return $ret;
 	}
 
-	function cardBackgroundColor($artifact, $extra_fileld_alias) {
-		$extra_fileld_alias = 'resolution';
+	function cardBackgroundColor($artifact, $extra_field_alias) {
+		$extra_field_alias = 'resolution';
 		static $_cached = array();
 		$ret = '';
 
 		$tracker_id = $artifact->ArtifactType->getID();
 		$element = 0;
 
-		if ($extra_fileld_alias) {
+		if ($extra_field_alias) {
 			$value = '';
 			$color = '';
 
 			$fields_ids = $this->getFieldsIds( $tracker_id );
-			if (array_key_exists($extra_fileld_alias, $fields_ids)) {
-				$extra_field_id =  $fields_ids[$extra_fileld_alias];
+			if (array_key_exists($extra_field_alias, $fields_ids)) {
+				$extra_field_id =  $fields_ids[$extra_field_alias];
 
 				if ($extra_field_id) {
 					$extra_data = $artifact->getExtraFieldData();
@@ -63,8 +63,8 @@ class TaskBoardSampleAdapter extends TaskBoardBasicAdapter {
 							$_cached[$tracker_id] = array();
 						}
 
-						if (!array_key_exists($extra_fileld_alias, $_cached[$tracker_id])) {
-							$_cached[$tracker_id][$extra_fileld_alias] = array();
+						if (!array_key_exists($extra_field_alias, $_cached[$tracker_id])) {
+							$_cached[$tracker_id][$extra_field_alias] = array();
 						}
 
 						if (method_exists($artifact->ArtifactType, 'getElementColors')) {
@@ -74,7 +74,7 @@ class TaskBoardSampleAdapter extends TaskBoardBasicAdapter {
 							);
 
 							$color = $bg_color;
-							$_cached[$tracker_id][$extra_fileld_alias][$value] = $color;
+							$_cached[$tracker_id][$extra_field_alias][$value] = $color;
 
 							$ret = $color;
 						}
