@@ -76,7 +76,7 @@ class hudson_Widget_ProjectJobsOverview extends HudsonOverviewWidget {
 				$this->_global_status_icon = '/'.$this->plugin->getIconsPath() . "status_blue.png";
 			}
 		} else {
-			$this->_use_global_status == false;
+			$this->_use_global_status = false;
 		}
 	}
 
