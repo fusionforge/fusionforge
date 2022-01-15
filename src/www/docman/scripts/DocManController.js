@@ -544,7 +544,7 @@ DocManListFileController.prototype =
 				jQuery('#review-select-mandatory-users').gentleSelect({columns: 3, itemWidth: 150});
 				jQuery('#review-select-optional-users').gentleSelect({columns: 3, itemWidth: 150});
 			}, this)).fail(function(jqXHR, textStatus, errorThrown) {
-					error_msg = jQuery('<p class="error">'+textStatus+': Unable to contact server.</p>');
+					let error_msg = jQuery('<p class="error">'+textStatus+': Unable to contact server.</p>');
 					jQuery('#tabbereditfile-association').prepend(error_msg);
 				});
 
