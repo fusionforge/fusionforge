@@ -488,28 +488,6 @@ class ProjectImporter {
 		return $html;
 	}
 
-	function display_role($role) {
-		$html = '';
-
-		$username = $this->get_user_name($user);
-		$email = $this->get_user_email($user);
-
-		$res = $this->users[$user];
-		$person = $res->getPropValue('sioc:account_of');
-		$res = $this->persons[$person];
-		$name = $res->getPropValue('foaf:name');
-		$role = $this->get_user_role($user);
-
-		$html .= 'User :<br />';
-		$html .= ' account name : '. $username .'<br />';
-		$html .= ' email : '. $email .'<br />';
-		$html .= ' owner : '. $name .'<br />';
-		$html .= ' role : '. $role .'<br />';
-		$html .= '<br/>';
-
-		return $html;
-	}
-
 	/**
 	 * Extract users / persons from the dump
 	 * @param unknown_type $dumpres
