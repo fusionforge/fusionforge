@@ -23,10 +23,9 @@ $tablinks = array(	'/plugins/'.$pluginname.'/index.php',
 					'/plugins/'.$pluginname.'/others.php');
 
 // the header that displays for the user portion of the plugin
-function twitter_User_Header($params) {
-	global $DOCUMENT_ROOT,$HTML, $user_id, $pluginname;
-	$params['toptab']=$pluginname;
-	$params['user']=$user_id;
+function twitter_User_Header($pluginname, $user_id) {
+	$params['toptab'] = $pluginname;
+	$params['user'] = $user_id;
 	site_user_header($params);
 }
 
@@ -59,7 +58,7 @@ function twitter_CheckUser() {
 	}
 
 	//displays the page header and toolbar
-	twitter_User_Header();
+	twitter_User_Header($pluginname, $id);
 	twitter_toolbar();
 
 }
