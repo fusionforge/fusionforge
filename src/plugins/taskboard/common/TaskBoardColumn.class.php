@@ -38,7 +38,11 @@ function &taskboard_column_get_object($taskboard_column_id, $data = false) {
 		if (db_numrows($res) <1) {
 			return false;
 		}
-		$data = db_fetch_array($res);
+		if ($data && is_array($data) && isset($data['taskboard_id'])) {
+			// the db result handle was passed in
+		} else {
+			$data = db_fetch_array($res);
+		}
 
 		$Taskboard = &taskboard_get_object($data['taskboard_id']);
 		$taskboard_columns[$taskboard_column_id] = new TaskBoardColumn($Taskboard, $data);

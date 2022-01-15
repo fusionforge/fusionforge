@@ -42,7 +42,11 @@ function &taskboard_get_object($taskboard_id, $data = false) {
 		if (db_numrows($res) <1) {
 			return false;
 		}
-		$data = db_fetch_array($res);
+		if ($data && is_array($data) && isset($data['group_id'])) {
+			// the db result handle was passed in
+		} else {
+			$data = db_fetch_array($res);
+		}
 
 		$Group = group_get_object($data['group_id']);
 		$trackers[$taskboard_id] = new TaskBoard($Group, $data);
