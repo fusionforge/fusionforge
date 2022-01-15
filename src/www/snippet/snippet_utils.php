@@ -58,8 +58,6 @@ $SCRIPT_LICENSE[8] = 'Collaborative Virtual Workspace License';
 $SCRIPT_LICENSE[9] = 'Ricoh Source Code Public License';
 $SCRIPT_LICENSE[10] = 'Python License';
 $SCRIPT_LICENSE[11] = 'zlib/libpng License';
-$SCRIPT_LICENSE[12] = 'WebSite Only';
-$SCRIPT_LICENSE[13] = 'Other';
 $SCRIPT_LICENSE[12] = _('WebSite Only');
 $SCRIPT_LICENSE[13] = _('Other');
 
