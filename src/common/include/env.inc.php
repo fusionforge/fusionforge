@@ -102,6 +102,7 @@ $include_path = join(PATH_SEPARATOR,
 		'/usr/share/pear',
 		'/usr/share/php/PEAR',
 		'/usr/share/php5/PEAR',
+		'/usr/share/php7/PEAR'
 	)
 );
 
