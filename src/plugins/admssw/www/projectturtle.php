@@ -45,13 +45,13 @@ site_project_header(array('title'=>_('ADMS.SW project meta-data preview'), 'h1' 
 
 $plugin = plugin_get_object($pluginname);
 
-echo '<p>'. sprintf( _('The following is a preview of the (machine-readable) RDF meta-data which can be obtained at <tt>%s</tt> as Turtle'), util_make_url_g($projectname, $group_id)) .'</p>';
+echo '<p>'. sprintf( _('The following is a preview of the (machine-readable) RDF meta-data which can be obtained at <tt>%s</tt> as Turtle'), util_make_url_g($projectname)) .'</p>';
 
 echo $plugin->htmlPreviewProjectAsTurtle($group_id);
 
 echo _('To access this RDF document, you may use, for instance:');
 echo '<br />';
-echo '<kbd>$ curl -H "Accept: text/turtle" '. util_make_url_g($projectname, $group_id) .'</kbd><br />';
+echo '<kbd>$ curl -H "Accept: text/turtle" '. util_make_url_g($projectname) .'</kbd><br />';
 
 $HTML->footer();
 

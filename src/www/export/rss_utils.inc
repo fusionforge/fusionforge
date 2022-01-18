@@ -77,7 +77,7 @@ function rss_dump_project_result_set($res, $title, $desription = '', $callback =
 		}
 		print "  <item>\n";
 		print "   <title>".htmlspecialchars($row['group_name'])."</title>\n";
-		print "   <link>".util_make_base_url().util_make_url_g($row['unix_group_name'],$row['group_id'])."</link>\n";
+		print "   <link>".util_make_base_url().util_make_url_g($row['unix_group_name'])."</link>\n";
 		print "   <description>";
 		print preg_replace('[\n\r]',' ',rss_description($row['short_description']));
 		print $addendum;
@@ -113,7 +113,7 @@ function rss_dump_project_result_array($result, $title, $desription = '', $callb
 		}
 		print "  <item>\n";
 		print "   <title>".htmlspecialchars($row['group_name'])."</title>\n";
-		print "   <link>".util_make_base_url().util_make_url_g($row['unix_group_name'],$row['group_id'])."</link>\n";
+		print "   <link>".util_make_base_url().util_make_url_g($row['unix_group_name'])."</link>\n";
 		print "   <description>";
 		print preg_replace('[\n\r]',' ',rss_description($row['short_description']));
 		print $addendum;

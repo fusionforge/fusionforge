@@ -482,7 +482,7 @@ projects on /projects URLs with content-negotiation
 
 		$proj_uris = array();
 		foreach ($projects as $row_grp) {
-			$proj_uri = util_make_url_g(strtolower($row_grp['unix_group_name']),$row_grp['group_id']).'#project';
+			$proj_uri = util_make_url_g(strtolower($row_grp['unix_group_name'])).'#project';
 			$proj_uris[] = $proj_uri;
 		}
 		if(count($proj_uris)) {
@@ -497,7 +497,7 @@ projects on /projects URLs with content-negotiation
 		// if needed, provide also full details about the projects
 		foreach ($projects as $row_grp) {
 				$group_id = $row_grp['group_id'];
-				//$proj_uri = util_make_url_g(strtolower($row_grp['unix_group_name']),$row_grp['group_id']);
+				//$proj_uri = util_make_url_g(strtolower($row_grp['unix_group_name']));
 				$count = $this->addProjectResourceToGraph($graph, $row_grp['group_id'], $detailed);
 		}
 

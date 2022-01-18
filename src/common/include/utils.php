@@ -1059,17 +1059,16 @@ function util_make_link_g($group_name, $group_id, $text) {
 		return $hook_params['group_link'];
 	}
 
-	return html_e('a', array('href' => util_make_url_g($group_name, $group_id)), $text, true);
+	return html_e('a', array('href' => util_make_url_g($group_name), $text, true);
 }
 
 /**
  * util_make_url_g - Create URL for a project's page
  *
  * @param	string	$group_name
- * @param	int	$group_id
  * @return	string
  */
-function util_make_url_g($group_name, $group_id) {
+function util_make_url_g($group_name) {
 	return util_make_uri('/projects/'.$group_name.'/');
 }
 

@@ -81,7 +81,7 @@ with content-negotiation (application/rdf+xml).");
 		);
 
 		$res = ARC2::getResource($conf);
-		$res->setURI(util_make_url_g($projectname, $group_id).'#project');
+		$res->setURI(util_make_url_g($projectname).'#project');
 
 		// $res->setRel('rdf:type', 'doap:Project');
 		rdfutils_setPropToUri($res, 'rdf:type', 'doap:Project');
@@ -91,7 +91,7 @@ with content-negotiation (application/rdf+xml).");
 		if($project_description) {
 			$res->setProp('doap:description', $project_description);
 		}
-		$homepages = array(util_make_url_g($projectname, $group_id));
+		$homepages = array(util_make_url_g($projectname));
 		$project_homepage = $project->getHomePage();
 		if(!in_array($project_homepage, $homepages)) {
 			$homepages[] = $project_homepage;

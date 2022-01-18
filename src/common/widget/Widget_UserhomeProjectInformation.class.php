@@ -57,7 +57,7 @@ class Widget_UserhomeProjectInformation extends Widget {
 			}
 
 			$project_link = util_make_link_g ($p->getUnixName(),$p->getID(),$p->getPublicName());
-			$project_uri = util_make_url_g ($p->getUnixName(),$p->getID());
+			$project_uri = util_make_url_g($p->getUnixName());
 			// sioc:UserGroups for all members of a project are named after /projects/A_PROJECT/members/
 			$usergroup_uri = $project_uri .'members/';
 

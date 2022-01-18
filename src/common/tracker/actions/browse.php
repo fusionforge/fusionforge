@@ -301,7 +301,7 @@ if ($ath->usesCustomStatuses()) {
 
 // start of RDFa
 $proj_name = $group->getUnixName();
-$proj_url = util_make_url_g($group->getUnixName(),$group_id);
+$proj_url = util_make_url_g($group->getUnixName());
 // the tracker's URIs are constructed in order to support addition of an OSLC-CM REST server
 // inside /tracker/cm/. There each tracker has a URL in the form .../project/PROJ_NAME/atid/ATID
 $tracker_stdzd_uri = util_make_url('/tracker/cm/project/'. $proj_name .'/atid/'. $ath->getID());

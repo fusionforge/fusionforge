@@ -43,7 +43,7 @@ echo html_e('p', array(), _('If you would like to contribute to this project by 
 
 // beginning of the user descripion block
 $project = group_get_object($group_id);
-$project_stdzd_uri = util_make_url_g ($project->getUnixName(), $group_id);
+$project_stdzd_uri = util_make_url_g($project->getUnixName());
 $usergroup_stdzd_uri = $project_stdzd_uri.'members/';
 $content = html_e('span', array('rel' => 'http://www.w3.org/2002/07/owl#sameAs', 'resource' => ''), '', false);
 $content .= html_e('span', array('rev' => 'sioc:has_usergroup', 'resource' => $project_stdzd_uri), '', false);

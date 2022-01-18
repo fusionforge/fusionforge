@@ -88,7 +88,7 @@ class ProjectHtmlSearchRenderer extends HtmlSearchRenderer {
 		$project_name = str_replace('</strong>', '', $project_name);
 
 		if (forge_check_perm('project_read', $project_id)) {
-			header('Location: '.util_make_url_g($project_name,$project_id));
+			header('Location: '.util_make_url_g($project_name));
 		} else {
 			$this->writeHeader();
 			$html = '<h2>'.sprintf(_('Search results for “%s”'), $project_name).'</h2>';

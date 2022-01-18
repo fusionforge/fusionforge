@@ -100,7 +100,7 @@ for ($i_proj = 0; $i_proj < count($projects); $i_proj++) {
 	$row_grp = $projects[$i_proj];
 
 	// Embed RDFa description for /projects/PROJ_NAME
-	$proj_uri = util_make_url_g(strtolower($row_grp['unix_group_name']),$row_grp['group_id']);
+	$proj_uri = util_make_url_g(strtolower($row_grp['unix_group_name']));
 	echo html_ao('div', array('typeof' => 'doap:Project sioc:Space', 'about' => $proj_uri));
 	echo html_e('span', array('rel' => 'planetforge:hosted_by', 'resource' => util_make_url('/')), '', false);
 
