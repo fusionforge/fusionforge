@@ -98,7 +98,7 @@ function loadTaskboard( group_id ) {
 
 			for(let aUserStory of aUserStories) {
 				drawUserStory( aUserStory );
-			};
+			}
 
 			drawBoardProgress();
 
@@ -145,7 +145,7 @@ function drawBoardProgress() {
 	var totalCostRemaining = 0;
 
 	var lastPhaseWithTasks = 0;
-	for( var j=start; j<aPhases.length; j++) {
+	for( let j=start; j<aPhases.length; j++) {
 		aPhases[j].progressTasks = 0;
 		aPhases[j].progressCost = 0;
 		for( let aUserStory of aUserStories ) {
@@ -172,9 +172,9 @@ function drawBoardProgress() {
 	html += '<tr><td style="padding: 0; width: '+ parseInt( 100 / aPhases.length ) +'%">' + gMessages.progressByTasks + ':</td><td style="padding: 0;">';
 
 	var buf = 0;
-	for( var j=start; j<aPhases.length; j++) {
+	for( let j=start; j<aPhases.length; j++) {
 		if( aPhases[j].progressTasks ) {
-			var wt = parseInt(  parseInt( aPhases[j].progressTasks ) / totalTasks * 100 );
+			let wt = parseInt(  parseInt( aPhases[j].progressTasks ) / totalTasks * 100 );
 			if( j == lastPhaseWithTasks ) {
 				// to avoid bad presentation when sum of rounded percemts less then 100
 				wt = 100 - buf;
@@ -195,7 +195,7 @@ function drawBoardProgress() {
 
 	if( parseFloat(totalCostEstimated) > 0 ) {
 		var totalCostCompleted = totalCostEstimated - totalCostRemaining;
-		var wt = parseInt( totalCostCompleted/totalCostEstimated * 100);
+		let wt = parseInt( totalCostCompleted/totalCostEstimated * 100);
 		// show progress by cost
 		html += '<table>';
 		html += '<tr><td style="padding: 0; width: '+ parseInt( 100 / aPhases.length ) +'">' + gMessages.progressByCost + ':</td><td style="padding: 0;">';

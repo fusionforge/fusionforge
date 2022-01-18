@@ -339,7 +339,7 @@ DocManListFileController.prototype =
 					}
 				}
 			}, this)).fail(function(jqXHR, textStatus, errorThrown) {
-					let error_msg = jQuery('<p class="error">'+textStatus+': Unable to contact server.</p>');
+					var error_msg = jQuery('<p class="error">'+textStatus+': Unable to contact server.</p>');
 					jQuery('#maindiv').prepend(error_msg);
 				});
 		} else {
@@ -405,7 +405,7 @@ DocManListFileController.prototype =
 					}
 				}
 			}, this)).fail(function(jqXHR, textStatus, errorThrown) {
-					let error_msg = jQuery('<p class="error">'+textStatus+': Unable to contact server.</p>');
+					var error_msg = jQuery('<p class="error">'+textStatus+': Unable to contact server.</p>');
 					jQuery('#maindiv').prepend(error_msg);
 				});
 		} else {
@@ -501,7 +501,7 @@ DocManListFileController.prototype =
 						});
 				}
 			}, this)).fail(function(jqXHR, textStatus, errorThrown) {
-					let error_msg = jQuery('<p class="error">'+textStatus+': Unable to contact server.</p>');
+					var error_msg = jQuery('<p class="error">'+textStatus+': Unable to contact server.</p>');
 					jQuery('#editFile').prepend(error_msg);
 				});
 
@@ -520,7 +520,7 @@ DocManListFileController.prototype =
 					jQuery('#associationtab').text(data.htmltab);
 				}
 			}, this)).fail(function(jqXHR, textStatus, errorThrown) {
-					let error_msg = jQuery('<p class="error">'+textStatus+': Unable to contact server.</p>');
+					var error_msg = jQuery('<p class="error">'+textStatus+': Unable to contact server.</p>');
 					jQuery('#tabbereditfile-association').prepend(error_msg);
 				});
 
@@ -544,7 +544,7 @@ DocManListFileController.prototype =
 				jQuery('#review-select-mandatory-users').gentleSelect({columns: 3, itemWidth: 150});
 				jQuery('#review-select-optional-users').gentleSelect({columns: 3, itemWidth: 150});
 			}, this)).fail(function(jqXHR, textStatus, errorThrown) {
-					let error_msg = jQuery('<p class="error">'+textStatus+': Unable to contact server.</p>');
+					var error_msg = jQuery('<p class="error">'+textStatus+': Unable to contact server.</p>');
 					jQuery('#tabbereditfile-association').prepend(error_msg);
 				});
 
@@ -641,7 +641,7 @@ DocManListFileController.prototype =
 						jQuery('#editfile-completedreview').prepend(data.html);
 					}
 				}, this.review)).fail(function(jqXHR, textStatus, errorThrown) {
-					error_msg = jQuery('<p class="error">'+textStatus+': Unable to contact server.</p>');
+					var error_msg = jQuery('<p class="error">'+textStatus+': Unable to contact server.</p>');
 					jQuery('#editfile-completedreview').prepend(error_msg);
 				});
 			} else {
@@ -659,7 +659,7 @@ DocManListFileController.prototype =
 					jQuery('#editfile-userstatusreview').prepend(data.html);
 				}
 			}, this.review)).fail(function(jqXHR, textStatus, errorThrown) {
-					error_msg = jQuery('<p class="error">'+textStatus+': Unable to contact server.</p>');
+					var error_msg = jQuery('<p class="error">'+textStatus+': Unable to contact server.</p>');
 					jQuery('#editfile-userstatusreview').prepend(error_msg);
 				});
 			jQuery('#new_review').val(0);
@@ -687,7 +687,7 @@ DocManListFileController.prototype =
 				jQuery('#editfile-commentreview').prepend(data.html);
 			}
 		}, this.comment)).fail(function(jqXHR, textStatus, errorThrown) {
-					error_msg = jQuery('<p class="error">'+textStatus+': Unable to contact server.</p>');
+					var error_msg = jQuery('<p class="error">'+textStatus+': Unable to contact server.</p>');
 					jQuery('#editfile-commentreview').prepend(error_msg);
 				});
 	},
@@ -708,7 +708,7 @@ DocManListFileController.prototype =
 					jQuery('#defaulteditzone').text(data.body);
 				}
 			}, this)).fail(function(jqXHR, textStatus, errorThrown) {
-					error_msg = jQuery('<p class="error">'+textStatus+': Unable to contact server.</p>');
+					var error_msg = jQuery('<p class="error">'+textStatus+': Unable to contact server.</p>');
 					jQuery('#defaulteditzone').prepend(error_msg);
 				});
 		}
@@ -785,7 +785,7 @@ DocManListFileController.prototype =
 					}
 				}
 			}, this.delversion)).fail(function(jqXHR, textStatus, errorThrown) {
-					error_msg = jQuery('<p class="error">'+textStatus+': Unable to contact server.</p>');
+					var error_msg = jQuery('<p class="error">'+textStatus+': Unable to contact server.</p>');
 					jQuery('#editFile').prepend(error_msg);
 				});
 	},
@@ -815,7 +815,7 @@ DocManListFileController.prototype =
 					}
 				}
 			}, this.delreview)).fail(function(jqXHR, textStatus, errorThrown) {
-					error_msg = jQuery('<p class="error">'+textStatus+': Unable to contact server.</p>');
+					var error_msg = jQuery('<p class="error">'+textStatus+': Unable to contact server.</p>');
 					jQuery('#editFile').prepend(error_msg);
 				});
 	},
