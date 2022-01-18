@@ -1059,7 +1059,7 @@ function util_make_link_g($group_name, $group_id, $text) {
 		return $hook_params['group_link'];
 	}
 
-	return html_e('a', array('href' => util_make_url_g($group_name), $text, true);
+	return html_e('a', array('href' => util_make_url_g($group_name)), $text, true);
 }
 
 /**
