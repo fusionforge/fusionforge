@@ -56,6 +56,7 @@ fix_httpd_access() {
 	if grep SUSE /etc/os-release >/dev/null 2>&1; then
 		grep -q "granted" /etc/apache2/httpd.conf || sed -i -e "s/denied/granted/" /etc/apache2/httpd.conf
 		grep -q "Allow from" /etc/apache2/httpd.conf || sed -i -e "s/Deny from/Allow from/g" /etc/apache2/httpd.conf
+		grep -q "Options +FollowSymLinks" /etc/apache2/http.conf || sed -i -e "s/Options None/Options +FollowSymLinks/" /etc/apache2/http.conf
 		grep -q "^APACHE_SERVER_FLAGS" /etc/sysconfig/apache2 | grep -q "SSL" || sed -i -e "s/^APACHE_SERVER_FLAGS=.*$/APACHE_SERVER_FLAGS=\"SSL\"/" /etc/sysconfig/apache2
 		service apache2 restart
 	fi
