@@ -107,7 +107,7 @@ elif [[ ! -z `cat /etc/os-release | grep 'SUSE'` ]]; then
 		mercurial \
 		python-psycopg2 \
 		mediawiki moinmoin-wiki \
-		vsftpd xinetd
+		vsftpd xinetd insserv-compat
 	suse_backport_from_fedora_rpm
 else
 	yum install -y make tar
