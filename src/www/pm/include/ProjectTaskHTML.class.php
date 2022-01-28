@@ -131,8 +131,8 @@ class ProjectTaskHTML extends ProjectTask {
 		/*
 			Show the details rows from task_history
 		*/
-		$result=$this->getMessages($asc);
-		$rows=db_numrows($result);
+		$result = $this->getMessages($asc);
+		$rows = db_numrows($result);
 
 		if ($rows > 0) {
 			$title = _('Comments')._(': ');
@@ -154,7 +154,7 @@ class ProjectTaskHTML extends ProjectTask {
 			for ($i = 0; $i < $rows; $i++) {
 				$cells = array();
 				$sanitizer = new TextSanitizer();
-				$body = $sanitizer->SanitizeHtml(db_result($result, $i, 'body'));
+				$body = util_gen_cross_ref($sanitizer->SanitizeHtml(db_result($result, $i, 'body')), $this->getProjectGroup()->getGroup()->getID());
 				if (strpos($body,'<') === false) {
 					$cells[][] = nl2br(db_result($result, $i, 'body'));
 				} else {
