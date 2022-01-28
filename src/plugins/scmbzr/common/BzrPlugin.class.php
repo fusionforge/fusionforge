@@ -3,7 +3,7 @@
  * FusionForge Bazaar plugin
  *
  * Copyright 2009, Roland Mas
- * Copyright 2013-2014,2017,2021, Franck Villaume - TrivialDev
+ * Copyright 2013-2014,2017,2021-2022, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge.
  *
@@ -28,6 +28,9 @@ forge_define_config_item('default_server', 'scmbzr', forge_get_config('scm_host'
 forge_define_config_item('repos_path', 'scmbzr', forge_get_config('chroot').'/scmrepos/bzr');
 
 class BzrPlugin extends SCMPlugin {
+
+	var $main_branch_names = array();
+
 	function __construct() {
 		global $gfconfig;
 		parent::__construct();
@@ -43,7 +46,6 @@ over it to the project's administrator.");
 		$this->hooks[] = 'scm_gather_stats';
 		$this->hooks[] = 'scm_admin_form';
 
-		$this->main_branch_names = array();
 		$this->main_branch_names[] = 'trunk';
 		$this->main_branch_names[] = 'master';
 		$this->main_branch_names[] = 'main';
@@ -290,8 +292,10 @@ over it to the project's administrator.");
 			$month = $params ['month'] ;
 			$day = $params ['day'] ;
 
-                        $updates = 0 ;
-                        $adds = 0 ;
+			$adds = 0 ;
+			$updates = 0 ;
+			$deletes = 0;
+			$commits = 0;
 			$usr_adds = array () ;
 			$usr_updates = array () ;
 			$usr_deletes = array () ;

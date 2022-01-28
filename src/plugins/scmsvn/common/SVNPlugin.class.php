@@ -5,7 +5,7 @@
  * Copyright 2003-2010, Roland Mas, Franck Villaume
  * Copyright 2004, GForge, LLC
  * Copyright 2010, Alain Peyrat <aljeux@free.fr>
- * Copyright 2012-2014,2016-2018,2021, Franck Villaume - TrivialDev
+ * Copyright 2012-2014,2016-2018,2021-2022, Franck Villaume - TrivialDev
  * Copyright 2013, French Ministry of National Education
  *
  * This file is part of FusionForge.
@@ -42,6 +42,7 @@ class SVNPlugin extends SCMPlugin {
 
 	var $svn_root_dav;
 	var $svn_root_fs;
+	var $web_port;
 
 	function __construct() {
 		parent::__construct();
