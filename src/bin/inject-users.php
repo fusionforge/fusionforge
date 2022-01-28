@@ -2,7 +2,7 @@
 <?php
 /**
  * Copyright 2009, Roland Mas
- * Copyright 2017, Franck Villaume - TrivialDev
+ * Copyright 2017,2022, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -62,7 +62,7 @@ while (! feof ($f)) {
 	$u = new FFUser();
 
 	$r = $u->create($login, $fname, $lname, $password, $password, $email,
-			 1, 0, 1, 'UTC', '', '', $themeId,
+			 1, 0, 1, 'UTC', $themeId,
 			 'shell', '', '', '', '', '', 'US', false);
 
 	if (!$r) {

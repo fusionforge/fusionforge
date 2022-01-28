@@ -935,7 +935,7 @@ class CliActions {
 				$createtimestamp = null;
 			}
 			if (!$ffuser->create($stream['data_array']['user_name'], $stream['data_array']['firstname'], $stream['data_array']['lastname'], $password, $password,
-					$stream['data_array']['email'], $mail_siteupdates, $mail_va, $language_id, $timezone, null, null, $theme_id, $unix_box,
+					$stream['data_array']['email'], $mail_siteupdates, $mail_va, $language_id, $timezone, $theme_id, $unix_box,
 					$address, $address2, $phone, $fax, $title, $ccode, $send_mail, $tooltips)) {
 				echo $ffuser->getErrorMessage()."\n";
 				db_rollback();

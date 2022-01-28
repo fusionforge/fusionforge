@@ -5,7 +5,7 @@
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2010-2011, Franck Villaume - Capgemini
  * Copyright 2011, Alain Peyrat - Alcatel-Lucent
- * Copyright 2012-2014,2016, Franck Villaume - TrivialDev
+ * Copyright 2012-2014,2016,2022, Franck Villaume - TrivialDev
  * Copyright 2013, French Ministry of National Education
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -89,7 +89,7 @@ if (getStringFromRequest('submit')) {
 		$refresh = ($language != $u->getLanguage() || $theme_id != $u->getThemeID());
 
 		if (!$u->update($firstname, $lastname, $language, $timezone, $mail_site, $mail_va, $use_ratings,
-				'',0,$theme_id,$address,$address2,$phone,$fax,$title,$ccode,$use_tooltips)
+				$theme_id,$address,$address2,$phone,$fax,$title,$ccode,$use_tooltips)
 				|| !$u->setPreference('quicknav_mode', $quicknav_mode)) {
 			form_release_key(getStringFromRequest('form_key'));
 			$error_msg = $u->getErrorMessage();

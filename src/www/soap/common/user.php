@@ -3,6 +3,7 @@
  * SOAP User Include - this file contains wrapper functions for the SOAP interface
  *
  * Copyright 2004 (c) GForge, LLC
+ * Copyright 2022, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -98,7 +99,7 @@ $server->register(
 );
 
 //addUser (unix_name,firstname,lastname,password1,password2,email,
-	//mail_site,mail_va,language_id,timezone,dummy1,dummy2,
+	//mail_site,mail_va,language_id,timezone,
 	//theme_id,unix_box='shell',address='',address2='',phone='',fax='',
 	//title='',ccode='US',send_mail)
 $server->register(
@@ -108,7 +109,6 @@ $server->register(
 		'password2' => 'xsd:string', 'email' => 'xsd:string',
 		'mail_site' => 'xsd:string', 'mail_va' => 'xsd:string',
 		'language_id' => 'xsd:int', 'timezone' => 'xsd:string',
-		'jabber_address' => 'xsd:string', 'jabber_only' => 'xsd:int',
 		'theme_id' => 'xsd:int', 'unix_box' => 'xsd:string',
 		'address' => 'xsd:string', 'address2' => 'xsd:string',
 		'phone' => 'xsd:string', 'fax' => 'xsd:string',
@@ -118,7 +118,7 @@ $server->register(
 	$uri.'#addUser', 'rpc', 'encoded'
 );
 
-//updateUser  (session_ser,user_id,firstname,lastname,language_id,timezone,mail_site,mail_va,use_ratings,dummy1,dummy2,theme_id,address,address2,phone,fax,title,ccode)
+//updateUser  (session_ser,user_id,firstname,lastname,language_id,timezone,mail_site,mail_va,use_ratings,theme_id,address,address2,phone,fax,title,ccode)
 $server->register(
 	'updateUser',
 	array('session_ser' => 'xsd:string',
@@ -130,8 +130,6 @@ $server->register(
 		'mail_site' => 'xsd:string',
 		'mail_va' => 'xsd:string',
 		'use_ratings' => 'xsd:string',
-		'jabber_address' => 'xsd:string',
-		'jabber_only' => 'xsd:int',
 		'theme_id' => 'xsd:int',
 		'address' => 'xsd:string',
 		'address2' => 'xsd:string',
@@ -244,10 +242,10 @@ function getUsersByName($session_ser, $user_names) {
 
 //add user object
 function addUser($unix_name, $firstname, $lastname, $password1, $password2, $email,
-		$mail_site, $mail_va, $language_id, $timezone, $jabber_address, $jabber_only, $theme_id, $unix_box, $address, $address2, $phone, $fax, $title, $ccode) {
+		$mail_site, $mail_va, $language_id, $timezone, $theme_id, $unix_box, $address, $address2, $phone, $fax, $title, $ccode) {
 	$new_user = new FFUser();
 
-	$register = $new_user->create($unix_name, $firstname, $lastname, $password1, $password2, $email, $mail_site, $mail_va, $language_id, $timezone, $jabber_address, $jabber_only, $theme_id, $unix_box, $address, $address2, $phone, $fax, $title, $ccode);
+	$register = $new_user->create($unix_name, $firstname, $lastname, $password1, $password2, $email, $mail_site, $mail_va, $language_id, $timezone, $theme_id, $unix_box, $address, $address2, $phone, $fax, $title, $ccode);
 
 	if (!$register) {
 		return new soap_fault('3004', 'user', 'Could Not Add A New User', 'Could Not Add A New User');
@@ -257,14 +255,14 @@ function addUser($unix_name, $firstname, $lastname, $password1, $password2, $ema
 }
 
 //update user object
-function updateUser ($session_ser, $user_id, $firstname, $lastname, $language_id, $timezone, $mail_site, $mail_va, $use_ratings, $jabber_address, $jabber_only, $theme_id, $address, $address2, $phone, $fax, $title, $ccode) {
+function updateUser ($session_ser, $user_id, $firstname, $lastname, $language_id, $timezone, $mail_site, $mail_va, $use_ratings, $theme_id, $address, $address2, $phone, $fax, $title, $ccode) {
 	continue_session($session_ser);
 	$user = user_get_object($user_id);
 	if (!$user || !is_object($user) || !($user->getID() == user_getid() || forge_check_global_perm('forge_admin'))) {
 		return new soap_fault('updateUser', 'Could Not Get User', 'Could Not Get User');
 	}
 
-	if (!$user->update($firstname, $lastname, $language_id, $timezone, $mail_site, $mail_va, $use_ratings, $jabber_address, $jabber_only, $theme_id, $address, $address2, $phone, $fax, $title, $ccode)) {
+	if (!$user->update($firstname, $lastname, $language_id, $timezone, $mail_site, $mail_va, $use_ratings, $theme_id, $address, $address2, $phone, $fax, $title, $ccode)) {
 	    return new soap_fault('updateUser', $user->getErrorMessage(), $user->getErrorMessage());
 	} else {
 		return $user->getID();

@@ -5,7 +5,7 @@
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2010 (c) FusionForge Team
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
- * Copyright 2013-2014,2016, Franck Villaume - TrivialDev
+ * Copyright 2013-2014,2016,2022, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -100,7 +100,7 @@ if (getStringFromRequest('submit')) {
 
 		$new_user = new FFUser();
 		$register = $new_user->create($unix_name,$firstname,$lastname,$password1,$password2,
-					      $email,$mail_site,$mail_va,$language_id,$timezone,'',0,$theme_id,'',
+					      $email,$mail_site,$mail_va,$language_id,$timezone,$theme_id,'',
 					      $address,$address2,$phone,$fax,$title,$ccode,$send_mail);
 		if ($register) {
 			site_header(array('title'=>_('Register Confirmation')));

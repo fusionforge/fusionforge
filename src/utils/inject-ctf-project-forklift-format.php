@@ -256,7 +256,7 @@ if (is_file($project_path.'/user.xml')) {
 				$userObject = new FFUser();
 				$r = $userObject->create($user_username, $user_firstname, $user_lastname,
 							$user_default_password, $user_default_password, $user_email,
-							1, 0, $user_language, $user_timezone, '', '',
+							1, 0, $user_language, $user_timezone,
 							$themeId, 'shell', '', '', '', '', '', 'US', false, true, $user_createdate);
 				if (!$r) {
 					echo 'Error: '.$user_username.' '.$userObject->getErrorMessage()."\n";

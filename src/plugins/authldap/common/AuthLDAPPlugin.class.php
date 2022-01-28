@@ -7,7 +7,7 @@
  * Copyright 2009-2010, Alain Peyrat, Alcatel-Lucent
  * Copyright 2009, Chris Dalzell, OpenGameForge.org
  * Copyright 2011, Roland Mas
- * Copyright 2014, Franck Villaume - TrivialDev
+ * Copyright 2014,2022, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -98,8 +98,6 @@ into the FusionForge database.");
 			$user_data['mail_va'] = 0;
 			$user_data['language_id'] = 1;
 			$user_data['timezone'] = 'GMT';
-			$user_data['jabber_address'] = '';
-			$user_data['jabber_only'] = 0;
 			$user_data['theme_id'] = getThemeIdFromName(forge_get_config('default_theme'));
 			$user_data['unix_box'] = '';
 			$user_data['address'] = '';
@@ -128,8 +126,6 @@ into the FusionForge database.");
 					 $user_data['mail_va'],
 					 $user_data['language_id'],
 					 $user_data['timezone'],
-					 $user_data['jabber_address'],
-					 $user_data['jabber_only'],
 					 $user_data['theme_id'],
 					 $user_data['unix_box'],
 					 $user_data['address'],
@@ -180,8 +176,6 @@ into the FusionForge database.");
 			   $u->getMailingsPrefs('site'),
 			   $u->getMailingsPrefs('va'),
 			   $u->usesRatings(),
-			   '',
-			   0,
 			   $u->getThemeID(),
 			   $u->getAddress(),
 			   $u->getAddress2(),

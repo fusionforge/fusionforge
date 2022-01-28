@@ -5,7 +5,7 @@
  * Copyright 1999-2001, VA Linux Systems, Inc.
  * Copyright 2009-2010, Roland Mas
  * Copyright 2011, Franck Villaume - Capgemini
- * Copyright 2012-2015,2018, Franck Villaume - TrivialDev
+ * Copyright 2012-2015,2018,2022, Franck Villaume - TrivialDev
  * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
  * http://fusionforge.org
  *
@@ -292,8 +292,6 @@ class FFUser extends FFError {
 	 * @param	string		$mail_va	The users preferred default timezone.
 	 * @param	int		$language_id	The ID of the language preference.
 	 * @param	string		$timezone	The users preferred default timezone.
-	 * @param	string		$dummy1		ignored	(no longer used)
-	 * @param	int		$dummy2		ignored	(no longer used)
 	 * @param	int		$theme_id	The users theme_id.
 	 * @param	string		$unix_box	The users unix_box.
 	 * @param	string		$address	The users address.
@@ -310,7 +308,7 @@ class FFUser extends FFError {
 	 */
 	function create($unix_name, $firstname, $lastname, $password1, $password2, $email,
 					$mail_site, $mail_va, $language_id, $timezone,
-					$dummy1, $dummy2, $theme_id, $unix_box = 'shell',
+					$theme_id, $unix_box = 'shell',
 					$address = '', $address2 = '', $phone = '', $fax = '', $title = '',
 					$ccode = 'US', $send_mail = true, $tooltips = true, $createtime = 0) {
 		global $SYS;
@@ -565,8 +563,6 @@ class FFUser extends FFError {
 	 * @param	string	$mail_site	The users preference for receiving site updates by email.
 	 * @param	string	$mail_va	The users preference for receiving community updates by email.
 	 * @param	string	$use_ratings	The users preference for being participating in "peer ratings".
-	 * @param	string	$dummy1		ignored	(no longer used)
-	 * @param	int	$dummy2		ignored	(no longer used)
 	 * @param	int	$theme_id	The users theme_id preference.
 	 * @param	string	$address	The users address.
 	 * @param	string	$address2	The users address2.
@@ -579,8 +575,8 @@ class FFUser extends FFError {
 	 * @return	bool
 	 */
 	function update($firstname, $lastname, $language_id, $timezone, $mail_site, $mail_va, $use_ratings,
-					$dummy1, $dummy2, $theme_id, $address, $address2, $phone, $fax, $title,
-					$ccode, $tooltips, $email = '') {
+			$theme_id, $address, $address2, $phone, $fax, $title,
+			$ccode, $tooltips, $email = '') {
 		$mail_site = $mail_site ? 1 : 0;
 		$mail_va = $mail_va ? 1 : 0;
 		$block_ratings = $use_ratings ? 0 : 1;
