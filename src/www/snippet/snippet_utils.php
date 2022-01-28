@@ -187,7 +187,7 @@ function snippet_show_package_snippets($version) {
 }
 
 function snippet_show_package_details($id) {
-	global $SCRIPT_CATEGORY,$SCRIPT_LANGUAGE;
+	global $SCRIPT_CATEGORY, $SCRIPT_LANGUAGE, $gfcommon;
 
 	$result = db_query_params("SELECT * FROM snippet_package WHERE snippet_package_id=$1", array($id));
 
@@ -227,7 +227,7 @@ function snippet_show_package_details($id) {
 }
 
 function snippet_show_snippet_details($id) {
-	global $SCRIPT_TYPE,$SCRIPT_CATEGORY,$SCRIPT_LICENSE,$SCRIPT_LANGUAGE;
+	global $SCRIPT_TYPE, $SCRIPT_CATEGORY, $SCRIPT_LICENSE, $SCRIPT_LANGUAGE, $gfcommon;
 
 	$result=db_query_params("SELECT * FROM snippet WHERE snippet_id=$1", array($id));
 
@@ -266,8 +266,3 @@ function snippet_show_snippet_details($id) {
 
 	</table>';
 }
-
-// Local Variables:
-// mode: php
-// c-file-style: "bsd"
-// End:
