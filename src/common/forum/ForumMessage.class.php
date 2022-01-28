@@ -5,7 +5,7 @@
  * Copyright 1999-2000, Tim Perdue/Sourceforge
  * Copyright 2002, Tim Perdue/GForge, LLC
  * Copyright 2009, Roland Mas
- * Copyright 2013,2021, Franck Villaume - TrivialDev
+ * Copyright 2013,2021-2022, Franck Villaume - TrivialDev
  * Copyright 2013, French Ministry of National Education
  * Copyright 2021, Guy Morin - French Ministry of Finances, DGFiP
  *
@@ -771,7 +771,7 @@ Or reply to this e-mail entering your response between the following markers:
 							  db_int_array_to_any_clause ($ids))) ;
 		}
 
-		$BCC = implode(util_result_column_to_array($bccres),',').','.$this->Forum->getSendAllPostsTo();
+		$BCC = implode(',', util_result_column_to_array($bccres)).','.$this->Forum->getSendAllPostsTo();
 		util_send_message('',$subject,$body,"noreply@".forge_get_config('web_host'),$BCC,'Forum',$extra_headers);
 		return true;
 	}
@@ -872,15 +872,10 @@ Or reply to this e-mail entering your response between the following markers:
 							   array ('A',
 								  db_int_array_to_any_clause ($ids))) ;
 			}
-			$BCC = implode(util_result_column_to_array($bccres),',').','.$this->Forum->getSendAllPostsTo();
+			$BCC = implode(',', util_result_column_to_array($bccres)).','.$this->Forum->getSendAllPostsTo();
 			util_send_message('',$subject,$body,"noreply@".forge_get_config('web_host'),$BCC,'Forum',$extra_headers);
 			return true;
 		}
 		return false;
 	}
 }
-
-// Local Variables:
-// mode: php
-// c-file-style: "bsd"
-// End:

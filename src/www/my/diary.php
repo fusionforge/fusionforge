@@ -4,7 +4,7 @@
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright (C) 2010 Alain Peyrat - Alcatel-Lucent
- * Copyright 2011,2016, Franck Villaume - TrivialDev
+ * Copyright 2011,2016,2022, Franck Villaume - TrivialDev
  * Copyright 2014, Stéphane-Eymeric Bredthauer
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -92,7 +92,7 @@ if (!session_loggedin()) {
 
 					if ($result) {
 						if ($rows > 0) {
-							$tolist=implode(util_result_column_to_array($result),', ');
+							$tolist=implode(', ', util_result_column_to_array($result));
 
 							$to = ''; // send to noreply@
 							$subject = sprintf (_("[%s User Notes: %s] %s"),

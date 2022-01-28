@@ -7,7 +7,7 @@
  * Copyright 2009-2011, Franck Villaume - Capgemini
  * Copyright 2010-2012, Thorsten Glaser - Tarent
  * Copyright 2010-2012, Alain Peyrat - Alcatel-Lucent
- * Copyright 2013,2016-2018,2021, Franck Villaume - TrivialDev
+ * Copyright 2013,2016-2018,2021-2022, Franck Villaume - TrivialDev
  * Copyright 2016, Stéphane-Eymeric Bredthauer - TrivalDev
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -296,7 +296,7 @@ function util_handle_message($id_arr, $subject, $body, $extra_emails = '', $from
 			$address['email'][] = db_result($res,$i,'email');
 		}
 		if (isset ($address['email']) && !empty($address['email'])) {
-			$extra_emails = implode($address['email'], ',').','.$extra_emails;
+			$extra_emails = implode(',', $address['email']).','.$extra_emails;
 		}
 	}
 	if ($extra_emails) {
@@ -1664,8 +1664,3 @@ function utils_array_diff_names($tab1, $tab2) {
 	reset($tab2);
 	return $diff;
 }
-
-// Local Variables:
-// mode: php
-// c-file-style: "bsd"
-// End:
