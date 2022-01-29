@@ -2,7 +2,7 @@
 /**
  * headermenu plugin : index page
  *
- * Copyright 2012, Franck Villaume - TrivialDev
+ * Copyright 2012,2022, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -64,17 +64,15 @@ switch ($type) {
 		break;
 	}
 	case 'pageview': {
-		$pageid = getIntFromRequest('pageid');
-		$headermenu->pageid = $pageid;
+		$headermenu->pageid = getIntFromRequest('pageid');
 		$headermenu->getHeader($type);
-		echo $headermenu->pageView($pageid);
+		echo $headermenu->pageView($headermenu->pageid);
 		break;
 	}
 	case 'iframeview': {
-		$pageid = getIntFromRequest('pageid');
-		$headermenu->pageid = $pageid;
+		$headermenu->pageid = getIntFromRequest('pageid');
 		$headermenu->getHeader($type);
-		echo $headermenu->iframeView($pageid);
+		echo $headermenu->iframeView($headermenu->pageid);
 		break;
 	}
 	case 'projectadmin': {

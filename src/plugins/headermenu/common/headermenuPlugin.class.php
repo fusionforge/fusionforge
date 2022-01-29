@@ -3,7 +3,7 @@
 /**
  * headermenuPlugin Class
  *
- * Copyright 2012-2014,2017, Franck Villaume - TrivialDev
+ * Copyright 2012-2014,2017,2022, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -23,6 +23,8 @@
  */
 
 class headermenuPlugin extends Plugin {
+
+	var $pageid;
 
 	function __construct() {
 		parent::__construct();
