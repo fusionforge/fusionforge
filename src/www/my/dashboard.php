@@ -174,21 +174,21 @@ if (!session_loggedin()) {
 								if ($display_col['related_tasks']) {
 									$result_tasks = $art->getRelatedTasks();
 									if($result_tasks) {
-										$cell_text ='';
+										$cell_text = '';
 										$taskcount = db_numrows($art->getRelatedTasks());
 										if ($taskcount > 0) {
 											for ($itask = 0; $itask < $taskcount; $itask++) {
-												if($itask>0)
+												if ($itask > 0) {
 													$cell_text .= html_e('br');
-
-												$taskinfo = db_fetch_array($art->getRelatedTasks(), $itask);
+												}
+												$taskinfo = db_fetch_array($art->getRelatedTasks());
 												$taskid = $taskinfo['project_task_id'];
 												$projectid = $taskinfo['group_project_id'];
-												$groupid   = $taskinfo['group_id'];
+												$groupid = $taskinfo['group_id'];
 												$g = group_get_object($groupid);
 												$pg = new ProjectGroup($g, $projectid);
 												$cell_text .= $pg->getName().html_e('br');
-												$summary   = util_unconvert_htmlspecialchars($taskinfo['summary']);
+												$summary = util_unconvert_htmlspecialchars($taskinfo['summary']);
 												$cell_text .= util_make_link('/pm/task.php?func=detailtask&project_task_id='.$taskid.'&group_id='.$groupid.'&group_project_id='.$projectid, $summary);
 											}
 										}
