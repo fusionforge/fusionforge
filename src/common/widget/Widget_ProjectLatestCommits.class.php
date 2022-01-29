@@ -2,7 +2,7 @@
 /**
  * Widget_ProjectLatestCommits
  *
- * Copyright 2014,2017-2018,2021, Franck Villaume - TrivialDev
+ * Copyright 2014,2017-2018,2021-2022, Franck Villaume - TrivialDev
  *
  * This file is a part of Fusionforge.
  *
@@ -31,12 +31,12 @@ class Widget_ProjectLatestCommits extends Widget {
 		global $project;
 		parent::__construct('projectlatestcommits');
 		if ($project && $this->canBeUsedByProject($project) && forge_check_perm('scm', $project->getID(), 'read')) {
-			$this->content['title'] = _('5 Latest Commits');
+			$this->title = _('5 Latest Commits');
 		}
 	}
 
 	public function getTitle() {
-		return _('5 Latest Commits');
+		return $this->title;
 	}
 
 	public function _getLinkToCommit($project, $commit_id, $plugin_name, $repo_name) {
@@ -112,7 +112,7 @@ class Widget_ProjectLatestCommits extends Widget {
 	}
 
 	function isAvailable() {
-		return isset($this->content['title']);
+		return isset($this->title);
 	}
 
 	function canBeUsedByProject(&$project) {

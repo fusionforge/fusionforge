@@ -1,7 +1,7 @@
 <?php
 /**
  * Copyright (c) Xerox Corporation, Codendi Team, 2001-2009. All rights reserved
- * Copyright 2012,2014,2016-2019, Franck Villaume - TrivialDev
+ * Copyright 2012,2014,2016-2019,2022, Franck Villaume - TrivialDev
  *
  * This file is a part of Fusionforge.
  *
@@ -90,6 +90,7 @@ require_once $gfcommon.'widget/Widget_UserhomeRss.class.php';
 	var $buttons;
 	var $owner_id;
 	var $owner_type;
+	var $title = null;
 
 	function __construct($id) {
 		$this->id = $id;

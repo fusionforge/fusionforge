@@ -25,8 +25,6 @@ require_once 'Widget.class.php';
 
 class Widget_TrackerDefaultActions extends Widget {
 
-	var $title;
-
 	function __construct() {
 		global $func;
 		$owner_id   = (int)substr(getStringFromRequest('owner'), 1);

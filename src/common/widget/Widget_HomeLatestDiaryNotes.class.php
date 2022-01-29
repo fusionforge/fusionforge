@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright 2019, Franck Villaume - TrivialDev
+ * Copyright 2019,2022, Franck Villaume - TrivialDev
  * This file is a part of Fusionforge.
  *
  * Fusionforge is free software; you can redistribute it and/or modify
@@ -24,7 +24,7 @@ class Widget_HomeLatestDiaryNotes extends Widget {
 	function __construct() {
 		parent::__construct('homelatestdiarynotes');
 		if (forge_get_config('use_diary')) {
-			$this->content['title'] = _('Latest 5 public diary & notes.');
+			$this->title = _('Latest 5 public diary & notes.');
 		}
 	}
 
@@ -33,7 +33,7 @@ class Widget_HomeLatestDiaryNotes extends Widget {
 	}
 
 	function getTitle() {
-		return $this->content['title'];
+		return $this->title;
 	}
 
 	function getDescription() {
@@ -41,7 +41,7 @@ class Widget_HomeLatestDiaryNotes extends Widget {
 	}
 
 	function isAvailable() {
-		return isset($this->content['title']);
+		return isset($this->title);
 	}
 
 	function getContent() {

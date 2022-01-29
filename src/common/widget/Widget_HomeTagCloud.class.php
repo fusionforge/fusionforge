@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright 2016, Franck Villaume - TrivialDev
+ * Copyright 2016,2022, Franck Villaume - TrivialDev
  * This file is a part of Fusionforge.
  *
  * Fusionforge is free software; you can redistribute it and/or modify
@@ -24,12 +24,12 @@ class Widget_HomeTagCloud extends Widget {
 	function __construct() {
 		parent::__construct('hometagcloud');
 		if (forge_get_config('use_project_tags')) {
-			$this->content['title'] = _('Tag Cloud');
+			$this->title = _('Tag Cloud');
 		}
 	}
 
 	function getTitle() {
-		return $this->content['title'];
+		return $this->title;
 	}
 
 	function getContent() {
@@ -37,7 +37,7 @@ class Widget_HomeTagCloud extends Widget {
 	}
 
 	function isAvailable() {
-		return isset($this->content['title']);
+		return isset($this->title);
 	}
 
 	function getDescription() {

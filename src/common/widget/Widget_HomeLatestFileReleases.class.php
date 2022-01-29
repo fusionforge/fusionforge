@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright 2017, Franck Villaume - TrivialDev
+ * Copyright 2017,2022, Franck Villaume - TrivialDev
  * This file is a part of Fusionforge.
  *
  * Fusionforge is free software; you can redistribute it and/or modify
@@ -23,12 +23,12 @@ class Widget_HomeLatestFileReleases extends Widget {
 	function __construct() {
 		parent::__construct('homelatestfilereleases');
 		if (forge_get_config('use_frs')) {
-			$this->content['title'] = _('Latest 5 File Releases');
+			$this->title = _('Latest 5 File Releases');
 		}
 	}
 
 	function getTitle() {
-		return $this->content['title'];
+		return $this->title;
 	}
 
 	function getCategory() {
@@ -36,7 +36,7 @@ class Widget_HomeLatestFileReleases extends Widget {
 	}
 
 	function isAvailable() {
-		return isset($this->content['title']);
+		return isset($this->title);
 	}
 
 	function getContent() {

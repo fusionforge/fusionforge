@@ -33,7 +33,6 @@ require_once 'common/survey/SurveyFactory.class.php';
 
 class Widget_MySurveys extends Widget {
 	var $content;
-	var $can_be_displayed;
 	var $_survey_show;
 
 	function __construct() {

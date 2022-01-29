@@ -2,7 +2,7 @@
 /**
  * FusionForge Followers (monitored users and vice versa) Widget
  *
- * Copyright 2018,2019, Franck Villaume - TrivialDev
+ * Copyright 2018,2019,2022, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -38,19 +38,20 @@ require_once $gfcommon.'include/MonitorElement.class.php';
 
 	function getContent() {
 		global $HTML;
+		$content = '';
 		$monitorUser = new MonitorElement('user');
 		$monitoredUserIds = $monitorUser->getMonitoredByUserIdInArray(user_getid());
 		$followerIds = $monitorUser->getMonitorUsersIdsInArray(user_getid());
 		if (!(is_array($monitoredUserIds) && count($monitoredUserIds) > 0) && !(is_array($followerIds) && count($followerIds) > 0)) {
-			echo $HTML->warning_msg(_('You are not following any user and not followed by any.'));
+			$content .= $HTML->warning_msg(_('You are not following any user and not followed by any.'));
 		} else {
-			echo $HTML->listTableTop();
+			$content .= $HTML->listTableTop();
 			$cells[][] = _('Following');
 			$cells[][] = count($followerIds);
 			$cells[][] = _('Followers');
 			$cells[][] = count($monitoredUserIds);
-			echo $HTML->multiTableRow(array(), $cells);
-			echo $HTML->listTableBottom();
+			$content .= $HTML->multiTableRow(array(), $cells);
+			$content .= $HTML->listTableBottom();
 			if (count($followerIds) > 0) {
 				$date_format = _('%Y-%m-%d');
 				$ids = array();
@@ -110,10 +111,10 @@ require_once $gfcommon.'include/MonitorElement.class.php';
 				}
 				$results = $ffactivity->getActivitiesForUsers($followerIds, $begin, $end, $section);
 				if ($results === false) {
-					echo $HTML->error_msg(_('Unable to get activities')._(':').$ffactivity->getErrorMessage());
+					$content .= $HTML->error_msg(_('Unable to get activities')._(':').$ffactivity->getErrorMessage());
 				}
 				if (count($results) < 1) {
-					echo $HTML->information(_('No Activity Found'));
+					$content .= $HTML->information(_('No Activity Found'));
 				} else {
 					$cached_perms = array();
 
@@ -137,12 +138,12 @@ require_once $gfcommon.'include/MonitorElement.class.php';
 							$theader[] = _('User');
 							$theader[] = _('Activity');
 
-							echo $HTML->listTableTop($theader);
+							$content .= $HTML->listTableTop($theader);
 							$displayTableTop = 1;
 						}
 
 						if ($last_day != strftime($date_format, $arr['activity_date'])) {
-							echo '<tr class="tableheading"><td colspan="3">'.strftime($date_format, $arr['activity_date']).'</td></tr>';
+							$content .= '<tr class="tableheading"><td colspan="3">'.strftime($date_format, $arr['activity_date']).'</td></tr>';
 							$last_day=strftime($date_format, $arr['activity_date']);
 						}
 						$cells = array();
@@ -153,16 +154,17 @@ require_once $gfcommon.'include/MonitorElement.class.php';
 							$cells[][] = '--';
 						}
 						$cells[][] = $displayinfo;
-						echo $HTML->multiTableRow(array(), $cells);
+						$content .= $HTML->multiTableRow(array(), $cells);
 					}
 					if ($displayTableTop) {
-						echo $HTML->listTableBottom();
+						$content .= $HTML->listTableBottom();
 					}
 					if (!$displayTableTop) {
-						echo $HTML->information(_('No Activity Found'));
+						$content .= $HTML->information(_('No Activity Found'));
 					}
 				}
 			}
 		}
+		return $content;
 	}
 }

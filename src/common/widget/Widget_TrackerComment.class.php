@@ -25,8 +25,6 @@ require_once 'Widget.class.php';
 
 class Widget_TrackerComment extends Widget {
 
-	var $title;
-
 	function __construct() {
 		$owner_id   = (int)substr(getStringFromRequest('owner'), 1);
 		parent::__construct('trackercomment', $owner_id, WidgetLayoutManager::OWNER_TYPE_TRACKER);

@@ -140,8 +140,3 @@ class Widget_MyProjectsLastDocuments extends Widget {
 		return false;
 	}
 }
-
-// Local Variables:
-// mode: php
-// c-file-style: "bsd"
-// End:

@@ -26,8 +26,6 @@ require_once $gfwww.'include/note.php';
 
 class Widget_TrackerSummary extends Widget {
 
-	var $title;
-
 	function __construct() {
 		$owner_id   = (int)substr(getStringFromRequest('owner'), 1);
 		parent::__construct('trackersummary', $owner_id, WidgetLayoutManager::OWNER_TYPE_TRACKER);

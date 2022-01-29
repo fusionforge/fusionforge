@@ -2,7 +2,7 @@
 /**
  * Userhome Project Information Widget Class
  *
- * Copyright 2018, Franck Villaume - TrivialDev
+ * Copyright 2018,2022, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is a part of Fusionforge.
@@ -41,6 +41,7 @@ class Widget_UserhomeProjectInformation extends Widget {
 
 	function getContent() {
 		global $HTML;
+		$html = '';
 		$user = user_get_object($this->owner_id);
 		$projects = $user->getGroups();
 		sortProjectList ($projects) ;
@@ -52,7 +53,7 @@ class Widget_UserhomeProjectInformation extends Widget {
 				continue;
 			}
 			if ($start) {
-				echo html_e('p', array(), _('This user is a member of the following projects')._(':'));
+				$html .= html_e('p', array(), _('This user is a member of the following projects')._(':'));
 				$start = false;
 			}
 
@@ -61,7 +62,7 @@ class Widget_UserhomeProjectInformation extends Widget {
 			// sioc:UserGroups for all members of a project are named after /projects/A_PROJECT/members/
 			$usergroup_uri = $project_uri .'members/';
 
-			print '<div rel="sioc:member_of">'."\n"
+			$html .= '<div rel="sioc:member_of">'."\n"
 				.'<div about="'. $usergroup_uri .'" typeof="sioc:UserGroup">'."\n"
 				.'<div rel="sioc:usergroup_of">'."\n"
 				.'<div about="'. $project_uri .'" typeof="sioc:Space">';
@@ -72,29 +73,30 @@ class Widget_UserhomeProjectInformation extends Widget {
 				&& $r->getHomeProject() != NULL
 				&& $r->getHomeProject()->getID() == $p->getID()) {
 					$role_names[] = $r->getName() ;
-					print '<div property="sioc:has_function" content= "'.$r->getName().'">';
+					$html .= '<div property="sioc:has_function" content= "'.$r->getName().'">';
 					$sioc_has_function_close .= "</div>";
 				}
 			}
 
-			print ('<br />' . $project_link .' ('.htmlspecialchars (implode (', ', $role_names)).')');
-			print "\n";
+			$html .= ('<br />' . $project_link .' ('.htmlspecialchars (implode (', ', $role_names)).')');
+			$html .= "\n";
 
 			if (forge_check_perm_for_user ($user, 'project_admin', $p->getID())) {
-				echo html_e('div', array('rev' => 'doap:maintainer', 'resource' => '#me'));
+				$html .= html_e('div', array('rev' => 'doap:maintainer', 'resource' => '#me'));
 			}
 			else {
-				echo html_e('div', array('rev' => 'doap:developer', 'resource' => '#me'));
+				$html .= html_e('div', array('rev' => 'doap:developer', 'resource' => '#me'));
 			}
 
-			echo $sioc_has_function_close."\n";  // sioc:has_function
-			echo "</div>\n";  // sioc:Space .../projects/A_PROJECT/
-			echo "</div>\n"; // sioc:usergroup_of
-			echo "</div>\n";  // sioc:UserGroup .../projects/A_PROJECT/members
-			echo "</div>\n"; // sioc:member_of
+			$html .= $sioc_has_function_close."\n";  // sioc:has_function
+			$html .= "</div>\n";  // sioc:Space .../projects/A_PROJECT/
+			$html .= "</div>\n"; // sioc:usergroup_of
+			$html .= "</div>\n";  // sioc:UserGroup .../projects/A_PROJECT/members
+			$html .= "</div>\n"; // sioc:member_of
 		}
 		if ($start) {
-			echo $HTML->information(_('This user is not a member of any project.'));
+			$html .= $HTML->information(_('This user is not a member of any project.'));
 		}
+		return $html;
 	}
 }

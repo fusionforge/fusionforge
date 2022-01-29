@@ -2,7 +2,7 @@
 /**
  * Userhome Peer Rating Widget Class
  *
- * Copyright 2018, Franck Villaume - TrivialDev
+ * Copyright 2018,2022, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is a part of Fusionforge.
@@ -48,45 +48,23 @@ class Widget_UserhomePeerRatings extends Widget {
 	}
 
 	function getContent() {
+		global $HTML;
+		$html = '';
 		$me = session_get_user();
 		$user = user_get_object($this->owner_id);
-		print "<p>";
-		print _('If you are familiar with this user, please take a moment to rate him/her on the following criteria. Keep in mind, that your rating will be visible to the user and others.');
-		print "</p>";
+		$html .= html_e('p', array(), _('If you are familiar with this user, please take a moment to rate him/her on the following criteria. Keep in mind, that your rating will be visible to the user and others.'));
+		$html .= html_e('p', array(), sprintf(_('The %s Peer Rating system is based on concepts from <a href="http://www.advogato.com/">Advogato.</a> The system has been re-implemented and expanded in a few ways.'), forge_get_config('forge_name')));
+		$html .= html_e('div', array('class' => 'align-center'), vote_show_user_rate_box ($user->getID(), $me? $me->getID() : 0));
+		$html .= html_e('p', array(), _('The Peer rating box shows all rating averages (and response levels) for each individual criteria. Due to the math and processing required to do otherwise, these numbers incorporate responses from both “trusted” and “non-trusted” users.'));
+		
+		$liElements = array();
+		$liElements[] = array('content' => sprintf(_('The “Sitewide Rank” field shows the user\'s rank compared to all ranked %s users.'), forge_get_config('forge_name')));
+		$liElements[] = array('content' => _('The “Aggregate Score” shows an average, weighted overall score, based on trusted-responses only.'));
+		$liElements[] = array('content' => _('The “Personal Importance” field shows the weight that users ratings of other developers will be given (between 1 and 1.5) -- higher rated user\'s responses are given more weight.'));
+		$html .= $HTML->html_list($liElements);
 
-		print "<p>";
-		printf(_('The %s Peer Rating system is based on concepts from <a href="http://www.advogato.com/">Advogato.</a> The system has been re-implemented and expanded in a few ways.'), forge_get_config('forge_name'));
-		print "</p>";
-		?>
-
-		<div class="align-center">
-		<?php vote_show_user_rate_box ($user->getID(), $me? $me->getID() : 0); ?>
-		</div>
-
-		<?php
-		print "<p>";
-		print _('The Peer rating box shows all rating averages (and response levels) for each individual criteria. Due to the math and processing required to do otherwise, these numbers incorporate responses from both “trusted” and “non-trusted” users.');
-		print "</p>";
-
-		print "<ul>";
-		print "<li>";
-		printf(_('The “Sitewide Rank” field shows the user\'s rank compared to all ranked %s users.'), forge_get_config('forge_name'));
-		print "</li>";
-
-		print "<li>";
-		print _('The “Aggregate Score” shows an average, weighted overall score, based on trusted-responses only.');
-		print "</li>";
-
-		print "<li>";
-		print _('The “Personal Importance” field shows the weight that users ratings of other developers will be given (between 1 and 1.5) -- higher rated user\'s responses are given more weight.');
-		print "</li>";
-		print "</ul>";
-
-		print "<p>";
-		print "<em>";
-		printf(_('If you would like to opt-out from peer rating system (this will affect your ability to both rate and be rated), refer to <a href="%s">your account maintenance page</a>. If you choose not to participate, your ratings of other users will be permanently deleted and the “Peer Rating” box will disappear from your user page.'),
-				util_make_url("/account"));
-		print "</em>";
-		print "</p>";
+		$html .= html_e('p', array(), html_e('em', array(), sprintf(_('If you would like to opt-out from peer rating system (this will affect your ability to both rate and be rated), refer to <a href="%s">your account maintenance page</a>. If you choose not to participate, your ratings of other users will be permanently deleted and the “Peer Rating” box will disappear from your user page.'),
+								util_make_url("/account"))));
+		return $html;
 	}
 }

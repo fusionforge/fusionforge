@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright 2016-2017, Franck Villaume - TrivialDev
+ * Copyright 2016-2017,2022, Franck Villaume - TrivialDev
  * This file is a part of Fusionforge.
  *
  * Fusionforge is free software; you can redistribute it and/or modify
@@ -25,7 +25,7 @@ class Widget_HomeDetailActivityMostActiveProjectWeek extends Widget {
 	function __construct() {
 		parent::__construct('homedetailactivitymostactiveprojectweek');
 		if (forge_get_config('use_activity')) {
-			$this->content['title'] = _('Detailed Activity for the 10 Most Active Projects this Week');
+			$this->title = _('Detailed Activity for the 10 Most Active Projects this Week');
 		}
 	}
 
@@ -120,10 +120,10 @@ class Widget_HomeDetailActivityMostActiveProjectWeek extends Widget {
 	}
 
 	function getTitle() {
-		return $this->content['title'];
+		return $this->title;
 	}
 
 	function isAvailable() {
-		return isset($this->content['title']);
+		return isset($this->title);
 	}
 }

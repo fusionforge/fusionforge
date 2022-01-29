@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright 2016,2021, Franck Villaume - TrivialDev
+ * Copyright 2016,2021-2022, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is a part of FusionForge.
@@ -27,18 +27,17 @@ require_once 'Widget.class.php';
 
 class Widget_ProjectScmStats extends Widget {
 
-	var $content = array();
 
 	function __construct() {
 		global $project;
 		parent::__construct('projectscmstats');
 		if ($project && $this->canBeUsedByProject($project) && forge_check_perm('scm', $project->getID(), 'read')) {
-			$this->content['title'] = _('Repository History');
+			$this->title = _('Repository History');
 		}
 	}
 
 	function getTitle() {
-		return $this->content['title'];
+		return $this->title;
 	}
 
 	function getContent() {
@@ -67,6 +66,6 @@ class Widget_ProjectScmStats extends Widget {
 	}
 
 	function isAvailable() {
-		return isset($this->content['title']);
+		return isset($this->title);
 	}
 }

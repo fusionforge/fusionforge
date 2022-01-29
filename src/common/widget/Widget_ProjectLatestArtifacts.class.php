@@ -2,7 +2,7 @@
 /**
  * Widget_ProjectLatestArtifacts
  *
- * Copyright 2017,2021, Franck Villaume - TrivialDev
+ * Copyright 2017,2021-2022, Franck Villaume - TrivialDev
  *
  * This file is a part of Fusionforge.
  *
@@ -34,13 +34,13 @@ class Widget_ProjectLatestArtifacts extends Widget {
 			$atf = new ArtifactTypeFactory($project);
 			$ats = $atf->getArtifactTypes();
 			if (count($ats) > 0) {
-				$this->content['title'] = _('5 Latest Artifacts');
+				$this->title = _('5 Latest Artifacts');
 			}
 		}
 	}
 
 	public function getTitle() {
-		return _('5 Latest Artifacts');
+		return $this->title;
 	}
 
 	public function _getLinkToArtifact($aid) {
@@ -99,7 +99,7 @@ class Widget_ProjectLatestArtifacts extends Widget {
 	}
 
 	function isAvailable() {
-		return isset($this->content['title']);
+		return isset($this->title);
 	}
 
 	function canBeUsedByProject(&$project) {

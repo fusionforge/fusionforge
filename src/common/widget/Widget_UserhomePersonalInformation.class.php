@@ -2,7 +2,7 @@
 /**
  * Userhome Personal Information Widget Class
  *
- * Copyright 2018, Franck Villaume - TrivialDev
+ * Copyright 2018,2022, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is a part of Fusionforge.
@@ -42,6 +42,6 @@ class Widget_UserhomePersonalInformation extends Widget {
 
 	function getContent() {
 		$user = user_get_object($this->owner_id);
-		echo user_personal_information($user);
+		return user_personal_information($user);
 	}
 }

@@ -1,7 +1,7 @@
 <?php
 /**
  * Copyright (c) Xerox Corporation, Codendi Team, 2001-2009. All rights reserved
- * Copyright 2012,2014,2021, Franck Villaume - TrivialDev
+ * Copyright 2012,2014,2021-2022, Franck Villaume - TrivialDev
  *
  * This file is a part of Fusionforge.
  *
@@ -27,7 +27,6 @@ require_once 'Widget.class.php';
 
 class Widget_ProjectDocumentsActivity extends Widget {
 
-	var $content;
 	var $_statistic_show = 'FUD';
 
 	function __construct() {
@@ -40,7 +39,7 @@ class Widget_ProjectDocumentsActivity extends Widget {
 			}
 		}
 		if ($project && $this->canBeUsedByProject($project) && forge_check_perm('docman', $project->getID(), 'read')) {
-			$this->content['title'] = _('Last 4 weeks Documents Manager Activity');
+			$this->title = _('Last 4 weeks Documents Manager Activity');
 		}
 	}
 
@@ -234,11 +233,11 @@ class Widget_ProjectDocumentsActivity extends Widget {
 	}
 
 	function getTitle() {
-		return $this->content['title'];
+		return $this->title;
 	}
 
 	function isAvailable() {
-		return isset($this->content['title']);
+		return isset($this->title);
 	}
 
 	function canBeUsedByProject(&$project) {

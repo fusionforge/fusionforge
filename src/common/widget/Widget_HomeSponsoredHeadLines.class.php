@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright 2019,2021, Franck Villaume - TrivialDev
+ * Copyright 2019,2021-2022, Franck Villaume - TrivialDev
  * This file is a part of Fusionforge.
  *
  * Fusionforge is free software; you can redistribute it and/or modify
@@ -24,12 +24,12 @@ class Widget_HomeSponsoredHeadLines extends Widget {
 	function __construct() {
 		parent::__construct('homesponsoredheadlines');
 		if (forge_get_config('use_diary') || forge_get_config('use_news')) {
-			$this->content['title'] = forge_get_config('forge_name').' '.('Headlines');
+			$this->title = forge_get_config('forge_name').' '.('Headlines');
 		}
 	}
 
 	function getTitle() {
-		return $this->content['title'];
+		return $this->title;
 	}
 
 	function getDescription() {
@@ -37,7 +37,7 @@ class Widget_HomeSponsoredHeadLines extends Widget {
 	}
 
 	function isAvailable() {
-		return isset($this->content['title']);
+		return isset($this->title);
 	}
 
 	function getContent() {

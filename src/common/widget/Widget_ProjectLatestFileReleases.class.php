@@ -1,7 +1,7 @@
 <?php
 /**
  * Copyright (c) Xerox Corporation, Codendi Team, 2001-2009. All rights reserved
- * Copyright 2012-2014, Franck Villaume - TrivialDev
+ * Copyright 2012-2014,2022 Franck Villaume - TrivialDev
  *
  * This file is a part of Fusionforge.
  *
@@ -27,17 +27,17 @@ require_once $gfcommon.'frs/FRSReleaseFactory.class.php';
  */
 
 class Widget_ProjectLatestFileReleases extends Widget {
-	var $content;
+
 	function __construct() {
 		global $project;
 		parent::__construct('projectlatestfilereleases');
 		if ($project && $this->canBeUsedByProject($project) && forge_check_perm('frs_admin', $project->getID(), 'read')) {
-			$this->content['title'] = _('Latest File Releases');
+			$this->title = _('Latest File Releases');
 		}
 	}
 
 	function getTitle() {
-		return $this->content['title'];
+		return $this->title;
 	}
 
 	function getContent() {
@@ -116,7 +116,7 @@ class Widget_ProjectLatestFileReleases extends Widget {
 	}
 
 	function isAvailable() {
-		return isset($this->content['title']);
+		return isset($this->title);
 	}
 	function canBeUsedByProject(&$project) {
 		return $project->usesFRS();

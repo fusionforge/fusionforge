@@ -2,7 +2,7 @@
 /**
  * Userhome Activity Widget Class
  *
- * Copyright 2018,2021, Franck Villaume - TrivialDev
+ * Copyright 2018,2021-2022, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is a part of Fusionforge.
@@ -42,6 +42,7 @@ class Widget_UserhomeActivity extends Widget {
 
 	function getContent() {
 		global $HTML;
+		$html = '';
 		$groupsArr = array();
 		$ids = array();
 		$texts = array();
@@ -101,10 +102,10 @@ class Widget_UserhomeActivity extends Widget {
 		}
 		$results = $ffactivity->getActivitiesForUser($this->owner_id, $begin, $end, $section);
 		if ($results === false) {
-			echo $HTML->error_msg(_('Unable to get activities')._(':').$ffactivity->getErrorMessage());
+			$html .= $HTML->error_msg(_('Unable to get activities')._(':').$ffactivity->getErrorMessage());
 		}
 		if (count($results) < 1) {
-			echo $HTML->information(_('No Activity Found'));
+			$html .= $HTML->information(_('No Activity Found'));
 		} else {
 			$cached_perms = array();
 			$date_format = _('%Y-%m-%d');
@@ -128,12 +129,12 @@ class Widget_UserhomeActivity extends Widget {
 					$theader[] = _('Project');
 					$theader[] = _('Activity');
 
-					echo $HTML->listTableTop($theader);
+					$html .= $HTML->listTableTop($theader);
 					$displayTableTop = 1;
 				}
 
 				if ($last_day != strftime($date_format, $arr['activity_date'])) {
-					echo '<tr class="tableheading"><td colspan="3">'.strftime($date_format, $arr['activity_date']).'</td></tr>';
+					$html .= '<tr class="tableheading"><td colspan="3">'.strftime($date_format, $arr['activity_date']).'</td></tr>';
 					$last_day=strftime($date_format, $arr['activity_date']);
 				}
 				$cells = array();
@@ -147,14 +148,15 @@ class Widget_UserhomeActivity extends Widget {
 					$cells[][] = '--';
 				}
 				$cells[][] = $displayinfo;
-				echo $HTML->multiTableRow(array(), $cells);
+				$html .= $HTML->multiTableRow(array(), $cells);
 			}
 			if ($displayTableTop) {
-				echo $HTML->listTableBottom();
+				$html .= $HTML->listTableBottom();
 			}
 			if (!$displayTableTop) {
-				echo $HTML->information(_('No Activity Found'));
+				$html .= $HTML->information(_('No Activity Found'));
 			}
 		}
+		return $html;
 	}
 }

@@ -25,8 +25,6 @@ require_once 'Widget.class.php';
 
 class Widget_TrackerGeneral extends Widget {
 
-	var $title;
-
 	function __construct() {
 		$owner_id = (int)substr(getStringFromRequest('owner'), 1);
 		if (!$owner_id) {

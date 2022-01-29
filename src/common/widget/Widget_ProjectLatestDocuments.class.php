@@ -2,7 +2,7 @@
 /**
  * Copyright (c) Xerox Corporation, Codendi Team, 2001-2009. All rights reserved
  * Copyright 2010, Franck Villaume - Capgemini
- * Copyright 2012-2013,2016,2021, Franck Villaume - TrivialDev
+ * Copyright 2012-2013,2016,2021-2022, Franck Villaume - TrivialDev
  * Copyright 2013, French Ministry of National Education
  *
  * This file is a part of Fusionforge.
@@ -29,17 +29,19 @@ require_once $gfcommon.'docman/DocumentFactory.class.php';
  */
 
 class Widget_ProjectLatestDocuments extends Widget {
-	var $content;
+
+	const NB_DOCS_TO_DISPLAY = 5;
+
 	function __construct() {
 		global $project;
 		parent::__construct('projectlatestdocuments');
 		if ($project && $this->canBeUsedByProject($project) && forge_check_perm('docman', $project->getID(), 'read')) {
-			$this->content['title'] = _('5 Latest Published Documents');
+			$this->title = _('5 Latest Published Documents');
 		}
 	}
 
 	function getTitle() {
-		return $this->content['title'];
+		return $this->title;
 	}
 
 	function getContent() {
@@ -58,7 +60,7 @@ class Widget_ProjectLatestDocuments extends Widget {
 		$df = new DocumentFactory(group_get_object($project->getID()));
 		$df->setDocGroupState($stateIdDg);
 		$df->setStateID($stateIdDocuments);
-		$df->setLimit(5);
+		$df->setLimit(self::NB_DOCS_TO_DISPLAY);
 		$df->setOrder(array('updatedate', 'createdate'));
 		$df->setSort('DESC');
 		$df->getDocuments();
@@ -138,7 +140,7 @@ class Widget_ProjectLatestDocuments extends Widget {
 	}
 
 	function isAvailable() {
-		return isset($this->content['title']);
+		return isset($this->title);
 	}
 
 	function canBeUsedByProject(&$project) {

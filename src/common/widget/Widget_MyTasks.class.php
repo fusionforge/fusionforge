@@ -30,7 +30,6 @@ require_once $gfcommon.'include/my_utils.php';
 */
 class Widget_MyTasks extends Widget {
 	var $content;
-	var $can_be_displayed;
 
 	function __construct() {
 		global $HTML;
