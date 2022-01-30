@@ -21,8 +21,6 @@
 require_once 'common/include/HTTPRequest.class.php';
 
 class globalsearch_Widget_Home extends Widget {
-	var $title = '';
-	var $content = '';
 
 	function __construct($owner_type, $owner_id) {
 		if ($owner_type == WidgetLayoutManager::OWNER_TYPE_HOME) {

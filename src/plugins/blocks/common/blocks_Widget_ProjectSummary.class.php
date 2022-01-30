@@ -20,7 +20,6 @@
  */
 
 class blocks_Widget_ProjectSummary extends Widget {
-	var $title = '';
 	var $content = '';
 
 	function __construct($owner_type, $owner_id) {

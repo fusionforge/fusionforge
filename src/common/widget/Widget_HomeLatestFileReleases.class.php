@@ -20,6 +20,12 @@
 require_once 'Widget.class.php';
 
 class Widget_HomeLatestFileReleases extends Widget {
+
+	const NB_HOMEFRS_TO_DISPLAY = 5;
+
+	var $cached_results = array();
+	var $data_res;
+
 	function __construct() {
 		parent::__construct('homelatestfilereleases');
 		if (forge_get_config('use_frs')) {
@@ -42,9 +48,8 @@ class Widget_HomeLatestFileReleases extends Widget {
 	function getContent() {
 		global $HTML;
 		$content = '';
-		$this->cached_results = array();
 		$this->fetchData();
-		while ((count($this->cached_results) < 5) && ($row = db_fetch_array($this->data_res))) {
+		while ((count($this->cached_results) < self::NB_HOMEFRS_TO_DISPLAY) && ($row = db_fetch_array($this->data_res))) {
 			if (forge_check_perm('frs', $row['package_id'], 'read')) {
 				$this->cached_results[] = $row;
 			}
@@ -108,7 +113,7 @@ class Widget_HomeLatestFileReleases extends Widget {
 						AND frs_package.group_id = frs_dlstats_grouptotal_vw.group_id
 						AND frs_release.status_id = 1 )
 						ORDER BY frs_release.release_date DESC',
-						array());
+						array(), self::NB_HOMEFRS_TO_DISPLAY);
 		return true;
 	}
 }
