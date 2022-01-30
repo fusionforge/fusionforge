@@ -69,7 +69,7 @@ class ArtifactHtml extends Artifact {
 	}
 
 	function showMessages() {
-		global $HTML;
+		global $HTML, $gfcommon;
 		$return = '';
 		if (session_loggedin()) {
 			$u = session_get_user();
