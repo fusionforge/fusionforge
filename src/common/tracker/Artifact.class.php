@@ -1748,7 +1748,7 @@ class Artifact extends FFObject {
 									$parentStatusName = $parentStatusList[$parentAt->getCustomStatusField()];
 									$statusList = $at->getExtraFieldElements($at->getCustomStatusField());
 									$found = false;
-									foreach ($statusList as $id->$statusName) {
+									foreach ($statusList as $id => $statusName) {
 										if ($parentStatusName == $statusName) {
 											$found = true;
 											$extra_fields[$at->getCustomStatusField()] = $id;
