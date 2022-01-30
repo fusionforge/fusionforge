@@ -4,6 +4,7 @@
  *
  * Copyright 2004 GForge, LLC
  * Copyright 2010, FusionForge Team
+ * Copyright 2022, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -68,7 +69,7 @@ function &MSPLogin($username,$password) {
 			WHERE g.group_id=pgl.group_id
                         AND pgl_group_project_id = ANY ($2)',
 					array(': ',
-					      db_int_array_to_any_clause ($tids))) ;
+					      db_int_array_to_any_clause ($gids))) ;
 		$rows=db_numrows($res);
 		if (!$res || $rows<1) {
 			$array['success']=false;
