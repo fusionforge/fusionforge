@@ -88,6 +88,7 @@ class helloworldPlugin extends Plugin {
 		elseif ($hookname == "blahblahblah") {
 			// ...
 		}
+		return true;
 	}
 }
 

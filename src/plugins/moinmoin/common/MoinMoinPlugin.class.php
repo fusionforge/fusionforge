@@ -165,8 +165,8 @@ _("This plugin allows each project to embed MoinMoinWiki under a tab.");
 			if ($project->usesPlugin($this->name) && isset($params['page'])) {
 				$params['url'] = '/plugins/moinmoin/'.$project->getUnixName().'/'.$params['page'];
 			}
-			return;
 		}
+		return true;
 	}
 
 	function groupisactivecheckboxpost(&$params) {

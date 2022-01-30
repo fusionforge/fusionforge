@@ -114,6 +114,7 @@ control over it to the project administrator.");
 		} elseif ($hookname == 'project_public_area') {
 			$this->project_public_area();
 		}
+		return true;
 	}
 
 	function &getPluginInfo() {

@@ -46,10 +46,10 @@ class TaskBoardPlugin extends Plugin {
 			$group_id = $params['group'];
 			$group = group_get_object($group_id);
 			if (!$group || !is_object($group)) {
-				return;
+				return false;
 			}
 			if ($group->isError()) {
-				return;
+				return false;
 			}
 
 			if($group->usesPlugin($this->name)) {
@@ -70,5 +70,6 @@ class TaskBoardPlugin extends Plugin {
 				}
 			}
 		}
+		return true;
 	}
 }

@@ -82,10 +82,6 @@ class soapadminPlugin extends Plugin {
 						     _('SoapAdmin Admin')).'</p>' ;
 			}
 		}
+		return true;
 	}
 }
-
-// Local Variables:
-// mode: php
-// c-file-style: "bsd"
-// End:

@@ -49,6 +49,7 @@ hosted on these forges from your own.");
 			$params['returned_text'] .= $this->search_box();
 			$params['returned_text'] .= $HTML->boxBottom();
 		}
+		return true;
 	}
 
 	function getAdminOptionLink() {

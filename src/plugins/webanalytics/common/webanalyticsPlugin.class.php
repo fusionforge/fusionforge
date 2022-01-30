@@ -41,19 +41,17 @@ such as Piwik or Google Analytics.");
 		switch ($hookname) {
 			case "webanalytics_url": {
 				echo $this->getWebAnalyticsCodes();
-				$returned = true;
 				break;
 			}
 			case "webanalytics_admin":
 			case "site_admin_option_hook": {
 				echo '<li>'.$this->getAdminOptionLink().'</li>';
-				$returned = true;
 				break;
 			}
 			default:
-				$returned = false;
+				return false;
 		}
-		return $returned;
+		return true;
 	}
 
 	function getAdminOptionLink() {

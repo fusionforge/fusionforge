@@ -51,10 +51,10 @@ class oslcPlugin extends Plugin {
 			$group_id=$params['group'];
 			$project = group_get_object($group_id);
 			if (!$project || !is_object($project)) {
-				return;
+				return false;
 			}
 			if ($project->isError()) {
-				return;
+				return false;
 			}
 			if ( $project->usesPlugin ( $this->name ) ) {
 				$params['TITLES'][]=$this->text;
@@ -170,14 +170,11 @@ class oslcPlugin extends Plugin {
 			}
 
 			$serviceprovider = util_make_url ("/plugins/oslc/cm/oslc-cm-services/".$group_id);
-
 			$res = $params['in_Resource'];
-
 			rdfutils_setPropToUri($res, 'oslc:serviceProvider', $serviceprovider);
-
 			$params['out_Resources'][] = $res;
-
 		}
+		return true;
 	}
 }
 

@@ -82,10 +82,10 @@ class mailmanPlugin extends Plugin {
 			$group_id=$params['group'];
 			$project = group_get_object($group_id);
 			if (!$project || !is_object($project)) {
-				return;
+				return false;
 			}
 			if ($project->isError()) {
-				return;
+				return false;
 			}
 			if ( $project->usesPlugin ( $this->name ) ) {
 				$params['TITLES'][]=$this->text;
@@ -218,8 +218,9 @@ class mailmanPlugin extends Plugin {
 		elseif ($hookname=='site_admin_option_hook') {
 			echo '<li><a href="'.$this->getInstallDir().'/">Template [' . _('Mailman plugin') . ']</a></li>';
 		}
-
+		return true;
 	}
+
 	function getSystemEventClass($params) {
 
 		switch($params['type']) {

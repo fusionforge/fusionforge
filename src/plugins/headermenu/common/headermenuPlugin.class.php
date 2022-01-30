@@ -1,5 +1,4 @@
 <?php
-
 /**
  * headermenuPlugin Class
  *
@@ -110,6 +109,7 @@ in the main menu (outermenu) or in the project menu (groupmenu).");
 				}
 			}
 		}
+		return true;
 	}
 
 	function getAdminOptionLink() {

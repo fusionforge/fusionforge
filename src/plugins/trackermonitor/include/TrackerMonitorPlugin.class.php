@@ -37,7 +37,7 @@ class TrackerMonitorPlugin extends Plugin {
 			$group_id = $params['group_id'];
 			$project = group_get_object($group_id);
 			if (!$project || !is_object($project) || $project->isError() || !$project->usesPlugin($this->name)) {
-				return;
+				return false;
 			}
 			$params['result']['show_monitor'] = array(
 				'text' => _('User monitoring status'),
@@ -45,5 +45,6 @@ class TrackerMonitorPlugin extends Plugin {
 				'page' => $gfplugins.'trackermonitor/include/tracker/views/form-showmonitor.php',
 			);
 		}
+		return true;
 	}
 }

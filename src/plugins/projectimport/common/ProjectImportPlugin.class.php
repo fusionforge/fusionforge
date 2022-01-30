@@ -34,7 +34,7 @@ class ProjectImportPlugin extends Plugin {
 	}
 
 	function CallHook($hookname, &$params) {
-		global $use_projectimportplugin,$G_SESSION,$HTML;
+		global $use_projectimportplugin, $G_SESSION, $HTML;
 		if ($hookname == "groupmenu") {
 			$group_id=$params['group'];
 			$project = group_get_object($group_id);
@@ -57,6 +57,7 @@ class ProjectImportPlugin extends Plugin {
 			}
 			(($params['toptab'] == $this->name) ? $params['selected']=(count($params['TITLES'])-1) : '' );
 		}
+		return true;
 	}
 
 	/**

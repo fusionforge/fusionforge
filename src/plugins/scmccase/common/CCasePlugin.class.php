@@ -67,8 +67,9 @@ class CCasePlugin extends SCMPlugin {
 			$scm_plugins[]=$this->name;
 			break;
 		default:
-			// Forgot something
+			return false;
 		}
+		return true;
 	}
 
 	function display_scm_page ($group_id) {

@@ -59,6 +59,7 @@ the configuration file.");
 				}
 				break;
 		}
+		return true;
 	}
 }
 

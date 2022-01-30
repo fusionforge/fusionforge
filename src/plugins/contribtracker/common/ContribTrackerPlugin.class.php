@@ -142,6 +142,7 @@ contributions, along with their authors.");
 			echo html_e('li', array(),
 					util_make_link('/plugins/'.$this->name.'/global_admin.php', _('Edit actors and roles'). ' [' . _('Contribution tracker plugin') . ']'));
 		}
+		return true;
 	}
 
 	function getActors() {

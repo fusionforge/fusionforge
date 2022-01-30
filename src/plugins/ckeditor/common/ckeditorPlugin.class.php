@@ -92,6 +92,7 @@ _("CKEditor is a WYSIWYG text editor that displays within a web browser.");
 				}
 			}
 		}
+		return true;
 	}
 
 	private function displayCKeditorArea(&$params) {

@@ -453,25 +453,20 @@ _('This plugin allows each project to embed Mediawiki under a tab.');
 				$params['ids'][] = $this->name;
 				$params['texts'][] = _('Mediawiki Changes');
 			}
-			return true;
 		}
+		return true;
 	}
 
 	function groupisactivecheckboxpost(&$params) {
-			if (!parent::groupisactivecheckboxpost($params)) {
-				return false;
-			}
-			if (getIntFromRequest('use_mediawiki') == 1) {
-				$systasksq = new SystasksQ();
-				$group_id = $params['group'];
-				$systasksq->add($this->getID(), 'MEDIAWIKI_CREATE_WIKI', $group_id);
-				$systasksq->add($this->getID(), 'MEDIAWIKI_CREATE_IMAGEDIR', $group_id);
-			}
-			return true;
+		if (!parent::groupisactivecheckboxpost($params)) {
+			return false;
+		}
+		if (getIntFromRequest('use_mediawiki') == 1) {
+			$systasksq = new SystasksQ();
+			$group_id = $params['group'];
+			$systasksq->add($this->getID(), 'MEDIAWIKI_CREATE_WIKI', $group_id);
+			$systasksq->add($this->getID(), 'MEDIAWIKI_CREATE_IMAGEDIR', $group_id);
+		}
+		return true;
 	}
 }
-
-// Local Variables:
-// mode: php
-// c-file-style: "bsd"
-// End:

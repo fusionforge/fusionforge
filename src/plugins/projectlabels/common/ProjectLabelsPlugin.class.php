@@ -49,6 +49,7 @@ for a “project of the month”.");
 				print ($row_tab['label_text']);
 			}
 		}
+		return true;
 	}
 }
 
