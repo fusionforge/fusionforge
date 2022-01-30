@@ -1289,6 +1289,7 @@ abstract class Layout extends FFError {
 		if (strlen($html_content) > 0) {
 			return html_e('div', $htmlAttr, $html_content, false);
 		}
+		return '';
 	}
 
 	/**

@@ -1,7 +1,7 @@
 <?php
 /**
  * Copyright (c) Xerox Corporation, Codendi Team, 2001-2009. All rights reserved
- * Copyright 2013,2016, Franck Villaume - TrivialDev
+ * Copyright 2013,2016,2022, Franck Villaume - TrivialDev
  *
  * This file is a part of Fusionforge.
  *
@@ -31,6 +31,7 @@ class WidgetLayout {
 	var $name;
 	var $description;
 	var $scope;
+	var $rows;
 
 	function __construct($id, $name, $description, $scope) {
 		$this->id          = $id;
