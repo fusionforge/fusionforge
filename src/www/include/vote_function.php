@@ -387,6 +387,7 @@ $USER_RATING_VALUES[]='3';
  *
  * @param	int	$user_id	The user ID
  * @param	int	$by_id		The user ID of the user who is rating $user_id
+ * @return	string
  */
 function vote_show_user_rate_box ($user_id, $by_id=0) {
 	if ($by_id) {
@@ -406,8 +407,9 @@ function vote_show_user_rate_box ($user_id, $by_id=0) {
 	}
 
 	global $USER_RATING_VALUES,$USER_RATING_QUESTIONS, $HTML;
-	echo $HTML->openForm(array('action' => '/developer/rate.php', 'method' => 'post'));
-	echo '<input type="hidden" name="rated_user" value="'.$user_id.'" />
+	$htmlcontent = '';
+	$htmlcontent .= $HTML->openForm(array('action' => '/developer/rate.php', 'method' => 'post'));
+	$htmlcontent .= '<input type="hidden" name="rated_user" value="'.$user_id.'" />
 	<table>';
 	for ($i=1; $i<=count($USER_RATING_QUESTIONS); $i++) {
 		$popup = "USER_RATING_POPUP$i";
@@ -415,19 +417,20 @@ function vote_show_user_rate_box ($user_id, $by_id=0) {
 		if (!isset($prev_vote[$i])) {
 			$prev_vote[$i] = '';
 		}
-		echo '
+		$htmlcontent .= '
 			<tr>
 				<td><strong>'. $USER_RATING_QUESTIONS[$i] .':</strong></td>
 				<td>'. html_build_select_box_from_arrays($USER_RATING_VALUES, $$popup, "Q_$i", $prev_vote[$i]/*'xzxz'*/, true, _('Unrated')).'</td>
 			</tr>';
 	}
 
-	echo '
+	$htmlcontent .= '
 		<tr><td colspan="2">
 			<input type="submit" name="submit" value="Rate User" />
 		</td></tr>
 		</table>';
-	echo $HTML->closeForm();
+	$htmlcontent .= $HTML->closeForm();
+	return $htmlcontent;
 }
 
 /**
