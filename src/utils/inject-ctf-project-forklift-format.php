@@ -323,8 +323,9 @@ if (is_dir($project_path.'/project')) {
 						if ($ctfpermissionSettingFolder == '*') {
 							switch ($ctfpermissionSetting) {
 								case 'docman_admin': // fusionforge value: docman 4
-									if (forge_get_config('use_docman') && $g->usesDocman())
+									if (forge_get_config('use_docman') && $g->usesDocman()) {
 										$permissionPerSectionArray['docman'][$g->getID()] = 4;
+									}
 									break;
 								case 'docman_create': // fusionforge value: docman 3
 								case 'docman_edit': // fusionforge value: docman 3
@@ -439,8 +440,9 @@ if (is_dir($project_path.'/project')) {
 						foreach ($role_members as $role_member) {
 							$member_name = (string)$role_member->username;
 							// check user really exists before binding it to a role
-							if (strlen($member_name) > MAXSIZE__USER_UNIXNAME)
+							if (strlen($member_name) > MAXSIZE__USER_UNIXNAME) {
 								$member_name = substr($member_name, 0, MAXSIZE__USER_UNIXNAME);
+							}
 							$member_nameObject = user_get_object_by_name($member_name);
 							if ($member_nameObject && !$member_nameObject->isError()) {
 								if ($newrole->addUser($member_nameObject)) {
@@ -487,8 +489,9 @@ if (is_dir($project_path.'/project')) {
 			}
 			foreach ($mergeFeaturesArray as $contentElement) {
 				$feature_keep = true;
-				if ($contentElement == '.' || $contentElement == '..' || $contentElement == 'applications.xml')
+				if ($contentElement == '.' || $contentElement == '..' || $contentElement == 'applications.xml') {
 					$feature_keep = false;
+				}
 
 				if ($feature_keep) {
 					enableFeature($g, $contentElement);
@@ -527,8 +530,9 @@ if (is_dir($project_path.'/project')) {
 									$ffid = null;
 									switch ($ctfpermissionSetting) {
 										case 'docman_admin': // fusionforge value: docman 4; Warning: this is FusionForge specific. There is no permission per folder. We overwrite the general value if missing.
-											if (forge_get_config('use_docman') && $g->usesDocman())
+											if (forge_get_config('use_docman') && $g->usesDocman()) {
 												$permissionPerSectionArray['docman'][$g->getID()] = 4;
+											}
 											break;
 										case 'docman_create': // fusionforge value: docman 3; Warning: this is FusionForge specific. There is no permission per folder. We overwrite the general value if missing.
 										case 'docman_edit':
@@ -712,58 +716,68 @@ function enableFeature(&$g, $value) {
 	$status = false;
 	switch ($value) {
 		case 'discussionApplication': // usesForum
-			if (forge_get_config('use_forum'))
+			if (forge_get_config('use_forum')) {
 				$status = $g->setUseForum(true);
+			}
 			break;
 		case 'documentApplication': // usesDocman
-			if (forge_get_config('use_docman'))
+			if (forge_get_config('use_docman')) {
 				$status = $g->setUseDocman(true);
+			}
 			break;
 		case 'frsApplication': // usesFRS
-			if (forge_get_config('use_frs'))
+			if (forge_get_config('use_frs')) {
 				$status = $g->setUseFRS(true);
+			}
 			break;
 		case 'linkedAppApplication': // uses headermenu plugin
 			// be sure that headermenu plugin is on, if not enable it!
-			if (enablePlugin('headermenu'))
+			if (enablePlugin('headermenu')) {
 				$status = $g->setPluginUse('headermenu');
+			}
 			break;
 		case 'newsApplication': // usesNews
-			if (forge_get_config('use_news'))
+			if (forge_get_config('use_news')) {
 				$status = $g->setUseNews(true);
+			}
 			break;
 		case 'pageApplication': // uses vhost ?
 			break;
 		case 'planningApplication': // planning folder => roadmap from tracker ?
 			break;
 		case 'reportingApplication': // uses Statistics
-			if (forge_get_config('use_activity'))
+			if (forge_get_config('use_activity')) {
 				$status = $g->setUseActivity(true);
+			}
 			break;
 		case 'scmApplication': // usesSCM
-			if (forge_get_config('use_scm'))
+			if (forge_get_config('use_scm')) {
 				$status = $g->setUseSCM(true);
+			}
 			break;
 		case 'taskApplication': // usesPM
-			if (forge_get_config('use_pm'))
+			if (forge_get_config('use_pm')) {
 				$status = $g->setUsePM(true);
+			}
 			break;
 		case 'trackerApplication': // usesTracker
-			if (forge_get_config('use_tracker'))
+			if (forge_get_config('use_tracker')) {
 				$status = $g->setUseTracker(true);
+			}
 			break;
 		case 'wikiApplication': // uses wiki plugin ?
 			// be sure that moinmoin plugin is on, if not enable it!
-			if (enablePlugin('moinmoin'))
+			if (enablePlugin('moinmoin')) {
 				$status = $g->setPluginUse('moinmoin');
+			}
 			break;
 		default:
 			echo 'Unknown feature '.$value."\n";
 			break;
 	}
-	if ($status)
+	if ($status) {
 		echo 'feature '.$value.' enabled'."\n";
-
+	}
 	return $status;
 }
 
@@ -823,9 +837,9 @@ function computeXmlApplication(&$g, $feature, $project_path) {
 			echo $feature.' data injection not yet implemented'."\n";
 			break;
 	}
-	if ($status)
+	if ($status) {
 		echo 'feature '.$feature.' data injection done'."\n";
-
+	}
 	return $status;
 }
 
@@ -839,8 +853,9 @@ function computeXmldocumentApplication(&$g, $project_path) {
 			foreach ($documentFolders as $documentFolder) {
 				$subFolderStatus[] = inject_folder($g, $documentFolder, 0, $project_path);
 			}
-			if (!in_array(false, $subFolderStatus))
+			if (!in_array(false, $subFolderStatus)) {
 				$status = true;
+			}
 		}
 	}
 	return $status;
@@ -850,8 +865,9 @@ function inject_folder(&$g, $documentFolder, $parentFolderId, $project_path) {
 	$continue = true;
 	$docgroup_name = trim((string)$documentFolder->title);
 	// limitation is 255 chars
-	if (strlen($docgroup_name) > MAXSIZE__DOCGROUP_NAME)
+	if (strlen($docgroup_name) > MAXSIZE__DOCGROUP_NAME) {
 		$docgroup_name = substr($docgroup_name, 0, MAXSIZE__DOCGROUP_NAME);
+	}
 	$docgroup_xid = trim((string)$documentFolder['xid']);
 	$docgroup_createdate = trim((string)$documentFolder->dateCreated);
 	$dg = new DocumentGroup($g);
@@ -1069,8 +1085,9 @@ function computeXmltrackerApplication(&$g, $project_path) {
 
 function inject_tracker(&$g, $tracker, &$t, &$tracker_xid, &$default_values, $project_path) {
 	$continue = true;
-	if ((string)$tracker->isDeleted == "true")
+	if ((string)$tracker->isDeleted == "true") {
 		return $continue;
+	}
 	$trackername = (string)$tracker->title;
 	$description = (string)$tracker->description;
 	if (trim($description)=="") {
@@ -1107,8 +1124,9 @@ function inject_tracker(&$g, $tracker, &$t, &$tracker_xid, &$default_values, $pr
 			foreach ($fields as $field) {
 				$fieldStatus[] = inject_field($t, $field, $default_values, $project_path, $tracker_xid);
 			}
-			if (in_array(false, $fieldStatus))
+			if (in_array(false, $fieldStatus)) {
 				$continue = false;
+			}
 		}
 	}
 
@@ -1132,13 +1150,14 @@ function inject_tracker(&$g, $tracker, &$t, &$tracker_xid, &$default_values, $pr
 		$CSFElements []  = Array( 'element_id' => 100, 'element_name'=>'fldv-new', 'status_id' => 0);
 
 		$w = new ArtifactWorkflow($t, $CSFid);
-		if (is_array($fields) || is_object($fields))
+		if (is_array($fields) || is_object($fields)) {
 			foreach ($fields as $field) {
 				if ($field->name == $CSFname) {
 					$CSField = $field;
 					break;
 				}
 			}
+		}
 
 		//nodes
 		$transitions = $tracker->workflow->transition;
@@ -1146,7 +1165,7 @@ function inject_tracker(&$g, $tracker, &$t, &$tracker_xid, &$default_values, $pr
 			foreach ($CSFElements as $element) {
 				echo "element : ".$element ["element_name"]."\n";
 				$nodes = array ();
-				if (is_array ( $transitions ) || is_object ( $transitions ))
+				if (is_array ( $transitions ) || is_object ( $transitions )) {
 					foreach ($transitions as $transition) {
 						$fromValue = (string)$transition->fromValue;
 						if ($element ["element_name"] == $fromValue || $fromValue == 'fldv-any') {
@@ -1165,6 +1184,7 @@ function inject_tracker(&$g, $tracker, &$t, &$tracker_xid, &$default_values, $pr
 							}
 						}
 					}
+				}
 				if ($element ["status_id"] == 1 && empty($nodes)) {
 					$nodes = array_diff($allElements, array($element ["element_id"]));
 				}
@@ -1374,8 +1394,6 @@ function inject_artifact(&$g, $tracker, $artifact, $histories, $auditing, $track
 	//non géré dans history ou audit
 //	$details = (string)$artifact->description;
 
-
-
 	$summary = $initialFieldsValue['title'];
 	$details = $initialFieldsValue['description'];
 	if (!isset($initialFieldsValue['assignedTo'])) {
@@ -1383,8 +1401,9 @@ function inject_artifact(&$g, $tracker, $artifact, $histories, $auditing, $track
 	} else {
 		$assignedTo = $initialFieldsValue['assignedTo'];
 		$assigned_to = get_user_id_by_name($assignedTo);
-		if ($assigned_to == false)
+		if ($assigned_to == false) {
 			$assigned_to = 100;
+		}
 	}
 	$priority = $initialFieldsValue['priority'];
 	if (isset($initialFieldsValue['projectId'])) {
@@ -1479,8 +1498,9 @@ function inject_artifact(&$g, $tracker, $artifact, $histories, $auditing, $track
 						$assigned_to = 100;
 					} else {
 						$assigned_to = get_user_id_by_name($assignedTo);
-						if ($assigned_to == false)
+						if ($assigned_to == false) {
 							$assigned_to = 100;
+						}
 					}
 					$change = true;
 					break;
@@ -1789,12 +1809,14 @@ function inject_field(&$t, $field, &$default_values, $project_path, $tracker_xid
 
 		$fieldValues = $field->fieldValues->field_value;
 		$fieldValueStatus = array();
-		if (is_array($fieldValues) || is_object($fieldValues))
+		if (is_array($fieldValues) || is_object($fieldValues)) {
 			foreach ($fieldValues as $fieldValue) {
 				$fieldValueStatus[] = inject_fieldValue($f, $fieldValue, $default_values, $project_path, $tracker_xid);
 			}
-		if (in_array(false, $fieldValueStatus))
+		}
+		if (in_array(false, $fieldValueStatus)) {
 			$continue = false;
+		}
 	}
 	return $continue;
 }
@@ -1805,12 +1827,14 @@ function inject_fieldValue(&$f, $fieldValue, &$default_values, $project_path, $t
 	$default = (string)$fieldValue['default'];
 
 	if ($f->getName () == "status") {
-		if (( string ) $fieldValue->valueClass == "Open")
+		if (( string ) $fieldValue->valueClass == "Open") {
 			$status_id = 1;
-		else
+		} else {
 			$status_id = 2;
-	} else
+		}
+	} else {
 		$status_id = 0;
+	}
 	$fv = new ArtifactExtraFieldElement ($f);
 	$r = $fv->create($valuename,$status_id);
 	if ($fv->isError() || !$r) {
@@ -1972,8 +1996,9 @@ function computeXmlfrsApplication(&$g, $project_path) {
 			foreach ($frsPackages as $frsPackage) {
 				$frsPackageStatus[] = inject_package($g, $frsPackage, $project_path);
 			}
-			if (!in_array(false, $frsPackageStatus))
+			if (!in_array(false, $frsPackageStatus)) {
 				$status = true;
+			}
 		}
 	}
 	return $status;
@@ -1982,8 +2007,9 @@ function computeXmlfrsApplication(&$g, $project_path) {
 function inject_package(&$g, $frsPackage, $project_path) {
 	global $adminUser;
 	$continue = true;
-	if ((string)$frsPackage->isDeleted == "true")
+	if ((string)$frsPackage->isDeleted == "true") {
 		return $continue;
+	}
 	$packagename = trim((string)$frsPackage->title);
 	$packagename = preg_replace("/[^-a-zA-Z0-9+_\. ~]/", "-", $packagename);
 	if (strlen($packagename) < MINSIZE__FRS_PACKAGE_NAME) {
@@ -2008,8 +2034,9 @@ function inject_package(&$g, $frsPackage, $project_path) {
 		foreach ($frsReleases as $frsRelease) {
 			$frsReleaseStatus[] = inject_release($package, $frsRelease, $project_path);
 		}
-		if (in_array(false, $frsReleaseStatus))
+		if (in_array(false, $frsReleaseStatus)) {
 			$continue = false;
+		}
 	}
 	return $continue;
 }
@@ -2017,8 +2044,9 @@ function inject_package(&$g, $frsPackage, $project_path) {
 function inject_release(&$package, $frsRelease, $project_path) {
 	global $adminUser;
 	$continue = true;
-	if ((string)$frsRelease->isDeleted == "true")
+	if ((string)$frsRelease->isDeleted == "true") {
 		return $continue;
+	}
 	$releasename = trim((string)$frsRelease->title);
 	$releasename = preg_replace("/[^-a-zA-Z0-9+_\. ~]/", "-", $releasename);
 	$notes = trim((string)$frsRelease->description);
@@ -2046,8 +2074,9 @@ function inject_release(&$package, $frsRelease, $project_path) {
 		foreach ($frsFiles as $frsFile) {
 			$frsFileStatus[] = inject_file($release, $frsFile, $project_path);
 		}
-		if (in_array(false, $frsFileStatus))
+		if (in_array(false, $frsFileStatus)) {
 			$continue = false;
+		}
 	}
 	return $continue;
 }
@@ -2055,8 +2084,9 @@ function inject_release(&$package, $frsRelease, $project_path) {
 function inject_file(&$release, $frsFile, $project_path) {
 	global $adminUser;
 	$continue = true;
-	if ((string)$frsFile->isDeleted == "true")
+	if ((string)$frsFile->isDeleted == "true") {
 		return $continue;
+	}
 	$filename = (string)$frsFile->attach['fileDisplayName'];
 	$filename = preg_replace("/[^-a-zA-Z0-9+_\. ~]/", "-", $filename);
 	$file_location = $project_path.'/'.(string)$frsFile->attach['filename'];
@@ -2087,8 +2117,9 @@ function computeXmldiscussionApplication(&$g, $project_path) {
 			foreach ($discussionFora as $discussionForum) {
 				$discussionForumStatus[] = inject_forum($g, $discussionForum, $project_path);
 			}
-			if (!in_array(false, $discussionForumStatus))
+			if (!in_array(false, $discussionForumStatus)) {
 				$status = true;
+			}
 		}
 	}
 	return $status;
@@ -2096,8 +2127,9 @@ function computeXmldiscussionApplication(&$g, $project_path) {
 
 function inject_forum(&$g, $discussionForum, $project_path) {
 	$continue = true;
-	if (strtolower(trim((string)$discussionForum->isDeleted)) == "true")
+	if (strtolower(trim((string)$discussionForum->isDeleted)) == "true") {
 		return $continue;
+	}
 	$forumname = trim((string)$discussionForum->title);
 	if (!preg_match('/^([_\.0-9a-z-])*$/i',$forumname)) {
 		echo 'Warning: '.$forumname.' is invalid'."\n";
@@ -2130,8 +2162,9 @@ function computeXmllinkedAppApplication(&$g, $project_path) {
 			foreach ($linkedApps as $linkedApp) {
 				$linkedAppStatus[] = inject_linkedapp($g, $linkedApp, $project_path);
 			}
-			if (!in_array(false, $linkedAppStatus))
+			if (!in_array(false, $linkedAppStatus)) {
 				$status = true;
+			}
 		}
 	}
 	return $status;
@@ -2152,13 +2185,15 @@ function inject_linkedapp(&$g, $linkedApp, $project_path) {
 }
 
 function util_session_set_new($user) {
-	if (strlen($user) > MAXSIZE__USER_UNIXNAME)
+	if (strlen($user) > MAXSIZE__USER_UNIXNAME) {
 		$user = substr($user, 0, MAXSIZE__USER_UNIXNAME);
+	}
 	// check if this user exists. if yes, then start a new session with. Used by create document function
 	// we use the last update value, not the value from the version itself.
 	$userObject = user_get_object_by_name($user);
-	if ($userObject && is_object($userObject) && !$userObject->isError())
+	if ($userObject && is_object($userObject) && !$userObject->isError()) {
 		session_set_new($userObject->getID());
+	}
 }
 
 function get_ff_id($object_string, $xid) {
@@ -2167,7 +2202,6 @@ function get_ff_id($object_string, $xid) {
 		return db_result($res, 0, 'ffid');
 	}
 	return false;
-
 }
 
 function set_permission_in_role(&$permissionPerSectionArray, $ctfpermissionSettingRessource, $ffobject, $section, $value) {
