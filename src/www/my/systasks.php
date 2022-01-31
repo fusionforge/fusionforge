@@ -102,4 +102,3 @@ for ($i=0; $i<db_numrows($res); $i++) {
 echo $HTML->listTableBottom();
 
 site_user_footer();
-

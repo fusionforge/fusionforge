@@ -59,4 +59,3 @@ function period2timestamp($period_name,$span) {
 	}
 	return (string)(time()-$seconds);
 }
-
