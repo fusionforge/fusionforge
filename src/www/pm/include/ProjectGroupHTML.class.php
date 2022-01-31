@@ -111,8 +111,9 @@ function pm_header($params) {
 
 	site_project_header($params);
 
-	if ($pg)
+	if ($pg) {
 		plugin_hook ("blocks", "tasks_".$pg->getName());
+	}
 }
 
 function pm_footer($params = array()) {

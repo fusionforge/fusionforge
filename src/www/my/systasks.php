@@ -45,10 +45,12 @@ site_user_header(array('title' => _('System actions queue (past day)')));
 $u = session_get_user();
 $groups = $u->getGroups();
 $gids = array();
-foreach($groups as $g)
+foreach($groups as $g) {
 	$gids[] = $g->getID();
-if (empty($gids))
+}
+if (empty($gids)) {
 	$gids[] = -1;  // avoid empty 'IN (...)' SQL clause
+}
 $gids = implode(',', $gids);
 
 $title_arr = array(
@@ -101,7 +103,3 @@ echo $HTML->listTableBottom();
 
 site_user_footer();
 
-// Local Variables:
-// mode: php
-// c-file-style: "bsd"
-// End:

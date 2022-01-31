@@ -52,15 +52,15 @@ $parent_id = getIntFromRequest('parent_id');
 
 if (!$group_id || !$group_project_id) {
 	$redirect_url = '';
-	if (isset($_SERVER['HTTP_REFERER']))
+	if (isset($_SERVER['HTTP_REFERER'])) {
 		$redirect_url = $_SERVER['HTTP_REFERER'];
-
-	if (!$group_id)
+	}
+	if (!$group_id) {
 		$missing_params[] = _('Group ID');
-
-	if (!$group_project_id)
+	}
+	if (!$group_project_id) {
 		$missing_params[] = _('Group Project ID');
-
+	}
 	exit_missing_param($redirect_url, $missing_params, 'pm');
 }
 
@@ -80,7 +80,7 @@ if (!$pg || !is_object($pg)) {
 
 /*
 	Figure out which function we're dealing with here
-*/
+ */
 switch (getStringFromRequest('func')) {
 
 	//

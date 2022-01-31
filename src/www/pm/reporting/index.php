@@ -70,7 +70,9 @@ function pm_quick_report($group_id,$title,$subtitle1,$qpa1,$subtitle2,$qpa2,$com
 
 	reports_quick_graph($subtitle1,$qpa1,$qpa2);
 
-	if ($comment) echo $comment;
+	if ($comment) {
+		echo $comment;
+	}
 
 	pm_footer();
 }

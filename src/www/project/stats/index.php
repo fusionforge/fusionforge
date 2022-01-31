@@ -60,7 +60,9 @@ $end = getIntFromRequest('end');
 // Set the start date to birth of the project.
 $report->site_start_date = $group->getStartDate();
 
-if (!$start || !$end) $z =& $report->getMonthStartArr();
+if (!$start || !$end) {
+	$z =& $report->getMonthStartArr();
+}
 
 if (!$start) {
 	$start = $z[0];
@@ -68,14 +70,20 @@ if (!$start) {
 if (!$end) {
 	$end = $z[count($z)-1];
 }
-if ($end < $start) list($start, $end) = array($end, $start);
+if ($end < $start) {
+	list($start, $end) = array($end, $start);
+}
 
 // Find a default SPAN value depending on the number of days.
 $delta=($end - $start)/24/60/60;
 if (!$SPAN) {
 	$SPAN = 1;
-	if ($delta > 60) $SPAN=2;
-	if ($delta > 365) $SPAN=3;
+	if ($delta > 60) {
+		$SPAN=2;
+	}
+	if ($delta > 365) {
+		$SPAN=3;
+	}
 }
 
 if ($SPAN && !is_numeric($SPAN)) { $SPAN = 1; }

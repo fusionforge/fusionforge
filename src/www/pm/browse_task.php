@@ -70,9 +70,9 @@ if (session_loggedin()) {
 	}
 }
 
-if(!isset($paging) || !$paging)
+if(!isset($paging) || !$paging) {
 	$paging = 25;
-
+}
 $ptf->setup($start, $_order, $paging, $set, $_assigned_to, $_status, $_category_id, $_view, $_sort_order);
 if ($ptf->isError()) {
 	exit_error($ptf->getErrorMessage(), 'pm');
@@ -212,23 +212,30 @@ if ($rows < 1) {
 	$title_arr=array();
 	$title_arr[] = "";
 	$title_arr[]=_('Task Id');
-	if ($display_col['summary'])
+	if ($display_col['summary']) {
 		$title_arr[]=_('Task Summary');
-	if ($display_col['status'])
+	}
+	if ($display_col['status']) {
 		$title_arr[]=_('Status');
-	if ($display_col['start_date'])
+	}
+	if ($display_col['start_date']) {
 		$title_arr[]=_('Start Date');
-	if ($display_col['end_date'])
+	}
+	if ($display_col['end_date']) {
 		$title_arr[]=_('End Date');
-	if ($display_col['percent_complete'])
+	}
+	if ($display_col['percent_complete']) {
 		$title_arr[]=_('Percent Complete');
-	if ($display_col['category'])
+	}
+	if ($display_col['category']) {
 		$title_arr[]=_('Category');
-	if ($display_col['assigned_to'])
+	}
+	if ($display_col['assigned_to']) {
 		$title_arr[]=_('Assigned to');
-	if ($display_col['priority'])
+	}
+	if ($display_col['priority']) {
 		$title_arr[]=_('Priority');
-
+	}
 
 	echo $HTML->listTableTop($title_arr, array(), 'full');
 
@@ -245,13 +252,16 @@ if ($rows < 1) {
 			($IS_ADMIN?'<input type="checkbox" name="project_task_id_list[]" value="'.
 			$pt_arr[$i]->getID() .'" /> ':'').
 			$pt_arr[$i]->getID() ."</td>\n";
-		if ($display_col['summary'])
+		if ($display_col['summary']) {
 			echo '<td>'.util_make_link($url,$pt_arr[$i]->getSummary())."</td>\n";
-		if ($display_col['status'])
+		}
+		if ($display_col['status']) {
 			echo '<td>'. $pt_arr[$i]->getStatusName() ."</td>\n";
-		if ($display_col['start_date'])
+		}
+		if ($display_col['start_date']) {
 			echo '<td>'.date(_('Y-m-d H:i'), $pt_arr[$i]->getStartDate() )."</td>\n";
-		if ($display_col['end_date'])
+		}
+		if ($display_col['end_date']) {
 			echo '<td>';
 			if ($now>$pt_arr[$i]->getEndDate() && $pt_arr[$i]->getStatusId() != 2 ) {
 				echo '<strong>* ';
@@ -262,14 +272,19 @@ if ($rows < 1) {
 			}
 			echo date(_('Y-m-d H:i'), $pt_arr[$i]->getEndDate()) .
 			    $x . "</td>\n";
-		if ($display_col['percent_complete'])
+		}
+		if ($display_col['percent_complete']) {
 			echo '<td>'. $pt_arr[$i]->getPercentComplete() ."%</td>\n";
-		if ($display_col['category'])
+		}
+		if ($display_col['category']) {
 			echo '<td>'. $pt_arr[$i]->getCategoryName() ."</td>\n";
-		if ($display_col['assigned_to'])
+		}
+		if ($display_col['assigned_to']) {
 			echo '<td>'. $pg->renderAssigneeList($pt_arr[$i]->getAssignedTo()) ."</td>\n";
-		if ($display_col['priority'])
+		}
+		if ($display_col['priority']) {
 			echo '<td>'. $pt_arr[$i]->getPriority() ."</td>\n";
+		}
 
 		echo '
 			</tr>';

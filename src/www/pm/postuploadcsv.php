@@ -79,8 +79,12 @@ if (isset($input_file) && isset($input_file['tmp_name']) &&
 			while (($values = fgetcsv($handle, 4096, $sep)) !== false) {
 				$task = array();
 				foreach($headers as $name => $id) {
-					if ($name == 'project_task_id') $name = 'id';
-					if ($name == 'title') $name = 'name';
+					if ($name == 'project_task_id') {
+						$name = 'id';
+					}
+					if ($name == 'title') {
+						$name = 'name';
+					}
 					$task[$name] = $values[$id];
 				}
 				$tasks[] = $task;

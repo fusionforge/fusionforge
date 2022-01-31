@@ -184,7 +184,9 @@ if ($week) {
 			</tr>';
 			echo $HTML->closeForm();
 		}
-		if (!isset($total_hours)) $total_hours = '';
+		if (!isset($total_hours)) {
+			$total_hours = '';
+		}
 		echo '<tr><td colspan="2"><strong>'._('Total Hours')._(':').'</strong></td>';
 		echo '<td class="align-center"><strong>'.$total_hours.'</strong></td><td colspan="2"></td></tr>';
 		echo $HTML->listTableBottom();

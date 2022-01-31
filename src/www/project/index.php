@@ -27,17 +27,20 @@ require_once $gfcommon.'include/pre.php';
 $group_id=getIntFromGet('group_id');
 
 /* validate group */
-if (!$group_id)
+if (!$group_id) {
 	exit_no_group();
+}
 
 $g = group_get_object($group_id);
-if (!$g || !is_object($g))
+if (!$g || !is_object($g)) {
 	exit_no_group();
+}
 
 session_require_perm('project_read', $group_id);
 
-if ($g->isError())
+if ($g->isError()) {
 	exit_error($g->getErrorMessage(), 'home');
+}
 
 /* everything sounds ok, now let's do the job */
 $action = getStringFromRequest('action');

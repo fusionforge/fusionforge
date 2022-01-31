@@ -35,7 +35,9 @@ function period2seconds($period_name,$span) {
 		return "";
 	}
 
-	if (!is_int ($span) || !$span) $span=1;
+	if (!is_int ($span) || !$span) {
+		$span=1;
+	}
 
 	if ($period_name=="day") {
 		return 60*60*24*$span;
@@ -52,11 +54,9 @@ function period2seconds($period_name,$span) {
 
 function period2timestamp($period_name,$span) {
 	$seconds=period2seconds($period_name,$span);
-	if (!$seconds) return '';
+	if (!$seconds) {
+		return '';
+	}
 	return (string)(time()-$seconds);
 }
 
-// Local Variables:
-// mode: php
-// c-file-style: "bsd"
-// End:
