@@ -146,7 +146,9 @@ function queries_to_soap($queries) {
 			$queryExtraFields = $artifactQuery->getExtraFields();
 			foreach ($queryExtraFields as $extra_field_id => $values) {
 				// $value may be a int. We wrap it in an array.
-				if (!is_array($values)) $values = array($values);
+				if (!is_array($values)) {
+					$values = array($values);
+				}
 				$extra_fields[] = array(
 							"extra_field_id"	=> $extra_field_id,
 							"values"			=> $values

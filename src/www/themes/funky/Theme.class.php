@@ -270,9 +270,9 @@ class Theme_Funky extends Layout {
 		$return = '<!-- start tabs -->'."\n";
 		$attrs = array('class' => 'tabGenerator fullwidth');
 
-		if ($total_width != '100%')
+		if ($total_width != '100%') {
 			$attrs['style'] = 'width:' . $total_width;
-
+		}
 		$return .= html_ao('table', $attrs);
 		$return .= html_ao('tr');
 
@@ -295,14 +295,14 @@ class Theme_Funky extends Layout {
 			}
 			$return .= html_ao('a', $attrs);
 			$attrs = array();
-			if ($selected == $i)
+			if ($selected == $i) {
 				$attrs['class'] = 'selected';
-
+			}
 			$return .= html_ao('span', $attrs);
 			$attrs = array('title' => $tabs_tooltips[$i]);
-			if ($nested)
+			if ($nested) {
 				$attrs['class'] = 'nested';
-
+			}
 			$return .= html_e('span', $attrs, $tabs_titles[$i], false);
 			$return .= html_ac(html_ap() - 3);
 		}

@@ -73,9 +73,9 @@ if (session_loggedin()) {
 	}
 }
 
-if(!isset($paging) || !$paging)
+if(!isset($paging) || !$paging) {
 	$paging = 25;
-
+}
 $start = getIntFromRequest('start');
 
 if ($start < 0) {

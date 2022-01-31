@@ -255,8 +255,8 @@ class Theme_Funky_Guy extends Layout {
 		echo html_ac(html_ap() -1); // </footer>
 
 		echo html_ao('div', array('id' => 'loader'));
-        echo html_ao('div');
-        echo html_ac(html_ap() -2); // </div></div>
+		echo html_ao('div');
+		echo html_ac(html_ap() -2); // </div></div>
 		// Loader
 		echo html_ao('script');
 		echo '
@@ -364,9 +364,9 @@ class Theme_Funky_Guy extends Layout {
 		$return = '<!-- start tabs -->'."\n";
 		$attrs = array('class' => 'tabGenerator fullwidth');
 
-		if ($total_width != '100%')
+		if ($total_width != '100%') {
 			$attrs['style'] = 'width:' . $total_width;
-
+		}
 		$return .= html_ao('div', $attrs);
 		$return .= html_ao('ul');
 
@@ -389,10 +389,11 @@ class Theme_Funky_Guy extends Layout {
 			$return .= html_ao('a', $attrs);
 
 			$attrs = array('title' => $tabs_tooltips[$i]);
-			if ($selected == $i)
+			if ($selected == $i) {
 				$attrs['class'] = 'selected';
-			elseif ($nested)
+			} elseif ($nested) {
 				$attrs['class'] = 'nested';
+			}
 
 			$return .= html_e('span', $attrs, $tabs_titles[$i], false);
 			$return .= html_ac(html_ap() - 2);

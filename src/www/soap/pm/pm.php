@@ -611,7 +611,9 @@ function projecttasks_to_soap($pt_arr) {
 			}
 
 			$sort_id = $pt_arr[$i]->getExternalID();
-			if (!$sort_id) $sort_id=0;
+			if (!$sort_id) { 
+				$sort_id=0;
+			}
 
 			$return[]=array(
 				'project_task_id' => $pt_arr[$i]->data_array['project_task_id'],

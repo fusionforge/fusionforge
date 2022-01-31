@@ -144,8 +144,9 @@ if ( $cat === 'c' ) {
 
 	// #######################################
 
-	if (!empty($discrim_desc))
+	if (!empty($discrim_desc)) {
 		echo html_e('p', array(), $discrim_desc);
+	}
 
 	// ######## two column table for key on right
 	// first print all parent cats and current cat (breadcrumb)

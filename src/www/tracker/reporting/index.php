@@ -69,7 +69,9 @@ $res = db_query_params('SELECT register_time FROM groups WHERE group_id=$1',
 			array($group_id));
 $report->site_start_date = db_result($res,0,'register_time');
 
-if (!$start || !$end) $z =& $report->getMonthStartArr();
+if (!$start || !$end) {
+	$z =& $report->getMonthStartArr();
+}
 
 if (!$start) {
 	$start = $z[0];
@@ -77,7 +79,9 @@ if (!$start) {
 if (!$end) {
 	$end = $z[count($z)-1];
 }
-if ($end < $start) list($start, $end) = array($end, $start);
+if ($end < $start) {
+	list($start, $end) = array($end, $start);
+}
 
 //
 //	Get list of trackers this person can see
