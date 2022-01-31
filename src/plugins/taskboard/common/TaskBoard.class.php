@@ -700,7 +700,7 @@ class TaskBoard extends FFError {
 
 		$card_title_background = $_used_trackers_data[$task->ArtifactType->getID()]['card_background_color'];
 		if( method_exists($this->TrackersAdapter, 'cardBackgroundColor' ) ) {
-			$task_maped['background'] = $this->TrackersAdapter->cardBackgroundColor($task, $card_title_background );
+			$task_maped['background'] = $this->TrackersAdapter->cardBackgroundColor($task);
 		} else {
 			$task_maped['background'] = $card_title_background;
 		}

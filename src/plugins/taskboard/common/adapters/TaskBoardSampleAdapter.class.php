@@ -37,8 +37,7 @@ class TaskBoardSampleAdapter extends TaskBoardBasicAdapter {
 		return $ret;
 	}
 
-	function cardBackgroundColor($artifact, $extra_field_alias) {
-		$extra_field_alias = 'resolution';
+	function cardBackgroundColor($artifact, $extra_field_alias = 'resolution') {
 		static $_cached = array();
 		$ret = '';
 
