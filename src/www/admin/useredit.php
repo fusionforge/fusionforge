@@ -203,7 +203,7 @@ echo html_build_select_box_from_arrays(
 	</td>
 	<td>
 		<select id="unix-shell" name="shell">
-			<?php account_shellselects($u->getShell()); ?>
+			<?php echo account_shellselects($u->getShell()); ?>
         </select>
     </td>
 </tr>

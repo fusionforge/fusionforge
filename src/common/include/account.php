@@ -331,7 +331,7 @@ function account_shellselects($current) {
 		// add the current option but unselectable -> defaults to cvssh if no other option in {core/chroot}/etc/shells
 		$html .= "<option value=\"$current\" disabled=\"disabled\">$current</option>\n";
 	}
-	echo $html;
+	return $html;
 }
 
 /**
