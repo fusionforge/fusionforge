@@ -91,7 +91,7 @@ class Navigation extends FFError {
 	 * list of titles of the feeds; $result['urls'] list of urls
 	 * of the feeds.
 	 * @param bool $asHTML
-	 * @return array
+	 * @return array|string
 	 */
 	function getRSS($asHTML = true) {
 		if (!$asHTML) {
@@ -112,10 +112,13 @@ class Navigation extends FFError {
 			return $res;
 		} else {
 			$feeds = $this->getRSS(false);
+			$feedhtml = '';
 			for ($j = 0; $j < count($feeds['urls']); $j++) {
-				echo html_e('link', array('rel' => 'alternate', 'title' => util_html_secure($feeds['titles'][$j]),
+				$feedhtml .= html_e('link', array('rel' => 'alternate', 'title' => util_html_secure($feeds['titles'][$j]),
 							'href' => $feeds['urls'][$j], 'type' => 'application/rss+xml'));
 			}
+			return $feedhtml;
+			
 		}
 	}
 
