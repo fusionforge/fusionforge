@@ -7,7 +7,7 @@
  * Copyright (C) 2011-2012 Alain Peyrat - Alcatel-Lucent
  * Copyright 2011, Iñigo Martinez
  * Copyright 2012, Thorsten “mirabilos” Glaser <t.glaser@tarent.de>
- * Copyright 2012-2017, Franck Villaume - TrivialDev
+ * Copyright 2012-2017,2022, Franck Villaume - TrivialDev
  * Copyright 2014, Stéphane-Eymeric Bredthauer
  * Copyright 2016-2017, Stéphane-Eymeric Bredthauer - TrivialDev
  * http://fusionforge.org
@@ -30,6 +30,7 @@
 
 require_once $gfcommon.'tracker/ArtifactFactory.class.php';
 require_once $gfcommon.'tracker/ArtifactQuery.class.php';
+require_once $gfcommon.'include/utils_crossref.php';
 
 global $ath;
 global $group_id;
@@ -715,7 +716,7 @@ if ($art_arr && $art_cnt > 0) {
 						// Now display extra-fields (fields are numbers).
 						$value = $extra_data[$f]['value'];
 						if ($extra_data[$f]['type'] == ARTIFACT_EXTRAFIELDTYPE_RELATION) {
-							$value = preg_replace('/\b(\d+)\b/e', "_artifactid2url('\\1')", $value);
+							$value = preg_replace_callback('/\b(\d+)b\]/', function($matches) {return _artifactid2url($matches[1]);}, $value);
 						} elseif ($extra_data[$f]['type'] == ARTIFACT_EXTRAFIELDTYPE_STATUS) {
 							if ($art_arr[$i]->getStatusID() == 2) {
 								$value = '<span class="strike">'.$value.'</span>';
