@@ -674,7 +674,7 @@ class DocumentGroup extends FFError {
 		if ($this->getParentID()) {
 			$parentDg = documentgroup_get_object($this->getParentID(), $this->Group->getID());
 			if ($parentDg->isError()) {
-				$this->setError = $parentDg->getErrorMessage();
+				$this->setError($parentDg->getErrorMessage());
 				return false;
 			}
 			//need to check if user has access to this path. If not, return false.
