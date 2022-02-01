@@ -104,7 +104,7 @@ class DiaryNote extends FFObject {
 					return;
 				}
 			}
-			if (!$this->isPublic() && (!$this->getUser->getID() != user_getid())) {
+			if (!$this->isPublic() && (!$this->getUser()->getID() != user_getid())) {
 				$this->setPermissionDeniedError();
 				$this->data_array = null;
 			}
