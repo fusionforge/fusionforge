@@ -128,7 +128,6 @@ class DocumentVersionFactory extends FFError {
 			while ($arr = db_fetch_array($res)) {
 				$serialids[] = $arr[0];
 			}
-			$this->serialids = $serialids;
 		}
 		return $serialids;
 	}
