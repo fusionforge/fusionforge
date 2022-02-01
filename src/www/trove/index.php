@@ -22,13 +22,13 @@
  */
 
 require_once '../env.inc.php';
-require_once 'pre.php';
-require_once 'trove.php';
+require_once $gfcommon.'include/pre.php';
+require_once $gfwww.'include/trove.php';
 
-require_once 'common/include/escapingUtils.php';
-require_once 'TroveCategory.class.php';
-require_once 'TroveCategoryFactory.class.php';
-require_once 'include/utils.php';
+require_once $gfcommon.'include/escapingUtils.php';
+require_once $gfwww.'/trove/TroveCategory.class.php';
+require_once $gfwww.'/trove/TroveCategoryFactory.class.php';
+require_once $gfcommon.'include/utils.php';
 
 if (!forge_get_config('use_trove')) {
 	exit_disabled();
@@ -48,6 +48,7 @@ echo '<hr />';
 // We check current filtering directives and display them
 
 $filter = getStringFromGet('discrim');
+$tgf = new TroveCategoryFactory;
 
 if($filter) {
 
@@ -62,7 +63,7 @@ if($filter) {
 	}
 	$filterArray = array_unique($cleanArray);
 	if(!empty($filterArray)) {
-		$filterCategories = TroveCategoryFactory::getCategories($filterArray);
+		$filterCategories = $tgf->getCategories($filterArray);
 
 		echo '<p><span style="color:red;">'._('Limiting View').'</span>';
 
@@ -89,7 +90,7 @@ if($filter) {
 		<td class="halfwidth">
 		<?php
 			// here we print list of root level categories, and use open folder for current
-			$rootCategories = TroveCategoryFactory::getRootCategories();
+			$rootCategories = $tgf->getRootCategories();
 			echo _('Browse By')._(':');
 			for($i = 0, $count = sizeof($rootCategories); $i < $count; $i++) {
 				$rootCategory =& $rootCategories[$i];
