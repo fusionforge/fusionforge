@@ -21,6 +21,7 @@
  */
 
 require_once $gfcommon.'include/FFError.class.php';
+require_once $gfcommon.'include/FusionForge.class.php';
 
 define('EFFORTUNITSET_FORGE_LEVEL', 1);
 define('EFFORTUNITSET_PROJECT_LEVEL', 2);
@@ -422,7 +423,7 @@ class EffortUnitSet extends FFError {
  */
 function getAvailableEffortUnitSets(&$Object = null) {
 	if (!$Object) {
-		$class ='';
+		$class = '';
 	} else {
 		$class = get_class($Object);
 	}
@@ -430,24 +431,21 @@ function getAvailableEffortUnitSets(&$Object = null) {
 		case 'ArtifactType':
 		case 'ArtifactTypeHtml':
 			if (!$Object || !is_object($Object)) {
-				$this->setError(_('Invalid Artifact Type'));
 				return false;
 			}
 			if ($Object->isError()) {
-				$this->setError(_('Effort Unit Set')._(':').' '.$Object->getErrorMessage());
+				$Object->setError(_('Effort Unit Set')._(':').' '.$Object->getErrorMessage());
 				return false;
 			}
 			$at_name = $Object->getName();
-			$group_name = $Object->getGroup()->getPublicName();
 			$objectLevel = EFFORTUNITSET_TRACKER_LEVEL;
 			break;
 		case 'Group':
 			if (!$Object || !is_object($Object)) {
-				$this->setError(_('Invalid Project'));
 				return false;
 			}
 			if ($Object->isError()) {
-				$this->setError(_('Effort Unit Set')._(':').' '.$Object->getErrorMessage());
+				$Object->setError(_('Effort Unit Set')._(':').' '.$Object->getErrorMessage());
 				return false;
 			}
 			$group_name = $Object->getPublicName();
@@ -460,19 +458,20 @@ function getAvailableEffortUnitSets(&$Object = null) {
 	$effortUnitSets = array();
 	switch($objectLevel) {
 		case EFFORTUNITSET_TRACKER_LEVEL:
-			$id = getEffortUnitSetForLevel($Object,EFFORTUNITSET_TRACKER_LEVEL);
+			$id = getEffortUnitSetForLevel($Object, EFFORTUNITSET_TRACKER_LEVEL);
 			if ($id) {
 				$effortUnitSets[$id] = sprintf(_('Tracker “%s” level Effort Unit Set'),$at_name);
 			}
 			// no break
 		case EFFORTUNITSET_PROJECT_LEVEL:
-			$id = getEffortUnitSetForLevel($Object,EFFORTUNITSET_PROJECT_LEVEL);
+			$id = getEffortUnitSetForLevel($Object, EFFORTUNITSET_PROJECT_LEVEL);
 			if ($id) {
 				$effortUnitSets[$id] = sprintf(_('Project “%s” level Effort Unit Set'),$group_name);
 			}
 			// no break
 		case EFFORTUNITSET_FORGE_LEVEL:
-			$id = getEffortUnitSetForLevel($Object,EFFORTUNITSET_FORGE_LEVEL);
+			$Object = new FusionForge;
+			$id = getEffortUnitSetForLevel($Object, EFFORTUNITSET_FORGE_LEVEL);
 			if ($id) {
 				$effortUnitSets[$id] = _('Forge level Effort Unit Set');
 			}
@@ -482,81 +481,72 @@ function getAvailableEffortUnitSets(&$Object = null) {
 
 /**
  * getAvailableEffortUnitSets - Get EffortUnitSet ID available for the object at this level.
- * @param	null|Group|ArtifactType $Object	Object
- * @param	int	 $level	level
+ * @param	FusionForge|Group|ArtifactType	$Object	Object
+ * @param	int	 			$level	level
  *
- * @return	int		EffortUnitSet ID.
+ * @return	int				EffortUnitSet ID.
  */
 function getEffortUnitSetForLevel(&$Object, $level) {
-	if (!$Object) {
-		$class = '';
-	} else {
-		$class = get_class($Object);
+	$class = get_class($Object);
+
+	if (!$Object || !is_object($Object)) {
+		return false;
 	}
+	if ($Object->isError()) {
+		$Object->setError(_('Effort Unit Set')._(':').' '.$Object->getErrorMessage());
+		return false;
+	}
+
 	switch ($class) {
 		case 'ArtifactType':
 		case 'ArtifactTypeHtml':
-			if (!$Object || !is_object($Object)) {
-				$this->setError(_('Invalid Artifact Type'));
-				return false;
-			}
-			if ($Object->isError()) {
-				$this->setError(_('Effort Unit Set')._(':').' '.$Object->getErrorMessage());
-				return false;
-			}
 			$atid = $Object->getID();
 			$at_name = $Object->getName();
 			$group_id = $Object->getGroup()->getID();
-			$group_name = $Object->getGroup()->getPublicName();
 			break;
 		case 'Group':
-			if (!$Object || !is_object($Object)) {
-				$this->setError(_('Invalid Project'));
-				return false;
-			}
-			if ($Object->isError()) {
-				$this->setError(_('Effort Unit Set')._(':').' '.$Object->getErrorMessage());
-				return false;
-			}
 			$group_id = $Object->getID();
 			$group_name = $Object->getPublicName();
 			if ($level < EFFORTUNITSET_PROJECT_LEVEL) {
 				return false;
 			}
 			break;
-		case '':
+		case 'FusionForge':
 			if ($level < EFFORTUNITSET_FORGE_LEVEL) {
 				return false;
 			}
 			break;
+		default:
+			return false;
 	}
+	$res = null;
 	switch($level) {
 		case EFFORTUNITSET_TRACKER_LEVEL:
 			$res = db_query_params('SELECT unit_set_id FROM effort_unit_set WHERE group_id = $1 AND group_artifact_id = $2 AND level = $3',
-			array($group_id, $atid, EFFORTUNITSET_TRACKER_LEVEL));
+						array($group_id, $atid, EFFORTUNITSET_TRACKER_LEVEL));
 			if (!$res) {
-				$this->setError(sprintf(_('Error getting Tracker “%s” level Effort Unit Set'),$at_name), db_error());
+				$Object->setError(sprintf(_('Error getting Tracker “%s” level Effort Unit Set'),$at_name), db_error());
 				return false;
 			}
 			break;
 		case EFFORTUNITSET_PROJECT_LEVEL:
 			$res = db_query_params('SELECT unit_set_id FROM effort_unit_set WHERE group_id = $1 AND group_artifact_id IS NULL AND level = $2',
-			array($group_id, EFFORTUNITSET_PROJECT_LEVEL));
+						array($group_id, EFFORTUNITSET_PROJECT_LEVEL));
 			if (!$res) {
-				$this->setError(sprintf(_('Error getting Project “%s” level Effort Unit Set'),$group_name), db_error());
+				$Object->setError(sprintf(_('Error getting Project “%s” level Effort Unit Set'),$group_name), db_error());
 				return false;
 			}
 			break;
 		case EFFORTUNITSET_FORGE_LEVEL:
 			$res = db_query_params('SELECT unit_set_id FROM effort_unit_set WHERE group_id IS NULL AND group_artifact_id IS NULL AND level = $1',
-			array(EFFORTUNITSET_FORGE_LEVEL));
+						array(EFFORTUNITSET_FORGE_LEVEL));
 			if (!$res) {
-				$this->setError(_('Error getting Forge level Effort Unit Set'), db_error());
+				$Object->setError(_('Error getting Forge level Effort Unit Set'), db_error());
 				return false;
 			}
 			break;
 	}
-	if (db_numrows($res) > 0) {
+	if ($res && db_numrows($res) > 0) {
 		return db_result($res, 0, 'unit_set_id');
 	}
 	return false;
