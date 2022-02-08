@@ -1,0 +1,41 @@
+#!/bin/bash
+#
+# Update packages maintained by composer version 2
+#
+# Copyright (C) 2021  Ralf Habacker <ralf.habacker@freenet.de>
+#
+# This file is part of FusionForge. FusionForge is free software;
+# you can redistribute it and/or modify it under the terms of the
+# GNU General Public License as published by the Free Software
+# Foundation; either version 2 of the Licence, or (at your option)
+# any later version.
+#
+# FusionForge is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License along
+# with FusionForge; if not, write to the Free Software Foundation, Inc.,
+# 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+
+r=$(dirname $0)
+r=$(realpath $r/..)
+
+if test -n "$1"; then
+    cmd="$@"
+else
+    cmd=update
+fi
+
+(
+    cd $r
+    /usr/bin/composer $cmd
+
+    # drop currently unsupported autoload related php files
+    if test -f autoload.php; then
+        rm -f autoload.php
+        rm -f composer/*.php
+    fi
+)
+

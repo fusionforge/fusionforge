@@ -62,7 +62,13 @@ class ArtifactHtml extends Artifact {
 			$title_arr[] = _('Detailed description');
 		}
 		$return .= $HTML->listTableTop($title_arr, array(), 'full');
-		$return .= $HTML->multiTableRow(array('id' => 'editdescription', 'style' => 'display:none'), array(array(html_e('textarea', array_merge($editattrs, array('id' => 'tracker-description', 'required' => 'required', 'name' => 'description', 'rows' => 20, 'style' => 'box-sizing: box-border; width: 99%;', 'title' => util_html_secure(html_get_tooltip_description('description')))), $result), 'style' => 'display: block; box-sizing:border-box;')));
+		$content = html_e('textarea', array_merge($editattrs,
+			array('id' => 'tracker-description', 'required' => 'required', 'name' => 'description',
+				'rows' => 20, 'style' => 'box-sizing: box-border; width: 99%;',
+				'title' => util_html_secure(html_get_tooltip_description('description')))), $result);
+		if (forge_get_config('tracker_parser_type') == 'markdown')
+			$content .= html_e('a', array('href' => forge_get_config('markdown_help_page'), 'target' => '_blank'), _('Markdown syntax help'));
+		$return .= $HTML->multiTableRow(array('id' => 'editdescription', 'style' => 'display:none'), array(array($content, 'style' => 'display: block; box-sizing:border-box;')));
 		$return .= $HTML->multiTableRow(array('id' => 'showdescription'), array(array($result_html)));
 		$return .= $HTML->listTableBottom();
 		return $return;
@@ -131,7 +137,7 @@ function hide_edit_button(id) {
 				$parsertype = forge_get_config('tracker_parser_type');
 				switch ($parsertype) {
 					case 'markdown':
-						require_once $gfcommon.'include/Markdown.include.php';
+						require_once dirname(__FILE__).'/../../include/Markdown.include.php';
 						$text = FF_Markdown($text);
 						break;
 					default:

@@ -1,0 +1,28 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "39498ebdf27b2f08f1f3a20b26cc666d",
+    "packages": [
+        {
+            "name": "vendor/libmarkdown-php",
+            "version": "1.0.2",
+            "dist": {
+                "type": "zip",
+                "url": "https://littoral.michelf.ca/code/php-markdown/php-markdown-1.0.2.zip"
+            },
+            "type": "library"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": [],
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": [],
+    "plugin-api-version": "2.1.0"
+}
