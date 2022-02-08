@@ -137,7 +137,7 @@ function hide_edit_button(id) {
 				$parsertype = forge_get_config('tracker_parser_type');
 				switch ($parsertype) {
 					case 'markdown':
-						require_once dirname(__FILE__).'/../../include/Markdown.include.php';
+						require_once $gfcommon.'include/Markdown.include.php';
 						$text = FF_Markdown($text);
 						break;
 					default:
