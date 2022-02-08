@@ -88,8 +88,7 @@ class Widget_ProjectDocumentsActivity extends Widget {
 		$textsArray[] = _('new and update Files'.' [FU]');
 		$textsArray[] = _('new files and directories'.' [FD]');
 		$textsArray[] = _('new and update files and directories'.' [FUD]');
-		$prefs = _('Display statistics')._(': ').html_build_select_box_from_arrays($optionsArray, $textsArray, 'show', $this->_statistic_show, false);
-		return $prefs;
+		return _('Display statistics')._(': ').html_build_select_box_from_arrays($optionsArray, $textsArray, 'show', $this->_statistic_show, false);
 	}
 
 	function getContent() {

@@ -124,7 +124,6 @@ class Widget_HomeHallOfFame extends Widget {
 		$textsArray[] = _('Projects & Diaries'.' [PD]');
 		$textsArray[] = _('Diaries & Artifacts'.' [DA]');
 		$textsArray[] = _('Projects, Diaries & Artifacts'.' [PDA]');
-		$prefs = _('Select objects')._(': ').html_build_select_box_from_arrays($optionsArray, $textsArray, 'show', $this->_hall_show, false);
-		return $prefs;
+		return _('Select objects')._(': ').html_build_select_box_from_arrays($optionsArray, $textsArray, 'show', $this->_hall_show, false);
 	}
 }

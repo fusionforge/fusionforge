@@ -1561,7 +1561,7 @@ class ArtifactType extends FFError {
 							);
 		}
 
-		$return = array(
+		return array(
 				'browse_list'		=> $this->getBrowseList(),
 				'browse_instructions'	=> $this->getBrowseInstructions(),
 				'custom_status_field'	=> $this->getCustomStatusField(),
@@ -1578,8 +1578,8 @@ class ArtifactType extends FFError {
 				'status_timeout'	=> $this->getStatusTimeout(),
 				'submit_instructions'	=> $this->getSubmitInstructions(),
 				'unit_set_id'		=> $this->getEffortUnitSet(),
-				'use_tracker_widget_display' => $this->getWidgetLayoutConfig());
-		return $return;
+				'use_tracker_widget_display' => $this->getWidgetLayoutConfig()
+			);
 	}
 
 	function getWidgetLayoutConfig() {

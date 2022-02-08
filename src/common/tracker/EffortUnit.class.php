@@ -631,6 +631,5 @@ function getEffortUnitById($unit_id){
 			$object = null;
 	}
 	$effortUnitSet = new EffortUnitSet($object, $data_array['unit_set_id']);
-	$effortUnit = new EffortUnit($effortUnitSet, $unit_id);
-	return $effortUnit;
+	return new EffortUnit($effortUnitSet, $unit_id);
 }

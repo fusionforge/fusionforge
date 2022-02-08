@@ -27,8 +27,7 @@ class Widget_HomeLatestNews extends Widget {
 		return _('Latest News');
 	}
 	function getContent() {
-		$content = news_show_latest(GROUP_IS_NEWS, 5, true, false, false, 5);
-		return $content;
+		return news_show_latest(GROUP_IS_NEWS, 5, true, false, false, 5);
 	}
 
 	function getDescription() {

@@ -95,8 +95,7 @@ class Widget_MyArtifacts extends Widget {
 		$textsArray[] = _('assigned to or monitored by me'.' [AM]');
 		$textsArray[] = _('submitted by or monitored by me'.' [SM]');
 		$textsArray[] = _('assigned to or submitted by or monitored by me'.' [ASM]');
-		$prefs = _('Display artifacts:').html_build_select_box_from_arrays($optionsArray, $textsArray, 'show', $this->_artifact_show);
-		return $prefs;
+		return _('Display artifacts:').html_build_select_box_from_arrays($optionsArray, $textsArray, 'show', $this->_artifact_show);
 	}
 
 	function getContent() {

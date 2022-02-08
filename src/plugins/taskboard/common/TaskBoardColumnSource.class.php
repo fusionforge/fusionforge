@@ -50,8 +50,7 @@ function &taskboard_column_source_get_object($taskboard_source_column_id, $taskb
 		}
 	}
 
-	$ColumnSource = new TaskBoardColumnSource($data);
-	return $ColumnSource;
+	return new TaskBoardColumnSource($data);
 }
 
 /**
@@ -80,8 +79,7 @@ function &taskboard_default_column_source_get_object($taskboard_target_column_id
 		}
 	}
 
-	$ColumnSource = new TaskBoardColumnSource($data);
-	return $ColumnSource;
+	return new TaskBoardColumnSource($data);
 }
 
 class TaskBoardColumnSource extends FFError {

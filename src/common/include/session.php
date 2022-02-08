@@ -70,11 +70,9 @@ function session_build_session_cookie($user_id) {
 		/* for escaping; this is not really HTML */
 		$session_cookie .= '<' . util_html_encode($s);
 	}
-	$session_cookie_hmac = hash_hmac("sha256", $session_cookie,
-	    forge_get_config('session_key'), true);
-	$session_serial_cookie = base64_encode($session_cookie) . '!' .
-	    base64_encode($session_cookie_hmac);
-	return $session_serial_cookie;
+	$session_cookie_hmac = hash_hmac("sha256", $session_cookie, forge_get_config('session_key'), true);
+
+	return base64_encode($session_cookie) . '!' .  base64_encode($session_cookie_hmac);
 }
 
 /**

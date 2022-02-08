@@ -185,8 +185,7 @@ class ValidFactory {
 			return $validator;
 		} elseif(is_string($validator) && class_exists('Valid_'.$validator)) {
 			$validator_classname = 'Valid_'.$validator;
-			$v = new $validator_classname($key);
-			return $v;
+			return new $validator_classname($key);
 		}
 		return null;
 	}
