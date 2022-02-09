@@ -22,6 +22,12 @@
 r=$(dirname $0)
 r=$(realpath $r/..)
 
+composerbin=$(which composer)
+if [ -z $composerbin ]; then
+	echo "missing composer binary";
+	exit;
+fi
+
 if test -n "$1"; then
     cmd="$@"
 else
@@ -30,7 +36,7 @@ fi
 
 (
     cd $r
-    /usr/bin/composer $cmd
+    $composerbin $cmd
 
     # drop currently unsupported autoload related php files
     if test -f autoload.php; then
