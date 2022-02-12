@@ -111,15 +111,16 @@ install_selenium() {
 	fi
 	mkdir -p /usr/local/share/php
 	pushd /usr/local/share/php
+	composerbin=$(which composer)
 	if grep "[[:space:]]8" /etc/centos-release >/dev/null 2>&1; then
-		composer --no-plugins --no-scripts require phpunit/phpunit:8.5
+		$composerbin --no-plugins --no-scripts require phpunit/phpunit:8.5
 	else
-		composer --no-plugins --no-scripts require phpunit/phpunit
+		$composerbin --no-plugins --no-scripts require phpunit/phpunit
 	fi
 	if grep -q ^9 /etc/debian_version >/dev/null 2>&1 || [ -e /etc/centos-release ]; then
-		composer --no-plugins --no-scripts require phpunit/phpunit-selenium
+		$composerbin --no-plugins --no-scripts require phpunit/phpunit-selenium
 	else
-		composer --no-plugins --no-scripts require phpunit/phpunit-selenium:dev-master
+		$composerbin --no-plugins --no-scripts require phpunit/phpunit-selenium:dev-master
 	fi
 	popd
 
