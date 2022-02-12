@@ -105,13 +105,16 @@ install_selenium() {
 		pushd $(mktemp -d)
 		php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
 		php composer-setup.php --install-dir=/usr/local/bin --filename=composer
+		composerbin=/usr/local/bin/composer
 		popd
 	else
 		zypper --non-interactive install MozillaFirefox wget php-composer patch unzip psmisc net-tools-deprecated
 	fi
 	mkdir -p /usr/local/share/php
 	pushd /usr/local/share/php
-	composerbin=$(which composer)
+	if [ -z "$composerbin" ]; then
+		composerbin=$(which composer)
+	fi
 	if grep "[[:space:]]8" /etc/centos-release >/dev/null 2>&1; then
 		$composerbin --no-plugins --no-scripts require phpunit/phpunit:8.5
 	else
