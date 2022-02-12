@@ -183,7 +183,7 @@ if (!session_loggedin()) {
 	echo html_e('h2', array(), $info_str);
 	if (forge_get_config('diary_parser_type') == 'markdown') {
 		echo html_e('p', array(), sprintf(_('You can use markdown syntax in the details of your blog post. Documentation for Markdown syntax is available at <a href="%1$s">%1$s</a>.'),
-							'https://michelf.ca/projets/php-markdown/syntaxe/'));
+							forge_get_config('markdown_help_page')));
 	}
 	echo $HTML->openForm(array('action' => '/my/diary.php', 'method' => 'post'));
 	echo html_e('input', array('type' => 'hidden', 'name' => 'form_key', 'value' => form_generate_key()));

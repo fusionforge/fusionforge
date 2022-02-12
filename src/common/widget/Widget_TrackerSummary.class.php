@@ -113,6 +113,9 @@ class Widget_TrackerSummary extends Widget {
 
 		}
 		if (($func == 'add' && forge_check_perm('tracker', $atid, 'submit')) || ($func == 'detail' && session_loggedin() && forge_check_perm('tracker', $atid, 'submit'))) {
+			if (forge_get_config('tracker_parser_type') == 'markdown') {
+				$return .= html_e('a', array('href' => forge_get_config('markdown_help_page'), 'target' => '_blank'), _('Markdown syntax help'));
+			}
 			$return .= $HTML->addRequiredFieldsInfoBox();
 			$return .= html_e('p', array('class' => 'middleRight'), html_e('input', array('form' => 'trackerform', 'type' => 'submit', 'name' => 'submit', 'value' => _('Save Changes'), 'title' => _('Save is validating the complete form'), 'onClick' => 'iefixform()')));
 		}

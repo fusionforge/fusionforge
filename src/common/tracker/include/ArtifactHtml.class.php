@@ -66,8 +66,9 @@ class ArtifactHtml extends Artifact {
 			array('id' => 'tracker-description', 'required' => 'required', 'name' => 'description',
 				'rows' => 20, 'style' => 'box-sizing: box-border; width: 99%;',
 				'title' => util_html_secure(html_get_tooltip_description('description')))), $result);
-		if (forge_get_config('tracker_parser_type') == 'markdown')
+		if (forge_get_config('tracker_parser_type') == 'markdown') {
 			$content .= html_e('a', array('href' => forge_get_config('markdown_help_page'), 'target' => '_blank'), _('Markdown syntax help'));
+		}
 		$return .= $HTML->multiTableRow(array('id' => 'editdescription', 'style' => 'display:none'), array(array($content, 'style' => 'display: block; box-sizing:border-box;')));
 		$return .= $HTML->multiTableRow(array('id' => 'showdescription'), array(array($result_html)));
 		$return .= $HTML->listTableBottom();

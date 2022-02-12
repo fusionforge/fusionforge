@@ -111,7 +111,8 @@ if (session_loggedin()) {
 	<?php
 	$attrs = array();
 	if (forge_get_config('snippet_parser_type') == 'markdown') {
-		$attrs = array('title' => _('Use Markdown Syntax'));
+		echo html_e('p', array(), sprintf(_('You can use markdown syntax in the description of the snippet. Documentation for Markdown syntax is available at <a href="%1$s">%1$s</a>.'),
+						forge_get_config('markdown_help_page')));
 	}
         echo $HTML->html_textarea('description', '', _('Description').utils_requiredField()._(': '), '', array_merge(array('rows' => '5', 'cols' => '45', 'required' => 'required'), $attrs)); ?>
 	</td></tr>
