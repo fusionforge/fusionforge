@@ -2,7 +2,7 @@
 /**
  * FusionForge Documentation Manager
  *
- * Copyright 2016-2017, Franck Villaume - TrivialDev
+ * Copyright 2016-2017,2022, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -57,7 +57,7 @@ class DocumentVersionFactory extends FFError {
 	 * @return	array	Array of enriched version datas from database.
 	 */
 	function getHTMLVersions($limit = 0, $start = 0) {
-		global $HTML;
+		global $HTML, $gfcommon;
 		$versions = array();
 		// everything but data_words! Too much memory consumption.
 		$res = db_query_params('SELECT serial_id, \'_\'||version as version, docid, current_version, title, updatedate, createdate, created_by, description, filename, filetype, filesize, vcomment FROM doc_data_version WHERE docid = $1 ORDER by version DESC',
@@ -86,10 +86,22 @@ class DocumentVersionFactory extends FFError {
 					$isHtml = 1;
 				}
 				$new_description = util_gen_cross_ref($arr['description'], $this->Document->Group->getID());
-				$arr['new_description'] = str_replace(array("\r\n", "\r", "\n"), "\\n", $new_description);
+				$parsertype = forge_get_config('docman_parser_type');
+				switch ($parsertype) {
+					case 'markdown':
+						require_once $gfcommon.'include/Markdown.include.php';
+						$new_description = FF_Markdown($new_description);
+						$new_vcomment = FF_Markdown($arr['vcomment']);
+						$arr['new_description'] = str_replace(array("\r\n", "\r", "\n"), '', $new_description);
+						$arr['new_vcomment'] = str_replace(array("\r\n", "\r", "\n"), '', $new_vcomment);
+						break;
+					default:
+						$arr['new_description'] = str_replace(array("\r\n", "\r", "\n"), "\\n", $new_description);
+						$arr['new_vcomment'] = str_replace(array("\r\n", "\r", "\n"), "\\n", $arr['vcomment']);
+				}
 				$arr['description'] = str_replace(array("\r\n", "\r", "\n"), "\\n", $arr['description']);
 				$arr['vcomment'] = str_replace(array("\r\n", "\r", "\n"), "\\n", $arr['vcomment']);
-				$arr['versionactions'][] = util_make_link('#', $HTML->getEditFilePic(_('Edit this version'), 'editversion'), array('id' => 'version_action_edit', 'onclick' => 'javascript:controllerListFile.toggleEditVersionView({title: \''.addslashes($arr['title']).'\', description: \''.addslashes($arr['description']).'\', new_description: \''.addslashes($arr['new_description']).'\', version: '.ltrim($arr['version'], '_').', current_version: '.$arr['current_version'].', isURL: '.$isURL.', isText: '.$isText.', isHtml: '.$isHtml.', filename: \''.addslashes($arr['filename']).'\', vcomment: \''.addslashes($arr['vcomment']).'\', docid: '.$arr['docid'].', groupId: '.$this->Document->Group->getID().'})'), true);
+				$arr['versionactions'][] = util_make_link('#', $HTML->getEditFilePic(_('Edit this version'), 'editversion'), array('id' => 'version_action_edit', 'onclick' => 'javascript:controllerListFile.toggleEditVersionView({title: \''.addslashes($arr['title']).'\', description: \''.addslashes($arr['description']).'\', new_description: \''.addslashes($arr['new_description']).'\', version: '.ltrim($arr['version'], '_').', current_version: '.$arr['current_version'].', isURL: '.$isURL.', isText: '.$isText.', isHtml: '.$isHtml.', filename: \''.addslashes($arr['filename']).'\', vcomment: \''.addslashes($arr['vcomment']).'\', new_vcomment: \''.addslashes($arr['new_vcomment']).'\', docid: '.$arr['docid'].', groupId: '.$this->Document->Group->getID().'})'), true);
 				if ($numrows > 1) {
 					$arr['versionactions'][] = util_make_link('#', $HTML->getRemovePic(_('Permanently delete this version'), 'delversion'), array('id' => 'version_action_delete', 'onclick' => 'javascript:controllerListFile.deleteVersion({version: '.ltrim($arr['version'], '_').', docid: '.$arr['docid'].', groupId: '.$this->Document->Group->getID().'})'), true);
 				}

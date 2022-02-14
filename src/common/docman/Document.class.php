@@ -7,7 +7,7 @@
  * Copyright 2009, Roland Mas
  * Copyright 2010-2011, Franck Villaume - Capgemini
  * Copyright (C) 2011-2012 Alain Peyrat - Alcatel-Lucent
- * Copyright 2011-2017,2021, Franck Villaume - TrivialDev
+ * Copyright 2011-2017,2021-2022, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -335,8 +335,18 @@ class Document extends FFObject {
 	 * @return	string	The description.
 	 */
 	function getDescription() {
+		global $gfcommon;
 		$result = util_gen_cross_ref($this->data_array['description'], $this->Group->getID());
-		return nl2br($result);
+		$parsertype = forge_get_config('docman_parser_type');
+		switch ($parsertype) {
+			case 'markdown':
+				require_once $gfcommon.'include/Markdown.include.php';
+				$result = FF_Markdown($result);
+				break;
+			default:
+				$result = nl2br($result);
+		}
+		return $result;
 	}
 
 	/**

@@ -2,7 +2,7 @@
 /**
  * FusionForge Documentation Manager
  *
- * Copyright 2012-2017, Franck Villaume - TrivialDev
+ * Copyright 2012-2017,2022, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -107,6 +107,12 @@ if ($g->useDocmanSearch()) {
 	$cells[] =  array(_('Both title & description fields can be parsed by the document search engine.'), 'colspan' => 2);
 	echo $HTML->multiTableRow(array(), $cells);
 }
+if (forge_get_config('docman_parser_type') == 'markdown') {
+	$cells = array();
+	$cells[] = array(sprintf(_('You can use markdown syntax in the description & comment of the document. Documentation for Markdown syntax is available at <a href="%1$s">%1$s</a>.'),
+			forge_get_config('markdown_help_page')), 'colspan' => 2);
+	echo $HTML->multiTableRow(array(), $cells);
+};
 $cells = array();
 $cells[] = array(_('Current Version')._(':'), 'class' => 'docman_editfile_currentversion');
 $cells[][] = html_e('input', array('type' => 'checkbox', 'title' => _('Make this version the current version'), 'id' => 'current_version', 'name' => 'current_version', 'value' => 1));

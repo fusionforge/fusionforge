@@ -7,7 +7,7 @@
  * Copyright 2010-2011, Franck Villaume - Capgemini
  * Copyright 2011, Roland Mas
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
- * Copyright 2012-2016,2021, Franck Villaume - TrivialDev
+ * Copyright 2012-2016,2021-2022, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -183,6 +183,10 @@ if ($dgf->getNested($stateidArr) == NULL) {
 	echo $HTML->addRequiredFieldsInfoBox();
 	if ($g->useDocmanSearch()) {
 		echo html_e('p', array(), _('Both fields Title & Description are used by the document search engine.'), false);
+	}
+	if (forge_get_config('docman_parser_type') == 'markdown') {
+		echo html_e('p', array(), sprintf(_('You can use markdown syntax in the description & comment of your document. Documentation for Markdown syntax is available at <a href="%1$s">%1$s</a>.'),
+						forge_get_config('markdown_help_page')));
 	}
 	echo html_e('div', array('class' => 'docmanSubmitDiv'), html_e('input', array('type' => 'submit', 'name' => 'submit', 'value' => _('Submit Information'))));
 	echo $HTML->closeForm();

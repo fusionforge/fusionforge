@@ -4,7 +4,7 @@
  * Copyright 2010, Antoine Mercadal - Capgemini
  * Copyright 2010-2011, Franck Villaume - Capgemini
  * Copyright 2011, Alain Peyrat
- * Copyright 2011-2017,2021, Franck Villaume - TrivialDev
+ * Copyright 2011-2017,2021-2022, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -496,7 +496,7 @@ DocManListFileController.prototype =
 							versionactiontdcontent += val.versionactions[i];
 						}
 						// please sync with the editfile.php widths if you change it here.
-						var htmlString = '<tr id="docversion'+val.version.substr(1)+'" ><td style="width: 60px">'+val.version.substr(1)+currenttdcontent+'</td><td style="width: 150px">'+filenametdcontent[0].outerHTML+'</td><td style="width: 150px">'+val.title+'</td><td style="width: 150px">'+val.new_description.replace(/\\n/g, '<br />')+'</td><td style="width: 110px">'+val.vcomment.replace(/\\n/g, '<br />')+'</td><td style="width: 100px">'+val.created_by_username+'</td><td style="width: 100px">'+val.lastdate+'</td><td style="width: 50px">'+val.filesize_readable+'</td><td style="width: 50px">'+versionactiontdcontent+'</td></tr>'
+						var htmlString = '<tr id="docversion'+val.version.substr(1)+'" ><td style="width: 60px">'+val.version.substr(1)+currenttdcontent+'</td><td style="width: 150px">'+filenametdcontent[0].outerHTML+'</td><td style="width: 150px">'+val.title+'</td><td style="width: 150px">'+val.new_description.replace(/\\n/g, '<br />')+'</td><td style="width: 110px">'+val.new_vcomment.replace(/\\n/g, '<br />')+'</td><td style="width: 100px">'+val.created_by_username+'</td><td style="width: 100px">'+val.lastdate+'</td><td style="width: 50px">'+val.filesize_readable+'</td><td style="width: 50px">'+versionactiontdcontent+'</td></tr>'
 						jQuery('#sortable_doc_version_table > tbody:last-child').append(htmlString);
 						});
 				}
