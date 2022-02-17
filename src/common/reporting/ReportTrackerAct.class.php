@@ -60,15 +60,10 @@ class ReportTrackerAct extends Report {
 			return false;
 		}
 
-		switch ($span) {
-			case REPORT_TYPE_WEEKLY: {
-				$arr = $this->getWeekStartArr();
-				break;
-			}
-			default: {
-				$arr = $this->getMonthStartArr();
-				break;
-			}
+		if ($span == REPORT_TYPE_WEEKLY) {
+			$arr = $this->getWeekStartArr();
+		} else {
+			$arr = $this->getMonthStartArr();
 		}
 
 		// required since we unset val in $arr
@@ -79,15 +74,10 @@ class ReportTrackerAct extends Report {
 				unset($arr[$i]);
 			} else {
 				if (!isset($arr_backed[$i-1])) {
-					switch ($span) {
-						case REPORT_TYPE_WEEKLY: {
-							$previous = $arr_backed[$i] - REPORT_WEEK_SPAN;
-							break;
-						}
-						default: {
-							$previous = mktime(0, 0, 0, date('m')-$this->max_month, 1, date('Y'));
-							break;
-						}
+					if ($span == REPORT_TYPE_WEEKLY) {
+						$previous = $arr_backed[$i] - REPORT_WEEK_SPAN;
+					} else {
+						$previous = mktime(0, 0, 0, date('m')-$this->max_month, 1, date('Y'));
 					}
 				} else {
 					$previous = $arr_backed[$i-1];

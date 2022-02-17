@@ -272,14 +272,10 @@ class HTTP_WebDAV_Server_Docman extends HTTP_WebDAV_Server {
 				exit_error(_('webdav db error')._(': ').db_error(),'docman');
 			}
 			while ($arr = db_fetch_array($res)) {
-				switch ($arr['filetype']) {
-					case "URL": {
-						echo html_e('li', array(), util_make_link($arr['filename'], $arr['filename'], array(), true), false);
-						break;
-					}
-					default: {
-						echo html_e('li', array(), util_make_link('/docman/view.php/'.$group_id.'/webdav'.$subpath.$arr['filename'], $arr['filename']), false);
-					}
+				if ($arr['filetype'] == 'URL') {
+					echo html_e('li', array(), util_make_link($arr['filename'], $arr['filename'], array(), true), false);
+				} else {
+					echo html_e('li', array(), util_make_link('/docman/view.php/'.$group_id.'/webdav'.$subpath.$arr['filename'], $arr['filename']), false);
 				}
 			}
 

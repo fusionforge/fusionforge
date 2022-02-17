@@ -272,14 +272,10 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 				$cells[][] = html_e('input', array('type' => 'checkbox', 'value' => $d->getID(), 'class' => 'checkeddocidactive', 'title' => _('Select / Deselect this document for massaction'), 'onClick' => 'controllerListFile.checkgeneral("active")'));
 			}
 		}
-		switch ($d->getFileType()) {
-			case 'URL': {
-				$cells[][] =  util_make_link($d->getFileName(), html_image($d->getFileTypeImage(), 22, 22, array('alt' => $d->getFileType())), array('title' => _('Visit this link')), true);
-				break;
-			}
-			default: {
-				$cells[][] =  util_make_link('/docman/view.php/'.$d->Group->getID().'/'.$d->getID(), html_image($d->getFileTypeImage(), 22, 22, array('alt' => $d->getFileType())), array('title' => _('View this document')));
-			}
+		if ($d->getFileType() == 'URL') {
+			$cells[][] =  util_make_link($d->getFileName(), html_image($d->getFileTypeImage(), 22, 22, array('alt' => $d->getFileType())), array('title' => _('Visit this link')), true);
+		} else {
+			$cells[][] =  util_make_link('/docman/view.php/'.$d->Group->getID().'/'.$d->getID(), html_image($d->getFileTypeImage(), 22, 22, array('alt' => $d->getFileType())), array('title' => _('View this document')));
 		}
 		$cells[][] = 'D'.$d->getID();
 		$nextcell = '';
@@ -311,15 +307,10 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 		} else {
 			$cells[][] = $d->getStateName();
 		}
-		switch ($d->getFileType()) {
-			case 'URL': {
-				$cells[] = array('--', 'content' => 0);
-				break;
-			}
-			default: {
-				$cells[] = array(human_readable_bytes($d->getFileSize()), 'content' => $d->getFileSize());
-				break;
-			}
+		if ($d->getFileType() == 'URL') {
+			$cells[] = array('--', 'content' => 0);
+		} else {
+			$cells[] = array(human_readable_bytes($d->getFileSize()), 'content' => $d->getFileSize());
 		}
 		$cells[][] = $d->getDownload();
 

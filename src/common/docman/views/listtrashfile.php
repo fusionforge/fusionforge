@@ -156,14 +156,10 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 	foreach ($nested_docs[$dirid] as $d) {
 		$cells = array();
 		$cells[][] = html_e('input', array('type' => 'checkbox', 'class' => 'checkeddocidactive', 'value' => $d->getID(), 'title' => _('Select / Deselect this document for massaction'), 'onClick' => 'controllerListFile.checkgeneral("active")'));
-		switch ($d->getFileType()) {
-			case 'URL': {
-				$cells[][] = util_make_link($d->getFileName(), html_image($d->getFileTypeImage(), 22, 22, array('alt' => $d->getFileType())), array('title' => _('Visit this link')));
-				break;
-			}
-			default: {
-				$cells[][] = util_make_link('/docman/view.php/'.$group_id.'/'.$d->getID().'/'.urlencode($d->getFileName()), html_image($d->getFileTypeImage(), 20, 20, array('alt' => $d->getFileType())), array('title' => _('View this document')));
-			}
+		if ($d->getFileType() == 'URL') {
+			$cells[][] = util_make_link($d->getFileName(), html_image($d->getFileTypeImage(), 22, 22, array('alt' => $d->getFileType())), array('title' => _('Visit this link')));
+		} else {
+			$cells[][] = util_make_link('/docman/view.php/'.$group_id.'/'.$d->getID().'/'.urlencode($d->getFileName()), html_image($d->getFileTypeImage(), 20, 20, array('alt' => $d->getFileType())), array('title' => _('View this document')));
 		}
 		$cells[][] = 'D'.$d->getID();
 		$nextcell ='';
@@ -183,15 +179,10 @@ if (isset($nested_docs[$dirid]) && is_array($nested_docs[$dirid])) {
 			$cells[] = array(date(_('Y-m-d H:i'), $d->getCreated()), 'sorttable_customkey' => $d->getCreated());
 		}
 		$cells[][] = $d->getStateName();
-		switch ($d->getFileType()) {
-			case 'URL': {
-				$cells[][] = '--';
-				break;
-			}
-			default: {
-				$cells[][] = human_readable_bytes($d->getFileSize());
-				break;
-			}
+		if ($d->getFileType() == 'URL') {
+			$cells[][] = '--';
+		} else {
+			$cells[][] = human_readable_bytes($d->getFileSize());
 		}
 		$newdgf = new DocumentGroupFactory($d->Group);
 		$editfileaction = DOCMAN_BASEURL.$GLOBALS['group_id'].'&action=editfile&fromview=listfile&dirid='.$d->getDocGroupID();

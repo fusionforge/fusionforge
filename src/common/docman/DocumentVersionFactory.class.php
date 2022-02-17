@@ -86,18 +86,15 @@ class DocumentVersionFactory extends FFError {
 					$isHtml = 1;
 				}
 				$new_description = util_gen_cross_ref($arr['description'], $this->Document->Group->getID());
-				$parsertype = forge_get_config('docman_parser_type');
-				switch ($parsertype) {
-					case 'markdown':
-						require_once $gfcommon.'include/Markdown.include.php';
-						$new_description = FF_Markdown($new_description);
-						$new_vcomment = FF_Markdown($arr['vcomment']);
-						$arr['new_description'] = str_replace(array("\r\n", "\r", "\n"), '', $new_description);
-						$arr['new_vcomment'] = str_replace(array("\r\n", "\r", "\n"), '', $new_vcomment);
-						break;
-					default:
-						$arr['new_description'] = str_replace(array("\r\n", "\r", "\n"), "\\n", $new_description);
-						$arr['new_vcomment'] = str_replace(array("\r\n", "\r", "\n"), "\\n", $arr['vcomment']);
+				if (forge_get_config('docman_parser_type') == 'markdown') {
+					require_once $gfcommon.'include/Markdown.include.php';
+					$new_description = FF_Markdown($new_description);
+					$new_vcomment = FF_Markdown($arr['vcomment']);
+					$arr['new_description'] = str_replace(array("\r\n", "\r", "\n"), '', $new_description);
+					$arr['new_vcomment'] = str_replace(array("\r\n", "\r", "\n"), '', $new_vcomment);
+				} else {
+					$arr['new_description'] = str_replace(array("\r\n", "\r", "\n"), "\\n", $new_description);
+					$arr['new_vcomment'] = str_replace(array("\r\n", "\r", "\n"), "\\n", $arr['vcomment']);
 				}
 				$arr['description'] = str_replace(array("\r\n", "\r", "\n"), "\\n", $arr['description']);
 				$arr['vcomment'] = str_replace(array("\r\n", "\r", "\n"), "\\n", $arr['vcomment']);

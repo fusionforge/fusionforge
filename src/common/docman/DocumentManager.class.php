@@ -167,19 +167,14 @@ class DocumentManager extends FFError {
 	function getHTMLTree($selecteddir, $linkmenu, $docGroupId = 0) {
 		global $g; // the master group of all the groups .... anyway. Needed to support projects-hierarchy plugin
 		$dg = new DocumentGroup($this->Group);
-		switch ($linkmenu) {
-			case 'listtrashfile': {
-				$stateId = 2;
-				$doc_group_stateid = array(2);
-				break;
-			}
-			default: {
-				$stateId = 1;
-				$doc_group_stateid = array(1);
-				if (forge_check_perm('docman', $this->Group->getID(), 'approve')) {
-					$doc_group_stateid = array(1, 3, 4, 5);
-				}
-				break;
+		if ($linkmenu == 'listtrashfile') {
+			$stateId = 2;
+			$doc_group_stateid = array(2);
+		} else {
+			$stateId = 1;
+			$doc_group_stateid = array(1);
+			if (forge_check_perm('docman', $this->Group->getID(), 'approve')) {
+				$doc_group_stateid = array(1, 3, 4, 5);
 			}
 		}
 		$subGroupIdArr = $dg->getSubgroup($docGroupId, $doc_group_stateid);
@@ -304,18 +299,14 @@ class DocumentManager extends FFError {
 		} else {
 			$stateQuery = db_query_params('select * from doc_states order by stateid', array());
 		}
-		switch ($format) {
-			case 'json': {
-				$returnString = '{';
-				while ($stateArr = db_fetch_array($stateQuery)) {
-					$returnString .= util_html_secure($stateArr['name']).': \''.$stateArr['stateid'].'\',';
-				}
-				return $returnString.'}';
+		if ($format == 'json') {
+			$returnString = '{';
+			while ($stateArr = db_fetch_array($stateQuery)) {
+				$returnString .= util_html_secure($stateArr['name']).': \''.$stateArr['stateid'].'\',';
 			}
-			default: {
-				return $stateQuery;
-			}
+			return $returnString.'}';
 		}
+		return $stateQuery;
 	}
 
 	/**
@@ -330,15 +321,12 @@ class DocumentManager extends FFError {
 		$text_array = array();
 		$this->buildArrays($nested_groups, $id_array, $text_array, array());
 		$rows = count($id_array);
-		switch ($format) {
-			case 'json': {
-				$returnString = '[';
-				for ($i = 0; $i < $rows; $i++) {
-					$returnString .= '['.$id_array[$i].',\''.util_html_secure(addslashes($text_array[$i])).'\'],';
-				}
-				$returnString .= ']';
-				break;
+		if ($format == 'json') {
+			$returnString = '[';
+			for ($i = 0; $i < $rows; $i++) {
+				$returnString .= '['.$id_array[$i].',\''.util_html_secure(addslashes($text_array[$i])).'\'],';
 			}
+			$returnString .= ']';
 		}
 		return $returnString;
 	}

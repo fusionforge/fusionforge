@@ -158,14 +158,11 @@ class DiaryNote extends FFObject {
 	function getDetails() {
 		global $gfcommon;
 		$result_html = util_gen_cross_ref($this->data_array['details']);
-		$parsertype = forge_get_config('diary_parser_type');
-		switch ($parsertype) {
-			case 'markdown':
-				require_once $gfcommon.'include/Markdown.include.php';
-				$result_html = FF_Markdown($result_html);
-				break;
-			default:
-				$result_html = nl2br($result_html);
+		if (forge_get_config('diary_parser_type') == 'markdown') {
+			require_once $gfcommon.'include/Markdown.include.php';
+			$result_html = FF_Markdown($result_html);
+		} else {
+			$result_html = nl2br($result_html);
 		}
 		return $result_html;
 	}
@@ -187,14 +184,11 @@ class DiaryNote extends FFObject {
 			$arr = explode("\n", $this->data_array['details']);
 		}
 		$abstract = util_gen_cross_ref($arr[0]);
-		$parsertype = forge_get_config('diary_parser_type');
-		switch ($parsertype) {
-			case 'markdown':
-				require_once $gfcommon.'include/Markdown.include.php';
-				$abstract = FF_Markdown($abstract);
-				break;
-			default:
-				$abstract = nl2br($abstract);
+		if (forge_get_config('diary_parser_type') == 'markdown') {
+			require_once $gfcommon.'include/Markdown.include.php';
+			$abstract = FF_Markdown($abstract);
+		} else {
+			$abstract = nl2br($abstract);
 		}
 		$arr_v = $this->getVotes();
 		$content = html_e('div', array('class' => 'widget-sticker-header box'), html_e('div', array(), util_make_link($this->getLink(), $this->getSummary()).' - '.$arr_v[0].' '._('Vote(s)').'&nbsp;'._('by').'&nbsp;').util_display_user($this->getUser()->getUnixname(), $this->getUser()->getID(), $this->getUser()->GetRealname()));

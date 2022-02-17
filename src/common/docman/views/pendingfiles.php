@@ -72,14 +72,10 @@ jQuery(document).ready(function() {
 		foreach ($nested_pending_docs[$dirid] as $d) {
 			$cells = array();
 			$cells[][] = html_e('input', array('type' => 'checkbox', 'value' => $d->getID(), 'class' => 'checkeddocidpending', 'title' => _('Select / Deselect this document for massaction'), 'onClick' => 'controllerListPending.checkgeneral("pending")'));
-			switch ($d->getFileType()) {
-				case 'URL': {
-					$cells[][] = util_make_link($d->getFileName(), html_image($d->getFileTypeImage(), 22, 22, array('alt'=>$d->getFileType())), array('title' => _('Visit this link')), true);
-					break;
-				}
-				default: {
-					$cells[][] = util_make_link('/docman/view.php/'.$g->getID().'/'.$d->getID().'/'.urlencode($d->getFileName()), html_image($d->getFileTypeImage(), 20, 20, array('alt'=>$d->getFileType())), array('title' => _('View this document')));
-				}
+			if ($d->getFileType() == 'URL') {
+				$cells[][] = util_make_link($d->getFileName(), html_image($d->getFileTypeImage(), 22, 22, array('alt'=>$d->getFileType())), array('title' => _('Visit this link')), true);
+			} else {
+				$cells[][] = util_make_link('/docman/view.php/'.$g->getID().'/'.$d->getID().'/'.urlencode($d->getFileName()), html_image($d->getFileTypeImage(), 20, 20, array('alt'=>$d->getFileType())), array('title' => _('View this document')));
 			}
 			$cells[][] = 'D'.$d->getID();
 			$nextcell = '';
@@ -99,15 +95,10 @@ jQuery(document).ready(function() {
 				$cells[] = array(date(_('Y-m-d H:i'), $d->getCreated()), 'content' => $d->getCreated());
 			}
 			$cells[][] =$d->getStateName();
-			switch ($d->getFileType()) {
-				case 'URL': {
-					$cells[][] = '--';
-					break;
-				}
-				default: {
-					$cells[][] = human_readable_bytes($d->getFileSize());
-					break;
-				}
+			if ($d->getFileType() == 'URL') {
+				$cells[][] = '--';
+			} else {
+				$cells[][] = human_readable_bytes($d->getFileSize());
 			}
 			$cells[][] = $d->getDownload();
 			$editfileaction = DOCMAN_BASEURL.'&action=editfile&fromview=listfile&dirid='.$d->getDocGroupID();

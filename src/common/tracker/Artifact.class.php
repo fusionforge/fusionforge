@@ -1726,41 +1726,39 @@ class Artifact extends FFObject {
 
 			foreach ($extra_fields as $key=>$value) {
 				$distribution_rule = $ef[$key]['distribution_rule'];
-				switch ($distribution_rule) {
-					case ARTIFACT_EXTRAFIELD_DISTRIBUTION_RULE_NO_DISTRIBUTION:
-						break;
-					case ARTIFACT_EXTRAFIELD_DISTRIBUTION_RULE_STATUS_CLOSE_RECURSIVELY:
-						$parentStatusID = $parentArtifact->getStatusID();
-						$parentStatusID = $parentAt->remapStatus($parentStatusID, $parentExtra_fields);
-						if (isset($parentChanges['status']) && $parentStatusID != 1 && $status_id == 1) {
-							$changes = true;
-							if ($parentAt->getID() == $at->getID()) {
-								$status_id = $parentStatusID;
-								if ($at->usesCustomStatuses()) {
-									$extra_fields[$at->getCustomStatusField()] = $parentExtra_fields[$parentAt->getCustomStatusField()];
-									$status_id = $at->remapStatus($status_id, $extra_fields);
-								}
+				if ($distribution_rule == ARTIFACT_EXTRAFIELD_DISTRIBUTION_RULE_NO_DISTRIBUTION) {
+					//no rule
+				} elseif ($distribution_rule == ARTIFACT_EXTRAFIELD_DISTRIBUTION_RULE_STATUS_CLOSE_RECURSIVELY) {
+					$parentStatusID = $parentArtifact->getStatusID();
+					$parentStatusID = $parentAt->remapStatus($parentStatusID, $parentExtra_fields);
+					if (isset($parentChanges['status']) && $parentStatusID != 1 && $status_id == 1) {
+						$changes = true;
+						if ($parentAt->getID() == $at->getID()) {
+							$status_id = $parentStatusID;
+							if ($at->usesCustomStatuses()) {
+								$extra_fields[$at->getCustomStatusField()] = $parentExtra_fields[$parentAt->getCustomStatusField()];
+								$status_id = $at->remapStatus($status_id, $extra_fields);
+							}
+						} else {
+							if (!$at->usesCustomStatuses()) {
+								$status_id = 2; //closed
 							} else {
-								if (!$at->usesCustomStatuses()) {
-									$status_id = 2; //closed
-								} else {
-									$parentStatusList = $parentAt->getExtraFieldElements($parentAt->getCustomStatusField());
-									$parentStatusName = $parentStatusList[$parentAt->getCustomStatusField()];
-									$statusList = $at->getExtraFieldElements($at->getCustomStatusField());
-									$found = false;
-									foreach ($statusList as $id => $statusName) {
-										if ($parentStatusName == $statusName) {
-											$found = true;
-											$extra_fields[$at->getCustomStatusField()] = $id;
-											$status_id = 2;
-											break;
-										}
+								$parentStatusList = $parentAt->getExtraFieldElements($parentAt->getCustomStatusField());
+								$parentStatusName = $parentStatusList[$parentAt->getCustomStatusField()];
+								$statusList = $at->getExtraFieldElements($at->getCustomStatusField());
+								$found = false;
+								foreach ($statusList as $id => $statusName) {
+									if ($parentStatusName == $statusName) {
+										$found = true;
+										$extra_fields[$at->getCustomStatusField()] = $id;
+										$status_id = 2;
+										break;
 									}
-									//TODO: status not found
 								}
+								//TODO: status not found
 							}
 						}
-						break;
+					}
 				}
 			}
 			if ($changes) {
@@ -1797,53 +1795,45 @@ class Artifact extends FFObject {
 				$aggregation_rule = $ef[$key]['aggregation_rule'];
 				$type = $ef[$key]['field_type'];
 				$alias = $ef[$key]['alias'];
-				switch ($aggregation_rule) {
-					case ARTIFACT_EXTRAFIELD_AGGREGATION_RULE_NO_AGGREGATION:
-						break;
-					case ARTIFACT_EXTRAFIELD_AGGREGATION_RULE_SUM:
-						switch ($type) {
-							case ARTIFACT_EXTRAFIELDTYPE_INTEGER:
-								$sum = 0;
-								break;
-							case ARTIFACT_EXTRAFIELDTYPE_EFFORT:
-								$effortUnitSet = new EffortUnitSet($at, $at->getEffortUnitSet());
-								$effortUnitFactory = new EffortUnitFactory($effortUnitSet);
-
-								$baseUnit = $effortUnitFactory->getBaseUnit();
-								$sum = 0;
-								$effortSum= new Effort(0, $baseUnit);
-								break;
-						}
-						foreach ($childrenArray as $child) {
-							$childArtifact = artifact_get_object($child['artifact_id']);
-							$childExtra_fields = $childArtifact->getExtraFieldData();
-							if ($at->getID() == $child['group_artifact_id']) {
-								// same tracker
-								$childEf_id= $key;
+				if ($aggregation_rule == ARTIFACT_EXTRAFIELD_AGGREGATION_RULE_NO_AGGREGATION) {
+					//no action yet
+				} elseif ($aggregation_rupe == ARTIFACT_EXTRAFIELD_AGGREGATION_RULE_SUM) {
+					if ($type == ARTIFACT_EXTRAFIELDTYPE_INTEGER) {
+						$sum = 0;
+					} elseif ($type == ARTIFACT_EXTRAFIELDTYPE_EFFORT) {
+						$effortUnitSet = new EffortUnitSet($at, $at->getEffortUnitSet());
+						$effortUnitFactory = new EffortUnitFactory($effortUnitSet);
+						$baseUnit = $effortUnitFactory->getBaseUnit();
+						$sum = 0;
+						$effortSum= new Effort(0, $baseUnit);
+					}
+					foreach ($childrenArray as $child) {
+						$childArtifact = artifact_get_object($child['artifact_id']);
+						$childExtra_fields = $childArtifact->getExtraFieldData();
+						if ($at->getID() == $child['group_artifact_id']) {
+							// same tracker
+							$childEf_id= $key;
+						} else {
+							$childAt = $childArtifact->getArtifactType();
+							$childEf = $childAt->getExtraFieldByAlias($alias);
+							if ($childEf) {
+								$childEf_id = $childEf['extra_field_id'];
 							} else {
-								$childAt = $childArtifact->getArtifactType();
-								$childEf = $childAt->getExtraFieldByAlias($alias);
-								if ($childEf) {
-									$childEf_id = $childEf['extra_field_id'];
-								} else {
-									$childEf_id = false;
-								}
-							}
-							if ($childEf_id) {
-								switch ($type) {
-									case ARTIFACT_EXTRAFIELDTYPE_INTEGER:
-										$sum = $sum+$childExtra_fields[$childEf_id];
-										break;
-									case ARTIFACT_EXTRAFIELDTYPE_EFFORT:
-										$effort = encodedEffortToEffort($childExtra_fields[$childEf_id]);
-										$effortSum= $effortSum->add($effort);
-										$sum = $effortSum->toEncoded();
-								}
+								$childEf_id = false;
 							}
 						}
-						$extra_fields[$key]=$sum;
-						$changes = true;
-						break;
+						if ($childEf_id) {
+							if ($type == ARTIFACT_EXTRAFIELDTYPE_INTEGER) {
+								$sum = $sum+$childExtra_fields[$childEf_id];
+							} elseif ($type == ARTIFACT_EXTRAFIELDTYPE_EFFORT) {
+								$effort = encodedEffortToEffort($childExtra_fields[$childEf_id]);
+								$effortSum= $effortSum->add($effort);
+								$sum = $effortSum->toEncoded();
+							}
+						}
+					}
+					$extra_fields[$key]=$sum;
+					$changes = true;
 				}
 			}
 

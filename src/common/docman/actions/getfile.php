@@ -42,15 +42,10 @@ if ($childgroup_id) {
 $doc_group = getIntFromRequest('doc_group');
 $fromview = getStringFromRequest('fromview');
 
-switch ($fromview) {
-	case 'listrashfile': {
-		$urlparam .= '&view='.$fromview;
-		break;
-	}
-	default: {
-		$urlparam .= '&dirid='.$doc_group;
-		break;
-	}
+if ($fromview == 'listrashfile') {
+	$urlparam .= '&view='.$fromview;
+} else {
+	$urlparam .= '&dirid='.$doc_group;
 }
 
 if (!forge_check_perm('docman', $g->getID(), 'approve')) {

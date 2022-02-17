@@ -337,14 +337,11 @@ class Document extends FFObject {
 	function getDescription() {
 		global $gfcommon;
 		$result = util_gen_cross_ref($this->data_array['description'], $this->Group->getID());
-		$parsertype = forge_get_config('docman_parser_type');
-		switch ($parsertype) {
-			case 'markdown':
-				require_once $gfcommon.'include/Markdown.include.php';
-				$result = FF_Markdown($result);
-				break;
-			default:
-				$result = nl2br($result);
+		if (forge_get_config('docman_parser_type') == 'markdown') {
+			require_once $gfcommon.'include/Markdown.include.php';
+			$result = FF_Markdown($result);
+		} else {
+			$result = nl2br($result);
 		}
 		return $result;
 	}
