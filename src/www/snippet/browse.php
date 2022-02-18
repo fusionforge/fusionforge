@@ -3,7 +3,7 @@
  * Code Snippets Repository
  *
  * Copyright 1999-2001 (c) VA Linux Systems
- * Copyright 2013,2017, Franck Villaume - TrivialDev
+ * Copyright 2013,2017,2022, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -100,13 +100,10 @@ if ((!$result || $rows < 1) && (!$result2 || $rows2 < 1)) {
 			util_make_link('/snippet/detail.php?type=package&id='.db_result($result2,$i,'snippet_package_id'),'<strong>'.db_result($result2,$i,'snippet_package_id').'</strong>').'</td><td>'.
 			util_make_link('/snippet/detail.php?type=package&id='.db_result($result2,$i,'snippet_package_id'), '<strong>'.db_result($result2,$i,'name').'</strong>').'</td><td>'.
 			util_display_user(db_result($result2, $i, 'user_name'), db_result($result2, $i, 'user_id'), db_result($result2, $i, 'realname')).'</td></tr>';
-			$parsertype = forge_get_config('snippet_parser_type');
-			switch ($parsertype) {
-			case 'markdown':
+			if (forge_get_config('snippet_parser_type') == 'markdown') {
 				require_once $gfcommon.'include/Markdown.include.php';
 				$result_html = FF_Markdown(db_result($result2 ,$i ,'description'));
-				break;
-			default:
+			} else {
 				$result_html = util_make_links(nl2br(db_result($result2, $i ,'description')));
 			}
 
@@ -127,13 +124,10 @@ if ((!$result || $rows < 1) && (!$result2 || $rows2 < 1)) {
 			util_make_link('/snippet/detail.php?type=snippet&id='.db_result($result,$i,'snippet_id'),'<strong>'.db_result($result,$i,'name').'</strong>').
 			'</td><td>'.
 			util_display_user(db_result($result, $i, 'user_name'), db_result($result, $i, 'user_id'), db_result($result, $i, 'realname')).'</td></tr>';
-			$parsertype = forge_get_config('snippet_parser_type');
-			switch ($parsertype) {
-			case 'markdown':
+			if (forge_get_config('snippet_parser_type') == 'markdown') {
 				require_once $gfcommon.'include/Markdown.include.php';
 				$result_html = FF_Markdown(db_result($result ,$i ,'description'));
-				break;
-			default:
+			} else {
 				$result_html = util_make_links(nl2br(db_result($result, $i ,'description')));
 			}
 
