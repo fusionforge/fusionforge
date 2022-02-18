@@ -794,7 +794,7 @@ class ArtifactType extends FFError {
 			$this_eus = new EffortUnitSet($this, $this->getEffortUnitSet());
 			switch ($eus->getLevel()) {
 				case EFFORTUNITSET_FORGE_LEVEL:
-					if ($this_eus->getLevel()) {
+					switch ($this_eus->getLevel()) {
 						case EFFORTUNITSET_PROJECT_LEVEL:
 							if (!$this_eus->isEquivalentTo($eus)) {
 								// make a copy at the tracker level
@@ -1599,8 +1599,3 @@ class ArtifactType extends FFError {
 		return $return;
 	}
 }
-
-// Local Variables:
-// mode: php
-// c-file-style: "bsd"
-// End:
