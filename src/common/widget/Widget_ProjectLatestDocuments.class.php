@@ -92,14 +92,10 @@ class Widget_ProjectLatestDocuments extends Widget {
 					$docid = $doc->getID();
 					$docgroup = $doc->getDocGroupID();
 					$ndg = documentgroup_get_object($docgroup, $project->getID());
-					switch ($filetype) {
-						case "URL": {
-							$docurl = util_make_link($filename, html_image($doc->getFileTypeImage(), 22, 22, array('alt'=>$doc->getFileType())), array(), true);
-							break;
-						}
-						default: {
-							$docurl = util_make_link('/docman/view.php/'.$project->getID().'/'.$docid, html_image($doc->getFileTypeImage(), 22, 22, array('alt'=>$doc->getFileType())));
-						}
+					if ($filetype == 'URL') {
+						$docurl = util_make_link($filename, html_image($doc->getFileTypeImage(), 22, 22, array('alt'=>$doc->getFileType())), array(), true);
+					} else {
+						$docurl = util_make_link('/docman/view.php/'.$project->getID().'/'.$docid, html_image($doc->getFileTypeImage(), 22, 22, array('alt'=>$doc->getFileType())));
 					}
 					$cells = array();
 					$cells[][] = date(_('Y-m-d'), ($updatedate >= $createdate) ? $updatedate : $createdate);

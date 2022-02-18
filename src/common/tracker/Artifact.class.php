@@ -1797,7 +1797,7 @@ class Artifact extends FFObject {
 				$alias = $ef[$key]['alias'];
 				if ($aggregation_rule == ARTIFACT_EXTRAFIELD_AGGREGATION_RULE_NO_AGGREGATION) {
 					//no action yet
-				} elseif ($aggregation_rupe == ARTIFACT_EXTRAFIELD_AGGREGATION_RULE_SUM) {
+				} elseif ($aggregation_rule == ARTIFACT_EXTRAFIELD_AGGREGATION_RULE_SUM) {
 					if ($type == ARTIFACT_EXTRAFIELDTYPE_INTEGER) {
 						$sum = 0;
 					} elseif ($type == ARTIFACT_EXTRAFIELDTYPE_EFFORT) {

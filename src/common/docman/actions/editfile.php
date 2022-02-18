@@ -60,15 +60,10 @@ if ($d->isError()) {
 $doc_group = getIntFromRequest('doc_group');
 $fromview = getStringFromRequest('fromview');
 
-switch ($fromview) {
-	case 'listrashfile': {
-		$urlparam .= '&view='.$fromview;
-		break;
-	}
-	default: {
-		$urlparam .= '&dirid='.$doc_group;
-		break;
-	}
+if ($fromview == 'listrashfile') {
+	$urlparam .= '&view='.$fromview;
+} else {
+	$urlparam .= '&dirid='.$doc_group;
 }
 
 $sanitizer = new TextSanitizer();

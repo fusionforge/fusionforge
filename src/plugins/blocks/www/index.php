@@ -3,7 +3,7 @@
  * Copyright (C) 2006 Alain Peyrat, Alcatel-Lucent
  * Copyright (C) 2010 Alain Peyrat <aljeux@free.fr>
  * Copyright (C) 2012-2014 Alain Peyrat - Alcatel-Lucent
- * Copyright 2016, Franck Villaume - TrivialDev
+ * Copyright 2016,2022, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge.
  *
@@ -308,13 +308,10 @@ if ($type == 'admin') {
 	print "<fieldset><legend>".
 		_("Tips").
 		"</legend>";
-	$parsertype = forge_get_config('parser_type', 'blocks');
-	switch ($parsertype) {
-		case 'markdown':
-			echo html_e('p', array(), _('You can use markdown format.'));
-			break;
-		default:
-			echo "<p>" .
+	if (forge_get_config('parser_type', 'blocks') == 'markdown') {
+		echo html_e('p', array(), _('You can use markdown format.'));
+	} else {
+		echo "<p>" .
 			_("You can create boxes like the ones on the right site of summary page, by inserting the following sentences in the content:").
 			"</p><ul><li>".
 			"{boxTop Hello}".

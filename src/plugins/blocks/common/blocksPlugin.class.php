@@ -3,7 +3,7 @@
  * Copyright (C) 2006 Alain Peyrat, Alcatel-Lucent
  * Copyright (C) 2010 Alain Peyrat <aljeux@free.fr>
  * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
- * Copyright 2014,2016, Franck Villaume - TrivialDev
+ * Copyright 2014,2016,2022, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge.
  *
@@ -126,25 +126,21 @@ control over it to the project's administrator.");
 	}
 
 	function parseContent($text) {
-		global $HTML;
-		$parsertype = forge_get_config('parser_type', 'blocks');
-		switch ($parsertype) {
-			case 'markdown':
-				require_once 'markdown.php';
-				$text = Markdown($text);
-				break;
-			default:
-				$text = preg_replace_callback('/<p>{boxTop (.*?)}<\/p>/i', function($m) { global $HTML; return $HTML->boxTop($m[1]); }, $text);
-				$text = preg_replace_callback('/{boxTop (.*?)}/i', function($m) { global $HTML; return $HTML->boxTop($m[1]); }, $text);
-				$text = preg_replace_callback('/<p>{boxMiddle (.*?)}<\/p>/i', function($m) { global $HTML; return $HTML->boxMiddle($m[1]); }, $text);
-				$text = preg_replace_callback('/{boxMiddle (.*?)}/i', function($m) { global $HTML; return $HTML->boxMiddle($m[1]); }, $text);
-				$text = preg_replace_callback('/<p>{boxBottom}<\/p>/i', function($m) { global $HTML; return $HTML->boxBottom($m[1]); }, $text);
-				$text = preg_replace_callback('/{boxBottom}/i', function($m) { global $HTML; return $HTML->boxBottom($m[1]); }, $text);
-
-				$text = preg_replace('/<p>{boxHeader}/i', '<hr />', $text);
-				$text = preg_replace('/{boxHeader}/i', '<hr />', $text);
-				$text = preg_replace('/{boxFooter}<\/p>/i', '<hr />', $text);
-				$text = preg_replace('/{boxFooter}/i', '<hr />', $text);
+		global $HTML, $gfcommon;
+		if (forge_get_config('parser_type', 'blocks') == 'markdown') {
+			require_once $gfcommon.'include/Markdown.include.php';
+			$text = Markdown($text);
+		} else {
+			$text = preg_replace_callback('/<p>{boxTop (.*?)}<\/p>/i', function($m) { global $HTML; return $HTML->boxTop($m[1]); }, $text);
+			$text = preg_replace_callback('/{boxTop (.*?)}/i', function($m) { global $HTML; return $HTML->boxTop($m[1]); }, $text);
+			$text = preg_replace_callback('/<p>{boxMiddle (.*?)}<\/p>/i', function($m) { global $HTML; return $HTML->boxMiddle($m[1]); }, $text);
+			$text = preg_replace_callback('/{boxMiddle (.*?)}/i', function($m) { global $HTML; return $HTML->boxMiddle($m[1]); }, $text);
+			$text = preg_replace_callback('/<p>{boxBottom}<\/p>/i', function($m) { global $HTML; return $HTML->boxBottom($m[1]); }, $text);
+			$text = preg_replace_callback('/{boxBottom}/i', function($m) { global $HTML; return $HTML->boxBottom($m[1]); }, $text);
+			$text = preg_replace('/<p>{boxHeader}/i', '<hr />', $text);
+			$text = preg_replace('/{boxHeader}/i', '<hr />', $text);
+			$text = preg_replace('/{boxFooter}<\/p>/i', '<hr />', $text);
+			$text = preg_replace('/{boxFooter}/i', '<hr />', $text);
 		}
 
 		return $text;

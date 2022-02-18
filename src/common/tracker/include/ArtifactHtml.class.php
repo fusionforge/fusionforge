@@ -5,7 +5,7 @@
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright (C) 2011-2012 Alain Peyrat - Alcatel-Lucent
  * Copyright 2011, Franck Villaume - Capgemini
- * Copyright 2015-2017,2019, Franck Villaume - TrivialDev
+ * Copyright 2015-2017,2019,2022, Franck Villaume - TrivialDev
  * Copyright 2016, Stéphane-Eymeric Bredthauer - TrivialDev
  * http://fusionforge.org
  *
@@ -42,14 +42,11 @@ class ArtifactHtml extends Artifact {
 		$return = '';
 		$result = $this->getDetails();
 		$result_html = util_gen_cross_ref($result, $this->ArtifactType->Group->getID());
-		$parsertype = forge_get_config('tracker_parser_type');
-		switch ($parsertype) {
-			case 'markdown':
-				require_once $gfcommon.'include/Markdown.include.php';
-				$result_html = FF_Markdown($result_html);
-				break;
-			default:
-				$result_html = nl2br($result_html);
+		if (forge_get_config('tracker_parser_type') == 'markdown') {
+			require_once $gfcommon.'include/Markdown.include.php';
+			$result_html = FF_Markdown($result_html);
+		} else {
+			$result_html = nl2br($result_html);
 		}
 
 		$title_arr = array();
@@ -135,14 +132,11 @@ function hide_edit_button(id) {
 				$return .= '<p style="clear: both;padding-top: 1em;">';
 				$text = db_result($result, $i, 'body');
 				$text = util_gen_cross_ref($text, $this->ArtifactType->Group->getID());
-				$parsertype = forge_get_config('tracker_parser_type');
-				switch ($parsertype) {
-					case 'markdown':
-						require_once $gfcommon.'include/Markdown.include.php';
-						$text = FF_Markdown($text);
-						break;
-					default:
-						$text = nl2br($text);
+				if (forge_get_config('tracker_parser_type') == 'markdown') {
+					require_once $gfcommon.'include/Markdown.include.php';
+					$text = FF_Markdown($text);
+				} else {
+					$text = nl2br($text);
 				}
 				$return .= $text;
 				$return .= '</p>';
@@ -182,13 +176,9 @@ function hide_edit_button(id) {
 				<tr><td>'.$field.'</td><td>';
 
 				if ($field == 'status_id') {
-
 					$return .= $artifactType->getStatusName(db_result($result, $i, 'old_value'));
-
 				} elseif ($field == 'assigned_to' || $field == 'submitted_by') {
-
 					$return .= user_getname(db_result($result, $i, 'old_value'));
-
 				} elseif ($field == 'close_date') {
 					if (db_result($result, $i, 'old_value')) {
 						$return .= date(_('Y-m-d H:i'),db_result($result, $i, 'old_value'));
@@ -196,9 +186,7 @@ function hide_edit_button(id) {
 						$return .= html_e('em', array(), _('None'));
 					}
 				} else {
-
 					$return .= db_result($result, $i, 'old_value');
-
 				}
 				$return .= '</td>'.
 					'<td>'. date(_('Y-m-d H:i'),db_result($result, $i, 'entrydate')) .'</td>';
@@ -257,8 +245,7 @@ function hide_edit_button(id) {
 	}
 
 	function showChildren() {
-		global $HTML;
-		global $atid;
+		global $HTML, $atid;
 		$readonly = false;
 		if (!forge_check_perm('tracker', $atid, 'submit')) {
 			$readonly = true;
@@ -303,8 +290,7 @@ function hide_edit_button(id) {
 	}
 
 	function showParent() {
-		global $HTML;
-		global $atid;
+		global $HTML, $atid;
 		$readonly = false;
 		if (!forge_check_perm('tracker', $atid, 'submit')) {
 			$readonly = true;
@@ -344,8 +330,7 @@ function hide_edit_button(id) {
 	}
 
 	function showDependencies() {
-		global $HTML;
-		global $atid;
+		global $HTML, $atid;
 		$readonly = false;
 		if (!forge_check_perm('tracker', $atid, 'submit')) {
 			$readonly = true;

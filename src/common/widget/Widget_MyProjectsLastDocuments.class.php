@@ -2,7 +2,7 @@
 /**
  * Copyright (c) Xerox Corporation, Codendi Team, 2001-2009. All rights reserved
  * Copyright 2010, Franck Villaume - Capgemini
- * Copyright 2011-2014,2016,2021, Franck Villaume - TrivialDev
+ * Copyright 2011-2014,2016,2021-2022, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is a part of FusionForge.
@@ -89,14 +89,10 @@ class Widget_MyProjectsLastDocuments extends Widget {
 							for ($i=0; $i < $count; $i++) {
 								$doc =& $df->Documents[$key][$i];
 								$html .= '<tr>';
-								switch ($doc->getFileType()) {
-									case "URL": {
-										$docurl = util_make_link($doc->getFileName(), html_image($doc->getFileTypeImage(), 22, 22, array('alt'=>$doc->getFileType())), array(), true);
-										break;
-									}
-									default: {
-										$docurl = util_make_link('/docman/view.php/'.$g->getID().'/'.$doc->getID(), html_image($doc->getFileTypeImage(), 22, 22, array('alt'=>$doc->getFileType())));
-									}
+								if ($doc->getFileType() == 'URL') {
+									$docurl = util_make_link($doc->getFileName(), html_image($doc->getFileTypeImage(), 22, 22, array('alt'=>$doc->getFileType())), array(), true);
+								} else {
+									$docurl = util_make_link('/docman/view.php/'.$g->getID().'/'.$doc->getID(), html_image($doc->getFileTypeImage(), 22, 22, array('alt'=>$doc->getFileType())));
 								}
 								$html .= '<td>'.$docurl.'</td>';
 								$html .= '<td>'.$doc->getFileName().'</td>';
