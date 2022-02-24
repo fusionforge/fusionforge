@@ -60,9 +60,8 @@ class NewsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 		$return = '';
 		foreach ($result as $row) {
 			$return .= '<tr>'
-				. '<td><a href="'.util_make_url ('/forum/forum.php?forum_id='. $row['forum_id']).'">'
-				. html_image('ic/msg.png', 10, 12)
-				. ' '.$row['summary'].'</a></td>
+				. '<td>'.util_make_link('/forum/forum.php?forum_id='. $row['forum_id'], html_image('ic/msg.png', 10, 12).' '.$row['summary'])
+				. '</td>
 				<td style="width: 15%">'.$row['realname'].'</td>
 				<td style="width: 15%">'.relative_date($row['post_date']).'</td></tr>';
 		}

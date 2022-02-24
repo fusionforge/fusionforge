@@ -3,6 +3,7 @@
  * Search Engine
  *
  * Copyright 2004, Guillaume Smet
+ * Copyright 2022, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -31,9 +32,9 @@ class GroupSearchEngine extends GFSearchEngine {
 
 	function isAvailable($parameters) {
 		if(isset($parameters[SEARCH__PARAMETER_GROUP_ID]) && $parameters[SEARCH__PARAMETER_GROUP_ID]) {
-			$Group = group_get_object($parameters[SEARCH__PARAMETER_GROUP_ID]);
-			if($Group && is_object($Group) && !$Group->isError()) {
-				$this->Group =& $Group;
+			$lgroup = group_get_object($parameters[SEARCH__PARAMETER_GROUP_ID]);
+			if($lgroup && is_object($lgroup) && !$lgroup->isError()) {
+				$this->Group =& $lgroup;
 				return true;
 			}
 		}
@@ -42,8 +43,8 @@ class GroupSearchEngine extends GFSearchEngine {
 
 	function getSearchRenderer($words, $offset, $exact, $parameters) {
 		$this->includeSearchRenderer();
-		$rendererClassName = $this->rendererClassName;
-		$renderer = new $rendererClassName($words, $offset, $exact, $parameters[SEARCH__PARAMETER_GROUP_ID]);
+		$lrendererClassName = $this->rendererClassName;
+		$renderer = new $lrendererClassName($words, $offset, $exact, $parameters[SEARCH__PARAMETER_GROUP_ID]);
 		return $renderer;
 	}
 }

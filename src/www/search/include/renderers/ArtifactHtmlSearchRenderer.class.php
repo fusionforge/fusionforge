@@ -74,12 +74,11 @@ class ArtifactHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 		foreach ($result as $row) {
 			$return .= '<tr>'
 				.'<td>'.$row['artifact_id'].'</td>'
-				.'<td><a href="'.util_make_url ('/tracker/?group_id='.$groupId.'&amp;atid=' . $row['group_artifact_id'] . '&amp;func=detail&aid=' . $row['artifact_id']).'"> '
-				. html_image('ic/tracker20g.png')
-				. ' '.$row['summary'].'</a></td>'
-				. '<td>'.$row['realname']."</td>"
-				. '<td>'.relative_date($row['open_date']).'</td>'
-				. '<td>'._($row['status_name']).'</td></tr>';
+				.'<td>'.util_make_link('/tracker/?group_id='.$groupId.'&atid=' . $row['group_artifact_id'] . '&func=detail&aid=' . $row['artifact_id'], html_image('ic/tracker20g.png').' '.$row['summary'])
+				.'</td>'
+				.'<td>'.$row['realname']."</td>"
+				.'<td>'.relative_date($row['open_date']).'</td>'
+				.'<td>'._($row['status_name']).'</td></tr>';
 			$i++;
 		}
 		return $return;

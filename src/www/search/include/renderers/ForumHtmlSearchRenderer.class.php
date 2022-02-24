@@ -68,9 +68,8 @@ class ForumHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 		$return = '';
 		$i = 0;
 		foreach ($result as $row) {
-			$return .= '<tr><td class="halfwidth"><a href="'.util_make_url ('/forum/message.php?msg_id=' . $row['msg_id']).'">'
-				. html_image('ic/msg.png', 10, 12)
-				. ' '.$row['subject'].'</a></td>'
+			$return .= '<tr><td class="halfwidth">'.util_make_link('/forum/message.php?msg_id=' . $row['msg_id'], html_image('ic/msg.png', 10, 12).' '.$row['subject'])
+				.'</td>'
 				. '<td style="width: 30%">'.$row['realname'].'</td>'
 				. '<td style="width: 20%">'.date($dateFormat, $row['post_date']).'</td></tr>';
 			$i++;

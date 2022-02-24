@@ -70,9 +70,8 @@ class ForumsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 			}
 			$return .= '<tr>'
 						. '<td style="width: 5%"></td>'
-						. '<td><a href="'.util_make_url ('/forum/message.php?msg_id='. $row['msg_id']).'">'
-							. html_image('ic/msg.png').' '.$row['subject']
-							.'</a></td>'
+						. '<td>'.util_make_link('/forum/message.php?msg_id='. $row['msg_id'], html_image('ic/msg.png').' '.$row['subject'])
+						.'</td>'
 						. '<td style="width: 15%">'.$row['realname'].'</td>'
 						. '<td style="width: 15%">'.relative_date($row['post_date']).'</td></tr>';
 			$rowColor ++;

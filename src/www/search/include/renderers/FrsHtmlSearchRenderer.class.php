@@ -72,7 +72,7 @@ class FrsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 			}
 			$return .= '<tr>'
 				. '<td style="width: 5%">&nbsp;</td>'
-				. '<td>'.util_make_link ('/frs/?view=shownotes&group_id='.$group_id.'&release_id='.$row['release_id'],$row['release_name']).'</td>'
+				. '<td>'.util_make_link('/frs/?view=shownotes&group_id='.$group_id.'&release_id='.$row['release_id'], $row['release_name']).'</td>'
 				. '<td style="width: 15%">'.$row['realname'].'</td>'
 				. '<td style="width: 15%">'.relative_date($row['release_date']).'</td>'
 				. '<td style="width: 15%">'._($row['status_name']).'</td>'

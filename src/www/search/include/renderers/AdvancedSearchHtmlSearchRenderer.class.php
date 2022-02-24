@@ -85,7 +85,7 @@ class AdvancedSearchHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	 * writeHeader - write the header of the output
 	 */
 	function writeHeader() {
-	    site_project_header(array('title' => _('Advanced search'), 'group' => $this->groupId, 'toptab' => 'none'));
+		site_project_header(array('title' => _('Advanced search'), 'group' => $this->groupId, 'toptab' => 'none'));
 		$sectionarray = $this->getSectionArray();
 		$this->handleTransferInformation($sectionarray);
 	}
@@ -96,9 +96,9 @@ class AdvancedSearchHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	 * @param bool $withpanel
 	 */
 	function writeBody($withpanel = true) {
-	    echo $this->getAdvancedSearchSubmenu();
-	    echo html_e('div', array('id' => 'results'), '', false);
 		global $HTML;
+		echo $this->getAdvancedSearchSubmenu();
+		echo html_e('div', array('id' => 'results'), '', false);
 		if (strlen($this->words) < 3) {
 			echo $HTML->error_msg(_('Error') . _(': ') . _('Search must be at least three characters'));
 		} else {
@@ -113,9 +113,9 @@ class AdvancedSearchHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	 * writeFooter - write the Footer of the output
 	 */
 	function writeFooter() {
-	    $sectionarray = $this->getSectionArray();
-	    $this->handleTransferInformation($sectionarray);
-	    echo $this->getAdvancedSearchBox($sectionarray, $this->groupId, $this->words, $this->isExact);
+		$sectionarray = $this->getSectionArray();
+		$this->handleTransferInformation($sectionarray);
+		echo $this->getAdvancedSearchBox($sectionarray, $this->groupId, $this->words, $this->isExact);
 	}
 
 	/**
@@ -200,9 +200,9 @@ class AdvancedSearchHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 		global $HTML;
 		$result = '';
 
-		if ($title === '')
+		if ($title === '') {
 			$title = $section;
-
+		}
 		$result .= '<h2><a name="'.$section.'"></a>'.$title.'</h2>';
 
 		$res = $renderer->searchQuery->getData($renderer->searchQuery->getRowsPerPage(),$renderer->searchQuery->getOffset());
@@ -347,18 +347,18 @@ class AdvancedSearchHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	}
 
 	function getAdvancedSearchSubmenu(){
-	    $res = '';
-	    $res .= html_ao('ul', array('class' => 'submenu'));
-	    $res .= html_ao('li', array());
-	    $res .= html_ao('span', array());
-	    $res .= html_e('a', array('href' => '#results', 'title' => _('Results')), _('Results'), false);
-	    $res .= html_ac(html_ap() -2); // </span></li>
-	    $res .= html_ao('li', array());
-	    $res .= html_ao('span', array());
-	    $res .= html_e('a', array('href' => '#search', 'title' => _('Advanced search')), _('Advanced search'), false);
-	    $res .= html_ac(html_ap() -2); // </span></li>
-	    $res .= html_ac(html_ap() -1); // </ul>
-	    return $res;
+		$res = '';
+		$res .= html_ao('ul', array('class' => 'submenu'));
+		$res .= html_ao('li', array());
+		$res .= html_ao('span', array());
+		$res .= html_e('a', array('href' => '#results', 'title' => _('Results')), _('Results'), false);
+		$res .= html_ac(html_ap() -2); // </span></li>
+		$res .= html_ao('li', array());
+		$res .= html_ao('span', array());
+		$res .= html_e('a', array('href' => '#search', 'title' => _('Advanced search')), _('Advanced search'), false);
+		$res .= html_ac(html_ap() -2); // </span></li>
+		$res .= html_ac(html_ap() -1); // </ul>
+		return $res;
 	}
 	
 	function getAdvancedSearchBox($sectionsArray, $group_id, $words, $isExact) {
@@ -373,7 +373,7 @@ class AdvancedSearchHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 		$res .= '<input class="ff" type="hidden" name="search" value="1"/>
 			<input class="ff" type="hidden" name="group_id" value="'.$group_id.'"/>
 			<div align="center">
-            <caption>' . ucfirst(sprintf(_('on project %s'), $group->getPublicName())) . '</caption>
+			<caption>' . ucfirst(sprintf(_('on project %s'), $group->getPublicName())) . '</caption>
 			<table id="advsearchinput">
 				<tr class="ff">
 				<td class="ff" colspan ="2">
@@ -494,9 +494,7 @@ EOS;
 		return $return.'		</td>
 							</tr>
 						</table>';
-
 	}
-
 }
 
 // Local Variables:

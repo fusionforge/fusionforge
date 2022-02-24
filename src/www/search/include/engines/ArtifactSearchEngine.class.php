@@ -3,6 +3,7 @@
  * Search Engine
  *
  * Copyright 2004 (c) Guillaume Smet
+ * Copyright 2022, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -38,9 +39,9 @@ class ArtifactSearchEngine extends GroupSearchEngine {
 
 	function isAvailable($parameters) {
 		if(parent::isAvailable($parameters) && isset($parameters[SEARCH__PARAMETER_ARTIFACT_ID]) && $parameters[SEARCH__PARAMETER_ARTIFACT_ID]) {
-			$ath = new ArtifactTypeHtml($this->Group, $parameters[SEARCH__PARAMETER_ARTIFACT_ID]);
-			if($ath && is_object($ath) && !$ath->isError()) {
-				$this->ath =& $ath;
+			$lath = new ArtifactTypeHtml($this->Group, $parameters[SEARCH__PARAMETER_ARTIFACT_ID]);
+			if($lath && is_object($lath) && !$lath->isError()) {
+				$this->ath =& $lath;
 				return true;
 			}
 		}
@@ -49,8 +50,8 @@ class ArtifactSearchEngine extends GroupSearchEngine {
 
 	function getSearchRenderer($words, $offset, $exact, $parameters) {
 		$this->includeSearchRenderer();
-		$rendererClassName = $this->rendererClassName;
-		$renderer = new $rendererClassName($words, $offset, $exact, $parameters[SEARCH__PARAMETER_GROUP_ID], $parameters[SEARCH__PARAMETER_ARTIFACT_ID]);
+		$lrendererClassName = $this->rendererClassName;
+		$renderer = new $lrendererClassName($words, $offset, $exact, $parameters[SEARCH__PARAMETER_GROUP_ID], $parameters[SEARCH__PARAMETER_ARTIFACT_ID]);
 		return $renderer;
 	}
 }

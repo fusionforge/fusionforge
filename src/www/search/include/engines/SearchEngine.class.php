@@ -51,8 +51,8 @@ class GFSearchEngine {
 
 	function getSearchRenderer($words, $offset, $exact, $parameters) {
 		$this->includeSearchRenderer();
-		$rendererClassName = $this->rendererClassName;
-		$renderer = new $rendererClassName($words, $offset, $exact);
+		$lrendererClassName = $this->rendererClassName;
+		$renderer = new $lrendererClassName($words, $offset, $exact);
 		return $renderer;
 	}
 }

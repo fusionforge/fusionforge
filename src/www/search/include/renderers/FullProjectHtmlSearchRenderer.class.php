@@ -3,7 +3,7 @@
  * Search Engine
  *
  * Copyright 2004 (c) Dominik Haas, GForge Team
- * Copyright 2012,2014, Franck Villaume - TrivialDev
+ * Copyright 2012,2014,2022, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -177,26 +177,6 @@ class FullProjectHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 			}
 		}
 
-/*
-		$renderer = new ForumsHtmlSearchRenderer($this->words, $this->offset, $this->isExact, $this->groupId);
-		$html .= $this->getPartResult($renderer, 'short_forum', _('Forum Search Results'));
-
-		$renderer = new TrackersHtmlSearchRenderer($this->words, $this->offset, $this->isExact, $this->groupId);
-		$html .= $this->getPartResult($renderer,  'short_tracker', _('Tracker Search Results'));
-
-		$renderer = new TasksHtmlSearchRenderer($this->words, $this->offset, $this->isExact, $this->groupId);
-		$html .= $this->getPartResult($renderer, 'short_pm', _('Task Search Results'));
-
-		$renderer = new DocsHtmlSearchRenderer($this->words, $this->offset, $this->isExact, $this->groupId);
-		$html .= $this->getPartResult($renderer, 'short_docman', _('Documentation Search Results'));
-
-		$renderer = new FrsHtmlSearchRenderer($this->words, $this->offset, $this->isExact, $this->groupId);
-		$html .= $this->getPartResult($renderer, 'short_files', _('Files Search Results'));
-
-		$renderer = new NewsHtmlSearchRenderer($this->words, $this->offset, $this->isExact, $this->groupId);
-		$html .= $this->getPartResult($renderer, 'short_news', _('News Search Results'));
-*/
-
 		return $html;
 	}
 
@@ -212,9 +192,9 @@ class FullProjectHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 		global $HTML;
 		$result = '';
 
-		if ($title === '')
+		if ($title === '') {
 			$title = $section;
-
+		}
 		$result .= '<h2><a name="'.$section.'"></a>'.$title.'</h2>';
 
 		if ($renderer->searchQuery->getRowsTotalCount() > 0) {

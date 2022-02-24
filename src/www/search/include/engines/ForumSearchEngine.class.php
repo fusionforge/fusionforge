@@ -3,6 +3,7 @@
  * Search Engine
  *
  * Copyright 2004 (c) Dominik Haas, GForge Team
+ * Copyright 2022, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -38,8 +39,8 @@ class ForumSearchEngine extends GroupSearchEngine {
 
 	function getSearchRenderer($words, $offset, $exact, $parameters) {
 		$this->includeSearchRenderer();
-		$rendererClassName = $this->rendererClassName;
-		$renderer = new $rendererClassName($words, $offset, $exact, $parameters[SEARCH__PARAMETER_GROUP_ID], $parameters[SEARCH__PARAMETER_FORUM_ID]);
+		$lrendererClassName = $this->rendererClassName;
+		$renderer = new $lrendererClassName($words, $offset, $exact, $parameters[SEARCH__PARAMETER_GROUP_ID], $parameters[SEARCH__PARAMETER_FORUM_ID]);
 		return $renderer;
 	}
 }

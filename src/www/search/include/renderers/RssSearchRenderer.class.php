@@ -58,8 +58,8 @@ class RssSearchRenderer extends SearchRenderer {
 
 			rss_dump_project_result_array(
 				$searchQuery->getData(),
-				'GForge Search Results',
-				'GForge Search Results for "'.$this->query['words'].'"',
+				'FusionForge Search Results',
+				'FusionForge Search Results for "'.$this->query['words'].'"',
 				$this->callbackFunction
 			);
 		}
