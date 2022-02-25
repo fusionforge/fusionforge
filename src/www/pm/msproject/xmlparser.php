@@ -137,12 +137,7 @@ function startElement($parser, $name, $attrib) {
 					$result[$name] = $principal_tag;
 					break;
 				}
-				case $attrib["HANDLE"] == "upload": {
-					$principal_tag = $attrib["HANDLE"];
-					$result[$name] = $principal_tag;
-					$result["ACTION"] = $attrib["ACTION"];
-					break;
-				}
+				case $attrib["HANDLE"] == "upload":
 				case $attrib["HANDLE"] == "download": {
 					$principal_tag = $attrib["HANDLE"];
 					$result[$name] = $principal_tag;
