@@ -50,9 +50,8 @@ class System extends FFError {
 		$user = user_get_object($user_id);
 		if (!$user) {
 			return false;
-		} else {
-			return true;
 		}
+		return true;
 	}
 
 	/**

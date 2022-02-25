@@ -176,16 +176,14 @@ class MailmanList extends FFError {
 	*
 	* @return boolean
 	*/
-	function activationRequested()
-	{
+	function activationRequested() {
 		$systemevent =	SystemEventManager::instance();
 		$result1 = $systemevent->fetchEvents(0,10,false,SystemEvent::STATUS_NEW,'MAILMAN_LIST_CREATE',$this->getID());
 		$result2 = $systemevent->fetchEvents(0,10,false,SystemEvent::STATUS_RUNNING,'MAILMAN_LIST_CREATE',$this->getID());
 		if(count($result1)+count($result2)<1) {
 			return false;
-		} else {
-			return true;
 		}
+		return true;
 	}
 
 	/**
@@ -193,8 +191,7 @@ class MailmanList extends FFError {
 	 *
 	 * @return bool
 	 */
-	function recreate()
-	{
+	function recreate() {
 
 		$systemevent =	SystemEventManager::instance();
 		$systemevent->createEvent('MAILMAN_LIST_CREATE', $this->getID(),SystemEvent::PRIORITY_MEDIUM);

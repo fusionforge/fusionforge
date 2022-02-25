@@ -171,11 +171,11 @@ function getDocumentStates($session_ser) {
 	$states = db_query_params ('select * from doc_states',
 			array ());
 	for ($row=0; $row<db_numrows($states); $row++) {
-			$return[]=array(
-				'state_id' => db_result($states, $row, 'stateid'),
-				'description' => db_result($states, $row, 'name')
-			);
-		}
+		$return[]=array(
+			'state_id' => db_result($states, $row, 'stateid'),
+			'description' => db_result($states, $row, 'name')
+		);
+	}
 	return $return;
 }
 
@@ -186,11 +186,10 @@ function getDocumentStates($session_ser) {
 function validateState($state_id) {
 	$res = db_query_params ('SELECT name FROM doc_states WHERE stateid=$1',
 			array ($state_id));
-	if(db_numrows($res)==1) {
+	if (db_numrows($res)==1) {
 		return true;
-	} else {
-		return false;
 	}
+	return false;
 }
 
 //
@@ -241,9 +240,8 @@ function addDocument($session_ser, $group_id, $doc_group, $title, $description, 
 
 	if (!$d->create($uploaded_data_name, $uploaded_data_type, $file, $doc_group, $title, $description)) {
 		return new soap_fault('', 'addDocument', $d->getErrorMessage(), $d->getErrorMessage());
-	} else {
-		return $d->getID();
 	}
+	return $d->getID();
 }
 
 //
@@ -327,10 +325,8 @@ function updateDocument($session_ser, $group_id, $doc_group, $doc_id, $title, $d
 
 	if (!$d->update($uploaded_data_name, $uploaded_data_type, $file, $doc_group, $title, $description, $state_id)) {
 		return new soap_fault('', 'updateDocument', $d->getErrorMessage(), $d->getErrorMessage());
-	} else {
-		return true;
 	}
-
+	return true;
 }
 
 //
@@ -369,9 +365,8 @@ function addDocumentGroup($session_ser, $group_id, $groupname, $parent_doc_group
 	}
 	if (!$dg->create($groupname, $parent_doc_group)) {
 		return new soap_fault('', 'addDocumentGroup', 'Could Not Create Document Group','Could Not Create Document Group');
-		} else {
-		return $dg->getID();
 	}
+	return $dg->getID();
 }
 
 //
@@ -412,9 +407,8 @@ function updateDocumentGroup($session_ser, $group_id, $doc_group, $new_groupname
 
 	if (!$dg->update($new_groupname, $new_parent_doc_group)) {
 		return new soap_fault('', 'updateDocumentGroup', $dg->getErrorMessage(), $dg->getErrorMessage());
-	} else {
-		return true;
 	}
+	return true;
 }
 
 //
@@ -659,7 +653,6 @@ function documentDelete($session_ser, $group_id, $doc_id) {
 
 	if (!$d->delete()) {
 		return new soap_fault('', 'documentDelete', $d->getErrorMessage(), $d->getErrorMessage());
-	} else {
-		return true;
 	}
+	return true;
 }

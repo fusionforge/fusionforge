@@ -240,9 +240,8 @@ function in_string($haystack, $needle, $case_sensitive = false) {
 	}
 	if (strpos($haystack, $needle) !== false) {
 		return true;
-	} else {
-		return false;
 	}
+	return false;
 }
 
 function show($text) {

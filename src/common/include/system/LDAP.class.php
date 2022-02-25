@@ -31,14 +31,14 @@ class LDAP extends UNIX {
  	 */
 
 	/**
- 	 *	asciize() - Replace non-ascii characters with question marks
+ 	 * asciize() - Replace non-ascii characters with question marks
  	 *
- 	 *	LDAP expects utf-8 encoded character string. Since we cannot
- 	 *	know which encoding 8-bit characters in database use, we
- 	 *	just replace them with question marks.
+ 	 * LDAP expects utf-8 encoded character string. Since we cannot
+ 	 * know which encoding 8-bit characters in database use, we
+ 	 * just replace them with question marks.
  	 *
- 	 *	@param		string	$str	UTF-8 encoded character string.
- 	 *	@return		string	which contains only ascii characters
+ 	 * @param	string	$str	UTF-8 encoded character string.
+ 	 * @return	string	which contains only ascii characters
  	 */
 	function asciize($str) {
 		if (!$str) {
@@ -56,8 +56,7 @@ class LDAP extends UNIX {
 	/**
 	 * gfLdapConnect() - Connect to the LDAP server
 	 *
-	 * @returns bool	true on success/false on error
-	 *
+	 * @returns	bool	true on success/false on error
 	 */
 	function gfLdapConnect() {
 
@@ -81,10 +80,9 @@ class LDAP extends UNIX {
 	/**
 	 * gfLdapAdd() - Wrapper for ldap_add()
 	 *
-	 * @param		string	$dn		dn
-	 * @param		string	$entry	entry
-	 *
-	 * @return bool
+	 * @param	string	$dn	dn
+	 * @param	string	$entry	entry
+	 * @return	bool
 	 */
 	function gfLdapAdd($dn, $entry) {
 		global $ldap_conn;
@@ -94,9 +92,8 @@ class LDAP extends UNIX {
 	/**
 	 * gfLdapDelete() - Wrapper for ldap_delete()
 	 *
-	 * @param		string	$dn		dn
-	 *
-	 * @return bool
+	 * @param	string	$dn	dn
+	 * @return	bool
 	 */
 	function gfLdapDelete($dn) {
 		global $ldap_conn;
@@ -106,10 +103,9 @@ class LDAP extends UNIX {
 	/**
 	 * gfLdapModify() - Wrapper for ldap_modify()
 	 *
-	 * @param		string	$dn		dn
-	 * @param		string	$entry	entry
-	 *
-	 * @return bool
+	 * @param	string	$dn	dn
+	 * @param	string	$entry	entry
+	 * @return	bool
 	 */
 	function gfLdapModify($dn,$entry) {
 		global $ldap_conn;
@@ -120,31 +116,28 @@ class LDAP extends UNIX {
 	 * gfLdapModifyIfExists() - Wrapper for ldap_modify()
 	 * works like gfLdapModify, but returns true if the LDAP entry does not exist
 	 *
-	 * @param		string	$dn		dn
-	 * @param		string	$entry	entry
-	 *
-	 * @return bool
+	 * @param	string	$dn	dn
+	 * @param	string	$entry	entry
+	 * @return	bool
 	 */
 	function gfLdapModifyIfExists($dn,$entry) {
-			$res = $this->gfLdapModify($dn,$entry);
-			if ($res) {
+		$res = $this->gfLdapModify($dn,$entry);
+		if ($res) {
+				return true ;
+		} else {
+			$err = ldap_errno ($ldap_conn) ;
+			if ($err == 32) {
 					return true ;
-			} else {
-					$err = ldap_errno ($ldap_conn) ;
-					if ($err == 32) {
-							return true ;
-					} else {
-							return false ;
-					}
 			}
+		}
+		return false;
 	}
 
 	/**
 	 * gfLdapModAdd() - Wrapper for ldap_mod_add()
 	 *
-	 * @param		string	$dn		dn
-	 * @param		string	$entry	entry
-	 *
+	 * @param	string	$dn	dn
+	 * @param	string	$entry	entry
 	 * @return bool
 	 */
 	function gfLdapModAdd($dn,$entry) {
@@ -155,9 +148,8 @@ class LDAP extends UNIX {
 	/**
 	 * gfLdapModDel() - Wrapper for ldap_mod_del()
 	 *
-	 * @param		string	$dn		dn
-	 * @param		string	$entry	entry
-	 *
+	 * @param	string	$dn	dn
+	 * @param	string	$entry	entry
 	 * @return bool
 	 */
 	function gfLdapModDel($dn,$entry) {
@@ -168,10 +160,9 @@ class LDAP extends UNIX {
 	/**
 	 * gfLdapRead() - Wrapper for ldap_read()
 	 *
-	 * @param		string	$dn		dn
-	 * @param		string	$filter	filter
-	 * @param		int		$attrs	attrs
-	 *
+	 * @param	string	$dn	dn
+	 * @param	string	$filter	filter
+	 * @param	int	$attrs	attrs
 	 * @return resource
 	 */
 	function gfLdapRead($dn,$filter,$attrs=0) {
@@ -224,9 +215,8 @@ class LDAP extends UNIX {
 	/**
 	 * sysCheckUser() - Check for the existence of a user
 	 *
-	 * @param		int	$user_id	The user ID of the user to check
-	 * @return bool	true on success/false on error
-	 *
+	 * @param	int	$user_id	The user ID of the user to check
+	 * @return	bool	true on success/false on error
 	 */
 	function sysCheckUser($user_id) {
 		$user = user_get_object($user_id);
@@ -239,9 +229,8 @@ class LDAP extends UNIX {
 	/**
 	 * gfLdapcheck_user_by_name() - Check for a user by the username
 	 *
-	 * @param		string	$user_name	The username
-	 * @return bool	true on success/false on error
-	 *
+	 * @param	string	$user_name	The username
+	 * @return	bool	true on success/false on error
 	 */
 	function gfLdapcheck_user_by_name($user_name) {
 		global $ldap_conn;
@@ -266,7 +255,6 @@ class LDAP extends UNIX {
 	 *
 	 * @param	int	$user_id	The user ID of the user to create
 	 * @return	bool	 The return status of gfLdapcreate_user_from_object()
-	 *
 	 */
 	function sysCreateUser($user_id) {
 		// Check even if the user shouldn't exist
@@ -283,7 +271,6 @@ class LDAP extends UNIX {
 	 *
 	 * @param		int	$user_id	The ID of the user to check
 	 * @return bool	true on success/false on error
-	 *
 	 */
 	function sysCheckCreateUser($user_id) {
 		if (!$this->sysCheckUser($user_id)){
@@ -298,7 +285,6 @@ class LDAP extends UNIX {
 	 *
 	 * @param		object	$user	The user object
 	 * @return bool	true on success/false on error
-	 *
 	 */
 	function gfLdapcreate_user_from_object(&$user) {
 
@@ -336,20 +322,18 @@ class LDAP extends UNIX {
 	/**
 	 * gfLdapCreateUserFromProps() - Creates an LDAP user from
 	 *
-	 * @param		string	$username	The username
-	 * @param		string	$cn
-	 * @param		string	$crypt_pw	The encrypted password
-	 * @param		string	$shell
-	 * @param		string	$cvsshell
-	 * @param		int		$uid
-	 * @param		int		$gid
-	 * @param		string	$email
-	 * @return bool	true on success/false on error
-	 *
+	 * @param	string	$username	The username
+	 * @param	string	$cn
+	 * @param	string	$crypt_pw	The encrypted password
+	 * @param	string	$shell
+	 * @param	string	$cvsshell
+	 * @param	int	$uid
+	 * @param	int	$gid
+	 * @param	string	$email
+	 * @return	bool	true on success/false on error
 	 */
 	function gfLdapCreateUserFromProps($username, $cn, $crypt_pw,
 						$shell, $cvsshell, $uid, $gid, $email) {
-
 		if (!$this->gfLdapConnect()) {
 			return false;
 		}
@@ -384,13 +368,10 @@ class LDAP extends UNIX {
 	/**
 	 * sysRemoveUser() - Remove an LDAP user
 	 *
-	 * @param		int	$user_id	The user ID of the user to remove
-	 * @return bool	true on success/false on error
-	 *
+	 * @param	int	$user_id	The user ID of the user to remove
+	 * @return	bool	true on success/false on error
 	 */
 	function sysRemoveUser($user_id) {
-
-
 		$user = user_get_object($user_id);
 		if (!$this->gfLdapConnect()) {
 			return false;
@@ -408,15 +389,12 @@ class LDAP extends UNIX {
 	/**
 	 * sysUserSetAttribute() - Set an attribute for a user
 	 *
-	 * @param		int		$user_id	The user ID
-	 * @param		string	$attr	The attribute to set
-	 * @param		string	$value	The new value of the attribute
-	 * @return bool	true on success/false on error
-	 *
+	 * @param	int	$user_id	The user ID
+	 * @param	string	$attr		The attribute to set
+	 * @param	string	$value		The new value of the attribute
+	 * @return	bool	true on success/false on error
 	 */
 	function sysUserSetAttribute($user_id,$attr,$value) {
-
-
 		$user = user_get_object($user_id);
 		if (!$this->gfLdapConnect()) {
 			return false;
@@ -439,9 +417,8 @@ class LDAP extends UNIX {
 	/**
 	 * sysCheckGroup() - Check for the existence of a group
 	 *
-	 * @param		int		The ID of the group to check
-	 * @return bool	true on success/false on error
-	 *
+	 * @param	int	$group_id	The ID of the group to check
+	 * @return	bool	true on success/false on error
 	 */
 	function sysCheckGroup($group_id) {
 		global $ldap_conn;
@@ -466,12 +443,10 @@ class LDAP extends UNIX {
 	/**
 	 * sysCreateGroup() - Create a group
 	 *
-	 * @param		int		The ID of the group to create
-	 * @return bool	true on success/false on error
-	 *
+	 * @param	int	$group_id	The ID of the group to create
+	 * @return	bool	true on success/false on error
 	 */
 	function sysCreateGroup($group_id) {
-
 		$group = group_get_object($group_id);
 		if (!$this->gfLdapConnect()) {
 			return false;
@@ -498,12 +473,11 @@ class LDAP extends UNIX {
 	/**
 	 * sysRemoveGroup() - Remove a group
 	 *
-	 * @param		int		The ID of the group to remove
-	 * @return bool	true on success/false on error
+	 * @param	int	$group_id	The ID of the group to remove
+	 * @return	bool	true on success/false on error
 	 *
 	 */
 	function sysRemoveGroup($group_id) {
-
 		$group = group_get_object($group_id);
 		if (!$this->gfLdapConnect()) {
 			return false;
@@ -566,11 +540,10 @@ class LDAP extends UNIX {
 	/**
 	 * sysGroupAddUser() - Add a user to an LDAP group
 	 *
-	 * @param		int		$group_id	The ID of the group two which the user will be added
-	 * @param		int		$user_id	The ID of the user to add
-	 * @param		bool	$cvs_only	Only add this user to CVS
-	 * @return bool	true on success/false on error
-	 *
+	 * @param	int	$group_id	The ID of the group two which the user will be added
+	 * @param	int	$user_id	The ID of the user to add
+	 * @param	bool	$cvs_only	Only add this user to CVS
+	 * @return	bool	true on success/false on error
 	 */
 	function sysGroupAddUser($group_id, $user_id, $cvs_only=false) {
 		global $ldap_conn;
@@ -636,11 +609,10 @@ class LDAP extends UNIX {
 	/**
 	 * sysGroupRemoveUser() - Remove a user from an LDAP group
 	 *
-	 * @param		int		$group_id	The ID of the group from which to remove the user
-	 * @param		int		$user_id	The ID of the user to remove
-	 * @param		bool	$cvs_only	Only remove user from CVS group
-	 * @return bool	true on success/false on error
-	 *
+	 * @param	int	$group_id	The ID of the group from which to remove the user
+	 * @param	int	$user_id	The ID of the user to remove
+	 * @param	bool	$cvs_only	Only remove user from CVS group
+	 * @return	bool	true on success/false on error
 	 */
 	function sysGroupRemoveUser($group_id, $user_id, $cvs_only=false) {
 

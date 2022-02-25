@@ -82,7 +82,6 @@ class pgsql extends System {
 	 *
 	 * @param	int	$user_id	The user ID of the user to check
 	 * @return	bool			true on success/false on error
-	 *
 	 */
 	function sysCheckUser($user_id) {
 		$user = user_get_object($user_id);
@@ -97,7 +96,6 @@ class pgsql extends System {
 	 *
 	 * @param	int	$user_id	The user ID of the user to create
 	 * @return	bool			success or not
-	 *
 	 */
 	function sysCreateUser($user_id) {
 		$user = user_get_object($user_id);
@@ -143,9 +141,8 @@ class pgsql extends System {
 	/**
 	 * sysCheckCreateUser() - Check that a user has been created
 	 *
-	 * @param	int		$user_id	The ID of the user to check
+	 * @param	int	$user_id	The ID of the user to check
 	 * @return	bool	true on success/false on error
-	 *
 	 */
 	function sysCheckCreateUser($user_id) {
 		return $this->sysCreateUser($user_id);
@@ -156,7 +153,6 @@ class pgsql extends System {
 	 *
 	 * @param	int	$group_id	The ID of the group to check
 	 * @return	bool			true on success/false on error
-	 *
 	 */
 	function sysCheckCreateGroup($group_id) {
 		return $this->sysCreateGroup($group_id);
@@ -167,7 +163,6 @@ class pgsql extends System {
 	 *
 	 * @param	int	$user_id	The user ID of the user to remove
 	 * @return	bool			true on success/false on failure
-	 *
 	 */
 	function sysRemoveUser($user_id) {
 		$res = db_query_params('UPDATE users SET unix_status=$1 WHERE user_id=$2',
@@ -190,11 +185,10 @@ class pgsql extends System {
 	/**
 	* sysUserSetAttribute() - Set an attribute for a user
 	*
-	* @param	int		$user_id	The user ID
+	* @param	int	$user_id	The user ID
 	* @param	string	$attr		The attribute to set
 	* @param	string	$value		The new value of the attribute
-	* @return	bool				true on success/false on error
-	*
+	* @return	bool			true on success/false on error
 	*/
 	function sysUserSetAttribute($user_id,$attr,$value) {
 		// trigger nscd cache invalidation and scm-passwd regen through systasksd
@@ -216,9 +210,8 @@ class pgsql extends System {
 	/**
 	 * sysCheckGroup() - Check for the existence of a group
 	 *
-	 * @param	int		$group_id	The ID of the group to check
-	 * @return	bool				true on success/false on error
-	 *
+	 * @param	int	$group_id	The ID of the group to check
+	 * @return	bool			true on success/false on error
 	 */
 	function sysCheckGroup($group_id) {
 		$group = group_get_object($group_id);
@@ -229,17 +222,16 @@ class pgsql extends System {
 						array($group_id));
 			if (db_numrows($res) == 0){
 				return false;
-			} else {
-				return true;
 			}
 		}
+		return true;
 	}
 
 	/**
 	 * sysCreateGroup() - Create a group
 	 *
-	 * @param		int		$group_id	The ID of the group to create
-	 * @return bool			true on success/false on error
+	 * @param	int	$group_id	The ID of the group to create
+	 * @return bool		true on success/false on error
 	 *
 	 */
 	function sysCreateGroup($group_id) {
@@ -361,18 +353,18 @@ class pgsql extends System {
 
 		if (forge_check_perm_for_user($u,'scm',$group_id,'read')) {
 			$res = db_query_params ('INSERT INTO nss_usergroups (
-SELECT users.unix_uid AS uid,
-	   groups.group_id + $1 AS gid,
-	   users.user_id AS user_id,
-	   groups.group_id AS group_id,
-	   users.user_name AS user_name,
-	   groups.unix_group_name||$2 AS unix_group_name
-FROM users,groups
-WHERE users.user_id=$3
-  AND users.status=$4
-  AND users.unix_status=$5
-  AND groups.status=$6
-  AND groups.group_id=$7)',
+							SELECT users.unix_uid AS uid,
+								groups.group_id + $1 AS gid,
+								users.user_id AS user_id,
+								groups.group_id AS group_id,
+								users.user_name AS user_name,
+								groups.unix_group_name||$2 AS unix_group_name
+							FROM users,groups
+							WHERE users.user_id=$3
+							AND users.status=$4
+							AND users.unix_status=$5
+							AND groups.status=$6
+							AND groups.group_id=$7)',
 						array($this->GID_ADD_SCMRO,
 							  '_scmro',
 							  $user_id,
@@ -387,18 +379,18 @@ WHERE users.user_id=$3
 
 		if (forge_check_perm_for_user($u,'scm',$group_id,'write')) {
 			$res = db_query_params ('INSERT INTO nss_usergroups (
-SELECT users.unix_uid AS uid,
-	   groups.group_id + $1 AS gid,
-	   users.user_id AS user_id,
-	   groups.group_id AS group_id,
-	   users.user_name AS user_name,
-	   groups.unix_group_name||$2 AS unix_group_name
-FROM users,groups
-WHERE users.user_id=$3
-  AND users.status=$4
-  AND users.unix_status=$5
-  AND groups.status=$6
-  AND groups.group_id=$7)',
+							SELECT users.unix_uid AS uid,
+								groups.group_id + $1 AS gid,
+								users.user_id AS user_id,
+								groups.group_id AS group_id,
+								users.user_name AS user_name,
+								groups.unix_group_name||$2 AS unix_group_name
+							FROM users,groups
+							WHERE users.user_id=$3
+							AND users.status=$4
+							AND users.unix_status=$5
+							AND groups.status=$6
+							AND groups.group_id=$7)',
 						array($this->GID_ADD_SCMRW,
 							  '_scmrw',
 							  $user_id,
@@ -413,18 +405,18 @@ WHERE users.user_id=$3
 
 		if ($u->isMember($p)) {
 			$res = db_query_params ('INSERT INTO nss_usergroups (
-SELECT users.unix_uid AS uid,
-	   groups.group_id + $1 AS gid,
-	   users.user_id AS user_id,
-	   groups.group_id AS group_id,
-	   users.user_name AS user_name,
-	   groups.unix_group_name AS unix_group_name
-FROM users,groups
-WHERE users.user_id=$2
-  AND users.status=$3
-  AND users.unix_status=$4
-  AND groups.status=$5
-  AND groups.group_id=$6)',
+							SELECT users.unix_uid AS uid,
+								groups.group_id + $1 AS gid,
+								users.user_id AS user_id,
+								groups.group_id AS group_id,
+								users.user_name AS user_name,
+								groups.unix_group_name AS unix_group_name
+							FROM users,groups
+							WHERE users.user_id=$2
+							AND users.status=$3
+							AND users.unix_status=$4
+							AND groups.status=$5
+							AND groups.group_id=$6)',
 						array ($this->GID_ADD,
 							   $user_id,
 							   'A', 'A', 'A',
@@ -468,63 +460,63 @@ WHERE users.user_id=$2
 		}
 
 		$sql = "
-INSERT INTO nss_usergroups
+			INSERT INTO nss_usergroups
 
--- Member access
-SELECT users.unix_uid, nss_groups.gid, users.user_id, nss_groups.group_id, user_name, nss_groups.name::text
-FROM users
-  JOIN pfo_user_role USING (user_id)
-  JOIN pfo_role ON (pfo_user_role.role_id=pfo_role.role_id)
-  LEFT JOIN role_project_refs ON (pfo_user_role.role_id=role_project_refs.role_id)
-  JOIN nss_groups ON (pfo_role.home_group_id=nss_groups.group_id)
-WHERE users.unix_status='A' AND nss_groups.gid < $1
+			-- Member access
+			SELECT users.unix_uid, nss_groups.gid, users.user_id, nss_groups.group_id, user_name, nss_groups.name::text
+			FROM users
+			JOIN pfo_user_role USING (user_id)
+			JOIN pfo_role ON (pfo_user_role.role_id=pfo_role.role_id)
+			LEFT JOIN role_project_refs ON (pfo_user_role.role_id=role_project_refs.role_id)
+			JOIN nss_groups ON (pfo_role.home_group_id=nss_groups.group_id)
+			WHERE users.unix_status='A' AND nss_groups.gid < $1
 
-UNION
+			UNION
 
--- Read access
-SELECT users.unix_uid, nss_groups.gid, users.user_id, nss_groups.group_id, user_name, nss_groups.name::text
-FROM users
-  JOIN pfo_user_role USING (user_id)
-  JOIN pfo_role ON (pfo_user_role.role_id=pfo_role.role_id)
-  LEFT JOIN role_project_refs ON (pfo_user_role.role_id=role_project_refs.role_id)
-  JOIN nss_groups ON (pfo_role.home_group_id=nss_groups.group_id OR role_project_refs.group_id=nss_groups.group_id)
-  JOIN pfo_role_setting ON (pfo_user_role.role_id=pfo_role_setting.role_id AND (pfo_role_setting.ref_id=nss_groups.group_id) AND ((section_name='project_admin' AND perm_val=1) OR (section_name='scm' AND perm_val>=1)))
-WHERE users.unix_status='A' AND nss_groups.gid > $2
+			-- Read access
+			SELECT users.unix_uid, nss_groups.gid, users.user_id, nss_groups.group_id, user_name, nss_groups.name::text
+			FROM users
+			JOIN pfo_user_role USING (user_id)
+			JOIN pfo_role ON (pfo_user_role.role_id=pfo_role.role_id)
+			LEFT JOIN role_project_refs ON (pfo_user_role.role_id=role_project_refs.role_id)
+			JOIN nss_groups ON (pfo_role.home_group_id=nss_groups.group_id OR role_project_refs.group_id=nss_groups.group_id)
+			JOIN pfo_role_setting ON (pfo_user_role.role_id=pfo_role_setting.role_id AND (pfo_role_setting.ref_id=nss_groups.group_id) AND ((section_name='project_admin' AND perm_val=1) OR (section_name='scm' AND perm_val>=1)))
+			WHERE users.unix_status='A' AND nss_groups.gid > $2
 
-UNION
+			UNION
 
--- Write access
-SELECT users.unix_uid, nss_groups.gid, users.user_id, nss_groups.group_id, user_name, nss_groups.name::text
-FROM users
-  JOIN pfo_user_role USING (user_id)
-  JOIN pfo_role ON (pfo_user_role.role_id=pfo_role.role_id)
-  LEFT JOIN role_project_refs ON (pfo_user_role.role_id=role_project_refs.role_id)
-  JOIN nss_groups ON (pfo_role.home_group_id=nss_groups.group_id OR role_project_refs.group_id=nss_groups.group_id)
-  JOIN pfo_role_setting ON (pfo_user_role.role_id=pfo_role_setting.role_id AND (pfo_role_setting.ref_id=nss_groups.group_id) AND ((section_name='project_admin' AND perm_val=1) OR (section_name='scm' AND perm_val=2)))
-WHERE users.unix_status='A' AND nss_groups.gid > $1 AND nss_groups.gid < $2
+			-- Write access
+			SELECT users.unix_uid, nss_groups.gid, users.user_id, nss_groups.group_id, user_name, nss_groups.name::text
+			FROM users
+			JOIN pfo_user_role USING (user_id)
+			JOIN pfo_role ON (pfo_user_role.role_id=pfo_role.role_id)
+			LEFT JOIN role_project_refs ON (pfo_user_role.role_id=role_project_refs.role_id)
+			JOIN nss_groups ON (pfo_role.home_group_id=nss_groups.group_id OR role_project_refs.group_id=nss_groups.group_id)
+			JOIN pfo_role_setting ON (pfo_user_role.role_id=pfo_role_setting.role_id AND (pfo_role_setting.ref_id=nss_groups.group_id) AND ((section_name='project_admin' AND perm_val=1) OR (section_name='scm' AND perm_val=2)))
+			WHERE users.unix_status='A' AND nss_groups.gid > $1 AND nss_groups.gid < $2
 
-UNION
+			UNION
 
--- Forge admins
-SELECT users.unix_uid, nss_groups.gid, users.user_id, nss_groups.group_id, user_name, nss_groups.name::text
-FROM users
-  JOIN pfo_user_role USING (user_id)
-  JOIN pfo_role_setting ON (pfo_user_role.role_id=pfo_role_setting.role_id AND section_name='forge_admin' AND perm_val=1), nss_groups
-WHERE users.unix_status='A'
+			-- Forge admins
+			SELECT users.unix_uid, nss_groups.gid, users.user_id, nss_groups.group_id, user_name, nss_groups.name::text
+			FROM users
+			JOIN pfo_user_role USING (user_id)
+			JOIN pfo_role_setting ON (pfo_user_role.role_id=pfo_role_setting.role_id AND section_name='forge_admin' AND perm_val=1), nss_groups
+			WHERE users.unix_status='A'
 
--- Not supported, this is not sane
--- UNION
---
--- -- 'Open' privileges for Anonymous and LoggedIn users
--- SELECT users.unix_uid, nss_groups.gid, users.user_id, nss_groups.group_id, user_name, nss_groups.name::text||'_scmro'
--- FROM users
---   JOIN role_project_refs ON (role_project_refs.role_id IN (1,2))
---   JOIN nss_groups ON (role_project_refs.group_id=nss_groups.group_id)
---   JOIN pfo_role_setting ON (role_project_refs.role_id=pfo_role_setting.role_id AND (pfo_role_setting.ref_id=nss_groups.group_id) AND ((section_name='project_admin' AND perm_val=1) OR (section_name='scm' AND perm_val=2)))
--- WHERE users.unix_status='A' AND nss_groups.gid < $1
+			-- Not supported, this is not sane
+			-- UNION
+			--
+			-- -- 'Open' privileges for Anonymous and LoggedIn users
+			-- SELECT users.unix_uid, nss_groups.gid, users.user_id, nss_groups.group_id, user_name, nss_groups.name::text||'_scmro'
+			-- FROM users
+			--   JOIN role_project_refs ON (role_project_refs.role_id IN (1,2))
+			--   JOIN nss_groups ON (role_project_refs.group_id=nss_groups.group_id)
+			--   JOIN pfo_role_setting ON (role_project_refs.role_id=pfo_role_setting.role_id AND (pfo_role_setting.ref_id=nss_groups.group_id) AND ((section_name='project_admin' AND perm_val=1) OR (section_name='scm' AND perm_val=2)))
+			-- WHERE users.unix_status='A' AND nss_groups.gid < $1
 
-GROUP BY users.user_id, nss_groups.gid;
-";
+			GROUP BY users.user_id, nss_groups.gid;
+			";
 		$res = db_query_params($sql, array($this->GID_ADD_SCMRW, $this->GID_ADD_SCMRO));
 		if (!$res) {
 			$this->setError('Error: cannot regen nss_usergroups: '.db_error());

@@ -896,9 +896,8 @@ class ArtifactQuery extends FFError {
 					       $user_id)) ;
 		if (db_numrows($res)>0) {
 			return true;
-		} else {
-			return false;
 		}
+		return false;
 	}
 }
 

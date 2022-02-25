@@ -50,7 +50,6 @@
 	 * otherwise return false;
 	 */
 	function get($variable) {
-
 		return $this->_get($variable, $this->params);
 	}
 
@@ -73,9 +72,8 @@
 	function _get($variable, $array) {
 		if ($this->_exist($variable, $array)) {
 			return $array[$variable];
-		} else {
-			return false;
 		}
+		return false;
 	}
 
 	/**
@@ -191,9 +189,8 @@
 		$this->_last_access_to_input[$idx][$variable] = $this->_getCallTrace();
 		if(is_array($this->params[$idx])) {
 			return $this->_get($variable, $this->params[$idx]);
-		} else {
-			return false;
 		}
+		return false;
 	}
 
 	function isAjax() {

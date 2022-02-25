@@ -1,6 +1,24 @@
 <?php
+/*
+ * http://fusionforge.org
+ *
+ * This file is part of FusionForge. FusionForge is free software;
+ * you can redistribute it and/or modify it under the terms of the
+ * GNU General Public License as published by the Free Software
+ * Foundation; either version 2 of the Licence, or (at your option)
+ * any later version.
+ *
+ * FusionForge is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with FusionForge; if not, write to the Free Software Foundation, Inc.,
+ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ */
 
-class OAuthProvider	{
+class OAuthProvider {
 
 	protected $id;
 	protected $name;
@@ -11,7 +29,7 @@ class OAuthProvider	{
 	protected $authorize_url;
 	protected $access_token_url;
 
-	function __construct($name, $description, $consumer_key, $consumer_secret, $request_token_url, $authorize_url, $access_token_url, $id = 0)	{
+	function __construct($name, $description, $consumer_key, $consumer_secret, $request_token_url, $authorize_url, $access_token_url, $id = 0) {
 		$this->id = $id;
 		$this->name = $name;
 		$this->description = $description;
@@ -22,11 +40,11 @@ class OAuthProvider	{
 		$this->access_token_url = $access_token_url;
 	}
 
-	public function get_id()	{
+	public function get_id() {
 		return $this->id;
 	}
 
-	protected function set_id($id)	{
+	protected function set_id($id) {
 		$this->id = $id;
 	}
 
@@ -34,27 +52,27 @@ class OAuthProvider	{
 		return $this->name;
 	}
 
-	public function get_description()	{
+	public function get_description() {
 		return $this->description;
 	}
 
-	public function get_consumer_key()	{
+	public function get_consumer_key() {
 		return $this->consumer_key;
 	}
 
-	public function get_consumer_secret()	{
+	public function get_consumer_secret() {
 		return $this->consumer_secret;
 	}
 
-	public function get_request_token_url()	{
+	public function get_request_token_url() {
 		return $this->request_token_url;
 	}
 
-	public function get_authorize_url()	{
+	public function get_authorize_url() {
 		return $this->authorize_url;
 	}
 
-	public function get_access_token_url()	{
+	public function get_access_token_url() {
 		return $this->access_token_url;
 	}
 
@@ -62,37 +80,36 @@ class OAuthProvider	{
 		$this->name = $name;
 	}
 
-	public function set_description($description)	{
+	public function set_description($description) {
 		$this->description = $description;
 	}
 
-	public function set_consumer_key($consumer_key)	{
+	public function set_consumer_key($consumer_key) {
 		$this->consumer_key = $consumer_key;
 	}
 
-	public function set_consumer_secret($consumer_secret)	{
+	public function set_consumer_secret($consumer_secret) {
 		$this->consumer_secret = $consumer_secret;
 	}
 
-	public function set_request_token_url($request_token_url)	{
+	public function set_request_token_url($request_token_url) {
 		$this->request_token_url = $request_token_url;
 	}
 
-	public function set_authorize_url($authorize_url)	{
+	public function set_authorize_url($authorize_url) {
 		$this->authorize_url = $authorize_url;
 	}
 
-	public function set_access_token_url($access_token_url)	{
+	public function set_access_token_url($access_token_url) {
 		$this->access_token_url = $access_token_url;
 	}
 
-	static function convert_row_to_object($row)	{
+	static function convert_row_to_object($row) {
 		if ($row!=null) {
 			$provider = new OAuthProvider($row['name'], $row['description'], $row['consumer_key'], $row['consumer_secret'], $row['request_token_url'], $row['authorize_url'], $row['access_token_url'], $row['id']);
 			return $provider;
-		} else {
-			return null;
 		}
+		return null;
 	}
 
 	static function get_provider($id) {
@@ -120,7 +137,7 @@ class OAuthProvider	{
 		return $providers;
 	}
 
-	static function check_provider_values($new=TRUE, $name, $description, $consumer_key, $consumer_secret, $request_token_url, $authorize_url, $access_token_url)	{
+	static function check_provider_values($new=TRUE, $name, $description, $consumer_key, $consumer_secret, $request_token_url, $authorize_url, $access_token_url) {
 		if (!trim($name)) {
 			return "The field 'Name' is empty! ";
 		} elseif (!trim($description)) {
@@ -147,20 +164,17 @@ class OAuthProvider	{
 			return "The Authorization URL is not valid.";
 		} elseif (trim($access_token_url) && (!preg_match('|^http(s)?://[a-z0-9-]+(.[a-z0-9-]+)*(:[0-9]+)?(/.*)?$|i', $access_token_url))) {
 			return "The Access Token URL is not valid.";
-		} else {
-			return null;
 		}
+		return null;
 	}
 
-	static function provider_exists($name)	{
+	static function provider_exists($name) {
 		$conn = FFOAuthDataStore::singleton();
 		$row = $conn->find_provider_from_name($name);
 		if($row==null)	{
 			return false;
 		}
-		else {
-			return true;
-		}
+		return true;
 	}
 
 	function write_to_db() {
@@ -171,12 +185,12 @@ class OAuthProvider	{
 		$id = $conn->save_provider($this);
 		if(!$id)	{
 			exit_error("Error trying to add new oauth provider to DB", 'oauthconsumer');
-		}else {
+		} else {
 			$this->set_id($id);
 		}
 	}
 
-	function delete()	{
+	function delete() {
 		$conn = FFOAuthDataStore::singleton();
 		$id = $this->get_id();
 		if ($id!=0) {

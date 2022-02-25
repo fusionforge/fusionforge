@@ -303,9 +303,8 @@ _('Use Mantis Bugtracker as another ticket management tool.');
 		}
 		if (db_numrows($resIdProjetMantis) > 0) {
 			return true;
-		} else {
-			return false;
 		}
+		return false;
 	}
 
 	/**

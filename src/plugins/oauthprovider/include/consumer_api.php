@@ -111,9 +111,8 @@ class OauthAuthzConsumer extends OAuthConsumer {
 			return "The name '".$p_consumer_name."' has already been taken. Please choose another!";
 		} elseif (!preg_match('|^http(s)?://[a-z0-9-]+(.[a-z0-9-]+)*(:[0-9]+)?(/.*)?$|i', $p_consumer_url)) {
 			return "The Consumer URL is not valid.";
-		} else {
-			return null;
 		}
+		return null;
 	}
 
 	/**
@@ -127,9 +126,8 @@ class OauthAuthzConsumer extends OAuthConsumer {
   			$t_consumer = new OauthAuthzConsumer( $t_row['name'], $t_row['consumer_key'], $t_row['consumer_secret'], $t_row['consumer_url'], $t_row['consumer_desc'], $t_row['consumer_email'] );
 			$t_consumer->setId($t_row['id']);
 			return $t_consumer;
-		} else {
-			return null;
 		}
+		return null;
 	}
 
 	/**
@@ -204,10 +202,8 @@ class OauthAuthzConsumer extends OAuthConsumer {
 		$t_row = $DBSTORE->find_consumer_from_name($p_consumer_name);
 		if ($t_row==null) {
 			return false;
-		} else {
-			return true;
 		}
-
+		return true;
 	}
 
 	/**

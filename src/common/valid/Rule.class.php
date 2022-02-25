@@ -60,9 +60,8 @@ class Rule_Date extends Rule {
 	function isValid($val) {
 		if(preg_match('/^(\d{1,4})-(\d{1,2})-(\d{1,2}?)$/', $val, $m)) {
 			return checkdate($m[2], $m[3], $m[1]);
-		} else {
-			return false;
 		}
+		return false;
 	}
 }
 
@@ -162,9 +161,8 @@ class Rule_Int extends Rule {
 	function checkFormat($val) {
 		if(preg_match('/^([+-]?[1-9][0-9]*|[+-]?0)$/', $val)) {
 			return true;
-		} else {
-			return false;
 		}
+		return false;
 	}
 
 	function isValid($val) {
@@ -174,12 +172,9 @@ class Rule_Int extends Rule {
 			// Check (-2^31;2^31-1) range
 			if(strval(intval($val)) == $val) {
 				return true;
-			} else {
-				return false;
 			}
-		} else {
-			return false;
 		}
+		return false;
 	}
 }
 

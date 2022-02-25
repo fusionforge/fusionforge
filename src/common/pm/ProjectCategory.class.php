@@ -102,11 +102,10 @@ class ProjectCategory extends FFError {
 			//
 			//	Now set up our internal data structures
 			//
-			if (!$this->fetchData($id)) {
-				return false;
-			} else {
+			if ($this->fetchData($id)) {
 				return true;
 			}
+			return false;
 		} else {
 			$this->setError(db_error());
 			return false;

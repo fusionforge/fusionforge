@@ -41,33 +41,29 @@ function browser_get_platform() {
 function browser_is_mac() {
 	if (browser_get_platform()=='Mac') {
 		return true;
-	} else {
-		return false;
 	}
+	return false;
 }
 
 function browser_is_windows() {
 	if (browser_get_platform()=='Win') {
 		return true;
-	} else {
-		return false;
 	}
+	return false;
 }
 
 function browser_is_ie() {
 	if (browser_get_agent()=='IE') {
 		return true;
-	} else {
-		return false;
 	}
+	return false;
 }
 
 function browser_is_netscape() {
 	if (browser_get_agent()=='MOZILLA') {
 		return true;
-	} else {
-		return false;
 	}
+	return false;
 }
 
 /*
@@ -103,13 +99,3 @@ if (strstr(getStringFromServer('HTTP_USER_AGENT'),'Win')) {
 } else {
 	$GLOBALS['BROWSER_PLATFORM']='Other';
 }
-
-/*
-echo "\n\nAgent: ".getStringFromServer('HTTP_USER_AGENT');
-echo "\nIE: ".browser_is_ie();
-echo "\nMac: ".browser_is_mac();
-echo "\nWindows: ".browser_is_windows();
-echo "\nPlatform: ".browser_get_platform();
-echo "\nVersion: ".browser_get_version();
-echo "\nAgent: ".browser_get_agent();
-*/

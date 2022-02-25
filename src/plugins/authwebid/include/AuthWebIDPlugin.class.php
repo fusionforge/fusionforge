@@ -59,16 +59,15 @@ class AuthWebIDPlugin extends ForgeAuthPlugin {
 		$this->saved_login = '';
 		$this->saved_user = NULL;
 
-		$this->delegatedAuthentifier = FALSE;
+		$this->delegatedAuthentifier = false;
 
-		$this->webid_identity = FALSE;
+		$this->webid_identity = false;
 
 		$this->declareConfigVars();
 
 		// The IdP to use is configured in the .ini file
 		$this->delegate_webid_auth_to = forge_get_config('delegate_webid_auth_to', $this->name);
 		$this->idp_delegation_link = forge_get_config('idp_delegation_link', $this->name);
-
 	}
 
 	/**
@@ -77,7 +76,7 @@ class AuthWebIDPlugin extends ForgeAuthPlugin {
 	 * @param string $message : alternative message for the link
 	 * @return string html
 	 */
-	function displayAuthentifyViaIdPLink($callback, $message = FALSE) {
+	function displayAuthentifyViaIdPLink($callback, $message = false) {
 		if (!$message) {
 			$message = sprintf( _('Click here to delegate authentication of your WebID to %s'), $this->delegate_webid_auth_to);
 		}
@@ -141,7 +140,7 @@ class AuthWebIDPlugin extends ForgeAuthPlugin {
 	 * @return	string
 	 */
 	public function getUserNameFromWebIDIdentity($webid_identity) {
-		$user_name = FALSE;
+		$user_name = false;
 		$res = db_query_params('SELECT users.user_name FROM users, plugin_authwebid_user_identities WHERE users.user_id = plugin_authwebid_user_identities.user_id AND webid_identity=$1',
 							    array($webid_identity));
 		if($res) {
@@ -162,11 +161,9 @@ class AuthWebIDPlugin extends ForgeAuthPlugin {
 		$res = db_query_params('SELECT webid_identity FROM plugin_authwebid_user_identities WHERE webid_identity =$1',
 				array($webid_identity));
 		if ($res && db_numrows($res) > 0) {
-			return TRUE;
+			return true;
 		}
-		else {
-			return FALSE;
-		}
+		return false;
 	}
 
 	/**
@@ -206,13 +203,10 @@ class AuthWebIDPlugin extends ForgeAuthPlugin {
 		if ($res && db_numrows($res) > 0) {
 			$arr = db_fetch_array($res);
 			if ($arr[0] == '1') {
-				return TRUE;
-			} else {
-				return FALSE;
+				return true;
 			}
-		} else {
-			return FALSE;
 		}
+		return false;
 	}
 
 	/**
@@ -323,7 +317,7 @@ class AuthWebIDPlugin extends ForgeAuthPlugin {
 		*/
 
 		// We don't rely on the PHP session, as we're in FusionForge
-		$create_session = FALSE;
+		$create_session = false;
 		//$this->delegatedAuthentifier = new Authentication_Delegated($create_session, NULL, NULL, $certRepository);
 		$this->delegatedAuthentifier = new Authentication_Delegated($create_session);
 
@@ -335,7 +329,7 @@ class AuthWebIDPlugin extends ForgeAuthPlugin {
 	 * @return	string
 	 */
 	public function getCurrentWebID() {
-		$webid = FALSE;
+		$webid = false;
 		if ($this->delegatedAuthentifier) {
 			$webid = $this->delegatedAuthentifier->webid;
 		}

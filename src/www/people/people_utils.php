@@ -274,9 +274,8 @@ function people_verify_job_group($job_id,$group_id) {
 	$result=db_query_params('SELECT * FROM people_job WHERE job_id=$1 AND group_id=$2', array($job_id, $group_id));
 	if (!$result || db_numrows($result) < 1) {
 		return false;
-	} else {
-		return true;
 	}
+	return true;
 }
 
 function people_get_skill_name($skill_id) {

@@ -763,9 +763,8 @@ class FFUser extends FFError {
 	function isActive() {
 		if ($this->getStatus() == 'A') {
 			return true;
-		} else {
-			return false;
 		}
+		return false;
 	}
 
 	/**
@@ -1746,9 +1745,8 @@ Email: %3$s
 		$hidden = unserialize($this->data_array['hidden']);
 		if (is_array($hidden) && in_array($fieldName, $hidden)) {
 			return true;
-		} else {
-			return false;
 		}
+		return false;
 	}
 
 	/**

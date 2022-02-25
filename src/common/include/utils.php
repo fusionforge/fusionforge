@@ -583,6 +583,7 @@ function validate_emails($addresses, $separator = ',') {
 
 /**
  * util_is_valid_filename - Verifies whether a file has a valid filename
+ * TODO: check to rename and use only 1 function: see util_is_valid_repository_name
  *
  * @param	string	$file	The file to verify
  * @return	bool	true on success/false on error
@@ -594,13 +595,11 @@ function util_is_valid_filename($file) {
 
 	if (!empty($invalidchars)) {
 		return false;
-	} else {
-		if (strstr($file, '..')) {
-			return false;
-		} else {
-			return true;
-		}
 	}
+	if (strstr($file, '..')) {
+		return false;
+	}
+	return true;
 }
 
 /**

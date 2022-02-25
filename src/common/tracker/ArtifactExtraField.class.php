@@ -477,9 +477,8 @@ class ArtifactExtraField extends FFError {
 	function isAutoAssign() {
 		if ($this->getArtifactType()->getAutoAssignField() == $this->getID()) {
 			return true;
-		} else {
-			return false;
 		}
+		return false;
 	}
 
 	/**

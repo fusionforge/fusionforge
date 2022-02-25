@@ -1156,7 +1156,6 @@ abstract class RoleExplicit extends BaseRole implements PFO_RoleExplicit {
 		while ($arr = db_fetch_array($res)) {
 			$result[] = user_get_object($arr['user_id']);
 		}
-
 		return $result;
 	}
 
@@ -1165,9 +1164,8 @@ abstract class RoleExplicit extends BaseRole implements PFO_RoleExplicit {
 					array($user->getID(), $this->getID()));
 		if ($res && db_numrows($res)) {
 			return true;
-		} else {
-			return false;
 		}
+		return false;
 	}
 
 	function getID() {	// From the PFO spec

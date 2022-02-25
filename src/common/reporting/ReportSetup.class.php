@@ -27,10 +27,10 @@ class ReportSetup extends Report {
 
 	function initialSetup() {
 		$this->createTables();
-		if (!$this->initialData()) {
-			return false;
-		} else {
+		if ($this->initialData()) {
 			return true;
+		}
+		return false;
 		}
 	}
 
