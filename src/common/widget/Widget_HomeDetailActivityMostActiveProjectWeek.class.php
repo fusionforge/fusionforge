@@ -65,8 +65,9 @@ class Widget_HomeDetailActivityMostActiveProjectWeek extends Widget {
 			$displayTableTop = 0;
 			$last_day = 0;
 			$displayed_activities = false;
+			$cached_perms = array();
 			foreach ($activities as $activity) {
-				if (!$ffactivity->check_perm_for_activity($activity, $this->cached_perms)) {
+				if (!$ffactivity->check_perm_for_activity($activity, $cached_perms)) {
 					continue;
 				}
 				if (!$displayTableTop) {

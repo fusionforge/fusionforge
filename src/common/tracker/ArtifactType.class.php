@@ -1289,13 +1289,13 @@ class ArtifactType extends FFError {
 	 * @return	resource	database result set.
 	 */
 	function getCannedResponses() {
-		if (!isset($this->cannedresponses_res)) {
-			$this->cannedresponses_res = db_query_params('SELECT id,title
+		if (!isset($this->canned_responses_res)) {
+			$this->canned_responses_res = db_query_params('SELECT id,title
 				FROM artifact_canned_responses
 				WHERE group_artifact_id=$1',
 								      array($this->getID()));
 		}
-		return $this->cannedresponses_res;
+		return $this->canned_responses_res;
 	}
 
 	/**

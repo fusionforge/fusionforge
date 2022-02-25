@@ -4,7 +4,7 @@
  *
  * Copyright 2002, GForge, LLC
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
- * Copyright 2014,2016, Franck Villaume - TrivialDev
+ * Copyright 2014,2016,2022, Franck Villaume - TrivialDev
  * Copyright 2016, Stéphane-Eymeric Bredthauer - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -62,6 +62,7 @@ class ArtifactFactory extends FFError {
 	var $summary;
 	var $description;
 	var $followups;
+	var $priority;
 
 	var $query_type;		// query, default, custom
 	var $query_id;			// id of the query (when query_type=query)

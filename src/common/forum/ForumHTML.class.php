@@ -480,10 +480,9 @@ class ForumHTML extends FFError {
 	}
 
 	/**
-	 * showEditForm - Prints the form to edit a message
+	 * showEditForm - Prints the form to edit a message : The HTML output echoed
 	 *
 	 * @param	int	$msg The Message
-	 * @return	The HTML output echoed
 	 */
 	function showEditForm(&$msg) {
 		global $HTML;

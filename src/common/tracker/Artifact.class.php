@@ -835,6 +835,11 @@ class Artifact extends FFObject {
 			$this->updateLastModified($importData);
 
 			if ($send_followup && $sendNotice) {
+				if (array_key_exists('time',$importData)){
+					$time = $importData['time'];
+				} else {
+					$time = time();
+				}
 				$this->mailFollowupEx($time, 2, false);
 			}
 		}
@@ -1895,8 +1900,8 @@ class Artifact extends FFObject {
 	/**
 	 * mailFollowupEx - send out an email update for this artifact.
 	 *
-	 * @param	time_t	$tm	Time of the change
-	 * @param	int	$type	(1) initial/creation (2) update
+	 * @param	time_t	$tm		Time of the change
+	 * @param	int	$type		(1) initial/creation (2) update
 	 * @param	array	$more_addresses	Array of additional addresses to mail to
 	 * @param	array	$changes	Array of fields changed in this update
 	 * @access	private
@@ -2062,9 +2067,6 @@ class Artifact extends FFObject {
 			$bcc = implode(',',array_unique($emails));
 			util_send_message('', $subject, $body, $from, $bcc, '', $extra_headers);
 		}
-
-		$this->sendSubjectMsg = $subject;
-		$this->sendBodyMsg = $body;
 
 		return true;
 	}

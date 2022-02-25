@@ -198,8 +198,8 @@ class FRSFile extends FFError {
 			db_rollback();
 			return false;
 		}
-		$this->file_id = db_insertid($result, 'frs_file', 'file_id');
-		if (!$this->fetchData($this->file_id)) {
+		$file_id = db_insertid($result, 'frs_file', 'file_id');
+		if (!$this->fetchData($file_id)) {
 			db_rollback();
 			return false;
 		}

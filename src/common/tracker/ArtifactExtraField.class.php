@@ -207,7 +207,7 @@ class ArtifactExtraField extends FFError {
 
 		if ($result && db_affected_rows($result) > 0) {
 			$this->clearError();
-			$id=db_insertid($result, 'artifact_extra_field_list', 'extra_field_id');
+			$id = db_insertid($result, 'artifact_extra_field_list', 'extra_field_id');
 			//
 			//	Now set up our internal data structures
 			//
@@ -277,7 +277,6 @@ class ArtifactExtraField extends FFError {
 	 * @return	bool	success.
 	 */
 	function fetchData($id) {
-		$this->id=$id;
 		$res = db_query_params('SELECT * FROM artifact_extra_field_list WHERE extra_field_id=$1',
 					array($id));
 

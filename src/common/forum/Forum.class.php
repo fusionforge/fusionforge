@@ -6,7 +6,7 @@
  * Copyright 2002, Tim Perdue/GForge, LLC
  * Copyright 2009, Roland Mas
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
- * Copyright 2013-2014 Franck Villaume - TrivialDev
+ * Copyright 2013-2014, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -92,6 +92,8 @@ class Forum extends FFError {
 	 * @var int	is_news
 	 */
 	var $is_news;
+	
+	var $save_date;
 
 	/**
 	 * @param	$Group
@@ -224,8 +226,8 @@ class Forum extends FFError {
 			db_rollback();
 			return false;
 		}
-		$this->group_forum_id=db_insertid($result,'forum_group_list','group_forum_id');
-		$this->fetchData($this->group_forum_id);
+		$group_forum_id = db_insertid($result,'forum_group_list','group_forum_id');
+		$this->fetchData($group_forum_id);
 
 		if ($create_default_message) {
 			$fm=new ForumMessage($this);

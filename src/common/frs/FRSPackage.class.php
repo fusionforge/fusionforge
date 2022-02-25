@@ -6,7 +6,7 @@
  * Copyright 2009, Roland Mas
  * Copyright (C) 2011-2012 Alain Peyrat - Alcatel-Lucent
  * Copyright 2011, Franck Villaume - Capgemini
- * Copyright 2012-2014, Franck Villaume - TrivialDev
+ * Copyright 2012-2014,2022, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -179,8 +179,8 @@ class FRSPackage extends FFError {
 			db_rollback();
 			return false;
 		}
-		$this->package_id = db_insertid($result, 'frs_package', 'package_id');
-		if (!$this->fetchData($this->package_id)) {
+		$package_id = db_insertid($result, 'frs_package', 'package_id');
+		if (!$this->fetchData($package_id)) {
 			db_rollback();
 			return false;
 		} else {

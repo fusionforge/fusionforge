@@ -80,9 +80,7 @@ function get_canned_response($id) {
 	if (! $result || db_numrows($result) < 1) {
 		return '';
 	}
-	else {
-		return db_result($result, 0, 'body');
-	}
+	return db_result($result, 0, 'body');
 }
 
 function get_formulas_results($group, $atid, $extra_fields=array(), $status='', $assigned_to='', $priority=0, $summary='', $description=''){

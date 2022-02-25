@@ -262,6 +262,8 @@ class Group extends FFError {
 	 * @var	int|bool	$voters
 	 */
 	var $voters = false;
+	
+	var $plugins_data;
 
 	/**
 	 * Group - Group object constructor - use group_get_object() to instantiate.

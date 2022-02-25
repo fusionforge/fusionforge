@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright 2020-2021, Franck Villaume - TrivialDev
+ * Copyright 2020-2022, Franck Villaume - TrivialDev
  * This file is a part of Fusionforge.
  *
  * Fusionforge is free software; you can redistribute it and/or modify
@@ -69,6 +69,7 @@ class Widget_HomeHallOfFame extends Widget {
 		if (strlen($content)) {
 			return $content.html_e('div', array('style' => 'clear:both'), '&nbsp;');
 		}
+		return $content;
 	}
 
 	function getDescription() {

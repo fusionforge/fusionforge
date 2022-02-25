@@ -5,7 +5,7 @@
  * Copyright 2002, Tim Perdue/GForge, LLC
  * Copyright 2009, Roland Mas
  * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
- * Copyright 2014,2016, Franck Villaume - TrivialDev
+ * Copyright 2014,2016,2022, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -203,8 +203,8 @@ class FRSRelease extends FFObject {
 			db_rollback();
 			return false;
 		}
-		$this->release_id=db_insertid($result,'frs_release','release_id');
-		if (!$this->fetchData($this->release_id)) {
+		$release_id = db_insertid($result,'frs_release','release_id');
+		if (!$this->fetchData($release_id)) {
 			db_rollback();
 			return false;
 		} else {

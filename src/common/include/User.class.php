@@ -233,6 +233,7 @@ class FFUser extends FFError {
 
 	var $theme;
 	var $theme_id;
+	var $plugins_data;
 
 	/**
 	 * CONSTRUCTOR - GENERALLY DON'T USE THIS
