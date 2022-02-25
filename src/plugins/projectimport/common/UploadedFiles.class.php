@@ -240,7 +240,7 @@ class SiteAdminFilesDirectory extends AbstractFilesDirectory {
 
 		$storage_base = forge_get_config('storage_base', 'projectimport');
 
-		parent::AbstractFilesDirectory($HTML, $storage_base);
+		parent::__construct($HTML, $storage_base);
 
 	}
 }
@@ -267,7 +267,7 @@ class ProjectFilesDirectory extends AbstractFilesDirectory {
 		$storage_base = forge_get_config('storage_base', 'projectimport');
 		$storage_base .= '/'. $group->getUnixName().'/';
 
-		parent::AbstractFilesDirectory($HTML, $storage_base);
+		parent::__construct($HTML, $storage_base);
 
 	}
 }
@@ -328,7 +328,9 @@ class FileManagerPage {
 	 */
 	function feedback($message) {
 		global $feedback;
-		if ($feedback) $feedback .= '<br />';
+		if ($feedback) {
+			$feedback .= '<br />';
+		}
 		$feedback .= $message;
 	}
 

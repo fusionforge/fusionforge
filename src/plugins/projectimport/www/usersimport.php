@@ -58,7 +58,7 @@ class UsersImportPage extends FileManagerPage {
 
 		$storage = new SiteAdminFilesDirectory($HTML);
 
-		parent::FileManagerPage($HTML, $storage);
+		parent::__construct($HTML, $storage);
 	}
 
 	/**

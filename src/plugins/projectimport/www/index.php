@@ -73,7 +73,7 @@ class ProjectImportPage extends FileManagerPage {
 		$this->posted_spaces_imported = array();
 		$storage = new ProjectFilesDirectory($HTML, $group_id);
 
-		parent::FileManagerPage($HTML, $storage);
+		parent::__construct($HTML, $storage);
 	}
 	/**
 	 * Initializes data structures from POSTed data coming from the form input
