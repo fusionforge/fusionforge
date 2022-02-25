@@ -170,7 +170,7 @@ class FFObject extends FFError {
 	function addAssociations($objectrefs = '') {
 		$objectRefArr = explode(',', $objectrefs);
 		$status = false;
-		if (count($objectRefArr) > 0) {
+		if (!empty($objectRefArr)) {
 			$statusArr = array();
 			foreach ($objectRefArr as $objectRef) {
 				if (preg_match('/^[Dd][0-9]+/', $objectRef)) {

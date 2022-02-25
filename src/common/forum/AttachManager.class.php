@@ -6,7 +6,7 @@
  * The rest Copyright 2002-2005 (c) GForge Team
  * Copyright 2005, Daniel Perez
  * Copyright (C) 2010-2011 Alain Peyrat - Alcatel-Lucent
- * Copyright 2014, Franck Villaume - TrivialDev
+ * Copyright 2014,2022, Franck Villaume - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -178,6 +178,7 @@ class AttachManager extends FFError {
 			array());
 		if (!$result || db_numrows($result) < 1) {
 			$this->messages[] = _('Could not get message id');
+			return false;
 		} else {
 			$this->msg_id = db_result($result, 0, 0);
 			$res = db_query_params('INSERT INTO forum_attachment (userid, dateline, filename, filedata, filesize, visible, msg_id , filehash, mimetype)
@@ -214,7 +215,8 @@ class AttachManager extends FFError {
 				}
 			} else {
 				$this->messages[] = _('File not uploaded');
-				$this->setError();
+				$this->setError(_('Error Adding Attachment')._(': ').db_error());
+				return false;
 			}
 		}
 	}

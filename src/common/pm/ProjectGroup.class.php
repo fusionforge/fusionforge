@@ -167,9 +167,9 @@ class ProjectGroup extends FFError {
 			db_rollback();
 			return false;
 		}
-		$this->group_project_id=db_insertid($result,'project_group_list','group_project_id');
-		$this->fetchData($this->group_project_id);
-		$this->Group->normalizeAllRoles () ;
+		$group_project_id = db_insertid($result,'project_group_list','group_project_id');
+		$this->fetchData($group_project_id);
+		$this->Group->normalizeAllRoles();
 
 		db_commit();
 

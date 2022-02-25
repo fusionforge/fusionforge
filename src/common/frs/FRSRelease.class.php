@@ -352,8 +352,6 @@ class FRSRelease extends FFObject {
 
 	/**
 	 * sendNotice - the logic to send an email notice for a release.
-	 *
-	 * @return	bool	success.
 	 */
 	function sendNotice() {
 		$arr =& $this->FRSPackage->getMonitorIDs();
