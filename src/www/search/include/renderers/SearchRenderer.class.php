@@ -37,10 +37,10 @@ class SearchRenderer extends FFError {
 	var $searchQuery;
 
 	/**
-	 * @param string  $typeOfSearch type of search
-	 * @param string  $words        words we are searching for
-	 * @param bool $isExact      if we want to search for all the words or if only one matching the query is sufficient
-	 * @param         $searchQuery
+	 * @param	string	$typeOfSearch	type of search
+	 * @param	string	$words		words we are searching for
+	 * @param	bool	$isExact	if we want to search for all the words or if only one matching the query is sufficient
+	 * @param	$searchQuery
 	 */
 	function __construct($typeOfSearch, $words, $isExact, $searchQuery) {
 		$this->query['typeOfSearch'] = $typeOfSearch;

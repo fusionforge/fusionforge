@@ -30,7 +30,6 @@ require_once $gfwww.'search/include/engines/FrsGroupSearchEngine.class.php';
 require_once $gfwww.'search/include/engines/NewsGroupSearchEngine.class.php';
 require_once $gfwww.'search/include/engines/TasksGroupSearchEngine.class.php';
 require_once $gfwww.'search/include/engines/TrackersGroupSearchEngine.class.php';
-
 require_once $gfwww.'search/include/engines/ArtifactSearchEngine.class.php';
 require_once $gfwww.'search/include/engines/ForumSearchEngine.class.php';
 
@@ -149,24 +148,24 @@ class SearchManager {
 		plugin_hook_by_reference('group_search_engines', $this);
 
 		// Global search engine
-		$ffSESoft = new GFSearchEngine(SEARCH__TYPE_IS_SOFTWARE, 'ProjectHtmlSearchRenderer', _('Projects'));
+		$ffSESoft = new SearchEngine(SEARCH__TYPE_IS_SOFTWARE, 'ProjectHtmlSearchRenderer', _('Projects'));
 		$this->addSearchEngine(
 			SEARCH__TYPE_IS_SOFTWARE,
 			$ffSESoft
 		);
-		$ffSEPeople = new GFSearchEngine(SEARCH__TYPE_IS_PEOPLE, 'PeopleHtmlSearchRenderer', _('People'));
+		$ffSEPeople = new SearchEngine(SEARCH__TYPE_IS_PEOPLE, 'PeopleHtmlSearchRenderer', _('People'));
 		$this->addSearchEngine(
 			SEARCH__TYPE_IS_PEOPLE,
 			$ffSEPeople
 		);
-		$ffSEAllDocs = new GFSearchEngine(SEARCH__TYPE_IS_ALLDOCS, 'DocsAllHtmlSearchRenderer', _('Documents'));
+		$ffSEAllDocs = new SearchEngine(SEARCH__TYPE_IS_ALLDOCS, 'DocsAllHtmlSearchRenderer', _('Documents'));
 		$this->addSearchEngine(
 			SEARCH__TYPE_IS_ALLDOCS,
 			$ffSEAllDocs
 		);
 
 		if (forge_get_config('use_people')) {
-			$ffSESkills = new GFSearchEngine(SEARCH__TYPE_IS_SKILL, 'SkillHtmlSearchRenderer', _('Skills'));
+			$ffSESkills = new SearchEngine(SEARCH__TYPE_IS_SKILL, 'SkillHtmlSearchRenderer', _('Skills'));
 			$this->addSearchEngine(
 				SEARCH__TYPE_IS_SKILL,
 				$ffSESkills
@@ -174,7 +173,7 @@ class SearchManager {
 		}
 
 		// Rss search engines
-		$ffSESoftRss = new GFSearchEngine(SEARCH__TYPE_IS_SOFTWARE, 'ProjectRssSearchRenderer', _('Projects'));
+		$ffSESoftRss = new SearchEngine(SEARCH__TYPE_IS_SOFTWARE, 'ProjectRssSearchRenderer', _('Projects'));
 		$this->addSearchEngine(
 			SEARCH__TYPE_IS_SOFTWARE,
 			$ffSESoftRss,

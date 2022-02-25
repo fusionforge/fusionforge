@@ -34,16 +34,6 @@ class RssSearchRenderer extends SearchRenderer {
 	var $callbackFunction = '';
 
 	/**
-	 * @param string $typeOfSearch type of the search (Software, Forum, People and so on)
-	 * @param string $words words we are searching for
-	 * @param bool $isExact if we want to search for all the words or if only one matching the query is sufficient
-	 * @param object $searchQuery SearchQuery instance
-	 */
-	function __construct($typeOfSearch, $words, $isExact, $searchQuery) {
-		parent::__construct($typeOfSearch, $words, $isExact, $searchQuery);
-	}
-
-	/**
 	 * flush - flush the RSS output
 	 */
 	function flush() {

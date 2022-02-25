@@ -24,7 +24,7 @@
 
 require_once $GLOBALS['gfwww'].'search/include/engines/GroupSearchEngine.class.php';
 
-class WikiSearchEngine extends GFSearchEngine {
+class WikiSearchEngine extends SearchEngine {
 
 	/**
 	* name of the external site

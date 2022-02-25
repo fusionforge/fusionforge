@@ -23,12 +23,8 @@
 
 require_once $gfwww.'search/include/engines/SearchEngine.class.php';
 
-class GroupSearchEngine extends GFSearchEngine {
+class GroupSearchEngine extends SearchEngine {
 	var $Group;
-
-	function __construct($type, $rendererClassName, $label) {
-		parent::__construct($type, $rendererClassName, $label);
-	}
 
 	function isAvailable($parameters) {
 		if(isset($parameters[SEARCH__PARAMETER_GROUP_ID]) && $parameters[SEARCH__PARAMETER_GROUP_ID]) {
