@@ -31,7 +31,6 @@ class ReportSetup extends Report {
 			return true;
 		}
 		return false;
-		}
 	}
 
 	function createTables() {
