@@ -447,7 +447,6 @@ function updateGroup2($session_ser, $group_id, $form_group_name, $form_homepage,
 	$group = group_get_object($group_id);
 
 	$res = $group->update(
-		session_get_user(),
 		$form_group_name,
 		$form_homepage,
 		$form_shortdesc,

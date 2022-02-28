@@ -64,7 +64,6 @@ if (getStringFromRequest('submit')) {
 	$send_all_frs = getStringFromRequest('send_all_frs');
 
 	$res = $group->update(
-		session_get_user(),
 		$form_group_name,
 		$form_homepage,
 		$form_shortdesc,

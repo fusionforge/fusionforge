@@ -6,7 +6,7 @@
  * Copyright 2009-2013, Roland Mas
  * Copyright 2010-2011,2021, Franck Villaume - Capgemini
  * Copyright 2010-2012, Alain Peyrat - Alcatel-Lucent
- * Copyright 2012-2017,2021, Franck Villaume - TrivialDev
+ * Copyright 2012-2017,2021-2022, Franck Villaume - TrivialDev
  * Copyright 2013, French Ministry of National Education
  * Copyright 2017, Stéphane-Eymeric Bredthauer - TrivialDev
  * http://fusionforge.org
@@ -498,7 +498,6 @@ class Group extends FFError {
 	 *
 	 * Unlike updateAdmin(), this function accessible to project admin.
 	 *
-	 * @param	object	$user		User requesting operation (for access control).
 	 * @param	string	$group_name
 	 * @param	string	$homepage
 	 * @param	string	$short_description
@@ -525,7 +524,7 @@ class Group extends FFError {
 	 * @return	int	status.
 	 * @access    public
 	 */
-	function update(&$user, $group_name, $homepage, $short_description, $use_mail, $use_survey, $use_forum,
+	function update($group_name, $homepage, $short_description, $use_mail, $use_survey, $use_forum,
 		$use_pm, $use_pm_depend_box, $use_scm, $use_news, $use_docman,
 		$new_doc_address, $send_all_docs, $logo_image_id,
 		$use_ftp, $use_tracker, $use_frs, $use_stats, $tags, $use_activity, $is_public, $new_frs_address, $send_all_frs) {

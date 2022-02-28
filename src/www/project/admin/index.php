@@ -79,7 +79,6 @@ if (getStringFromRequest('submit')) {
 	$tags .= implode(",", $addTags);
 
 	$res = $group->update(
-		session_get_user(),
 		$form_group_name,
 		$form_homepage,
 		$form_shortdesc,
