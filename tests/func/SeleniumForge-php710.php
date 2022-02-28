@@ -2,7 +2,7 @@
 /**
  * Copyright (C) 2007-2008 Alain Peyrat <aljeux at free dot fr>
  * Copyright (C) 2009 Alain Peyrat, Alcatel-Lucent
- * Copyright 2013,2019-2020, Franck Villaume - TrivialDev
+ * Copyright 2013,2019-2020,2022, Franck Villaume - TrivialDev
  * Copyright (C) 2015  Inria (Sylvain Beucler)
  *
  * This file is part of FusionForge.
@@ -578,6 +578,12 @@ abstract class FForge_SeleniumTestCase extends PHPUnit\Extensions\Selenium2TestC
 
 	protected function skip_on_debian($msg='Skipping on Debian platforms') {
 		if (INSTALL_OS == 'debian') {
+			$this->skip_test($msg);
+		}
+	}
+
+	protected function skip_on_debian_11($msg='Skipping on Debian 11 platforms') {
+		if (INSTALL_OS == 'debian' && VERSION_OS == 11) {
 			$this->skip_test($msg);
 		}
 	}

@@ -4,7 +4,7 @@
 #
 # Copyright (C) 2011  Olivier Berger - Institut Telecom
 # Copyright (C) 2014, 2015  Inria (Sylvain Beucler)
-# Copyright 2020, 2021, Franck Villaume - TrivialDev
+# Copyright 2020-2022, Franck Villaume - TrivialDev
 #
 # This file is part of FusionForge. FusionForge is free software;
 # you can redistribute it and/or modify it under the terms of the
@@ -27,17 +27,21 @@ export DEBIAN_FRONTEND=noninteractive
 if [ -z "$1" ]; then
 	set +x
 	echo "Usage:"
-	echo "  $0 src/debian"
-	echo "  $0 deb/debian"
-	echo "  $0 src/centos"
-	echo "  $0 rpm/centos"
-	echo "  $0 src/opensuse"
-	echo "  $0 rpm/opensuse"
+	echo "  $0 src/debian/[9,10,11]"
+	echo "  $0 deb/debian/[9,10,11]"
+	echo "  $0 src/centos/[7,8]"
+	echo "  $0 rpm/centos/[7,8]"
+	echo "  $0 src/opensuse/15"
+	echo "  $0 rpm/opensuse/15"
 	exit 1
 fi
 
-export INSTALL_METHOD=${1%/*}
-export INSTALL_OS=${1#*/}
+TMP_INSTALL_METHOD=${1%/*}
+export INSTALL_METHOD=${TMP_INSTALL_METHOD%/*}
+TMP_INSTALL_OS=${1#*/}
+export INSTALL_OS=${TMP_INSTALL_OS%/*}
+export VERSION_OS=${TMP_INSTALL_OS#*/}
+
 shift
 
 case $INSTALL_METHOD in
@@ -47,10 +51,32 @@ case $INSTALL_METHOD in
 esac
 
 case $INSTALL_OS in
-	debian*|centos*|opensuse*) ;;
+	debian)
+		case $VERSION_OS in
+			9|10|11) ;;
+			*)	echo "Unknown version"
+				exit 1;;
+		esac
+	;;
+	centos)
+		case $VERSION_OS in
+			7|8) ;;
+			*)	echo "Unknown version"
+				exit 1;;
+		esac
+	;;
+	opensuse)
+		case $VERSION_OS in
+			15) ;;
+			*)	echo "Unknown version"
+				exit 1;;
+		esac
+	;;
 	*)	echo "Unknown install OS"
 		exit 1 ;;
 esac
+
+
 
 fix_httpd_access() {
 	if grep SUSE /etc/os-release >/dev/null 2>&1; then
@@ -250,6 +276,7 @@ define ('ROOT', '');
 
 define('INSTALL_METHOD', getenv('INSTALL_METHOD'));
 define('INSTALL_OS', getenv('INSTALL_OS'));
+define('VERSION_OS', getenv('VERSION_OS'));
 
 //
 // DON'T MODIFY BELOW THIS LINE UNLESS YOU KNOW WHAT YOU DO

@@ -28,6 +28,7 @@ class ScmSvnWUITest extends FForge_SeleniumTestCase
 
 	function testScmSvnWUI()
 	{
+		$this->skip_on_debian_11();
 		$this->loadAndCacheFixture();
 
 		$this->changeConfig(array("scmsvn" => array("use_ssh" => "no",
