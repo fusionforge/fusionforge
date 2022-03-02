@@ -40,8 +40,7 @@ class ForumSearchEngine extends GroupSearchEngine {
 	function getSearchRenderer($words, $offset, $exact, $parameters) {
 		$this->includeSearchRenderer();
 		$lrendererClassName = $this->rendererClassName;
-		$renderer = new $lrendererClassName($words, $offset, $exact, $parameters[SEARCH__PARAMETER_GROUP_ID], $parameters[SEARCH__PARAMETER_FORUM_ID]);
-		return $renderer;
+		return new $lrendererClassName($words, $offset, $exact, $parameters[SEARCH__PARAMETER_GROUP_ID], $parameters[SEARCH__PARAMETER_FORUM_ID]);
 	}
 }
 
