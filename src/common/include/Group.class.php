@@ -1483,8 +1483,7 @@ class Group extends FFError {
 	 * @return	bool	whether plugin is being used or not
 	 */
 	function usesPlugin($pluginname) {
-		$plugins_data = $this->getPlugins();
-		foreach ($plugins_data as $p_name) {
+		foreach ($this->getPlugins() as $p_name) {
 			if ($p_name == $pluginname) {
 				return true;
 			}
@@ -1500,9 +1499,8 @@ class Group extends FFError {
 	 * @return	bool	whether plugin is being used or not
 	 */
 	function usesService($feature) {
-		$plugins_data = $this->getPlugins();
 		$pm = plugin_manager_get_object();
-		foreach ($plugins_data as $p_name) {
+		foreach ($this->getPlugins() as $p_name) {
 			if ($p_name == $feature) {
 				return true;
 			}
