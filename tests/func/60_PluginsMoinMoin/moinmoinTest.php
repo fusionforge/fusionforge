@@ -30,6 +30,7 @@ class PluginMoinMoin extends FForge_SeleniumTestCase
 
 	function testMoinMoin()
 	{
+		$this->skip_on_debian_11();
 		$this->loadAndCacheFixture();
 
 		$this->changeConfig(array("moinmoin" => array("use_frame" => "no")));
