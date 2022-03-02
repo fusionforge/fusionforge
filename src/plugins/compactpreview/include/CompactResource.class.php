@@ -142,7 +142,6 @@ class LocalGroupCompactResource extends GroupCompactResource {
 	}
 	public function getResourceLink() {
 		$group_name = $this->params['group_name'];
-		$group_id = $this->params['group_id'];
 		$link_text = $this->params['link_text'];
 		$resource_url = util_make_url_g($group_name);
 		$css_class = $this->getCssClass();
