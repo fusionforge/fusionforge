@@ -112,8 +112,9 @@ function artifact_submission_form($ath, $group, $summary='', $details='', $assig
 	} else {
 		$content .= html_e('textarea', array('id'=>'tracker-description', 'required'=>'required', 'name'=>'details', 'rows'=>'20', 'class'=>'fullwidth', 'title'=>util_html_secure(html_get_tooltip_description('description'))), $details, false);
 	}
-	if (forge_get_config('tracker_parser_type') == 'markdown')
+	if (forge_get_config('tracker_parser_type') == 'markdown') {
 		$content .= html_e('a', array('class' => 'test', 'href' => forge_get_config('markdown_help_page'), 'target' => '_blank'), _('Markdown syntax help'));
+	}
 	$cells = array();
 	$cells[] = array($content, 'colspan'=>'2');
 	echo $HTML->multiTableRow(array(), $cells);
