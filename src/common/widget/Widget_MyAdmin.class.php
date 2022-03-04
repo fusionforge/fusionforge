@@ -38,7 +38,6 @@ class Widget_MyAdmin extends Widget {
 
 	function getContent() {
 		global $HTML;
-		$i = 0;
 		$html_my_admin = $HTML->listTableTop();
 
 		if (forge_check_global_perm('forge_admin')) {
@@ -47,7 +46,6 @@ class Widget_MyAdmin extends Widget {
 			$pending_users = $row['count'];
 
 			$html_my_admin .= $this->_get_admin_row(
-				$i++,
 				vsprintf(_('Users in <a href="%s"><strong>P</strong> (pending) Status</a>'), array(util_make_uri('/admin/userlist.php?status=P'))),
 				$pending_users,
 				$this->_get_color($pending_users)
@@ -65,7 +63,6 @@ class Widget_MyAdmin extends Widget {
 			$pending_projects = $row['count'];
 
 			$html_my_admin .= $this->_get_admin_row(
-				$i++,
 				vsprintf(_('Groups in <a href="%s"><strong>P</strong> (pending) Status</a>'), array(util_make_uri('/admin/approve-pending.php'))),
 				$pending_projects,
 				$this->_get_color($pending_projects)
@@ -86,7 +83,6 @@ class Widget_MyAdmin extends Widget {
 			$pending_news = db_numrows($res);
 
 			$html_my_admin .= $this->_get_admin_row(
-				$i++,
 				util_make_link('/news/admin', _('Site News Approval')),
 				$pending_news,
 				$this->_get_color($pending_news)
@@ -101,7 +97,7 @@ class Widget_MyAdmin extends Widget {
 		return $nb == 0 ? 'green' : 'orange';
 	}
 
-	function _get_admin_row($i, $text, $value, $bgcolor, $textcolor = 'white') {
+	function _get_admin_row($text, $value, $bgcolor, $textcolor = 'white') {
 		global $HTML;
 		$cells = array();
 		$cells[][] = $text;
