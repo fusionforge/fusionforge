@@ -27,20 +27,17 @@ export DEBIAN_FRONTEND=noninteractive
 if [ -z "$1" ]; then
 	set +x
 	echo "Usage:"
-	echo "  $0 src/debian/[9,10,11]"
-	echo "  $0 deb/debian/[9,10,11]"
-	echo "  $0 src/centos/[7,8]"
-	echo "  $0 rpm/centos/[7,8]"
-	echo "  $0 src/opensuse/15"
-	echo "  $0 rpm/opensuse/15"
+	echo "  $0 src/debian"
+	echo "  $0 deb/debian"
+	echo "  $0 src/centos"
+	echo "  $0 rpm/centos"
+	echo "  $0 src/opensuse"
+	echo "  $0 rpm/opensuse"
 	exit 1
 fi
 
-TMP_INSTALL_METHOD=${1%/*}
-export INSTALL_METHOD=${TMP_INSTALL_METHOD%/*}
-TMP_INSTALL_OS=${1#*/}
-export INSTALL_OS=${TMP_INSTALL_OS%/*}
-export VERSION_OS=${TMP_INSTALL_OS#*/}
+export INSTALL_METHOD=${1%/*}
+export INSTALL_OS=${1#*/}
 
 shift
 
@@ -52,6 +49,13 @@ esac
 
 case $INSTALL_OS in
 	debian)
+		if grep -q ^9 /etc/debian_version; then
+			export VERSION_OS=9
+		elif grep -q ^10 /etc/debian_version; then
+			export VERSION_OS=10
+		elif grep -q ^11 /etc/debian_version; then
+			export VERSION_OS=11
+		fi
 		case $VERSION_OS in
 			9|10|11) ;;
 			*)	echo "Unknown version"
@@ -59,6 +63,7 @@ case $INSTALL_OS in
 		esac
 	;;
 	centos)
+		export VERSION_OS=$(rpm -q --qf "%{VERSION}" $(rpm -q --whatprovides redhat-release))
 		case $VERSION_OS in
 			7|8) ;;
 			*)	echo "Unknown version"
@@ -66,8 +71,9 @@ case $INSTALL_OS in
 		esac
 	;;
 	opensuse)
+		export VERSION_OS=$(rpm -q --qf "%{VERSION}" $(rpm -q --whatprovides suse-release))
 		case $VERSION_OS in
-			15) ;;
+			15*) ;;
 			*)	echo "Unknown version"
 				exit 1;;
 		esac
@@ -75,8 +81,6 @@ case $INSTALL_OS in
 	*)	echo "Unknown install OS"
 		exit 1 ;;
 esac
-
-
 
 fix_httpd_access() {
 	if grep SUSE /etc/os-release >/dev/null 2>&1; then
