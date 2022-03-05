@@ -65,7 +65,7 @@ case $INSTALL_OS in
 	centos)
 		export VERSION_OS=$(rpm -q --qf "%{VERSION}" $(rpm -q --whatprovides redhat-release))
 		case $VERSION_OS in
-			7|8) ;;
+			7|8*) ;;
 			*)	echo "Unknown version"
 				exit 1;;
 		esac
