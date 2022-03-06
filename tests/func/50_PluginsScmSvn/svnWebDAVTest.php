@@ -30,6 +30,7 @@ class ScmSvnWebDAVTest extends FForge_SeleniumTestCase
 	function testScmSvnWebDAV()
 	{
 		$this->skip_on_debian_11();
+		$this->skip_on_centos_8();
 		$this->loadAndCacheFixture();
 
 		$this->changeConfig(array("scmsvn" => array("use_ssl" => "no")));

@@ -588,6 +588,12 @@ abstract class FForge_SeleniumTestCase extends PHPUnit\Extensions\Selenium2TestC
 		}
 	}
 
+	protected function skip_on_centos_8($msg='Skipping on Centos 8 platforms') {
+		if (INSTALL_OS == 'centos' && preg_match('/^8.*/', VERSION_OS)) {
+			$this->skip_test($msg);
+		}
+	}
+
 	/**
 	 * add PHP wrappers for SeleniumTestCase compatibility
 	 */
