@@ -251,7 +251,16 @@ EOF
 		8*)
 		yum --enablerepo=raven-modular install -y httpd-itk
 		# missing packages:
-		# php-pear-HTTP php-pear-Text-CAPTCHA viewvc python-pycurl moin mod_wsgi python-psycopg2 php-markdown
+		# php-pear-HTTP php-pear-Text-CAPTCHA viewvc python-pycurl moin mod_wsgi python-psycopg2 php-markdown php-htmlpurifier
+
+		#installation from source...
+		#php-htmlpurifier
+		mkdir -p /usr/share/php
+		cd /usr/share/php
+		wget http://htmlpurifier.org/releases/htmlpurifier-4.14.0-lite.tar.gz
+		tar -zxf htmlpurifier-4.14.0-lite.tar.gz
+		ln -s htmlpurifier-4.14.0-lite/library htmlpurifier
+		cd -
 		;;
 	esac
 }
