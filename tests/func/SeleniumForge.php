@@ -19,7 +19,9 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-if (PHP_VERSION_ID >= 70100) {
+if (PHP_VERSION_ID >= 70300) {
+	require_once dirname(__FILE__).'/SeleniumForge-php730.php';
+} elseif (PHP_VERSION_ID >= 70100) {
 	require_once dirname(__FILE__).'/SeleniumForge-php710.php';
 } else {
 	require_once dirname(__FILE__).'/SeleniumForge-php700.php';
