@@ -1,6 +1,7 @@
 <?php
 /**
  * Copyright (c) STMicroelectronics, 2007. All Rights Reserved.
+ * Copyright 2022, Franck Villaume - TrivialDev
  *
  * Originally written by Mohamed CHAARI, 2007.
  *
@@ -21,77 +22,12 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-define('CODENDI_PURIFIER_FORUMML', 20);
-
-class ForumML_HTMLPurifier extends Codendi_HTMLPurifier {
-
-    /**
-     * Hold an instance of the class
-     */
-    private static $ForumML_HTMLPurifier_instance;
-
-    protected function __construct() {
-    }
+class ForumML_TextSanitizer extends TextSanitizer {
 
 	/**
-     * Singleton access.
-     * Override parent method
-     * @access: static
-     */
-	public static function instance() {
-		//static $purifier;
-		if (!isset(self::$ForumML_HTMLPurifier_instance)) {
-            $c = __CLASS__;
-			self::$ForumML_HTMLPurifier_instance = new $c;
-		}
-		return self::$ForumML_HTMLPurifier_instance;
+	* Perform HTML purification depending of level purification required and create links.
+	*/
+	function purifyml($html, $level=0, $groupId=0) {
+		return util_make_links($thi->purify($html));
 	}
-
-	/**
-	 * No basic HTML markups, no forms, no javascript
-	 * Allow urls, auto-magic links, <blockquote> and CSS styles
-	 */
-	function getForumMLConfig() {
-
-        $config = $this->getCodendiConfig();
-        // allow <blockquote> html tag, used to display ForumML messages replies
-        $config->set('HTML.AllowedElements', 'blockquote');
-        // support CSS
-        $config->set('CSS.DefinitionRev', 1);
-        return $config;
-    }
-
-    /**
-     * HTML Purifier configuration factory
-     */
-    function getHPConfig($level) {
-        $config = null;
-        switch($level) {
-        	case CODENDI_PURIFIER_FORUMML:
-        		$config = $this->getForumMLConfig();
-        		break;
-
-        	default:
-        		$config = parent::getHPConfig($level);
-        }
-        return $config;
-    }
-
-    /**
-    * Perform HTML purification depending of level purification required and create links.
-    */
-    function purify($html, $level=0, $groupId=0) {
-        $clean = '';
-        switch($level) {
-            case CODENDI_PURIFIER_FORUMML:
-                require_once($GLOBALS['htmlpurifier_dir'].'HTMLPurifier.auto.php');
-                $hp = HTMLPurifier::getInstance();
-                $config = $this->getHPConfig($level);
-                $clean = util_make_links($hp->purify($html, $config), $groupId);
-                break;
-            default:
-                $clean = parent::purify($html,$level,$groupId);
-        }
-        return $clean;
-    }
 }

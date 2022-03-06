@@ -102,9 +102,9 @@ class ForumMLHtmlSearchRenderer extends HtmlGroupSearchRenderer {
                         $from = preg_replace('/\</', '&lt;', $from);
                         $from = preg_replace('/\>/', '&gt;', $from);
                         $date = date("Y-m-d H:i",strtotime($header[2]));
-                        // purify message subject (CODENDI_PURIFIER_FORUMML level)
-                        $hp =& ForumML_HTMLPurifier::instance();
-                        $subject = $hp->purify($subject,CODENDI_PURIFIER_FORUMML);
+                        // purify message subject
+                        $hp =new ForumML_HTMLPurifier();
+                        $subject = $hp->purify($subject);
 
                         // display the resulting threads in rows
                         $return .= "<tr class='".$class."'>

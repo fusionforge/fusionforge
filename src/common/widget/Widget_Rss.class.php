@@ -3,7 +3,7 @@
  * Generic RSS Widget Class
  *
  * Copyright (c) Xerox Corporation, Codendi Team, 2001-2009. All rights reserved
- * Copyright 2012,2014,2019,2021, Franck Villaume - TrivialDev
+ * Copyright 2012,2014,2019,2021-2022, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is a part of Fusionforge.
@@ -39,13 +39,11 @@ require_once 'Widget.class.php';
 	}
 
 	function getTitle() {
-		$hp = Codendi_HTMLPurifier::instance();
-		return $this->rss_title ?  $hp->purify($this->rss_title, CODENDI_PURIFIER_CONVERT_HTML)  : _('RSS Reader');
+		return $this->rss_title ? htmlentities($this->rss_title, ENT_QUOTES, 'UTF-8')  : _('RSS Reader');
 	}
 
 	function getContent() {
 		global $HTML;
-		$hp = Codendi_HTMLPurifier::instance();
 		$content = '';
 		if ($this->rss_url) {
 			if (function_exists('idn_to_utf8()')) {
@@ -76,7 +74,7 @@ require_once 'Widget.class.php';
 					$content .= '<tr><td style="width:99%">';
 					if ($image = $item->get_link(0, 'image')) {
 						//hack to display twitter avatar
-						$content .= '<img src="'.  $hp->purify($image, CODENDI_PURIFIER_CONVERT_HTML)  .'" style="float:left; margin-right:1em;" />';
+						$content .= '<img src="'. htmlentities($image, ENT_QUOTES, 'UTF-8')  .'" style="float:left; margin-right:1em;" />';
 					}
 					/* Do not trust SimplePie for purifying. */
 					$content .= html_e('a', array(
@@ -104,20 +102,19 @@ require_once 'Widget.class.php';
 	}
 
 	function getPreferences() {
-		$hp = Codendi_HTMLPurifier::instance();
 		$prefs = '<table>';
 		$prefs .= '<tr>';
 		$prefs .= '<td>';
 		$prefs .= _('Title')._(':');
 		$prefs .= '</td>';
 		$prefs .= '<td>';
-		$prefs .= '<input type="text" class="textfield_medium" name="rss[title]" value="'. $hp->purify($this->rss_title, CODENDI_PURIFIER_CONVERT_HTML) .'" /></td></tr>';
+		$prefs .= '<input type="text" class="textfield_medium" name="rss[title]" value="'. htmlentities($this->rss_title, ENT_QUOTES, 'UTF-8') .'" /></td></tr>';
 		$prefs .= '<tr>';
 		$prefs .= '<td>';
 		$prefs .= 'URL'._(':');
 		$prefs .= '</td>';
 		$prefs .= '<td>';
-		$prefs .= '<input type="url" class="textfield_medium" name="rss[url]" value="'. $hp->purify($this->rss_url, CODENDI_PURIFIER_CONVERT_HTML) .'" /></td></tr>';
+		$prefs .= '<input type="url" class="textfield_medium" name="rss[url]" value="'. htmlentities($this->rss_url, ENT_QUOTES, 'UTF-8') .'" /></td></tr>';
 		$prefs .= '</table>';
 		return $prefs;
 	}

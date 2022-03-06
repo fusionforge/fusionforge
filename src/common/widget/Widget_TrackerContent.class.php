@@ -2,7 +2,7 @@
 /**
  * Generic Tracker Content Widget Class
  *
- * Copyright 2016-2018,2021 Franck Villaume - TrivialDev
+ * Copyright 2016-2018,2021-2022, Franck Villaume - TrivialDev
  * Copyright 2017, Stephane-Eymeric Bredthauer - TrivialDev
  * http://fusionforge.org
  *
@@ -39,8 +39,7 @@ class Widget_TrackerContent extends Widget {
 	}
 
 	function getTitle() {
-		$hp = Codendi_HTMLPurifier::instance();
-		return $this->trackercontent_title ? $hp->purify($this->trackercontent_title, CODENDI_PURIFIER_CONVERT_HTML)  : _('Tracker Content Box');
+		return $this->trackercontent_title ? htmlentities($this->trackercontent_title, ENT_QUOTES, 'UTF-8')  : _('Tracker Content Box');
 	}
 
 	function isUnique() {
@@ -71,8 +70,7 @@ class Widget_TrackerContent extends Widget {
 
 	function create() {
 		$sanitizer = new TextSanitizer();
-		$hp = Codendi_HTMLPurifier::instance();
-		$this->trackercontent_title = $hp->purify(getStringFromRequest('title'), CODENDI_PURIFIER_CONVERT_HTML);
+		$this->trackercontent_title = htmlentities(getStringFromRequest('title'), ENT_QUOTES, 'UTF-8');
 		$trackerrows = getArrayFromRequest('trackercontent_layout');
 		$trackerextrafields = getArrayFromRequest('trackercontent_ef');
 		$trackercelltitles = getArrayFromRequest('trackercontent_title');

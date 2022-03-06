@@ -2,7 +2,7 @@
 /**
  * Copyright (c) Xerox Corporation, Codendi Team, 2001-2009. All rights reserved
  * Copyright (C) 2011 Alain Peyrat - Alcatel-Lucent
- * Copyright 2013-2018,2021, Franck Villaume - TrivialDev
+ * Copyright 2013-2018,2021-2022, Franck Villaume - TrivialDev
  *
  * This file is a part of Fusionforge.
  *
@@ -809,7 +809,6 @@ class WidgetLayoutManager {
 	 * @return	string
 	 */
 	function _displayWidgetsSelectionForm($widgets, $used_widgets, $owner_id = null) {
-		$hp = Codendi_HTMLPurifier::instance();
 		$additionnal_html = '';
 		if (count($widgets)) {
 			$categs = $this->getCategories($widgets, $owner_id);
@@ -817,7 +816,7 @@ class WidgetLayoutManager {
 			if (count($categs)) {
 				// display the categories selector in left panel
 				foreach($categs as $c => $ws) {
-					$widget_rows[$c] = util_make_link('#widget-categ-'.$c, html_e('span', array(), str_replace('_',' ', $hp->purify($c, CODENDI_PURIFIER_CONVERT_HTML))), array('class' => 'widget-categ-switcher', 'id' => 'widget-categ-switcher-'.$c, 'onClick' => 'jQuery(\'.widget-categ-class-void\').hide();jQuery(\'.widget-categ-switcher\').removeClass(\'selected\');jQuery(\'#widget-categ-'. $c .'\').show();jQuery(\'#widget-categ-switcher-'. $c .'\').addClass(\'selected\')'), true);
+					$widget_rows[$c] = util_make_link('#widget-categ-'.$c, html_e('span', array(), str_replace('_',' ', htmlentities($c, ENT_QUOTES, 'UTF-8'))), array('class' => 'widget-categ-switcher', 'id' => 'widget-categ-switcher-'.$c, 'onClick' => 'jQuery(\'.widget-categ-class-void\').hide();jQuery(\'.widget-categ-switcher\').removeClass(\'selected\');jQuery(\'#widget-categ-'. $c .'\').show();jQuery(\'#widget-categ-switcher-'. $c .'\').addClass(\'selected\')'), true);
 				}
 				uksort($widget_rows, 'strnatcasecmp');
 				echo html_ao('ul', array('id' => 'widget-categories'));
@@ -843,7 +842,7 @@ class WidgetLayoutManager {
 						$widget_rows[$widget->getTitle()] = $row;
 					}
 					uksort($widget_rows, 'strnatcasecmp');
-					$additionnal_html .= '<div id="widget-categ-'. $c .'" class="widget-categ-class-void hide" ><h2 class="boxtitle">'. str_replace('_',' ', $hp->purify($c, CODENDI_PURIFIER_CONVERT_HTML)) .'</h2>';
+					$additionnal_html .= '<div id="widget-categ-'. $c .'" class="widget-categ-class-void hide" ><h2 class="boxtitle">'. str_replace('_',' ', htmlentities($c, ENT_QUOTES, 'UTF-8')) .'</h2>';
 					foreach($widget_rows as $row) {
 						$additionnal_html .= $row;
 					}

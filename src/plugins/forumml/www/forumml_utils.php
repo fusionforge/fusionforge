@@ -87,9 +87,9 @@ function plugin_forumml_show_search_results($p,$result,$group_id,$list_id) {
 		$from = preg_replace('/\>/', '&gt;', $from);
 
 		$date = date("Y-m-d H:i",strtotime($header[2]));
-		// purify message subject (CODENDI_PURIFIER_FORUMML level)
-		$hp =& ForumML_HTMLPurifier::instance();
-		$subject = $hp->purify($subject,CODENDI_PURIFIER_FORUMML);
+		// purify message subject
+		$hp = new ForumML_HTMLPurifier();
+		$subject = $hp->purifyml($subject);
 
 		// display the resulting threads in rows
 		printf ("<tr class='".$class."'>
@@ -185,7 +185,6 @@ function plugin_forumml_show_all_threads($p,$list_id,$list_name,$offset) {
 			<th class='forumml' width='25%'>"._('Author')."</th>
 			</tr>";
 
-		$hp =& ForumML_HTMLPurifier::instance();
 		$i = 0;
 		while ($msg = $result->getRow()) {
 			$i++;
@@ -215,12 +214,12 @@ function plugin_forumml_show_all_threads($p,$list_id,$list_name,$offset) {
 			$subject = preg_replace('/^[ ]*\['.$list_name.'\]/i', '', $msg['subject']);
 
 			print "<a href='message.php?group_id=".$request->get('group_id')."&topic=".$msg['id_message']."&list=".$request->get('list')."'>
-				".$hp->purify($subject, CODENDI_PURIFIER_CONVERT_HTML)."
+				".htmlentities($subject, ENT_QUOTES, 'UTF-8')."
 				</a> <b>".html_e('em', array(), '('.$count.')')."</b>
 				</td>".
 				"<td class='info'>".strftime("%a, %e %h %G  %R",$msg['lastup'])."</td>".
 				"<td class='info'>".strftime("%a, %e %h %G  %R",strtotime($msg['date']))."</td>
-				<td class='info'>".$hp->purify($msg['sender'], CODENDI_PURIFIER_CONVERT_HTML)."</td>
+				<td class='info'>".htmlentities($msg['sender'], ENT_QUOTES, 'UTF-8')."</td>
 				</tr>";
 		}
 
@@ -377,17 +376,17 @@ function plugin_forumml_build_flattened_thread($topic) {
 
 // List all messages inside a thread
 function plugin_forumml_show_thread($p, $list_id, $parentId, $purgeCache) {
-	$hp     = ForumML_HTMLPurifier::instance();
 	$thread = plugin_forumml_build_flattened_thread($parentId);
 	foreach ($thread as $message) {
-		plugin_forumml_show_message($p, $hp, $message, $parentId, $purgeCache);
+		plugin_forumml_show_message($p, $message, $parentId, $purgeCache);
 	}
 }
 
 // Display a message
-function plugin_forumml_show_message($p, $hp, $msg, $id_parent, $purgeCache) {
+function plugin_forumml_show_message($p, $msg, $id_parent, $purgeCache) {
 	$body    = $msg['body'];
 	$request = HTTPRequest::instance();
+	$hp = new TextSanitizer();
 
 	// Is "ready to display" body already in cache or not
 	$bodyIsCached = false;
@@ -396,15 +395,15 @@ function plugin_forumml_show_message($p, $hp, $msg, $id_parent, $purgeCache) {
 	}
 
 	if (PEAR::isError($from_info = Mail_RFC822::parseAddressList($msg['sender'], forge_get_config('web_host'))) || !isset($from_info[0]) || !$from_info[0]->personal) {
-		$from_info = $hp->purify($msg['sender'], CODENDI_PURIFIER_CONVERT_HTML);
+		$from_info = htmlentities($msg['sender'], ENT_QUOTES, 'UTF-8');
 	} else {
-		$from_info = '<abbr title="'.  $hp->purify($from_info[0]->mailbox .'@'. $from_info[0]->host, CODENDI_PURIFIER_CONVERT_HTML)  .'">'.  $hp->purify($from_info[0]->personal, CODENDI_PURIFIER_CONVERT_HTML)  .'</abbr>';
+		$from_info = '<abbr title="'.  htmlentities($from_info[0]->mailbox .'@'. $from_info[0]->host, ENT_QUOTES, 'UTF-8')  .'">'.  htmlentities($from_info[0]->personal, ENT_QUOTES, 'UTF-8')  .'</abbr>';
 	}
 
 	echo '<div class="plugin_forumml_message">';
 	// specific thread
 	echo '<div class="plugin_forumml_message_header boxitemalt" id="plugin_forumml_message_'. $msg['id_message'] .'">';
-	echo '<div class="plugin_forumml_message_header_subject">'. $hp->purify($msg['subject'], CODENDI_PURIFIER_CONVERT_HTML) .'</div>';
+	echo '<div class="plugin_forumml_message_header_subject">'. htmlentities($msg['subject'], ENT_QUOTES, 'UTF-8') .'</div>';
 
 	echo '<a href="#'. $msg['id_message'] .'" title="message #'. $msg['id_message'] .'">';
 	echo '<img src="'. $p->getThemePath() .'/images/ic/comment.png" id="'. $msg['id_message'] .'" style="vertical-align:middle" alt="#'. $msg['id_message'] .'" />';
@@ -419,14 +418,14 @@ function plugin_forumml_show_message($p, $hp, $msg, $id_parent, $purgeCache) {
 	$cc = trim($msg['cc']);
 	if ($cc) {
 		if (PEAR::isError($cc_info = Mail_RFC822::parseAddressList($cc, forge_get_config('web_host')))) {
-			$ccs = $hp->purify($cc, CODENDI_PURIFIER_CONVERT_HTML);
+			$ccs = htmlentities($cc, ENT_QUOTES, 'UTF-8');
 		} else {
 			$ccs = array();
 			foreach($cc_info as $c) {
 				if (!$c->personal) {
-					$ccs[] = $hp->purify($c->mailbox .'@'. $c->host, CODENDI_PURIFIER_CONVERT_HTML);
+					$ccs[] = htmlentities($c->mailbox .'@'. $c->host, ENT_QUOTES, 'UTF-8');
 				} else {
-					$ccs[] = '<abbr title="'. $hp->purify($c->mailbox .'@'. $c->host, CODENDI_PURIFIER_CONVERT_HTML) .'">'.  $hp->purify($c->personal, CODENDI_PURIFIER_CONVERT_HTML)  .'</abbr>';
+					$ccs[] = '<abbr title="'. htmlentities($c->mailbox .'@'. $c->host, ENT_QUOTES, 'UTF-8') .'">'. htmlentities($c->personal, ENT_QUOTES, 'UTF-8') .'</abbr>';
 				}
 			}
 			$ccs = implode(', ', $ccs);
@@ -483,12 +482,11 @@ function plugin_forumml_show_message($p, $hp, $msg, $id_parent, $purgeCache) {
 			// Update attachment links
 			$body = plugin_forumml_replace_attachment($msg['id_message'], $request->get('group_id'), $request->get('list'), $id_parent, $body);
 
-			// Use CODENDI_PURIFIER_FULL for html mails
-			$msg['cached_html'] = $hp->purify($body,CODENDI_PURIFIER_FULL,$request->get('group_id'));
+			// Use TextSanitizer for html mails
+			$msg['cached_html'] = $hp->purify($body);
 		} else {
-			// CODENDI_PURIFIER_FORUMML level : no basic html markups, no forms, no javascript,
 			// Allowed: url + automagic links + <blockquote>
-			$purified_body = $hp->purify($body,CODENDI_PURIFIER_CONVERT_HTML,$request->get('group_id'));
+			$purified_body = htmlentities($body, ENT_QUOTES, 'UTF-8');
 			$purified_body = str_replace('&gt;', '>', $purified_body);
 			$tab_body = '';
 			$level = 0;
@@ -542,11 +540,11 @@ function plugin_forumml_show_message($p, $hp, $msg, $id_parent, $purgeCache) {
 		$vReply->required();
 		if ($request->valid($vReply) && $request->get('reply') == 1) {
 			if ($is_html) {
-				$body = $hp->purify($body, CODENDI_PURIFIER_STRIP_HTML);
+				$body = $hp->purify($body);
 			} else {
-				$body = $hp->purify($body, CODENDI_PURIFIER_CONVERT_HTML);
+				$body = htmlentities($body, ENT_QUOTES, 'UTF-8');
 			}
-			plugin_forumml_reply($hp,$msg['subject'],$msg['id_message'],$id_parent,$body,$msg['sender']);
+			plugin_forumml_reply($msg['subject'],$msg['id_message'],$id_parent,$body,$msg['sender']);
 		}
 	} else {
 
@@ -561,7 +559,7 @@ function plugin_forumml_show_message($p, $hp, $msg, $id_parent, $purgeCache) {
 }
 
 // Display the post form under the current post
-function plugin_forumml_reply($hp,$subject,$in_reply_to,$id_parent,$body,$author) {
+function plugin_forumml_reply($subject,$in_reply_to,$id_parent,$body,$author) {
 
 	$request =& HTTPRequest::instance();
 	$tab_tmp = explode("\n",$body);
@@ -625,7 +623,7 @@ return $body;
 function plugin_forumml_process_mail($plug,$reply=false) {
 	global $feedback;
 	$request = HTTPRequest::instance();
-	$hp = ForumML_HTMLPurifier::instance();
+	$hp = new TextSanitizer();
 
 	// Instantiate a new Mail class
 	$mail = new Mail();
@@ -658,7 +656,7 @@ function plugin_forumml_process_mail($plug,$reply=false) {
 		$idx = 0;
 		foreach ($request->get('ccs') as $cc) {
 			if (trim($cc) != "") {
-				$cc_array[$idx] = $hp->purify($cc,CODENDI_PURIFIER_FULL);
+				$cc_array[$idx] = $hp->purify($cc);
 				$idx++;
 			}
 		}

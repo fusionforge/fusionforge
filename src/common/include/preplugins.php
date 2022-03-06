@@ -20,7 +20,5 @@
 
 //Codendi class for httpRequest
 require_once $gfcommon.'include/HTTPRequest.class.php';
-//Codendi class for hmlPurifier
-require_once $gfcommon.'include/Codendi_HTMLPurifier.class.php';
 //Codendi class for Validator
 require_once $gfcommon.'valid/ValidFactory.class.php';

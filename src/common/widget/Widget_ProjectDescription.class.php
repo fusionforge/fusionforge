@@ -20,7 +20,6 @@
  */
 
 require_once 'Widget.class.php';
-require_once 'common/include/Codendi_HTMLPurifier.class.php';
 
 /**
  * Widget_ProjectDescription
