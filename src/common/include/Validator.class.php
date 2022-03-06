@@ -3,6 +3,8 @@
  * FusionForge field validator
  *
  * Copyright 2002, GForge, LLC
+ * Copyright 2002, Tim Perdue/GForge, LLC
+ * Copyright 2009, Roland Mas
  * Copyright 2021, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -40,8 +42,8 @@ class Validator {
 	/**
 	* Checks to see if a field is null; if so, the field name is added to an internal array
 	*
-	* @param field - a variable to check for null
-	* @param name - the variable name
+	* @param	string|array $field - a variable to check for null
+	* @param	string	$name - the variable name
 	*/
 	function check($field, $name) {
 		if (!$field) {
@@ -61,7 +63,7 @@ class Validator {
 	/**
 	* Returns an error message which contains the null field names which have been checked
 	*
-	* @param	string	$preamble  - A string with which to start the error message
+	* @param	string	$preamble - A string with which to start the error message
 	* @return	string - A complete error message
 	*/
 	function formErrorMsg($preamble) {
