@@ -38,7 +38,7 @@ function show_news_approve_form($qpa_pending, $qpa_rejected, $qpa_approved, $for
 
 	// function to show single news item
 	// factored out because called 3 time below
-	function show_news_item($row, $i, $approved, $selectable, $form_url) {
+	function show_news_item($row, $approved, $selectable, $form_url) {
 		global $HTML;
 
 		echo '<tr><td>';
@@ -85,7 +85,7 @@ function show_news_approve_form($qpa_pending, $qpa_rejected, $qpa_approved, $for
 		echo '<h2>'.sprintf(_('These items need to be approved (total: %d)'), $rows).'</h2>';
 		echo $HTML->listTableTop($title_arr);
 		for ($i=0; $i < $rows; $i++) {
-			show_news_item($items[$i], $i, false,true, $form_url);
+			show_news_item($items[$i], false, true, $form_url);
 		}
 		echo $HTML->listTableBottom();
 		echo '<br /><input type="submit" name="submit" value="'._('Reject Selected').'" />';
@@ -111,7 +111,7 @@ function show_news_approve_form($qpa_pending, $qpa_rejected, $qpa_approved, $for
 		echo '<h2>'.sprintf(_('These items were rejected this past week or were not intended for front page (total: %d).'), $rows).'</h2>';
 		echo $HTML->listTableTop($title_arr);
 		for ($i=0; $i<$rows; $i++) {
-			show_news_item($items[$i], $i, false, false, $form_url);
+			show_news_item($items[$i], false, false, $form_url);
 		}
 		echo $HTML->listTableBottom();
 	}
@@ -134,7 +134,7 @@ function show_news_approve_form($qpa_pending, $qpa_rejected, $qpa_approved, $for
 		echo '<h2>'.sprintf(_('These items were approved this past week (total: %d).'), $rows).'</h2>';
 		echo $HTML->listTableTop($title_arr);
 		for ($i=0; $i < $rows; $i++) {
-			show_news_item($items[$i], $i, false, false, $form_url);
+			show_news_item($items[$i], false, false, $form_url);
 		}
 		echo $HTML->listTableBottom();
 	}
