@@ -170,15 +170,13 @@ $server->register(
 	$uri.'#addGroup', 'rpc', 'encoded'
 );
 
-//updateGroup ($group_id, $is_public, $is_template, $status, $group_type, $unix_box, $http_domain, $scm_box)
+//updateGroup ($group_id, $is_template, $status, $unix_box, $http_domain, $scm_box)
 $server->register(
 	'updateGroup',
 	array('session_ser' => 'xsd:string',
 		'group_id' => 'xsd:int',
-		'is_public' => 'xsd:int',
 		'is_template' => 'xsd:int',
 		'status' => 'xsd:string',
-		'group_type' => 'xsd:string',
 		'unix_box' => 'xsd:string',
 		'http_domain' => 'xsd:string',
 		'scm_box' => 'xsd:string'),
@@ -408,7 +406,7 @@ function addGroup($session_ser, $group_name, $unix_name, $description, $purpose,
 	return $result;
 }
 
-function updateGroup($session_ser, $group_id, $is_public, $is_template, $status, $group_type, $unix_box, $http_domain, $scm_box) {
+function updateGroup($session_ser, $group_id, $is_template, $status, $unix_box, $http_domain, $scm_box) {
 	continue_session($session_ser);
 	$group = group_get_object($group_id);
 	$error_msg = '';
