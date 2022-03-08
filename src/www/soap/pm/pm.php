@@ -333,7 +333,6 @@ $server->register(
 		'group_project_id' => 'xsd:int',
 		'project_name' => 'xsd:string',
 		'description' => 'xsd:string',
-		'_public' => 'xsd:int',
 		'send_all_posts_to' => 'xsd:string'),
 	array('addSubproject' => 'xsd:int'),
 	$uri, $uri.'#addSubproject', 'rpc', 'encoded'
@@ -729,7 +728,7 @@ function addProjectMessage($session_ser, $group_id, $group_project_id, $project_
 //
 //	addSubproject
 //
-function addSubproject($session_ser, $group_id, $group_project_id, $project_name, $description, $_public, $send_all_posts_to) {
+function addSubproject($session_ser, $group_id, $group_project_id, $project_name, $description, $send_all_posts_to) {
 	continue_session($session_ser);
 
 	$g = group_get_object($group_id);
