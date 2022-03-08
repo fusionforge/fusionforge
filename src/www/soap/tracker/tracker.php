@@ -481,19 +481,19 @@ $server->register(
 //
 $server->register(
 	'artifactSetMonitor',
-	array('session_ser' => 'xsd:string', 'group_id' => 'xsd:int', 'group_artifact_id' => 'xsd:int', 'artifact_id' => 'xsd:int'),
+	array('session_ser' => 'xsd:string', 'artifact_id' => 'xsd:int'),
 	array('artifactSetMonitorResponse' => 'xsd:boolean'),
 	$uri, $uri.'#artifactSetMonitorResponse', 'rpc', 'encoded'
 );
 
 $server->register(
 	'artifactIsMonitoring',
-	array('session_ser' => 'xsd:string', 'group_id' => 'xsd:int', 'group_artifact_id' => 'xsd:int', 'artifact_id' => 'xsd:int'),
+	array('session_ser' => 'xsd:string', 'artifact_id' => 'xsd:int'),
 	array('artifactIsMonitoringResponse' => 'xsd:boolean'),
 	$uri, $uri.'#artifactIsMonitoringResponse', 'rpc', 'encoded'
 );
 
-function artifactSetMonitor($session_ser, $group_id, $group_artifact_id, $artifact_id) {
+function artifactSetMonitor($session_ser, $artifact_id) {
 	continue_session($session_ser);
 	$a =& artifact_get_object($artifact_id);
 	if (!$a || !is_object($a)) {
@@ -505,7 +505,7 @@ function artifactSetMonitor($session_ser, $group_id, $group_artifact_id, $artifa
 	return true;
 }
 
-function artifactIsMonitoring($session_ser, $group_id, $group_artifact_id, $artifact_id) {
+function artifactIsMonitoring($session_ser, $artifact_id) {
 	continue_session($session_ser);
 	$a =& artifact_get_object($artifact_id);
 	if (!$a || !is_object($a)) {
