@@ -400,12 +400,12 @@ $server->register(
 //
 $server->register(
 	'artifactFileDelete',
-	array('session_ser' => 'xsd:string', 'group_id' => 'xsd:int', 'group_artifact_id' => 'xsd:int', 'artifact_id' => 'xsd:int', 'file_id' => 'xsd:int'),
+	array('session_ser' => 'xsd:string', 'file_id' => 'xsd:int'),
 	array('artifactFileDeleteResponse' => 'xsd:boolean'),
 	$uri, $uri.'#artifactFileDeleteResponse', 'rpc', 'encoded'
 );
 
-function artifactFileDelete($session_ser, $group_id, $group_artifact_id, $artifact_id, $file_id) {
+function artifactFileDelete($session_ser, $file_id) {
 	continue_session($session_ser);
 	$a =& artifactfile_get_object($file_id);
 	if (!$a || !is_object($a)) {
