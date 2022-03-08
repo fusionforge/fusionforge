@@ -63,7 +63,7 @@ function pm_reporting_header($group_id) {
 				_('Report by Subproject')));
 }
 
-function pm_quick_report($group_id,$title,$subtitle1,$qpa1,$subtitle2,$qpa2,$comment="") {
+function pm_quick_report($group_id,$title,$qpa1,$qpa2,$comment="") {
 
 	pm_header(array ("title"=>$title));
 	pm_reporting_header($group_id);
@@ -203,9 +203,9 @@ AND project_group_list.group_id=$1', array ($group_id));
 		$qpa2 = db_construct_qpa($qpa2, ' GROUP BY subproject');
 
 		pm_quick_report($group_id,
-			  _('Tasks By Category'),
-			  _('Open Tasks By Category'), $qpa1,
-			  _('All Tasks By Category'), $qpa2);
+			_('Tasks By Category'),
+			$qpa1,
+			$qpa2);
 
 	} elseif ($what=="tech") {
 		$qpa1 = db_construct_qpa(array(), 'SELECT users.user_name AS technician, count(*) AS Count
@@ -234,8 +234,8 @@ AND project_group_list.group_id=$1', array ($group_id));
 
 		pm_quick_report($group_id,
 		  _('Tasks By Assignee'),
-		  _('Open Tasks By Assignee'), $qpa1,
-		  _('All Tasks By Assignee'), $qpa2,
+		 $qpa1,
+		 $qpa2,
 		  '<p>' . _('Note that same task can be assigned to several technicians. Such task will be counted for each of them.') . '</p>');
 
 	} else {
