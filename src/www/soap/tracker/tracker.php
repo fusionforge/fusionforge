@@ -298,7 +298,6 @@ $server->register(
 		'session_ser' => 'xsd:string',
 		'group_id' => 'xsd:int',
 		'group_artifact_id' => 'xsd:int',
-		'status_id' => 'xsd:int',
 		'priority' => 'xsd:int',
 		'assigned_to' => 'xsd:int',
 		'summary' => 'xsd:string',
@@ -521,12 +520,12 @@ function artifactIsMonitoring($session_ser, $artifact_id) {
 //
 $server->register(
 	'artifactDelete',
-	array('session_ser' => 'xsd:string', 'group_id' => 'xsd:int', 'group_artifact_id' => 'xsd:int', 'artifact_id' => 'xsd:int'),
+	array('session_ser' => 'xsd:string', 'artifact_id' => 'xsd:int'),
 	array('artifactDeleteResponse' => 'xsd:boolean'),
 	$uri, $uri.'#artifactDeleteResponse', 'rpc', 'encoded'
 );
 
-function artifactDelete($session_ser, $group_id, $group_artifact_id, $artifact_id) {
+function artifactDelete($session_ser, $artifact_id) {
 	continue_session($session_ser);
 	$a =& artifact_get_object($artifact_id);
 	if (!$a || !is_object($a)) {
@@ -543,12 +542,12 @@ function artifactDelete($session_ser, $group_id, $group_artifact_id, $artifact_i
 
 $server->register(
 	'artifactTypeIsMonitoring',
-	array('session_ser' => 'xsd:string', 'group_id' => 'xsd:int', 'group_artifact_id' => 'xsd:int'),
+	array('session_ser' => 'xsd:string', 'group_artifact_id' => 'xsd:int'),
 	array('artifactTypeIsMonitoringResponse' => 'xsd:boolean'),
 	$uri, $uri.'#artifactTypeIsMonitoringResponse', 'rpc', 'encoded'
 );
 
-function artifactTypeSetMonitor($session_ser, $group_id, $group_artifact_id) {
+function artifactTypeSetMonitor($session_ser, $group_artifact_id) {
 	continue_session($session_ser);
 	$a =& artifactType_get_object($group_artifact_id);
 	if (!$a || !is_object($a)) {
@@ -560,7 +559,7 @@ function artifactTypeSetMonitor($session_ser, $group_id, $group_artifact_id) {
 	return true;
 }
 
-function artifactTypeIsMonitoring($session_ser, $group_id, $group_artifact_id) {
+function artifactTypeIsMonitoring($session_ser, $group_artifact_id) {
 	continue_session($session_ser);
 	$a =& artifactType_get_object($group_artifact_id);
 	if (!$a || !is_object($a)) {
@@ -640,7 +639,7 @@ function arrangeExtraFields($extra_fields, $extra_field_info) {
 //	addArtifact
 //
 
-function addArtifact($session_ser, $group_id, $group_artifact_id, $status_id,
+function addArtifact($session_ser, $group_id, $group_artifact_id,
 	$priority, $assigned_to, $summary, $details, $extra_fields) {
 
 	continue_session($session_ser);
