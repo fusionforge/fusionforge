@@ -68,7 +68,7 @@ function pm_quick_report($group_id,$title,$subtitle1,$qpa1,$subtitle2,$qpa2,$com
 	pm_header(array ("title"=>$title));
 	pm_reporting_header($group_id);
 
-	reports_quick_graph($subtitle1,$qpa1,$qpa2);
+	reports_quick_graph($qpa1,$qpa2);
 
 	if ($comment) {
 		echo $comment;

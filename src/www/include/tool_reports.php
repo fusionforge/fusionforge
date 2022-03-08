@@ -26,11 +26,10 @@
 /**
  * reports_quick_graph() - Show a quick graph of data.
  *
- * @param	string	$title		Graph title
  * @param	array	$qpa1		First query resource ID
  * @param	array	$qpa2		Second query resource ID
  */
-function reports_quick_graph($title, $qpa1, $qpa2) {
+function reports_quick_graph($qpa1, $qpa2) {
 	global $HTML;
 	$result1 = db_query_qpa($qpa1);
 	$result2 = db_query_qpa($qpa2);
