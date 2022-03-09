@@ -111,7 +111,7 @@ class SoapTest extends FForge_SeleniumTestCase
 		}
 		$this->assertTrue($found, "Trackers 'Bugs' not found");
 
-		$response = $this->soapclient->addArtifact($this->session, $projecta->group_id, $tracker->group_artifact_id, 1, 3, 100, "Bug submitted by SOAP", "Bug details are not really relevant here", array());
+		$response = $this->soapclient->addArtifact($this->session, $projecta->group_id, $tracker->group_artifact_id, 3, 100, "Bug submitted by SOAP", "Bug details are not really relevant here", array());
 
 		$this->switchUser(FORGE_ADMIN_USERNAME);
 		$this->gotoProject('ProjectA');
