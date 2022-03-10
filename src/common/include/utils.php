@@ -414,19 +414,17 @@ function util_make_links($data = '') {
 	foreach ($lines as $line) {
 		// Do not scan lines if they already have hyperlinks.
 		// Avoid problem with text written with an WYSIWYG HTML editor.
-		if (preg_match('/<a ([^>]*)>.*<\/a>/i', $line, $linePart)) {
-			if (preg_match('/href="[^"]*"/i', $linePart[1])) {
-				$newText .= $line;
-				continue;
-			}
+		if (preg_match('/<a ([^>]*)>.*<\/a>/i', $line, $linePart) &&
+				preg_match('/href="[^"]*"/i', $linePart[1])) {
+			$newText .= $line;
+			continue;
 		}
 
 		// Skip </img> tag also
-		if (preg_match('/<img ([^>]*)\/>/i', $line, $linePart)) {
-			if (preg_match('/href="[^"]*"/', $linePart[1])) {
-				$newText .= $line;
-				continue;
-			}
+		if (preg_match('/<img ([^>]*)\/>/i', $line, $linePart) &&
+				preg_match('/href="[^"]*"/', $linePart[1])) {
+			$newText .= $line;
+			continue;
 		}
 
 		// When we come here, we usually have form input
