@@ -27,7 +27,7 @@ class ForumML_TextSanitizer extends TextSanitizer {
 	/**
 	* Perform HTML purification depending of level purification required and create links.
 	*/
-	function purifyml($html, $level=0, $groupId=0) {
+	function purifyml($html) {
 		return util_make_links($this->purify($html));
 	}
 }
