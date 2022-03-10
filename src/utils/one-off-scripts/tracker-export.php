@@ -218,7 +218,7 @@ foreach ($srclist as $aidx) {
 		"% $aid",
 	    ));
 	$fv = array();
-	if ($res) while (($row = db_fetch_array($res))) {
+	if ($res) while (row = db_fetch_array($res)) {
 		$fv[] = array(
 			'group' => dbe2jsn($row['group_name']),
 			'tracker' => dbe2jsn($row['name']),
@@ -233,7 +233,7 @@ foreach ($srclist as $aidx) {
 	/* copy comments */
 	$res = $ah->getMessages();
 	$fv = array();
-	if ($res) while (($row = db_fetch_array($res))) {
+	if ($res) while ($row = db_fetch_array($res)) {
 		$fv[] = array(
 			'adddate' => (int)$row['adddate'],
 			'from_email' => $row['from_email'],
@@ -325,7 +325,7 @@ foreach ($srclist as $aidx) {
 		WHERE artifact_id=$1
 		ORDER BY adddate, id',
 	    array($ah->getID()));
-	if ($res) while (($row = db_fetch_array($res))) {
+	if ($res) while ($row = db_fetch_array($res)) {
 		$fv[] = array(
 			'description' => $row['description'],
 			'filename' => $row['filename'],
@@ -344,7 +344,7 @@ foreach ($srclist as $aidx) {
 		WHERE artifact_id=$1
 		ORDER BY entrydate, id',
 	    array($ah->getID()));
-	if ($res) while (($row = db_fetch_array($res))) {
+	if ($res) while ($row = db_fetch_array($res)) {
 		$fv[] = array(
 			'field_name' => dbe2jsn($row['field_name']),
 			'old_value' => dbe2jsn($row['old_value']),
