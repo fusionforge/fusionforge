@@ -1,7 +1,7 @@
 include ../../GNUmakefile.defaults
 
 # Detection of distro-specific libexecdir for git-http-backend
-gitlibexecdir=$(shell if [ -e /etc/redhat-release ]; then echo '/usr/libexec/git-core'; elif [ -e /etc/debian-release ] echo '/usr/lib/git-core'; else echo '/usr/lib/git'; fi)
+gitlibexecdir=$(shell if [ -e /etc/redhat-release ]; then echo '/usr/libexec/git-core'; elif [ -e /etc/debian_version ]; then echo '/usr/lib/git-core'; else echo '/usr/lib/git'; fi)
 
 all:
 	@echo "No default action"
