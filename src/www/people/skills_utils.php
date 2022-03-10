@@ -25,7 +25,7 @@
 /**
  * displayUserSkills()
  *
- * @param	int		$user_id
+ * @param	int	$user_id
  * @param	bool	$allowEdit
  */
 
@@ -77,8 +77,9 @@ function displayUserSkills($user_id, $allowEdit) {
 			} else {
 				$startStr = $startY;
 			}
-			if (!(isset($finishtM))){
-				$finishtM=0;			}
+			if (!(isset($finishtM))) {
+				$finishtM = 0;
+			}
 
 			if($finishM > 0 && $finishtM < 13) {
 				$finishStr = date ("M Y", mktime(0,0,0,$finishM,1,$finishY));
