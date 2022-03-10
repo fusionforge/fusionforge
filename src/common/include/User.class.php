@@ -1509,8 +1509,7 @@ class FFUser extends FFError {
 	 * @return	bool	whether plugin is being used or not
 	 */
 	function usesPlugin($pluginname) {
-		$plugins_data = $this->getPlugins();
-		foreach ($plugins_data as $p_name) {
+		foreach ($this->getPlugins() as $p_name) {
 			if ($p_name == $pluginname) {
 				return true;
 			}
