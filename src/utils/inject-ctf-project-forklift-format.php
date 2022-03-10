@@ -1401,7 +1401,7 @@ function inject_artifact(&$g, $tracker, $artifact, $histories, $auditing, $track
 	} else {
 		$assignedTo = $initialFieldsValue['assignedTo'];
 		$assigned_to = get_user_id_by_name($assignedTo);
-		if ($assigned_to == false) {
+		if (!$assigned_to) {
 			$assigned_to = 100;
 		}
 	}
@@ -1498,7 +1498,7 @@ function inject_artifact(&$g, $tracker, $artifact, $histories, $auditing, $track
 						$assigned_to = 100;
 					} else {
 						$assigned_to = get_user_id_by_name($assignedTo);
-						if ($assigned_to == false) {
+						if (!$assigned_to) {
 							$assigned_to = 100;
 						}
 					}
