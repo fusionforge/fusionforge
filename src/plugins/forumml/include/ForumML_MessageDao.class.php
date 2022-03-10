@@ -18,7 +18,7 @@
  * along with Codendi. If not, see <http://www.gnu.org/licenses/>.
  */
 
-require_once 'common/dao/include/DataAccessObject.class.php';
+require_once $gfcommon.'/dao/include/DataAccessObject.class.php';
 
 /*
 define('FORUMML_MESSAGE_ID', 1);
@@ -29,10 +29,6 @@ define('FORUMML_CONTENT_TYPE', 12);
 define('FORUMML_CC', 34);
 */
 class ForumML_MessageDao extends DataAccessObject {
-
-	function __construct($da) {
-		parent::__construct($da);
-	}
 
 	function searchHeaderValue($messageId, $headerId) {
 		$messageId = $this->da->quoteSmart($messageId);

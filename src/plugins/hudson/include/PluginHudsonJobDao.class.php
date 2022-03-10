@@ -18,19 +18,12 @@
  * along with Fusionforge. If not, see <http://www.gnu.org/licenses/>.
  */
 
-require_once 'common/dao/include/DataAccessObject.class.php';
+require_once $gfcommon.'/dao/include/DataAccessObject.class.php';
 
 /**
  *  Data Access Object for PluginHudsonJob
  */
 class PluginHudsonJobDao extends DataAccessObject {
-
-	/**
-	 * @param $da instance of the DataAccess class
-	 */
-	function __construct($da) {
-		parent::__construct($da);
-	}
 
 	/**
 	 * Gets all jobs in the db

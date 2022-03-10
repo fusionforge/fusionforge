@@ -20,16 +20,12 @@
  * Portions Copyright 2010 (c) Mélanie Le Bail
  */
 
-require_once 'common/dao/include/DataAccessObject.class.php';
+require_once $gfcommon.'/dao/include/DataAccessObject.class.php';
 
 /**
  *  Data Access Object for mailing lists
  */
 class MailmanListDao extends DataAccessObject {
-
-	function __construct($da) {
-		parent::__construct($da);
-	}
 
 	/**
 	 * Search active (=not deteted) mailing lists
