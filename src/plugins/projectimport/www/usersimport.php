@@ -213,7 +213,9 @@ class UsersImportPage extends FileManagerPage {
 
 					if (!$res) {
 						$error_msg = $new_user->getErrorMessage();
-						if ($feedback) $feedback .= '<br />';
+						if ($feedback) {
+							$feedback .= '<br />';
+						}
 						$feedback .= 'Import of "'. $unix_name . '": '. $error_msg;
 
 						$htmlcode .= _('Failed to create user'). ': <pre>'. $unix_name .'</pre>';

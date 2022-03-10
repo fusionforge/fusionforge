@@ -120,7 +120,9 @@ class ImportedProject {
 			$spaceres = ProjectImporter::make_resource($space);
 			$provider = $spaceres->getPropValue('planetforge:provided_by');
 			if (! $importer->supportsTool($provider))	{
-				if ($feedback) $feedback .= '<br />';
+				if ($feedback)  {
+					$feedback .= '<br />';
+				}
 				$feedback .= _('error: no supported provider for ') . $space . _(': ') . $provider."!\n";
 			}
 			else {

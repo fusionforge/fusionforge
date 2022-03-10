@@ -488,8 +488,9 @@ class ProjectImportPage extends FileManagerPage {
 				if($can_proceed) {
 					//print_r('We can proceed !');
 					$check=TRUE;
-					if($apply) $check = FALSE;
-
+					if ($apply) {
+						$check = FALSE;
+					}
 					// For security, for now: TODO to be removed later
 					//$check = TRUE;
 					user_fill($users, $group_id, $check);

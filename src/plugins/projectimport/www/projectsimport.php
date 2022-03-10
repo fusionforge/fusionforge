@@ -252,7 +252,9 @@ class ProjectsImportPage extends FileManagerPage {
 
 					if (!$res) {
 						$error_msg = $group->getErrorMessage();
-						if ($feedback) $feedback .= '<br />';
+						if ($feedback) {
+							$feedback .= '<br />';
+						}
 						$feedback .= 'Import of "'. $unix_name . '": '. $error_msg;
 
 						$htmlcontent .= '<tr>
