@@ -594,6 +594,12 @@ abstract class FForge_SeleniumTestCase extends PHPUnit\Extensions\Selenium2TestC
 		}
 	}
 
+	protected function skip_on_opensuse_15($msg='Skipping on OpenSUSE 15 platforms') {
+		if (INSTALL_OS == 'opensuse' && preg_match('/^15.*/', VERSION_OS)) {
+			$this->skip_test($msg);
+		}
+	}
+
 	/**
 	 * add PHP wrappers for SeleniumTestCase compatibility
 	 */

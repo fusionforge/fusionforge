@@ -29,6 +29,7 @@ class ScmGitSmartHTTPTest extends FForge_SeleniumTestCase
 
 	function testScmGitSmartHTTP()
 	{
+		$this->skip_on_opensuse_15();
 		$this->loadAndCacheFixture();
 
 		$this->activatePlugin('scmgit');
