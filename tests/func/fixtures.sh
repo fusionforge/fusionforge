@@ -215,6 +215,7 @@ fi
 if [ -x /usr/sbin/nscd ]; then
     echo "Flushing/restarting nscd"
     nscd -i passwd && nscd -i group
+    service nscd restart
 fi
 
 start_database
