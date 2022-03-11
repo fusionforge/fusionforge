@@ -218,7 +218,7 @@ foreach ($srclist as $aidx) {
 		"% $aid",
 	    ));
 	$fv = array();
-	if ($res) while (row = db_fetch_array($res)) {
+	if ($res) while ($row = db_fetch_array($res)) {
 		$fv[] = array(
 			'group' => dbe2jsn($row['group_name']),
 			'tracker' => dbe2jsn($row['name']),
