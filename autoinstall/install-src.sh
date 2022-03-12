@@ -95,7 +95,7 @@ if [ -e /etc/debian_version ]; then
 elif [[ ! -z `cat /etc/os-release | grep 'SUSE'` ]]; then
 	suse_check_release
 	suse_install_repos
-	suse_install_rpms make gettext-runtime php7 php7-gettext php7-posix php7-pgsql \
+	suse_install_rpms make gettext-runtime php7 php7-gettext php7-posix php7-pgsql php7-soap \
 		apache2 apache2-mod_php7 apache2-mod_wsgi apache2-mod_mpm_itk \
 		postgresql-server postgresql-contrib subversion \
 		php7-pear php-pear-HTMLPurifier php7-curl \
