@@ -582,6 +582,12 @@ abstract class FForge_SeleniumTestCase extends PHPUnit\Extensions\Selenium2TestC
 		}
 	}
 
+	protected function skip_on_debian_10($msg='Skipping on Debian 10 platforms') {
+		if (INSTALL_OS == 'debian' && VERSION_OS == 10) {
+			$this->skip_test($msg);
+		}
+	}
+
 	protected function skip_on_debian_11($msg='Skipping on Debian 11 platforms') {
 		if (INSTALL_OS == 'debian' && VERSION_OS == 11) {
 			$this->skip_test($msg);
