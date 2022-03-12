@@ -20,7 +20,7 @@
  * Portions Copyright 2010 (c) Mélanie Le Bail
  */
 
-require_once $gfcommon.'/dao/include/DataAccessObject.class.php';
+require_once $gfcommon.'dao/include/DataAccessObject.class.php';
 
 /**
  *  Data Access Object for mailing lists

@@ -18,7 +18,7 @@
  * along with Fusionforge. If not, see <http://www.gnu.org/licenses/>.
  */
 
-require_once $gfcommon.'/dao/include/DataAccessObject.class.php';
+require_once $gfcommon.'dao/include/DataAccessObject.class.php';
 
 /**
  *  Data Access Object for PluginHudsonJob
