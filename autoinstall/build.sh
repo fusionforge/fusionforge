@@ -43,7 +43,7 @@ function build_deb {
 	rm -rf /usr/src/debian-repository
 	mkdir -p /usr/src/debian-repository
 
-	cat >/root/.mini-dinstall.conf <<-EOF | sed 's,@PATH@,$srcdir,g'
+	cat <<-EOF | sed "s,@PATH@,$srcdir,g" >/root/.mini-dinstall.conf
 		[DEFAULT]
 		archivedir = /usr/src/debian-repository
 		archive_style = flat
@@ -188,7 +188,7 @@ function build_suse_rpm {
 
 	(cd ../build/RPMS/ && createrepo .)
 	repopath=$(readlink  ../build/RPMS/)
-	cat <<-EOF | sed 's,@PATH@,$repopath,g' > /etc/zypp/repos.d/local.repo
+	cat <<-EOF | sed "s,@PATH@,$repopath,g" > /etc/zypp/repos.d/local.repo
 	[local]
 	name=local
 	baseurl=file://@PATH@
