@@ -69,20 +69,20 @@ class GroupJoinRequest extends FFError {
 		$this->Group =& $Group;
 		if ($user_id) {
 			if (!$arr || !is_array($arr)) {
-				if (!$this->fetchData($Group->getID(), $user_id)) {
-					return;
-				}
+				$this->fetchData($Group->getID(), $user_id);
 			} else {
-				$this->data_array =& $arr;
 				//
 				//      Verify this message truly belongs to this Group
 				//
-				if ($this->data_array['group_id'] != $this->Group->getID()) {
-					$this->setError('group_id in db result does not match Group Object');
-					return;
+				if (!isset($arr['group_id']) ||
+					(isset($arr['group_id']) && ($arr['group_id'] != $this->Group->getID()))) {
+					$this->setError('group_id does not match Group Object');
+				} else {
+					$this->data_array =& $arr;
 				}
 			}
 		}
+		return;
 	}
 
 	/**
@@ -292,10 +292,9 @@ class GroupJoinRequest extends FFError {
 					$this->getUserId()));
 			if (!$res || db_affected_rows($res) < 1) {
 				$this->setError(_('Delete failed')._(': ').db_error());
-                return false;
-			} else {
-				return true;
+				return false;
 			}
+			return true;
 		}
 	}
 }
