@@ -74,7 +74,7 @@ if [ -e /etc/debian_version ]; then
 			fonts-dejavu-core mediawiki
 	fi
 	if ! pear list Text_CAPTCHA ; then
-	    pear install Text_CAPTCHA
+		pear install Text_CAPTCHA
 	fi
 	if ! dpkg-vendor --is Ubuntu; then
 		apt-get install locales-all  # https://bugs.launchpad.net/ubuntu/+source/glibc/+bug/1394929
