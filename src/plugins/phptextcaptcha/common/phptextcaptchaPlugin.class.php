@@ -28,7 +28,9 @@ class phptextcaptchaPlugin extends Plugin {
 	function __construct() {
 		parent::__construct();
 		$this->name = 'phptextcaptcha';
-		$this->text = _('Enable use of php-text-captcha (more information http://pear.php.net/manual/en/package.text.text-captcha.php)');
+		$this->text =
+_('Enable use of php-text-captcha (more information
+http://pear.php.net/manual/en/package.text.text-captcha.php)');
 		$this->_addHook('captcha_check');
 		$this->_addHook('captcha_form');
 		$this->pngdir = forge_get_config('data_path').'/plugins/'.$this->name;
