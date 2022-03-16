@@ -51,7 +51,7 @@ class PluginMediawiki extends FForge_SeleniumTestCase
 		$this->assertFalse($this->isTextPresent("not created yet"));
 		$this->assertFalse($this->isTextPresent("not found"));
 
-		$this->clickAndWait("link=Edit");
+		$this->clickAndWait("link=create");
 		$this->assertTrue($this->isTextPresent("You have followed a link to a page that does not exist yet."));
 		$this->type("//textarea[@id='wpTextbox1']", "= Bleh =
 == Blahblah ==
