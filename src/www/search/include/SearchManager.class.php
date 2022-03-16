@@ -148,24 +148,24 @@ class SearchManager {
 		plugin_hook_by_reference('group_search_engines', $this);
 
 		// Global search engine
-		$ffSESoft = new SearchEngine(SEARCH__TYPE_IS_SOFTWARE, 'ProjectHtmlSearchRenderer', _('Projects'));
+		$ffSESoft = new FFSearchEngine(SEARCH__TYPE_IS_SOFTWARE, 'ProjectHtmlSearchRenderer', _('Projects'));
 		$this->addSearchEngine(
 			SEARCH__TYPE_IS_SOFTWARE,
 			$ffSESoft
 		);
-		$ffSEPeople = new SearchEngine(SEARCH__TYPE_IS_PEOPLE, 'PeopleHtmlSearchRenderer', _('People'));
+		$ffSEPeople = new FFSearchEngine(SEARCH__TYPE_IS_PEOPLE, 'PeopleHtmlSearchRenderer', _('People'));
 		$this->addSearchEngine(
 			SEARCH__TYPE_IS_PEOPLE,
 			$ffSEPeople
 		);
-		$ffSEAllDocs = new SearchEngine(SEARCH__TYPE_IS_ALLDOCS, 'DocsAllHtmlSearchRenderer', _('Documents'));
+		$ffSEAllDocs = new FFSearchEngine(SEARCH__TYPE_IS_ALLDOCS, 'DocsAllHtmlSearchRenderer', _('Documents'));
 		$this->addSearchEngine(
 			SEARCH__TYPE_IS_ALLDOCS,
 			$ffSEAllDocs
 		);
 
 		if (forge_get_config('use_people')) {
-			$ffSESkills = new SearchEngine(SEARCH__TYPE_IS_SKILL, 'SkillHtmlSearchRenderer', _('Skills'));
+			$ffSESkills = new FFSearchEngine(SEARCH__TYPE_IS_SKILL, 'SkillHtmlSearchRenderer', _('Skills'));
 			$this->addSearchEngine(
 				SEARCH__TYPE_IS_SKILL,
 				$ffSESkills
@@ -173,7 +173,7 @@ class SearchManager {
 		}
 
 		// Rss search engines
-		$ffSESoftRss = new SearchEngine(SEARCH__TYPE_IS_SOFTWARE, 'ProjectRssSearchRenderer', _('Projects'));
+		$ffSESoftRss = new FFSearchEngine(SEARCH__TYPE_IS_SOFTWARE, 'ProjectRssSearchRenderer', _('Projects'));
 		$this->addSearchEngine(
 			SEARCH__TYPE_IS_SOFTWARE,
 			$ffSESoftRss,
@@ -193,8 +193,3 @@ class SearchManager {
 	}
 
 }
-
-// Local Variables:
-// mode: php
-// c-file-style: "bsd"
-// End:

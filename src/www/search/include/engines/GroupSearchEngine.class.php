@@ -23,7 +23,7 @@
 
 require_once $gfwww.'search/include/engines/SearchEngine.class.php';
 
-class GroupSearchEngine extends SearchEngine {
+class GroupSearchEngine extends FFSearchEngine {
 	var $Group;
 
 	function isAvailable($parameters) {

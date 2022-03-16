@@ -1,6 +1,6 @@
 <?php
 /**
- * Search Engine
+ * FusionForge Search Engine
  *
  * Copyright 2004 (c) Guillaume Smet
  * http://fusionforge.org
@@ -21,7 +21,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-class SearchEngine {
+class FFSearchEngine {
 	var $type;
 	var $rendererClassName;
 	var $label;
