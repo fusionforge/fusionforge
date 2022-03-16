@@ -29,10 +29,8 @@ require_once $gfcommon.'include/plugins_utils.php';
 
 forge_define_config_item('default_server', 'scmgit', forge_get_config('scm_host'));
 forge_define_config_item('repos_path', 'scmgit', forge_get_config('chroot').'/scmrepos/git');
-forge_define_config_item('use_ssh', 'scmgit', false);
-forge_set_config_item_bool('use_ssh', 'scmgit');
-forge_define_config_item('use_ssl', 'scmgit', true);
-forge_set_config_item_bool('use_ssl', 'scmgit');
+forge_define_config_item_bool('use_ssh', 'scmgit', false);
+forge_define_config_item_bool('use_ssl', 'scmgit', true);
 forge_define_config_item('ssh_port', 'core', 22);
 
 class GitPlugin extends SCMPlugin {

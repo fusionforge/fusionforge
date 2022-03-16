@@ -30,12 +30,9 @@ require_once $gfcommon.'include/plugins_utils.php';
 forge_define_config_item('default_server', 'scmsvn', forge_get_config('scm_host'));
 forge_define_config_item('repos_path', 'scmsvn', forge_get_config('chroot').'/scmrepos/svn');
 forge_define_config_item('serve_path', 'scmsvn', forge_get_config('repos_path'));
-forge_define_config_item('use_ssh', 'scmsvn', false);
-forge_set_config_item_bool('use_ssh', 'scmsvn');
-forge_define_config_item('use_dav', 'scmsvn', true);
-forge_set_config_item_bool('use_dav', 'scmsvn');
-forge_define_config_item('use_ssl', 'scmsvn', true);
-forge_set_config_item_bool('use_ssl', 'scmsvn');
+forge_define_config_item_bool('use_ssh', 'scmsvn', false);
+forge_define_config_item_bool('use_dav', 'scmsvn', true);
+forge_define_config_item_bool('use_ssl', 'scmsvn', true);
 forge_define_config_item('ssh_port', 'core', 22);
 
 class SVNPlugin extends SCMPlugin {
