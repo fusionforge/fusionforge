@@ -110,28 +110,28 @@ if (!isset($fusionforge_plugin_mediawiki_LocalSettings_included)) {
 		return $s;
 	}
 
-	$wgDBtype           = "forge";
+	$wgDBtype           = forge_get_config('mw_dbtype', 'mediawiki');
 	$wgDBserver         = forge_get_config('database_host') ;
-	if (forge_get_config('mw_dbtype', 'mediawiki')=='mysql'){
+	if (forge_get_config('mw_dbtype', 'mediawiki') == 'mysql') {
 		// At the time writing schema in mysql is synonym for database
-		$wgDBname           = 'plugin_mediawiki_'.$fusionforgeproject;
-		$wgDBprefix         = 'mw';
+		$wgDBname   = 'plugin_mediawiki_'.$fusionforgeproject;
+		$wgDBprefix = 'mw';
 	} else {
-		$wgDBname           = forge_get_config('database_name');
+		$wgDBname   = forge_get_config('database_name');
 	}
 	$wgDBuser           = forge_get_config('database_user') ;
 	$wgDBpassword       = forge_get_config('database_password') ;
-	$wgDBadminuser           = forge_get_config('database_user') ;
-	$wgDBadminpassword       = forge_get_config('database_password') ;
+	$wgDBadminuser      = forge_get_config('database_user') ;
+	$wgDBadminpassword  = forge_get_config('database_password') ;
 	$wgDBport           = forge_get_config('database_port') ;
 	$wgDBmwschema       = 'plugin_mediawiki_' . ff_mw_db_name($fusionforgeproject);
 	$wgDBts2schema      = 'plugin_mediawiki_' . ff_mw_db_name($fusionforgeproject);
 	$wgMainCacheType = CACHE_NONE;
 	$wgMemCachedServers = array();
 
-	$wgEnableUploads = forge_get_config('enable_uploads', 'mediawiki');
-	$wgUploadDirectory = "$project_dir/images";
-	$wgUseImageMagick = true;
+	$wgEnableUploads    = forge_get_config('enable_uploads', 'mediawiki');
+	$wgUploadDirectory  = "$project_dir/images";
+	$wgUseImageMagick   = true;
 	$wgImageMagickConvertCommand = "/usr/bin/convert";
 	$wgLocalInterwiki   = $wgSitename;
 	$wgShowExceptionDetails = true ;
