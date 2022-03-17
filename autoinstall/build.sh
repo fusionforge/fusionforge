@@ -30,7 +30,7 @@ function build_deb {
 	export DEBIAN_FRONTEND=noninteractive
 	srcdir=$(dirname $0)
 	# Install build dependencies
-	apt-get -y install mini-dinstall dput devscripts fakeroot
+	apt-get -y install mini-dinstall dput devscripts fakeroot gettext
 	apt-get -y install build-essential \
 		$(grep Build-Depends ${srcdir}/src/debian/control.in | sed -e 's/Build-Depends: //' -e 's/(.*)//')
 	if grep -q ^8 /etc/debian_version; then
