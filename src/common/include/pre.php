@@ -5,7 +5,7 @@
  * Copyright 1999-2001, VA Linux Systems
  * Copyright 2010, Roland Mas <lolando@debian.org>
  * Copyright (C) 2012 Alain Peyrat - Alcatel-Lucent
- * Copyright 2013,2018,2021, Franck Villaume - TrivialDev
+ * Copyright 2013,2018,2021-2022, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -127,20 +127,13 @@ if ($installation_environment == 'development' || $installation_environment == '
 } else {
 	$default_sysdebug_enable = 'false';
 }
-forge_define_config_item ('sysdebug_enable', 'core', $default_sysdebug_enable) ;
-forge_set_config_item_bool ('sysdebug_enable', 'core') ;
-forge_define_config_item ('sysdebug_phphandler', 'core', 'true') ;
-forge_set_config_item_bool ('sysdebug_phphandler', 'core') ;
-forge_define_config_item ('sysdebug_backtraces', 'core', 'false') ;
-forge_set_config_item_bool ('sysdebug_backtraces', 'core') ;
-forge_define_config_item ('sysdebug_ignored', 'core', 'false') ;
-forge_set_config_item_bool ('sysdebug_ignored', 'core') ;
-forge_define_config_item ('sysdebug_dberrors', 'core', 'true') ;
-forge_set_config_item_bool ('sysdebug_dberrors', 'core') ;
-forge_define_config_item ('sysdebug_dbquery', 'core', 'false') ;
-forge_set_config_item_bool ('sysdebug_dbquery', 'core') ;
-forge_define_config_item ('sysdebug_xmlstarlet', 'core', 'false') ;
-forge_set_config_item_bool ('sysdebug_xmlstarlet', 'core') ;
+forge_define_config_item_bool ('sysdebug_enable', 'core', $default_sysdebug_enable) ;
+forge_define_config_item_bool ('sysdebug_phphandler', 'core', 'true') ;
+forge_define_config_item_bool ('sysdebug_backtraces', 'core', 'false') ;
+forge_define_config_item_bool ('sysdebug_ignored', 'core', 'false') ;
+forge_define_config_item_bool ('sysdebug_dberrors', 'core', 'true') ;
+forge_define_config_item_bool ('sysdebug_dbquery', 'core', 'false') ;
+forge_define_config_item_bool ('sysdebug_xmlstarlet', 'core', 'false') ;
 // Load extra func to add extras func like debug
 $sysdebug_enable = forge_get_config('sysdebug_enable');
 
