@@ -21,9 +21,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-forge_define_config_item('enabled', 'sysauthldap', 'no');
-forge_set_config_item_bool('enabled', 'sysauthldap');
-
+forge_define_config_item_bool('enabled', 'sysauthldap', false);
 forge_define_config_item('ldap_host', 'sysauthldap', '$core/web_host');
 forge_define_config_item('ldap_port', 'sysauthldap', '389');
 forge_define_config_item('ldap_version', 'sysauthldap', '3');

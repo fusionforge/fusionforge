@@ -267,12 +267,8 @@ abstract class ForgeAuthPlugin extends Plugin {
 	 * TODO: Enter description here ...
 	 */
 	protected function declareConfigVars() {
-		forge_define_config_item ('required', $this->name, 'no');
-		forge_set_config_item_bool ('required', $this->name) ;
-
-		forge_define_config_item ('sufficient', $this->name, 'no');
-		forge_set_config_item_bool ('sufficient', $this->name) ;
-
+		forge_define_config_item_bool ('required', $this->name, false);
+		forge_define_config_item_bool ('sufficient', $this->name, false);
 		forge_define_config_item ('sync_data_on', $this->name, 'never');
 	}
 

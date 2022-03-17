@@ -22,8 +22,7 @@
  */
 
 forge_define_config_item('wiki_data_path','moinmoin', '$core/data_path/plugins/moinmoin/wikidata');
-forge_define_config_item('use_frame', 'moinmoin', false);
-forge_set_config_item_bool('use_frame', 'moinmoin');
+forge_define_config_item_bool('use_frame', 'moinmoin', false);
 
 class MoinMoinPlugin extends Plugin {
 	public $systask_types = array(

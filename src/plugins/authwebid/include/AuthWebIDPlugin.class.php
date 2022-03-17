@@ -340,12 +340,10 @@ class AuthWebIDPlugin extends ForgeAuthPlugin {
 		parent::declareConfigVars();
 
 		// Change vs default
-		forge_define_config_item ('required', $this->name, 'no');
-		forge_set_config_item_bool ('required', $this->name);
+		forge_define_config_item_bool ('required', $this->name, false);
 
 		// Change vs default
-		forge_define_config_item ('sufficient', $this->name, 'no');
-		forge_set_config_item_bool ('sufficient', $this->name);
+		forge_define_config_item_bool ('sufficient', $this->name, false);
 
 		// Default delegated WebID IdP to use
 		forge_define_config_item ('delegate_webid_auth_to', $this->name, 'auth.my-profile.eu');

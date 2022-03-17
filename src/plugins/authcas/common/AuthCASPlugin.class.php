@@ -162,8 +162,7 @@ server.");
 		forge_define_config_item ('cas_version', $this->name, '2.0');
 		forge_define_config_item ('cas_context', $this->name, '/cas');
 
-		forge_define_config_item('validate_server_certificate', $this->name, 'no');
-		forge_set_config_item_bool('validate_server_certificate', $this->name);
+		forge_define_config_item_bool ('validate_server_certificate', $this->name, false);
 	}
 
 }

@@ -23,8 +23,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-forge_define_config_item('check_password_strength', 'core', 'true');
-forge_set_config_item_bool('check_password_strength', 'core');
+forge_define_config_item_bool('check_password_strength', 'core', 'true');
 
 /**
  * pw_weak() - checks if password is weak
