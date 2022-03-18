@@ -114,12 +114,7 @@ install_selenium() {
 	# rsyslog to get e.g. sshd error log
 	if [ -e /etc/debian_version ]; then
 		apt-get -y install wget firefox-esr net-tools
-		if grep -q ^8 /etc/debian_version; then
-		    apt-get -y install rsyslog patch composer
-		    apt-get -y install -t jessie-backports openjdk-8-jdk
-		else
-		    apt-get -y install php-curl unzip composer psmisc rsyslog default-jre patch
-		fi
+		apt-get -y install php-curl unzip composer psmisc rsyslog default-jre patch
 	elif [ -e /etc/centos-release ]; then
 		yum -y install wget firefox
 		os_version=$(rpm -q --qf "%{VERSION}" $(rpm -q --whatprovides redhat-release))

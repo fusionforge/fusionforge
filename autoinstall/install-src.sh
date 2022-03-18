@@ -28,21 +28,8 @@ set -e
 # Install FusionForge dependencies
 if [ -e /etc/debian_version ]; then
 	export DEBIAN_FRONTEND=noninteractive
-	backports_deb
 	apt-get update || true
-	if grep -q ^8 /etc/debian_version; then
-	    	apt-get install -y make gettext php5-cli php5-pgsql php-htmlpurifier php-http php-text-captcha \
-			libapache2-mpm-itk libapache2-mod-svn \
-			libapache2-mod-php5 \
-			apache2 postgresql postgresql-contrib libnss-pgsql2 unscd \
-			cvs subversion viewvc python-pycurl git mercurial bzr loggerhead xinetd mksh \
-			python-moinmoin libapache2-mod-wsgi python-psycopg2 \
-			unoconv poppler-utils dpkg-dev \
-			libmarkdown-php \
-			vsftpd \
-			fonts-dejavu-core
-		apt-get -y install mediawiki -t jessie-backports
-	elif grep -q ^9 /etc/debian_version; then
+	if grep -q ^9 /etc/debian_version; then
 		apt-get install -y make gettext php-cli php-pgsql php-htmlpurifier php-http php-text-captcha php-soap \
 			libapache2-mpm-itk libapache2-mod-svn \
 			libapache2-mod-php \
@@ -155,7 +142,7 @@ fi
 	if [ -e /etc/centos-release ] && ! grep -q "[[:space:]]8" /etc/centos-release; then
 		make install-plugin-mediawiki
 	fi
-	if [ -e /etc/centos-release ] || grep -q ^8 /etc/debian_version; then
+	if [ -e /etc/centos-release ]; then
 		make install-plugin-scmbzr
 	fi
 	if [ -e /etc/centos-release ] && ! grep -q "[[:space:]]8" /etc/centos-release;then

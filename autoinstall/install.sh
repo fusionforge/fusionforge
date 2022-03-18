@@ -30,7 +30,6 @@ if [ -e /etc/debian_version ]; then
 	export UCF_FORCE_CONFFNEW=yes
 	export LANG=C
 	APT="apt-get -y -o Dpkg::Options::=--force-confnew"
-	backports_deb
 	apt-get update || true
 	if dpkg-query -s fusionforge >/dev/null 2>&1; then
 		# Already installed, upgrading
@@ -47,9 +46,6 @@ if [ -e /etc/debian_version ]; then
 		fusionforge-plugin-blocks fusionforge-plugin-taskboard \
 		fusionforge-plugin-message fusionforge-plugin-repositoryapi
 		$APT install dpkg-dev
-		if grep -q ^8 /etc/debian_version; then
-			$APT install fusionforge-plugin-scmbzr
-		fi
 		if ! dpkg-vendor --is Ubuntu; then
 			apt-get install locales-all  # https://bugs.launchpad.net/ubuntu/+source/glibc/+bug/1394929
 		fi

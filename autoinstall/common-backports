@@ -21,21 +21,6 @@
 # with FusionForge; if not, write to the Free Software Foundation, Inc.,
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
-
-function backports_deb {
-	if grep -q ^8 /etc/debian_version; then
-		# Install Mediawiki from jessie-backport
-		if [ ! -f /etc/apt/sources.list.d/backports.list ]; then
-			echo 'deb http://archive.debian.org/debian jessie-backports main' \
-				> /etc/apt/sources.list.d/backports.list
-		fi
-		if [ ! -f /etc/apt/apt.conf.d/10no--check-valid-until ]; then
-			echo 'Acquire::Check-Valid-Until "0";' \
-				> /etc/apt/apt.conf.d/10no--check-valid-until
-		fi
-	fi
-}
-
 function backport_rpm_from_fedora {
 	rebuild_one_rpm --enablefedora $*
 }

@@ -33,11 +33,7 @@ function build_deb {
 	apt-get -y install mini-dinstall dput devscripts fakeroot gettext
 	apt-get -y install build-essential \
 		$(grep Build-Depends ${srcdir}/src/debian/control.in | sed -e 's/Build-Depends: //' -e 's/(.*)//')
-	if grep -q ^8 /etc/debian_version; then
-		apt-get -y install php5-cli  # debian/gen_control.sh
-	else
-		apt-get -y install php-cli  # debian/gen_control.sh
-	fi
+	apt-get -y install php-cli  # debian/gen_control.sh
 
 	# Populate a local Debian packages repository for APT managed with mini-dinstall
 	rm -rf /usr/src/debian-repository
