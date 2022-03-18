@@ -29,6 +29,8 @@ if ( !defined( 'MEDIAWIKI' ) ) {
 	die( -1 );
 }
 
+$wgValidSkinNames['fusionforge'] = 'FusionForge';
+
 /**
  * Inherit main code from SkinTemplate, set the CSS and template filter.
  * @todo document

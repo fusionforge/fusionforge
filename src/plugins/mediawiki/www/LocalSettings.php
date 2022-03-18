@@ -145,6 +145,7 @@ if (!isset($fusionforge_plugin_mediawiki_LocalSettings_included)) {
 		wfLoadSkin('MonoBookFusionForge');
 	} else {
 		require_once "$IP/skins/MonoBook/MonoBook.php";
+		require_once "$IP/skins/mediawiki-skin/FusionForge.php";
 		$wgDefaultSkin = 'fusionforge';
 	}
 	// disable other skins. It breaks FusionForge displays.

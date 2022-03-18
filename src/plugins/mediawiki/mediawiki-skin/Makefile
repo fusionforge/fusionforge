@@ -19,6 +19,7 @@ FusionForge.php.renamed: $(MWSKINPATH)
 
 $(MWSKINPATH):
 	echo 'You must install mediawiki to get reference files'
+	exit 1
 
 cleanphp:
 	rm -f FusionForge.php.renamed FusionForge.php.patch2

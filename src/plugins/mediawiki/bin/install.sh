@@ -7,7 +7,7 @@ plugindir=$(forge_get_config plugins_path)/mediawiki
 
 mediawikidir=$(find /usr/share -type d -name 'mediawiki' | grep -E -v 'doc|extensions|resources|vendor|selinux')
 # Debian: /usr/share/mediawiki/
-# CentOS7: /usr/share/mediawiki123/
+# CentOS7: /usr/share/mediawiki/
 # OpenSUSE Leap 15: /usr/share/php/mediawiki/
 
 upgrade_mediawikis () {
@@ -46,7 +46,8 @@ case "$1" in
 		ln -nfs $mediawikidir/skins/monobook/headbg.jpg $source_path/www/themes/css/mw-headbg.jpg
 
 		ln -nfs $mediawikidir $data_path/plugins/mediawiki/master
-		ln -nfs $plugindir/mediawiki-skin/FusionForge.php $mediawikidir/skins/
+		rm -f $mediawikidir/skins/FusionForge.php //remove the old autoload mechanism
+		ln -nfs $plugindir/mediawiki-skin $mediawikidir/skins/
 		ln -nfs $plugindir/MonoBookFusionForge $mediawikidir/skins/
 	;;
 	triggered)
@@ -58,7 +59,8 @@ case "$1" in
 		find $plugindir/www/ -type l -print0 | xargs -r0 rm
 		rm -f $source_path/www/themes/css/mw-headbg.jpg
 		rm -f $data_path/plugins/mediawiki/master
-		rm -f $mediawikidir/skins/FusionForge.php
+		rm -f $mediawikidir/skins/FusionForge.php //remove the old autoload mechanism
+		rm -f $mediawikidir/skins/mediawiki-skin
 		rm -f $mediawikidir/skins/MonoBookFusionForge
 	;;
 	*)
