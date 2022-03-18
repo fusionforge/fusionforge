@@ -28,7 +28,7 @@ Description: collaborative development tool - standard metapackage
 
 Package: fusionforge-common
 Architecture: all
-Depends: php-cli | php5-cli, php-pgsql | php5-pgsql, php-htmlpurifier | php5-htmlpurifier, php-mbstring, cron, ucf, ${misc:Depends}
+Depends: php-cli, php-pgsql, php-htmlpurifier, php-mbstring, cron, ucf, ${misc:Depends}
 # Handle conflicts with files in old packages:
 # gforge-common -> /usr/share/locale/XX/LC_MESSAGES/fusionforge.mo
 # gforge-db-postgresql -> /usr/bin/forge_make_admin & forge_set_password
@@ -48,7 +48,7 @@ Description: collaborative development tool - shared files
 Package: fusionforge-db-local
 Architecture: all
 Provides: fusionforge-db
-Depends: fusionforge-common (=${source:Version}), postgresql, postgresql-contrib, php-cli | php5-cli, ${misc:Depends}
+Depends: fusionforge-common (=${source:Version}), postgresql, postgresql-contrib, php-cli, ${misc:Depends}
 Description: collaborative development tool - database (using PostgreSQL)
  FusionForge provides many tools to aid collaboration in a
  development project, such as bug-tracking, task management,
@@ -79,7 +79,7 @@ Description: collaborative development tool - database (remote)
 
 Package: fusionforge-web
 Architecture: all
-Depends: fusionforge-common (=${source:Version}), fusionforge-db-local | fusionforge-db, apache2, libapache2-mpm-itk | apache2-mpm-itk, php-cli | php5-cli, libapache2-mod-php | libapache2-mod-php5, libphp-simplepie, php-http, php-http-webdav-server, php-soap, libmarkdown-php, libjs-jquery-livequery, python, poppler-utils, openssl, ${misc:Depends}
+Depends: fusionforge-common (=${source:Version}), fusionforge-db-local | fusionforge-db, apache2, libapache2-mpm-itk | apache2-mpm-itk, php-cli, libapache2-mod-php, libphp-simplepie, php-http, php-http-webdav-server, php-soap, libmarkdown-php, libjs-jquery-livequery, python, poppler-utils, openssl, ${misc:Depends}
 Recommends: locales-all, unoconv
 Description: collaborative development tool - web part (using Apache)
  FusionForge provides many tools to aid collaboration in a
@@ -94,7 +94,7 @@ Description: collaborative development tool - web part (using Apache)
 
 Package: fusionforge-web-vhosts
 Architecture: all
-Depends: fusionforge-common (=${source:Version}), php-cli | php5-cli, ${misc:Depends}
+Depends: fusionforge-common (=${source:Version}), php-cli, ${misc:Depends}
 Description: collaborative development tool - web vhosts (using Apache)
  FusionForge provides many tools to aid collaboration in a
  development project, such as bug-tracking, task management,
@@ -108,7 +108,7 @@ Description: collaborative development tool - web vhosts (using Apache)
 
 Package: fusionforge-shell
 Architecture: all
-Depends: fusionforge-common (=${source:Version}), php-cli | php5-cli, libnss-pgsql2, openssh-server, unscd | nscd, libpam-modules, ucf, ${misc:Depends}
+Depends: fusionforge-common (=${source:Version}), php-cli, libnss-pgsql2, openssh-server, unscd | nscd, libpam-modules, ucf, ${misc:Depends}
 Description: collaborative development tool - shell accounts (using PostgreSQL)
  FusionForge provides many tools to aid collaboration in a
  development project, such as bug-tracking, task management,
@@ -122,7 +122,7 @@ Description: collaborative development tool - shell accounts (using PostgreSQL)
 
 Package: fusionforge-scm
 Architecture: all
-Depends: fusionforge-common (=${source:Version}), fusionforge-shell (=${source:Version}), xinetd, rsync, php-cli | php5-cli, ${misc:Depends}
+Depends: fusionforge-common (=${source:Version}), fusionforge-shell (=${source:Version}), xinetd, rsync, php-cli, ${misc:Depends}
 Description: collaborative development tool - shell accounts (using PostgreSQL)
  FusionForge provides many tools to aid collaboration in a
  development project, such as bug-tracking, task management,
@@ -168,7 +168,7 @@ Description: collaborative development tool - mail tools (using Exim 4)
 
 Package: fusionforge-lists
 Architecture: all
-Depends: fusionforge-common (=${source:Version}), php-cli | php5-cli, fusionforge-mta-postfix | fusionforge-mta, mailman, ${misc:Depends}
+Depends: fusionforge-common (=${source:Version}), php-cli, fusionforge-mta-postfix | fusionforge-mta, mailman, ${misc:Depends}
 Description: collaborative development tool - mailing-lists (using Mailman)
  FusionForge provides many tools to aid collaboration in a
  development project, such as bug-tracking, task management,
@@ -181,7 +181,7 @@ Description: collaborative development tool - mailing-lists (using Mailman)
 
 Package: fusionforge-ftp
 Architecture: all
-Depends: fusionforge-common (=${source:Version}), php-cli | php5-cli, vsftpd, ${misc:Depends}
+Depends: fusionforge-common (=${source:Version}), php-cli, vsftpd, ${misc:Depends}
 Description: collaborative development tool - ftp (using vsftpd)
  FusionForge provides many tools to aid collaboration in a
  development project, such as bug-tracking, task management,
