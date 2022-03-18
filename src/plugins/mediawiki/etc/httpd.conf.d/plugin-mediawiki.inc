@@ -6,6 +6,7 @@ AliasMatch ^${FF__core__url_prefix}plugins/mediawiki/wiki/[-a-zA-Z0-9_]*/img_aut
 AliasMatch ^${FF__core__url_prefix}plugins/mediawiki/wiki/([-a-zA-Z0-9_]*)/images/(.*) ${FF__core__data_path}/plugins/mediawiki/projects/$1/images/$2
 AliasMatch ^${FF__core__url_prefix}plugins/mediawiki/wiki/([-a-zA-Z0-9_]*)/skins/(.*) ${FF__mediawiki__src_path}/skins/$2
 AliasMatch ^${FF__core__url_prefix}plugins/mediawiki/wiki/([-a-zA-Z0-9_]*)/extensions/(.*) ${FF__mediawiki__src_path}/extensions/$2
+AliasMatch ^${FF__core__url_prefix}plugins/mediawiki/wiki/([-a-zA-Z0-9_]*)/resources/assets/(.*) ${FF__mediawiki__src_path}/resources/assets/$2
 AliasMatch ^${FF__core__url_prefix}plugins/mediawiki/dumps/(.*)$ ${FF__core__data_path}/plugins/mediawiki/dumps/$1
 
 <Directory ${FF__core__data_path}/plugins/mediawiki/dumps>
@@ -19,6 +20,10 @@ AliasMatch ^${FF__core__url_prefix}plugins/mediawiki/dumps/(.*)$ ${FF__core__dat
 </Directory>
 
 <LocationMatch "${FF__core__url_prefix}plugins/mediawiki/wiki/[-a-zA-Z0-9_]*/skins/(.*)">
+  Require all granted
+</LocationMatch>
+
+<LocationMatch "${FF__core__url_prefix}plugins/mediawiki/wiki/[-a-zA-Z0-9_]*/resources/assets/(.*)">
   Require all granted
 </LocationMatch>
 
