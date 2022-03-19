@@ -1,7 +1,7 @@
 <?php
 /**
  * Copyright (C) 2010 Roland Mas, Olaf Lenz
- * Copyright 2018, Franck Villaume - TrivialDev
+ * Copyright 2018,2022, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge.
  *
@@ -190,7 +190,11 @@ if (!isset($fusionforge_plugin_mediawiki_LocalSettings_included)) {
 	$GLOBALS['REMOTE_ADDR'] = getStringFromServer('REMOTE_ADDR') ;
 	$GLOBALS['HTTP_USER_AGENT'] = getStringFromServer('HTTP_USER_AGENT') ;
 
-	require_once("$IP/includes/db/Database.php");
+	if ($wgVersionArr[0] == 1 && $wgVersionArr[1] >= 28) {
+		require_once("$IP/includes/libs/rdbms/database/Database.php");
+	} else {
+		require_once("$IP/includes/db/Database.php");
+	}
 	if (forge_get_config('mw_dbtype', 'mediawiki')=='mysql'){
 		require_once 'DatabaseForgeMysql.php';
 	}else{

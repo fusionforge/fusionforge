@@ -4,7 +4,7 @@
 # Copyright (C) 2011, 2019, Roland Mas
 # Copyright (C) 2011, Olivier Berger - Institut Telecom
 # Copyright (C) 2014, Inria (Sylvain Beucler)
-# Copyright 2017,2019,2021 Franck Villaume - TrivialDev
+# Copyright 2017,2019,2021-2022 Franck Villaume - TrivialDev
 #
 # This file is part of FusionForge. FusionForge is free software;
 # you can redistribute it and/or modify it under the terms of the

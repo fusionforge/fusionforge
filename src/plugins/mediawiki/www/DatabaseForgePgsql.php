@@ -2,6 +2,7 @@
 /*
  * Copyright (C) 2010 Roland Mas, Olaf Lenz
  * Copyright (C) 2011 France Telecom
+ * Copyright 2022, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge.
  *
@@ -20,7 +21,14 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-require_once("$IP/includes/db/DatabasePostgres.php");
+global $wgVersion;
+$wgVersionArr = explode('.', $wgVersion);
+if ($wgVersionArr[0] == 1 && $wgVersionArr[1] >= 28) {
+	require_once("$IP/includes/libs/rdbms/database/DatabasePostgres.php");
+} else {
+	require_once("$IP/includes/db/DatabasePostgres.php");
+}
+
 class DatabaseForge extends DatabasePostgres {
 	function __construct($server=false, $user=false, $password=false, $dbName=false, $failFunction=false, $flags=0) {
 		global $wgDBtype;
