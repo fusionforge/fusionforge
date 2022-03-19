@@ -139,17 +139,16 @@ fi
 		install-plugin-blocks \
 		install-plugin-taskboard install-plugin-message \
 		install-plugin-repositoryapi
-	if [ -e /etc/centos-release ] && ! grep -q "[[:space:]]8" /etc/centos-release; then
-		make install-plugin-mediawiki
-	fi
 	if [ -e /etc/centos-release ]; then
 		make install-plugin-scmbzr
 	fi
-	if [ -e /etc/centos-release ] && ! grep -q "[[:space:]]8" /etc/centos-release;then
+	if [ -e /etc/centos-release ] && ! grep -q "[[:space:]]8" /etc/centos-release; then
+		make install-plugin-mediawiki
 		make install-plugin-moinmoin
 	fi
 	if [ -e /etc/debian_version ] && ! grep -q ^11 /etc/debian_version; then
 		make install-plugin-moinmoin
+		make install-plugin-mediawiki
 	fi
 	if [ -e /etc/centos-release -o -e /etc/debian_version ]; then
 		make install-plugin-phptextcaptcha
