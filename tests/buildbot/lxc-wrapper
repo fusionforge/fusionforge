@@ -15,7 +15,7 @@ esac
 
 host=$2
 case "$host" in
-	centos7|centos8|debian9|debian10)
+	centos7|centos8|debian9|debian10|debian11)
 		echo "Handling host $host"
 		;;
 	*)
@@ -48,6 +48,7 @@ case $host in
 			;;
 		debian11)
 			release=bullseye
+			;;
 		esac
 		cachedir=/var/cache/lxc/debian/rootfs-$release-amd64
 		export MIRROR=http://ftp.fr.debian.org/debian

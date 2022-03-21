@@ -117,6 +117,7 @@ case $HOST in
     centos8.local)
 	VM=centos8
 	INSTALL_OS=centos
+	;;
     *)
 	export DIST=stretch
 	VM=debian9
