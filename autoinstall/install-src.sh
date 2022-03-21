@@ -148,10 +148,16 @@ fi
 	fi
 	if [ -e /etc/debian_version ] && ! grep -q ^11 /etc/debian_version; then
 		make install-plugin-moinmoin
+	fi
+	if [ -e /etc/debian_version ]; then
 		make install-plugin-mediawiki
 	fi
 	if [ -e /etc/centos-release -o -e /etc/debian_version ]; then
 		make install-plugin-phptextcaptcha
+	fi
+	if [[ ! -z `cat /etc/os-release | grep 'SUSE'` ]]; then
+		make install-plugin-moinmoin
+		make install-plugin-mediawiki
 	fi
 	make post-install
 )
