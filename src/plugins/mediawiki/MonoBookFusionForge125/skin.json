@@ -1,0 +1,50 @@
+{
+	"name": "MonoBookFusionForge125",
+	"author": [
+		"Gabriel Wicke",
+		"..."
+	],
+	"url": "https://www.mediawiki.org/wiki/Skin:MonoBook",
+	"descriptionmsg": "monobook-desc",
+	"namemsg": "skinname-monobookfusionforge125",
+	"license-name": "GPL-2.0+",
+	"type": "skin",
+	"requires": {
+		"MediaWiki": ">= 1.25.0"
+	},
+	"ValidSkinNames": {
+		"monobookfusionforge125": "MonoBookFusionForge125"
+	},
+	"SkinOOUIThemes": {
+		"monobookfusionforge125": "Apex"
+	},
+	"MessagesDirs": {
+		"MonoBookFusionForge125": [
+			"i18n"
+		]
+	},
+	"ResourceModules": {
+		"skins.monobookfusionforge125.styles": {
+			"position": "top",
+			"styles": {
+				"main.css": {
+					"media": "screen"
+				}
+			}
+		}
+	},
+	"ResourceFileModulePaths": {
+		"localBasePath": "",
+		"remoteSkinPath": "MonoBookFusionForge125"
+	},
+	"ResourceModuleSkinStyles": {
+		"monobookfusionforge125": {
+			"+mediawiki.special.preferences.styles": "skinStyles/mediawiki.special.preferences.styles.less"
+		}
+	},
+	"AutoloadClasses": {
+		"SkinMonoBookFusionForge125": "SkinMonoBookFusionForge125.php",
+		"MonoBookFusionForge125Template": "MonoBookFusionForge125Template.php"
+	},
+	"manifest_version": 1
+}

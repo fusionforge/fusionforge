@@ -97,6 +97,7 @@ if (!isset($fusionforge_plugin_mediawiki_LocalSettings_included)) {
 		$exit_errorlevel = 0;
 	}
 	$wgSitename         = $g->getPublicName() . " Wiki";
+	$wgServer           = util_make_url();
 	$wgScriptPath       = forge_get_config('url_prefix').'plugins/mediawiki/wiki/'.$fusionforgeproject;
 
 	$wgEmergencyContact = forge_get_config('admin_email');
@@ -140,16 +141,23 @@ if (!isset($fusionforge_plugin_mediawiki_LocalSettings_included)) {
 
 	global $wgVersion;
 	$wgVersionArr = explode('.', $wgVersion);
-	if ($wgVersionArr[0] == 1 && $wgVersionArr[1] >= 25) {
-		$wgDefaultSkin = 'monobookfusionforge';
-		wfLoadSkin('MonoBookFusionForge');
+	// disable default skins. It breaks FusionForge displays.
+	$wgSkipSkins = array( "cologneblue", "monobook", "modern", "vector" );
+	if ($wgVersionArr[0] == 1 && $wgVersionArr[1] >= 35) {
+		$wgDefaultSkin = 'monobookfusionforge135';
+		wfLoadSkin('MonoBookFusionForge135');
+		$wgSkipSkins[] = 'monobookfusionforge125';
+	} elseif ($wgVersionArr[0] == 1 && $wgVersionArr[1] >= 25) {
+		$wgDefaultSkin = 'monobookfusionforge125';
+		wfLoadSkin('MonoBookFusionForge125');
+		$wgSkipSkins[] = 'monobookfusionforge135';
 	} else {
 		require_once "$IP/skins/MonoBook/MonoBook.php";
 		require_once "$IP/skins/mediawiki-skin/FusionForge.php";
 		$wgDefaultSkin = 'fusionforge';
+		$wgSkipSkins[] = 'monobookfusionforge135';
+		$wgSkipSkins[] = 'monobookfusionforge125';
 	}
-	// disable other skins. It breaks FusionForge displays.
-	$wgSkipSkins = array( "cologneblue", "monobook", "modern", "vector" );
 
 	$wgHtml5 = false;
 	$wgWellFormedXml = true;
@@ -197,7 +205,7 @@ if (!isset($fusionforge_plugin_mediawiki_LocalSettings_included)) {
 	}
 	if (forge_get_config('mw_dbtype', 'mediawiki')=='mysql'){
 		require_once 'DatabaseForgeMysql.php';
-	}else{
+	} else {
 		require_once 'DatabaseForgePgsql.php';
 	}
 
