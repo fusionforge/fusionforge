@@ -95,16 +95,6 @@ if [ -z "$HOST" ]; then
     exit 1
 fi
 case $HOST in
-    debian7.local)
-	export DIST=wheezy
-	VM=debian7
-	INSTALL_OS=debian
-	;;
-    debian8.local)
-	export DIST=jessie
-	VM=debian8
-	INSTALL_OS=debian
-	;;
     debian9.local)
 	export DIST=stretch
 	VM=debian9
@@ -120,18 +110,13 @@ case $HOST in
 	VM=debian11
 	INSTALL_OS=debian
 	;;
-    centos5.local)
-	VM=centos5
-	INSTALL_OS=centos
-	;;
-    centos6.local)
-	VM=centos6
-	INSTALL_OS=centos
-	;;
     centos7.local)
 	VM=centos7
 	INSTALL_OS=centos
 	;;
+    centos8.local)
+	VM=centos8
+	INSTALL_OS=centos
     *)
 	export DIST=stretch
 	VM=debian9

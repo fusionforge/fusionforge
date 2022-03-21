@@ -15,7 +15,7 @@ esac
 
 host=$2
 case "$host" in
-	centos7|debian8|debian9|debian10)
+	centos7|centos8|debian9|debian10)
 		echo "Handling host $host"
 		;;
 	*)
@@ -32,7 +32,7 @@ sed -i -e 's/^ *chroot $rootfs_path passwd -e root/echo # DISABLED # &/' /usr/sh
 
 # Get variables
 case $host in
-	centos7)
+	centos*)
 		template=centos
 		release=${host#centos}
 		cachedir=/var/cache/lxc/centos/x86_64/$release/rootfs
@@ -40,15 +40,14 @@ case $host in
 	debian*)
 		template=debian
 		case $host in
-		debian8)
-			release=jessie
-			;;
 		debian9)
 			release=stretch
 			;;
 		debian10)
 			release=buster
 			;;
+		debian11)
+			release=bullseye
 		esac
 		cachedir=/var/cache/lxc/debian/rootfs-$release-amd64
 		export MIRROR=http://ftp.fr.debian.org/debian
@@ -68,7 +67,7 @@ case $cmd in
 
 		# Customize the cache
 		case $host in
-			centos7)
+			centos*)
 			chroot $cachedir usermod --expiredate $(date +"%Y-%m-%d" -d "1 year") root
 			chroot $cachedir yum install -y avahi-autoipd avahi nscd
 			# Fix nscd restart and stalled avahi pid files
