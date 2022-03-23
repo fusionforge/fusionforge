@@ -56,12 +56,11 @@ class SkinMonoBookFusionForge125 extends SkinTemplate {
 		$out->addStyle( $this->stylename . '/IE70Fixes.css', 'screen', 'IE 7' );
 	}
 
-function setupTemplate( $classname, $repository = false, $cache_dir = false ) {
+	function setupTemplate( $classname, $repository = false, $cache_dir = false ) {
 		$tc = new $classname();
 		$tc->params = array();
 		if ($tc->project = $project = group_get_object_by_name($GLOBALS['fusionforgeproject'])) {
-			$tc->params['group'] = $GLOBALS['group_id'] =
-			$project->getID();
+			$tc->params['group'] = $GLOBALS['group_id'] = $project->getID();
 			$tc->params['toptab'] = 'mediawiki';
 		}
 		return $tc;

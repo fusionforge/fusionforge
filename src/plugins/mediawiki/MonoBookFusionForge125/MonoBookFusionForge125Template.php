@@ -39,7 +39,9 @@ class MonoBookFusionForge125Template extends BaseTemplate {
 	 */
 	public function execute() {
 		// Suppress warnings to prevent notices about missing indexes in $this->data
-		wfSuppressWarnings();
+		if (function_exists(wfSuppressWarnings)) {
+			wfSuppressWarnings();
+		}
 
 		$this->html( 'headelement' );
 
@@ -217,7 +219,9 @@ class MonoBookFusionForge125Template extends BaseTemplate {
 		$GLOBALS['HTML']->footer($this->params);
 
 		echo "\n";
-		wfRestoreWarnings();
+		if (function_exists(wfRestoreWarnings)) {
+			wfRestoreWarnings();
+		}
 	} // end of execute() method
 
 	/*************************************************************************************************/

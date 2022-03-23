@@ -143,20 +143,14 @@ if (!isset($fusionforge_plugin_mediawiki_LocalSettings_included)) {
 	$wgVersionArr = explode('.', $wgVersion);
 	// disable default skins. It breaks FusionForge displays.
 	$wgSkipSkins = array( "cologneblue", "monobook", "modern", "vector" );
-	if ($wgVersionArr[0] == 1 && $wgVersionArr[1] >= 35) {
-		$wgDefaultSkin = 'monobookfusionforge135';
-		wfLoadSkin('MonoBookFusionForge135');
-		$wgSkipSkins[] = 'monobookfusionforge125';
-	} elseif ($wgVersionArr[0] == 1 && $wgVersionArr[1] >= 25) {
+	if ($wgVersionArr[0] == 1 && $wgVersionArr[1] >= 25) {
 		$wgDefaultSkin = 'monobookfusionforge125';
 		wfLoadSkin('MonoBookFusionForge125');
-		$wgSkipSkins[] = 'monobookfusionforge135';
 	} else {
 		require_once "$IP/skins/MonoBook/MonoBook.php";
 		require_once "$IP/skins/mediawiki-skin/FusionForge.php";
 		$wgDefaultSkin = 'fusionforge';
 		$wgSkipSkins[] = 'monobookfusionforge135';
-		$wgSkipSkins[] = 'monobookfusionforge125';
 	}
 
 	$wgHtml5 = false;

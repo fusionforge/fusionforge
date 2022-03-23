@@ -49,7 +49,6 @@ case "$1" in
 		rm -f $mediawikidir/skins/FusionForge.php //remove the old autoload mechanism
 		ln -nfs $plugindir/mediawiki-skin $mediawikidir/skins/
 		ln -nfs $plugindir/MonoBookFusionForge125 $mediawikidir/skins/
-		ln -nfs $plugindir/MonoBookFusionForge135 $mediawikidir/skins/
 	;;
 	triggered)
 		case $2 in
@@ -63,7 +62,6 @@ case "$1" in
 		rm -f $mediawikidir/skins/FusionForge.php //remove the old autoload mechanism
 		rm -f $mediawikidir/skins/mediawiki-skin
 		rm -f $mediawikidir/skins/MonoBookFusionForge125
-		rm -f $mediawikidir/skins/MonoBookFusionForge135
 	;;
 	*)
 		echo "Usage: $0 {configure|triggered|remove}"
