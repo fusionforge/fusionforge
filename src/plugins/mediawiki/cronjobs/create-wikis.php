@@ -84,6 +84,18 @@ while ( $row = db_fetch_array($project_res) ) {
 		}
 
 		cron_debug("  Creating mediawiki database.");
+		$table_file_generated = "$src_path/maintenance/postgres/tables-generated.sql";
+		if (file_exists($table_file_generated)) {
+			$res = db_query_from_file($table_file_generated);
+			if (!$res) {
+				$err =  "Error: Mediawiki Database Creation Failed: " . db_error();
+				cron_debug($err);
+				db_rollback();
+				cron_entry(23,$err);
+				exit;
+			}
+		}
+
 		$table_file = "$src_path/maintenance/postgres/tables.sql";
 		if (!file_exists($table_file)) {
 			$err =  "Error: Couldn't find Mediawiki Database Creation File $table_file!";
@@ -93,19 +105,21 @@ while ( $row = db_fetch_array($project_res) ) {
 			exit;
 		}
 
+		$table_file_updatekeys = "$src_path/maintenance/postgres/update-keys.sql";
+		if (file_exists($table_file_updatekeys)) {
+			$res = db_query_from_file($table_file_updatekeys);
+			if (!$res) {
+				$err =  "Error: Mediawiki Database Creation Failed: " . db_error();
+				cron_debug($err);
+				db_rollback();
+				cron_entry(23,$err);
+				exit;
+			}
+		}
+
 		$res = db_query_params("SET search_path=$schema", array());
 		if (!$res) {
 			$err =  "Error: DB Query Failed: " .
-				db_error();
-			cron_debug($err);
-			db_rollback();
-			cron_entry(23,$err);
-			exit;
-		}
-
-		$res = db_query_from_file($table_file);
-		if (!$res) {
-			$err =  "Error: Mediawiki Database Creation Failed: " .
 				db_error();
 			cron_debug($err);
 			db_rollback();
