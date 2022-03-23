@@ -81,14 +81,11 @@ if (!$group->usesPlugin('mediawiki')) {
 }
 
 function ffmw_wrapper_fixup_searchpath($username) {
-	db_query_params("ALTER ROLE $username SET search_path = public",
-	    array());
+	db_query_params("ALTER ROLE $username SET search_path = public", array());
 }
-register_shutdown_function('ffmw_wrapper_fixup_searchpath',
-    forge_get_config('database_user'));
+register_shutdown_function('ffmw_wrapper_fixup_searchpath', forge_get_config('database_user'));
 
-$ff_localsettings = forge_get_config('source_path') .
-    '/www/plugins/mediawiki/LocalSettings.php';
+$ff_localsettings = forge_get_config('source_path') . '/www/plugins/mediawiki/LocalSettings.php';
 if ($preload_localsettings) {
 	define("MEDIAWIKI", true);
 	require_once($ff_localsettings);
