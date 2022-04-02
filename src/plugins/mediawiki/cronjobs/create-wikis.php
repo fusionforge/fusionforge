@@ -2,6 +2,7 @@
 <?php
 /**
  * Copyright (C) 2010  Olaf Lenz
+ * Copyright 2022, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge.
  *
@@ -38,12 +39,14 @@ require_once $gfcommon.'include/cron_utils.php';
 $src_path = forge_get_config('src_path', 'mediawiki');
 $master_path = forge_get_config('master_path', 'mediawiki');
 
+$err = '';
+
 # Get all projects that use the mediawiki plugin
 $project_res = db_query_params ("SELECT g.unix_group_name from groups g, group_plugin gp, plugins p where g.group_id = gp.group_id and gp.plugin_id = p.plugin_id and p.plugin_name = $1;", array("mediawiki"));
 if (!$project_res) {
 	$err =  "Error: Database Query Failed: ".db_error();
 	cron_debug($err);
-	cron_entry(23,$err);
+	cron_entry('PLUGIN_MEDIAWIKI_CREATE_WIKIS',$err);
 	exit;
 }
 
@@ -79,7 +82,7 @@ while ( $row = db_fetch_array($project_res) ) {
 				db_error();
 			cron_debug($err);
 			db_rollback();
-			cron_entry(23,$err);
+			cron_entry('PLUGIN_MEDIAWIKI_CREATE_WIKIS',$err);
 			exit;
 		}
 
@@ -91,7 +94,7 @@ while ( $row = db_fetch_array($project_res) ) {
 				$err =  "Error: Mediawiki Database Creation Failed: " . db_error();
 				cron_debug($err);
 				db_rollback();
-				cron_entry(23,$err);
+				cron_entry('PLUGIN_MEDIAWIKI_CREATE_WIKIS',$err);
 				exit;
 			}
 		}
@@ -101,7 +104,7 @@ while ( $row = db_fetch_array($project_res) ) {
 			$err =  "Error: Couldn't find Mediawiki Database Creation File $table_file!";
 			cron_debug($err);
 			db_rollback();
-			cron_entry(23,$err);
+			cron_entry('PLUGIN_MEDIAWIKI_CREATE_WIKIS',$err);
 			exit;
 		}
 
@@ -112,7 +115,7 @@ while ( $row = db_fetch_array($project_res) ) {
 				$err =  "Error: Mediawiki Database Creation Failed: " . db_error();
 				cron_debug($err);
 				db_rollback();
-				cron_entry(23,$err);
+				cron_entry('PLUGIN_MEDIAWIKI_CREATE_WIKIS',$err);
 				exit;
 			}
 		}
@@ -123,7 +126,7 @@ while ( $row = db_fetch_array($project_res) ) {
 				db_error();
 			cron_debug($err);
 			db_rollback();
-			cron_entry(23,$err);
+			cron_entry('PLUGIN_MEDIAWIKI_CREATE_WIKIS',$err);
 			exit;
 		}
 
@@ -133,7 +136,7 @@ while ( $row = db_fetch_array($project_res) ) {
 				db_error();
 			cron_debug($err);
 			db_rollback();
-			cron_entry(23,$err);
+			cron_entry('PLUGIN_MEDIAWIKI_CREATE_WIKIS',$err);
 			exit;
 		}
 
@@ -141,7 +144,7 @@ while ( $row = db_fetch_array($project_res) ) {
 			$err =  "Error: DB Commit Failed: " .
 				db_error();
 			cron_debug($err);
-			cron_entry(23,$err);
+			cron_entry('PLUGIN_MEDIAWIKI_CREATE_WIKIS',$err);
 			exit;
 		}
 
@@ -167,6 +170,8 @@ while ( $row = db_fetch_array($project_res) ) {
 		}
 	}
 }
+
+cron_entry('PLUGIN_MEDIAWIKI_CREATE_WIKIS', $err);
 
 // Local Variables:
 // mode: php
