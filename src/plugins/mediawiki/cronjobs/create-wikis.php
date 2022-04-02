@@ -107,6 +107,14 @@ while ( $row = db_fetch_array($project_res) ) {
 			cron_entry('PLUGIN_MEDIAWIKI_CREATE_WIKIS',$err);
 			exit;
 		}
+		$res = db_query_from_file($table_file);
+		if (!$res) {
+			$err =  "Error: Mediawiki Database Creation Failed: " . db_error();
+			cron_debug($err);
+			db_rollback();
+			cron_entry('PLUGIN_MEDIAWIKI_CREATE_WIKIS',$err);
+			exit;
+		}
 
 		$table_file_updatekeys = "$src_path/maintenance/postgres/update-keys.sql";
 		if (file_exists($table_file_updatekeys)) {
