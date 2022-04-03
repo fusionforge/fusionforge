@@ -98,6 +98,7 @@ if (!isset($fusionforge_plugin_mediawiki_LocalSettings_included)) {
 	}
 	$wgSitename         = $g->getPublicName() . " Wiki";
 	$wgServer           = util_make_url();
+	$wgUsePathInfo      = false;
 	$wgScriptPath       = forge_get_config('url_prefix').'plugins/mediawiki/wiki/'.$fusionforgeproject;
 
 	$wgEmergencyContact = forge_get_config('admin_email');
