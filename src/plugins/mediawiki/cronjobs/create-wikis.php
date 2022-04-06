@@ -89,11 +89,13 @@ while ( $row = db_fetch_array($project_res) ) {
 		cron_debug("  Creating mediawiki database.");
 		$table_file_generated = "$src_path/maintenance/postgres/tables-generated.sql";
 		if (file_exists($table_file_generated)) {
+			db_query_params("SET search_path=$schema", array());
 			$res = db_query_from_file($table_file_generated);
 			if (!$res) {
+				db_rollback();
 				$err =  "Error: Mediawiki Database Creation Failed: " . db_error();
 				cron_debug($err);
-				db_rollback();
+				db_query_params("SET search_path=public", array());
 				cron_entry('PLUGIN_MEDIAWIKI_CREATE_WIKIS',$err);
 				exit;
 			}
@@ -101,57 +103,53 @@ while ( $row = db_fetch_array($project_res) ) {
 
 		$table_file = "$src_path/maintenance/postgres/tables.sql";
 		if (!file_exists($table_file)) {
+			db_rollback();
 			$err =  "Error: Couldn't find Mediawiki Database Creation File $table_file!";
 			cron_debug($err);
-			db_rollback();
+			db_query_params("SET search_path=public", array());
 			cron_entry('PLUGIN_MEDIAWIKI_CREATE_WIKIS',$err);
 			exit;
 		}
+		db_query_params("SET search_path=$schema", array());
 		$res = db_query_from_file($table_file);
 		if (!$res) {
+			db_rollback();
 			$err =  "Error: Mediawiki Database Creation Failed: " . db_error();
 			cron_debug($err);
-			db_rollback();
+			db_query_params("SET search_path=public", array());
 			cron_entry('PLUGIN_MEDIAWIKI_CREATE_WIKIS',$err);
 			exit;
 		}
 
 		$table_file_updatekeys = "$src_path/maintenance/postgres/update-keys.sql";
 		if (file_exists($table_file_updatekeys)) {
+			db_query_params("SET search_path=$schema", array());
 			$res = db_query_from_file($table_file_updatekeys);
 			if (!$res) {
+				db_rollback();
 				$err =  "Error: Mediawiki Database Creation Failed: " . db_error();
 				cron_debug($err);
-				db_rollback();
+				db_query_params("SET search_path=public", array());
 				cron_entry('PLUGIN_MEDIAWIKI_CREATE_WIKIS',$err);
 				exit;
 			}
 		}
 
-		$res = db_query_params("SET search_path=$schema", array());
-		if (!$res) {
-			$err =  "Error: DB Query Failed: " .
-				db_error();
-			cron_debug($err);
-			db_rollback();
-			cron_entry('PLUGIN_MEDIAWIKI_CREATE_WIKIS',$err);
-			exit;
-		}
-
 		$res = db_query_params("CREATE TEXT SEARCH CONFIGURATION $schema.default ( COPY = pg_catalog.english )", array());
 		if (!$res) {
-			$err =  "Error: DB Query Failed: " .
-				db_error();
-			cron_debug($err);
 			db_rollback();
+			$err =  "Error: DB Query Failed: " . db_error();
+			cron_debug($err);
+			db_query_params("SET search_path=public", array());
 			cron_entry('PLUGIN_MEDIAWIKI_CREATE_WIKIS',$err);
 			exit;
 		}
 
 		if (!db_commit()) {
-			$err =  "Error: DB Commit Failed: " .
-				db_error();
+			db_rollback();
+			$err =  "Error: DB Commit Failed: " . db_error();
 			cron_debug($err);
+			db_query_params("SET search_path=public", array());
 			cron_entry('PLUGIN_MEDIAWIKI_CREATE_WIKIS',$err);
 			exit;
 		}
@@ -179,9 +177,5 @@ while ( $row = db_fetch_array($project_res) ) {
 	}
 }
 
+db_query_params("SET search_path=public", array());
 cron_entry('PLUGIN_MEDIAWIKI_CREATE_WIKIS', $err);
-
-// Local Variables:
-// mode: php
-// c-file-style: "bsd"
-// End:

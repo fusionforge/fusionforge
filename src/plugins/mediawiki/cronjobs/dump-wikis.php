@@ -70,4 +70,5 @@ while ( $row = db_fetch_array($project_res) ) {
 	}
 }
 
+db_query_params("SET search_path=public", array());
 cron_entry('PLUGIN_MEDIAWIKI_DUMP_WIKIS',$err);
