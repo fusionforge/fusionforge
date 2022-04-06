@@ -66,10 +66,8 @@ $cron_arr = array(
 #    903 => 'job-server.pl';
 
 function cron_entry($job,$output) {
-	$sql='INSERT INTO cron_history (rundate,job,output)
-		values ($1, $2, $3)' ;
-	return db_query_params ($sql,
-				array (time(), $job, $output));
+	$sql='INSERT INTO cron_history (rundate,job,output) values ($1, $2, $3)';
+	return db_query_params($sql, array(time(), $job, $output));
 }
 
 function cron_debug($string) {
