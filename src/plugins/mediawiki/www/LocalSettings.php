@@ -84,7 +84,6 @@ if (!isset($fusionforge_plugin_mediawiki_LocalSettings_included)) {
 	}
 
 	$g = group_get_object_by_name($fusionforgeproject) ;
-	$group_id = $g->getID();
 	if (!$g->usesPlugin('mediawiki')) {
 		$exit_errorlevel = 1;
 		exit_error(sprintf(_('Project %s does not use the Mediawiki plugin'), $fusionforgeproject));
@@ -96,6 +95,8 @@ if (!isset($fusionforge_plugin_mediawiki_LocalSettings_included)) {
 		/* revert, if we are still there */
 		$exit_errorlevel = 0;
 	}
+	session_require_perm('plugin_mediawiki_read', $g->getID(), 'read');
+
 	$wgSitename         = $g->getPublicName() . " Wiki";
 	$wgServer           = util_make_url();
 	$wgUsePathInfo      = false;
