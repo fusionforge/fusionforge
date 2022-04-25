@@ -184,7 +184,6 @@ function run_script($script) {
 
 	} elseif ($ext == 'sql') {
 		// run the sql script
-		$queries = array();
 		if (run_sql_script($filename)) {
 			show(realpath($db_path.$filename)." ran correctly\n\n");
 			$return = true;
@@ -207,8 +206,6 @@ function run_sql_script($filename) {
 		return false;
 	}
 	$queries = parse_sql_file($db_path.$filename);
-
-	$i = 0;
 
 	//db_begin();
 
