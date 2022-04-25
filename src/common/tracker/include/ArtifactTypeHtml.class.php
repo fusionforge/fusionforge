@@ -418,12 +418,12 @@ class ArtifactTypeHtml extends ArtifactType {
 			} elseif ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_RELATION) {
 				$str = $this->renderRelationField($efarr[$i]['extra_field_id'], $selected[$efarr[$i]['extra_field_id']], $efarr[$i]['attribute1'], $efarr[$i]['attribute2'], $attrs);
 				if ($mode == 'UPDATE' || $mode == 'NEW') {
-					$post_name = $HTML->getEditFieldPic(_('Click to edit'), $alt = _('Click to edit'), array('onclick'=>"switch2edit(this, 'show$i', 'edit$i')"));
+					$post_name = $HTML->getEditFieldPic(_('Click to edit'), _('Click to edit'), array('onclick'=>"switch2edit(this, 'show$i', 'edit$i')"));
 				}
 			} elseif ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_PARENT) {
 				$str = $this->renderParentField($efarr[$i]['extra_field_id'], $selected[$efarr[$i]['extra_field_id']], $efarr[$i]['attribute1'], $efarr[$i]['attribute2'], $attrs);
 				if ($mode == 'UPDATE' || $mode == 'NEW') {
-					$post_name = $HTML->getEditFieldPic(_('Click to edit'), $alt = _('Click to edit'), array('onclick'=>"switch2edit(this, 'show$i', 'edit$i')"));
+					$post_name = $HTML->getEditFieldPic(_('Click to edit'), _('Click to edit'), array('onclick'=>"switch2edit(this, 'show$i', 'edit$i')"));
 				}
 			} elseif ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_DATETIME) {
 				$str = $this->renderDatetime($efarr[$i]['extra_field_id'], $selected[$efarr[$i]['extra_field_id']], $attrs);
