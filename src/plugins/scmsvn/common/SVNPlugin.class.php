@@ -1118,7 +1118,7 @@ some control over it to the project's administrator.");
 									count($existing_repos)), $project_name));
 			$titleArr = array(_('Repository name'), ('Initial repository description'), _('Delete'));
 			echo $HTML->listTableTop($titleArr);
-			foreach ($existing_repos as $key => $repo) {
+			foreach ($existing_repos as $repo) {
 				$cells = array();
 				$cells[][] = html_e('kbd', array(), $repo['repo_name']);
 				$cells[][] = $repo['description'];
