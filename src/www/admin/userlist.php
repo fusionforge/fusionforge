@@ -111,7 +111,7 @@ function show_users_list($users, $filter = '', $sortorder = 'realname', $start, 
 	echo $HTML->paging_top($start, $paging, $totalUsers, $rows, '/admin/userlist.php?sortorder='.$sortorder.$filter);
 	echo $HTML->listTableTop($headers, $headerLinks);
 
-	foreach ($users as $key => $uid) {
+	foreach ($users as $uid) {
 		$cells = array();
 		$u = user_get_object($uid);
 		$nextcell = $u->getRealName().' ('.$u->getUnixName().')';
