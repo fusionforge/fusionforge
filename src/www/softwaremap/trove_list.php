@@ -5,7 +5,7 @@
  * Copyright 1999-2001, VA Linux Systems, Inc.
  * Copyright 2009, Roland Mas
  * Copyright 2011, Franck Villaume - Capgemini
- * Copyright 2013-2014, Franck Villaume - TrivialDev
+ * Copyright 2013-2014,2022, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -294,7 +294,7 @@ if ( $cat === 'c' ) {
 			if (group_get_object($row_grp['group_id'])->usesStats()) {
 				print _('Activity Percentile')._(': ').'<strong>'. number_format($row_grp['percentile'],2) .'</strong>';
 				print '<br />';
-				sprintf(_('Activity Ranking: <strong>%d</strong>'), number_format($row_grp['ranking'],2));
+				print _('Activity Ranking')._(': ').'<strong>'. number_format($row_grp['ranking'],2) .'</strong>';
 			}
 			print '<br />'._('Registered'). _(': ') . '<strong>'.date(_('Y-m-d H:i'),$row_grp['register_time']).'</strong>';
 			print "</td></tr></table>\n<hr />\n";
