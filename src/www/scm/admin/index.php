@@ -138,10 +138,11 @@ if (getStringFromRequest('create_repository') && getStringFromRequest('submit'))
 		}
 	}
 
-	if (!$scm_changed)
+	if (!$scm_changed) {
 		// Don't call scm plugin update if their form wasn't displayed
 		// to avoid processing an apparently empty form and reset configuration
 		plugin_hook("scm_admin_update", $hook_params);
+	}
 } elseif (getStringFromRequest('scmhook_submit')) {
 	$hook_params = array();
 	$hook_params['group_id'] = $group_id;

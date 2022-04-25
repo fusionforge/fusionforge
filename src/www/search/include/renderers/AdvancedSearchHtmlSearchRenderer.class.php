@@ -208,8 +208,9 @@ class AdvancedSearchHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 		$res = $renderer->searchQuery->getData($renderer->searchQuery->getRowsPerPage(),$renderer->searchQuery->getOffset());
 
 		if (count($res) > 0) {
-			if ($renderer->searchQuery->getRowsTotalCount() >= $renderer->searchQuery->getRowsPerPage())
+			if ($renderer->searchQuery->getRowsTotalCount() >= $renderer->searchQuery->getRowsPerPage()) {
 				$result .= html_e('em', array(), sprintf(_('Note: only the first %d results for this category are displayed.'), $renderer->searchQuery->getRowsPerPage()));
+			}
 			$result .= $HTML->listTabletop($renderer->tableHeaders);
 			$result .= $renderer->getRows();
 			$result .= $HTML->listTableBottom();
@@ -460,22 +461,25 @@ EOS;
 			$return .= '<fieldset>'."\n";
 			$return .= '<legend>';
 			$return .= '<input type="checkbox" id="'.$key.'_checkall" name="'.$key.'_checkall"';
-			if (getStringFromRequest($key.'_checkall'))
+			if (getStringFromRequest($key.'_checkall')) {
 				$return .= ' checked="checked"';
+			}
 			$return .= ' class="checkall" /><label for="'.$key.'_checkall">'.$group_subsection_names[$key].'</label>';
 			$return .= "\n";
 			$return .= '</legend>';
 
 			if (!is_array($section)) {
 				$return .= '		<input type="checkbox" id="'.$key.'" name="'.$key.'"';
-				if (getStringFromRequest($key))
+				if (getStringFromRequest($key)) {
 					$return .= ' checked="checked"';
+				}
 				$return .= ' class="childCheckBox" /><label for="'.$key.'">'.$group_subsection_names[$key].'</label><br />'."\n";
 			} else {
 				foreach($section as $underkey => $undersection) {
 					$return .= '	<input type="checkbox" id="'.$key.$underkey.'" name="'.$key.$underkey.'"';
-					if (getStringFromRequest($key.$underkey))
+					if (getStringFromRequest($key.$underkey)) {
 						$return .= ' checked="checked"';
+					}
 					$return .= ' /><label for="'.$key.$underkey.'">'.$undersection.'</label><br />'."\n";
 				}
 			}

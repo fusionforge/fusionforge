@@ -43,7 +43,9 @@ $typ = getStringFromRequest('typ');
 $dev_id = getIntFromRequest('dev_id');
 $type = getStringFromRequest('type');
 
-if (!$start || !$end) $z =& $report->getMonthStartArr();
+if (!$start || !$end) {
+	$z =& $report->getMonthStartArr();
+}
 
 if (!$start) {
 	$start = $z[0];
@@ -51,7 +53,9 @@ if (!$start) {
 if (!$end) {
 	$end = $z[count($z)-1];
 }
-if ($end < $start) list($start, $end) = array($end, $start);
+if ($end < $start) {
+	list($start, $end) = array($end, $start);
+}
 
 if ($typ != 'r' && $start == $end) {
 	$error_msg .= _('Start and end dates must be different');

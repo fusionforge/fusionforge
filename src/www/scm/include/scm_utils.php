@@ -106,8 +106,9 @@ function commitstime_graph($group_id, $chartid) {
 	$data = array();
 	while ($row = db_fetch_array($res)) {
 		$data[$row[0]] = $row[1];
-		if (!$firstDateInDB)
+		if (!$firstDateInDB) {
 			$firstDateInDB = $row[0];
+		}
 	}
 
 	$start = $g->getStartDate();

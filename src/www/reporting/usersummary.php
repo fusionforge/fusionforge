@@ -41,14 +41,21 @@ $start = getIntFromRequest('start');
 $end = getIntFromRequest('end');
 $tstat = getStringFromRequest('tstat');
 
-if (!$start || !$end) $z =& $report->getWeekStartArr();
+if (!$start || !$end) {
+	$z =& $report->getWeekStartArr();
+}
+
 if (!$start) {
 	$start = $z[0];
 }
+
 if (!$end) {
 	$end = $z[count($z)-1];
 }
-if ($end < $start) list($start, $end) = array($end, $start);
+
+if ($end < $start) {
+	list($start, $end) = array($end, $start);
+}
 
 if (!$tstat) {
 	$tstat='1';
