@@ -96,7 +96,6 @@ class ArtifactTypes extends FFError {
 				//
 				foreach ($trk[9] AS $fld) {
 					$aef = new ArtifactExtraField($at);
-//print($fld[0])."***|";
 					if (!$aef->create($fld[0], $fld[1], $fld[2], $fld[3], $fld[4])) {
 						$this->setError('Error Creating Extra Field: '.$aef->getErrorMessage());
 						db_rollback();
@@ -106,15 +105,11 @@ class ArtifactTypes extends FFError {
 						//	create each element in the field
 						//
 						foreach ($fld[5] AS $el) {
-//print($el)."**";
-
 							$aefe = new ArtifactExtraFieldElement($aef);
-						/*	 Allow us to provide a list as an element
-							 value - in doing so, we can provide a
-							 status field value for people wanting to
-							 set up custom statuses. The first element
-							 of any given array is the name, the second
-							 is the status_id (0, 1 or 2)*/
+							/* Allow us to provide a list as an element value - in doing so, we can provide a
+							   status field value for people wanting to set up custom statuses. The first element
+							   of any given array is the name, the second is the status_id (0, 1 or 2)
+							 */
 							$el_name = $el;
 							$el_status = 0;
 							if (is_array($el) && $fld[1] == ARTIFACT_EXTRAFIELDTYPE_STATUS) {
@@ -130,9 +125,7 @@ class ArtifactTypes extends FFError {
 					}
 				}
 			}
-
 		}
-
 		db_commit();
 		return true;
 	}

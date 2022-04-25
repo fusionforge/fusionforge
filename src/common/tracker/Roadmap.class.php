@@ -75,12 +75,6 @@ class Roadmap extends FFError {
 			return;
 		}
 
-		/*if (! $this->userCanView()) {
-			$this->setPermissionDeniedError();
-			$this->data_array = null;
-			return false;
-		}*/
-
 		$this->roadmap_id = $roadmap_id;
 		$this->name = '';
 		$this->enable = 1;

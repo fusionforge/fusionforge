@@ -120,7 +120,6 @@ class ArtifactFile extends FFError {
 		//	data validation
 		//
 		if (!$filename || !$filetype || !$filesize || !$file) {
-			//echo '<p>|'.$filename.'|'.$filetype.'|'.$filesize.'|'.$file.'|';
 			$this->setError(_('ArtifactFile')._(': ')._('File, name, type, size are required'));
 			return false;
 		}

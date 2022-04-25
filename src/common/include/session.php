@@ -733,10 +733,7 @@ function session_set_for_authplugin($authpluginname) {
 	// TODO: else... what ?
 
 	$re = RBACEngine::getInstance();
-	//print_r($re->getGlobalRoles());
-	//print_r($re->getPublicRoles());
 	$re->invalidateRoleCaches() ;
-	//print_r($re->getAvailableRoles());
 }
 
 //TODO - this should be generalized and used for pre.php,
