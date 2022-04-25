@@ -57,7 +57,6 @@ class TaskBoardPlugin extends Plugin {
 				$params['DIRS'][] = util_make_uri('/plugins/'.$this->name.'/index.php?group_id='.$group_id);
 				$params['TOOLTIPS'][] = _('Agile Scrum and Kanban display of existing artifacts.');
 				if (session_loggedin()) {
-					$user = session_get_user();
 					$userperm = $group->getPermission();
 					if ($userperm->isAdmin()) {
 						$params['ADMIN'][] = util_make_uri('/plugins/'.$this->name.'/admin/?&group_id='.$group_id);
