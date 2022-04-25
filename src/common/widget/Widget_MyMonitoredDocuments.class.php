@@ -81,7 +81,7 @@ class Widget_MyMonitoredDocuments extends Widget {
 					$html_hdr = $HTML->multiTableRow(array('class' => 'boxitem'), $cells);
 					$html = '';
 					if (!$hide_now) {
-						foreach ($monitorElementDocGroupIds as $key => $monitorElementDocGroupId) {
+						foreach ($monitorElementDocGroupIds as $monitorElementDocGroupId) {
 							$documentGroupObject = documentgroup_get_object($monitorElementDocGroupId, $distinctMonitorGroupId);
 							$cells = array();
 							$cells[] = array('&nbsp;&nbsp;&nbsp;-&nbsp;(d)&nbsp;'.util_make_link('/docman/?group_id='.$distinctMonitorGroupId.'&view=listfile&dirid='.$monitorElementDocGroupId, stripslashes($documentGroupObject->getName())), 'style' => 'width:99%');
