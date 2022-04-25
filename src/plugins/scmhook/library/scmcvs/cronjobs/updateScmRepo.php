@@ -40,7 +40,6 @@ class ScmCvsUpdateScmRepo {
 		$group = group_get_object($group_id);
 		$scmhookPlugin = new scmhookPlugin;
 		$hooksAvailable = $scmhookPlugin->getAvailableHooks($group_id);
-		$unixname = $group->getUnixName();
 
 		if (is_dir($cvsdir_root)) {
 			@unlink($cvsdir_root.'/hooks/pre-commit');
