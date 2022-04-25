@@ -63,7 +63,6 @@ class SkillHtmlSearchRenderer extends HtmlSearchRenderer {
 	 */
 	function getRows() {
 		$result = $this->searchQuery->getData($this->searchQuery->getRowsPerPage(),$this->searchQuery->getOffset());
-		$rowsCount = count($result);
 
 		$monthArray = array();
 		for($i = 1; $i <= 12; $i++) {

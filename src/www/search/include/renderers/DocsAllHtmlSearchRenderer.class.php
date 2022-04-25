@@ -77,15 +77,12 @@ class DocsAllHtmlSearchRenderer extends HtmlSearchRenderer {
 	function getRows() {
 		global $HTML;
 		$result = $this->searchQuery->getData($this->searchQuery->getRowsPerPage(),$this->searchQuery->getOffset());
-		$rowsCount = count($result);
 
 		$return = '';
 
 		$lastGroupID = null;
 		$lastDocGroupID = null;
 
-		$rowColor = 0;
-		$i = 0;
 		foreach ($result as $row) {
 			$cells = array();
 			$document = document_get_object($row['docid'], $row['group_id']);
@@ -93,7 +90,6 @@ class DocsAllHtmlSearchRenderer extends HtmlSearchRenderer {
 			if ($lastGroupID != $document->Group->getID()) {
 				$cells[] = array(html_image('ic/home16b.png', 10, 12).html_e('strong', array(), util_make_link('/docman/?group_id='.$document->Group->getID(),$currentDocGroup)), 'colspan' => 4);
 				$lastGroupID = $document->Group->getID();
-				$rowColor = 0;
 				$return .= $HTML->multiTableRow(array(), $cells);
 			}
 			$cells = array();
@@ -112,7 +108,6 @@ class DocsAllHtmlSearchRenderer extends HtmlSearchRenderer {
 			$cells[][] = $row['title'];
 			$cells[][] = $row['description'];
 			$return .= $HTML->multiTableRow(array(), $cells);
-			$rowColor++;
 		}
 		return $return;
 	}

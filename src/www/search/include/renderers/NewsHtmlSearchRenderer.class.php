@@ -55,7 +55,6 @@ class NewsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	 */
 	function getRows() {
 		$result = $this->searchQuery->getData($this->searchQuery->getRowsPerPage(),$this->searchQuery->getOffset());
-		$rowsCount = count($result);
 
 		$return = '';
 		foreach ($result as $row) {
