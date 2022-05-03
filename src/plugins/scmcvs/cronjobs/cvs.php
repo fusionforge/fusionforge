@@ -219,7 +219,7 @@ function add_cvstracker($unix_group_name) {
 	// now make sure that if cvs version is 1.12, "UseNewInfoFmtStrings=yes" line
 	// MUST be present in CVSROOT/config, or else cvstracker won't work
 	if ($cvs_binary_version == "1.12") {
-		$config_file = $loginfo_file=$cvsdir_prefix.'/'.$unix_group_name.'/CVSROOT/config';
+		$config_file = $cvsdir_prefix.'/'.$unix_group_name.'/CVSROOT/config';
 		if (!is_file($config_file)) {
 			echo "Couldn't get CVSROOT/config for $unix_group_name";
 			return;
