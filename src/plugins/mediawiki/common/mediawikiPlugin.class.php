@@ -3,7 +3,7 @@
  * MediaWikiPlugin Class
  *
  * Copyright 2000-2011, Fusionforge Team
- * Copyright 2012,2014,2016-2017, Franck Villaume - TrivialDev
+ * Copyright 2012,2014,2016-2017,2022, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge.
@@ -116,7 +116,7 @@ _('This plugin allows each project to embed Mediawiki under a tab.');
 			if ( $project->usesPlugin($this->name)) {
 				$params['result'] .= '<div class="public-area-box">';
 				$params['result'] .= util_make_link('/plugins/'.$this->name.'/wiki/'.$project->getUnixName().'/index.php',
-							html_abs_image(util_make_url('/plugins/'.$this->name.'/wiki/'.$project->getUnixName().'/skins/monobook/wiki.png'),'20','20',array('alt'=>'Mediawiki')).
+							html_abs_image(util_make_url('/plugins/'.$this->name.'/wiki.png'),'20','20',array('alt'=>'Mediawiki')).
 							' Mediawiki');
 				$params['result'] .= '</div>';
 			}
@@ -436,7 +436,7 @@ _('This plugin allows each project to embed Mediawiki under a tab.');
                                                 }
                                                 $title .= $recentchanges['title'];
                                                 $result['title'] = $title;
-						$result['icon'] = html_abs_image('/plugins/'.$this->name.'/wiki/'.$project->getUnixName().'/skins/monobook/wiki.png','20','20',array('alt'=>'Mediawiki'));
+						$result['icon'] = html_abs_image('/plugins/'.$this->name.'/wiki.png','20','20',array('alt'=>'Mediawiki'));
 						if (isset($recentchanges['user'])) {
 	                                        	$userObject = user_get_object_by_name(strtolower($recentchanges['user']));
                                         		if (is_a($userObject, 'FFUser')) {

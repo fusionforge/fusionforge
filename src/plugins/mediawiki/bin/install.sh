@@ -49,6 +49,7 @@ case "$1" in
 		rm -f $mediawikidir/skins/FusionForge.php //remove the old autoload mechanism
 		ln -nfs $plugindir/mediawiki-skin $mediawikidir/skins/
 		ln -nfs $plugindir/MonoBookFusionForge125 $mediawikidir/skins/
+		ln -nfs $plugindir/MonoBookFusionForge125/wiki.png $plugindir/www/
 	;;
 	triggered)
 		case $2 in
