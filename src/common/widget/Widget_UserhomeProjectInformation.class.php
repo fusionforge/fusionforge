@@ -57,7 +57,7 @@ class Widget_UserhomeProjectInformation extends Widget {
 				$start = false;
 			}
 
-			$project_link = util_make_link_g ($p->getUnixName(),$p->getID(),$p->getPublicName());
+			$project_link = util_make_link_g($p->getUnixName(),$p->getID(),$p->getPublicName());
 			$project_uri = util_make_url_g($p->getUnixName());
 			// sioc:UserGroups for all members of a project are named after /projects/A_PROJECT/members/
 			$usergroup_uri = $project_uri .'members/';
@@ -78,14 +78,13 @@ class Widget_UserhomeProjectInformation extends Widget {
 				}
 			}
 
-			$html .= ('<br />' . $project_link .' ('.htmlspecialchars (implode (', ', $role_names)).')');
+			$html .= ('<br />' .$project_link.' ('.htmlspecialchars(implode(', ',$role_names)).')');
 			$html .= "\n";
 
-			if (forge_check_perm_for_user ($user, 'project_admin', $p->getID())) {
-				$html .= html_e('div', array('rev' => 'doap:maintainer', 'resource' => '#me'));
-			}
-			else {
-				$html .= html_e('div', array('rev' => 'doap:developer', 'resource' => '#me'));
+			if (forge_check_perm_for_user($user, 'project_admin', $p->getID())) {
+				$html .= html_e('div', array('rev' => 'doap:maintainer', 'resource' => '#me'), '', false);
+			} else {
+				$html .= html_e('div', array('rev' => 'doap:developer', 'resource' => '#me'), '', false);
 			}
 
 			$html .= $sioc_has_function_close."\n";  // sioc:has_function
