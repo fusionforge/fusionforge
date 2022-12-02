@@ -3,6 +3,7 @@
  * FusionForge Effort Unit Set
  *
  * Copyright 2017, Stéphane-Eymeric Bredthauer - TrivialDev
+ * Copyright 2022, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge. FusionForge is free software;
  * you can redistribute it and/or modify it under the terms of the
@@ -118,11 +119,11 @@ class EffortUnitSet extends FFError {
 	/**
 	 * create - Create new Effort Unit Set in the database.
 	 *
-	 * @param	bool	$is_autoconvert		set if unit is auto convert
-	 * @param	array	$importData			For import
+	 * @param	int	$is_autoconvert		1 = set if unit is auto convert, default 0
+	 * @param	array	$importData		For import
 	 * @return	bool	success or not
 	 */
-	function create($is_autoconvert = false, $importData = array()) {
+	function create($is_autoconvert = 0, $importData = array()) {
 		if(array_key_exists('user', $importData)){
 			$user = $importData['user'];
 		} else {
@@ -170,7 +171,7 @@ class EffortUnitSet extends FFError {
 				break;
 		}
 		db_begin();
-		$res = db_query_params($query,$params);
+		$res = db_query_params($query, $params);
 		$id = db_insertid($res, 'effort_unit_set', 'unit_set_id');
 
 		if (!$res || !$id) {
