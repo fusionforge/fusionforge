@@ -1,7 +1,7 @@
 <?php
 /**
  * Copyright (C) 2013 Vitaliy Pylypiv <vitaliy.pylypiv@gmail.com>
- * Copyright 2015-2016, Franck Villaume - TrivialDev
+ * Copyright 2015-2016, 2022, Franck Villaume - TrivialDev
  *
  * This file is part of FusionForge.
  *
@@ -28,10 +28,12 @@ class TaskBoardPlugin extends Plugin {
 		$this->name = 'taskboard';
 		$this->text = _('Task Board'); // To show in the tabs, use...
 		$this->pkg_desc = _('Agile Task Board: Supports Scrum and Kanban methodologies.');
-		$this->hooks[] = 'project_admin_plugins'; // to show up in the admin page fro group
-		$this->hooks[] = 'groupmenu';
-		$this->hooks[] = 'groupisactivecheckbox'; // The "use ..." checkbox in editgroupinfo
-		$this->hooks[] = 'groupisactivecheckboxpost'; //
+		$this->_addHook('project_admin_plugins'); // to show up in the admin page for group
+		$this->_addHook('groupmenu') ;	// To put into the project tabs
+		$this->_addHook('groupisactivecheckbox') ; // The "use ..." checkbox in editgroupinfo
+		$this->_addHook('groupisactivecheckboxpost'); //
+		$this->_addHook('clone_project_from_template');
+
 	}
 
 	function CallHook($hookname, &$params) {
@@ -68,6 +70,9 @@ class TaskBoardPlugin extends Plugin {
 					}
 				}
 			}
+		} elseif ($hookname == 'clone_project_from_template') {
+			$template = $params['template'];
+			$project = $params['project'];
 		}
 		return true;
 	}
