@@ -471,8 +471,8 @@ function getAvailableEffortUnitSets(&$Object = null) {
 			}
 			// no break
 		case EFFORTUNITSET_FORGE_LEVEL:
-			$Object = new FusionForge;
-			$id = getEffortUnitSetForLevel($Object, EFFORTUNITSET_FORGE_LEVEL);
+			$lObject = new FusionForge;
+			$id = getEffortUnitSetForLevel($lObject, EFFORTUNITSET_FORGE_LEVEL);
 			if ($id) {
 				$effortUnitSets[$id] = _('Forge level Effort Unit Set');
 			}
