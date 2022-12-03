@@ -148,7 +148,7 @@ if (!$atid && !$group_id) {
 	// Tracker level
 }
 
-function show_units(&$effortUnitSet){
+function show_units(&$effortUnitSet) {
 	global $HTML;
 
 	$currentURL = getStringFromServer('PHP_SELF');
@@ -173,7 +173,7 @@ function show_units(&$effortUnitSet){
 					break;
 				case EFFORTUNITSET_PROJECT_LEVEL:
 					echo sprintf(_('Project “%s” level Effort Unit Set'),$effortUnitSet->getGroup()->getPublicName());
-						$isEditable = true;
+					$isEditable = true;
 					break;
 			}
 			echo html_ac(html_ap() - 1);
