@@ -609,6 +609,7 @@ class EffortUnit extends FFError {
 		return true;
 	}
 }
+
 function getEffortUnitById($unit_id){
 	$res = db_query_params ('SELECT * FROM effort_unit INNER JOIN effort_unit_set USING (unit_set_id) WHERE unit_id=$1',
 			array($unit_id));
