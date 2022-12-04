@@ -327,10 +327,10 @@ class EffortUnit extends FFError {
 
 	/**
 	 * update - update this Effort Unit, name or definition.
-	 * @param	string	$name				The name of the unit.
+	 * @param	string	$name			The name of the unit.
 	 * @param	int	$conversion_factor	The conversion factor to define the current unit.
-	 * @param	int	$to_unit			The unity used for the definition of the current unit.
-	 * @param	array	$importData			For import
+	 * @param	int	$to_unit		The unity used for the definition of the current unit.
+	 * @param	array	$importData		For import
 	 *
 	 * @return	bool	success or not.
 	 */
@@ -577,7 +577,7 @@ class EffortUnit extends FFError {
 		$effortUnitFactory = new EffortUnitFactory($this->EffortUnitSet);
 		$units = $effortUnitFactory->getUnits();
 		foreach ($units as $unit) {
-			if ($unit->getToUnit()==$this->getID()) {
+			if ($unit->getToUnit() == $this->getID()) {
 				$unitsDependingOn[] = $unit;
 				$unitsDependingOn = array_merge($unitsDependingOn, $unit->getUnitsDependingOn());
 			}
