@@ -148,6 +148,11 @@ function session_check_session_cookie($session_cookie) {
 		error_log("session_check_session_cookie failed: expired !");
 		return false;
 	}
+	$u = user_get_object($user_id);
+	if ($u->status == 'D') {
+		error_log("Deleted user ".$u->getUnixName()." tries to log in");
+		return false;
+	}
 
 	return $user_id;
 }

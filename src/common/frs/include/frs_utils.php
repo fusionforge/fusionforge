@@ -171,7 +171,7 @@ function frs_add_file_from_form($release, $type_id, $processor_id, $release_date
 	} elseif ($release->getFRSPackage()->getGroup()->usesDocman() && $docman_fileid) {
 		$doc = new Document($release->getFRSPackage()->getGroup(), $docman_fileid);
 		$fname = $doc->getFileName();
-		$infile = DocumentStorage::instance()->get($docman_fileid);
+		$infile = DocumentStorage::instance()->get($doc->getSerialIDVersion());
 		$move = false;
 		$filechecks = true;
 	} elseif ($userfile && $userfile['error'] == UPLOAD_ERR_NO_FILE) {
