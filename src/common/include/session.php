@@ -149,7 +149,7 @@ function session_check_session_cookie($session_cookie) {
 		return false;
 	}
 	$u = user_get_object($user_id);
-	if ($u->status == 'D') {
+	if ($u->getStatus() == 'D') {
 		error_log("Deleted user ".$u->getUnixName()." tries to log in");
 		return false;
 	}
