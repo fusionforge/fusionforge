@@ -3,6 +3,7 @@
  * Project Admin page to edit units
  *
  * Copyright 2017, Stéphane-Eymeric Bredthauer - TrivialDev
+ * Copyright 2023, Franck Villaume - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -61,7 +62,6 @@ if (!$atid && !$group_id) {
 	if (!$perm || !is_object($perm) || !$perm->isArtifactAdmin()) {
 		exit_permission_denied();
 	}
-
 
 	$title = _('Effort Units for project').' '.$group->getPublicName();
 	$headerArr = array('title' => $title, 'group' => $group->getID());
@@ -265,16 +265,13 @@ function show_units(&$effortUnitSet) {
 		echo $HTML->listTableTop($titleArray, $linksArray, $class, $id, $thClassArray, $thTitleArray, $thOtherAttrsArray);
 		foreach($units as $unit) {
 			$cells = array();
+			$content = '';
 			if ($isEditable) {
 				$pos =  $unit->getPosition();
-				if ($pos==1) {
-					$content = html_image('ic/btn_up.png', 19, 18, array('alt'=>'Up'));
-				} else {
-					$content = util_make_link($currentURL.'?'.($urlParameters ? $urlParameters.'&':'').'unit_id='.$unit->getID().'&new_pos='.($pos - 1).'&function=updownorder', html_image('ic/btn_up.png', 19, 18, array('alt'=>'Up', 'title'=>_('Move Up this custom field element'))));
+				if ($pos !=1) {
+					$content .= util_make_link($currentURL.'?'.($urlParameters ? $urlParameters.'&':'').'unit_id='.$unit->getID().'&new_pos='.($pos - 1).'&function=updownorder', html_image('ic/btn_up.png', 19, 18, array('alt'=>'Up', 'title'=>_('Move Up this custom field element'))));
 				}
-				if ($pos == count($units)) {
-					$content .= html_image('ic/btn_down.png', 19, 18, array('alt'=>'Down'));
-				} else {
+				if ($pos != count($units)) {
 					$content .= util_make_link($currentURL.'?'.($urlParameters ? $urlParameters.'&':'').'unit_id='.$unit->getID().'&new_pos='.($pos + 1).'&function=updownorder', html_image('ic/btn_down.png', 19, 18, array('alt'=>'Down', 'title'=>_('Move Down this custom field element'))));
 				}
 				$cells[] = array($content, 'class'=>'align-center');
