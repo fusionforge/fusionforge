@@ -29,11 +29,10 @@ require_once $gfcommon.'tracker/EffortUnitFactory.class.php';
 require_once $gfcommon.'tracker/include/ArtifactTypeHtml.class.php';
 require_once $gfcommon.'tracker/include/ArtifactTypeFactoryHtml.class.php';
 
-
 global $HTML, $error_msg, $feedback;
 
-$group_id = getIntFromRequest('group_id',false);
-$atid= getIntFromRequest('atid',false);
+$group_id = getIntFromRequest('group_id', false);
+$atid= getIntFromRequest('atid', false);
 
 $object = null;
 $group = false;
@@ -356,7 +355,7 @@ function postadd_unit(&$effortUnitSet){
 	return true;
 }
 
-function edit_unit (&$effortUnitSet) {
+function edit_unit(&$effortUnitSet) {
 	global $HTML;
 	$currentURL = getStringFromServer('PHP_SELF');
 	$urlParameters = urlParameters($effortUnitSet);
