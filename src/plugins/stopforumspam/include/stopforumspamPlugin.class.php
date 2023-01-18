@@ -24,20 +24,21 @@ class stopforumspamPlugin extends Plugin {
 		parent::__construct($id) ;
 		$this->name = "stopforumspam";
 		$this->text = "StopForumSpam"; // To show in the tabs, use...
+		$this->_addHook('account_register_check');
 	}
 
 	function CallHook($hookname, &$params) {
 		global $use_stopforumspamplugin,$G_SESSION,$HTML;
-		if ($hookname == "usermenu") {
-			$text = $this->text; // this is what shows in the tab
-			if ($G_SESSION->usesPlugin("stopforumspam")) {
-				$param = '?type=user&id=' . $G_SESSION->getId() . '&pluginname=' . $this->name; // we indicate the part we're calling is the user one
-				echo $HTML->PrintSubMenu (array ($text),
-										  array ('/plugins/stopforumspam/index.php' . $param ));
-				array ('/plugins/stopforumspam/index.php' . $param ));
-		}
-		elseif ($hookname == "blahblahblah") {
-			// ...
+		if ($hookname == "account_register_check") {
+ 		}
+	}
+
+	function check_data($datatype, $entry) {
+		$res = db_query_params ('SELECT count(last_seen) FROM plugin_stopforumspam_known_entries WHERE datatype=$1 AND entry=$2', array($datatype, $data));
+		if (db_result($res,0,0) > 0) {
+			return true;
+		} else {
+			return false;
 		}
 	}
 }
