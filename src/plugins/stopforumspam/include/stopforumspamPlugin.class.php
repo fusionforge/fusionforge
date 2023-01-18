@@ -33,9 +33,9 @@ class stopforumspamPlugin extends Plugin {
 			if ($G_SESSION->usesPlugin("stopforumspam")) {
 				$param = '?type=user&id=' . $G_SESSION->getId() . '&pluginname=' . $this->name; // we indicate the part we're calling is the user one
 				echo $HTML->PrintSubMenu (array ($text),
-						  array ('/plugins/stopforumspam/index.php' . $param ));
-
-			}
+										  array ('/plugins/stopforumspam/index.php' . $param ));
+				array ('/plugins/stopforumspam/index.php' . $param ));
+		}
 		elseif ($hookname == "blahblahblah") {
 			// ...
 		}
