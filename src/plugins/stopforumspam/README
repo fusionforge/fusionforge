@@ -1,0 +1,4 @@
+StopForumSpam plugin
+
+This plugin uses the stopforumspam.com blocklists to prevent known
+spammers from registering accounts on the FusionForge site.

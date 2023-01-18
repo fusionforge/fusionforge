@@ -1,0 +1,7 @@
+#
+# Regular cron jobs for the plugin-stopforumspam package
+#
+PATH=@bindir@:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+
+# Fetch data dumps from stopforumspam.com
+58 * * * * root forge_run_plugin_job stopforumspam fetch-data.php
