@@ -87,6 +87,19 @@ if (getStringFromRequest('submit')) {
 		plugin_hook('captcha_check', $params);
 	}
 
+	$params = array();
+	$params['email'] = $email;
+	$params['block'] = false;
+	plugin_hook('account_register_checks', $params);
+	if ($params['block']) {
+			site_header(array('title'=>_('Account registration blocked')));
+			foreach ($params['error'] as $e) {
+				echo '<p>'.$HTML->error_msg($e).'</p>';
+			}
+			site_footer();
+			exit;
+	}
+
 	if ($valide) {
 		$activate_immediately = getIntFromRequest('activate_immediately');
 		if (($activate_immediately == 1) &&

@@ -24,12 +24,30 @@ class stopforumspamPlugin extends Plugin {
 		parent::__construct($id) ;
 		$this->name = "stopforumspam";
 		$this->text = "StopForumSpam"; // To show in the tabs, use...
-		$this->_addHook('account_register_check');
+		$this->_addHook('account_register_checks');
 	}
 
 	function CallHook($hookname, &$params) {
 		global $use_stopforumspamplugin,$G_SESSION,$HTML;
-		if ($hookname == "account_register_check") {
+		if (!in_array('error',$params)) {
+			$params['error'] = array();
+		}
+		if ($hookname == "account_register_checks") {
+			$email = $params['email'];
+			if ($this->check_data($email,'email')) {
+				$params['block'] = true;
+				array_push($params['error'],sprintf(_("Email %s blocked by stopforumspam plugin"),htmlspecialchars($email)));
+			}
+			$ip = $_SERVER['REMOTE_ADDR'];
+			if (preg_match(':',$ip)) {
+				$family = "ipv6";
+			} else {
+				$family = "ipv4";
+			}
+			if ($this->check_data($ip,$family)) {
+				$params['block'] = true;
+				array_push($params['error'],sprintf(_("IP address %s blocked by stopforumspam plugin"),htmlspecialchars($ip)));
+			}
  		}
 	}
 
