@@ -29,11 +29,11 @@ require_once $gfcommon.'include/cron_utils.php';
 $sources = array(
 	"email" => array(
 		"1day" => array(
-			"refreshperiod" => 3500,
+			"refreshperiod" => 3500, // Slightly less than one hour
 			"url" => "https://www.stopforumspam.com/downloads/listed_email_1.gz",
 			),
 		"365days" => array(
-			"refreshperiod" => 86000,
+			"refreshperiod" => 86000, // Slightly less than one day
 			"url" => "https://www.stopforumspam.com/downloads/listed_email_365.gz",
 			),
 		),
