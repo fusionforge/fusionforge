@@ -41,10 +41,12 @@ class stopforumspamPlugin extends Plugin {
 			$ip = $_SERVER['REMOTE_ADDR'];
 			if (preg_match(':',$ip)) {
 				$family = "ipv6";
+				$check_ip = true;
 			} else {
 				$family = "ipv4";
+				$check_ip = false;
 			}
-			if ($this->check_data($ip,$family)) {
+			if ($check_ip && $this->check_data($ip,$family)) {
 				$params['block'] = true;
 				array_push($params['error'],sprintf(_("IP address %s blocked by stopforumspam plugin"),htmlspecialchars($ip)));
 			}
