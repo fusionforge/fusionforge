@@ -65,10 +65,6 @@ $now = time();
 foreach ($sources as $type => $periods) {
 	foreach ($periods as $period => $data) {
 
-		if ($period == "365days") {
-			continue;
-		}
-
 		$res = db_query_params ('SELECT last_fetch FROM plugin_stopforumspam_last_fetch WHERE datatype=$1 AND period=$2', array($type, $period));
 
 		if (!$res) {
@@ -87,13 +83,8 @@ foreach ($sources as $type => $periods) {
 			continue;
 		}
 
-		$ch = curl_init();
-		curl_setopt($ch, CURLOPT_URL, $data['url']);
-		$gzbody = curl_exec($ch);
-		$body = gzinflate($gzbody);
-
-		$line = strtok($body, PHP_EOL);
-		while ($line !== FALSE) {
+        $fp = fopen('compress.zlib://'.$data['url'],'r');
+		while (($line = fgets($fp, 4096)) !== false) {
 			$res = db_query_params ('SELECT count(last_seen) FROM plugin_stopforumspam_known_entries WHERE datatype=$1 AND entry=$2', array($type, $line));
 			if (db_result($res,0,0) > 0) {
 				db_query_params ('UPDATE plugin_stopforumspam_known_entries SET last_seen=$1 WHERE datatype=$2 AND entry=$3', array($now, $type, $line));
@@ -102,6 +93,18 @@ foreach ($sources as $type => $periods) {
 			}
 			$line = strtok(PHP_EOL);
 		}
+
+		$res = db_query_params ('SELECT count(last_fetch) FROM plugin_stopforumspam_last_fetch WHERE datatype=$1 AND period=$2', array($type, $period));
+		if (db_result($res,0,0) > 0) {
+			db_query_params ('UPDATE plugin_stopforumspam_last_fetch SET last_fetch=$1 WHERE datatype=$2 AND period=$3', array($now, $type, $period));
+		} else {
+			db_query_params ('INSERT INTO plugin_stopforumspam_last_fetch (datatype, period, last_fetch) VALUES ($1, $2, $3)', array($type, $period, $now));
+		}
+
+
+
+
+
 	}
 }
 
