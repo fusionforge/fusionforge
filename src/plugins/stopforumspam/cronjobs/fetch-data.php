@@ -85,25 +85,10 @@ foreach ($sources as $type => $periods) {
 
         $fp = fopen('compress.zlib://'.$data['url'],'r');
 		while (($line = fgets($fp, 4096)) !== false) {
-			$res = db_query_params ('SELECT count(last_seen) FROM plugin_stopforumspam_known_entries WHERE datatype=$1 AND entry=$2', array($type, $line));
-			if (db_result($res,0,0) > 0) {
-				db_query_params ('UPDATE plugin_stopforumspam_known_entries SET last_seen=$1 WHERE datatype=$2 AND entry=$3', array($now, $type, $line));
-			} else {
-				db_query_params ('INSERT INTO plugin_stopforumspam_known_entries (datatype, entry, last_seen) VALUES ($1, $2, $3)', array($type, $line, $now));
-			}
-			$line = strtok(PHP_EOL);
+			db_query_params ('INSERT INTO plugin_stopforumspam_known_entries (datatype, entry, last_seen) VALUES ($1, $2, $3) ON CONFLICT (datatype,entry) DO UPDATE SET last_seen=$3', array($type, $line, $now));
 		}
 
-		$res = db_query_params ('SELECT count(last_fetch) FROM plugin_stopforumspam_last_fetch WHERE datatype=$1 AND period=$2', array($type, $period));
-		if (db_result($res,0,0) > 0) {
-			db_query_params ('UPDATE plugin_stopforumspam_last_fetch SET last_fetch=$1 WHERE datatype=$2 AND period=$3', array($now, $type, $period));
-		} else {
-			db_query_params ('INSERT INTO plugin_stopforumspam_last_fetch (datatype, period, last_fetch) VALUES ($1, $2, $3)', array($type, $period, $now));
-		}
-
-
-
-
+		db_query_params ('INSERT INTO plugin_stopforumspam_last_fetch (datatype, period, last_fetch) VALUES ($1, $2, $3) ON CONFLICT (datatype, period) DO UPDATE SET last_fetch=$3', array($type, $period, $now));
 
 	}
 }
