@@ -61,6 +61,8 @@ $sources = array(
 
 $now = time();
 
+db_prepare ('INSERT INTO plugin_stopforumspam_known_entries (datatype, entry, last_seen) VALUES ($1, $2, $3) ON CONFLICT (datatype,entry) DO UPDATE SET last_seen=$3', 'insert_into_plugin_stopforumspam_known_entries');
+
 // Fetch and store data from stopforumspam.com
 foreach ($sources as $type => $periods) {
 	foreach ($periods as $period => $data) {
@@ -82,8 +84,6 @@ foreach ($sources as $type => $periods) {
 		if ($now - $lastfetch < $data['refreshperiod']) {
 			continue;
 		}
-
-		db_prepare ('INSERT INTO plugin_stopforumspam_known_entries (datatype, entry, last_seen) VALUES ($1, $2, $3) ON CONFLICT (datatype,entry) DO UPDATE SET last_seen=$3', 'insert_into_plugin_stopforumspam_known_entries');
 
         $fp = fopen('compress.zlib://'.$data['url'],'r');
 		while (($line = fgets($fp, 4096)) !== false) {
