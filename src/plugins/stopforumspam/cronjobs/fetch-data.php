@@ -26,35 +26,50 @@ require_once dirname(__FILE__) . '/../../../www/env.inc.php';
 require_once $gfcommon.'include/pre.php';
 require_once $gfcommon.'include/cron_utils.php';
 
+$hour = 3600;
+$day = 86400;
+
 $sources = array(
 	"email" => array(
 		"1day" => array(
-			"refreshperiod" => 3500, // Slightly less than one hour
+			"refreshperiod" => 0.9*$hour, // Slightly less than one hour
 			"url" => "https://www.stopforumspam.com/downloads/listed_email_1.gz",
 			),
-		"365days" => array(
-			"refreshperiod" => 86000, // Slightly less than one day
-			"url" => "https://www.stopforumspam.com/downloads/listed_email_365.gz",
+		"30days" => array(
+			"refreshperiod" => 0.99*$day, // Slightly less than one day
+			"url" => "https://www.stopforumspam.com/downloads/listed_email_30.gz",
+			),
+		"90days" => array(
+			"refreshperiod" => 29.99*$day, // Slightly less than one month
+			"url" => "https://www.stopforumspam.com/downloads/listed_email_90.gz",
 			),
 		),
 	"ipv4" => array(
 		"1day" => array(
-			"refreshperiod" => 3500,
+			"refreshperiod" => 0.9*$hour,
 			"url" => "https://www.stopforumspam.com/downloads/listed_ip_1.gz",
 			),
-		"365days" => array(
-			"refreshperiod" => 86000,
-			"url" => "https://www.stopforumspam.com/downloads/listed_ip_365.gz",
+		"30days" => array(
+			"refreshperiod" => 0.99*$day,
+			"url" => "https://www.stopforumspam.com/downloads/listed_ip_30.gz",
+			),
+		"90days" => array(
+			"refreshperiod" => 29.99*$day,
+			"url" => "https://www.stopforumspam.com/downloads/listed_ip_90.gz",
 			),
 		),
 	"ipv6" => array(
 		"1day" => array(
-			"refreshperiod" => 3500,
+			"refreshperiod" => 0.9*$hour,
 			"url" => "https://www.stopforumspam.com/downloads/listed_ip_1_ipv6.gz",
 			),
-		"365days" => array(
-			"refreshperiod" => 86000,
-			"url" => "https://www.stopforumspam.com/downloads/listed_ip_365_ipv6.gz",
+		"30days" => array(
+			"refreshperiod" => 0.99*$day,
+			"url" => "https://www.stopforumspam.com/downloads/listed_ip_30_ipv6.gz",
+			),
+		"90days" => array(
+			"refreshperiod" => 29.99*$day,
+			"url" => "https://www.stopforumspam.com/downloads/listed_ip_90_ipv6.gz",
 			),
 		),
 	);
@@ -97,7 +112,7 @@ foreach ($sources as $type => $periods) {
 
 // Expire old data
 
-$expire_horizon = $now - 7*86400;
+$expire_horizon = $now - 365*$day;
 
 $res = db_query_params ('DELETE FROM plugin_stopforumspam_known_entries WHERE last_seen < $1', array($expire_horizon));
 
