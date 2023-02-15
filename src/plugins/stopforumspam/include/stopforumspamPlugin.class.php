@@ -98,7 +98,7 @@ class stopforumspamPlugin extends Plugin {
 	}
 
 	function check_data($datatype, $entry) {
-		$res = db_query_params ('SELECT count(last_seen) FROM plugin_stopforumspam_known_entries WHERE datatype=$1 AND entry=$2', array($datatype, $data));
+		$res = db_query_params ('SELECT count(last_seen) FROM plugin_stopforumspam_known_entries WHERE datatype=$1 AND entry=$2', array($datatype, $entry));
 		if (db_result($res,0,0) > 0) {
 			return true;
 		} else {
