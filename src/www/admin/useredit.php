@@ -249,7 +249,7 @@ echo html_build_select_box_from_arrays(
 
 	$params = array();
 	$params['user'] = $u;
-	plugin_hook_by_reference('delete_user_form', $params);
+	<?php plugin_hook_by_reference('delete_user_form', $params); ?>
 
 	<input type="submit" name="delete_user" value="<?php echo _('Delete'); ?>" /><br />&nbsp;
 </td>
