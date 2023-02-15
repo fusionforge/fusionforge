@@ -247,9 +247,12 @@ echo html_build_select_box_from_arrays(
 	<input id="delete-contributions"  type="checkbox" name="delete_contributions" value="1" />
 	<label for="delete-contributions"><?php echo _('I want to delete their contributions too'); ?></label>&nbsp;
 
+	
+	<?php
 	$params = array();
 	$params['user'] = $u;
-	<?php plugin_hook_by_reference('delete_user_form', $params); ?>
+	plugin_hook_by_reference('delete_user_form', $params);
+	?>
 
 	<input type="submit" name="delete_user" value="<?php echo _('Delete'); ?>" /><br />&nbsp;
 </td>
