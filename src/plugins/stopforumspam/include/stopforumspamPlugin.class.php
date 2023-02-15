@@ -92,6 +92,8 @@ class stopforumspamPlugin extends Plugin {
 			$url .= "&email=".urlencode($user->getEmail());
 			$url .= "&api_key=$api_key";
 			file_get_contents($url);
+
+			db_query_params ('INSERT INTO plugin_stopforumspam_known_entries (datatype, entry, last_seen) VALUES ($1,$2,$3) ON CONFLICT (datatype,entry) DO UPDATE SET last_seen=$3', array('email',$user->getEmail(), time()));
 		}
 	}
 
