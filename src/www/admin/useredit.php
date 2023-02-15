@@ -50,6 +50,16 @@ if (!$u || !is_object($u)) {
 
 if (getStringFromRequest('delete_user') != '') {
 	if (getStringFromRequest('confirm_delete') == '1') {
+		$params = array();
+		$params['user'] = $u;
+		plugin_hook_by_reference('delete_user_form_submit', $params);
+		exit();
+
+		if (getStringFromRequest('delete_contributions') == '1') {
+			$delete_contributions = true;
+		} else {
+			$delete_contributions = false;
+		}
 		// delete user
 		if (!$u->delete(true)) {
 			exit_error( _('Could Not Complete Operation')._(': ').$u->getErrorMessage(),'admin');
@@ -234,6 +244,13 @@ echo html_build_select_box_from_arrays(
 <td colspan="2">
 	<input id="confirm-delete"  type="checkbox" name="confirm_delete" value="1" />
 	<label for="confirm-delete"><?php echo _('I want to delete this user'); ?></label>&nbsp;
+	<input id="delete-contributions"  type="checkbox" name="delete_contributions" value="1" />
+	<label for="delete-contributions"><?php echo _('I want to delete their contributions too'); ?></label>&nbsp;
+
+	$params = array();
+	$params['user'] = $u;
+	plugin_hook_by_reference('delete_user_form', $params);
+
 	<input type="submit" name="delete_user" value="<?php echo _('Delete'); ?>" /><br />&nbsp;
 </td>
 </tr>

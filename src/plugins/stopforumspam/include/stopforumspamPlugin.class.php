@@ -25,6 +25,7 @@ class stopforumspamPlugin extends Plugin {
 		$this->name = "stopforumspam";
 		$this->text = "StopForumSpam"; // To show in the tabs, use...
 		$this->_addHook('account_register_checks');
+		$this->_addHook('delete_user_form');
 	}
 
 	function CallHook($hookname, &$params) {
@@ -51,6 +52,39 @@ class stopforumspamPlugin extends Plugin {
 				array_push($params['error'],sprintf(_("IP address %s blocked by stopforumspam plugin"),htmlspecialchars($ip)));
 			}
  		}
+		if ($hookname == "delete_user_form") {
+			$user = $params['user'];
+			$res = db_query_params ('SELECT ip_addr FROM user_session WHERE user_id=$1 AND ip_addr != $2 ORDER BY time DESC', array($user->getId(), ''));
+			if (db_numrows($res) == 0) {
+				return;
+			}
+			$ip = db_result($res,0,0);
+			?>
+	<input id="report-to-stopforumspam"  type="checkbox" name="report_to_stopforumspam" value="1" />
+	<label for="report-to-stopforumspam"><?php echo _("Also report email and IP address for this user to stopforumspam.com"); ?></label>&nbsp;
+			<?php
+		}
+		if ($hookname == "delete_user_form_submit") {
+			if (getStringFromRequest('report_to_stopforumspam') != '1') {
+				return;
+			}
+
+			$user = $params['user'];
+			$res = db_query_params ('SELECT ip_addr FROM user_session WHERE user_id=$1 AND ip_addr != $2 ORDER BY time DESC', array($user->getId(), ''));
+			if (db_numrows($res) == 0) {
+				return;
+			}
+			$ip = db_result($res,0,0);
+			$url = "http://www.stopforumspam.com/add.php";
+			$url .= "?username=".urlencode($u->getUnixName());
+			$url .= "&ip_addr=".urlencode($ip);
+			$url .= "&evidence=";
+			$url .= "&email=".urlencode($u->getEmail());
+			$url .= "&api_key=".$api_key;
+			error_log("XXX submitting $url");
+			file_get_contents($url);
+			exit();
+		}
 	}
 
 	function check_data($datatype, $entry) {
