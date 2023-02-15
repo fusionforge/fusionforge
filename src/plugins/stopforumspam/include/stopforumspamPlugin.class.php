@@ -91,6 +91,7 @@ class stopforumspamPlugin extends Plugin {
 			$url .= "&evidence=";
 			$url .= "&email=".urlencode($user->getEmail());
 			$url .= "&api_key=$api_key";
+			file_get_contents($url);
 		}
 	}
 
