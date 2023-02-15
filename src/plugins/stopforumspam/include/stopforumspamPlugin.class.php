@@ -26,6 +26,7 @@ class stopforumspamPlugin extends Plugin {
 		$this->text = "StopForumSpam"; // To show in the tabs, use...
 		$this->_addHook('account_register_checks');
 		$this->_addHook('delete_user_form');
+		$this->_addHook('delete_user_form_submit');
 	}
 
 	function CallHook($hookname, &$params) {
@@ -53,6 +54,11 @@ class stopforumspamPlugin extends Plugin {
 			}
  		}
 		if ($hookname == "delete_user_form") {
+			$api_key = forge_get_config('api_key','stopforumspam');
+			if ($api_key == '') {
+				return;
+			}
+
 			$user = $params['user'];
 			$res = db_query_params ('SELECT ip_addr FROM user_session WHERE user_id=$1 AND ip_addr != $2 ORDER BY time DESC', array($user->getId(), ''));
 			if (db_numrows($res) == 0) {
@@ -68,6 +74,10 @@ class stopforumspamPlugin extends Plugin {
 			if (getStringFromRequest('report_to_stopforumspam') != '1') {
 				return;
 			}
+			$api_key = forge_get_config('api_key','stopforumspam');
+			if ($api_key == '') {
+				return;
+			}
 
 			$user = $params['user'];
 			$res = db_query_params ('SELECT ip_addr FROM user_session WHERE user_id=$1 AND ip_addr != $2 ORDER BY time DESC', array($user->getId(), ''));
@@ -75,15 +85,12 @@ class stopforumspamPlugin extends Plugin {
 				return;
 			}
 			$ip = db_result($res,0,0);
-			$url = "http://www.stopforumspam.com/add.php";
-			$url .= "?username=".urlencode($u->getUnixName());
+			$url = "https://www.stopforumspam.com/add.php";
+			$url .= "?username=".urlencode($user->getUnixName());
 			$url .= "&ip_addr=".urlencode($ip);
 			$url .= "&evidence=";
-			$url .= "&email=".urlencode($u->getEmail());
-			$url .= "&api_key=".$api_key;
-			error_log("XXX submitting $url");
-			file_get_contents($url);
-			exit();
+			$url .= "&email=".urlencode($user->getEmail());
+			$url .= "&api_key=$api_key";
 		}
 	}
 

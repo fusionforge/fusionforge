@@ -53,7 +53,6 @@ if (getStringFromRequest('delete_user') != '') {
 		$params = array();
 		$params['user'] = $u;
 		plugin_hook_by_reference('delete_user_form_submit', $params);
-		exit();
 
 		if (getStringFromRequest('delete_contributions') == '1') {
 			$delete_contributions = true;
