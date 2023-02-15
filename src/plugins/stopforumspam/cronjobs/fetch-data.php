@@ -102,7 +102,7 @@ foreach ($sources as $type => $periods) {
 
         $fp = fopen('compress.zlib://'.$data['url'],'r');
 		while (($line = fgets($fp, 4096)) !== false) {
-			db_execute ('insert_into_plugin_stopforumspam_known_entries', array($type, $line, $now));
+			db_execute ('insert_into_plugin_stopforumspam_known_entries', array($type, trim($line), $now));
 		}
 
 		db_query_params ('INSERT INTO plugin_stopforumspam_last_fetch (datatype, period, last_fetch) VALUES ($1, $2, $3) ON CONFLICT (datatype, period) DO UPDATE SET last_fetch=$3', array($type, $period, $now));
