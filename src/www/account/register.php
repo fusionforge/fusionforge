@@ -88,6 +88,7 @@ if (getStringFromRequest('submit')) {
 	}
 
 	$params = array();
+	$params['username'] = $unix_name;
 	$params['email'] = $email;
 	$params['block'] = false;
 	plugin_hook_by_reference('account_register_checks', $params);
@@ -95,6 +96,7 @@ if (getStringFromRequest('submit')) {
 			site_header(array('title'=>_('Account registration blocked')));
 			foreach ($params['error'] as $e) {
 				echo '<p>'.$HTML->error_msg($e).'</p>';
+				error_log($params['error']);
 			}
 			site_footer();
 			exit;

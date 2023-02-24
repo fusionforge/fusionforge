@@ -38,7 +38,7 @@ class stopforumspamPlugin extends Plugin {
 			$email = $params['email'];
 			if ($this->check_data($email,'email')) {
 				$params['block'] = true;
-				array_push($params['error'],sprintf(_("Email %s blocked by stopforumspam plugin"),htmlspecialchars($email)));
+				array_push($params['error'],sprintf(_("Account creation for username %s blocked by stopforumspam plugin because of email %s"),htmlspecialchars($username),htmlspecialchars($email)));
 			}
 			$ip = $_SERVER['REMOTE_ADDR'];
 			if (preg_match(':',$ip)) {
@@ -50,7 +50,7 @@ class stopforumspamPlugin extends Plugin {
 			}
 			if ($check_ip && $this->check_data($ip,$family)) {
 				$params['block'] = true;
-				array_push($params['error'],sprintf(_("IP address %s blocked by stopforumspam plugin"),htmlspecialchars($ip)));
+				array_push($params['error'],sprintf(_("Account creation for username %s blocked by stopforumspam plugin because of IP address %s"),htmlspecialchars($username),htmlspecialchars($ip)));
 			}
  		}
 		if ($hookname == "delete_user_form") {
