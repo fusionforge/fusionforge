@@ -41,7 +41,7 @@ class stopforumspamPlugin extends Plugin {
 				array_push($params['error'],sprintf(_("Account creation for username %s blocked by stopforumspam plugin because of email %s"),htmlspecialchars($username),htmlspecialchars($email)));
 			}
 			$ip = $_SERVER['REMOTE_ADDR'];
-			if (preg_match(':',$ip)) {
+			if (preg_match('/:/',$ip)) {
 				$family = "ipv6";
 				$check_ip = true;
 			} else {
