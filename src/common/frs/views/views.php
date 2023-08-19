@@ -2,7 +2,7 @@
 /**
  * FusionForge FRS : view dispatcher
  *
- * Copyright 2014 Franck Villaume - TrivialDev
+ * Copyright 2014,2023, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -26,6 +26,18 @@
 global $gfcommon;
 
 $view = getStringFromRequest('view', 'listpackages');
-if (file_exists(forge_get_config('source_path').'/common/frs/views/'.$view.'.php')) {
+$views_whitelist_array = array('admin',
+			'docmanfile',
+			'editrelease',
+			'linktrackerroadmap',
+			'listpackages',
+			'menu',
+			'qrs',
+			'reporting',
+			'shownotes',
+			'showreleases',
+			'useftpuploads',
+			'usemanualuploads');
+if (in_array($view, $views_whitelist_array)) {
 	include(forge_get_config('source_path').'/common/frs/views/'.$view.'.php');
 }

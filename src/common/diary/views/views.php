@@ -2,7 +2,7 @@
 /**
  * FusionForge Diary aka blog
  *
- * Copyright 2019, Franck Villaume - TrivialDev
+ * Copyright 2019,2023, Franck Villaume - TrivialDev
  * http://fusionforge.org
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -24,11 +24,9 @@
 /* please do not add require here : use www/diary/index.php to add require */
 
 $view = getStringFromRequest('view', 'main');
-switch ($view) {
-	case 'detail':
-	case 'archivelist':
-	case 'main': {
-		include ($gfcommon.'diary/views/'.$view.'.php');
-		break;
-	}
+$views_whitelist_array = array('detail',
+				'archivelist',
+				'main');
+if (in_array($view, $views_whitelist_array)) {
+	include ($gfcommon.'diary/views/'.$view.'.php');
 }

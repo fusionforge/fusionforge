@@ -5,7 +5,7 @@
  * Copyright 1999-2001 (c) VA Linux Systems
  * Copyright 2002-2004 (c) GForge Team
  * Copyright 2010 (c) FusionForge Team
- * Copyright 2013-2014, Franck Villaume - TrivialDev
+ * Copyright 2013-2014,2023, Franck Villaume - TrivialDev
  * http://fusionforge.org/
  *
  * This file is part of FusionForge. FusionForge is free software;
@@ -85,8 +85,23 @@ if($content_type != $default_content_type) {
 }
 
 /* everything sounds ok, now let do the job */
+$actions_whitelist_array = array('addassociation',
+				'addfile',
+				'addpackage',
+				'addrelease',
+				'deleteassociation',
+				'deletefile',
+				'deletepackage',
+				'deleterelease',
+				'editfile',
+				'editrelease',
+				'linkroadmap',
+				'monitor',
+				'pointer_down',
+				'pointer_up',
+				'updatepackage');
 $action = getStringFromRequest('action');
-if (file_exists(forge_get_config('source_path').'/common/frs/actions/'.$action.'.php')) {
+if (in_array($action, $actions_whitelist_array)) {
 	include(forge_get_config('source_path').'/common/frs/actions/'.$action.'.php');
 }
 
